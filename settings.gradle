@@ -1,0 +1,1 @@
+include ':app', ':sharedlib', ':server'
