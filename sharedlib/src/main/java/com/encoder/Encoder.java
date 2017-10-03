@@ -23,4 +23,6 @@ public class Encoder {
         writer.flush();
     }
 
+    //TODO make decoding methods
+
 }
