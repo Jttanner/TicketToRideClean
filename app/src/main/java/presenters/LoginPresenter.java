@@ -53,7 +53,7 @@ public class LoginPresenter implements MVP_Main.RequiredPresenterOps, MVP_Main.P
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-            URL url = new URL("http://localhost:8080/user/login");
+            URL url = new URL("http://10.24.71.148:8080/user/login");
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
