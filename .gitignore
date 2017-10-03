@@ -1,8 +1,5 @@
 # Built application files
-build/intermediates/gradle_project_sync_data.bin
-build/intermediates/dex-cache/cache.xml
-*.apk
-*.ap_
+/*/build/
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
