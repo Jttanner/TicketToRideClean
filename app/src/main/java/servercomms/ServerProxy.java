@@ -26,28 +26,10 @@ public class ServerProxy {
     private ServerProxy() {
     }
 
-    public LoginResult Login(LoginRequest request){
-        URL url = null;
-        try {
-            //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/login");
-        } catch (MalformedURLException e) {
-            Log.d(TAG,"URL is messed up yo in login method");
-            e.printStackTrace();
-        }
-        //Make sure we are error checking this return statement
+    public LoginResult login(URL url, LoginRequest request){
         return (LoginResult) ClientCommunicator.getInstance().send(url,request);
     }
-    public RegisterResult Register(RegisterRequest request){
-        URL url = null;
-        try {
-            //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/login");
-        } catch (MalformedURLException e) {
-            Log.d(TAG,"URL is messed up yo in login method");
-            e.printStackTrace();
-        }
-        //Make sure we are error checking this return statement
+    public RegisterResult register(URL url, RegisterRequest request){
         return (RegisterResult) ClientCommunicator.getInstance().send(url,request);
     }
     /*public List<Game> getGameList(Command c){

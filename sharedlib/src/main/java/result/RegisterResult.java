@@ -8,33 +8,12 @@ import request.RequestObject;
 
 public class RegisterResult extends ResultObject {
 
-    public RegisterResult(boolean success, String userName, String message){
-        this.success = success;
 
+    public RegisterResult(boolean success, String userName, String errorMessage) {
+        super(success, userName, errorMessage);
     }
 
-    private String userName;
-    private boolean success;
-    private String message;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    @Override
-    public boolean isSuccess() { return success; }
-
-    public void setSuccess(boolean success) { this.success = success; }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String errorMessage) {
-        this.message = message;
+    public RegisterResult(boolean success, String errorMessage) {
+        super(success, errorMessage);
     }
 }

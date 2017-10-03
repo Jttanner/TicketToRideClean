@@ -37,7 +37,7 @@ public interface MVP_Main {
          *
          * @param toast The Toast to be popped
          */
-        void loginFailed(Toast toast);
+        void loginFailed(String errorMessage);
         /**Toggles the buttons on the login screen
          * @param b What setting the buttons are going to be at, enabled(true), disabled(false)*/
         void toggleButtons(boolean b);
