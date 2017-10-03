@@ -12,7 +12,15 @@ public class Player {
     }
 
     String userID;
+    String Name;
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
     public void startGame(Game game){
 

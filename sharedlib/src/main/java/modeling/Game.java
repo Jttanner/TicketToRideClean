@@ -18,6 +18,26 @@ public class Game {
 
     String gameID;
 
+    String Name;
+
+    int NumPlayer;
+
+    public int getNumPlayer() {
+        return NumPlayer;
+    }
+
+    public void setNumPlayer(int numPlayer) {
+        NumPlayer = numPlayer;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
     boolean hasStarted;
 
     public boolean canJoinGame(){
