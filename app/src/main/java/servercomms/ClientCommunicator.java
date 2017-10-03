@@ -3,9 +3,11 @@ package servercomms;
 import com.encoder.Encoder;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import result.RegisterResult;
 import result.ResultObject;
 
 
@@ -35,13 +37,15 @@ class ClientCommunicator {
             http.addRequestProperty("Accept", "application/json");
             //Makes an encoder object to encode the request object into the output stream
             Encoder encoder = new Encoder();
-            encoder.encode(request, http.getOutputStream());
-
+            OutputStream respBody = http.getOutputStream();
+            encoder.encode(request, respBody);
+            respBody.close();
             http.connect();
 
             if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
+                //http.getInputStream();
                 //return encoder.decodeResultObject(http.getInputStream());
+                return new RegisterResult(false,"error");
                 //TODO handle decoding
 
             } else {
