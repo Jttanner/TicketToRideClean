@@ -1,6 +1,8 @@
 package command;
 
+import ServerModel.ServerFacade;
 import commandData.DeleteGameCommandData;
+import modeling.Game;
 import result.Result;
 
 /**
@@ -12,23 +14,16 @@ public class DeleteGameCommand extends DeleteGameCommandData implements ICommand
             super();
     }
 
+    private Game gameObject;
+
     @Override
     public Result execute() {
-        try {
-            GetGameListCommand getGameCommandData = new GetGameListCommand();
 
-            //Delete game gameID
-            //Send back boolean whether the game is deleted
-
-            //String str = GetGameListCommand.getStr();
-            //int number = StringProcessor.instance().parseInteger(str);
-            //String data = String.valueOf(number);
-            Result result = new Result(true, "data", null);
-            return result;
-        }
-        catch (NumberFormatException e) {
-            Result result = new Result(false, null, "Error, not a number!");
-            return result;
+        boolean deleteGameSuccessful = ServerFacade.getInstance().deleteGame(gameObject);
+        if (deleteGameSuccessful == true) {
+            return new Result(true, "", "");
+        } else {
+            return new Result(false, "", "");
         }
     }
 }
