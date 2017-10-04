@@ -16,6 +16,10 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
     public Result execute() {
         try {
             GetGameListCommand getGameCommandData = new GetGameListCommand();
+
+            //Send us the getter
+            //Expects a list of games in an object
+
             //String str = GetGameListCommand.getStr();
             //int number = StringProcessor.instance().parseInteger(str);
             //String data = String.valueOf(number);

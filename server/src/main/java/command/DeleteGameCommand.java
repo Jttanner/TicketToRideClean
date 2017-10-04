@@ -16,6 +16,10 @@ public class DeleteGameCommand extends DeleteGameCommandData implements ICommand
     public Result execute() {
         try {
             GetGameListCommand getGameCommandData = new GetGameListCommand();
+
+            //Delete game gameID
+            //Send back boolean whether the game is deleted
+
             //String str = GetGameListCommand.getStr();
             //int number = StringProcessor.instance().parseInteger(str);
             //String data = String.valueOf(number);
