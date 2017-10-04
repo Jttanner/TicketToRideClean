@@ -9,17 +9,17 @@ import modeling.Game;
  */
 
 public class GetGameListCommandData extends Command {
-
-    private ArrayList<Game> gameListLobby;
+    //We don't need it!
+    //private ArrayList<Game> gameListLobby;
 
     public GetGameListCommandData() {
     }
 
-    public ArrayList<Game> getGameListLobby() {
+    /*public ArrayList<Game> getGameListLobby() {
         return gameListLobby;
     }
 
     public void setGameListLobby(ArrayList<Game> gameListLobby) {
         this.gameListLobby = gameListLobby;
-    }
+    }*/
 }

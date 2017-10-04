@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import command.CreateGameCommand;
 import command.GetGameListCommand;
+import command.ICommand;
 import command.JoinGameCommand;
 import commandData.Command;
 import result.Result;
@@ -33,38 +34,26 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
 
             Gson gson = new Gson();
             Command cmd = gson.fromJson(reqData, Command.class);
-
+            ICommand word = null;
             switch (cmd.getType()) {
                 case "createGame":
-                    CreateGameCommand word = gson.fromJson(reqData, CreateGameCommand.class);
-                    Result result = word.execute();
-                    String jsonStr = gson.toJson(word);
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    OutputStream respBody = exchange.getResponseBody();
-                    writeString(jsonStr, respBody);
-                    respBody.close();
+                    word = gson.fromJson(reqData, CreateGameCommand.class);
                     break;
                 case "joinGame":
-                    JoinGameCommand joinword = gson.fromJson(reqData, JoinGameCommand.class);
-                    Result joinresult = joinword.execute();
-                    String joinjsonStr = gson.toJson(joinword);
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    OutputStream joinrespBody = exchange.getResponseBody();
-                    writeString(joinjsonStr, joinrespBody);
-                    joinrespBody.close();
+                    word = gson.fromJson(reqData, JoinGameCommand.class);
                     break;
                 case "getGameList":
-                    GetGameListCommand gamelistword = gson.fromJson(reqData, GetGameListCommand.class);
-                    Result gamelistresult = gamelistword.execute();
-                    String gamelistjsonStr = gson.toJson(gamelistword);
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    OutputStream gamelistrespBody = exchange.getResponseBody();
-                    writeString(gamelistjsonStr, gamelistrespBody);
-                    gamelistrespBody.close();
+                    word = gson.fromJson(reqData, GetGameListCommand.class);
                     break;
                 default:
                     break;
             }
+            Result result = word.execute();
+            String jsonStr = gson.toJson(word);
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+            OutputStream respBody = exchange.getResponseBody();
+            writeString(jsonStr, respBody);
+            respBody.close();
         }
         catch (IOException e) {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);

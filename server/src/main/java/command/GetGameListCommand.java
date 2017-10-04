@@ -22,7 +22,7 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
     @Override
     public Result execute() {
         try {
-            GetGameListCommand getGameCommandData = new GetGameListCommand();
+            //GetGameListCommand getGameCommandData = new GetGameListCommand();
 
             ServerFacade facade = ServerFacade.getInstance();
 
@@ -32,7 +32,7 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
                 gameList.add(game.getValue());
             }
 
-            Result result = new Result(true, gameList, null);
+            Result result = new Result(true, gameList, "Game List sent.");
             return result;
         }
         catch (NumberFormatException e) {
