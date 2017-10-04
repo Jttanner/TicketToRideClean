@@ -2,6 +2,7 @@ package ServerModel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import modeling.Game;
@@ -61,13 +62,9 @@ public class ServerFacade {
         }
     }
 
-    public void createGame(User creator, Game newGame){
+    public void createGame(Game newGame){
         try{
             Game game = newGame;
-            Player creatorPlayer = new Player(creator.getUserID());
-            game.addPlayer(creatorPlayer);
-            creator.addPlayer(creatorPlayer);
-            creator.addGame(game);
             games.put(game.getGameID(), game);
         } catch (Exception e){
             e.printStackTrace();
