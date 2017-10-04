@@ -1,7 +1,12 @@
 package ui.views;
 
+import android.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +26,7 @@ import teamjapannumbahone.tickettoride.R;
  */
 
 public class GameListActivity extends AppCompatActivity implements MVP_GameList.GameListActivityInterface {
-    Button StartGameButton;
+    //Button StartGameButton;
     Button CreateGameButton;
     Button JoinGameButton;
 
@@ -36,7 +41,7 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
     }
 
     void wireUp(){
-        StartGameButton = (Button) findViewById(R.id.StartGameButton);
+       // StartGameButton = (Button) findViewById(R.id.StartGameButton);
         CreateGameButton = (Button) findViewById(R.id.CreateGameButton);
         CreateGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +54,17 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
         });
         JoinGameButton = (Button) findViewById(R.id.JoinGameButton);
         recyclerView = (RecyclerView) findViewById(R.id.GameListRecycler);
+        JoinGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                android.support.v4.app.Fragment fragment = fm.findFragmentById(R.id.activity_login);
+                if(fragment == null){
+                    fragment = new CreateGameFragment();
+                    fm.beginTransaction().add(R.id.fragment_spot,fragment).commit();
+                }
+            }
+        });
     }
 
     @Override
@@ -66,7 +82,7 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
 
     @Override
     public void ToggleButton(boolean startGame, boolean joinGame) {
-        StartGameButton.setEnabled(startGame);
+        //StartGameButton.setEnabled(startGame);
         JoinGameButton.setEnabled(joinGame);
     }
 }

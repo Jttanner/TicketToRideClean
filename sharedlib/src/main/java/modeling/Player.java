@@ -13,6 +13,15 @@ public class Player {
 
     String userID;
     String Name;
+    String Color;
+
+    public String getColor() {
+        return Color;
+    }
+
+    public void setColor(String color) {
+        Color = color;
+    }
 
     public String getName() {
         return Name;
