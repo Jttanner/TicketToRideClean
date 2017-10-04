@@ -5,7 +5,7 @@ package commandData;
  */
 
 public class DeleteGameCommandData extends Command {
-    private String str;
+    /*private String str;
 
     public DeleteGameCommandData() {
     }
@@ -16,5 +16,5 @@ public class DeleteGameCommandData extends Command {
 
     public void setStr(String str) {
         this.str = str;
-    }
+    }*/
 }
