@@ -1,6 +1,13 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import ServerModel.ServerFacade;
 import commandData.GetGameListCommandData;
+import modeling.Game;
 import result.Result;
 
 /**
@@ -17,15 +24,15 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
         try {
             GetGameListCommand getGameCommandData = new GetGameListCommand();
 
+            ServerFacade facade = ServerFacade.getInstance();
 
+            List<Game> gameList = new ArrayList<>();
 
-            //Send us the getter
-            //Expects a list of games in an object
+            for (Map.Entry<String, Game> game : facade.getGameList().entrySet()){
+                gameList.add(game.getValue());
+            }
 
-            //String str = GetGameListCommand.getStr();
-            //int number = StringProcessor.instance().parseInteger(str);
-            //String data = String.valueOf(number);
-            Result result = new Result(true, "data", null);
+            Result result = new Result(true, gameList, null);
             return result;
         }
         catch (NumberFormatException e) {

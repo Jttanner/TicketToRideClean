@@ -58,7 +58,8 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-            URL url = new URL("http://10.4.143.233:8080/user/login");
+            String myIp = "10.24.71.92";
+            URL url = new URL("http://" + myIp +" :8080/user/login");
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
@@ -75,7 +76,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         try {
             //TODO dynamic host and port number getting
             //String myIp = InetAddress.getLocalHost().getHostAddress();
-            String myIp = "10.4.158.51";
+            String myIp = "10.24.71.92";
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask();

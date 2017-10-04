@@ -1,5 +1,7 @@
 package commandData;
 
+import modeling.User;
+
 /**
  * Created by Hwang on 9/28/2017.
  */
@@ -8,6 +10,7 @@ public class CreateGameCommandData extends Command {
     private String gameName;
     private int gameID;
     private int playerMax;
+    User user;
 
     public CreateGameCommandData() {
     }
