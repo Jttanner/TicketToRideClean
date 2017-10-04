@@ -2,6 +2,7 @@ package ServerModel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import modeling.Game;
@@ -61,16 +62,14 @@ public class ServerFacade {
         }
     }
 
-    public void createGame(User creator, Game newGame){
+    public boolean createGame(Game newGame){
         try{
             Game game = newGame;
-            Player creatorPlayer = new Player(creator.getUserID());
-            game.addPlayer(creatorPlayer);
-            creator.addPlayer(creatorPlayer);
-            creator.addGame(game);
             games.put(game.getGameID(), game);
+            return true;
         } catch (Exception e){
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -92,6 +91,37 @@ public class ServerFacade {
         } catch (Exception e){
             //catch if theres a bad user or game
             e.printStackTrace();
+        }
+    }
+
+    public boolean deleteGame(Game game){
+        try{
+            String gameID = game.getGameID();
+            if (games.containsKey(gameID)){
+                games.remove(games.get(gameID));
+                return  true;
+            } else{
+                return false;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean leaveGame(Game game, Player player){
+        try{
+            if (games.containsKey(game.getGameID())){
+                Game thisGame = games.get(game.getGameID());
+                thisGame.removePlayer(player);
+            } else{
+                return false;
+            }
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
     }
 

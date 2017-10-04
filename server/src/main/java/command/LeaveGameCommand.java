@@ -4,6 +4,7 @@ import ServerModel.ServerFacade;
 import command.*;
 import commandData.*;
 import modeling.Game;
+import modeling.Player;
 import modeling.User;
 import result.*;
 
@@ -11,13 +12,14 @@ import result.*;
  * Created by Hwang on 9/29/2017.
  */
 
-public class CreateGameCommand extends CreateGameCommandData implements ICommand {
+public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
 
-    public CreateGameCommand() {
+    public LeaveGameCommand() {
         super();
     }
 
     private Game gameObject;
+    private Player playerObject;
 
     @Override
     public Result execute() {
@@ -35,8 +37,8 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         //Sends back a bool in an object telling if it successfully created a game or not
         //Game gameObject = createGameCommandData.getGameObject();
 
-        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(gameObject);
-        if (gameCreatedSuccessful == true) {
+        boolean leaveCreatedSuccessful = ServerFacade.getInstance().leaveGame(gameObject, playerObject);
+        if (leaveCreatedSuccessful == true) {
             return new Result(true, "", "");
         } else {
             return new Result(false, "", "");

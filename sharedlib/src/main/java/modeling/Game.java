@@ -23,24 +23,24 @@ public class Game {
 
     String gameID;
 
-    String Name;
+    String gameName;
 
-    int NumPlayer;
+    int playerMax;
 
-    public int getNumPlayer() {
-        return NumPlayer;
+    public int getPlayerMax() {
+        return playerMax;
     }
 
-    public void setNumPlayer(int numPlayer) {
-        NumPlayer = numPlayer;
+    public void setPlayerMax(int playerMax) {
+         this.playerMax = playerMax;
     }
 
-    public String getName() {
-        return Name;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public boolean canJoinGame(){
