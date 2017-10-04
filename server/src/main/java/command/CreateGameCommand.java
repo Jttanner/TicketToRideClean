@@ -34,7 +34,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         int maxPlayers;*/
         //Sends back a bool in an object telling if it successfully created a game or not
         //Game gameObject = createGameCommandData.getGameObject();
-        
+
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(gameObject);
         if (gameCreatedSuccessful == true) {
             return new Result(true, "", "");
