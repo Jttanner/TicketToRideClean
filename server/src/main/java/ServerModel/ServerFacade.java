@@ -62,12 +62,14 @@ public class ServerFacade {
         }
     }
 
-    public void createGame(Game newGame){
+    public boolean createGame(Game newGame){
         try{
             Game game = newGame;
             games.put(game.getGameID(), game);
+            return true;
         } catch (Exception e){
             e.printStackTrace();
+            return false;
         }
     }
 
