@@ -94,6 +94,22 @@ public class ServerFacade {
         }
     }
 
+    public boolean deleteGame(Game game){
+        try{
+            String gameID = game.getGameID();
+            if (games.containsKey(gameID)){
+                games.remove(games.get(gameID));
+                return  true;
+            } else{
+                return false;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Map<String, Game> getGameList(){
         return games;
     }
