@@ -19,12 +19,14 @@ public class UserInfo {
     String password;
     String userID;
 
-    public LoginResult checkUserInfo(LoginRequest request){
+    public boolean checkUserInfo(LoginRequest request){
         String userName = request.getUserName();
         if (this.userName.equals(userName) && this.password.equals(request.getPassword())){
-            return new LoginResult(true, userName, "Login Successful.");
+            return true;
+            //return new LoginResult(true, userName, "Login Successful.", );
         } else{
-            return new LoginResult(false, userName,"Invalid Username or Password.");
+            return false;
+            //return new LoginResult(false, userName,"Invalid Username or Password.");
         }
     }
 

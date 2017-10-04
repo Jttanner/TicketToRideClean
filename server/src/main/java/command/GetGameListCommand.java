@@ -17,6 +17,8 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
         try {
             GetGameListCommand getGameCommandData = new GetGameListCommand();
 
+
+
             //Send us the getter
             //Expects a list of games in an object
 

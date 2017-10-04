@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -44,7 +45,8 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     }
 
     /*TODO need to decide if I need a statemainter. What do I do with this observable Presenter when it is destroyed.
-     TODO Probably need to deteach from the Model Objects*/
+     TODO Probably need to deteach from the Model Objects*
+     /
     /**
      * Called by View during the reconstruction events
      *
@@ -63,7 +65,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         } catch (Exception e) {
             Log.d(TAG, "login method messed up: " + e.toString());
             e.printStackTrace();
-            checkLogSuccess(new RegisterResult(false, e.toString()));
+            checkLogSuccess(new RegisterResult(false, e.toString(), null));
         }
 
     }
@@ -72,13 +74,15 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            URL url = new URL("http://10.4.143.233:8080/user/register");
+            //String myIp = InetAddress.getLocalHost().getHostAddress();
+            String myIp = "10.4.158.51";
+            URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url,request);
         } catch (Exception e) {
             Log.d(TAG, "register method messed up: " + e.toString());
-            checkLogSuccess(new RegisterResult(false, e.toString()));
+            checkLogSuccess(new RegisterResult(false, e.toString(), null));
             e.printStackTrace();
         }
     }
