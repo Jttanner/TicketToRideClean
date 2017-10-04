@@ -4,13 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 
 import MVP_coms_classes.MVP_Login;
+import clientModel.CModel;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.LoginResult;
@@ -24,7 +25,7 @@ import ui.views.GameListActivity;
  * The presenter for the login/register View, its function is self explanatory. It handles the logic for logging in and registering
  */
 
-public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login.ProvidedLoginPresentOps {
+public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login.ProvidedLoginPresentOps, Observer {
     private WeakReference<MVP_Login.RequiredLoginViewOps> myView;
     /**
      * Booleans that tell us whether the user has entered a  suitable userName or password yet
@@ -35,21 +36,22 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
 
     /**
      * Presenter Constructor
-     *
      * @param view MainActivity
      */
     public LoginPresenter(MVP_Login.RequiredLoginViewOps view) {
         myView = new WeakReference<>(view);
+        CModel.getInstance().addObserver(this);
     }
 
+    /*TODO need to decide if I need a statemainter. What do I do with this observable Presenter when it is destroyed.
+     TODO Probably need to deteach from the Model Objects*/
     /**
      * Called by View during the reconstruction events
      *
-     * @Override public void setView(MVP_Login.RequiredLoginViewOps view) {
+     * public void setView(MVP_Login.RequiredLoginViewOps view) {
      * myView = new WeakReference<>(view);
      * }
-     */
-
+*/
     @Override
     public void login(LoginRequest request) {
         try {
@@ -61,7 +63,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         } catch (Exception e) {
             Log.d(TAG, "login method messed up: " + e.toString());
             e.printStackTrace();
-            checkSuccess(new RegisterResult(false, e.toString()));
+            checkLogSuccess(new RegisterResult(false, e.toString()));
         }
 
     }
@@ -76,7 +78,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             httpTask.start(url,request);
         } catch (Exception e) {
             Log.d(TAG, "register method messed up: " + e.toString());
-            checkSuccess(new RegisterResult(false, e.toString()));
+            checkLogSuccess(new RegisterResult(false, e.toString()));
             e.printStackTrace();
         }
     }
@@ -86,7 +88,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
      * Checks the success of the login or registration tells the GUI to take the appropitae action
      * Also as a note I'm passing in an object because i get a java.lang.ClassCastException if I that above
      */
-    private void checkSuccess(Object r) {
+    private void checkLogSuccess(Object r) {
         ResultObject result = null;
         if (r instanceof RegisterResult) {
             result = (RegisterResult) r;
@@ -106,7 +108,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             }
         }
         else{
-            //If we get here something when wrong with the server and we didnt recieve a result object back
+            //If we get here something when wrong with the server and we didnt receive a result object back
             myView.get().loginFailed("Server Failure");
         }
 
@@ -114,7 +116,8 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
 
     /**
      * Return the View reference.
-     * Throw an exception if the View is unavailable.
+     * @exception NullPointerException  Thrown if the View is unavailable.
+     * @return MVP_Login.RequiredLoginViewOps The interface returned
      */
     private MVP_Login.RequiredLoginViewOps getView() throws NullPointerException {
         if (myView != null)
@@ -123,6 +126,9 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             throw new NullPointerException("View is unavailable");
     }
 
+    /**
+     * @return Application context
+     */
     @Override
     public Context getAppContext() {
         try {
@@ -145,25 +151,34 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             return null;
         }
     }
-
+    /**Checks if the user has entered a password
+     * @param b Whether the user has a password or not*/
     @Override
     public void hasPassword(boolean b) {
         hasPassword = b;
         canEnableButtons();
     }
-
+    /**Checks if the user has entered a username
+     * @param b Whether the user has a username or not*/
     @Override
     public void hasUserName(boolean b) {
         hasUserName = b;
         canEnableButtons();
     }
-
+    /**Handles the logic of whether the login and register buttons are enabled or not*/
     private void canEnableButtons() {
         myView.get().toggleButtons(hasPassword && hasUserName);
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        //TODO will need to create wrapper classes for the collections of objects passed in here from the model
+        Log.d(TAG, "Num of observers: " + o.countObservers());
+    }
+
     /**
-     * Task which does a register or login request. Calls the proxy server which calls the server
+     * Task which does a register or login request. Calls the proxy server which calls the server.
+     * Is given a Url and a request object to use
      */
     private class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         private Object request;
@@ -198,7 +213,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         protected void onPostExecute(Object result) {//gets us back on the main thread
             Log.d("onPostExecute", "Entering onPostExecute");
             super.onPostExecute(result);
-            checkSuccess(result);
+            checkLogSuccess(result);
         }
     }
 

@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 
 import MVP_coms_classes.MVP_Login;
+import clientModel.CModel;
+import modeling.Game;
 import presenters.LoginPresenter;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -46,7 +48,6 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         Log.d(TAG, "Entering OnCreateView");
         super.onCreate(savedInstanceState);
         View v = inflater.inflate(R.layout.activity_login, container, false);
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setupMVP();
         setupWidgets(v);
         //This code below just ensures our buttons are enabled with our hardcoded input
@@ -61,12 +62,10 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
 
 
     private void setupMVP() {
-        // Create the Presenter
-        LoginPresenter presenter = new LoginPresenter(this);
-        // Set the Presenter as a interface
-        // To limit the communication with it
-        mPresenter = presenter;
+        /* Create the Presenter; Set the Presenter as a interface to limit communication*/
+        mPresenter = new LoginPresenter(this);
     }
+
     /**Here we setup the widgets so that they can be used
      * @param v Our View Object*/
     private void setupWidgets(View v) {
@@ -76,6 +75,8 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         mPassWordEdit = (EditText) v.findViewById(R.id.editPassword);
         setTextListeners();
         setOnClicks();
+        //Only for testing purposes
+        CModel.getInstance().setCurrGame(new Game());
 
     }
 
