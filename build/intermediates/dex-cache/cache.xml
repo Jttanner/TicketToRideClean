@@ -3,21 +3,21 @@
 
     <item
         is-multidex="false"
-<<<<<<< HEAD
-        jar="C:\Users\LabUser\Documents\TicketToRideClean\sharedlib\build\libs\sharedlib.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="79917798f9a97ee4b7b5b2f3085847fce13bc0b9">
-        <dex dex="C:\Users\LabUser\Documents\TicketToRideClean\app\build\intermediates\pre-dexed\debug\sharedlib_59d267c7545a093e00a0be3decae2fd520bf60b6.jar" />
-=======
         jar="C:\Users\tyler\AndroidStudioProjects\TicketToRideClean\sharedlib\build\libs\sharedlib.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="bbbccba1b165fd7ca8ef91986f097f7a2543ef90">
+        sha1="3651e65b829ea596108340c751f49237a35938a7">
         <dex dex="C:\Users\tyler\AndroidStudioProjects\TicketToRideClean\app\build\intermediates\pre-dexed\debug\sharedlib_cd3fb146beaa14852c011596251caf81cab48f29.jar" />
->>>>>>> c6e5636da4de0ee4fd0af3f06636e698a07ebfa8
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\tyler\.android\build-cache\5e071f2e020a91c72057f25ff951796c95383271\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\tyler\AndroidStudioProjects\TicketToRideClean\app\build\intermediates\pre-dexed\debug\classes_f54af67e49f1314529dfc45c5f0311798d1b6e7d.jar" />
     </item>
 
 </items>

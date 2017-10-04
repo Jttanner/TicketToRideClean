@@ -157,7 +157,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
 
     @Override
     public void loginSucceeded(Intent intent) {
-        //startActivity(intent);
+        startActivity(intent);
     }
 
     @Override

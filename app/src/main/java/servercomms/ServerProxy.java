@@ -5,7 +5,9 @@ import result.*;
 
 import android.util.Log;
 
-import java.net.MalformedURLException;
+import com.encoder.Encoder;
+
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -27,10 +29,18 @@ public class ServerProxy {
     }
 
     public LoginResult login(URL url, LoginRequest request){
-        return (LoginResult) ClientCommunicator.getInstance().send(url,request);
+        Log.d(TAG,"Logging on");
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
+        //decode and send back to the presenter
+        return new Encoder().decodeLoginResult(inputStream);
     }
     public RegisterResult register(URL url, RegisterRequest request){
-        return (RegisterResult) ClientCommunicator.getInstance().send(url,request);
+        Log.d(TAG,"Registering");
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
+        //decode and send back to the presenter
+        return new Encoder().decodeRegisterResult(inputStream);
     }
     /*public List<Game> getGameList(Command c){
     }*/

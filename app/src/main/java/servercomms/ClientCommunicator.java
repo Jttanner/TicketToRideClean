@@ -1,8 +1,11 @@
 package servercomms;
 
+import android.util.Log;
+
 import com.encoder.Encoder;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,7 +20,10 @@ import result.ResultObject;
  * off through http and returns the results.
  */
 class ClientCommunicator {
+    /**The instance of the CC*/
     private static ClientCommunicator ourInstance = new ClientCommunicator();
+    /**THe tag for the log*/
+    private final String TAG = "ClientCommunicator";
 
     static ClientCommunicator getInstance() {
         return ourInstance;
@@ -25,16 +31,20 @@ class ClientCommunicator {
 
     private ClientCommunicator() {
     }
-
-    ResultObject send(URL url, Object request) {
+    /**This method is used by the proxy to send URLs to the server
+     * @param url The url being sent
+     * @param request The type of request
+     * @param typeOfRequest POST,GET,etc...
+     * @return A result from the server*/
+    InputStream send(URL url, Object request, String typeOfRequest) {
         try {
 
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
 
-            http.setRequestMethod("POST");
+            http.setRequestMethod(typeOfRequest);
             http.setDoOutput(true);    // There is a request body
-
             http.addRequestProperty("Accept", "application/json");
+
             //Makes an encoder object to encode the request object into the output stream
             Encoder encoder = new Encoder();
             OutputStream respBody = http.getOutputStream();
@@ -43,17 +53,14 @@ class ClientCommunicator {
             http.connect();
 
             if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                //http.getInputStream();
-                //return encoder.decodeResultObject(http.getInputStream());
-                return new RegisterResult(false,"error");
-                //TODO handle decoding
+                return http.getInputStream();
 
             } else {
-                System.out.println("ERROR: " + http.getResponseMessage());
-                //TODO handle decoding
-                //return encoder.decodeResultObject(http.getErrorStream());
+                Log.d(TAG,"ERROR: " + http.getResponseMessage());
+                return http.getErrorStream();
             }
         } catch (IOException e) {
+            Log.d(TAG,"ERROR: " + e.toString());
             e.printStackTrace();
         }
         return null;

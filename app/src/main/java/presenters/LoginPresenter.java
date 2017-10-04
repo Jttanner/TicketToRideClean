@@ -1,6 +1,7 @@
 package presenters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
 import servercomms.ServerProxy;
+import ui.views.GameListActivity;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -52,7 +54,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-            URL url = new URL("http://10.24.71.148:8080/user/login");
+            URL url = new URL("http://192.168.1.6:8080/user/login");
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
@@ -68,7 +70,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            URL url = new URL("http://10.24.71.148:8080/user/register");
+            URL url = new URL("http://192.168.1.6:8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url,request);
@@ -86,9 +88,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
      */
     private void checkSuccess(Object r) {
         ResultObject result = null;
-        Toast toast = new Toast(myView.get().getAppContext());
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
         if (r instanceof RegisterResult) {
             result = (RegisterResult) r;
 
@@ -97,15 +96,18 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         }
         if(result != null){
             if (result.isSuccess()) {
-                //Intent intent = new Intent(this, CreateGame.class);
-                //myView.get().loginSucceeded(intent);
+                Intent intent = new Intent(getActivityContext(), GameListActivity.class);
+                myView.get().loginSucceeded(intent);
                 //So obviously the below code will not be in the final product...just a placeholder until we get the next class
-                myView.get().loginFailed(result.getMessage());
             }
             else {//if the login failed or we got some weird output object/no object\
 
                 myView.get().loginFailed(result.getMessage());
             }
+        }
+        else{
+            //If we get here something when wrong with the server and we didnt recieve a result object back
+            myView.get().loginFailed("Server Failure");
         }
 
     }
