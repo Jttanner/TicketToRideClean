@@ -16,6 +16,10 @@ public class JoinGameCommand {
     public Result execute() {
         try {
             JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
+
+            //Join game sends gameID
+            //Send back bool,
+
             //String str = joinGameCommandData.getStr();
             //int number = StringProcessor.instance().parseInteger(str);
             //String data = String.valueOf(number);

@@ -21,6 +21,10 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
             CreateGameCommandData createGameCommandData = new CreateGameCommandData();
 
             //TODO: Finish the changes necessary here in the comment block to for the serverModel/serverFacade. Same for other commands
+
+            //Create game sends a game to the server
+            //Sends back a bool in an object telling if it successfully created a game or not
+
             /*
             String gameName = createGameCommandData.getGameName();
             int gameID = createGameCommandData.getPlayerMax();
