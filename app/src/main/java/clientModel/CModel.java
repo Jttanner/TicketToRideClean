@@ -18,6 +18,7 @@ import presenters.LoginPresenter;
 /**
  * Created by tyler on 9/27/2017.
  * The root client Model class
+ * TODO: add User to Model which we send back with login and register
  */
 public class CModel extends Observable{
     private static final String TAG = "CModel";

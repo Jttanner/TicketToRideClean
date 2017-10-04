@@ -36,9 +36,14 @@ public class ServerFacade {
 
         try{
             UserInfo check = users.get(request.getUserName()).getInfo();
-            return  check.checkUserInfo(request);
+            if (check.checkUserInfo(request)){
+                String userName = request.getUserName();
+                return new LoginResult(true,"login success!", userName, users.get(userName));
+            } else{
+                return new LoginResult(false, "login failed.", "", null);
+            }
         }catch (NullPointerException e){
-            return new LoginResult(false, "failed", "failed");
+            return new LoginResult(false, "login failed.", "", null);
         }
 
     }
@@ -49,17 +54,16 @@ public class ServerFacade {
         String newUserID = UUID.randomUUID().toString();
         User newUser = new User(new UserInfo(userName, password, newUserID));
         if (request.getUserName() != null && request.getPassword() != null){
-
             users.put(userName, newUser);
-            return new RegisterResult(true, userName,"Successfully Registered.");
+            return new RegisterResult(true, userName,"Successfully Registered.", newUser);
         } else{
-            return new RegisterResult(false, userName, "Failed to Register.");
+            return new RegisterResult(false, userName, "Failed to Register.", null);
         }
     }
 
-    public void createGame(User creator){
+    public void createGame(User creator, Game newGame){
         try{
-            Game game = new Game();
+            Game game = newGame;
             Player creatorPlayer = new Player(creator.getUserID());
             game.addPlayer(creatorPlayer);
             creator.addPlayer(creatorPlayer);
