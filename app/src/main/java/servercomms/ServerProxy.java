@@ -24,13 +24,14 @@ public class ServerProxy {
     private String TAG = "ServerProxy";
 
     private ServerProxy() {
+
     }
 
     public LoginResult Login(LoginRequest request){
         URL url = null;
         try {
             //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/login");
+            url = new URL("http://localhost:8080/user/login");
         } catch (MalformedURLException e) {
             Log.d(TAG,"URL is messed up yo in login method");
             e.printStackTrace();
@@ -42,9 +43,9 @@ public class ServerProxy {
         URL url = null;
         try {
             //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/login");
+            url = new URL("http://localhost:8080/user/register");
         } catch (MalformedURLException e) {
-            Log.d(TAG,"URL is messed up yo in login method");
+            Log.d(TAG,"URL is messed up yo in register method");
             e.printStackTrace();
         }
         //Make sure we are error checking this return statement

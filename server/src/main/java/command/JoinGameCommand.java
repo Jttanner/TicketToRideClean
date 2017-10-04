@@ -19,7 +19,7 @@ public class JoinGameCommand {
             //String str = joinGameCommandData.getStr();
             //int number = StringProcessor.instance().parseInteger(str);
             //String data = String.valueOf(number);
-            Result result = new Result(true, "data", null);
+            Result result = new Result(true, joinGameCommandData.getGameID(), null);
             return result;
         }
         catch (NumberFormatException e) {
