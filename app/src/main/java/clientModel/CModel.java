@@ -1,17 +1,26 @@
 package clientModel;
 
+import android.nfc.Tag;
+import android.util.Log;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
+import java.util.TreeSet;
 
 import modeling.Game;
 import modeling.Player;
 import modeling.User;
+import presenters.LoginPresenter;
 
 /**
  * Created by tyler on 9/27/2017.
  * The root client Model class
  */
-class CModel {
+public class CModel extends Observable{
+    private static final String TAG = "CModel";
     private static CModel ourInstance = new CModel();
 
     public static CModel getInstance() {
@@ -25,11 +34,12 @@ class CModel {
     private Game currGame;
     /**The set of players you are playing with*/
     private Set<Player> allPlayers;
-    /**Holds our persenters*/
-    //private StateMaintainer stateMaintainer;
+    /**Our Presenters*/
+    //private Set<Observer> observerSet = new TreeSet<>();
 
     private CModel() {
     }
+
 
     public User getMyUser() {
         return myUser;
@@ -53,21 +63,70 @@ class CModel {
 
     public void setMyUser(User myUser) {
         this.myUser = myUser;
+        /*setChanged();
+        notifyObservers(this);*/
     }
 
     public void setAllGames(List<Game> allGames) {
         this.allGames = allGames;
+        setChanged();
+        notifyObservers(this.allGames);
     }
 
     public void setCurrGame(Game currGame) {
         this.currGame = currGame;
+        setChanged();
+        notifyObservers(this.currGame);
     }
 
     public void setAllPlayers(Set<Player> allPlayers) {
         this.allPlayers = allPlayers;
+        setChanged();
+        notifyObservers(this.allPlayers);
     }
 
    /* public void setStateMaintainer(StateMaintainer stateMaintainer) {
         this.stateMaintainer = stateMaintainer;
     }*/
+
+    @Override
+    public synchronized void addObserver(Observer o) {
+        super.addObserver(o);
+        Log.d(TAG,"Number of observers " + String.valueOf(countObservers()));
+    }
+
+    @Override
+    public synchronized void deleteObserver(Observer o) {
+        super.deleteObserver(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        super.notifyObservers();
+    }
+
+    @Override
+    public void notifyObservers(Object arg) {
+        super.notifyObservers(arg);
+    }
+
+    @Override
+    public synchronized void deleteObservers() {
+        super.deleteObservers();
+    }
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
+    }
+
+    @Override
+    protected synchronized void clearChanged() {
+        super.clearChanged();
+    }
+
+    @Override
+    public synchronized boolean hasChanged() {
+        return super.hasChanged();
+    }
 }

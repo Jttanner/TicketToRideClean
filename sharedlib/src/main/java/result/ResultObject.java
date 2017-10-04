@@ -5,32 +5,36 @@ package result;
  */
 
 public class ResultObject  {
+    private String userName;
+    private boolean success;
+    private String message;
 
-    ResultObject(){
+    public ResultObject(){
 
     }
-
-    private String errorMessage;
-    private boolean success;
     /**I made a constructor and setter depending on how yall want to do this*/
-    public ResultObject(boolean success) {
+    public ResultObject(boolean success, String userName, String errorMessage) {
         this.success = success;
     }
 
     public ResultObject(boolean success,String errorMessage) {
         this.success = success;
-        this.errorMessage = errorMessage;
+        this.message = errorMessage;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getUserName() {
+        return userName;
     }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

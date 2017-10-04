@@ -1,6 +1,9 @@
 package modeling;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 
 /**
@@ -14,11 +17,32 @@ public class Game {
         gameID = UUID.randomUUID().toString();
     }
 
+
     Set<Player> players;
+
+    boolean hasStarted;
 
     String gameID;
 
-    boolean hasStarted;
+    String Name;
+
+    int NumPlayer;
+
+    public int getNumPlayer() {
+        return NumPlayer;
+    }
+
+    public void setNumPlayer(int numPlayer) {
+        NumPlayer = numPlayer;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
     public boolean canJoinGame(){
         return false;
@@ -43,4 +67,5 @@ public class Game {
     public boolean isHasStarted() {
         return hasStarted;
     }
+
 }

@@ -5,7 +5,9 @@ import result.*;
 
 import android.util.Log;
 
-import java.net.MalformedURLException;
+import com.encoder.Encoder;
+
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -24,32 +26,21 @@ public class ServerProxy {
     private String TAG = "ServerProxy";
 
     private ServerProxy() {
-
     }
 
-    public LoginResult Login(LoginRequest request){
-        URL url = null;
-        try {
-            //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/user/login");
-        } catch (MalformedURLException e) {
-            Log.d(TAG,"URL is messed up yo in login method");
-            e.printStackTrace();
-        }
-        //Make sure we are error checking this return statement
-        return (LoginResult) ClientCommunicator.getInstance().send(url,request);
+    public LoginResult login(URL url, LoginRequest request){
+        Log.d(TAG,"Logging on");
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
+        //decode and send back to the presenter
+        return new Encoder().decodeLoginResult(inputStream);
     }
-    public RegisterResult Register(RegisterRequest request){
-        URL url = null;
-        try {
-            //TODO dynamic host and port number getting
-            url = new URL("http://localhost:8080/user/register");
-        } catch (MalformedURLException e) {
-            Log.d(TAG,"URL is messed up yo in register method");
-            e.printStackTrace();
-        }
-        //Make sure we are error checking this return statement
-        return (RegisterResult) ClientCommunicator.getInstance().send(url,request);
+    public RegisterResult register(URL url, RegisterRequest request){
+        Log.d(TAG,"Registering");
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
+        //decode and send back to the presenter
+        return new Encoder().decodeRegisterResult(inputStream);
     }
     /*public List<Game> getGameList(Command c){
     }*/
