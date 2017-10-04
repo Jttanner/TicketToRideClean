@@ -41,6 +41,5 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         } else {
             return new Result(false, "", "");
         }
-        return null;
     }
 }
