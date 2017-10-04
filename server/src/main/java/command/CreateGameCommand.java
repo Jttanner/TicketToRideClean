@@ -3,44 +3,45 @@ package command;
 import ServerModel.ServerFacade;
 import command.*;
 import commandData.*;
+import modeling.Game;
+import modeling.User;
 import result.*;
 
 /**
  * Created by Hwang on 9/29/2017.
  */
 
-public class CreateGameCommand extends CreateGameCommandData implements ICommand{
+public class CreateGameCommand extends CreateGameCommandData implements ICommand {
 
-    public CreateGameCommand(){
+    public CreateGameCommand() {
         super();
     }
 
     @Override
     public Result execute() {
-        try {
-            CreateGameCommandData createGameCommandData = new CreateGameCommandData();
 
-            //TODO: Finish the changes necessary here in the comment block to for the serverModel/serverFacade. Same for other commands
+        CreateGameCommandData createGameCommandData = new CreateGameCommandData();
 
-            //Create game sends a game to the server
-            //Sends back a bool in an object telling if it successfully created a game or not
+        //TODO: Finish the changes necessary here in the comment block to for the serverModel/serverFacade. Same for other commands
 
-            /*
-            String gameName = createGameCommandData.getGameName();
-            int gameID = createGameCommandData.getPlayerMax();
-            boolean gameCreatedSuccessful = ServerFacade.getInstance().createGameLobby(gameName, gameID);
-            if (gameCreatedSuccessful == true){
-                return new Result (true, "", "");
-            }
-            else {
-                return new Result (false, "", "");
-            }
-            */
-            return null;
+        //Create game sends a game object & A USER to the server
+        /*Set<Player> players;
+        boolean hasStarted;
+        String gameID;
+        String gameName;
+        int maxPlayers;*/
+        //Sends back a bool in an object telling if it successfully created a game or not
+
+
+        Game gameObject = createGameCommandData.getGameObject();
+        User user = createGameCommandData.getUser();
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(user, gameObject);
+        if (gameCreatedSuccessful == true) {
+            return new Result(true, "", "");
+        } else {
+            return new Result(false, "", "");
         }
-        catch (NumberFormatException e) {
-            Result result = new Result(false, null, "Error, not a number!");
-            return result;
-        }
+
+        return null;
     }
 }
