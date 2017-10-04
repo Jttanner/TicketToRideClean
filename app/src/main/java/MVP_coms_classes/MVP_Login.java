@@ -11,7 +11,7 @@ import result.*;
  * This holds our interfaces that we will use between the GUIs and interfaces
  */
 
-public interface MVP_Main {
+public interface MVP_Login {
 
     /**
      * Required View methods available to Presenter.

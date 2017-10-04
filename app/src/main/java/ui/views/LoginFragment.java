@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import MVP_coms_classes.MVP_Main;
+import MVP_coms_classes.MVP_Login;
 import presenters.LoginPresenter;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -28,9 +28,9 @@ import teamjapannumbahone.tickettoride.R;
  * Our loginFragment
  */
 
-public class LoginFragment extends Fragment implements MVP_Main.RequiredLoginViewOps {
+public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginViewOps {
     /**The pointer to our presenter object*/
-    private MVP_Main.ProvidedLoginPresentOps mPresenter;
+    private MVP_Login.ProvidedLoginPresentOps mPresenter;
     /**Our login button. Click to login*/
     private Button mLoginButton;
     /**User registration button*/

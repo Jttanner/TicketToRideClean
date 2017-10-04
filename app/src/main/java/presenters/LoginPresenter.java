@@ -1,7 +1,6 @@
 package presenters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 
-import MVP_coms_classes.MVP_Main;
+import MVP_coms_classes.MVP_Login;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.LoginResult;
@@ -23,8 +22,8 @@ import servercomms.ServerProxy;
  * The presenter for the login/register View, its function is self explanatory. It handles the logic for logging in and registering
  */
 
-public class LoginPresenter implements MVP_Main.RequiredPresenterOps, MVP_Main.ProvidedLoginPresentOps {
-    private WeakReference<MVP_Main.RequiredLoginViewOps> myView;
+public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login.ProvidedLoginPresentOps {
+    private WeakReference<MVP_Login.RequiredLoginViewOps> myView;
     /**
      * Booleans that tell us whether the user has entered a  suitable userName or password yet
      */
@@ -37,14 +36,14 @@ public class LoginPresenter implements MVP_Main.RequiredPresenterOps, MVP_Main.P
      *
      * @param view MainActivity
      */
-    public LoginPresenter(MVP_Main.RequiredLoginViewOps view) {
+    public LoginPresenter(MVP_Login.RequiredLoginViewOps view) {
         myView = new WeakReference<>(view);
     }
 
     /**
      * Called by View during the reconstruction events
      *
-     * @Override public void setView(MVP_Main.RequiredLoginViewOps view) {
+     * @Override public void setView(MVP_Login.RequiredLoginViewOps view) {
      * myView = new WeakReference<>(view);
      * }
      */
@@ -115,7 +114,7 @@ public class LoginPresenter implements MVP_Main.RequiredPresenterOps, MVP_Main.P
      * Return the View reference.
      * Throw an exception if the View is unavailable.
      */
-    private MVP_Main.RequiredLoginViewOps getView() throws NullPointerException {
+    private MVP_Login.RequiredLoginViewOps getView() throws NullPointerException {
         if (myView != null)
             return myView.get();
         else
