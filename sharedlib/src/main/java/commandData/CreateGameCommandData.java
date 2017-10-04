@@ -9,7 +9,6 @@ import modeling.User;
 
 public class CreateGameCommandData extends Command {
     private Game gameObject;
-    private User user;
 
     public CreateGameCommandData() {
     }
@@ -20,13 +19,5 @@ public class CreateGameCommandData extends Command {
 
     public void setGameObject(Game gameObject) {
         this.gameObject = gameObject;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
