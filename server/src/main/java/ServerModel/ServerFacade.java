@@ -110,6 +110,21 @@ public class ServerFacade {
         }
     }
 
+    public boolean leaveGame(Game game, Player player){
+        try{
+            if (games.containsKey(game.getGameID())){
+                Game thisGame = games.get(game.getGameID());
+                thisGame.removePlayer(player);
+            } else{
+                return false;
+            }
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Map<String, Game> getGameList(){
         return games;
     }
