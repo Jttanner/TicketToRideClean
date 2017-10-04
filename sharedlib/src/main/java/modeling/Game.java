@@ -1,9 +1,6 @@
 package modeling;
 
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.UUID;
 
 /**
