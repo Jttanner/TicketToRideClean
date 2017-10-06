@@ -2,7 +2,6 @@ package presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
@@ -10,15 +9,14 @@ import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
+import MVP_coms_classes.LoginSuccessChecker;
 import MVP_coms_classes.MVP_Login;
 import clientModel.CModel;
-import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
-import servercomms.ServerProxy;
 import ui.views.GameListActivity;
 
 /**
@@ -26,7 +24,7 @@ import ui.views.GameListActivity;
  * The presenter for the login/register View, its function is self explanatory. It handles the logic for logging in and registering
  */
 
-public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login.ProvidedLoginPresentOps, Observer {
+public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login.ProvidedLoginPresentOps, Observer, LoginSuccessChecker {
     private WeakReference<MVP_Login.RequiredLoginViewOps> myView;
     /**
      * Booleans that tell us whether the user has entered a  suitable userName or password yet
@@ -44,9 +42,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         CModel.getInstance().addObserver(this);
     }
 
-    /*TODO need to decide if I need a statemainter. What do I do with this observable Presenter when it is destroyed.
-     TODO Probably need to deteach from the Model Objects*
-     /
     /**
      * Called by View during the reconstruction events
      *
@@ -58,16 +53,11 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-<<<<<<< HEAD
-
-            String myIp = "128.187.116.11";
+            String myIp = "192.168.1.6";
             URL url = new URL("http://" + myIp +" :8080/user/login");
 
-=======
-            URL url = new URL("http://128.187.116.11:8080/user/login");
->>>>>>> 31f52d54b61c40884744043a10ebff8004a50c5f
             //call the async task
-            HttpTask httpTask = new HttpTask();
+            HttpTask httpTask = new HttpTask(this);
             httpTask.start(url, request);
         } catch (Exception e) {
             Log.d(TAG, "login method messed up: " + e.toString());
@@ -81,15 +71,10 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            String myIp = "128.187.116.11";
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 31f52d54b61c40884744043a10ebff8004a50c5f
+            String myIp = "192.168.1.6";
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
-            HttpTask httpTask = new HttpTask();
+            HttpTask httpTask = new HttpTask(this);
             httpTask.start(url,request);
         } catch (Exception e) {
             Log.d(TAG, "register method messed up: " + e.toString());
@@ -98,12 +83,13 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         }
     }
 
-
     /**
      * Checks the success of the login or registration tells the GUI to take the appropitae action
      * Also as a note I'm passing in an object because i get a java.lang.ClassCastException if I that above
+     * @param r The result object being passed in
      */
-    private void checkLogSuccess(Object r) {
+    @Override
+    public void checkLogSuccess(Object r) {
         ResultObject result = null;
         if (r instanceof RegisterResult) {
             result = (RegisterResult) r;
@@ -126,7 +112,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             //If we get here something when wrong with the server and we didnt receive a result object back
             myView.get().loginFailed("Server Failure");
         }
-
     }
 
     /**
@@ -191,57 +176,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         Log.d(TAG, "Num of observers: " + o.countObservers());
     }
 
-    /**
-     * Task which does a register or login request. Calls the proxy server which calls the server.
-     * Is given a Url and a request object to use
-     */
-    private class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
-        private Object request;
 
-        void start(URL url, Object req) {
-            if (req instanceof RegisterRequest) {
-                request = req;
-                Log.d("start", "Do a regRequest");
-                //Goes into doInBackGround
-                execute(url);
-            } else if(req instanceof  LoginRequest) {
-                Log.d("start", "Do a loginRequest");
-                request = req;
-                //Goes into doInBackGround
-                execute(url);
-            }
-
-            }
-        }
-
-        @Override
-        protected Object doInBackground(URL... urls) {
-            Log.d("DoInBackGround", "Entering DoInBackGround");
-
-            if (request instanceof LoginRequest) {
-                //Calls the serverProxy
-                return ServerProxy.getInstance().login(urls[0], (LoginRequest) request);
-            } else if(request instanceof  RegisterRequest) {
-                return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
-            }
-            else if(request instanceof  Command){
-                //TODO return ServerProxy.getInstance().doStuffWithCommand();
-            }
-            return new ResultObject(false,"Given incorrect object of type: " + request.getClass());
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {//gets us back on the main thread
-            Log.d("onPostExecute", "Entering onPostExecute");
-            super.onPostExecute(result);
-            if(result instanceof ResultObject){
-                checkLogSuccess(result);
-            }
-            else if(result instanceof Command){
-                //TODO do what you want with the command object
-            }
-
-        }
-    }
 
 }

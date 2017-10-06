@@ -1,8 +1,6 @@
 package presenters;
 
-import java.util.Observable;
-import java.util.Observer;
-
+import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.MVP_GameList;
 import commandData.Command;
 import modeling.Game;
@@ -11,7 +9,7 @@ import modeling.Game;
  * Created by LabUser on 10/2/2017.
  */
 
-public class GameListPresenter implements MVP_GameList.GameListPresenterInterface {
+public class GameListPresenter implements MVP_GameList.GameListPresenterInterface, CommandSuccessChecker {
     @Override
     public void CreateGame(Game game) {
         Command command = new Command();
@@ -26,4 +24,8 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     }
 
+    @Override
+    public void checkCommandSuccess(Object r) {
+        //TODO check the success of any given command and do something with it
+    }
 }

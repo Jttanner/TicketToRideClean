@@ -2,7 +2,6 @@ package ui.views;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -15,10 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import MVP_coms_classes.MVP_Login;
-import clientModel.CModel;
-import modeling.Game;
 import presenters.LoginPresenter;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -76,7 +72,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         setTextListeners();
         setOnClicks();
         //Only for testing purposes
-        CModel.getInstance().setCurrGame(new Game());
+        //CModel.getInstance().setCurrGame(new Game());
 
     }
 

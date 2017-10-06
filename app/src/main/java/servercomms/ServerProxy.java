@@ -51,8 +51,7 @@ public class ServerProxy {
     }
     /*public List<Game> getGameList(Command c){
     }*/
-    /*public void Encode(Object o, ResponseBody responseBody){
-    }*/
+
     //The request object for createGame will need the User Object
     public void joinGame(){
 
