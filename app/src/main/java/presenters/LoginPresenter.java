@@ -13,6 +13,7 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_Login;
 import clientModel.CModel;
+import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.LoginResult;
@@ -58,12 +59,10 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-<<<<<<< HEAD
-            URL url = new URL("http://128.187.116.11:8080/user/login");
-=======
-            String myIp = "10.24.71.92";
+
+            String myIp = "128.187.116.11";
             URL url = new URL("http://" + myIp +" :8080/user/login");
->>>>>>> e62c4c0d6617add8ebc19dad70b860487bb6bbc0
+
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
@@ -83,7 +82,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
 
             String myIp = "128.187.116.11";
 
-            String myIp = "10.24.71.92";
 
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
@@ -207,6 +205,9 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
                 request = req;
                 //Goes into doInBackGround
                 execute(url);
+            }
+            else if (req instanceof Command){
+                request = req;
             }
         }
 

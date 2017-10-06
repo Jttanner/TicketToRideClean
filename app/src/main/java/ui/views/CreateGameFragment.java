@@ -44,7 +44,7 @@ public class CreateGameFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         game = new Game();
-        game.setNumPlayer(2);
+        game.setPlayerMax(2);
         player.setColor("red");
         View v = inflater.inflate(R.layout.fragment_creategame, container, false);
         setUp(v);
@@ -66,7 +66,7 @@ public class CreateGameFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                game.setName(s.toString());
+                game.setGameName(s.toString());
             }
         });
 
@@ -83,7 +83,7 @@ public class CreateGameFragment extends DialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String size = (String) adapterView.getItemAtPosition(position);
-                game.setNumPlayer(Integer.parseInt(size));
+                game.setPlayerMax(Integer.parseInt(size));
             }
 
             @Override

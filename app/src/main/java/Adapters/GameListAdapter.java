@@ -53,14 +53,14 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     public void onBindViewHolder(GameListAdapter.ViewHolder holder, int position) {
         Game currentGame = list.get(position);
         holder.id.setText(position);
-        holder.name.setText(currentGame.getName());
+        holder.name.setText(currentGame.getGameName());
         String players = "";
 
         for(Player each : currentGame.getPlayers()){
             players += each.getName();
         }
         holder.players.setText(players);
-        holder.inGame.setText(currentGame.getPlayers().size() + "/" + currentGame.getNumPlayer());
+        holder.inGame.setText(currentGame.getPlayers().size() + "/" + currentGame.getPlayerMax());
 
     }
 
