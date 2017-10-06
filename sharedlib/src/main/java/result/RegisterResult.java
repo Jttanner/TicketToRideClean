@@ -1,7 +1,6 @@
 package result;
 
 import modeling.User;
-import request.RequestObject;
 
 /**
  * Created by Hwang on 9/28/2017.
@@ -9,7 +8,7 @@ import request.RequestObject;
 
 public class RegisterResult extends ResultObject {
 
-    User user;
+    private User user;
 
     public RegisterResult(boolean success, String userName, String errorMessage, User user) {
         super(success, userName, errorMessage);
@@ -19,5 +18,9 @@ public class RegisterResult extends ResultObject {
     public RegisterResult(boolean success, String errorMessage, User user) {
         super(success, errorMessage);
         this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

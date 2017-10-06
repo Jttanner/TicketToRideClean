@@ -6,13 +6,13 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.MVP_Login;
 import clientModel.CModel;
+import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.LoginResult;
@@ -58,12 +58,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-<<<<<<< HEAD
             URL url = new URL("http://128.187.116.11:8080/user/login");
-=======
-            String myIp = "10.24.71.92";
-            URL url = new URL("http://" + myIp +" :8080/user/login");
->>>>>>> e62c4c0d6617add8ebc19dad70b860487bb6bbc0
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
@@ -79,12 +74,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            //String myIp = InetAddress.getLocalHost().getHostAddress();
-
             String myIp = "128.187.116.11";
-
-            String myIp = "10.24.71.92";
-
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask();
@@ -208,6 +198,14 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
                 //Goes into doInBackGround
                 execute(url);
             }
+            //if its a command
+            else if(req instanceof Command){
+                Log.d("start", "Do a command request");
+                request = req;
+                //TODO need to create the methods that will create this task for this case
+                //Goes into doInBackGround
+                execute(url);
+            }
         }
 
         @Override
@@ -217,16 +215,26 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             if (request instanceof LoginRequest) {
                 //Calls the serverProxy
                 return ServerProxy.getInstance().login(urls[0], (LoginRequest) request);
-            } else {
+            } else if(request instanceof  RegisterRequest) {
                 return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
             }
+            else if(request instanceof  Command){
+                //TODO return ServerProxy.getInstance().doStuffWithCommand();
+            }
+            return new ResultObject(false,"Given incorrect object of type: " + request.getClass());
         }
 
         @Override
         protected void onPostExecute(Object result) {//gets us back on the main thread
             Log.d("onPostExecute", "Entering onPostExecute");
             super.onPostExecute(result);
-            checkLogSuccess(result);
+            if(result instanceof ResultObject){
+                checkLogSuccess(result);
+            }
+            else if(result instanceof Command){
+                //TODO do what you want with the command object
+            }
+
         }
     }
 
