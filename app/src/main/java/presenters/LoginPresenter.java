@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -59,10 +58,14 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
+<<<<<<< HEAD
 
             String myIp = "128.187.116.11";
             URL url = new URL("http://" + myIp +" :8080/user/login");
 
+=======
+            URL url = new URL("http://128.187.116.11:8080/user/login");
+>>>>>>> 31f52d54b61c40884744043a10ebff8004a50c5f
             //call the async task
             HttpTask httpTask = new HttpTask();
             httpTask.start(url, request);
@@ -78,11 +81,12 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            //String myIp = InetAddress.getLocalHost().getHostAddress();
-
             String myIp = "128.187.116.11";
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 31f52d54b61c40884744043a10ebff8004a50c5f
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask();
@@ -206,8 +210,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
                 //Goes into doInBackGround
                 execute(url);
             }
-            else if (req instanceof Command){
-                request = req;
+
             }
         }
 
@@ -218,16 +221,26 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
             if (request instanceof LoginRequest) {
                 //Calls the serverProxy
                 return ServerProxy.getInstance().login(urls[0], (LoginRequest) request);
-            } else {
+            } else if(request instanceof  RegisterRequest) {
                 return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
             }
+            else if(request instanceof  Command){
+                //TODO return ServerProxy.getInstance().doStuffWithCommand();
+            }
+            return new ResultObject(false,"Given incorrect object of type: " + request.getClass());
         }
 
         @Override
         protected void onPostExecute(Object result) {//gets us back on the main thread
             Log.d("onPostExecute", "Entering onPostExecute");
             super.onPostExecute(result);
-            checkLogSuccess(result);
+            if(result instanceof ResultObject){
+                checkLogSuccess(result);
+            }
+            else if(result instanceof Command){
+                //TODO do what you want with the command object
+            }
+
         }
     }
 

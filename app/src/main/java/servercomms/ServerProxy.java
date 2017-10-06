@@ -1,14 +1,17 @@
 package servercomms;
 
-import request.*;
-import result.*;
-
 import android.util.Log;
 
 import com.encoder.Encoder;
 
 import java.io.InputStream;
 import java.net.URL;
+
+import clientModel.CModel;
+import request.LoginRequest;
+import request.RegisterRequest;
+import result.LoginResult;
+import result.RegisterResult;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -32,15 +35,19 @@ public class ServerProxy {
         Log.d(TAG,"Logging on");
         String typeOfRequest = "POST";
         InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
-        //decode and send back to the presenter
-        return new Encoder().decodeLoginResult(inputStream);
+        //decode ,set the user object, and send back to the presenter
+        LoginResult result = new Encoder().decodeLoginResult(inputStream);
+        CModel.getInstance().setMyUser(result.getUser());
+        return result;
     }
     public RegisterResult register(URL url, RegisterRequest request){
         Log.d(TAG,"Registering");
         String typeOfRequest = "POST";
         InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
-        //decode and send back to the presenter
-        return new Encoder().decodeRegisterResult(inputStream);
+        //decode ,set the user object, and send back to the presenter
+        RegisterResult result = new Encoder().decodeRegisterResult(inputStream);
+        CModel.getInstance().setMyUser(result.getUser());
+        return result;
     }
     /*public List<Game> getGameList(Command c){
     }*/

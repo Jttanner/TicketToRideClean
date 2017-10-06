@@ -1,24 +1,19 @@
 package clientModel;
 
-import android.nfc.Tag;
 import android.util.Log;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
-import java.util.TreeSet;
 
 import modeling.Game;
 import modeling.Player;
 import modeling.User;
-import presenters.LoginPresenter;
 
 /**
  * Created by tyler on 9/27/2017.
  * The root client Model class
- * TODO: add User to Model which we send back with login and register
  */
 public class CModel extends Observable{
     private static final String TAG = "CModel";
