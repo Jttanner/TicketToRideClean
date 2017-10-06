@@ -4,16 +4,16 @@ package result;
  * Created by Hwang on 9/29/2017.
  */
 
-public class Result {
+public class CommandResult {
 
     private boolean success;
     private Object data;
     private String errorInfo;
 
-    public Result() {
+    public CommandResult() {
     }
 
-    public Result(boolean success, Object data, String errorInfo) {
+    public CommandResult(boolean success, Object data, String errorInfo) {
         this.success = success;
         this.data = data;
         this.errorInfo = errorInfo;

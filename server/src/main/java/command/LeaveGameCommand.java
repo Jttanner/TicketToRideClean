@@ -1,12 +1,10 @@
 package command;
 
 import ServerModel.ServerFacade;
-import command.*;
-import commandData.*;
+import commandData.LeaveGameCommandData;
 import modeling.Game;
 import modeling.Player;
-import modeling.User;
-import result.*;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -22,7 +20,7 @@ public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
     private Player playerObject;
 
     @Override
-    public Result execute() {
+    public CommandResult execute() {
 
         //CreateGameCommandData createGameCommandData = new CreateGameCommandData();
 
@@ -38,10 +36,10 @@ public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
         //Game gameObject = createGameCommandData.getGameObject();
 
         boolean leaveCreatedSuccessful = ServerFacade.getInstance().leaveGame(gameObject, playerObject);
-        if (leaveCreatedSuccessful == true) {
-            return new Result(true, "", "");
+        if (leaveCreatedSuccessful) {
+            return new CommandResult(true, "", "");
         } else {
-            return new Result(false, "", "");
+            return new CommandResult(false, "", "");
         }
     }
 }

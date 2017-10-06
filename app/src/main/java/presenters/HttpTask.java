@@ -10,6 +10,7 @@ import MVP_coms_classes.LoginSuccessChecker;
 import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
+import result.CommandResult;
 import result.ResultObject;
 import servercomms.ServerProxy;
 /**
@@ -67,8 +68,8 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         super.onPostExecute(result);
         if (result instanceof ResultObject) {
             loginChecker.checkLogSuccess(result);
-        } else if (result instanceof Command) {
-            commandChecker.checkCommandSuccess(result);
+        } else if (result instanceof CommandResult) {
+            commandChecker.checkCommandSuccess((CommandResult)result);
             //TODO do what you want with the command object
         }
 

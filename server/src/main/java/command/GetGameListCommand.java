@@ -1,14 +1,13 @@
 package command;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ServerModel.ServerFacade;
 import commandData.GetGameListCommandData;
 import modeling.Game;
-import result.Result;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -20,7 +19,7 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
     }
 
     @Override
-    public Result execute() {
+    public CommandResult execute() {
         try {
             //GetGameListCommand getGameCommandData = new GetGameListCommand();
 
@@ -32,11 +31,11 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
                 gameList.add(game.getValue());
             }
 
-            Result result = new Result(true, gameList, "Game List sent.");
+            CommandResult result = new CommandResult(true, gameList, "Game List sent.");
             return result;
         }
         catch (NumberFormatException e) {
-            Result result = new Result(false, null, "Error, not a number!");
+            CommandResult result = new CommandResult(false, null, "Error, not a number!");
             return result;
         }
     }

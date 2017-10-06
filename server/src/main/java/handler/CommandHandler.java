@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.sql.SQLException;
 
 import command.CreateGameCommand;
 import command.GetGameListCommand;
 import command.ICommand;
 import command.JoinGameCommand;
 import commandData.Command;
-import result.Result;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/28/2017.
@@ -48,7 +47,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 default:
                     break;
             }
-            Result result = word.execute();
+            CommandResult result = word.execute();
             String jsonStr = gson.toJson(word);
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
             OutputStream respBody = exchange.getResponseBody();

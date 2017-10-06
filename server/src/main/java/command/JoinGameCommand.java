@@ -2,7 +2,7 @@ package command;
 
 import commandData.JoinGameCommandData;
 import modeling.User;
-import result.Result;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -16,7 +16,7 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
 
 
    // @Override
-    public Result execute() {
+    public CommandResult execute() {
         try {
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
             int gameID = this.getGameID();
@@ -28,11 +28,11 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
             //String str = joinGameCommandData.getStr();
             //int number = StringProcessor.instance().parseInteger(str);
             //String data = String.valueOf(number);
-            Result result = new Result(true, gameID, null);
+            CommandResult result = new CommandResult(true, gameID, null);
             return result;
         }
         catch (NumberFormatException e) {
-            Result result = new Result(false, null, "Error, not a number!");
+            CommandResult result = new CommandResult(false, null, "Error, not a number!");
             return result;
         }
     }

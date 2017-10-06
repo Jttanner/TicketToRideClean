@@ -1,11 +1,9 @@
 package command;
 
 import ServerModel.ServerFacade;
-import command.*;
-import commandData.*;
+import commandData.CreateGameCommandData;
 import modeling.Game;
-import modeling.User;
-import result.*;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -20,7 +18,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
     private Game gameObject;
 
     @Override
-    public Result execute() {
+    public CommandResult execute() {
 
         //CreateGameCommandData createGameCommandData = new CreateGameCommandData();
 
@@ -36,10 +34,10 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         //Game gameObject = createGameCommandData.getGameObject();
 
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(gameObject);
-        if (gameCreatedSuccessful == true) {
-            return new Result(true, "", "");
+        if (gameCreatedSuccessful) {
+            return new CommandResult(true, "", "");
         } else {
-            return new Result(false, "", "");
+            return new CommandResult(false, "", "");
         }
     }
 }
