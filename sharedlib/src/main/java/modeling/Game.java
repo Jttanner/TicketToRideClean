@@ -1,5 +1,6 @@
 package modeling;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -13,11 +14,13 @@ public class Game {
     public Game(){
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
-        players = new TreeSet<>();
+        players = new ArrayList<>();
     }
 
 
-    Set<Player> players;
+
+
+    ArrayList<Player> players;
 
     boolean hasStarted;
 
@@ -46,19 +49,22 @@ public class Game {
     public boolean canJoinGame(){
         return false;
     }
-
-    public void addPlayer(Player player){
-        players.add(player);
-    }
-
-    public void removePlayer(Player player){
-        players.remove(player);
-    }
-
-    public Set<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+    public boolean addPlayer(Player p) {
+        if(players.contains(p)) {
+            return false;
+        }
+        else {
+            players.add(p);
+            return true;
+        }
+    }
     public String getGameID() {
         return gameID;
     }

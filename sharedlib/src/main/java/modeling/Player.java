@@ -13,18 +13,17 @@ public class Player implements Comparator<Player> {
         this.userID = userID;
     }
 
-    String userID;
-    String Name;
-    String Color;
+    private String userID;
+    private String Name;
+    private ColorEnum Color;
 
-    public String getColor() {
-        return Color;
+    public int getColor() {
+        return Color.getColor();
     }
 
-    public void setColor(String color) {
+    public void setColor(ColorEnum color) {
         Color = color;
     }
-
     public String getName() {
         return Name;
     }
