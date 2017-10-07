@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="deepRed">#960000</color>
-    <color name="white">#ffffff</color>
+    <color gameName="colorPrimary">#3F51B5</color>
+    <color gameName="colorPrimaryDark">#303F9F</color>
+    <color gameName="colorAccent">#FF4081</color>
+    <color gameName="deepRed">#960000</color>
+    <color gameName="white">#ffffff</color>
 </resources>
