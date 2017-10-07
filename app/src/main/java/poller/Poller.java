@@ -27,6 +27,8 @@ public class Poller {
 
     public Poller(String URL){
         this.URL = URL;
+        command = new GetGameListCommandData();
+        command.setType("getGameList");
     }
 
     public void updateGameList() {

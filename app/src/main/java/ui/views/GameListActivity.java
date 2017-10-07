@@ -39,6 +39,7 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         wireUp();
+        GameListPresenter.initiazlizePoller();
     }
 
     void wireUp(){
@@ -66,8 +67,7 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
                 }
             }
         });
-        String myIpUrl = "http://192.168.0.7:8080/user/command";
-        Poller poller = new Poller(myIpUrl);
+
     }
 
     @Override
