@@ -2,10 +2,15 @@ package poller;
 
 import android.os.AsyncTask;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
+import commandData.GetGameListCommandData;
+import modeling.Game;
 import modeling.User;
 import servercomms.ClientFacade;
 import servercomms.ServerProxy;
@@ -15,6 +20,14 @@ import servercomms.ServerProxy;
  */
 
 public class Poller {
+
+    CModel clientModel = CModel.getInstance();
+    String URL;
+    GetGameListCommandData command;
+
+    public Poller(String URL){
+        this.URL = URL;
+    }
 
     public void updateGameList() {
         //final Handler handler = new Handler();
@@ -38,7 +51,11 @@ public class Poller {
         {
             //TODO: Push the request to the serverProxy
             ServerProxy serverProxy = ServerProxy.getInstance();
-            //serverProxy.getGameList(URL, command);
+            try{
+                clientModel.setAllGames(serverProxy.getGameList(new URL(URL), command));
+            }catch (MalformedURLException e){
+                e.printStackTrace();
+            }
             return null;
         }
 

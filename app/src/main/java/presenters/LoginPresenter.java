@@ -53,7 +53,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-            String myIp = "192.168.1.6";
+            String myIp = "192.168.0.7";
             URL url = new URL("http://" + myIp +" :8080/user/login");
 
             //call the async task
@@ -71,7 +71,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            String myIp = "192.168.1.6";
+            String myIp = "192.168.0.7";
             URL url = new URL("http://" + myIp +":8080/user/register");
             //call the async task
             HttpTask httpTask = new HttpTask(this);

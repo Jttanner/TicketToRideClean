@@ -16,7 +16,9 @@ import java.util.List;
 
 import Adapters.GameListAdapter;
 import MVP_coms_classes.MVP_GameList;
+import commandData.GetGameListCommandData;
 import modeling.Game;
+import poller.Poller;
 import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
@@ -64,6 +66,8 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
                 }
             }
         });
+        String myIpUrl = "http://192.168.0.7:8080/user/command";
+        Poller poller = new Poller(myIpUrl);
     }
 
     @Override
