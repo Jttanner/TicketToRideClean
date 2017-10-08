@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
+import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
@@ -47,6 +48,12 @@ public class Encoder {
     public LoginResult decodeLoginResult(InputStream inputStream) {
         Reader reader = new InputStreamReader(inputStream);
         return gson.fromJson(reader, LoginResult.class);
+    }
+
+    public CommandResult decodeCommand(InputStream inputStream){
+        Reader reader = new InputStreamReader(inputStream);
+        System.out.println(inputStream);
+        return gson.fromJson(reader, CommandResult.class);
     }
 
     //TODO make decoding methods

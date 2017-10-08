@@ -2,6 +2,7 @@ package ui.views;
 
 import android.app.Fragment;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +25,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by LabUser on 10/2/2017.
  */
 
-public class GameListActivity extends AppCompatActivity implements MVP_GameList.GameListActivityInterface {
+public class GameListActivity extends FragmentActivity implements MVP_GameList.GameListActivityInterface {
     //Button StartGameButton;
     Button CreateGameButton;
     Button JoinGameButton;
@@ -47,7 +48,9 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
             public void onClick(View v) {
                 //not yet
                 //MVP_GameList.GameListPresenterInterface presenter = new GameListPresenter();
-
+                FragmentManager fm = getSupportFragmentManager();
+                CreateGameFragment fragment = new CreateGameFragment();
+                fragment.show(fm,"fragment_creategame");
 
             }
         });
@@ -56,12 +59,7 @@ public class GameListActivity extends AppCompatActivity implements MVP_GameList.
         JoinGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                android.support.v4.app.Fragment fragment = fm.findFragmentById(R.id.activity_login);
-                if(fragment == null){
-                    fragment = new CreateGameFragment();
-                    fm.beginTransaction().add(R.id.fragment_spot,fragment).commit();
-                }
+
             }
         });
     }

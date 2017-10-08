@@ -8,8 +8,11 @@ import java.io.InputStream;
 import java.net.URL;
 
 import clientModel.CModel;
+import commandData.Command;
+import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
+import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -31,6 +34,7 @@ public class ServerProxy {
     private ServerProxy() {
     }
 
+
     public LoginResult login(URL url, LoginRequest request){
         Log.d(TAG,"Logging on");
         String typeOfRequest = "POST";
@@ -51,6 +55,13 @@ public class ServerProxy {
     }
     /*public List<Game> getGameList(Command c){
     }*/
+    public CommandResult CreateGame(URL url, CreateGameCommandData command){
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url,command,typeOfRequest);
+        //decode ,set the user object, and send back to the presenter
+        CommandResult result = new Encoder().decodeCommand(inputStream);
+       return result;
+    }
 
     //The request object for createGame will need the User Object
     public void joinGame(){

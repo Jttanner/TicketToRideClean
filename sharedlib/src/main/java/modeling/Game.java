@@ -1,5 +1,6 @@
 package modeling;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -13,7 +14,7 @@ public class Game {
     public Game(){
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
-        players = new TreeSet<>();
+        players = new HashSet<>();
     }
 
 

@@ -53,12 +53,10 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void login(LoginRequest request) {
         try {
             //TODO dynamic host and port number getting
-            String myIp = "192.168.1.6";
-            URL url = new URL("http://" + myIp +" :8080/user/login");
 
             //call the async task
             HttpTask httpTask = new HttpTask(this);
-            httpTask.start(url, request);
+            httpTask.start(" :8080/user/login", request);
         } catch (Exception e) {
             Log.d(TAG, "login method messed up: " + e.toString());
             e.printStackTrace();
@@ -71,11 +69,10 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void register(RegisterRequest request) {
         try {
             //TODO dynamic host and port number getting
-            String myIp = "192.168.1.6";
-            URL url = new URL("http://" + myIp +":8080/user/register");
+
             //call the async task
             HttpTask httpTask = new HttpTask(this);
-            httpTask.start(url,request);
+            httpTask.start(":8080/user/register",request);
         } catch (Exception e) {
             Log.d(TAG, "register method messed up: " + e.toString());
             checkLogSuccess(new RegisterResult(false, e.toString(), null));

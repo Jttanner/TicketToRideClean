@@ -1,7 +1,9 @@
 package ui.views;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -32,24 +34,32 @@ public class CreateGameFragment extends DialogFragment {
     Spinner spinner;
     EditText gameName;
     Game game;
-    Player player = new Player(CModel.getInstance().getMyUser().getUserID());
+    Player player;
     Button buttonRed;
     Button buttonGreen;
     Button buttonYellow;
     Button buttonBlue;
     Button buttonCancel;
     Button buttonSubmit;
+
+    public CreateGameFragment(){
+        System.out.println("hello");
+        game = new Game();
+        game.setPlayerMax(2);
+        System.out.println(CModel.getInstance().getMyUser().getUserID());
+        player = new Player(CModel.getInstance().getMyUser().getUserID());
+        player.setColor("red");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        game = new Game();
-        game.setPlayerMax(2);
-        player.setColor("red");
         View v = inflater.inflate(R.layout.fragment_creategame, container, false);
+
         setUp(v);
 
-        return null;
+        return v;
     }
     private void setUp(View v){
         gameName = (EditText) v.findViewById(R.id.gameName);

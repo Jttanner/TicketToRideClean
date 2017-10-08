@@ -8,6 +8,7 @@ import java.net.URL;
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.LoginSuccessChecker;
 import commandData.Command;
+import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -22,6 +23,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     private Object request;
     private LoginSuccessChecker loginChecker;
     private CommandSuccessChecker commandChecker;
+    private String address = "192.168.0.100";
 
     HttpTask(Object presenter) {
         if(presenter instanceof LoginPresenter ){
@@ -32,17 +34,29 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         }
     }
 
-    void start(URL url, Object req) {
-        if (req instanceof RegisterRequest) {
-            request = req;
-            Log.d("start", "Do a regRequest");
-            //Goes into doInBackGround
-            execute(url);
-        } else if (req instanceof LoginRequest) {
-            Log.d("start", "Do a loginRequest");
-            request = req;
-            //Goes into doInBackGround
-            execute(url);
+    void start(String postfix, Object req) {
+        address += postfix;
+        try {
+            URL url = new URL("http://" + address);
+            if (req instanceof RegisterRequest) {
+                request = req;
+                Log.d("start", "Do a regRequest");
+                //Goes into doInBackGround
+                execute(url);
+            } else if (req instanceof LoginRequest) {
+                Log.d("start", "Do a loginRequest");
+                request = req;
+                //Goes into doInBackGround
+                execute(url);
+            }
+            else if (req instanceof CreateGameCommandData){
+                request = req;
+                execute(url);
+            }
+        }
+        catch (Exception e){
+            Log.d("here", "login method messed up: " + e.toString());
+            e.printStackTrace();
         }
 
     }
@@ -56,8 +70,9 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return ServerProxy.getInstance().login(urls[0], (LoginRequest) request);
         } else if (request instanceof RegisterRequest) {
             return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
-        } else if (request instanceof Command) {
-            //TODO return ServerProxy.getInstance().doStuffWithCommand();
+        } else if (request instanceof CreateGameCommandData) {
+            System.out.println("shawn");
+            return ServerProxy.getInstance().CreateGame(urls[0],(CreateGameCommandData) request);
         }
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());
     }
@@ -72,6 +87,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             commandChecker.checkCommandSuccess((CommandResult)result);
             //TODO do what you want with the command object
         }
+
 
     }
 
