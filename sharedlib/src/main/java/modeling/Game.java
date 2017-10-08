@@ -65,6 +65,9 @@ public class Game {
             return true;
         }
     }
+    public void removePlayer(Player player) {
+        players.remove(players.indexOf(player));
+    }
     public String getGameID() {
         return gameID;
     }
