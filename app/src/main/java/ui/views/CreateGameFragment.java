@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clientModel.CModel;
+import modeling.ColorEnum;
 import modeling.Game;
 import modeling.Player;
 import presenters.GameListPresenter;
@@ -55,6 +56,12 @@ public class CreateGameFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+<<<<<<< HEAD
+=======
+        game = new Game();
+        game.setPlayerMax(2);
+        player.setColor(ColorEnum.RED);
+>>>>>>> 8535345a461327642799b36a89885dd0c5119d81
         View v = inflater.inflate(R.layout.fragment_creategame, container, false);
 
         setUp(v);
@@ -115,25 +122,25 @@ public class CreateGameFragment extends DialogFragment {
         buttonBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("blue");
+                player.setColor(ColorEnum.BLUE);
             }
         });
         buttonRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("red");
+                player.setColor(ColorEnum.RED);
             }
         });
         buttonYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("yellow");
+                player.setColor(ColorEnum.YELLOW);
             }
         });
         buttonGreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("green");
+                player.setColor(ColorEnum.GREEN);
             }
         });
         buttonSubmit.setOnClickListener(new View.OnClickListener(){

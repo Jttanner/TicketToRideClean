@@ -1,6 +1,10 @@
 package modeling;
 
+<<<<<<< HEAD
 import java.util.HashSet;
+=======
+import java.util.ArrayList;
+>>>>>>> 8535345a461327642799b36a89885dd0c5119d81
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
@@ -14,11 +18,17 @@ public class Game {
     public Game(){
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
+<<<<<<< HEAD
         players = new HashSet<>();
+=======
+        players = new ArrayList<>();
+>>>>>>> 8535345a461327642799b36a89885dd0c5119d81
     }
 
 
-    Set<Player> players;
+
+
+    ArrayList<Player> players;
 
     boolean hasStarted;
 
@@ -47,19 +57,25 @@ public class Game {
     public boolean canJoinGame(){
         return false;
     }
-
-    public void addPlayer(Player player){
-        players.add(player);
-    }
-
-    public void removePlayer(Player player){
-        players.remove(player);
-    }
-
-    public Set<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+    public boolean addPlayer(Player p) {
+        if(players.contains(p)) {
+            return false;
+        }
+        else {
+            players.add(p);
+            return true;
+        }
+    }
+    public void removePlayer(Player player) {
+        players.remove(players.indexOf(player));
+    }
     public String getGameID() {
         return gameID;
     }
