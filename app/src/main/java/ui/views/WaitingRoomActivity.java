@@ -41,9 +41,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     private ListView playerListView;
     private PlayerListAdapter playerListAdapter;// = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
 
-    private String urlString = "http://10.4.158.51:8080/user/command";
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Poller.getInstance().stopPoller();

@@ -36,8 +36,6 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         presenter = new GameListPresenter(this);
