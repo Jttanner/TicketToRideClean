@@ -21,13 +21,6 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
             int gameID = this.getGameID();
 
-
-            //Join game sends gameID
-            //Send back bool,
-
-            //String str = joinGameCommandData.getStr();
-            //int number = StringProcessor.instance().parseInteger(str);
-            //String data = String.valueOf(number);
             CommandResult result = new CommandResult(true, gameID, null);
             return result;
         }
