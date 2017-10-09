@@ -14,6 +14,7 @@ import command.GetGameListCommand;
 import command.ICommand;
 import command.JoinGameCommand;
 import commandData.Command;
+import commandData.CreateGameCommandData;
 import modeling.Game;
 import result.CommandResult;
 
@@ -34,25 +35,26 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
 
             Gson gson = new Gson();
             Command cmd = gson.fromJson(reqData, Command.class);
-            ICommand word = null;
-            CommandResult result;
+            CommandResult result = null;
             switch (cmd.getType()) {
                 case "createGame":
-                    CreateGameCommand command = new CreateGameCommand();
-                    command.setGameObject((Game) cmd.getData());
-                    result = command.execute();
+
+                    CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
+                    CreateGameCommand realCommang = new CreateGameCommand();
+                    realCommang.setGameObject(command.getGameObject());
+                    result = realCommang.execute();
                     break;
                 case "joinGame":
-                    word = gson.fromJson(reqData, JoinGameCommand.class);
+                    //word = gson.fromJson(reqData, JoinGameCommand.class);
                     break;
                 case "getGameList":
-                    word = gson.fromJson(reqData, GetGameListCommand.class);
+                    //word = gson.fromJson(reqData, GetGameListCommand.class);
                     break;
                 default:
                     break;
             }
 //             result = word.execute();
-            String jsonStr = gson.toJson(word);
+            String jsonStr = gson.toJson(result);
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
             OutputStream respBody = exchange.getResponseBody();
             writeString(jsonStr, respBody);

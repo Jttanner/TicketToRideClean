@@ -26,7 +26,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void CreateGame(Game game) {
         CreateGameCommandData command = new CreateGameCommandData();
         command.setType("createGame");
-        command.setData(game);
+        command.setGameObject(game);
 
         HttpTask httpTask = new HttpTask(this);
         httpTask.start(":8080/user/command",command);

@@ -22,7 +22,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     private Object request;
     private LoginSuccessChecker loginChecker;
     private CommandSuccessChecker commandChecker;
-    private String address = "192.168.1.6";
+    private String address = "192.168.0.7";
 
     HttpTask(Object presenter) {
         if(presenter instanceof LoginPresenter ){

@@ -15,8 +15,6 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         super();
     }
 
-    private Game gameObject;
-
     @Override
     public CommandResult execute() {
 
@@ -33,7 +31,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
         //Sends back a bool in an object telling if it successfully created a game or not
         //Game gameObject = createGameCommandData.getGameObject();
 
-        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(gameObject);
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
         if (gameCreatedSuccessful) {
             return new CommandResult(true, "", "");
         } else {
