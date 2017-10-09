@@ -10,11 +10,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
 import modeling.Game;
+import poller.Poller;
 import presenters.WaitingRoomPresenter;
+import result.GameList;
+import servercomms.ClientFacade;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -33,6 +38,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Poller.getInstance().stopPoller();
         Log.d(TAG,"OnCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waitingroom);
@@ -55,7 +61,11 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
             @Override
             public void onClick(View v) {
                 //Check if it is valid. Go to new activity
+                List<Game> gameList = CModel.getInstance().getAllGames();
                 Game game = CModel.getInstance().getCurrGame();
+                
+                ClientFacade clientFacade = ClientFacade.getInstance();
+                clientFacade.updateGameList(new GameList(gameList));
                 game.setHasStarted(true);
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 

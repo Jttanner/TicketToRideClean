@@ -36,14 +36,17 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         presenter = new GameListPresenter(this);
         wireUp();
         Poller poller = Poller.getInstance();
         poller.updateGameList();
-
     }
+
+
 
     void wireUp(){
        // StartGameButton = (Button) findViewById(R.id.StartGameButton);
@@ -81,7 +84,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             //This will do stuffs
             List<Game> games = radapter.getGames();
             for(Game g : list){
-                if(!(games.contains(g))){
+                if(!(games.contains(g)) && !(g.isHasStarted())){
                     games.add(g);
                 }
             }
@@ -102,6 +105,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
     @Override
     public void JoinGameResult() {
+        Poller.getInstance().stopPoller();
         Intent intent = new Intent(this,WaitingRoomActivity.class);
         startActivity(intent);
         //this is where we go to the next activity
