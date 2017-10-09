@@ -72,7 +72,7 @@ public class Game {
     }
 
     public boolean canJoinGame() {
-        return false;
+        return !hasStarted;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -104,4 +104,7 @@ public class Game {
         return hasStarted;
     }
 
+    public void setHasStarted(boolean hasStarted) {
+        this.hasStarted = hasStarted;
+    }
 }

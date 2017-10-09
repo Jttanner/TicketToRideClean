@@ -67,6 +67,10 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+
         radapter = new GameListAdapter(CModel.getInstance().getAllGames(),presenter);
         recyclerView.setAdapter(radapter);
     }
