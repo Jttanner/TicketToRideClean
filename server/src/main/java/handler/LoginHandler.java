@@ -8,11 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.sql.SQLException;
 
 import ServerModel.ServerFacade;
-import request.*;
-import result.*;
+import request.LoginRequest;
+import result.LoginResult;
 
 /**
  * Created by Hwang on 9/28/2017.
@@ -35,12 +34,11 @@ public class LoginHandler extends BaseHandler implements HttpHandler {
                 Gson gson = new Gson();
 
                 LoginRequest loginRequest = gson.fromJson(reqData, LoginRequest.class);
-                ServerFacade loginService = new ServerFacade();
                 LoginResult lr = null;
 
                 try
                 {
-                    lr = loginService.login(loginRequest);
+                    lr = ServerFacade.getInstance().login(loginRequest);
                 }
                 //catch (SQLException e)
                 //{

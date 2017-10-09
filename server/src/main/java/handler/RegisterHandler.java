@@ -32,10 +32,9 @@ public class RegisterHandler extends BaseHandler implements HttpHandler {
                 Gson gson = new Gson();
 
                 RegisterRequest registerRequest = gson.fromJson(reqData, RegisterRequest.class);
-                ServerFacade registerService = new ServerFacade();
                 RegisterResult rs;
                 try {
-                    rs = registerService.register(registerRequest);
+                    rs = ServerFacade.getInstance().register(registerRequest);
                     encoder.encode(rs,respBody);
                     respBody.close();
 
