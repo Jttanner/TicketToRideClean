@@ -40,7 +40,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     @Override
     public void JoinGame(Game game) {
         CModel.getInstance().setCurrGame(game);
-        myView.get().JoinGameResult();
+        myView.get().JoinGameResult(game);
     }
 
     @Override
