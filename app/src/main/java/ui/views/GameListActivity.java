@@ -92,6 +92,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             recyclerView.setLayoutManager(linearLayoutManager);
             radapter = new GameListAdapter(games, presenter);
 
+
             //radapter.setList(games);
             //radapter.notifyDataSetChanged();
             //radapter = new GameListAdapter(games,presenter);
