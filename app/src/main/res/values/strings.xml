@@ -1,5 +1,5 @@
 <resources>
-<<<<<<< HEAD
+
     <string name="app_name">TicketToRide</string>
     <string name="pass">Password</string>
     <string name="userName">Username</string>
@@ -10,7 +10,6 @@
     <string name="password">password</string>
     <string name="startGame">Start Game</string>
 
-=======
     <string gameName="app_name">TicketToRide</string>
     <string gameName="pass">Password</string>
     <string gameName="userName">Username</string>
@@ -19,5 +18,5 @@
     <string gameName="loginpicDescription">Ticket To Ride</string>
     <string gameName="user">user</string>
     <string gameName="password">password</string>
->>>>>>> 378b3c4e93ccb75b694633abee9ac7c10c8d74a8
+
 </resources>
