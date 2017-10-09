@@ -24,6 +24,7 @@ public class Poller {
     GetGameListCommandData command;
     Timer timer = new Timer();
     private final String TAG = "Poller";
+    boolean active = false;
 
     private static Poller instance = new Poller();
 
@@ -32,6 +33,7 @@ public class Poller {
             this.URL = new URL("http://10.24.64.221:8080/user/command");
             command = new GetGameListCommandData();
             command.setType("getGameList");
+            active = true;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -46,6 +48,9 @@ public class Poller {
     }
 
     public void updateGameList() {
+        if (!active){
+            timer = new Timer();
+        }
         //final Handler handler = new Handler();
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
@@ -72,8 +77,9 @@ public class Poller {
     }
 
     public void stopPoller(){
-        if(timer != null){
+        if(timer != null && active){
             timer.cancel();
+            active = false;
         }
     }
 

@@ -30,9 +30,6 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-
-        boolean success = false;
-
         try {
             InputStream reqBody = exchange.getRequestBody();
             String reqData = readString(reqBody);
@@ -42,7 +39,6 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             CommandResult result = null;
             switch (cmd.getType()) {
                 case "createGame":
-
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
                     CreateGameCommand realCommand = new CreateGameCommand();
                     realCommand.setGameObject(command.getGameObject());

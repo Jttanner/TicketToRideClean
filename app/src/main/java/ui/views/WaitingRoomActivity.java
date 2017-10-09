@@ -70,24 +70,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
                 StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
                 mPresenter.startGame(startGameCommandData);
                 //Check if it is valid. Go to new activity
-                /*
-                List<Game> gameList = CModel.getInstance().getAllGames();
-                Game game = CModel.getInstance().getCurrGame();
-                for (Game g: gameList){
-                    if (g.getGameID().equals(game.getGameID())){
-                        gameList.remove(g);
-                    }
-                }
-                game.setHasStarted(true);
-                gameList.add(game);
-                ClientFacade clientFacade = ClientFacade.getInstance();
-                clientFacade.updateGameList(new GameList(gameList));
-
-                myGame = game;
-
-                StartGameTask startGameTask = new StartGameTask();
-                startGameTask.execute()*/;
-
 
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
