@@ -81,10 +81,6 @@ public class CModel extends Observable{
         notifyObservers(this.allPlayers);
     }
 
-   /* public void setStateMaintainer(StateMaintainer stateMaintainer) {
-        this.stateMaintainer = stateMaintainer;
-    }*/
-
     @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);

@@ -15,6 +15,8 @@ public class ResultObject  {
     /**I made a constructor and setter depending on how yall want to do this*/
     public ResultObject(boolean success, String userName, String errorMessage) {
         this.success = success;
+        this.userName = userName;
+        this.message = errorMessage;
     }
 
     public ResultObject(boolean success,String errorMessage) {

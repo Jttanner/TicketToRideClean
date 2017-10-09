@@ -60,4 +60,8 @@ public class PlayerListAdapter extends BaseAdapter {
 
         return view;
     }
+
+    public void setPlayerList(ArrayList<Player> playerList) {
+        this.playerList = playerList;
+    }
 }
