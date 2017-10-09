@@ -49,12 +49,19 @@ public class ServerFacade {
         String password = request.getPassword();
         String newUserID = UUID.randomUUID().toString();
         User newUser = new User(new UserInfo(userName, password, newUserID));
-        if (request.getUserName() != null && request.getPassword() != null){
+        if (validRegister(request)){
             ServerModel.getInstance().getUsers().put(userName, newUser);
             return new RegisterResult(true, userName,"Successfully Registered.", newUser);
         } else{
             return new RegisterResult(false, userName, "Failed to Register.", null);
         }
+    }
+
+    private boolean validRegister(RegisterRequest request) {
+        String userName = request.getUserName();
+        return  request.getPassword().length() > 0
+                && userName.length() > 0
+                && (!ServerModel.getInstance().getUsers().containsKey(userName));
     }
 
     public boolean createGame(Game newGame){
