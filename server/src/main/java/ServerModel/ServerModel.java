@@ -1,10 +1,13 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import modeling.Game;
 import modeling.User;
+import result.GameList;
 
 /**
  * Created by jontt on 9/27/2017.
@@ -34,9 +37,18 @@ public class ServerModel {
     Map<String, User> getUsers() {
         return users;
     }
-
-    Map<String, Game> getGames() {
+    Map<String, Game> getGamesAsMap(){
         return games;
+    }
+    GameList getGames() {
+        List<Game> gameList = new ArrayList<>();
+
+        for (Map.Entry<String, Game> game : getGamesAsMap().entrySet()){
+            if (!game.getValue().isHasStarted()){
+                gameList.add(game.getValue());
+            }
+        }
+        return new GameList(gameList);
     }
 
 

@@ -2,16 +2,13 @@ package poller;
 
 import android.os.AsyncTask;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
 import commandData.GetGameListCommandData;
-import modeling.Game;
-import modeling.User;
+import result.GameList;
 import servercomms.ClientFacade;
 import servercomms.ServerProxy;
 
@@ -30,7 +27,7 @@ public class Poller {
 
     private Poller(){
         try{
-            this.URL = new URL("http://192.168.0.7:8080/user/command");
+            this.URL = new URL("http://192.168.1.6:8080/user/command");
             command = new GetGameListCommandData();
             command.setType("getGameList");
         }catch (Exception e){
@@ -82,7 +79,7 @@ public class Poller {
 
     public class UpdateLobby extends AsyncTask<Void, Void, Integer>
     {
-        private List<Game> gameList;
+        private GameList gameList;
 
         @Override
         protected Integer doInBackground(Void... params)
@@ -91,7 +88,7 @@ public class Poller {
 
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
-                gameList = serverProxy.getGameList(URL, command);
+                gameList = (GameList) serverProxy.getGameList(URL, command);
                 //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
                 e.printStackTrace();
@@ -104,7 +101,7 @@ public class Poller {
         {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-            clientModel.setAllGames(gameList);
+            ClientFacade.getInstance().updateGameList(gameList);
         }
     }
 }

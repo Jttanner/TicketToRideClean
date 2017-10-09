@@ -1,4 +1,4 @@
-package clientModel;
+package result;
 
 import java.util.List;
 

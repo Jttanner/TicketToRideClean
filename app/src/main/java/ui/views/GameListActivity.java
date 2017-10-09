@@ -1,5 +1,6 @@
 package ui.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import MVP_coms_classes.MVP_GameList;
 import clientModel.CModel;
 import modeling.Game;
 import poller.Poller;
+import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -25,9 +27,9 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     //Button StartGameButton;
     Button CreateGameButton;
     Button JoinGameButton;
-
+    MVP_GameList.GameListPresenterInterface presenter;
     RecyclerView recyclerView;
-    RecyclerView.Adapter radapter;
+    GameListAdapter radapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         //GameListPresenter.initiazlizePoller();
         Poller poller = Poller.getInstance();
         poller.updateGameList();
+        presenter = new GameListPresenter(this);
     }
 
     void wireUp(){
@@ -61,19 +64,24 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
-        radapter = new GameListAdapter(CModel.getInstance().getAllGames());
+        radapter = new GameListAdapter(CModel.getInstance().getAllGames(),presenter);
     }
 
     @Override
     public void UpdateList(List<Game> list) {
         if(list != null){
-            radapter = new GameListAdapter(list);
-            recyclerView.setAdapter(radapter);
+            //This will do stuffs
+            radapter.setList(list);
+            radapter.notifyDataSetChanged();
+            //radapter = new GameListAdapter(list);
+            //recyclerView.setAdapter(radapter);
         }
     }
 
     @Override
     public void JoinGameResult() {
+        Intent intent = new Intent(this,WaitingRoomActivity.class);
+        startActivity(intent);
         //this is where we go to the next activity
     }
 

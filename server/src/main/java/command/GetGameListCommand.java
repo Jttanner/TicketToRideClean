@@ -1,12 +1,7 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import ServerModel.ServerFacade;
 import commandData.GetGameListCommandData;
-import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -25,15 +20,7 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
 
             ServerFacade facade = ServerFacade.getInstance();
 
-            List<Game> gameList = new ArrayList<>();
-
-            for (Map.Entry<String, Game> game : facade.getGameList().entrySet()){
-                if (!game.getValue().isHasStarted()){
-                    gameList.add(game.getValue());
-                }
-            }
-
-            CommandResult result = new CommandResult(true, gameList, "Game List sent.");
+            CommandResult result = new CommandResult(true, facade.getGameList(), "Game List sent.");
             return result;
         }
         catch (NumberFormatException e) {

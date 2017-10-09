@@ -18,6 +18,6 @@ public interface MVP_GameList {
 
     interface GameListPresenterInterface {
         void CreateGame(Game game);
-        void JoinGame(int index);
+        void JoinGame(Game game);
     }
 }

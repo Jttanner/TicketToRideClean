@@ -10,6 +10,7 @@ import java.util.Set;
 import modeling.Game;
 import modeling.Player;
 import modeling.User;
+import result.GameList;
 
 /**
  * Created by tyler on 9/27/2017.

@@ -6,10 +6,11 @@ import java.util.Observer;
 
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.MVP_GameList;
-import clientModel.GameList;
+import clientModel.CModel;
 import commandData.CreateGameCommandData;
 import modeling.Game;
 import result.CommandResult;
+import result.GameList;
 
 /**
  * Created by LabUser on 10/2/2017.
@@ -36,12 +37,18 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
 
     @Override
-    public void JoinGame(int index) {
-
+    public void JoinGame(Game game) {
+        CModel.getInstance().setCurrGame(game);
+        myView.get().JoinGameResult();
     }
 
     @Override
     public void checkCommandSuccess(CommandResult r) {
+        if(r.getData() instanceof  GameList){
+            GameList list = (GameList) r.getData();
+            myView.get().UpdateList(list.getGames());
+        }
+
         //TODO check the success of any given command and do something with it
 
     }

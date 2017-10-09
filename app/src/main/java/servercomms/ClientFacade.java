@@ -1,8 +1,7 @@
 package servercomms;
 
-import java.util.List;
-
-import modeling.Game;
+import clientModel.CModel;
+import result.GameList;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -19,7 +18,7 @@ public class ClientFacade {
     private ClientFacade() {
     }
 
-    public void updateGameList(List<Game> games){
-
+    public void updateGameList(GameList games){
+        CModel.getInstance().setAllGames(games.getGames());
     }
 }

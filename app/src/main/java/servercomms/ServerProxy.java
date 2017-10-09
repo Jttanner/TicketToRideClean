@@ -6,15 +6,10 @@ import com.encoder.Encoder;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 
 import clientModel.CModel;
 import commandData.Command;
 import commandData.CreateGameCommandData;
-
-import commandData.GetGameListCommandData;
-
-import modeling.Game;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -69,13 +64,13 @@ public class ServerProxy {
         CommandResult result = new Encoder().decodeCommand(inputStream);
         return result;
     }
-    public List<Game> getGameList(URL url, Command command){
+    public Object getGameList(URL url, Command command){
         Log.d(TAG, "Getting game list");
         String typeOfRequest = "GET";
         InputStream inputStream = ClientCommunicator.getInstance().send(url, command, typeOfRequest);
         //GetGameListCommandData getGameListCommandData = new Encoder().decodeGetGameListCommandData(inputStream);
         CommandResult result = new Encoder().decodeCommand(inputStream);
-        return (List<Game>) result.getData();
+        return result.getData();
 
     }
 
