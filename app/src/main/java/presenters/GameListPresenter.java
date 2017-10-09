@@ -47,6 +47,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void checkCommandSuccess(CommandResult r) {
         if(r != null && r.isSuccess()) {
             CModel.getInstance().addGame(createdGame);
+            this.JoinGame(createdGame);
         }
 
         //TODO check the success of any given command and do something with it
