@@ -27,8 +27,6 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
         HttpTask httpTask = new HttpTask(this);
         httpTask.start(":8080/user/command",command);
-
-
     }
 
 
