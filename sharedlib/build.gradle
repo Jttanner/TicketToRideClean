@@ -3,6 +3,8 @@ apply plugin: 'java'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.joanzapata.android:android-iconify-parent:1.0.11'
+    compile 'com.joanzapata.android:android-iconify:1.0.11'
 }
 
 sourceCompatibility = "1.7"

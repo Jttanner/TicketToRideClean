@@ -1,7 +1,6 @@
 package modeling;
 
-import request.*;
-import result.*;
+import request.LoginRequest;
 
 /**
  * Created by jontt on 9/27/2017.
@@ -15,9 +14,9 @@ public class UserInfo {
         this.userID = userID;
     }
 
-    String userName;
-    String password;
-    String userID;
+    private String userName;
+    private String password;
+    private String userID;
 
     public boolean checkUserInfo(LoginRequest request){
         String userName = request.getUserName();
@@ -30,4 +29,15 @@ public class UserInfo {
         }
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 }

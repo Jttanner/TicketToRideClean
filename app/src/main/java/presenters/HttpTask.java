@@ -7,7 +7,6 @@ import java.net.URL;
 
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.LoginSuccessChecker;
-import commandData.Command;
 import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -23,7 +22,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     private Object request;
     private LoginSuccessChecker loginChecker;
     private CommandSuccessChecker commandChecker;
-    private String address = "192.168.0.100";
+    private String address = "192.168.1.6";
 
     HttpTask(Object presenter) {
         if(presenter instanceof LoginPresenter ){
@@ -71,7 +70,6 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         } else if (request instanceof RegisterRequest) {
             return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
         } else if (request instanceof CreateGameCommandData) {
-            System.out.println("shawn");
             return ServerProxy.getInstance().CreateGame(urls[0],(CreateGameCommandData) request);
         }
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());

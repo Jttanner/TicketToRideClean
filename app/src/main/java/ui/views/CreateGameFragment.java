@@ -49,19 +49,14 @@ public class CreateGameFragment extends DialogFragment {
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserID());
         player = new Player(CModel.getInstance().getMyUser().getUserID());
-        player.setColor("red");
+        player.setColor(ColorEnum.RED);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-<<<<<<< HEAD
-=======
-        game = new Game();
-        game.setPlayerMax(2);
-        player.setColor(ColorEnum.RED);
->>>>>>> 8535345a461327642799b36a89885dd0c5119d81
+
         View v = inflater.inflate(R.layout.fragment_creategame, container, false);
 
         setUp(v);

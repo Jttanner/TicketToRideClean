@@ -20,6 +20,10 @@ public class RegisterResult extends ResultObject {
         this.user = user;
     }
 
+    public RegisterResult(boolean success,String errorMessage) {
+        super(success,errorMessage);
+    }
+
     public User getUser() {
         return user;
     }
