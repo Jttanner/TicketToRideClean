@@ -81,6 +81,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     private List<Game> list;
     //constructor
     public GameListAdapter(List<Game> l, MVP_GameList.GameListPresenterInterface presenter){
+        super();
         this.presenter = presenter;
         this.list = l;
     }
@@ -104,7 +105,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(GameListAdapter.ViewHolder holder, int position) {
         Game currentGame = list.get(position);
-        holder.id.setText(position);
+        holder.id.setText("" + position);
         holder.name.setText(currentGame.getGameName());
         String players = "";
 

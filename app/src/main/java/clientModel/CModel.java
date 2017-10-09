@@ -38,6 +38,10 @@ public class CModel extends Observable{
     private CModel() {
     }
 
+    /*public void addGame(Game game){
+        this
+    }*/
+
 
     public User getMyUser() {
         return myUser;
@@ -49,6 +53,12 @@ public class CModel extends Observable{
 
     public Game getCurrGame() {
         return currGame;
+    }
+
+    public void addGame(Game game){
+        this.allGames.add(game);
+        setChanged();
+        notifyObservers(new GameList(allGames));
     }
 
     public Set<Player> getAllPlayers() {

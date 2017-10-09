@@ -1,8 +1,6 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +23,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     public GameListPresenter(MVP_GameList.GameListActivityInterface view){
         myView = new WeakReference<>(view);
+        CModel.getInstance().addObserver(this);
     }
     @Override
     public void CreateGame(Game game) {
@@ -47,9 +46,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     @Override
     public void checkCommandSuccess(CommandResult r) {
         if(r != null && r.isSuccess()) {
-            List<Game> games = new ArrayList<>();
-            games.add(createdGame);
-            myView.get().UpdateList(games);
+            CModel.getInstance().addGame(createdGame);
         }
 
         //TODO check the success of any given command and do something with it

@@ -1,3 +1,4 @@
+
 package ui.views;
 
 import android.content.Intent;
@@ -5,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by LabUser on 10/2/2017.
  */
 
+
 public class GameListActivity extends FragmentActivity implements MVP_GameList.GameListActivityInterface {
     //Button StartGameButton;
     Button CreateGameButton;
@@ -35,10 +38,11 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
+        presenter = new GameListPresenter(this);
         wireUp();
         Poller poller = Poller.getInstance();
         poller.updateGameList();
-        presenter = new GameListPresenter(this);
+
     }
 
     void wireUp(){
@@ -64,6 +68,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             }
         });
         radapter = new GameListAdapter(CModel.getInstance().getAllGames(),presenter);
+        recyclerView.setAdapter(radapter);
     }
 
     @Override
@@ -72,11 +77,18 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             //This will do stuffs
             List<Game> games = radapter.getGames();
             for(Game g : list){
-                games.add(g);
+                if(!(games.contains(g))){
+                    games.add(g);
+                }
             }
-            //radapter.setList(games);
-            //radapter.notifyDataSetChanged();
-            radapter = new GameListAdapter(games,presenter);
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            recyclerView.setLayoutManager(linearLayoutManager);
+            radapter.setList(games);
+            radapter.notifyDataSetChanged();
+            //radapter = new GameListAdapter(games,presenter);
             recyclerView.setAdapter(radapter);
         }
     }
