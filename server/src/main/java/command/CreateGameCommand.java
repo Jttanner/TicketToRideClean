@@ -13,6 +13,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
 
     public CreateGameCommand() {
         super();
+        setType("createGame");
     }
 
     @Override

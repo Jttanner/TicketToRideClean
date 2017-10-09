@@ -33,6 +33,7 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
         CommandResult result = null;
         if (facade.startGame(game)){
             result = new CommandResult(true, null, "");
+            result.setType("startGame");
         } else{
             result = new CommandResult(false, null, "");
         }

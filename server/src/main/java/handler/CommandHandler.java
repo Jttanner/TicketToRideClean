@@ -60,6 +60,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
                     result = startGameCommand.execute();
+                    result.setType("startGame");
                 default:
                     break;
             }
