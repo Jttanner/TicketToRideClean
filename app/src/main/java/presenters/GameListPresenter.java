@@ -34,11 +34,6 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     }
 
-    public static void initiazlizePoller(){
-        String myIpUrl = "http://192.168.0.7:8080/user/command";
-        Poller poller = new Poller(myIpUrl);
-        poller.updateGameList();
-    }
 
     @Override
     public void JoinGame(int index) {

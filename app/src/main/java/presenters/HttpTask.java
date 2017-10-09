@@ -8,6 +8,7 @@ import java.net.URL;
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.LoginSuccessChecker;
 import commandData.CreateGameCommandData;
+import commandData.GetGameListCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -52,6 +53,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
                 request = req;
                 execute(url);
             }
+
         }
         catch (Exception e){
             Log.d("here", "login method messed up: " + e.toString());

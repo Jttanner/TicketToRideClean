@@ -35,12 +35,13 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Gson gson = new Gson();
             Command cmd = gson.fromJson(reqData, Command.class);
             ICommand word = null;
-            CommandResult result;
+            CommandResult result = null;
             switch (cmd.getType()) {
-                case "createGame":
+                case "createGame": {
                     CreateGameCommand command = new CreateGameCommand();
                     command.setGameObject((Game) cmd.getData());
                     result = command.execute();
+                }
                     break;
                 case "joinGame":
                     word = gson.fromJson(reqData, JoinGameCommand.class);
@@ -52,7 +53,8 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;
             }
 //             result = word.execute();
-            String jsonStr = gson.toJson(word);
+            String jsonStr = gson.toJson(result);
+            System.out.println(result);
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
             OutputStream respBody = exchange.getResponseBody();
             writeString(jsonStr, respBody);
