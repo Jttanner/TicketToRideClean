@@ -1,3 +1,4 @@
+/*
 package Adapters;
 
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,11 @@ import modeling.Game;
 import modeling.Player;
 import teamjapannumbahone.tickettoride.R;
 
+*/
 /**
  * Created by LabUser on 10/2/2017.
- */
+ *//*
+
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHolder> {
     MVP_GameList.GameListPresenterInterface presenter;
@@ -81,6 +84,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     private List<Game> list;
     //constructor
     public GameListAdapter(List<Game> l, MVP_GameList.GameListPresenterInterface presenter){
+        super();
         this.presenter = presenter;
         this.list = l;
     }
@@ -121,3 +125,4 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         return list.size();
     }
 }
+*/

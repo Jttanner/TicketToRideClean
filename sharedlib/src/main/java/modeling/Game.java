@@ -10,8 +10,25 @@ import java.util.UUID;
 public class Game {
 
 
+    @Override
+    public String toString() {
+        return gameName;
+    }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Game)) {
+            return false;
+        }
+        Game oGame = (Game) o;
+        return this.gameID.equals(oGame.getGameID());
+    }
 
     private ArrayList<Player> players;
 
@@ -23,10 +40,10 @@ public class Game {
 
     private int playerMax;
 
-    public Game(){
+    public Game() {
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
-        players = new ArrayList<> ();
+        players = new ArrayList<>();
 
     }
 
@@ -43,7 +60,7 @@ public class Game {
     }
 
     public void setPlayerMax(int playerMax) {
-         this.playerMax = playerMax;
+        this.playerMax = playerMax;
     }
 
     public String getGameName() {
@@ -54,9 +71,10 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public boolean canJoinGame(){
+    public boolean canJoinGame() {
         return false;
     }
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
@@ -64,18 +82,20 @@ public class Game {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
+
     public boolean addPlayer(Player p) {
-        if(players.contains(p)) {
+        if (players.contains(p)) {
             return false;
-        }
-        else {
+        } else {
             players.add(p);
             return true;
         }
     }
+
     public void removePlayer(Player player) {
         players.remove(players.indexOf(player));
     }
+
     public String getGameID() {
         return gameID;
     }

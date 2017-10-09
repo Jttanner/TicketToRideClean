@@ -51,6 +51,12 @@ public class CModel extends Observable{
         return currGame;
     }
 
+    public void addGame(Game game){
+        this.allGames.add(game);
+        setChanged();
+        notifyObservers(new GameList(allGames));
+    }
+
     public Set<Player> getAllPlayers() {
         return allPlayers;
     }
