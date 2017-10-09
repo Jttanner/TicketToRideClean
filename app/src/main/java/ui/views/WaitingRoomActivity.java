@@ -1,6 +1,7 @@
 package ui.views;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +11,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
+import commandData.JoinGameCommandData;
+import commandData.StartGameCommandData;
 import modeling.Game;
 import poller.Poller;
 import presenters.WaitingRoomPresenter;
 import result.GameList;
 import servercomms.ClientFacade;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -34,6 +40,8 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     private WaitingRoomPresenter mPresenter;
     private ListView playerListView;
     private PlayerListAdapter playerListAdapter;// = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
+
+    private String urlString = "http://10.4.158.51:8080/user/command";
 
 
     @Override
@@ -60,18 +68,30 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         StartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CModel cModel = CModel.getInstance();
+                Game currentGame =cModel.getCurrGame();
+                StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
+                mPresenter.startGame(startGameCommandData);
                 //Check if it is valid. Go to new activity
+                /*
                 List<Game> gameList = CModel.getInstance().getAllGames();
                 Game game = CModel.getInstance().getCurrGame();
-                /*for (Game g: gameList){
+                for (Game g: gameList){
                     if (g.getGameID().equals(game.getGameID())){
                         gameList.remove(g);
                     }
-                }*/
+                }
                 game.setHasStarted(true);
-                //gameList.add(game);
-                //ClientFacade clientFacade = ClientFacade.getInstance();
-                //clientFacade.updateGameList(new GameList(gameList));
+                gameList.add(game);
+                ClientFacade clientFacade = ClientFacade.getInstance();
+                clientFacade.updateGameList(new GameList(gameList));
+
+                myGame = game;
+
+                StartGameTask startGameTask = new StartGameTask();
+                startGameTask.execute()*/;
+
+
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
             }
@@ -87,4 +107,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         //playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
         //playerListView.setAdapter(playerListAdapter);
     }
+
+
+
 }

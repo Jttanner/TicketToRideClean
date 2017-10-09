@@ -96,6 +96,18 @@ public class ServerFacade {
         }
     }
 
+    public boolean startGame(Game game){
+        ServerModel serverModel = ServerModel.getInstance();
+        if (serverModel.getGamesAsMap().containsKey(game.getGameID())){
+            serverModel.getGamesAsMap().remove(game.getGameID());
+            game.setHasStarted(true);
+            serverModel.getGamesAsMap().put(game.getGameID(), game);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean deleteGame(Game game){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){

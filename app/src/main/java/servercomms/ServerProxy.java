@@ -10,6 +10,8 @@ import java.net.URL;
 import clientModel.CModel;
 import commandData.Command;
 import commandData.CreateGameCommandData;
+import commandData.JoinGameCommandData;
+import commandData.StartGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -65,6 +67,8 @@ public class ServerProxy {
         CommandResult result = new Encoder().decodeCommand(inputStream);
         return result;
     }
+
+
     public Object getGameList(URL url, Command command){
         Log.d(TAG, "Getting game list");
         String typeOfRequest = "GET";
@@ -78,9 +82,18 @@ public class ServerProxy {
     }
 
     //The request object for createGame will need the User Object
-    public void joinGame(){
-
+    public CommandResult joinGame(URL url, JoinGameCommandData joinGameCommandData){
+        return null;
     }
+
+    public CommandResult startGame(URL url, StartGameCommandData startGameCommandData){
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url, startGameCommandData, typeOfRequest);
+        //decode ,set the user object, and send back to the presenter
+        CommandResult result = new Encoder().decodeCommand(inputStream);
+        return result;
+    }
+
     public void deleteGame(){
 
     }
