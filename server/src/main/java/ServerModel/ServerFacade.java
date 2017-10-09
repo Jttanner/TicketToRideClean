@@ -86,6 +86,9 @@ public class ServerFacade {
                     Player newPlayer = new Player(user.getUserID());
                     newPlayer.setColor("Black");
                     foundGame.addPlayer(newPlayer);
+                    ServerModel.getInstance().getGamesAsMap().remove(gameID);
+                    ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
+
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
                 }else{
