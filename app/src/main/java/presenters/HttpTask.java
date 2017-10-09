@@ -8,7 +8,6 @@ import java.net.URL;
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.LoginSuccessChecker;
 import commandData.CreateGameCommandData;
-import commandData.StartGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -52,11 +51,6 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             else if (req instanceof CreateGameCommandData){
                 request = req;
                 execute(url);
-            } else if(req instanceof StartGameCommandData){
-                Log.d("start", "Do a startGameRequest");
-                request = req;
-                //Goes into doInBackGround
-                execute(url);
             }
 
         }
@@ -70,17 +64,14 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     @Override
     protected Object doInBackground(URL... urls) {
         Log.d("DoInBackGround", "Entering DoInBackGround");
-        ServerProxy serverProxy = ServerProxy.getInstance();
 
         if (request instanceof LoginRequest) {
             //Calls the serverProxy
-            return serverProxy.login(urls[0], (LoginRequest) request);
+            return ServerProxy.getInstance().login(urls[0], (LoginRequest) request);
         } else if (request instanceof RegisterRequest) {
-            return serverProxy.register(urls[0], (RegisterRequest) request);
+            return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
         } else if (request instanceof CreateGameCommandData) {
-            return serverProxy.CreateGame(urls[0],(CreateGameCommandData) request);
-        } else if (request instanceof StartGameCommandData){
-            return serverProxy.startGame(urls[0], (StartGameCommandData) request);
+            return ServerProxy.getInstance().CreateGame(urls[0],(CreateGameCommandData) request);
         }
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());
     }
@@ -92,7 +83,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         if (result instanceof ResultObject) {
             loginChecker.checkLogSuccess(result);
         } else if (result instanceof CommandResult) {
-            if (commandChecker != null)commandChecker.checkCommandSuccess((CommandResult) result);
+            commandChecker.checkCommandSuccess((CommandResult) result);
             //TODO do what you want with the command object
         }
 

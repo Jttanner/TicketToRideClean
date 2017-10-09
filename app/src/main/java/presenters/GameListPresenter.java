@@ -71,10 +71,6 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     }
 
-
-    public static void initiazlizePoller() {
-    }
-
     @Override
     public void update(Observable o, Object arg) {
         if(arg instanceof GameList){
