@@ -23,4 +23,12 @@ public class JoinGameCommandData extends Command {
     public void setGameID(int gameID) {
         this.gameID = gameID;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
