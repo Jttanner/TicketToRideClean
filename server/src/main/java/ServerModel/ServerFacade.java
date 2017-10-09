@@ -1,16 +1,16 @@
 package ServerModel;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import modeling.Game;
 import modeling.Player;
 import modeling.User;
 import modeling.UserInfo;
-import result.*;
-import request.*;
+import request.LoginRequest;
+import request.RegisterRequest;
+import result.LoginResult;
+import result.RegisterResult;
 
 /**
  * Created by jontt on 9/27/2017.
@@ -18,12 +18,7 @@ import request.*;
 
 public class ServerFacade {
 
-
-    Map<String, User> users = new HashMap<>();//Key=UserName
-    Map<String, Game> games = new HashMap<>();//Key=gameID
-
     private static ServerFacade instance = null;
-    private static ServerModel serverModel = ServerModel.getInstance();
 
     public static ServerFacade getInstance()
     {
@@ -36,15 +31,15 @@ public class ServerFacade {
     public LoginResult login(LoginRequest request){
 
         try{
-            UserInfo check = users.get(request.getUserName()).getInfo();
+            UserInfo check = ServerModel.getInstance().getUsers().get(request.getUserName()).getInfo();
             if (check.checkUserInfo(request)){
                 String userName = request.getUserName();
-                return new LoginResult(true,"login success!", userName, users.get(userName));
+                return new LoginResult(true,"login success!", userName, ServerModel.getInstance().getUsers().get(userName));
             } else{
-                return new LoginResult(false, "login failed.", "", null);
+                return new LoginResult(false, "login failed.");
             }
         }catch (NullPointerException e){
-            return new LoginResult(false, "login failed.", "", null);
+            return new LoginResult(false, "login failed.");
         }
 
     }
@@ -55,7 +50,7 @@ public class ServerFacade {
         String newUserID = UUID.randomUUID().toString();
         User newUser = new User(new UserInfo(userName, password, newUserID));
         if (request.getUserName() != null && request.getPassword() != null){
-            users.put(userName, newUser);
+            ServerModel.getInstance().getUsers().put(userName, newUser);
             return new RegisterResult(true, userName,"Successfully Registered.", newUser);
         } else{
             return new RegisterResult(false, userName, "Failed to Register.", null);
@@ -64,8 +59,7 @@ public class ServerFacade {
 
     public boolean createGame(Game newGame){
         try{
-            Game game = newGame;
-            games.put(game.getGameID(), game);
+            ServerModel.getInstance().getGames().put(newGame.getGameID(), newGame);
             return true;
         } catch (Exception e){
             e.printStackTrace();
@@ -75,8 +69,8 @@ public class ServerFacade {
 
     public void joinGame(User user, Game game){
         try{
-            if (games.containsKey(game.getGameID())){
-                Game foundGame = games.get(game.getGameID());
+            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
+                Game foundGame = ServerModel.getInstance().getGames().get(game.getGameID());
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
                     foundGame.addPlayer(newPlayer);
@@ -96,9 +90,8 @@ public class ServerFacade {
 
     public boolean deleteGame(Game game){
         try{
-            String gameID = game.getGameID();
-            if (games.containsKey(gameID)){
-                games.remove(games.get(gameID));
+            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
+                ServerModel.getInstance().getGames().remove(game.getGameID());
                 return  true;
             } else{
                 return false;
@@ -112,8 +105,8 @@ public class ServerFacade {
 
     public boolean leaveGame(Game game, Player player){
         try{
-            if (games.containsKey(game.getGameID())){
-                Game thisGame = games.get(game.getGameID());
+            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
+                Game thisGame = ServerModel.getInstance().getGames().get(game.getGameID());
                 thisGame.removePlayer(player);
             } else{
                 return false;
@@ -126,7 +119,7 @@ public class ServerFacade {
     }
 
     public Map<String, Game> getGameList(){
-        return games;
+        return ServerModel.getInstance().getGames();
     }
 
 

@@ -1,27 +1,18 @@
 package ui.views;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Adapters.GameListAdapter;
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
 import modeling.Game;
-import modeling.Player;
-import presenters.LoginPresenter;
 import presenters.WaitingRoomPresenter;
 import teamjapannumbahone.tickettoride.R;
 
@@ -60,8 +51,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         StartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //not yet
-                //MVP_GameList.GameListPresenterInterface presenter = new GameListPresenter();
                 //Check if it is valid. Go to new activity
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
@@ -72,27 +61,9 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     }
     @Override
     public void updateWaitingRoom(Game game) {
-        playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
-        playerListView.setAdapter(playerListAdapter);
+        playerListAdapter.setPlayerList(game.getPlayers());
+        playerListAdapter.notifyDataSetChanged();
+        //playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
+        //playerListView.setAdapter(playerListAdapter);
     }
-//
-//    @Override
-//    public void UpdateList(List<Player> list) {
-//        if(list != null){
-//            radapter = new GameListAdapter(list);
-//            recyclerView.setAdapter(radapter);
-//        }
-//    }
-//
-//    @Override
-//    public void JoinGameResult() {
-//        //this is where we go to the next activity
-//    }
-//
-//    @Override
-//    public void ToggleButton(boolean startGame, boolean joinGame) {
-//        //StartGameButton.setEnabled(startGame);
-//        JoinGameButton.setEnabled(joinGame);
-//    }
-
 }

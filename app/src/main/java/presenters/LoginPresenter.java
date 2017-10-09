@@ -164,7 +164,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO will need to create wrapper classes for the collections of objects passed in here from the model
         Log.d(TAG, "Num of observers: " + o.countObservers());
     }
 

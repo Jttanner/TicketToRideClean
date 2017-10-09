@@ -55,7 +55,7 @@ public class Encoder {
 
     public CommandResult decodeCommand(InputStream inputStream) {
         Reader reader = new InputStreamReader(inputStream);
-        System.out.println(inputStream);
+
         return gson.fromJson(reader, CommandResult.class);
     }
     public GetGameListCommandData decodeGetGameListCommandData(InputStream inputStream){

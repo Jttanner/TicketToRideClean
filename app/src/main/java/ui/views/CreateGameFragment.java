@@ -140,7 +140,7 @@ public class CreateGameFragment extends DialogFragment {
                 game.addPlayer(player);
                 GameListPresenter presenter = new GameListPresenter();
                 presenter.CreateGame(game);
-
+                getDialog().dismiss();
             }
         });
         buttonCancel.setOnClickListener(new View.OnClickListener(){

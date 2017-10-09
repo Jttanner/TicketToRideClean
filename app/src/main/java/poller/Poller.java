@@ -66,7 +66,7 @@ public class Poller {
         {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-            ClientFacade clientFacade = ClientFacade.getInstance();
+
 
         }
     }

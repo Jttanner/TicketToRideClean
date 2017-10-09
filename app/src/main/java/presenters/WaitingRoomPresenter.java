@@ -5,7 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.CommandSuccessChecker;
-import MVP_coms_classes.MVP_Login;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
 import modeling.Game;
@@ -29,6 +28,8 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
 
     @Override
     public void update(Observable o, Object arg) {
-        myView.get().updateWaitingRoom((Game)arg);
+        if(arg instanceof Game){
+            myView.get().updateWaitingRoom((Game)arg);
+        }
     }
 }

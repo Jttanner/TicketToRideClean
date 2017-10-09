@@ -1,11 +1,6 @@
 package modeling;
 
-import java.util.HashSet;
-
 import java.util.ArrayList;
-
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.UUID;
 
 /**
@@ -18,24 +13,29 @@ public class Game {
 
 
 
-    ArrayList<Player> players;
+    private ArrayList<Player> players;
 
-    boolean hasStarted;
+    private boolean hasStarted;
 
-    String gameID;
+    private String gameID;
 
-    String gameName;
+    private String gameName;
 
-    int playerMax;
+    private int playerMax;
 
     public Game(){
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
-
         players = new ArrayList<> ();
 
-        players = new ArrayList<>();
+    }
 
+    public Game(ArrayList<Player> players, boolean hasStarted, String gameID, String gameName, int playerMax) {
+        this.players = players;
+        this.hasStarted = hasStarted;
+        this.gameID = gameID;
+        this.gameName = gameName;
+        this.playerMax = playerMax;
     }
 
     public int getPlayerMax() {

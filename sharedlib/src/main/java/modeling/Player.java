@@ -17,6 +17,12 @@ public class Player implements Comparator<Player> {
     private String Name;
     private String color;
 
+    public Player(String userID, String name, String color) {
+        this.userID = userID;
+        Name = name;
+        this.color = color;
+    }
+
     public String getColor() {
         return color;
     }

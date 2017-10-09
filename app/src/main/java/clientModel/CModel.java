@@ -53,10 +53,6 @@ public class CModel extends Observable{
         return allPlayers;
     }
 
-   /* public StateMaintainer getStateMaintainer() {
-        return stateMaintainer;
-    }*/
-
     public void setMyUser(User myUser) {
         this.myUser = myUser;
         /*setChanged();
@@ -80,10 +76,6 @@ public class CModel extends Observable{
         setChanged();
         notifyObservers(this.allPlayers);
     }
-
-   /* public void setStateMaintainer(StateMaintainer stateMaintainer) {
-        this.stateMaintainer = stateMaintainer;
-    }*/
 
     @Override
     public synchronized void addObserver(Observer o) {
