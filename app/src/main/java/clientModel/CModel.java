@@ -38,6 +38,10 @@ public class CModel extends Observable{
     private CModel() {
     }
 
+    /*public void addGame(Game game){
+        this
+    }*/
+
 
     public User getMyUser() {
         return myUser;

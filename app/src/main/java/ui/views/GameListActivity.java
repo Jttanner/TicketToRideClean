@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -81,10 +82,14 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
                 }
             }
 
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            recyclerView.setLayoutManager(linearLayoutManager);
             radapter.setList(games);
             radapter.notifyDataSetChanged();
             //radapter = new GameListAdapter(games,presenter);
-            //recyclerView.setAdapter(radapter);
+            recyclerView.setAdapter(radapter);
         }
     }
 

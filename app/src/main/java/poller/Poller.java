@@ -29,7 +29,7 @@ public class Poller {
 
     private Poller(){
         try{
-            this.URL = new URL("http://10.24.71.15:8080/user/command");
+            this.URL = new URL("http://10.24.68.10:8080/user/command");
             command = new GetGameListCommandData();
             command.setType("getGameList");
         }catch (Exception e){
