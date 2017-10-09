@@ -13,10 +13,4 @@
     <color name="black">#000000</color>
     <color name="silver">#c0c0c0</color>
 
-    <color gameName="colorPrimary">#3F51B5</color>
-    <color gameName="colorPrimaryDark">#303F9F</color>
-    <color gameName="colorAccent">#FF4081</color>
-    <color gameName="deepRed">#960000</color>
-    <color gameName="white">#ffffff</color>
-
 </resources>

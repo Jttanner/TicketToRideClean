@@ -10,13 +10,4 @@
     <string name="password">password</string>
     <string name="startGame">Start Game</string>
 
-    <string gameName="app_name">TicketToRide</string>
-    <string gameName="pass">Password</string>
-    <string gameName="userName">Username</string>
-    <string gameName="login">Login</string>
-    <string gameName="register">Register</string>
-    <string gameName="loginpicDescription">Ticket To Ride</string>
-    <string gameName="user">user</string>
-    <string gameName="password">password</string>
-
 </resources>
