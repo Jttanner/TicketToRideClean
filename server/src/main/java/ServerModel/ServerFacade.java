@@ -60,6 +60,7 @@ public class ServerFacade {
     public boolean createGame(Game newGame){
         try{
             ServerModel.getInstance().getGames().put(newGame.getGameID(), newGame);
+            System.out.println(ServerModel.getInstance().getGames().get(newGame.getGameID()).getGameID());
             return true;
         } catch (Exception e){
             e.printStackTrace();
