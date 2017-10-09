@@ -67,6 +67,10 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+
         radapter = new GameListAdapter(CModel.getInstance().getAllGames(),presenter);
         recyclerView.setAdapter(radapter);
     }
@@ -83,11 +87,13 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             }
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
             recyclerView.setLayoutManager(linearLayoutManager);
-            radapter.setList(games);
-            radapter.notifyDataSetChanged();
+            radapter = new GameListAdapter(games, presenter);
+
+            //radapter.setList(games);
+            //radapter.notifyDataSetChanged();
             //radapter = new GameListAdapter(games,presenter);
             recyclerView.setAdapter(radapter);
         }
