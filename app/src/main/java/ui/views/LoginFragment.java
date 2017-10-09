@@ -144,12 +144,12 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
 
     @Override
     public Context getAppContext() {
-        return this.getActivity().getApplicationContext();
+        return getActivity().getApplicationContext();
     }
 
     @Override
     public Context getActivityContext() {
-        return this.getActivity();
+        return getActivity();
     }
 
     @Override
@@ -158,7 +158,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         /*ArrayList<Player> arrayList = new ArrayList<>();
         arrayList.add(new Player("myid","name",MyColor.BLUE.toString()));
         CModel.getInstance().setCurrGame(new Game(arrayList,false,"id","gameName",5));
-        Intent myIntent = new Intent(getActivity(), WaitingRoomActivity.class);*/
+        Intent myIntent = new Intent(getActivityContext(), WaitingRoomActivity.class);*/
         startActivity(intent);
     }
 
