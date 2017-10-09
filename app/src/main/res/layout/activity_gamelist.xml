@@ -44,18 +44,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1">
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Game"
+            android:id="@+id/RemoveGameButton"
+            android:layout_weight="0.33"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Join Game"
             android:id="@+id/JoinGameButton"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.33"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create Game"
             android:id="@+id/CreateGameButton"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.33"/>
     </LinearLayout>
 </LinearLayout>

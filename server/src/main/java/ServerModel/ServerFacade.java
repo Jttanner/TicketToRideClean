@@ -1,6 +1,5 @@
 package ServerModel;
 
-import java.util.Map;
 import java.util.UUID;
 
 import modeling.Game;
@@ -9,6 +8,7 @@ import modeling.User;
 import modeling.UserInfo;
 import request.LoginRequest;
 import request.RegisterRequest;
+import result.GameList;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -49,7 +49,7 @@ public class ServerFacade {
         String password = request.getPassword();
         String newUserID = UUID.randomUUID().toString();
         User newUser = new User(new UserInfo(userName, password, newUserID));
-        if (request.getUserName() != null && request.getPassword() != null){
+        if (validRegister(request)){
             ServerModel.getInstance().getUsers().put(userName, newUser);
             return new RegisterResult(true, userName,"Successfully Registered.", newUser);
         } else{
@@ -57,10 +57,17 @@ public class ServerFacade {
         }
     }
 
+    private boolean validRegister(RegisterRequest request) {
+        String userName = request.getUserName();
+        return  request.getPassword().length() > 0
+                && userName.length() > 0
+                && (!ServerModel.getInstance().getUsers().containsKey(userName));
+    }
+
     public boolean createGame(Game newGame){
         try{
-            ServerModel.getInstance().getGames().put(newGame.getGameID(), newGame);
-            System.out.println(ServerModel.getInstance().getGames().get(newGame.getGameID()).getGameID());
+            ServerModel.getInstance().getGamesAsMap().put(newGame.getGameID(), newGame);
+            System.out.println(ServerModel.getInstance().getGamesAsMap().get(newGame.getGameID()).getGameID());
             return true;
         } catch (Exception e){
             e.printStackTrace();
@@ -70,8 +77,8 @@ public class ServerFacade {
 
     public void joinGame(User user, Game game){
         try{
-            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
-                Game foundGame = ServerModel.getInstance().getGames().get(game.getGameID());
+            if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
+                Game foundGame = ServerModel.getInstance().getGamesAsMap().get(game.getGameID());
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
                     foundGame.addPlayer(newPlayer);
@@ -91,8 +98,8 @@ public class ServerFacade {
 
     public boolean deleteGame(Game game){
         try{
-            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
-                ServerModel.getInstance().getGames().remove(game.getGameID());
+            if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
+                ServerModel.getInstance().getGamesAsMap().remove(game.getGameID());
                 return  true;
             } else{
                 return false;
@@ -106,8 +113,8 @@ public class ServerFacade {
 
     public boolean leaveGame(Game game, Player player){
         try{
-            if (ServerModel.getInstance().getGames().containsKey(game.getGameID())){
-                Game thisGame = ServerModel.getInstance().getGames().get(game.getGameID());
+            if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
+                Game thisGame = ServerModel.getInstance().getGamesAsMap().get(game.getGameID());
                 thisGame.removePlayer(player);
             } else{
                 return false;
@@ -119,7 +126,7 @@ public class ServerFacade {
         }
     }
 
-    public Map<String, Game> getGameList(){
+    public GameList getGameList(){
         return ServerModel.getInstance().getGames();
     }
 

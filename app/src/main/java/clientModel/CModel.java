@@ -2,6 +2,7 @@ package clientModel;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,6 +11,7 @@ import java.util.Set;
 import modeling.Game;
 import modeling.Player;
 import modeling.User;
+import result.GameList;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -25,7 +27,7 @@ public class CModel extends Observable{
     /**The user associated with this client model*/
     private User myUser;
     /**The list of games being played or waiting to be played*/
-    private List<Game> allGames;
+    private List<Game> allGames = new ArrayList<>();
     /**The game the player is currently playing*/
     private Game currGame;
     /**The set of players you are playing with*/
@@ -61,8 +63,13 @@ public class CModel extends Observable{
 
     public void setAllGames(List<Game> allGames) {
         this.allGames = allGames;
+        for (Game g: allGames) {
+            if (getCurrGame() != null && g.getGameID().equals(getCurrGame().getGameID())){
+                setCurrGame(g);
+            }
+        }
         setChanged();
-        notifyObservers(this.allGames);
+        notifyObservers(new GameList(allGames));
     }
 
     public void setCurrGame(Game currGame) {

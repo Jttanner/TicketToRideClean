@@ -21,7 +21,6 @@ import java.util.List;
 import clientModel.CModel;
 import modeling.Game;
 import modeling.Player;
-import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -138,8 +137,7 @@ public class CreateGameFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 game.addPlayer(player);
-                GameListPresenter presenter = new GameListPresenter();
-                presenter.CreateGame(game);
+                ((GameListActivity)getActivity()).presenter.CreateGame(game);
                 getDialog().dismiss();
             }
         });

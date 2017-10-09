@@ -1,14 +1,10 @@
 package ui.views;
 
-import android.app.Fragment;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +13,7 @@ import java.util.List;
 
 import Adapters.GameListAdapter;
 import MVP_coms_classes.MVP_GameList;
-import commandData.GetGameListCommandData;
+import clientModel.CModel;
 import modeling.Game;
 import poller.Poller;
 import presenters.GameListPresenter;
@@ -31,16 +27,18 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     //Button StartGameButton;
     Button CreateGameButton;
     Button JoinGameButton;
-
+    MVP_GameList.GameListPresenterInterface presenter;
     RecyclerView recyclerView;
-    RecyclerView.Adapter radapter;
+    GameListAdapter radapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         wireUp();
-        GameListPresenter.initiazlizePoller();
+        Poller poller = Poller.getInstance();
+        poller.updateGameList();
+        presenter = new GameListPresenter(this);
     }
 
     void wireUp(){
@@ -65,19 +63,28 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
-
+        radapter = new GameListAdapter(CModel.getInstance().getAllGames(),presenter);
     }
 
     @Override
     public void UpdateList(List<Game> list) {
         if(list != null){
-            radapter = new GameListAdapter(list);
+            //This will do stuffs
+            List<Game> games = radapter.getGames();
+            for(Game g : list){
+                games.add(g);
+            }
+            //radapter.setList(games);
+            //radapter.notifyDataSetChanged();
+            radapter = new GameListAdapter(games,presenter);
             recyclerView.setAdapter(radapter);
         }
     }
 
     @Override
     public void JoinGameResult() {
+        Intent intent = new Intent(this,WaitingRoomActivity.class);
+        startActivity(intent);
         //this is where we go to the next activity
     }
 

@@ -1,5 +1,6 @@
 package handler;
 
+import com.encoder.Encoder;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -11,11 +12,11 @@ import java.net.HttpURLConnection;
 
 import command.CreateGameCommand;
 import command.GetGameListCommand;
-import command.ICommand;
 import command.JoinGameCommand;
 import commandData.Command;
 import commandData.CreateGameCommandData;
-import modeling.Game;
+import commandData.GetGameListCommandData;
+import commandData.JoinGameCommandData;
 import result.CommandResult;
 
 /**
@@ -40,24 +41,31 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "createGame":
 
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
-                    CreateGameCommand realCommang = new CreateGameCommand();
-                    realCommang.setGameObject(command.getGameObject());
-                    result = realCommang.execute();
+                    CreateGameCommand realCommand = new CreateGameCommand();
+                    realCommand.setGameObject(command.getGameObject());
+                    result = realCommand.execute();
                     break;
                 case "joinGame":
-                    //word = gson.fromJson(reqData, JoinGameCommand.class);
+                    JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
+                    JoinGameCommand joinGameCommand = new JoinGameCommand(Integer.parseInt(joinGameCommandData.getUser().getUserID()), joinGameCommandData.getUser());
+                    result = joinGameCommand.execute();
                     break;
                 case "getGameList":
-                    //word = gson.fromJson(reqData, GetGameListCommand.class);
+                    //we don't really need these objects.
+                    GetGameListCommandData getGameListCommandData = gson.fromJson(reqData, GetGameListCommandData.class);
+                    GetGameListCommand getGameListCommand = new GetGameListCommand();
+                    getGameListCommand.setType("getGameList");
+                    result = getGameListCommand.execute();
                     break;
                 default:
                     break;
             }
 //             result = word.execute();
-            String jsonStr = gson.toJson(result);
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+            //String jsonStr = gson.toJson(result);
             OutputStream respBody = exchange.getResponseBody();
-            writeString(jsonStr, respBody);
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+            new Encoder().encode(result,exchange.getResponseBody());
+            //writeString(jsonStr, respBody);
             respBody.close();
         }
         catch (IOException e) {
