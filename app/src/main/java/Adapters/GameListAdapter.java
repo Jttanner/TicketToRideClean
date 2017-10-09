@@ -36,6 +36,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             players = (TextView) itemView.findViewById(R.id.GameListAdapterGamePlayers);
             inGame = (TextView) itemView.findViewById(R.id.GameListAdapterGameInGame);
             this.presenter = presenter;
+
             setupListeners();
         }
 
