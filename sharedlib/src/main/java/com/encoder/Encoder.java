@@ -12,7 +12,6 @@ import java.io.Reader;
 import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
-import result.ResultObject;
 
 /**
  * This class handles all encoding(and will have methods for decoding) to and from JSON
@@ -55,7 +54,5 @@ public class Encoder {
         System.out.println(inputStream);
         return gson.fromJson(reader, CommandResult.class);
     }
-
-    //TODO make decoding methods
 
 }

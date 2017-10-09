@@ -7,7 +7,6 @@ import java.net.URL;
 
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.LoginSuccessChecker;
-import commandData.Command;
 import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -23,7 +22,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     private Object request;
     private LoginSuccessChecker loginChecker;
     private CommandSuccessChecker commandChecker;
-    private String address = "192.168.0.100";
+    private String address = "192.168.1.6";
 
     HttpTask(Object presenter) {
         if(presenter instanceof LoginPresenter ){

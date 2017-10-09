@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\LabUser\Documents\TicketToRideClean\sharedlib\build\libs\sharedlib.jar"
+        jar="C:\Users\tyler\AndroidStudioProjects\TicketToRideClean\sharedlib\build\libs\sharedlib.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="501fdcf842b610e7cd43ec8a9eeb2816be0cb63d">
-        <dex dex="C:\Users\LabUser\Documents\TicketToRideClean\app\build\intermediates\pre-dexed\debug\sharedlib_59d267c7545a093e00a0be3decae2fd520bf60b6.jar" />
+        sha1="190053257bb1dbda76deea48803d4139ba6c4f71">
+        <dex dex="C:\Users\tyler\AndroidStudioProjects\TicketToRideClean\app\build\intermediates\pre-dexed\debug\sharedlib_cd3fb146beaa14852c011596251caf81cab48f29.jar" />
     </item>
 
 </items>

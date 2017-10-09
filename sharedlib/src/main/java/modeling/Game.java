@@ -1,12 +1,5 @@
 package modeling;
-
-<<<<<<< HEAD
-import java.util.HashSet;
-=======
 import java.util.ArrayList;
->>>>>>> 8535345a461327642799b36a89885dd0c5119d81
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.UUID;
 
 /**
@@ -18,11 +11,7 @@ public class Game {
     public Game(){
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
-<<<<<<< HEAD
-        players = new HashSet<>();
-=======
         players = new ArrayList<>();
->>>>>>> 8535345a461327642799b36a89885dd0c5119d81
     }
 
 

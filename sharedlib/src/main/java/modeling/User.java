@@ -1,7 +1,6 @@
 package modeling;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,9 +12,9 @@ public class User {
         this.info = info;
     }
 
-    UserInfo info;
-    Set<Game> activeGames = new HashSet<>();
-    Set<Player> ownedPlayers = new HashSet<>();
+    private UserInfo info;
+    private Set<Game> activeGames = new HashSet<>();
+    private Set<Player> ownedPlayers = new HashSet<>();
 
     public void addGame(Game game){
         activeGames.add(game);
@@ -34,7 +33,7 @@ public class User {
     }
 
     public String getUserID(){
-        return info.userID;
+        return info.getUserID();
     }
 
     public UserInfo getInfo() {
