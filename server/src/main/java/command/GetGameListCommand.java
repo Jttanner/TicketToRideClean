@@ -28,7 +28,9 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
             List<Game> gameList = new ArrayList<>();
 
             for (Map.Entry<String, Game> game : facade.getGameList().entrySet()){
-                gameList.add(game.getValue());
+                if (!game.getValue().isHasStarted()){
+                    gameList.add(game.getValue());
+                }
             }
 
             CommandResult result = new CommandResult(true, gameList, "Game List sent.");

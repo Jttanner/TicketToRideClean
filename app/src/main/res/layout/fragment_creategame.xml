@@ -66,6 +66,11 @@
                 android:layout_height="wrap_content"
                 android:text="Blue"
                 android:id="@+id/ColorBlue"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Black"
+                android:id="@+id/ColorBlack"/>
         </LinearLayout>
 
 

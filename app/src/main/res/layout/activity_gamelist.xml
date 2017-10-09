@@ -47,8 +47,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start Game"
-            android:id="@+id/StartGameButton"
+            android:text="Remove Game"
+            android:id="@+id/RemoveGameButton"
             android:layout_weight="0.33"/>
         <Button
             android:layout_width="wrap_content"
