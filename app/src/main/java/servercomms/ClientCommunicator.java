@@ -10,9 +10,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import result.RegisterResult;
-import result.ResultObject;
-
 
 /**
  * Created by tyler on 9/12/2017.
@@ -47,6 +44,7 @@ class ClientCommunicator {
 
             //Makes an encoder object to encode the request object into the output stream
             Encoder encoder = new Encoder();
+            Log.d(TAG,"getting outputstream");
             OutputStream respBody = http.getOutputStream();
             encoder.encode(request, respBody);
             respBody.close();

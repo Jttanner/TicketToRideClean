@@ -26,6 +26,7 @@ public class RegisterHandler extends BaseHandler implements HttpHandler {
         Encoder encoder = new Encoder();
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 InputStream reqBody = exchange.getRequestBody();
                 String reqData = readString(reqBody);
                 Gson gson = new Gson();
@@ -35,7 +36,6 @@ public class RegisterHandler extends BaseHandler implements HttpHandler {
                 RegisterResult rs;
                 try {
                     rs = registerService.register(registerRequest);
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     encoder.encode(rs,respBody);
                     respBody.close();
 
