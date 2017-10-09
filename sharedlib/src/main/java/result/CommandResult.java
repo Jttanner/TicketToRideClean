@@ -8,7 +8,16 @@ public class CommandResult {
 
     private boolean success;
     private Object data;
+    private String type;
     private String errorInfo;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public CommandResult() {
     }
@@ -17,6 +26,7 @@ public class CommandResult {
         this.success = success;
         this.data = data;
         this.errorInfo = errorInfo;
+        this.setType(type);
     }
 
     CommandResult(boolean success, String errorInfo){

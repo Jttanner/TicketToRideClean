@@ -50,7 +50,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;
                 case "joinGame":
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
-                    JoinGameCommand joinGameCommand = new JoinGameCommand(Integer.parseInt(joinGameCommandData.getUser().getUserID()), joinGameCommandData.getUser());
+                    JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getUser().getUserID(), joinGameCommandData.getUser());
                     result = joinGameCommand.execute();
                     break;
                 case "getGameList":
