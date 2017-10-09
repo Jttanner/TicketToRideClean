@@ -55,6 +55,8 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
             @Override
             public void onClick(View v) {
                 //Check if it is valid. Go to new activity
+                Game game = CModel.getInstance().getCurrGame();
+                game.setHasStarted(true);
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
             }
