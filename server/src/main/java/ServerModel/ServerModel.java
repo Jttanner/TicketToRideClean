@@ -23,7 +23,6 @@ public class ServerModel {
     private ServerModel() {
     }
 
-
     static ServerModel getInstance()
     {
         if(instance == null){
