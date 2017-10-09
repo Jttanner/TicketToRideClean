@@ -25,6 +25,19 @@ public class Poller {
     String URL;
     GetGameListCommandData command;
 
+    private static Poller instance = new Poller();
+
+    private Poller(){
+    }
+
+    public static Poller getInstance()
+    {
+        if(instance == null){
+            instance = new Poller();
+        }
+        return instance;
+    }
+
     public Poller(String URL){
         this.URL = URL;
         command = new GetGameListCommandData();
