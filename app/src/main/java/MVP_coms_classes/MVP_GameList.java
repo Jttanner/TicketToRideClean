@@ -12,7 +12,7 @@ public interface MVP_GameList {
 
     interface GameListActivityInterface{
         void UpdateList(List<Game> list);
-        void JoinGameResult();
+        void JoinGameResult(Game game);
         void ToggleButton(boolean startGame, boolean joinGame);
     }
 

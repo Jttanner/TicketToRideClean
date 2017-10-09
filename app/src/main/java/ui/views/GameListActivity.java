@@ -104,7 +104,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     }
 
     @Override
-    public void JoinGameResult() {
+    public void JoinGameResult(Game game) {
         Poller.getInstance().stopPoller();
         Intent intent = new Intent(this,WaitingRoomActivity.class);
         startActivity(intent);
