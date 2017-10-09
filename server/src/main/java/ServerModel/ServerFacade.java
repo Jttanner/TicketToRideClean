@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.awt.Color;
 import java.util.UUID;
 
 import modeling.Game;
@@ -79,8 +80,11 @@ public class ServerFacade {
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
                 Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
+                if(foundGame.getPlayers().size() < foundGame.getPlayerMax())
+                    return;
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
+                    newPlayer.setColor("Black");
                     foundGame.addPlayer(newPlayer);
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
