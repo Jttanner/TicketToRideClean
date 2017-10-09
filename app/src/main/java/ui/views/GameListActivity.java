@@ -42,7 +42,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         wireUp();
         //GameListPresenter.initiazlizePoller();
         Poller poller = Poller.getInstance();
-        poller.UpdateLobby();
+        poller.updateGameList();
     }
 
     void wireUp(){
