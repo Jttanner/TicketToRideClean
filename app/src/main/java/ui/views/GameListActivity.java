@@ -17,7 +17,9 @@ import java.util.List;
 
 import Adapters.GameListAdapter;
 import MVP_coms_classes.MVP_GameList;
+import commandData.GetGameListCommandData;
 import modeling.Game;
+import poller.Poller;
 import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
@@ -38,6 +40,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         wireUp();
+        GameListPresenter.initiazlizePoller();
     }
 
     void wireUp(){
@@ -62,6 +65,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
+
     }
 
     @Override

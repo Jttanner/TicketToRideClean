@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
@@ -11,4 +12,11 @@
     <color name="green">#008000</color>
     <color name="black">#000000</color>
     <color name="silver">#c0c0c0</color>
+=======
+    <color gameName="colorPrimary">#3F51B5</color>
+    <color gameName="colorPrimaryDark">#303F9F</color>
+    <color gameName="colorAccent">#FF4081</color>
+    <color gameName="deepRed">#960000</color>
+    <color gameName="white">#ffffff</color>
+>>>>>>> 378b3c4e93ccb75b694633abee9ac7c10c8d74a8
 </resources>

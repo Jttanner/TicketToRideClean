@@ -8,6 +8,7 @@ import MVP_coms_classes.MVP_GameList;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import modeling.Game;
+import poller.Poller;
 import result.CommandResult;
 
 /**
@@ -31,6 +32,12 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         httpTask.start(":8080/user/command",command);
 
 
+    }
+
+    public static void initiazlizePoller(){
+        String myIpUrl = "http://192.168.0.7:8080/user/command";
+        Poller poller = new Poller(myIpUrl);
+        poller.updateGameList();
     }
 
     @Override
