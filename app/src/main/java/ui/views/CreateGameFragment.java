@@ -1,7 +1,9 @@
 package ui.views;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clientModel.CModel;
+import modeling.ColorEnum;
 import modeling.Game;
 import modeling.Player;
 import presenters.GameListPresenter;
@@ -32,24 +35,38 @@ public class CreateGameFragment extends DialogFragment {
     Spinner spinner;
     EditText gameName;
     Game game;
-    Player player = new Player(CModel.getInstance().getMyUser().getUserID());
+    Player player;
     Button buttonRed;
     Button buttonGreen;
     Button buttonYellow;
     Button buttonBlue;
     Button buttonCancel;
     Button buttonSubmit;
+
+    public CreateGameFragment(){
+        System.out.println("hello");
+        game = new Game();
+        game.setPlayerMax(2);
+        System.out.println(CModel.getInstance().getMyUser().getUserID());
+        player = new Player(CModel.getInstance().getMyUser().getUserID());
+        player.setColor("red");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+<<<<<<< HEAD
+=======
         game = new Game();
         game.setPlayerMax(2);
-        player.setColor("red");
+        player.setColor(ColorEnum.RED);
+>>>>>>> 8535345a461327642799b36a89885dd0c5119d81
         View v = inflater.inflate(R.layout.fragment_creategame, container, false);
+
         setUp(v);
 
-        return null;
+        return v;
     }
     private void setUp(View v){
         gameName = (EditText) v.findViewById(R.id.gameName);
@@ -105,25 +122,25 @@ public class CreateGameFragment extends DialogFragment {
         buttonBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("blue");
+                player.setColor(ColorEnum.BLUE);
             }
         });
         buttonRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("red");
+                player.setColor(ColorEnum.RED);
             }
         });
         buttonYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("yellow");
+                player.setColor(ColorEnum.YELLOW);
             }
         });
         buttonGreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.setColor("green");
+                player.setColor(ColorEnum.GREEN);
             }
         });
         buttonSubmit.setOnClickListener(new View.OnClickListener(){

@@ -111,8 +111,8 @@ public class ServerCommunicator {
         // "args" should contain one command-line argument, which is the port number
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
-            String portNumber = args[0];
-            new ServerCommunicator().run(portNumber);
+            //String portNumber = args[0];
+            new ServerCommunicator().run("8080");
         }
     }
 
