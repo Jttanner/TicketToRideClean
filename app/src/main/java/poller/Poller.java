@@ -24,6 +24,7 @@ public class Poller {
     CModel clientModel = CModel.getInstance();
     URL URL;
     GetGameListCommandData command;
+    Timer timer = new Timer();
 
     private static Poller instance = new Poller();
 
@@ -47,7 +48,6 @@ public class Poller {
 
     public void updateGameList() {
         //final Handler handler = new Handler();
-        Timer timer = new Timer();
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
@@ -58,6 +58,12 @@ public class Poller {
             }
         };
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
+    }
+
+    public void stopPoller(){
+        if(timer != null){
+            timer.cancel();
+        }
     }
 
     public class UpdateLobby extends AsyncTask<Void, Void, Integer>
