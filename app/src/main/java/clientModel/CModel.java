@@ -62,6 +62,11 @@ public class CModel extends Observable{
 
     public void setAllGames(List<Game> allGames) {
         this.allGames = allGames;
+        for (Game g: allGames) {
+            if (getCurrGame() != null && g.getGameID().equals(getCurrGame().getGameID())){
+                setCurrGame(g);
+            }
+        }
         setChanged();
         notifyObservers(new GameList(allGames));
     }
