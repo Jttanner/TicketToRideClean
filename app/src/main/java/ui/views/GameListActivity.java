@@ -40,8 +40,8 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         setContentView(R.layout.activity_gamelist);
         presenter = new GameListPresenter(this);
         wireUp();
-        Poller poller = Poller.getInstance();
-        poller.updateGameList();
+        //Poller poller = Poller.getInstance();
+        //poller.updateGameList();
     }
 
 

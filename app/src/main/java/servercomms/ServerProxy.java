@@ -83,7 +83,11 @@ public class ServerProxy {
 
     //The request object for createGame will need the User Object
     public CommandResult joinGame(URL url, JoinGameCommandData joinGameCommandData){
-        return null;
+        String typeOfRequest = "POST";
+        InputStream inputStream = ClientCommunicator.getInstance().send(url, joinGameCommandData, typeOfRequest);
+        //decode ,set the user object, and send back to the presenter
+        CommandResult result = new Encoder().decodeCommand(inputStream);
+        return result;
     }
 
     public CommandResult startGame(URL url, StartGameCommandData startGameCommandData){

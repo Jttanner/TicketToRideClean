@@ -56,8 +56,9 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         if(r != null && r.isSuccess()) {
             switch (r.getType()) {
                 case "createGame":
-                CModel.getInstance().addGame(createdGame);
-                this.JoinGame(createdGame);
+                    CModel.getInstance().addGame(createdGame);
+                    CModel.getInstance().setCurrGame(createdGame);
+                    this.JoinGame(createdGame);
                     break;
                 case "joinGame":
                     myView.get().JoinGameResult(createdGame);

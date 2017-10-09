@@ -11,8 +11,8 @@ import result.CommandResult;
 
 public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
 
-    public JoinGameCommand(String userID, User user){
-        super(userID, user);
+    public JoinGameCommand(String gameID, User user){
+        super(gameID, user);
     }
 
 

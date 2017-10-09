@@ -45,8 +45,9 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = realCommand.execute();
                     break;
                 case "joinGame":
+                    //result.setType("joinGame");
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
-                    JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getUser().getUserID(), joinGameCommandData.getUser());
+                    JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getGameID(), joinGameCommandData.getUser());
                     result = joinGameCommand.execute();
                     break;
                 case "getGameList":
