@@ -15,13 +15,13 @@ public class Player implements Comparator<Player> {
 
     private String userID;
     private String Name;
-    private ColorEnum Color;
+    private String Color;
 
     public int getColor() {
-        return Color.getColor();
+        return getColor();
     }
 
-    public void setColor(ColorEnum color) {
+    public void setColor(String color) {
         Color = color;
     }
     public String getName() {

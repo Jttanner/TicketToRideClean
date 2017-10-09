@@ -1,11 +1,14 @@
+/*
 package modeling;
 
 
 import java.awt.Color;
 
+*/
 /**
  * Created by kwankyuk on 10/7/17.
- */
+ *//*
+
 
 public enum ColorEnum {
 
@@ -33,3 +36,4 @@ public enum ColorEnum {
     }
 
 }
+*/
