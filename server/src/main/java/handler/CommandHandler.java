@@ -13,10 +13,13 @@ import java.net.HttpURLConnection;
 import command.CreateGameCommand;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
+import command.StartGameCommand;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
+import commandData.StartGameCommandData;
+import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -57,6 +60,10 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     getGameListCommand.setType("getGameList");
                     result = getGameListCommand.execute();
                     break;
+                case "startGame":
+                    StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
+                    StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
+                    result = startGameCommand.execute();
                 default:
                     break;
             }
