@@ -109,6 +109,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -125,7 +126,7 @@ import poller.Poller;
 import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
-public class MainActivity extends Activity implements MVP_GameList.GameListActivityInterface {
+public class MainActivity extends AppCompatActivity implements MVP_GameList.GameListActivityInterface {
     Button CreateGameButton;
     Button JoinGameButton;
     MVP_GameList.GameListPresenterInterface presenter;
@@ -137,6 +138,7 @@ public class MainActivity extends Activity implements MVP_GameList.GameListActiv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //FragmentManager fm = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
 
         // preparing list data
@@ -147,6 +149,7 @@ public class MainActivity extends Activity implements MVP_GameList.GameListActiv
         // setting list adapter
         expListView.setAdapter(listAdapter);
 
+        final MainActivity mainActivity = this;
 
         Poller poller = Poller.getInstance();
         poller.updateGameList();
@@ -155,6 +158,10 @@ public class MainActivity extends Activity implements MVP_GameList.GameListActiv
     void wireUp(){
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
+
+        prepareListData();
+
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         // StartGameButton = (Button) findViewById(R.id.StartGameButton);
         CreateGameButton = (Button) findViewById(R.id.CreateGameButton);
         CreateGameButton.setOnClickListener(new View.OnClickListener() {
@@ -187,33 +194,34 @@ public class MainActivity extends Activity implements MVP_GameList.GameListActiv
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+
+
         // Adding child data
         listDataHeader.add("Games");
 
         // Adding child data
-        List<String> gameList = new ArrayList<String>();
+        List<String> gameList = new ArrayList<>();
         for (Game g : CModel.getInstance().getAllGames()){
             gameList.add(g.toString());
         }
 
         listDataChild.put(listDataHeader.get(0), gameList); // Header, Child data
     }
-
+/*
     private void updateGameList(List<Game> list){
         // Adding child data
         List<String> gameList = new ArrayList<String>();
         for (Game g : list){
             gameList.add(g.toString());
         }
-        listDataChild.put(listDataHeader.get(0), gameList);
+        //listDataChild.put(listDataHeader.get(0), gameList);
         listAdapter.notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public void UpdateList(List<Game> list) {
         if(list != null){
-            listDataChild.put(listDataHeader.get(0), updateGameList(list)); // Header, Child data
+            listDataChild.put(listDataHeader.get(0), gameList); // Header, Child data
         }
     }
 
