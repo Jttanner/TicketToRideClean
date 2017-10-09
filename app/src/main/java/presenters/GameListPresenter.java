@@ -1,9 +1,12 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
+import java.util.Observable;
+import java.util.Observer;
 
 import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.MVP_GameList;
+import clientModel.GameList;
 import commandData.CreateGameCommandData;
 import modeling.Game;
 import result.CommandResult;
@@ -12,7 +15,7 @@ import result.CommandResult;
  * Created by LabUser on 10/2/2017.
  */
 
-public class GameListPresenter implements MVP_GameList.GameListPresenterInterface, CommandSuccessChecker {
+public class GameListPresenter implements MVP_GameList.GameListPresenterInterface, CommandSuccessChecker,Observer {
     private WeakReference<MVP_GameList.GameListActivityInterface> myView;
     public GameListPresenter(){}
 
@@ -45,5 +48,13 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
 
     public static void initiazlizePoller() {
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(arg instanceof GameList){
+            GameList games = (GameList) arg;
+            myView.get().UpdateList(games.getGames());
+        }
     }
 }

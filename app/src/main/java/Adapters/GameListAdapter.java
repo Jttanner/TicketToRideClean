@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.content.Context;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,12 +33,18 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             inGame = (TextView) itemView.findViewById(R.id.GameListAdapterGameInGame);
         }
     }
+
+
     //game list member variable
-    List<Game> list;
+    private List<Game> list;
     //constructor
     public GameListAdapter(List<Game> l){
-        list = l;
+        this.list = l;
     }
+
+    /*public void setList(List<Game> list) {
+        this.list = list;
+    }*/
 
 
     @Override

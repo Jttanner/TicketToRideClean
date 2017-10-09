@@ -157,6 +157,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         Log.d(TAG,"loginSucceeded");
         /*ArrayList<Player> arrayList = new ArrayList<>();
         arrayList.add(new Player("myid","name",MyColor.BLUE.toString()));
+        Game game = new Game(arrayList,false,"id","gameName",5);
         CModel.getInstance().setCurrGame(new Game(arrayList,false,"id","gameName",5));
         Intent myIntent = new Intent(getActivityContext(), WaitingRoomActivity.class);*/
         startActivity(intent);

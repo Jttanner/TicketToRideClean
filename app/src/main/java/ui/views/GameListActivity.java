@@ -1,14 +1,9 @@
 package ui.views;
 
-import android.app.Fragment;
-
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +12,9 @@ import java.util.List;
 
 import Adapters.GameListAdapter;
 import MVP_coms_classes.MVP_GameList;
-import commandData.GetGameListCommandData;
+import clientModel.CModel;
 import modeling.Game;
 import poller.Poller;
-import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -67,7 +61,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
-
+        radapter = new GameListAdapter(CModel.getInstance().getAllGames());
     }
 
     @Override
