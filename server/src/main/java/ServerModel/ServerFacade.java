@@ -75,10 +75,10 @@ public class ServerFacade {
         }
     }
 
-    public void joinGame(User user, Game game){
+    public void joinGame(User user, String gameID){
         try{
-            if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
-                Game foundGame = ServerModel.getInstance().getGamesAsMap().get(game.getGameID());
+            if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
+                Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
                     foundGame.addPlayer(newPlayer);

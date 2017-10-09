@@ -1,5 +1,6 @@
 package command;
 
+import ServerModel.ServerFacade;
 import commandData.JoinGameCommandData;
 import modeling.User;
 import result.CommandResult;
@@ -10,7 +11,7 @@ import result.CommandResult;
 
 public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
 
-    public JoinGameCommand(int userID, User user){
+    public JoinGameCommand(String userID, User user){
         super(userID, user);
     }
 
@@ -19,9 +20,10 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
     public CommandResult execute() {
         try {
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
-            int gameID = this.getGameID();
-
+            String gameID = this.getGameID();
+            ServerFacade.getInstance().joinGame(getUser(),gameID);
             CommandResult result = new CommandResult(true, gameID, null);
+            result.setType("joinGame");
             return result;
         }
         catch (NumberFormatException e) {

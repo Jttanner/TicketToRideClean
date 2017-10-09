@@ -114,4 +114,10 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         //StartGameButton.setEnabled(startGame);
         JoinGameButton.setEnabled(joinGame);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }
