@@ -73,8 +73,9 @@ public class ServerProxy {
         Log.d(TAG, "Getting game list");
         String typeOfRequest = "GET";
         InputStream inputStream = ClientCommunicator.getInstance().send(url, command, typeOfRequest);
-        GetGameListCommandData getGameListCommandData = new Encoder().decodeGetGameListCommandData(inputStream);
-        return getGameListCommandData.getGameListLobby();
+        //GetGameListCommandData getGameListCommandData = new Encoder().decodeGetGameListCommandData(inputStream);
+        CommandResult result = new Encoder().decodeCommand(inputStream);
+        return (List<Game>) result.getData();
 
     }
 

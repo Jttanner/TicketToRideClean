@@ -55,6 +55,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     //we don't really need these objects.
                     GetGameListCommandData getGameListCommandData = gson.fromJson(reqData, GetGameListCommandData.class);
                     GetGameListCommand getGameListCommand = new GetGameListCommand();
+                    getGameListCommand.setType("getGameList");
                     result = getGameListCommand.execute();
                     break;
                 default:

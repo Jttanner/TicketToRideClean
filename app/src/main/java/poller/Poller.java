@@ -22,12 +22,19 @@ import servercomms.ServerProxy;
 public class Poller {
 
     CModel clientModel = CModel.getInstance();
-    String URL;
+    URL URL;
     GetGameListCommandData command;
 
     private static Poller instance = new Poller();
 
     private Poller(){
+        try{
+            this.URL = new URL("http://192.168.0.7:8080/user/command");
+            command = new GetGameListCommandData();
+            command.setType("getGameList");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static Poller getInstance()
@@ -36,12 +43,6 @@ public class Poller {
             instance = new Poller();
         }
         return instance;
-    }
-
-    public Poller(String URL){
-        this.URL = URL;
-        command = new GetGameListCommandData();
-        command.setType("getGameList");
     }
 
     public void updateGameList() {
@@ -61,17 +62,21 @@ public class Poller {
 
     public class UpdateLobby extends AsyncTask<Void, Void, Integer>
     {
+        private List<Game> gameList;
+
         @Override
         protected Integer doInBackground(Void... params)
         {
             //TODO: Push the request to the serverProxy
+
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
-                clientModel.setAllGames(serverProxy.getGameList(new URL(URL), command));
-            }catch (MalformedURLException e){
+                gameList = serverProxy.getGameList(URL, command);
+                //clientModel.setAllGames(serverProxy.getGameList(URL, command));
+            }catch (Exception e){
                 e.printStackTrace();
             }
-            return null;
+            return 0;
         }
 
         @Override
@@ -79,8 +84,7 @@ public class Poller {
         {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-
-
+            clientModel.setAllGames(gameList);
         }
     }
 }
