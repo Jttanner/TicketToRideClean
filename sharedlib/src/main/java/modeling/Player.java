@@ -15,14 +15,14 @@ public class Player implements Comparator<Player> {
 
     private String userID;
     private String Name;
-    private String Color;
+    private String color;
 
-    public int getColor() {
-        return getColor();
+    public String getColor() {
+        return color;
     }
 
     public void setColor(String color) {
-        Color = color;
+        this.color = color;
     }
     public String getName() {
         return Name;

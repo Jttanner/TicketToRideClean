@@ -1,7 +1,7 @@
 package Adapters;
 
-import android.app.ListActivity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import modeling.Player;
 import teamjapannumbahone.tickettoride.R;
@@ -58,7 +55,7 @@ public class PlayerListAdapter extends BaseAdapter {
         TextView textView = (TextView) view.findViewById(R.id.player_view);
 
         //Sets the player info
-        textView.setTextColor(currentPlayer.getColor());
+        textView.setTextColor(Color.parseColor(currentPlayer.getColor()));
         textView.setText(currentPlayer.getName());
 
         return view;
