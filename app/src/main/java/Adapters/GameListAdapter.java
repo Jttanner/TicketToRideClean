@@ -89,6 +89,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         this.list = list;
     }
 
+    public List<Game> getGames(){
+        return this.list;
+    }
+
 
     @Override
     public GameListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

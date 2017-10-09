@@ -70,10 +70,14 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     public void UpdateList(List<Game> list) {
         if(list != null){
             //This will do stuffs
-            radapter.setList(list);
-            radapter.notifyDataSetChanged();
-            //radapter = new GameListAdapter(list);
-            //recyclerView.setAdapter(radapter);
+            List<Game> games = radapter.getGames();
+            for(Game g : list){
+                games.add(g);
+            }
+            //radapter.setList(games);
+            //radapter.notifyDataSetChanged();
+            radapter = new GameListAdapter(games,presenter);
+            recyclerView.setAdapter(radapter);
         }
     }
 

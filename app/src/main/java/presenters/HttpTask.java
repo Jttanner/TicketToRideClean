@@ -83,7 +83,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         if (result instanceof ResultObject) {
             loginChecker.checkLogSuccess(result);
         } else if (result instanceof CommandResult) {
-            commandChecker.checkCommandSuccess((CommandResult)result);
+            commandChecker.checkCommandSuccess((CommandResult) result);
             //TODO do what you want with the command object
         }
 

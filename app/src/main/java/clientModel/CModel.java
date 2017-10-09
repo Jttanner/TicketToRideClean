@@ -2,6 +2,7 @@ package clientModel;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -26,7 +27,7 @@ public class CModel extends Observable{
     /**The user associated with this client model*/
     private User myUser;
     /**The list of games being played or waiting to be played*/
-    private List<Game> allGames;
+    private List<Game> allGames = new ArrayList<>();
     /**The game the player is currently playing*/
     private Game currGame;
     /**The set of players you are playing with*/

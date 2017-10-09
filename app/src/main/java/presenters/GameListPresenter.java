@@ -1,6 +1,8 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,6 +20,7 @@ import result.GameList;
 
 public class GameListPresenter implements MVP_GameList.GameListPresenterInterface, CommandSuccessChecker,Observer {
     private WeakReference<MVP_GameList.GameListActivityInterface> myView;
+    private Game createdGame;
     public GameListPresenter(){}
 
     public GameListPresenter(MVP_GameList.GameListActivityInterface view){
@@ -28,6 +31,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         CreateGameCommandData command = new CreateGameCommandData();
         command.setType("createGame");
         command.setGameObject(game);
+        createdGame = game;
 
         HttpTask httpTask = new HttpTask(this);
         httpTask.start(":8080/user/command",command);
@@ -44,9 +48,10 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     @Override
     public void checkCommandSuccess(CommandResult r) {
-        if(r.getData() instanceof  GameList){
-            GameList list = (GameList) r.getData();
-            myView.get().UpdateList(list.getGames());
+        if(r != null && r.isSuccess()) {
+            List<Game> games = new ArrayList<>();
+            games.add(createdGame);
+            myView.get().UpdateList(games);
         }
 
         //TODO check the success of any given command and do something with it
