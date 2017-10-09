@@ -70,7 +70,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         //TODO check the success of any given command and do something with it
 
     }
-    
+
     @Override
     public void update(Observable o, Object arg) {
         if(arg instanceof GameList){

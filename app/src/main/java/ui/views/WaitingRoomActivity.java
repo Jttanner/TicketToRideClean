@@ -87,6 +87,4 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         //playerListView.setAdapter(playerListAdapter);
     }
 
-
-
 }
