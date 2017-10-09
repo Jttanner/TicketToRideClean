@@ -71,7 +71,6 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         } else if (request instanceof RegisterRequest) {
             return ServerProxy.getInstance().register(urls[0], (RegisterRequest) request);
         } else if (request instanceof CreateGameCommandData) {
-            System.out.println("shawn");
             return ServerProxy.getInstance().CreateGame(urls[0],(CreateGameCommandData) request);
         }
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());

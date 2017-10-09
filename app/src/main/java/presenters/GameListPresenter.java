@@ -17,6 +17,7 @@ import result.CommandResult;
 public class GameListPresenter implements MVP_GameList.GameListPresenterInterface, CommandSuccessChecker {
     private WeakReference<MVP_GameList.GameListActivityInterface> myView;
     public GameListPresenter(){}
+
     public GameListPresenter(MVP_GameList.GameListActivityInterface view){
         myView = new WeakReference<>(view);
     }
@@ -24,12 +25,11 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void CreateGame(Game game) {
         CreateGameCommandData command = new CreateGameCommandData();
         command.setType("createGame");
-        command.setGameObject(game);
-        String myIp = "10.24.70.210";
+        command.setData(game);
 
         HttpTask httpTask = new HttpTask(this);
         httpTask.start(":8080/user/command",command);
-        System.out.println("succeed");
+
 
     }
 
@@ -41,6 +41,8 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     @Override
     public void checkCommandSuccess(CommandResult r) {
         //TODO check the success of any given command and do something with it
-        System.out.println("Shawn is Great");
+
     }
+
+
 }
