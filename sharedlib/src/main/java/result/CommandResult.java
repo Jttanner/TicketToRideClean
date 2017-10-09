@@ -19,6 +19,11 @@ public class CommandResult {
         this.errorInfo = errorInfo;
     }
 
+    CommandResult(boolean success, String errorInfo){
+        this.success = success;
+        this.errorInfo = errorInfo;
+    }
+
     public boolean isSuccess() {
         return success;
     }

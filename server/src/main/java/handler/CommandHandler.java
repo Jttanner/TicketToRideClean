@@ -1,5 +1,6 @@
 package handler;
 
+import com.encoder.Encoder;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -11,13 +12,11 @@ import java.net.HttpURLConnection;
 
 import command.CreateGameCommand;
 import command.GetGameListCommand;
-import command.ICommand;
 import command.JoinGameCommand;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
-import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -62,10 +61,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;
             }
 //             result = word.execute();
-            String jsonStr = gson.toJson(result);
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+            //String jsonStr = gson.toJson(result);
             OutputStream respBody = exchange.getResponseBody();
-            writeString(jsonStr, respBody);
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+            new Encoder().encode(result,exchange.getResponseBody());
+            //writeString(jsonStr, respBody);
             respBody.close();
         }
         catch (IOException e) {

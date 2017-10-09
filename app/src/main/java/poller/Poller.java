@@ -1,6 +1,7 @@
 package poller;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.net.URL;
 import java.util.Timer;
@@ -22,6 +23,7 @@ public class Poller {
     URL URL;
     GetGameListCommandData command;
     Timer timer = new Timer();
+    private final String TAG = "Poller";
 
     private static Poller instance = new Poller();
 
@@ -91,6 +93,7 @@ public class Poller {
                 gameList = (GameList) serverProxy.getGameList(URL, command);
                 //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
+                Log.d(TAG,e.getMessage());
                 e.printStackTrace();
             }
             return 0;

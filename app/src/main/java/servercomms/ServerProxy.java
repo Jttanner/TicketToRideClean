@@ -13,6 +13,7 @@ import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
+import result.GetGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -68,9 +69,11 @@ public class ServerProxy {
         Log.d(TAG, "Getting game list");
         String typeOfRequest = "GET";
         InputStream inputStream = ClientCommunicator.getInstance().send(url, command, typeOfRequest);
-        //GetGameListCommandData getGameListCommandData = new Encoder().decodeGetGameListCommandData(inputStream);
-        CommandResult result = new Encoder().decodeCommand(inputStream);
-        return result.getData();
+        //Gson gson = new Gson();
+        //GetGameCommandResult result = gson.fromJson(inputStream.toString(), GetGameCommandResult.class);
+        GetGameCommandResult result = new Encoder().decodeGetGameCommandResult(inputStream);
+        //Log.d(TAG,result.getGameList().getClass().getName());
+        return result.getGameList();
 
     }
 

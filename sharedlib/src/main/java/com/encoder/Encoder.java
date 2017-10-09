@@ -9,11 +9,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
-
 import result.CommandResult;
-
-import commandData.GetGameListCommandData;
-
+import result.GetGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -55,13 +52,12 @@ public class Encoder {
 
     public CommandResult decodeCommand(InputStream inputStream) {
         Reader reader = new InputStreamReader(inputStream);
-
         return gson.fromJson(reader, CommandResult.class);
     }
-    public GetGameListCommandData decodeGetGameListCommandData(InputStream inputStream){
-        Reader reader = new InputStreamReader(inputStream);
-        return gson.fromJson(reader, GetGameListCommandData.class);
 
+    public GetGameCommandResult decodeGetGameCommandResult(InputStream inputStream) {
+        Reader reader = new InputStreamReader(inputStream);
+        return gson.fromJson(reader, GetGameCommandResult.class);
     }
 
 }
