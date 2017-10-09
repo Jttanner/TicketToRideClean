@@ -46,7 +46,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
         data.setType("joinGame");
         HttpTask httpTask = new HttpTask(this);
-        httpTask.start(":8080/user/commmand",data);
+        httpTask.start(":8080/user/command",data);
 
 
     }
