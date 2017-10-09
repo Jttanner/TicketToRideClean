@@ -34,21 +34,20 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
         HttpTask httpTask = new HttpTask(this);
         httpTask.start(":8080/user/command",command);
-
-
     }
 
 
     @Override
     public void JoinGame(Game game) {
         CModel.getInstance().setCurrGame(game);
-        myView.get().JoinGameResult();
+        myView.get().JoinGameResult(game);
     }
 
     @Override
     public void checkCommandSuccess(CommandResult r) {
         if(r != null && r.isSuccess()) {
             CModel.getInstance().addGame(createdGame);
+            this.JoinGame(createdGame);
         }
 
         //TODO check the success of any given command and do something with it
