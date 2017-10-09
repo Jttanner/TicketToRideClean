@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -52,15 +51,9 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     @Override
     public void login(LoginRequest request) {
         try {
-            //TODO dynamic host and port number getting
-
-            String myIp = "192.168.0.100";
-            URL url = new URL("http://" + myIp +" :8080/user/login");
-
-
             //call the async task
             HttpTask httpTask = new HttpTask(this);
-            httpTask.start(" :8080/user/login", request);
+            httpTask.start(":8080/user/login", request);
         } catch (Exception e) {
             Log.d(TAG, "login method messed up: " + e.toString());
             e.printStackTrace();
@@ -72,11 +65,6 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     @Override
     public void register(RegisterRequest request) {
         try {
-            //TODO dynamic host and port number getting
-
-            String myIp = "192.168.0.100";
-            URL url = new URL("http://" + myIp +":8080/user/register");
-
             //call the async task
             HttpTask httpTask = new HttpTask(this);
             httpTask.start(":8080/user/register",request);
