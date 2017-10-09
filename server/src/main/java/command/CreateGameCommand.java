@@ -21,9 +21,13 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
 
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
         if (gameCreatedSuccessful) {
-            return new CommandResult(true, "", "");
+            CommandResult result = new CommandResult(true, "", "");
+            result.setType("createGame");
+            return result;
         } else {
-            return new CommandResult(false, "", "");
+            CommandResult result = new CommandResult(false, "", "");
+            result.setType("createGame");
+            return result;
         }
     }
 }

@@ -26,7 +26,6 @@ public class CommandResult {
         this.success = success;
         this.data = data;
         this.errorInfo = errorInfo;
-        this.setType(type);
     }
 
     CommandResult(boolean success, String errorInfo){

@@ -28,6 +28,7 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
         }
         catch (NumberFormatException e) {
             CommandResult result = new CommandResult(false, null, "Error, not a number!");
+            result.setType("joinGame");
             return result;
         }
     }
