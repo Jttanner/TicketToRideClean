@@ -1,4 +1,3 @@
-/*
 package Adapters;
 
 import android.support.v7.widget.RecyclerView;
@@ -15,11 +14,9 @@ import modeling.Game;
 import modeling.Player;
 import teamjapannumbahone.tickettoride.R;
 
-*/
 /**
  * Created by LabUser on 10/2/2017.
- *//*
-
+ */
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHolder> {
     MVP_GameList.GameListPresenterInterface presenter;
@@ -108,7 +105,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(GameListAdapter.ViewHolder holder, int position) {
         Game currentGame = list.get(position);
-        holder.id.setText(position);
+        holder.id.setText("" + position);
         holder.name.setText(currentGame.getGameName());
         String players = "";
 
@@ -125,4 +122,3 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         return list.size();
     }
 }
-*/
