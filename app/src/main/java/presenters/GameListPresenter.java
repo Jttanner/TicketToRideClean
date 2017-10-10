@@ -8,7 +8,9 @@ import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.MVP_GameList;
 import clientModel.CModel;
 import commandData.CreateGameCommandData;
+import commandData.JoinGameCommandData;
 import modeling.Game;
+import modeling.Player;
 import result.CommandResult;
 import result.GameList;
 
@@ -40,22 +42,34 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     @Override
     public void JoinGame(Game game) {
         CModel.getInstance().setCurrGame(game);
-        myView.get().JoinGameResult(game);
+        createdGame = game;
+        JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
+        data.setType("joinGame");
+        HttpTask httpTask = new HttpTask(this);
+        httpTask.start(":8080/user/command",data);
+
+
     }
 
     @Override
     public void checkCommandSuccess(CommandResult r) {
         if(r != null && r.isSuccess()) {
-            CModel.getInstance().addGame(createdGame);
-            this.JoinGame(createdGame);
+            switch (r.getType()) {
+                case "createGame":
+                    CModel.getInstance().addGame(createdGame);
+                    CModel.getInstance().setCurrGame(createdGame);
+                    this.JoinGame(createdGame);
+                    break;
+                case "joinGame":
+                    myView.get().JoinGameResult(createdGame);
+                    break;
+                default:
+                    break;
+            }
         }
 
         //TODO check the success of any given command and do something with it
 
-    }
-
-
-    public static void initiazlizePoller() {
     }
 
     @Override

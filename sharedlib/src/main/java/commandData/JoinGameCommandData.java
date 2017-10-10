@@ -1,5 +1,6 @@
 package commandData;
 
+import modeling.Player;
 import modeling.User;
 
 /**
@@ -8,19 +9,28 @@ import modeling.User;
 
 public class JoinGameCommandData extends Command {
 
-    private int gameID;
+    private String gameID;
     private User user;
+    private Player player;
 
-    public JoinGameCommandData(int gameID, User user) {
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public JoinGameCommandData(String gameID, User user) {
         this.gameID = gameID;
         this.user = user;
     }
 
-    public int getGameID() {
+    public String getGameID() {
         return gameID;
     }
 
-    public void setGameID(int gameID) {
+    public void setGameID(String gameID) {
         this.gameID = gameID;
     }
 

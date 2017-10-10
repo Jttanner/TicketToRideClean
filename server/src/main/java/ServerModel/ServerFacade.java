@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.awt.Color;
 import java.util.UUID;
 
 import modeling.Game;
@@ -75,13 +76,18 @@ public class ServerFacade {
         }
     }
 
-    public void joinGame(User user, Game game){
+    public void joinGame(User user, String gameID){
         try{
-            if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
-                Game foundGame = ServerModel.getInstance().getGamesAsMap().get(game.getGameID());
+            if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
+                Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
+                if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
+                    return;
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
+                    newPlayer.setColor("Red");
+                    newPlayer.setName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
+                    ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
                 }else{
@@ -99,9 +105,10 @@ public class ServerFacade {
     public boolean startGame(Game game){
         ServerModel serverModel = ServerModel.getInstance();
         if (serverModel.getGamesAsMap().containsKey(game.getGameID())){
-            serverModel.getGamesAsMap().remove(game.getGameID());
-            game.setHasStarted(true);
-            serverModel.getGamesAsMap().put(game.getGameID(), game);
+
+            serverModel.getGamesAsMap().get(game.getGameID()).setHasStarted(true);
+            //game.setHasStarted(true);
+            //serverModel.getGamesAsMap().put(game.getGameID(), game);
             return true;
         } else {
             return false;

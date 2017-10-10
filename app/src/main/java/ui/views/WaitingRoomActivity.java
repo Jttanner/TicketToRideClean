@@ -41,9 +41,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     private ListView playerListView;
     private PlayerListAdapter playerListAdapter;// = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
 
-    private String urlString = "http://10.4.158.51:8080/user/command";
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Poller.getInstance().stopPoller();
@@ -73,24 +70,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
                 StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
                 mPresenter.startGame(startGameCommandData);
                 //Check if it is valid. Go to new activity
-                /*
-                List<Game> gameList = CModel.getInstance().getAllGames();
-                Game game = CModel.getInstance().getCurrGame();
-                for (Game g: gameList){
-                    if (g.getGameID().equals(game.getGameID())){
-                        gameList.remove(g);
-                    }
-                }
-                game.setHasStarted(true);
-                gameList.add(game);
-                ClientFacade clientFacade = ClientFacade.getInstance();
-                clientFacade.updateGameList(new GameList(gameList));
-
-                myGame = game;
-
-                StartGameTask startGameTask = new StartGameTask();
-                startGameTask.execute()*/;
-
 
                 Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
@@ -107,7 +86,5 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         //playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
         //playerListView.setAdapter(playerListAdapter);
     }
-
-
 
 }
