@@ -85,6 +85,7 @@ public class ServerFacade {
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
                     newPlayer.setColor("Red");
+                    newPlayer.setName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
                     ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);
