@@ -80,15 +80,13 @@ public class ServerFacade {
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
                 Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
-                if(foundGame.getPlayers().size() < foundGame.getPlayerMax())
+                if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
                     return;
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
-                    newPlayer.setColor("Black");
+                    newPlayer.setColor("Red");
                     foundGame.addPlayer(newPlayer);
-                    ServerModel.getInstance().getGamesAsMap().remove(gameID);
                     ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
-
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
                 }else{
