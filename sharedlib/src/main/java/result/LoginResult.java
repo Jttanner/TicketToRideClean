@@ -8,6 +8,10 @@ import modeling.User;
 
 public class LoginResult extends ResultObject {
 
+    /*
+    * Will return the login result for the login process
+    * */
+
     private User user;
 
     public LoginResult(boolean success, String errorMessage, User user) {

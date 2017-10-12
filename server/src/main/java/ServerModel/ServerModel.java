@@ -14,14 +14,15 @@ import result.GameList;
  */
 
 public class ServerModel {
-    private static ServerModel instance = new ServerModel();
-    private Map<String, User> users = new HashMap<>();//Key=UserName
-    private Map<String, Game> games = new HashMap<>();//Key=gameID
-    private User user;
 
-    ServerModel(User user){
-        this.user = user;
-    }
+    /*
+    This holds all the information needed for the server.
+     */
+
+    private static ServerModel instance = new ServerModel();
+    private Map<String, User> users = new HashMap<>(); //Key=UserName
+    private Map<String, Game> games = new HashMap<>(); //Key=gameID
+    private User user;
 
     private ServerModel() {
     }
@@ -34,12 +35,17 @@ public class ServerModel {
         return instance;
     }
 
+    //(userName, User)
     Map<String, User> getUsers() {
         return users;
     }
+
+    //(gameID, Game)
     Map<String, Game> getGamesAsMap(){
         return games;
     }
+
+    //Takes in the current list of games and returns a list of games that haven't started yet
     GameList getGames() {
         List<Game> gameList = new ArrayList<>();
 

@@ -7,17 +7,17 @@ import modeling.Game;
  */
 
 public class CreateGameCommandData extends Command {
-    private Game gameObject;
+    private Game game;
 
     public CreateGameCommandData() {
         setType("createGame");
     }
 
-    public Game getGameObject() {
-        return gameObject;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

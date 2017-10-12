@@ -5,6 +5,12 @@ package commandData;
  */
 
 public class Command {
+
+    /*
+    Every command object needs a type (what command it is) and the data associated with it to successfully execute the command.
+    Basically a model which stores data for the command.
+     */
+
     private String type;
     private Object data;
 

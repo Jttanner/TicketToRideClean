@@ -4,7 +4,9 @@ package request;
  * Created by Hwang on 9/28/2017.
  */
 
-public class RegisterRequest extends RequestObject {
+public class RegisterRequest {
+
+    /* Packaged request so that it can go to and from JSON format */
 
     private String userName;
     private String password;

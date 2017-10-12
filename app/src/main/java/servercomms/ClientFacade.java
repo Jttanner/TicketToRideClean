@@ -5,6 +5,7 @@ import modeling.Game;
 import modeling.User;
 import result.CommandResult;
 import result.GameList;
+import result.PlayerList;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -55,5 +56,9 @@ public class ClientFacade {
             CModel.getInstance().setCurrGame(game);
         }
 
+    }
+
+    public void updatePlayerList(PlayerList players){
+        CModel.getInstance().setAllPlayers(players.getPlayers());
     }
 }

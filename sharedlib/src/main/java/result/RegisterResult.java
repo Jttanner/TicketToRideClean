@@ -8,6 +8,10 @@ import modeling.User;
 
 public class RegisterResult extends ResultObject {
 
+    /*
+    * Will return the register result for the login process
+    * */
+
     private User user;
 
     public RegisterResult(boolean success, String errorMessage, User user) {
