@@ -13,10 +13,13 @@ import java.net.HttpURLConnection;
 import command.CreateGameCommand;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
+import command.StartGameCommand;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
+import commandData.StartGameCommandData;
+import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -27,9 +30,6 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-
-        boolean success = false;
-
         try {
             InputStream reqBody = exchange.getRequestBody();
             String reqData = readString(reqBody);
@@ -39,15 +39,15 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             CommandResult result = null;
             switch (cmd.getType()) {
                 case "createGame":
-
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
                     CreateGameCommand realCommand = new CreateGameCommand(command.getGameObject());
                     realCommand.setGameObject(command.getGameObject());
                     result = realCommand.execute();
                     break;
                 case "joinGame":
+                    //result.setType("joinGame");
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
-                    JoinGameCommand joinGameCommand = new JoinGameCommand(Integer.parseInt(joinGameCommandData.getUser().getUserID()), joinGameCommandData.getUser());
+                    JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getGameID(), joinGameCommandData.getUser());
                     result = joinGameCommand.execute();
                     break;
                 case "getGameList":
@@ -57,6 +57,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     getGameListCommand.setType("getGameList");
                     result = getGameListCommand.execute();
                     break;
+                case "startGame":
+                    StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
+                    StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
+                    result = startGameCommand.execute();
+                    result.setType("startGame");
                 default:
                     break;
             }

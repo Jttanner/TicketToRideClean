@@ -75,4 +75,5 @@ public class Encoder {
         return gson.fromJson(reader, GetGameCommandResult.class);
     }
 
+
 }
