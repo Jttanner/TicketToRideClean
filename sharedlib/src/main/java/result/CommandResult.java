@@ -9,6 +9,7 @@ public class CommandResult {
     private boolean success;
     private Object data;
     private String errorInfo;
+    private String type;
 
     public CommandResult() {
     }
@@ -19,9 +20,14 @@ public class CommandResult {
         this.errorInfo = errorInfo;
     }
 
-    CommandResult(boolean success, String errorInfo){
+    public CommandResult(boolean success, String errorInfo){
         this.success = success;
         this.errorInfo = errorInfo;
+    }
+
+    public CommandResult(String type, boolean success){
+        this.success = success;
+        this.type = type;
     }
 
     public boolean isSuccess() {

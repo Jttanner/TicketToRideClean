@@ -3,14 +3,12 @@ package poller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
 import commandData.GetGameListCommandData;
 import result.GameList;
-import servercomms.ClientFacade;
 import servercomms.ServerProxy;
 
 /**
@@ -20,7 +18,7 @@ import servercomms.ServerProxy;
 public class Poller {
 
     CModel clientModel = CModel.getInstance();
-    URL URL;
+    //URL URL;
     GetGameListCommandData command;
     Timer timer = new Timer();
     private final String TAG = "Poller";
@@ -29,7 +27,7 @@ public class Poller {
 
     private Poller(){
         try{
-            this.URL = new URL("http://10.4.131.102:8080/user/command");
+            //this.URL = new URL("http://10.24.71.220:8080/user/command");
             command = new GetGameListCommandData();
             command.setType("getGameList");
         }catch (Exception e){
@@ -90,7 +88,7 @@ public class Poller {
 
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
-                gameList = (GameList) serverProxy.getGameList(URL, command);
+                serverProxy.getGameList(command);
                 //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
                 Log.d(TAG,e.getMessage());
@@ -104,7 +102,7 @@ public class Poller {
         {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-            ClientFacade.getInstance().updateGameList(gameList);
+           // ClientFacade.getInstance().updateGameList(gameList);
         }
     }
 }

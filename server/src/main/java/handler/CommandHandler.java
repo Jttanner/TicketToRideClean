@@ -41,7 +41,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "createGame":
 
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
-                    CreateGameCommand realCommand = new CreateGameCommand();
+                    CreateGameCommand realCommand = new CreateGameCommand(command.getGameObject());
                     realCommand.setGameObject(command.getGameObject());
                     result = realCommand.execute();
                     break;

@@ -10,9 +10,10 @@ import result.CommandResult;
  */
 
 public class CreateGameCommand extends CreateGameCommandData implements ICommand {
-
-    public CreateGameCommand() {
+    private Game mGame;
+    public CreateGameCommand(Game game) {
         super();
+        mGame = game;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
 
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
         if (gameCreatedSuccessful) {
-            return new CommandResult(true, "", "");
+            return new CommandResult(true, mGame, "");
         } else {
             return new CommandResult(false, "", "");
         }

@@ -66,9 +66,14 @@ public class CModel extends Observable{
     }
 
     public void setMyUser(User myUser) {
-        this.myUser = myUser;
-        /*setChanged();
-        notifyObservers(this);*/
+        if(myUser != null) {
+            this.myUser = myUser;
+            setChanged();
+            notifyObservers(myUser);
+        }
+        else{
+            Log.d(TAG,"You gave us a null user???");
+        }
     }
 
     public void setAllGames(List<Game> allGames) {
@@ -112,6 +117,7 @@ public class CModel extends Observable{
 
     @Override
     public void notifyObservers(Object arg) {
+        Log.d(TAG,"Notifying observers: sending class " + arg.getClass().toString());
         super.notifyObservers(arg);
     }
 

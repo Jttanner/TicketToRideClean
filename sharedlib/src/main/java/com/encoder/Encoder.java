@@ -37,8 +37,12 @@ public class Encoder {
      * @return RegisterResult A decoded RegisterResult
      * */
     public RegisterResult decodeRegisterResult(InputStream inputStream) {
-        Reader reader = new InputStreamReader(inputStream);
-        return gson.fromJson(reader, RegisterResult.class);
+        try {
+            Reader reader = new InputStreamReader(inputStream);
+            return gson.fromJson(reader, RegisterResult.class);
+        }catch (Exception e){
+            return new RegisterResult(false,e.getMessage());
+        }
     }
 
     /**Handles the decoding of login  result objects,
@@ -46,13 +50,24 @@ public class Encoder {
      * @return LoginResult A LoginResult result
      * */
     public LoginResult decodeLoginResult(InputStream inputStream) {
-        Reader reader = new InputStreamReader(inputStream);
-        return gson.fromJson(reader, LoginResult.class);
+        try {
+            Reader reader = new InputStreamReader(inputStream);
+            return gson.fromJson(reader, LoginResult.class);
+        }
+        catch (Exception e){
+            return new LoginResult(false, e.getMessage());
+        }
     }
-
-    public CommandResult decodeCommand(InputStream inputStream) {
-        Reader reader = new InputStreamReader(inputStream);
-        return gson.fromJson(reader, CommandResult.class);
+    /**Handles the decoding of command results coming from the server
+    * @param inputStream The input given back
+    * @return CommandResult**/
+    public CommandResult decodeCommandResult(InputStream inputStream) {
+        try {
+            Reader reader = new InputStreamReader(inputStream);
+            return gson.fromJson(reader, CommandResult.class);
+        }catch (Exception e){
+            return new CommandResult(false,e.getMessage());
+        }
     }
 
     public GetGameCommandResult decodeGetGameCommandResult(InputStream inputStream) {
