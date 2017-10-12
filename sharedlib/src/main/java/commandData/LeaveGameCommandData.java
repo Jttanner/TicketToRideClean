@@ -8,25 +8,25 @@ import modeling.Player;
  */
 
 public class LeaveGameCommandData {
-    private Game gameObject;
-    private Player playerObject;
+    private Game game;
+    private Player player;
 
     public LeaveGameCommandData() {
     }
 
-    public Game getGameObject() {
-        return gameObject;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
-    public Player getPlayerObject() {
-        return playerObject;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerObject(Player playerObject) {
-        this.playerObject = playerObject;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

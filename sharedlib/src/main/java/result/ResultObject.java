@@ -5,13 +5,15 @@ package result;
  */
 
 public class ResultObject  {
+
+    /*
+    TODO: CAN SOMEONE PLEASE EXPLAIN TO ME WHY WE NEED THIS GAMELIST WITHIN OUR RESULT PACKAGE? I FEEL LIKE IT'S A LAZY WAY TO DO THIS
+     */
+
     private String userName;
     private boolean success;
     private String message;
 
-    public ResultObject(){
-
-    }
     /**I made a constructor and setter depending on how yall want to do this*/
     public ResultObject(boolean success, String userName, String errorMessage) {
         this.success = success;

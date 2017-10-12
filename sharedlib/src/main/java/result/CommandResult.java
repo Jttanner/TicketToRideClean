@@ -6,6 +6,11 @@ package result;
 
 public class CommandResult {
 
+    /*
+    Packaged result for a Result. Able to handle any type of data since its contained within an object.
+    Just make sure to cast it back to it's original data form when receiving it
+    */
+
     private boolean success;
     private Object data;
     private String type;

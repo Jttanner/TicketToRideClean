@@ -1,6 +1,6 @@
 package handler;
 
-import com.encoder.Encoder;
+import encoder.Encoder;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -28,6 +28,11 @@ import result.CommandResult;
 
 public class CommandHandler extends BaseHandler implements HttpHandler {
 
+    /*
+    It's coming from ServerCommunicator. Receives the command from the inputStream, finds what type the command is, and calls execute on that command.
+    Goes to it's corresponding command in the command package.
+     */
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try {
@@ -41,26 +46,26 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
                     CreateGameCommand realCommand = new CreateGameCommand();
-                    realCommand.setGameObject(command.getGameObject());
-                    result = realCommand.execute();
+                    realCommand.setGame(command.getGame());
+                    result = realCommand.execute(); //Sending it to the command
                     break;
                 case "joinGame":
                     //result.setType("joinGame");
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
                     JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getGameID(), joinGameCommandData.getUser());
-                    result = joinGameCommand.execute();
+                    result = joinGameCommand.execute(); //Sending it to the command
                     break;
                 case "getGameList":
                     //we don't really need these objects.
                     GetGameListCommandData getGameListCommandData = gson.fromJson(reqData, GetGameListCommandData.class);
                     GetGameListCommand getGameListCommand = new GetGameListCommand();
                     getGameListCommand.setType("getGameList");
-                    result = getGameListCommand.execute();
+                    result = getGameListCommand.execute(); //Sending it to the command
                     break;
                 case "startGame":
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
-                    result = startGameCommand.execute();
+                    result = startGameCommand.execute(); //Sending it to the command
                     result.setType("startGame");
                 default:
                     break;
@@ -69,7 +74,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             //String jsonStr = gson.toJson(result);
             OutputStream respBody = exchange.getResponseBody();
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-            new Encoder().encode(result,exchange.getResponseBody());
+            new Encoder().encode(result,exchange.getResponseBody()); //Back to JSON format
             //writeString(jsonStr, respBody);
             respBody.close();
         }

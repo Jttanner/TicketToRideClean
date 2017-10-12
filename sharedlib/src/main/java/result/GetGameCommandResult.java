@@ -5,6 +5,11 @@ package result;
  */
 
 public class GetGameCommandResult extends  CommandResult {
+
+    /*
+    * Will return the game result for the waiting lobby
+    * */
+
     private GameList gameList;
 
     public GetGameCommandResult(boolean success, GameList gameList, String errorInfo) {

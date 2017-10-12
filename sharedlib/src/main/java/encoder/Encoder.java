@@ -1,4 +1,4 @@
-package com.encoder;
+package encoder;
 
 import com.google.gson.Gson;
 

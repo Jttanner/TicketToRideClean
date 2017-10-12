@@ -4,12 +4,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
 import commandData.GetGameListCommandData;
+import modeling.Player;
 import result.GameList;
+import result.PlayerList;
 import servercomms.ClientFacade;
 import servercomms.ServerProxy;
 
@@ -30,7 +34,7 @@ public class Poller {
 
     private Poller(){
         try{
-            this.URL = new URL("http://10.24.64.221:8080/user/command");
+            this.URL = new URL("http://192.168.2.134:8080/user/command");
             command = new GetGameListCommandData();
             command.setType("getGameList");
             active = true;
@@ -111,6 +115,37 @@ public class Poller {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
             ClientFacade.getInstance().updateGameList(gameList);
+        }
+    }
+
+    public class UpdatePlayers extends AsyncTask<Void, Void, Integer>
+    {
+        private PlayerList playerList;
+
+        @Override
+        protected Integer doInBackground(Void... params)
+        {
+            //TODO: Push the request to the serverProxy
+
+            ServerProxy serverProxy = ServerProxy.getInstance();
+            try{
+                //CModel cModel = CModel.getInstance();
+                //playerList = cModel.getAllPlayers();
+                playerList = (PlayerList) serverProxy.getGameList(URL, command);
+                //clientModel.setAllGames(serverProxy.getGameList(URL, command));
+            }catch (Exception e){
+                Log.d(TAG,e.getMessage());
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer)
+        {
+            //TODO: Receive the response from the Proxy
+            super.onPostExecute(integer);
+            ClientFacade.getInstance().updatePlayerList(playerList);
         }
     }
 }

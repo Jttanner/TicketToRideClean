@@ -15,6 +15,7 @@ public class Game {
         return gameName;
     }
 
+    //Comparing objects to see if they are truly equal
     @Override
     public boolean equals(Object o) {
         if (o == null) {

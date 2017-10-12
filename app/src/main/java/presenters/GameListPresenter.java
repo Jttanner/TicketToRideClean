@@ -10,7 +10,6 @@ import clientModel.CModel;
 import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
 import modeling.Game;
-import modeling.Player;
 import result.CommandResult;
 import result.GameList;
 
@@ -31,7 +30,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void CreateGame(Game game) {
         CreateGameCommandData command = new CreateGameCommandData();
         command.setType("createGame");
-        command.setGameObject(game);
+        command.setGame(game);
         createdGame = game;
 
         HttpTask httpTask = new HttpTask(this);
@@ -76,6 +75,11 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void update(Observable o, Object arg) {
         if(arg instanceof GameList){
             GameList games = (GameList) arg;
+            if(games.getGames() == null)
+            {
+                System.out.println("This is the problem.");
+                return;
+            }
             myView.get().UpdateList(games.getGames());
         }
     }

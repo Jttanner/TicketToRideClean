@@ -9,13 +9,13 @@ import java.util.Comparator;
 
 public class Player implements Comparator<Player> {
 
-    public Player(String userID){
-        this.userID = userID;
-    }
-
     private String userID;
     private String Name;
     private String color;
+
+    public Player(String userID){
+        this.userID = userID;
+    }
 
     public Player(String userID, String name, String color) {
         this.userID = userID;
@@ -30,6 +30,7 @@ public class Player implements Comparator<Player> {
     public void setColor(String color) {
         this.color = color;
     }
+
     public String getName() {
         return Name;
     }
@@ -42,7 +43,7 @@ public class Player implements Comparator<Player> {
 
     }
 
-    public void forfietGame(Game game){
+    public void forfeitGame(Game game){
 
     }
 

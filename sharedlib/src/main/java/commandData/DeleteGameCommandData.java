@@ -5,6 +5,10 @@ package commandData;
  */
 
 public class DeleteGameCommandData extends Command {
+
+    /*
+    TODO: We need to eventually implement this class
+     */
     /*private String str;
 
     public DeleteGameCommandData() {

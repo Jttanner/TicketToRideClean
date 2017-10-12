@@ -2,7 +2,6 @@ package command;
 
 import ServerModel.ServerFacade;
 import commandData.CreateGameCommandData;
-import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -20,7 +19,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
     public CommandResult execute() {
 
 
-        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGame());
         if (gameCreatedSuccessful) {
             CommandResult result = new CommandResult(true, "", "");
             result.setType("createGame");

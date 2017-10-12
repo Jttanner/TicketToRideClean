@@ -2,7 +2,7 @@ package servercomms;
 
 import android.util.Log;
 
-import com.encoder.Encoder;
+import encoder.Encoder;
 
 import java.io.InputStream;
 import java.net.URL;

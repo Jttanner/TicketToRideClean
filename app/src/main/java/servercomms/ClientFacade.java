@@ -2,6 +2,7 @@ package servercomms;
 
 import clientModel.CModel;
 import result.GameList;
+import result.PlayerList;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -20,5 +21,9 @@ public class ClientFacade {
 
     public void updateGameList(GameList games){
         CModel.getInstance().setAllGames(games.getGames());
+    }
+
+    public void updatePlayerList(PlayerList players){
+        CModel.getInstance().setAllPlayers(players.getPlayers());
     }
 }
