@@ -13,6 +13,7 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
 
     public JoinGameCommand(String gameID, User user){
         super(gameID, user);
+        setType("joinGame");
     }
 
 
@@ -23,12 +24,12 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
             String gameID = this.getGameID();
             ServerFacade.getInstance().joinGame(getUser(),gameID);
             CommandResult result = new CommandResult(true, gameID, null);
-            result.setType("joinGame");
+            result.setType(this.getType());
             return result;
         }
         catch (NumberFormatException e) {
             CommandResult result = new CommandResult(false, null, "Error, not a number!");
-            result.setType("joinGame");
+            result.setType(this.getType());
             return result;
         }
     }

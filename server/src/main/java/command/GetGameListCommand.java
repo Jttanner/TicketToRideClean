@@ -2,31 +2,24 @@ package command;
 
 import ServerModel.ServerFacade;
 import commandData.GetGameListCommandData;
-import result.GameList;
-import result.GetGameCommandResult;
+import result.CommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
  */
 
-public class GetGameListCommand extends GetGameListCommandData implements ICommand{
-    public GetGameListCommand(){
+public class GetGameListCommand extends GetGameListCommandData implements ICommand {
+    public GetGameListCommand() {
         super();
+        setType("getGameList");
     }
 
     @Override
-    public GetGameCommandResult execute() {
-        try {
-            //GetGameListCommand getGameCommandData = new GetGameListCommand();
+    public CommandResult execute() {
+        ServerFacade facade = ServerFacade.getInstance();
 
-            ServerFacade facade = ServerFacade.getInstance();
-
-            GetGameCommandResult result = new GetGameCommandResult(true, facade.getGameList(), "Game List sent.");
-            return result;
-        }
-        catch (NumberFormatException e) {
-            GetGameCommandResult result = new GetGameCommandResult(false, new GameList(null), "Error, not a number!");
-            return result;
-        }
+        CommandResult result = new CommandResult(true, facade.getGameList(), "Game List sent.");
+        result.setType(this.getType());
+        return result;
     }
 }

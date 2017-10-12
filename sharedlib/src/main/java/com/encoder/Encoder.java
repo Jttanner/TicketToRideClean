@@ -10,7 +10,6 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 
 import result.CommandResult;
-import result.GetGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -69,11 +68,5 @@ public class Encoder {
             return new CommandResult(false,e.getMessage());
         }
     }
-
-    public GetGameCommandResult decodeGetGameCommandResult(InputStream inputStream) {
-        Reader reader = new InputStreamReader(inputStream);
-        return gson.fromJson(reader, GetGameCommandResult.class);
-    }
-
 
 }

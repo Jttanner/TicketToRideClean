@@ -9,11 +9,9 @@ import java.io.InputStream;
 import java.net.URL;
 
 import commandData.Command;
-import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
-import result.GetGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
@@ -67,10 +65,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return encoder.decodeLoginResult(stream);
         } else if (request instanceof RegisterRequest) {
             return encoder.decodeRegisterResult(stream);
-        } else if (request instanceof CreateGameCommandData) {
-            return encoder.decodeGetGameCommandResult(stream);
-        }
-        else if(request instanceof Command){
+        } else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);
         }
         Log.d(TAG,"Yo things went wack, you gave us the wrong object type in the HttpTask");
@@ -85,10 +80,6 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             ClientFacade.getInstance().updateUser(((LoginResult) result).getUser());
         } else if (result instanceof RegisterResult) {
             ClientFacade.getInstance().updateUser(((RegisterResult) result).getUser());
-        }
-        //This is used for updating the list of games
-        else if(result instanceof GetGameCommandResult){
-            ClientFacade.getInstance().updateGameList(((GetGameCommandResult) result).getGameList());;
         }
         //this is used for any other command
         else if(result instanceof CommandResult){

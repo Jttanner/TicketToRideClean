@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import commandData.Command;
-import commandData.CreateGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
 
@@ -24,8 +23,8 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private String ipaddress = "10.24.71.220";
-    private String myUrl = "http://" + ipaddress +"8080/user/";
+    private String ipaddress = "10.24.68.128";
+    private String myUrl = "http://" + ipaddress +":8080/user/";
 
     private ServerProxy() {
     }
@@ -34,9 +33,9 @@ public class ServerProxy {
     public void login( LoginRequest request){
         Log.d(TAG,"Logging on");
         HttpTask httpTask = new HttpTask();
-        myUrl += "login";
+        String url = myUrl +"login";
         try {
-            httpTask.start(new URL(myUrl),request);
+            httpTask.start(new URL(url),request);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -44,9 +43,9 @@ public class ServerProxy {
     public void register(RegisterRequest request){
         Log.d(TAG,"Registering");
         HttpTask httpTask = new HttpTask();
-        myUrl += "register";
+        String url = myUrl +"register";
         try {
-            httpTask.start(new URL(myUrl),request);
+            httpTask.start(new URL(url),request);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -55,33 +54,16 @@ public class ServerProxy {
 //    public List<Game> getGameList(Command c) {
 //
 //    }
-    public void CreateGame(CreateGameCommandData command) {
-        Log.d(TAG, "CreateGame");
+    /**Sends commands to the server. All commandData objects are of Type Command so this works
+     * @param command The command to be sent*/
+    public void sendCommand(Command command){
+        Log.d(TAG, "Sending Commands: " + command.getType());
         HttpTask httpTask = new HttpTask();
-        myUrl += "command";
+        String url = myUrl +"command";
         try {
-            httpTask.start(new URL(myUrl),command);
+            httpTask.start(new URL(url),command);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-    }
-    public void getGameList(Command command){
-        Log.d(TAG, "Getting game list");
-        HttpTask httpTask = new HttpTask();
-        myUrl += "command";
-        try {
-            httpTask.start(new URL(myUrl),command);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    //The request object for createGame will need the User Object
-    public void joinGame(){
-
-    }
-    public void deleteGame(){
-
     }
 }

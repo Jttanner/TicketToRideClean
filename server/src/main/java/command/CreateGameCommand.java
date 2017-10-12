@@ -14,6 +14,7 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
     public CreateGameCommand(Game game) {
         super();
         mGame = game;
+        setType("createGame");
     }
 
     @Override
@@ -21,10 +22,16 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
 
 
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
+        CommandResult result;
         if (gameCreatedSuccessful) {
-            return new CommandResult(true, mGame, "");
+            result = new CommandResult(true, mGame, "");
+            result.setType(this.getType());
+            return result;
         } else {
-            return new CommandResult(false, "", "");
+            result = new CommandResult(false);
+            result.setType(this.getType());
+            return result;
         }
+
     }
 }

@@ -8,8 +8,7 @@ public class CommandResult {
 
     private boolean success;
     private Object data;
-    private String type;
-    private String errorInfo;
+    private String message;
     private String type;
 
     public String getType() {
@@ -26,12 +25,15 @@ public class CommandResult {
     public CommandResult(boolean success, Object data, String errorInfo) {
         this.success = success;
         this.data = data;
-        this.errorInfo = errorInfo;
+        this.message = errorInfo;
     }
 
     public CommandResult(boolean success, String errorInfo){
         this.success = success;
-        this.errorInfo = errorInfo;
+        this.message = errorInfo;
+    }
+    public CommandResult(boolean success){
+        this.success = success;
     }
 
     public CommandResult(String type, boolean success){
@@ -47,8 +49,8 @@ public class CommandResult {
         return data;
     }
 
-    public String getErrorInfo() {
-        return errorInfo;
+    public String getMessage() {
+        return message;
     }
 
     public void setSuccess(boolean success) {
@@ -59,7 +61,7 @@ public class CommandResult {
         this.data = data;
     }
 
-    public void setErrorInfo(String errorInfo) {
-        this.errorInfo = errorInfo;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

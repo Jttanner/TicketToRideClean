@@ -16,7 +16,6 @@ import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.Command;
 import commandData.CreateGameCommandData;
-import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
 import modeling.Game;
@@ -45,23 +44,18 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = realCommand.execute();
                     break;
                 case "joinGame":
-                    //result.setType("joinGame");
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
                     JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getGameID(), joinGameCommandData.getUser());
                     result = joinGameCommand.execute();
                     break;
                 case "getGameList":
-                    //we don't really need these objects.
-                    GetGameListCommandData getGameListCommandData = gson.fromJson(reqData, GetGameListCommandData.class);
                     GetGameListCommand getGameListCommand = new GetGameListCommand();
-                    getGameListCommand.setType("getGameList");
                     result = getGameListCommand.execute();
                     break;
                 case "startGame":
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
                     result = startGameCommand.execute();
-                    result.setType("startGame");
                 default:
                     break;
             }

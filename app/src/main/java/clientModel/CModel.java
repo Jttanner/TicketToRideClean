@@ -55,6 +55,12 @@ public class CModel extends Observable{
         return currGame;
     }
 
+    public void toggleGameHasStarted(){
+        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        setChanged();
+        notifyObservers(Boolean.TRUE);
+    }
+
     public void addGame(Game game){
         this.allGames.add(game);
         setChanged();
@@ -76,15 +82,15 @@ public class CModel extends Observable{
         }
     }
 
-    public void setAllGames(List<Game> allGames) {
-        this.allGames = allGames;
-        for (Game g: allGames) {
+    public void setAllGames(GameList allGames) {
+        this.allGames = allGames.getGames();
+        for (Game g: this.allGames) {
             if (getCurrGame() != null && g.getGameID().equals(getCurrGame().getGameID())){
                 setCurrGame(g);
             }
         }
         setChanged();
-        notifyObservers(new GameList(allGames));
+        notifyObservers(new GameList(this.allGames));
     }
 
     public void setCurrGame(Game currGame) {

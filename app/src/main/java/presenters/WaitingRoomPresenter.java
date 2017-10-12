@@ -6,13 +6,11 @@ import java.lang.ref.WeakReference;
 import java.util.Observable;
 import java.util.Observer;
 
-import MVP_coms_classes.CommandSuccessChecker;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
 import commandData.StartGameCommandData;
 import modeling.Game;
-import result.CommandResult;
-import result.RegisterResult;
+import servercomms.ServerProxy;
 
 import static android.content.ContentValues.TAG;
 
@@ -20,32 +18,32 @@ import static android.content.ContentValues.TAG;
  * Created by korea on 10/6/2017.
  */
 
-public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOps, Observer, CommandSuccessChecker {
+public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOps, Observer {
     private WeakReference<MVP_WaitingRoom.RequiredViewOps> myView;
 
     public WaitingRoomPresenter(MVP_WaitingRoom.RequiredViewOps view) {
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
     }
-    @Override
-    public void checkCommandSuccess(CommandResult r) {
-
-    }
 
     @Override
     public void update(Observable o, Object arg) {
+        //TODO if the currGames players change
         if(arg instanceof Game){
             myView.get().updateWaitingRoom((Game)arg);
+        }
+        else if(arg instanceof Boolean && ((Boolean) arg)){
+            //TODO start the map activity
+            //Intent intent = new Intent();
         }
     }
 
     public void startGame(StartGameCommandData startGameCommandData){
         try {
             //call the async task
-            HttpTask httpTask = new HttpTask(this);
-            httpTask.start(":8080/user/command", startGameCommandData);
+            ServerProxy.getInstance().sendCommand(startGameCommandData);
         } catch (Exception e) {
-            Log.d(TAG, "register method messed up: " + e.toString());
+            Log.d(TAG, "hi my name is Kwan: " + e.toString());
             e.printStackTrace();
         }
     }

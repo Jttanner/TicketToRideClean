@@ -29,7 +29,6 @@ public class Poller {
         try{
             //this.URL = new URL("http://10.24.71.220:8080/user/command");
             command = new GetGameListCommandData();
-            command.setType("getGameList");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -88,7 +87,7 @@ public class Poller {
 
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
-                serverProxy.getGameList(command);
+                serverProxy.sendCommand(command);
                 //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
                 Log.d(TAG,e.getMessage());

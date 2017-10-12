@@ -15,6 +15,7 @@ public class GetGameListCommandData extends Command {
     private List<Game> gameListLobby;
 
     public GetGameListCommandData() {
+        setType("getGameList");
     }
 
     public List<Game> getGameListLobby() {

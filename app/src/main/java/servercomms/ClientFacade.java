@@ -21,9 +21,9 @@ public class ClientFacade {
     private ClientFacade() {
     }
 
-    public void updateGameList(GameList games){
-        CModel.getInstance().setAllGames(games.getGames());
-    }
+   /* public void updateGameList(GameList games){
+        CModel.getInstance().setAllGames(games);
+    }*/
 
     public void checkTypeOfCommand(CommandResult result) {
         //This if means we have created a game(and we are joining)
@@ -31,6 +31,17 @@ public class ClientFacade {
             if(((Game) result.getData()).canJoinGame()) {
                 CModel.getInstance().setCurrGame((Game)result.getData());
             }
+        }
+        else if(result.getType().equals("getGameList")){
+            CModel.getInstance().setAllGames((GameList) result.getData());
+        }
+        else if(result.getType().equals("startGame")) {
+            CModel.getInstance().toggleGameHasStarted();
+            //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
+            //We don't need to worry about that logic here
+            //This else if does nothing. The server should send the start game command to the command manager
+            //Each client's poller should check the client manager to see when the game started.
+
         }
     }
 
