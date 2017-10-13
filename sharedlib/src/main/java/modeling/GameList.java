@@ -1,8 +1,12 @@
 package modeling;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.print.DocFlavor;
 
 import modeling.Game;
 
@@ -12,9 +16,9 @@ import modeling.Game;
 
 public class GameList {
 
-    private List<Game> games;
-    private List<Game> gamesStarted;
-    private Map<String, Game> gameIDtoGame;
+    private List<Game> games = new ArrayList<>();
+    private List<Game> gamesStarted = new ArrayList<>();
+    private Map<String, Game> gameIDtoGame = new HashMap<>();
 
     public boolean addGame(Game newGame){
         if (newGame != null) {
@@ -108,8 +112,8 @@ public class GameList {
         return gameIDtoGame.get(gameID); //TODO: Will this return the game that I want that's associated with GameID?
     }
 
-    public GameList(List<Game> games) {
-        this.games = games;
+    public GameList() {
+
     }
 
     public List<Game> getGames() {

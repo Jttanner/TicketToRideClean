@@ -25,8 +25,7 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
-    private User user;
-    private Map<String, Player> playerMap; //Key = playerID
+
     private GameList gameList;
     private UserInfoList userInfoList;
 
@@ -86,18 +85,20 @@ public class ServerModel {
 
     //Takes in the current list of games and returns a list of games that haven't started yet
     public GameList getGames() {
-        List<Game> gameList = new ArrayList<>();
+        //List<Game> gameList = new ArrayList<>();
 
+        /*
         for (Map.Entry<String, Game> game : getGamesAsMap().entrySet()){
             if (!game.getValue().isHasStarted()){
                 gameList.add(game.getValue());
             }
         }
-        return new GameList(gameList);
-    }
 
 
-    public User getUser() {
-        return user;
+
+        return new GameList(gameList);*/
+
+        return this.gameList;
     }
+
 }
