@@ -1,6 +1,8 @@
 
 package result;
 
+import modeling.GameList;
+
 /**
  * Created by tyler on 10/9/2017.
  */

@@ -8,7 +8,7 @@ import modeling.User;
 import modeling.UserInfo;
 import request.LoginRequest;
 import request.RegisterRequest;
-import result.GameList;
+import modeling.GameList;
 import result.LoginResult;
 import result.RegisterResult;
 

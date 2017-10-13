@@ -7,7 +7,7 @@ import java.util.Map;
 
 import modeling.Game;
 import modeling.User;
-import result.GameList;
+import modeling.GameList;
 
 /**
  * Created by jontt on 9/27/2017.

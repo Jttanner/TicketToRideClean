@@ -9,7 +9,7 @@ import clientModel.CModel;
 import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
 import modeling.Game;
-import result.GameList;
+import modeling.GameList;
 import servercomms.ServerProxy;
 
 /**
