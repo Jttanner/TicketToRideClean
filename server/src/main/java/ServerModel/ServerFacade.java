@@ -76,30 +76,53 @@ public class ServerFacade {
         }
     }
 
-    public void joinGame(User user, String gameID){
+    public boolean joinGame(User user, String gameID){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
                 Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
                 if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
-                    return;
+                    return false;
                 if (foundGame.canJoinGame()){
                     Player newPlayer = new Player(user.getUserID());
-                    newPlayer.setColor("Red");
+                    switch (foundGame.getPlayers().size()){
+
+                        case 0:
+                            newPlayer.setColor("Red");
+                            break;
+                        case 1:
+                            newPlayer.setColor("Green");
+                            break;
+                        case 2:
+                            newPlayer.setColor("Black");
+                            break;
+                        case 3:
+                            newPlayer.setColor("Blue");
+                            break;
+                        case 4:
+                            newPlayer.setColor("Yellow");
+                            break;
+                        default:
+                            break;
+                    }
+
                     newPlayer.setName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
                     ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
+                    return true;
                 }else{
                     //don't add
                     //return game is full somehow
                     //TODO: talk about how to propegate these errors.  create exception classes?  or just check?
                 }
+
             }
         } catch (Exception e){
             //catch if theres a bad user or game
             e.printStackTrace();
         }
+        return false;
     }
 
     public boolean startGame(Game game){

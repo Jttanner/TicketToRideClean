@@ -137,7 +137,7 @@ public class CreateGameFragment extends DialogFragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                game.addPlayer(player);
+                //game.addPlayer(player);
                 ((GameListActivity)getActivity()).presenter.CreateGame(game);
                 getDialog().dismiss();
             }
