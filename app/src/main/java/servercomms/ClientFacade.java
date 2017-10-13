@@ -5,7 +5,6 @@ import modeling.Game;
 import modeling.User;
 import result.CommandResult;
 import result.GetGameCommandResult;
-import result.PlayerList;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -55,15 +54,15 @@ public class ClientFacade {
         CModel.getInstance().setMyUser(user);
     }
 
-    public void updateCurrGame(Game game){
+    /*public void updateCurrGame(Game game){
         //this if means we have joined a game
         if(game.canJoinGame()){
             CModel.getInstance().setCurrGame(game);
         }
 
-    }
+    }*/
 
-    public void updatePlayerList(PlayerList players){
+    /*public void updatePlayerList(PlayerList players){
         CModel.getInstance().setAllPlayers(players.getPlayers());
-    }
+    }*/
 }
