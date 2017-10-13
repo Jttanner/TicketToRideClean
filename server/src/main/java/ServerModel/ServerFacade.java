@@ -19,6 +19,10 @@ import result.RegisterResult;
 
 public class ServerFacade {
 
+    /*
+    *The backbone of the Server: will execute functionality and create interaction between the ServerModel and the Handlers
+     */
+
     private static ServerFacade instance = null;
 
     public static ServerFacade getInstance()
@@ -35,7 +39,7 @@ public class ServerFacade {
             UserInfo check = ServerModel.getInstance().getUsers().get(request.getUserName()).getInfo();
             if (check.checkUserInfo(request)){
                 String userName = request.getUserName();
-                return new LoginResult(true,"login success!", userName, ServerModel.getInstance().getUsers().get(userName));
+                return new LoginResult(true,"login success!", ServerModel.getInstance().getUsers().get(userName));
             } else{
                 return new LoginResult(false, "login failed.");
             }
@@ -52,12 +56,13 @@ public class ServerFacade {
         User newUser = new User(new UserInfo(userName, password, newUserID));
         if (validRegister(request)){
             ServerModel.getInstance().getUsers().put(userName, newUser);
-            return new RegisterResult(true, userName,"Successfully Registered.", newUser);
+            return new RegisterResult(true,"Successfully Registered.", newUser);
         } else{
-            return new RegisterResult(false, userName, "Failed to Register.", null);
+            return new RegisterResult(false, "Failed to Register.", null);
         }
     }
 
+    //Checks to see if it's a valid username and password, and if the username is not already contained in the database
     private boolean validRegister(RegisterRequest request) {
         String userName = request.getUserName();
         return  request.getPassword().length() > 0

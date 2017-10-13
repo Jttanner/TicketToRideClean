@@ -55,6 +55,12 @@ public class CModel extends Observable{
         return currGame;
     }
 
+    public void toggleGameHasStarted(){
+        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        setChanged();
+        notifyObservers(Boolean.TRUE);
+    }
+
     public void addGame(Game game){
         this.allGames.add(game);
         setChanged();
@@ -66,20 +72,25 @@ public class CModel extends Observable{
     }
 
     public void setMyUser(User myUser) {
-        this.myUser = myUser;
-        /*setChanged();
-        notifyObservers(this);*/
+        if(myUser != null) {
+            this.myUser = myUser;
+            setChanged();
+            notifyObservers(myUser);
+        }
+        else{
+            Log.d(TAG,"You gave us a null user???");
+        }
     }
 
-    public void setAllGames(List<Game> allGames) {
-        this.allGames = allGames;
-        for (Game g: allGames) {
+    public void setAllGames(GameList allGames) {
+        this.allGames = allGames.getGames();
+        for (Game g: this.allGames) {
             if (getCurrGame() != null && g.getGameID().equals(getCurrGame().getGameID())){
                 setCurrGame(g);
             }
         }
         setChanged();
-        notifyObservers(new GameList(allGames));
+        notifyObservers(new GameList(this.allGames));
     }
 
     public void setCurrGame(Game currGame) {
@@ -112,6 +123,7 @@ public class CModel extends Observable{
 
     @Override
     public void notifyObservers(Object arg) {
+        Log.d(TAG,"Notifying observers: sending class " + arg.getClass().toString());
         super.notifyObservers(arg);
     }
 

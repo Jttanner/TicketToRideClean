@@ -13,6 +13,7 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
 
     public JoinGameCommand(String gameID, User user){
         super(gameID, user);
+        setType("joinGame");
     }
 
 

@@ -10,7 +10,7 @@ public class StartGameCommandData extends Command {
     private Game game;
 
     public StartGameCommandData(Game game){
-        setType("startGame");
+        setType("startGame"); //TODO: Do we need this?
         this.game = game;
     }
 

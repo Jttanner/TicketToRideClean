@@ -3,14 +3,12 @@ package poller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
 import commandData.GetGameListCommandData;
 import result.GameList;
-import servercomms.ClientFacade;
 import servercomms.ServerProxy;
 
 /**
@@ -20,20 +18,17 @@ import servercomms.ServerProxy;
 public class Poller {
 
     CModel clientModel = CModel.getInstance();
-    URL URL;
+    //URL URL;
     GetGameListCommandData command;
     Timer timer = new Timer();
     private final String TAG = "Poller";
-    boolean active = false;
 
     private static Poller instance = new Poller();
 
     private Poller(){
         try{
-            this.URL = new URL("http://10.24.64.221:8080/user/command");
+            //this.URL = new URL("http://10.24.71.220:8080/user/command");
             command = new GetGameListCommandData();
-            command.setType("getGameList");
-            active = true;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -48,9 +43,6 @@ public class Poller {
     }
 
     public void updateGameList() {
-        if (!active){
-            timer = new Timer();
-        }
         //final Handler handler = new Handler();
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
@@ -77,9 +69,8 @@ public class Poller {
     }
 
     public void stopPoller(){
-        if(timer != null && active){
+        if(timer != null){
             timer.cancel();
-            active = false;
         }
     }
 
@@ -96,7 +87,7 @@ public class Poller {
 
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
-                gameList = (GameList) serverProxy.getGameList(URL, command);
+                serverProxy.sendCommand(command);
                 //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
                 Log.d(TAG,e.getMessage());
@@ -110,7 +101,7 @@ public class Poller {
         {
             //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-            ClientFacade.getInstance().updateGameList(gameList);
+           // ClientFacade.getInstance().updateGameList(gameList);
         }
     }
 }

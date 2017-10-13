@@ -8,10 +8,14 @@ import modeling.User;
 
 public class LoginResult extends ResultObject {
 
+    /*
+    * Will return the login result for the login process
+    * */
+
     private User user;
 
-    public LoginResult(boolean success, String userName, String errorMessage, User user) {
-        super(success, userName, errorMessage);
+    public LoginResult(boolean success, String errorMessage, User user) {
+        super(success, user.getInfo().getUserName(), errorMessage);
         this.user = user;
     }
 

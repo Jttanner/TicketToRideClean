@@ -14,6 +14,7 @@ public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
 
     public LeaveGameCommand() {
         super();
+        setType("leaveGame");
     }
 
     private Game gameObject;
@@ -23,10 +24,15 @@ public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
     public CommandResult execute() {
 
         boolean leaveCreatedSuccessful = ServerFacade.getInstance().leaveGame(gameObject, playerObject);
+        CommandResult result;
         if (leaveCreatedSuccessful) {
-            return new CommandResult(true, "", "");
+            result = new CommandResult(true);
+            result.setType(this.getType());
         } else {
-            return new CommandResult(false, "", "");
+            result = new CommandResult(false);
+            result.setType(this.getType());
+
         }
+        return result;
     }
 }

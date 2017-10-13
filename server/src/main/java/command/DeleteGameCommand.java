@@ -12,6 +12,7 @@ import result.CommandResult;
 public class DeleteGameCommand extends DeleteGameCommandData implements ICommand{
     public DeleteGameCommand(){
             super();
+        setType("deleteGame");
     }
 
     private Game gameObject;
@@ -20,10 +21,15 @@ public class DeleteGameCommand extends DeleteGameCommandData implements ICommand
     public CommandResult execute() {
 
         boolean deleteGameSuccessful = ServerFacade.getInstance().deleteGame(gameObject);
+        CommandResult result;
         if (deleteGameSuccessful) {
-            return new CommandResult(true, "", "");
+            result = new CommandResult(true);
+            result.setType(this.getType());
+
         } else {
-            return new CommandResult(false, "", "");
+            result = new CommandResult(false);
+            result.setType(this.getType());
         }
+        return result;
     }
 }

@@ -1,7 +1,5 @@
 package command;
 
-import com.sun.corba.se.spi.activation.Server;
-
 import ServerModel.ServerFacade;
 import commandData.StartGameCommandData;
 import modeling.Game;
@@ -17,6 +15,7 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
     public StartGameCommand(Game game) {
         super(game);
         this.game = game;
+        setType("startGame");
     }
 
     public Game getGame() {
@@ -30,12 +29,13 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
     @Override
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
-        CommandResult result = null;
+        CommandResult result;
         if (facade.startGame(game)){
-            result = new CommandResult(true, null, "");
-            result.setType("startGame");
+            result = new CommandResult(true);
+            result.setType(this.getType());
         } else{
-            result = new CommandResult(false, null, "");
+            result = new CommandResult(false);
+            result.setType(this.getType());
         }
         return result;
     }

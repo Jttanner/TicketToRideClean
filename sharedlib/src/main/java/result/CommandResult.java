@@ -6,10 +6,15 @@ package result;
 
 public class CommandResult {
 
+    /*
+    Packaged result for a Result. Able to handle any type of data since its contained within an object.
+    Just make sure to cast it back to it's original data form when receiving it
+    */
+
     private boolean success;
     private Object data;
+    private String message;
     private String type;
-    private String errorInfo;
 
     public String getType() {
         return type;
@@ -25,12 +30,20 @@ public class CommandResult {
     public CommandResult(boolean success, Object data, String errorInfo) {
         this.success = success;
         this.data = data;
-        this.errorInfo = errorInfo;
+        this.message = errorInfo;
     }
 
-    CommandResult(boolean success, String errorInfo){
+    public CommandResult(boolean success, String errorInfo){
         this.success = success;
-        this.errorInfo = errorInfo;
+        this.message = errorInfo;
+    }
+    public CommandResult(boolean success){
+        this.success = success;
+    }
+
+    public CommandResult(String type, boolean success){
+        this.success = success;
+        this.type = type;
     }
 
     public boolean isSuccess() {
@@ -41,8 +54,8 @@ public class CommandResult {
         return data;
     }
 
-    public String getErrorInfo() {
-        return errorInfo;
+    public String getMessage() {
+        return message;
     }
 
     public void setSuccess(boolean success) {
@@ -53,7 +66,7 @@ public class CommandResult {
         this.data = data;
     }
 
-    public void setErrorInfo(String errorInfo) {
-        this.errorInfo = errorInfo;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

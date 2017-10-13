@@ -11,10 +11,11 @@ import modeling.Game;
  */
 
 public class GetGameListCommandData extends Command {
-    //We don't need it!
+    //We don't need it! WHY DON'T WE NEED IT???
     private List<Game> gameListLobby;
 
     public GetGameListCommandData() {
+        setType("getGameList");
     }
 
     public List<Game> getGameListLobby() {

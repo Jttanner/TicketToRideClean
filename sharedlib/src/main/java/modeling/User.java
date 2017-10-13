@@ -40,23 +40,18 @@ public class User {
         return info;
     }
 
-    /*
-        Join an existing game.
-         */
+    //Join an existing game.
     public void joinGame(){
 
     }
 
-    /*
-    Returns reference to the created game.
-     */
+    //Returns reference to the created game.
     public Game createNewGame(){
         return null;
     }
 
-    /*
-    Deletes an existing game which has been created but not started, or has finished.
-     */
+
+    //Deletes an existing game which has been created but not started, or has finished.
     public void deleteGame(){
 
     }

@@ -22,6 +22,7 @@ public class JoinGameCommandData extends Command {
     }
 
     public JoinGameCommandData(String gameID, User user) {
+        setType("joinGame");
         this.gameID = gameID;
         this.user = user;
     }
