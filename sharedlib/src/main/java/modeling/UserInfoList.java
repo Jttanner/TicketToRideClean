@@ -29,7 +29,7 @@ public class UserInfoList {
 
     public User register(String userName, String password)
     {
-        if ((userName.length() > 0) && (password.length() > 0)
+        if ((userName.length() > 0) && (password.length() > 0))
         if(!usernameToUserInfo.containsKey(userName)){
             UserInfo newUserInfo = new UserInfo();
             newUserInfo.setUserName(userName);

@@ -21,16 +21,17 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
 
     @Override
     public GetGameCommandResult execute() {
-        Result result;
+        GetGameCommandResult result;
         ServerFacade facade = ServerFacade.getInstance();
         GameList gameList = ServerFacade.getInstance().getGameList();
         if(gameList == null) {
-            result = new Result(false);
+            result = new GetGameCommandResult(false, gameList, "failed");
+            return  result;
         }
         else {
             GetGameListCommandData cmdData = new GetGameListCommandData();
             cmdData.setGameListLobby(gameList);
-            result = new Result(true, gameList, "Game Lists sent.");
+            result = new GetGameCommandResult(true, gameList, "Game Lists sent.");
             //result.setType(this.getType());
             return result;
         }
