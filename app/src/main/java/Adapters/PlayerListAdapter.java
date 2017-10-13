@@ -55,8 +55,9 @@ public class PlayerListAdapter extends BaseAdapter {
         TextView textView = (TextView) view.findViewById(R.id.player_view);
 
         //Sets the player info
+        textView.setText(currentPlayer.getPlayerName());
         textView.setTextColor(Color.parseColor(currentPlayer.getColor()));
-        textView.setText(currentPlayer.getName());
+
 
         return view;
     }

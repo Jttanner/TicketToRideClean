@@ -39,7 +39,4 @@ public class UserInfo {
         return password;
     }
 
-    public String getUserID() {
-        return userID;
-    }
 }

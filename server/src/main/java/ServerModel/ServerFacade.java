@@ -1,6 +1,5 @@
 package ServerModel;
 
-import java.awt.Color;
 import java.util.UUID;
 
 import modeling.Game;
@@ -9,7 +8,7 @@ import modeling.User;
 import modeling.UserInfo;
 import request.LoginRequest;
 import request.RegisterRequest;
-import result.GameList;
+import modeling.GameList;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -88,7 +87,7 @@ public class ServerFacade {
                 if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
                     return false;
                 if (foundGame.canJoinGame()){
-                    Player newPlayer = new Player(user.getUserID());
+                    Player newPlayer = new Player(user.getUserName());
                     switch (foundGame.getPlayers().size()){
 
                         case 0:
@@ -110,7 +109,7 @@ public class ServerFacade {
                             break;
                     }
 
-                    newPlayer.setName(user.getInfo().getUserName());
+                    newPlayer.setPlayerName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
                     ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);

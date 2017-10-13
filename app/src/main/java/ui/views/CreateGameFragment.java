@@ -43,9 +43,9 @@ public class CreateGameFragment extends DialogFragment {
         System.out.println("hello");
         game = new Game();
         game.setPlayerMax(2);
-        System.out.println(CModel.getInstance().getMyUser().getUserID());
-        player = new Player(CModel.getInstance().getMyUser().getUserID());
-        player.setName(CModel.getInstance().getMyUser().getInfo().getUserName());
+        System.out.println(CModel.getInstance().getMyUser().getUserName());
+        player = new Player(CModel.getInstance().getMyUser().getUserName());
+        player.setPlayerName(CModel.getInstance().getMyUser().getInfo().getUserName());
         player.setColor(MyColor.BLACK.toString());
     }
 
