@@ -1,6 +1,7 @@
 package modeling;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,9 @@ public class UserInfoList {
 
     private List<UserInfo> userInfoList;
     //Checks username to find it's userinfo
-    private Map<String, UserInfo> usernameToUserInfo;
+    private Map<String, UserInfo> usernameToUserInfo = new HashMap<>();
 
-    private Map<User, UserInfo> userToUserInfo;
+    private Map<User, UserInfo> userToUserInfo = new HashMap<>();
 
 
     public UserInfoList() {

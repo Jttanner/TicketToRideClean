@@ -26,8 +26,8 @@ public class ServerModel {
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
 
-    private GameList gameList;
-    private UserInfoList userInfoList;
+    private GameList gameList = new GameList();
+    private UserInfoList userInfoList = new UserInfoList();
 
 
     public ServerModel() {
@@ -42,6 +42,7 @@ public class ServerModel {
     }
 
     public User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
+
         return userInfoList.register(userName, password);
     }
 
