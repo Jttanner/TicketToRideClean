@@ -72,7 +72,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 if(g.getGameName().equals(name.getText().toString())){
                     selectedGame = g;
                     presenter.JoinGame(selectedGame);
-                    //TODO YO  here is your problem, you need to call the server FIRST before updating model
                     return;
                 }
             }
@@ -115,7 +114,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         String players = "";
 
         for(Player each : currentGame.getPlayers()){
-            players += each.getName();
+            players += each.getPlayerName();
         }
         holder.players.setText(players);
         holder.inGame.setText(currentGame.getPlayers().size() + "/" + currentGame.getPlayerMax());

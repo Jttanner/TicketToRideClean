@@ -8,7 +8,7 @@ import java.util.TimerTask;
 
 import clientModel.CModel;
 import commandData.GetGameListCommandData;
-import result.GameList;
+import modeling.GameList;
 import servercomms.ServerProxy;
 
 /**

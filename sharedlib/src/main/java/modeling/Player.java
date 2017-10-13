@@ -9,17 +9,17 @@ import java.util.Comparator;
 
 public class Player implements Comparator<Player> {
 
-    private String userID;
-    private String Name;
+    private String userName;
+    private String playerName;
     private String color;
 
-    public Player(String userID){
-        this.userID = userID;
+    public Player(String userName){
+        this.userName = userName;
     }
 
-    public Player(String userID, String name, String color) {
-        this.userID = userID;
-        Name = name;
+    public Player(String userName, String name, String color) {
+        this.userName = userName;
+        playerName = name;
         this.color = color;
     }
 
@@ -31,12 +31,12 @@ public class Player implements Comparator<Player> {
         this.color = color;
     }
 
-    public String getName() {
-        return Name;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setPlayerName(String name) {
+        playerName = name;
     }
 
     public void startGame(Game game){
@@ -53,7 +53,7 @@ public class Player implements Comparator<Player> {
 
     @Override
     public int compare(Player player, Player other) {
-        return Integer.parseInt(player.userID) - Integer.parseInt(other.userID);
+        return Integer.parseInt(player.userName) - Integer.parseInt(other.userName);
     }
 
     @Override
@@ -69,11 +69,11 @@ public class Player implements Comparator<Player> {
         }
         Player oPlayer = (Player) o;
         //All instance variables must match to return true
-        return (this.getColor().equals(oPlayer.getColor())) && (this.getUserID().equals(oPlayer.getUserID()))
-                && (this.getName().equals(oPlayer.getName()));
+        return (this.getColor().equals(oPlayer.getColor())) && (this.getUserName().equals(oPlayer.getUserName()))
+                && (this.getPlayerName().equals(oPlayer.getPlayerName()));
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserName() {
+        return userName;
     }
 }

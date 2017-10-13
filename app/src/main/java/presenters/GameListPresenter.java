@@ -9,7 +9,7 @@ import clientModel.CModel;
 import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
 import modeling.Game;
-import result.GameList;
+import modeling.GameList;
 import servercomms.ServerProxy;
 
 /**
@@ -35,7 +35,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     @Override
     public void JoinGame(Game game) {
-        CModel.getInstance().setCurrGame(game);
+        //CModel.getInstance().setCurrGame(game);
         createdGame = game;
         JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
         ServerProxy.getInstance().sendCommand(data);

@@ -1,6 +1,5 @@
 package ServerModel;
 
-import java.awt.Color;
 import java.util.UUID;
 
 import modeling.Game;
@@ -9,7 +8,7 @@ import modeling.User;
 import modeling.UserInfo;
 import request.LoginRequest;
 import request.RegisterRequest;
-import result.GameList;
+import modeling.GameList;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -81,31 +80,53 @@ public class ServerFacade {
         }
     }
 
-    public void joinGame(User user, String gameID){
+    public boolean joinGame(User user, String gameID){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
                 Game foundGame = ServerModel.getInstance().getGamesAsMap().get(gameID);
                 if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
-                    return;
+                    return false;
                 if (foundGame.canJoinGame()){
-                    Player newPlayer = new Player(user.getUserID());
-                    //TODO: We need to allow the user to choose his own color at this point
-                    newPlayer.setColor("Red"); //Default color?
-                    newPlayer.setName(user.getInfo().getUserName());
+                    Player newPlayer = new Player(user.getUserName());
+                    switch (foundGame.getPlayers().size()){
+
+                        case 0:
+                            newPlayer.setColor("Red");
+                            break;
+                        case 1:
+                            newPlayer.setColor("Green");
+                            break;
+                        case 2:
+                            newPlayer.setColor("Black");
+                            break;
+                        case 3:
+                            newPlayer.setColor("Blue");
+                            break;
+                        case 4:
+                            newPlayer.setColor("Yellow");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    newPlayer.setPlayerName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
-                    ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame); //TODO: What's the purpose of this line? Don't we already have the game stored in the map when we created it?
+                    ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);
                     user.addGame(foundGame);
+                    return true;
                 }else{
                     //don't add
                     //return game is full somehow
                     //TODO: talk about how to propegate these errors.  create exception classes?  or just check?
                 }
+
             }
         } catch (Exception e){
             //catch if theres a bad user or game
             e.printStackTrace();
         }
+        return false;
     }
 
     public boolean startGame(Game game){

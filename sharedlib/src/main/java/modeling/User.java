@@ -32,8 +32,8 @@ public class User {
         ownedPlayers.remove(player);
     }
 
-    public String getUserID(){
-        return info.getUserID();
+    public String getUserName(){
+        return info.getUserName();
     }
 
     public UserInfo getInfo() {
