@@ -64,7 +64,9 @@ public class CModel extends Observable{
     public void addGame(Game game){
         this.allGames.add(game);
         setChanged();
-        notifyObservers(new GameList(allGames));
+        GameList wrapperGameList = new GameList();
+        wrapperGameList.setGames(this.allGames);
+        notifyObservers(wrapperGameList);
     }
 
     public Set<Player> getAllPlayers() {
@@ -93,7 +95,9 @@ public class CModel extends Observable{
         }
         //will notify the gamelist of games made/changed
         setChanged();
-        notifyObservers(new GameList(this.allGames));
+        GameList wrapperGameList = new GameList();
+        wrapperGameList.setGames(this.allGames);
+        notifyObservers(wrapperGameList);
     }
     /**Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it

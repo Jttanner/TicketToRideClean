@@ -20,6 +20,10 @@ public class GameList {
     private List<Game> gamesStarted = new ArrayList<>();
     private Map<String, Game> gameIDtoGame = new HashMap<>();
 
+    public void setGames(List<Game> games){
+        this.games = games;
+    }
+
     public boolean addGame(Game newGame){
         if (newGame != null) {
             games.add(newGame);
