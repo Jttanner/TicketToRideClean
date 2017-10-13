@@ -1,5 +1,7 @@
 package servercomms;
 
+import android.util.Log;
+
 import clientModel.CModel;
 import modeling.Game;
 import modeling.User;
@@ -11,7 +13,8 @@ import result.GetGameCommandResult;
  * This class takes requests from the Server proxy, such as updating the game list. These operations updateWaitingRoom the model, which will
  * in turn notify the presenters of any changes made.
  */
-public class ClientFacade {
+class ClientFacade {
+    private static final String TAG = "ClientFacade";
     private static ClientFacade ourInstance = new ClientFacade();
 
     public static ClientFacade getInstance() {
@@ -25,10 +28,8 @@ public class ClientFacade {
         CModel.getInstance().setAllGames(games);
     }*/
 
-    public void checkTypeOfCommand(CommandResult result) {
+    void checkTypeOfCommand(CommandResult result) {
         //This if means we have created a game(and we are joining)
-        //LinkedTreeMap<>
-        //LinkedTreeMap<String,Object> map = result.getData();
        if(result.getData() instanceof Game){
             if(((Game) result.getData()).canJoinGame()) {
                 CModel.getInstance().setCurrGame((Game)result.getData());
@@ -48,9 +49,12 @@ public class ClientFacade {
         else if(result.getType().equals("joinGame")){
             CModel.getInstance().setCurrGame((String)result.getData());
        }
+       else{
+           Log.d(TAG,"We got a different class thn expected");
+       }
     }
 
-    public void updateUser(User user) {
+    void updateUser(User user) {
         CModel.getInstance().setMyUser(user);
     }
 

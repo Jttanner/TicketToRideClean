@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import modeling.Game;
+import modeling.GameList;
 import modeling.Player;
 import modeling.User;
-import modeling.GameList;
 import modeling.UserInfo;
 import modeling.UserInfoList;
-import request.LoginRequest;
-import result.LoginResult;
 
 /**
  * Created by jontt on 9/27/2017.
@@ -50,12 +48,8 @@ public class ServerModel {
 
     public boolean login(String userName, String password){
         UserInfo matches = userInfoList.login(userName, password);
-        if(matches != null){//If the account exists and matches with one in the database...
-            return true;
-        }
-        else{
-            return false;
-        }
+        //If the account exists and matches with one in the database...
+        return (matches != null);
     }
 
     public boolean createGame(Game newGame){
@@ -66,9 +60,9 @@ public class ServerModel {
         return gameList.joinGame(user, gameID);
     }
 
-    public boolean startGame(Game game){
+    /*public boolean startGame(Game game){
         return gameList.startGame(game);
-    }
+    }*/
 
     public boolean deleteGame(Game game){
         return gameList.deleteGame(game);

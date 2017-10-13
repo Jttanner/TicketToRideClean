@@ -1,15 +1,10 @@
 package ServerModel;
 
-import java.util.UUID;
-
 import modeling.Game;
-import modeling.Player;
+import modeling.GameList;
 import modeling.User;
-import modeling.UserInfo;
-import modeling.UserInfoList;
 import request.LoginRequest;
 import request.RegisterRequest;
-import modeling.GameList;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -48,7 +43,7 @@ public class ServerFacade {
 */
     public LoginResult login(LoginRequest request){
         boolean success = serverModel.login(request.getUserName(), request.getPassword());
-        if(success == true){
+        if(success){
             return new LoginResult(true, "login success!");
         }
         else{
