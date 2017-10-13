@@ -18,7 +18,6 @@ public class UserInfoList {
 
 
     public UserInfoList() {
-        //TODO we dont ever have an array list to give this
         userInfoList = new ArrayList();
     }
 
@@ -29,7 +28,8 @@ public class UserInfoList {
 
     public User register(String userName, String password)
     {
-        if((userName.length() > 0) && (password.length() > 0 && !usernameToUserInfo.containsKey(userName))){
+        if ((userName.length() > 0) && (password.length() > 0)
+        if(!usernameToUserInfo.containsKey(userName)){
             UserInfo newUserInfo = new UserInfo();
             newUserInfo.setUserName(userName);
             newUserInfo.setPassword(password);
@@ -49,7 +49,7 @@ public class UserInfoList {
     {
         UserInfo matches = null;
         for (UserInfo userInfo : userInfoList) {
-            if (userInfo.getUserName().equals(userName) && userInfo.getPassword().equals(password)) {
+            if (userInfo.getUserName() == userName && userInfo.getPassword() == password) {
                 matches = userInfo;
             }
         }

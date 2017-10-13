@@ -23,7 +23,7 @@ import result.ResultObject;
 
 class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     private Object request;
-    private final String TAG = "HttpTAsk";
+    private final String TAG = "HttpTask";
 
     HttpTask() {
     }
