@@ -2,22 +2,12 @@ package servercomms;
 
 import android.util.Log;
 
-import com.encoder.Encoder;
-
-import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
-import clientModel.CModel;
 import commandData.Command;
-import commandData.CreateGameCommandData;
-import commandData.JoinGameCommandData;
-import commandData.StartGameCommandData;
 import request.LoginRequest;
 import request.RegisterRequest;
-import result.CommandResult;
-import result.GetGameCommandResult;
-import result.LoginResult;
-import result.RegisterResult;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -33,72 +23,47 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
+    private String ipaddress = "192.168.1.6";
+    private String myUrl = "http://" + ipaddress +":8080/user/";
 
     private ServerProxy() {
     }
 
 
-    public LoginResult login(URL url, LoginRequest request){
+    public void login( LoginRequest request){
         Log.d(TAG,"Logging on");
-        String typeOfRequest = "POST";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
-        //decode ,set the user object, and send back to the presenter
-        LoginResult result = new Encoder().decodeLoginResult(inputStream);
-        CModel.getInstance().setMyUser(result.getUser());
-        return result;
+        HttpTask httpTask = new HttpTask();
+        String url = myUrl +"login";
+        try {
+            httpTask.start(new URL(url),request);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
-    public RegisterResult register(URL url, RegisterRequest request){
+    public void register(RegisterRequest request){
         Log.d(TAG,"Registering");
-        String typeOfRequest = "POST";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url,request,typeOfRequest);
-        //decode ,set the user object, and send back to the presenter
-        RegisterResult result = new Encoder().decodeRegisterResult(inputStream);
-        CModel.getInstance().setMyUser(result.getUser());
-        return result;
+        HttpTask httpTask = new HttpTask();
+        String url = myUrl +"register";
+        try {
+            httpTask.start(new URL(url),request);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
 //    public List<Game> getGameList(Command c) {
 //
 //    }
-    public CommandResult CreateGame(URL url, CreateGameCommandData command) {
-        String typeOfRequest = "POST";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url, command, typeOfRequest);
-        //decode ,set the user object, and send back to the presenter
-        CommandResult result = new Encoder().decodeCommand(inputStream);
-        return result;
-    }
-
-
-    public Object getGameList(URL url, Command command){
-        Log.d(TAG, "Getting game list");
-        String typeOfRequest = "GET";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url, command, typeOfRequest);
-        //Gson gson = new Gson();
-        //GetGameCommandResult result = gson.fromJson(inputStream.toString(), GetGameCommandResult.class);
-        GetGameCommandResult result = new Encoder().decodeGetGameCommandResult(inputStream);
-        //Log.d(TAG,result.getGameList().getClass().getName());
-        return result.getGameList();
-
-    }
-
-    //The request object for createGame will need the User Object
-    public CommandResult joinGame(URL url, JoinGameCommandData joinGameCommandData){
-        String typeOfRequest = "POST";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url, joinGameCommandData, typeOfRequest);
-        //decode ,set the user object, and send back to the presenter
-        CommandResult result = new Encoder().decodeCommand(inputStream);
-        return result;
-    }
-
-    public CommandResult startGame(URL url, StartGameCommandData startGameCommandData){
-        String typeOfRequest = "POST";
-        InputStream inputStream = ClientCommunicator.getInstance().send(url, startGameCommandData, typeOfRequest);
-        //decode ,set the user object, and send back to the presenter
-        CommandResult result = new Encoder().decodeCommand(inputStream);
-        return result;
-    }
-
-    public void deleteGame(){
-
+    /**Sends commands to the server. All commandData objects are of Type Command so this works
+     * @param command The command to be sent*/
+    public void sendCommand(Command command){
+        Log.d(TAG, "Sending Commands: " + command.getType());
+        HttpTask httpTask = new HttpTask();
+        String url = myUrl +"command";
+        try {
+            httpTask.start(new URL(url),command);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }

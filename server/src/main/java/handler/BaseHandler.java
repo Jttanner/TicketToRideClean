@@ -21,6 +21,9 @@ public class BaseHandler {
         sw.flush();
     }
 
+    /*
+    The readString method shows how to write a String to an OutputStream.
+    */
     protected String readString(InputStream is) throws IOException {
         StringBuilder sb = new StringBuilder();
         InputStreamReader sr = new InputStreamReader(is);

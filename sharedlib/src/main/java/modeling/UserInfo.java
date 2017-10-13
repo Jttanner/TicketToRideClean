@@ -18,6 +18,8 @@ public class UserInfo {
     private String password;
     private String userID;
 
+
+    //Authorizing that the username and password are correct
     public boolean checkUserInfo(LoginRequest request){
         String userName = request.getUserName();
         if (this.userName.equals(userName) && this.password.equals(request.getPassword())){

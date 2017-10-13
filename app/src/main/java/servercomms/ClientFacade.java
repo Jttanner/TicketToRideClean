@@ -1,7 +1,11 @@
 package servercomms;
 
 import clientModel.CModel;
-import result.GameList;
+import modeling.Game;
+import modeling.User;
+import result.CommandResult;
+import result.GetGameCommandResult;
+import result.PlayerList;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -18,7 +22,45 @@ public class ClientFacade {
     private ClientFacade() {
     }
 
-    public void updateGameList(GameList games){
-        CModel.getInstance().setAllGames(games.getGames());
+   /* public void updateGameList(GameList games){
+        CModel.getInstance().setAllGames(games);
+    }*/
+
+    public void checkTypeOfCommand(CommandResult result) {
+        //This if means we have created a game(and we are joining)
+        //LinkedTreeMap<>
+        //LinkedTreeMap<String,Object> map = result.getData();
+       if(result.getData() instanceof Game){
+            if(((Game) result.getData()).canJoinGame()) {
+                CModel.getInstance().setCurrGame((Game)result.getData());
+            }
+        }
+        else if(result instanceof GetGameCommandResult){
+            CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
+        }
+        else if(result.getType().equals("startGame")) {
+            CModel.getInstance().toggleGameHasStarted();
+            //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
+            //We don't need to worry about that logic here
+            //This else if does nothing. The server should send the start game command to the command manager
+            //Each client's poller should check the client manager to see when the game started.
+
+        }
+    }
+
+    public void updateUser(User user) {
+        CModel.getInstance().setMyUser(user);
+    }
+
+    public void updateCurrGame(Game game){
+        //this if means we have joined a game
+        if(game.canJoinGame()){
+            CModel.getInstance().setCurrGame(game);
+        }
+
+    }
+
+    public void updatePlayerList(PlayerList players){
+        CModel.getInstance().setAllPlayers(players.getPlayers());
     }
 }

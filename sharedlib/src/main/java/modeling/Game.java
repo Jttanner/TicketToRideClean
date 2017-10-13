@@ -15,6 +15,7 @@ public class Game {
         return gameName;
     }
 
+    //Comparing objects to see if they are truly equal
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -27,7 +28,10 @@ public class Game {
             return false;
         }
         Game oGame = (Game) o;
-        return this.gameID.equals(oGame.getGameID());
+        //All instance variables must match to return true
+        return (this.isHasStarted() == oGame.isHasStarted()) && (this.canJoinGame() && oGame.canJoinGame())
+                && (this.gameID.equals(oGame.getGameID())) && (this.gameName.equals(oGame.gameName))
+                && (this.getPlayerMax() == oGame.getPlayerMax()) && (this.players.equals(oGame.players));
     }
 
     private ArrayList<Player> players;

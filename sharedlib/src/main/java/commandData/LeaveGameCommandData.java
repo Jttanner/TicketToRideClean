@@ -7,11 +7,12 @@ import modeling.Player;
  * Created by Hwang on 10/4/2017.
  */
 
-public class LeaveGameCommandData {
+public class LeaveGameCommandData extends Command{
     private Game gameObject;
     private Player playerObject;
 
     public LeaveGameCommandData() {
+        setType("leaveGame");
     }
 
     public Game getGameObject() {
