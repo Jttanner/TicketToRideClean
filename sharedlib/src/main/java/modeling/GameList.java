@@ -2,6 +2,7 @@ package modeling;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import modeling.Game;
 
@@ -12,7 +13,8 @@ import modeling.Game;
 public class GameList {
 
     private List<Game> games;
-    private Map<String, Game> gameIDtoGame; //TODO: Should already have the gameID contained within the game though...
+    private List<Game> gamesStarted;
+    private Map<String, Game> gameIDtoGame;
 
     public boolean addGame(Game newGame){
         if (newGame != null) {
@@ -57,6 +59,50 @@ public class GameList {
         }
         return false;
     }
+
+    public boolean startGame(Game game){
+        //Find the game from the list of games
+        //Place that same game in the list of gamesStarted
+        //Delete the game from the general list of games
+        for (Game gameFound : games){
+            if(gameFound.equals(game)) {
+                gamesStarted.add(game);
+                games.remove(game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteGame(Game game){
+        for(Game gameFound : games) {
+            if (gameFound.equals(game)) {
+                games.remove(game);
+                return true;
+            }
+        }
+        for(Game gameFound : gamesStarted){
+            if (gameFound.equals(game)){
+                gamesStarted.remove(game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    public boolean leaveGame(Game game, Player player){
+        for(Game gameFound : games){
+            if(gameFound.equals(game)){
+                gameFound.removePlayer(player);
+            }
+        }
+        for(Game gameFound : gamesStarted){
+            if(gameFound.equals(game)){
+                gameFound.removePlayer(player);
+            }
+        }
+    }*/
 
     public Game findGame(String gameID){
         return gameIDtoGame.get(gameID); //TODO: Will this return the game that I want that's associated with GameID?

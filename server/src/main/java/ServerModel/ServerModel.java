@@ -70,6 +70,15 @@ public class ServerModel {
         return gameList.startGame(game);
     }
 
+    public boolean deleteGame(Game game){
+        return gameList.deleteGame(game);
+    }
+
+    /*
+    public boolean leaveGame(Game game, Player player){
+        return gameList.leaveGame(game);
+    }
+    */
 
     //(userName, User)
     public Map<String, User> getUsers() {

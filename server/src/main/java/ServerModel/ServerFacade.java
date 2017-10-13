@@ -178,9 +178,10 @@ public class ServerFacade {
 */
 
     public boolean startGame(Game game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
-        serverModel.startGame(game);
+        return serverModel.startGame(game);
     }
 
+    /*
     public boolean startGame(Game game){
         ServerModel serverModel = ServerModel.getInstance();
         if (serverModel.getGamesAsMap().containsKey(game.getGameID())){
@@ -193,7 +194,13 @@ public class ServerFacade {
             return false;
         }
     }
+    */
 
+    public boolean deleteGame(Game game){
+        return serverModel.deleteGame(game);
+    }
+
+    /*
     public boolean deleteGame(Game game){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
@@ -208,7 +215,15 @@ public class ServerFacade {
             return false;
         }
     }
+    */
 
+    /*
+    public boolean leaveGame(Game game, Player player){
+        return serverModel.deleteGame(game, player);
+    }*/
+
+
+    /*
     public boolean leaveGame(Game game, Player player){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(game.getGameID())){
@@ -223,6 +238,7 @@ public class ServerFacade {
             return false;
         }
     }
+    */
 
     public GameList getGameList(){
         return ServerModel.getInstance().getGames();
