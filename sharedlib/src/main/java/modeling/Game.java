@@ -74,9 +74,12 @@ public class Game {
     public void setGameName(String gameName) {
         this.gameName = gameName;
     }
-
+    /**This method determines if we can join a game by checking if adding a player would put us over the player max or
+     * if the game has already started or not
+     * @return boolean*/
     public boolean canJoinGame() {
-        return !hasStarted;
+        boolean stillCanJoin = players.size() >= 1 && players.size() <= playerMax;
+        return !hasStarted && stillCanJoin;
     }
 
     public ArrayList<Player> getPlayers() {
