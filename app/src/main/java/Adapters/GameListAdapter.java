@@ -114,7 +114,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         String players = "";
 
         for(Player each : currentGame.getPlayers()){
-            players += each.getName();
+            players += each.getPlayerName();
         }
         holder.players.setText(players);
         holder.inGame.setText(currentGame.getPlayers().size() + "/" + currentGame.getPlayerMax());

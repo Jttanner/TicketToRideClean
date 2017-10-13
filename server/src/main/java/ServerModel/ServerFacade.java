@@ -1,6 +1,5 @@
 package ServerModel;
 
-import java.awt.Color;
 import java.util.UUID;
 
 import modeling.Game;
@@ -110,7 +109,7 @@ public class ServerFacade {
                             break;
                     }
 
-                    newPlayer.setName(user.getInfo().getUserName());
+                    newPlayer.setPlayerName(user.getInfo().getUserName());
                     foundGame.addPlayer(newPlayer);
                     ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame);
                     user.addPlayer(newPlayer);
