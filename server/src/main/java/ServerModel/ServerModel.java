@@ -27,7 +27,7 @@ public class ServerModel {
     private ServerModel() {
     }
 
-    static ServerModel getInstance()
+    public static ServerModel getInstance()
     {
         if(instance == null){
             instance = new ServerModel();
@@ -36,17 +36,17 @@ public class ServerModel {
     }
 
     //(userName, User)
-    Map<String, User> getUsers() {
+    public Map<String, User> getUsers() {
         return users;
     }
 
     //(gameID, Game)
-    Map<String, Game> getGamesAsMap(){
+    public Map<String, Game> getGamesAsMap(){
         return games;
     }
 
     //Takes in the current list of games and returns a list of games that haven't started yet
-    GameList getGames() {
+    public GameList getGames() {
         List<Game> gameList = new ArrayList<>();
 
         for (Map.Entry<String, Game> game : getGamesAsMap().entrySet()){

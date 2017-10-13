@@ -1,7 +1,9 @@
 package command;
 
 import ServerModel.ServerFacade;
+import ServerModel.ServerModel;
 import commandData.JoinGameCommandData;
+import modeling.Game;
 import modeling.User;
 import result.CommandResult;
 
@@ -22,6 +24,7 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
         try {
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
             String gameID = this.getGameID();
+            Game game = ServerModel.getInstance().getGamesAsMap().get(gameID);
             boolean success = ServerFacade.getInstance().joinGame(getUser(),gameID);
             if(success) {
                 CommandResult result = new CommandResult(true, gameID, null);

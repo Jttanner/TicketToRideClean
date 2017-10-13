@@ -44,8 +44,9 @@ public class ClientFacade {
             //We don't need to worry about that logic here
             //This else if does nothing. The server should send the start game command to the command manager
             //Each client's poller should check the client manager to see when the game started.
-
         }
+        
+
     }
 
     public void updateUser(User user) {
