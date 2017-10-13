@@ -4,7 +4,7 @@ package result;
  * Created by tyler on 9/26/2017.
  */
 
-public class ResultObject  {
+public class ResultObject  implements Result{
 
     /*
     TODO: CAN SOMEONE PLEASE EXPLAIN TO ME WHY WE NEED THIS GAMELIST WITHIN OUR RESULT PACKAGE? I FEEL LIKE IT'S A LAZY WAY TO DO THIS

@@ -6,6 +6,7 @@ import commandData.JoinGameCommandData;
 import modeling.Game;
 import modeling.User;
 import result.CommandResult;
+import result.JoinGameCommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -27,12 +28,12 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
             Game game = ServerModel.getInstance().getGamesAsMap().get(gameID);
             boolean success = ServerFacade.getInstance().joinGame(getUser(),gameID);
             if(success) {
-                CommandResult result = new CommandResult(true, gameID, null);
+                CommandResult result = new CommandResult(true, new JoinGameCommandResult(gameID), null);
                 result.setType("joinGame");
                 return result;
             }
             else{
-                CommandResult result = new CommandResult(false,gameID,null);
+                CommandResult result = new CommandResult(false, new JoinGameCommandResult(gameID),null);
                 result.setType("joinGame");
                 return result;
             }

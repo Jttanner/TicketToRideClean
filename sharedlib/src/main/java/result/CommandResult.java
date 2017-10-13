@@ -4,7 +4,7 @@ package result;
  * Created by Hwang on 9/29/2017.
  */
 
-public class CommandResult {
+public class CommandResult implements Result {
 
     /*
     Packaged result for a Result. Able to handle any type of data since its contained within an object.
@@ -12,7 +12,7 @@ public class CommandResult {
     */
 
     private boolean success;
-    private Object data;
+    private Result data;
     private String message;
     private String type;
 
@@ -27,7 +27,7 @@ public class CommandResult {
     public CommandResult() {
     }
 
-    public CommandResult(boolean success, Object data, String errorInfo) {
+    public CommandResult(boolean success, Result data, String errorInfo) {
         this.success = success;
         this.data = data;
         this.message = errorInfo;
@@ -62,7 +62,7 @@ public class CommandResult {
         this.success = success;
     }
 
-    public void setData(Object data) {
+    public void setData(Result data) {
         this.data = data;
     }
 
