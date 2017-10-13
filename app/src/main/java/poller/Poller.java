@@ -27,7 +27,6 @@ public class Poller {
 
     private Poller(){
         try{
-            //this.URL = new URL("http://10.24.71.220:8080/user/command");
             command = new GetGameListCommandData();
         }catch (Exception e){
             e.printStackTrace();
@@ -88,7 +87,6 @@ public class Poller {
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
                 serverProxy.sendCommand(command);
-                //clientModel.setAllGames(serverProxy.getGameList(URL, command));
             }catch (Exception e){
                 Log.d(TAG,e.getMessage());
                 e.printStackTrace();
@@ -99,9 +97,7 @@ public class Poller {
         @Override
         protected void onPostExecute(Integer integer)
         {
-            //TODO: Receive the response from the Proxy
             super.onPostExecute(integer);
-           // ClientFacade.getInstance().updateGameList(gameList);
         }
     }
 }
