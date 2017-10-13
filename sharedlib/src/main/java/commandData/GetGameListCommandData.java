@@ -5,24 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modeling.Game;
+import modeling.GameList;
 
 /**
  * Created by Hwang on 9/29/2017.
  */
 
 public class GetGameListCommandData extends Command {
-    //We don't need it! WHY DON'T WE NEED IT???
-    private List<Game> gameListLobby;
+
+    private GameList gameListLobby;
 
     public GetGameListCommandData() {
         setType("getGameList");
     }
 
-    public List<Game> getGameListLobby() {
+    public GameList getGameListLobby() {
         return gameListLobby;
     }
 
-    public void setGameListLobby(ArrayList<Game> gameListLobby) {
+    public void setGameListLobby(GameList gameListLobby) {
         this.gameListLobby = gameListLobby;
     }
 }

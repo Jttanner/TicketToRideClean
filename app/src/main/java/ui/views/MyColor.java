@@ -25,7 +25,6 @@ public enum MyColor {
         color = c;
     }
 
-
     public int getColor() {
         return color;
     }
