@@ -60,9 +60,9 @@ public class ServerModel {
         return gameList.joinGame(user, gameID);
     }
 
-    /*public boolean startGame(Game game){
+    public boolean startGame(Game game){
         return gameList.startGame(game);
-    }*/
+    }
 
     public boolean deleteGame(Game game){
         return gameList.deleteGame(game);

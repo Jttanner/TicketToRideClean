@@ -23,7 +23,8 @@ public class LeaveGameCommand extends LeaveGameCommandData implements ICommand {
     @Override
     public CommandResult execute() {
 
-        boolean leaveCreatedSuccessful = ServerFacade.getInstance().leaveGame(gameObject, playerObject);
+       // boolean leaveCreatedSuccessful = ServerFacade.getInstance().leaveGame(gameObject, playerObject);
+        boolean leaveCreatedSuccessful = false;
         CommandResult result;
         if (leaveCreatedSuccessful) {
             result = new CommandResult(true);
