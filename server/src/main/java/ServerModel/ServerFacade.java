@@ -87,7 +87,7 @@ public class ServerFacade {
                 if(foundGame.getPlayers().size() > foundGame.getPlayerMax())
                     return false;
                 if (foundGame.canJoinGame()){
-                    Player newPlayer = new Player(user.getUserID());
+                    Player newPlayer = new Player(user.getUserName());
                     switch (foundGame.getPlayers().size()){
 
                         case 0:
