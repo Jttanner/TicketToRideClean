@@ -1,6 +1,5 @@
 package handler;
 
-import com.encoder.Encoder;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -18,7 +17,7 @@ import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
-import modeling.Game;
+import encoder.Encoder;
 import result.CommandResult;
 
 /**
@@ -39,8 +38,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
-                    CreateGameCommand realCommand = new CreateGameCommand(command.getGameObject());
-                    realCommand.setGameObject(command.getGameObject());
+                    CreateGameCommand realCommand = new CreateGameCommand(command.getGame());
                     result = realCommand.execute();
                     break;
                 case "joinGame":
@@ -54,17 +52,14 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;
                 case "startGame":
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
-                    StartGameCommand startGameCommand = new StartGameCommand((Game)startGameCommandData.getGame());
+                    StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData.getGame());
                     result = startGameCommand.execute();
                 default:
                     break;
             }
-//             result = word.execute();
-            //String jsonStr = gson.toJson(result);
             OutputStream respBody = exchange.getResponseBody();
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
             new Encoder().encode(result,exchange.getResponseBody());
-            //writeString(jsonStr, respBody);
             respBody.close();
         }
         catch (IOException e) {

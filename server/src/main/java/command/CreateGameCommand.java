@@ -10,10 +10,9 @@ import result.CommandResult;
  */
 
 public class CreateGameCommand extends CreateGameCommandData implements ICommand {
-    private Game mGame;
+    //private Game mGame;
     public CreateGameCommand(Game game) {
-        super();
-        mGame = game;
+        super(game);
         setType("createGame");
     }
 
@@ -21,10 +20,10 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
     public CommandResult execute() {
 
 
-        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGameObject());
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGame());
         CommandResult result;
         if (gameCreatedSuccessful) {
-            result = new CommandResult(true, mGame, "");
+            result = new CommandResult(true, this.getGame(), "");
             result.setType(this.getType());
             return result;
         } else {

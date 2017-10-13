@@ -27,8 +27,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     }
     @Override
     public void CreateGame(Game game) {
-        CreateGameCommandData command = new CreateGameCommandData();
-        command.setGameObject(game);
+        CreateGameCommandData command = new CreateGameCommandData(game);
         createdGame = game;
         ServerProxy.getInstance().sendCommand(command);
     }

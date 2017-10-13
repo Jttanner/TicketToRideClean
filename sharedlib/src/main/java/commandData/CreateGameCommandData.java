@@ -9,7 +9,9 @@ import modeling.Game;
 public class CreateGameCommandData extends Command {
     private Game game;
 
-    public CreateGameCommandData() {
+    public CreateGameCommandData(Game game)
+    {
+        this.game = game;
         setType("createGame");
     }
 

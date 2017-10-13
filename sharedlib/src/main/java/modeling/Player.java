@@ -55,4 +55,25 @@ public class Player implements Comparator<Player> {
     public int compare(Player player, Player other) {
         return Integer.parseInt(player.userID) - Integer.parseInt(other.userID);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Player)) {
+            return false;
+        }
+        Player oPlayer = (Player) o;
+        //All instance variables must match to return true
+        return (this.getColor().equals(oPlayer.getColor())) && (this.getUserID().equals(oPlayer.getUserID()))
+                && (this.getName().equals(oPlayer.getName()));
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 }

@@ -2,7 +2,7 @@ package command;
 
 import ServerModel.ServerFacade;
 import commandData.GetGameListCommandData;
-import result.CommandResult;
+import result.GetGameCommandResult;
 
 /**
  * Created by Hwang on 9/29/2017.
@@ -15,10 +15,10 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
     }
 
     @Override
-    public CommandResult execute() {
+    public GetGameCommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
 
-        CommandResult result = new CommandResult(true, facade.getGameList(), "Game List sent.");
+        GetGameCommandResult result = new GetGameCommandResult(true, facade.getGameList(), "Game List sent.");
         result.setType(this.getType());
         return result;
     }

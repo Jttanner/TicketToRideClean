@@ -1,6 +1,7 @@
 package presenters;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.Observable;
@@ -33,11 +34,13 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
             myView.get().updateWaitingRoom((Game)arg);
         }
         else if(arg instanceof Boolean && ((Boolean) arg)){
+            Toast.makeText(myView.get().getActivityContext(), "Start Game Success", Toast.LENGTH_SHORT).show();
             //TODO start the map activity
             //Intent intent = new Intent();
         }
     }
 
+    @Override
     public void startGame(StartGameCommandData startGameCommandData){
         try {
             //call the async task

@@ -1,13 +1,12 @@
-/*
+
 package result;
 
-*/
 /**
  * Created by tyler on 10/9/2017.
- *//*
+ */
 
 
-public class GetGameCommandResult extends  CommandResult {
+public class GetGameCommandResult extends CommandResult {
 
     /*
     * Will return the game result for the waiting lobby
@@ -25,4 +24,3 @@ public class GetGameCommandResult extends  CommandResult {
     }
 
 }
-*/

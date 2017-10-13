@@ -4,7 +4,7 @@ import clientModel.CModel;
 import modeling.Game;
 import modeling.User;
 import result.CommandResult;
-import result.GameList;
+import result.GetGameCommandResult;
 import result.PlayerList;
 
 /**
@@ -28,13 +28,15 @@ public class ClientFacade {
 
     public void checkTypeOfCommand(CommandResult result) {
         //This if means we have created a game(and we are joining)
-        if(result.getData() instanceof Game){
+        //LinkedTreeMap<>
+        //LinkedTreeMap<String,Object> map = result.getData();
+       if(result.getData() instanceof Game){
             if(((Game) result.getData()).canJoinGame()) {
                 CModel.getInstance().setCurrGame((Game)result.getData());
             }
         }
-        else if(result.getType().equals("getGameList")){
-            CModel.getInstance().setAllGames((GameList) result.getData());
+        else if(result instanceof GetGameCommandResult){
+            CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
         else if(result.getType().equals("startGame")) {
             CModel.getInstance().toggleGameHasStarted();

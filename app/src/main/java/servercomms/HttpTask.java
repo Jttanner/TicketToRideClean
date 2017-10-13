@@ -3,12 +3,12 @@ package servercomms;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.encoder.Encoder;
-
 import java.io.InputStream;
 import java.net.URL;
 
 import commandData.Command;
+import commandData.GetGameListCommandData;
+import encoder.Encoder;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -65,7 +65,10 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return encoder.decodeLoginResult(stream);
         } else if (request instanceof RegisterRequest) {
             return encoder.decodeRegisterResult(stream);
-        } else if(request instanceof Command){
+        } else if(request instanceof GetGameListCommandData){
+            return encoder.decodeGetGameResult(stream);
+        }
+        else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);
         }
         Log.d(TAG,"Yo things went wack, you gave us the wrong object type in the HttpTask");

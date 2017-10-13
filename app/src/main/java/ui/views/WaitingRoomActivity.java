@@ -1,7 +1,6 @@
 package ui.views;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,23 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
-import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
 import modeling.Game;
 import poller.Poller;
 import presenters.WaitingRoomPresenter;
-import result.GameList;
-import servercomms.ClientFacade;
-import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -37,7 +27,18 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     private Context mContext = this;
     //Button StartGameButton;
     private Button StartGameButton;
-    private WaitingRoomPresenter mPresenter;
+
+    @Override
+    public Context getAppContext() {
+        return getApplicationContext();
+    }
+
+    @Override
+    public Context getActivityContext() {
+        return mContext;
+    }
+
+    private MVP_WaitingRoom.RequiredPresenterOps mPresenter;
     private ListView playerListView;
     private PlayerListAdapter playerListAdapter;// = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
 
@@ -70,8 +71,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
                 StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
                 mPresenter.startGame(startGameCommandData);
                 //Check if it is valid. Go to new activity
-
-                Toast.makeText(mContext, "Start Game Success", Toast.LENGTH_SHORT).show();
 
             }
         });
