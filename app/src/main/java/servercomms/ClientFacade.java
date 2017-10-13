@@ -44,8 +44,11 @@ public class ClientFacade {
             //We don't need to worry about that logic here
             //This else if does nothing. The server should send the start game command to the command manager
             //Each client's poller should check the client manager to see when the game started.
-
         }
+        //This if is for joinGame, and the result.getData is the GameID for the game we are joining
+        else if(result.getType().equals("joinGame")){
+            CModel.getInstance().setCurrGame((String)result.getData());
+       }
     }
 
     public void updateUser(User user) {

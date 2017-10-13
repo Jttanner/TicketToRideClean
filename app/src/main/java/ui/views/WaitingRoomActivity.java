@@ -78,6 +78,8 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         playerListView.setAdapter(playerListAdapter);
     }
     @Override
+    /**Handles the updating of the playerlist in the listview
+     * @param Game THe game that may or may not have changed*/
     public void updateWaitingRoom(Game game) {
         Log.d(TAG,"updateWaitingRoom");
         playerListAdapter.setPlayerList(game.getPlayers());

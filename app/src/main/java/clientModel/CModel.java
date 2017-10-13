@@ -81,22 +81,36 @@ public class CModel extends Observable{
             Log.d(TAG,"You gave us a null user???");
         }
     }
-
+    /**This method updates the current game for the Playerlist as well as updating the GameList
+     * @param allGames THe games we got from the server*/
     public void setAllGames(GameList allGames) {
         this.allGames = allGames.getGames();
         for (Game g: this.allGames) {
             if (getCurrGame() != null && g.getGameID().equals(getCurrGame().getGameID())){
+                //Will notify the waiting room of new players
                 setCurrGame(g);
             }
         }
+        //will notify the gamelist of games made/changed
         setChanged();
         notifyObservers(new GameList(this.allGames));
     }
-
+    /**Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
+     * make it
+     * @param currGame  The game that was just made*/
     public void setCurrGame(Game currGame) {
         this.currGame = currGame;
         setChanged();
         notifyObservers(this.currGame);
+    }
+    /**Sets the current game for the user. takes a gameID from the server to do so
+     * @param gameID  THe gameID*/
+    public void setCurrGame(String gameID) {
+        for (Game g:allGames) {
+            if(g.getGameID().equals(gameID)){
+                setCurrGame(g);
+            }
+        }
     }
 
     public void setAllPlayers(Set<Player> allPlayers) {

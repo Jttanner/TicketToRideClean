@@ -72,7 +72,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 if(g.getGameName().equals(name.getText().toString())){
                     selectedGame = g;
                     presenter.JoinGame(selectedGame);
-                    //TODO YO  here is your problem, you need to call the server FIRST before updating model
                     return;
                 }
             }
