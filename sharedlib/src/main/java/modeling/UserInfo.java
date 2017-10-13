@@ -8,16 +8,16 @@ import request.LoginRequest;
 
 public class UserInfo {
 
-    public UserInfo(String userName, String password, String userID){
-        this.userName = userName;
-        this.password = password;
-        this.userID = userID;
-    }
-
     private String userName;
     private String password;
-    private String userID;
 
+    public UserInfo() {
+    }
+
+    public UserInfo(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
 
     //Authorizing that the username and password are correct
     public boolean checkUserInfo(LoginRequest request){
@@ -39,4 +39,11 @@ public class UserInfo {
         return password;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

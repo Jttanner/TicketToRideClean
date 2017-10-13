@@ -26,6 +26,10 @@ import result.CommandResult;
 
 public class CommandHandler extends BaseHandler implements HttpHandler {
 
+    /*
+    All commands will come through here and be sorted out. Results will
+     */
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try {
@@ -47,6 +51,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = joinGameCommand.execute();
                     break;
                 case "getGameList":
+
                     GetGameListCommand getGameListCommand = new GetGameListCommand();
                     result = getGameListCommand.execute();
                     break;

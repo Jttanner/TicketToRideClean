@@ -6,6 +6,7 @@ import modeling.Game;
 import modeling.Player;
 import modeling.User;
 import modeling.UserInfo;
+import modeling.UserInfoList;
 import request.LoginRequest;
 import request.RegisterRequest;
 import modeling.GameList;
@@ -19,10 +20,12 @@ import result.RegisterResult;
 public class ServerFacade {
 
     /*
-    *The backbone of the Server: will execute functionality and create interaction between the ServerModel and the Handlers
+    *The organizer/task distributer of the server: Receives the variables from the commands and sends them through to the Model
+    * Receives the results from the model and pushes it back to the client.
      */
 
     private static ServerFacade instance = null;
+    private static ServerModel serverModel = ServerModel.getInstance();
 
     public static ServerFacade getInstance()
     {
@@ -31,7 +34,38 @@ public class ServerFacade {
         }
         return instance;
     }
+/*
+    public LoginResult login(LoginRequest request){
+        UserInfoList userInfoList = new UserInfoList();
+        UserInfo matches = userInfoList.login(request.getUserName(), request.getPassword());
+        if(matches != null){
+            return new LoginResult(true, "login sucess!", user);
+        }
+        else{
+            return new LoginResult(false, "login failed.");
+        }
+    }
+*/
+    public LoginResult login(LoginRequest request){
+        boolean success = serverModel.login(request.getUserName(), request.getPassword());
+        if(success == true){
+            return new LoginResult(true, "login success!");
+        }
+        else{
+            return new LoginResult(false, "login failed.");
+        }
+    }
 
+    public RegisterResult register(RegisterRequest request){
+        User user = serverModel.register(request.getUserName(), request.getPassword());
+        if (user != null){
+            return new RegisterResult(true, "Successfully Registered", user); //TODO: Do we even need to give you a USER??
+        }
+        else{
+            return new RegisterResult(false, "Failed to Register.", null);
+        }
+    }
+/*
     public LoginResult login(LoginRequest request){
 
         try{
@@ -46,8 +80,9 @@ public class ServerFacade {
             return new LoginResult(false, "login failed.");
         }
 
-    }
+    }*/
 
+/*
     public RegisterResult register(RegisterRequest request){
         String userName = request.getUserName();
         String password = request.getPassword();
@@ -60,15 +95,20 @@ public class ServerFacade {
             return new RegisterResult(false, "Failed to Register.", null);
         }
     }
-
-    //Checks to see if it's a valid username and password, and if the username is not already contained in the database
+    */
+    //TODO: Don't need this validRegister anymore! Yay! It's checked in the UserInfoList!
+    /*
     private boolean validRegister(RegisterRequest request) {
         String userName = request.getUserName();
         return  request.getPassword().length() > 0
                 && userName.length() > 0
                 && (!ServerModel.getInstance().getUsers().containsKey(userName));
-    }
+    }*/
 
+    public boolean createGame(Game newGame){
+        return serverModel.createGame(newGame);
+    }
+/*
     public boolean createGame(Game newGame){
         try{
             ServerModel.getInstance().getGamesAsMap().put(newGame.getGameID(), newGame);
@@ -79,7 +119,14 @@ public class ServerFacade {
             return false;
         }
     }
+*/
 
+    public boolean joinGame(User user, String gameID)
+    {
+        return serverModel.joinGame(user, gameID);
+    }
+
+    /*
     public boolean joinGame(User user, String gameID){
         try{
             if (ServerModel.getInstance().getGamesAsMap().containsKey(gameID)){
@@ -127,6 +174,11 @@ public class ServerFacade {
             e.printStackTrace();
         }
         return false;
+    }
+*/
+
+    public boolean startGame(Game game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
+        serverModel.startGame(game);
     }
 
     public boolean startGame(Game game){
