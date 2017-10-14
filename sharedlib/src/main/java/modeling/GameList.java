@@ -31,8 +31,15 @@ public class GameList {
 
     public boolean joinGame(User user, String gameID){
         Game existingGame = findGame(gameID);
-        if (existingGame.getPlayers().size() >= existingGame.getPlayerMax()){
+        List<Player> existingGamePlayers = existingGame.getPlayers();
+        if (existingGame.getPlayers().size() >= existingGame.getPlayerMax()){ //Checks the player max
             return false;
+        }
+        for (Player foundPlayer : existingGamePlayers)
+        {
+            if (foundPlayer.getUserName().equals(user.getUserName())){
+                return true;
+            }
         }
         if (!existingGame.isHasStarted()){
             Player newPlayer = new Player(user.getUserName());

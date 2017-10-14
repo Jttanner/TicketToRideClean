@@ -80,18 +80,19 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     public void UpdateList(List<Game> list) {
         if(list != null){
             //This will do stuffs
+            /*
             List<Game> games = radapter.getGames();
             for(Game g : list){
                 if(!(games.contains(g)) && !(g.isHasStarted())){
                     games.add(g);
                 }
             }
-
+*/
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
             recyclerView.setLayoutManager(linearLayoutManager);
-            radapter = new GameListAdapter(games, presenter);
+            radapter = new GameListAdapter(CModel.getInstance().getAllGames(), presenter);
 
 
             //radapter.setList(games);
