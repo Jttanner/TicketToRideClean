@@ -28,12 +28,14 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
             Game game = ServerModel.getInstance().getGamesAsMap().get(gameID);
             boolean success = ServerFacade.getInstance().joinGame(getUser(),gameID);
             if(success) {
-                CommandResult result = new CommandResult(true, new JoinGameCommandResult(gameID), null);
+                CommandResult result = new JoinGameCommandResult(gameID);
                 result.setType("joinGame");
+                result.setSuccess(true);
                 return result;
             }
             else{
-                CommandResult result = new CommandResult(false, new JoinGameCommandResult(gameID),null);
+                CommandResult result = new JoinGameCommandResult(gameID);
+                result.setSuccess(false);
                 result.setType("joinGame");
                 return result;
             }

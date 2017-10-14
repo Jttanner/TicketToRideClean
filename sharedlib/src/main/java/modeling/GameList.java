@@ -22,8 +22,10 @@ public class GameList {
     public boolean addGame(Game newGame){
         if (newGame != null && !games.contains(newGame)) {
             games.add(newGame);
+            gameIDtoGame.put(newGame.getGameID(),newGame);
             return true;
         }
+
         return false;
     }
 

@@ -134,6 +134,7 @@ public class CModel extends Observable {
         for (Game g : allGames) {
             if (g.getGameID().equals(gameID)) {
                 setCurrGame(g);
+                return;
             }
         }
     }

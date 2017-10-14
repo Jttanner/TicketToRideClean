@@ -44,16 +44,16 @@ class ClientFacade {
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
        //This if is for joinGame, and the result.getData is the GameID for the game we are joining
-       else if(result.getData() instanceof JoinGameCommandResult){
+       else if(result instanceof JoinGameCommandResult){
            CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGameId());
        }
-        else if(result.getType().equals("startGame")) {
-            CModel.getInstance().toggleGameHasStarted();
-            //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
-            //We don't need to worry about that logic here
-            //This else if does nothing. The server should send the start game command to the command manager
-            //Each client's poller should check the client manager to see when the game started.
-        }
+//        else if(result.getType().equals("startGame")) {
+//            CModel.getInstance().toggleGameHasStarted();
+//            //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
+//            //We don't need to worry about that logic here
+//            //This else if does nothing. The server should send the start game command to the command manager
+//            //Each client's poller should check the client manager to see when the game started.
+//        }
 
        else{
            Log.d(TAG,"We got a different class then expected");
