@@ -14,6 +14,7 @@ import request.RegisterRequest;
 import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
+import result.Result;
 import result.ResultObject;
 
 /**
@@ -78,6 +79,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     @Override
     protected void onPostExecute(Object result) {//gets us back on the main thread
         Log.d("onPostExecute", "Entering onPostExecute");
+        //result = (Result)result;
         super.onPostExecute(result);
         if (result instanceof LoginResult) {
             ClientFacade.getInstance().updateUser(((LoginResult) result).getUser());
