@@ -29,9 +29,11 @@ public class Game {
         }
         Game oGame = (Game) o;
         //All instance variables must match to return true
-        return (this.isHasStarted() == oGame.isHasStarted()) && (this.canJoinGame() && oGame.canJoinGame())
-                && (this.gameID.equals(oGame.getGameID())) && (this.gameName.equals(oGame.gameName))
-                && (this.getPlayerMax() == oGame.getPlayerMax()) && (this.players.equals(oGame.players));
+        boolean bool = (this.isHasStarted() == oGame.isHasStarted()) && (this.gameID.equals(oGame.getGameID()))
+                && (this.gameName.equals(oGame.gameName))
+                && (this.getPlayerMax() == oGame.getPlayerMax())
+                && (this.players.equals(oGame.players));
+        return bool;
     }
 
     private ArrayList<Player> players;

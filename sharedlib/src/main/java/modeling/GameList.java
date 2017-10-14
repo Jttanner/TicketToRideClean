@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.print.DocFlavor;
-
-import modeling.Game;
 
 /**
  * Created by tyler on 10/8/2017.
@@ -25,7 +20,7 @@ public class GameList {
     }
 
     public boolean addGame(Game newGame){
-        if (newGame != null) {
+        if (newGame != null && !games.contains(newGame)) {
             games.add(newGame);
             return true;
         }

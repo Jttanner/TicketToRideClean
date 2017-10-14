@@ -48,6 +48,7 @@ public class ServerModel {
     }
 
     boolean createGame(Game newGame){
+        //if the game has not already been made
         return gameList.addGame(newGame);
     }
 

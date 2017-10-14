@@ -109,9 +109,7 @@ public class CModel extends Observable {
             }
             //will notify the gamelist activity of games made/changed
             setChanged();
-            GameList wrapperGameList = new GameList();
-            wrapperGameList.setGames(this.allGames);
-            notifyObservers(wrapperGameList);
+            notifyObservers(allGames);
         }
     }
 
