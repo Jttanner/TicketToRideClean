@@ -8,10 +8,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import MVP_coms_classes.MVP_GameList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
 import modeling.User;
+import presenters.GameListPresenter;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -49,6 +51,15 @@ public class CModel extends Observable {
     private CModel() {
     }
 
+    private GameListPresenter gameListPresenter;
+
+    public GameListPresenter getGameListPresenter() {
+        return gameListPresenter;
+    }
+
+    public void setGameListPresenter(GameListPresenter gameListPresenter) {
+        this.gameListPresenter = gameListPresenter;
+    }
     /*public void addGame(Game game){
         this
     }*/
@@ -121,6 +132,7 @@ public class CModel extends Observable {
      */
     public void setCurrGame(Game currGame) {
         this.currGame = currGame;
+        gameListPresenter.JoinGameResult();
         setChanged();
         notifyObservers(this.currGame);
     }
@@ -134,6 +146,7 @@ public class CModel extends Observable {
         for (Game g : allGames) {
             if (g.getGameID().equals(gameID)) {
                 setCurrGame(g);
+
                 return;
             }
         }

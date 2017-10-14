@@ -91,7 +91,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
             recyclerView.setLayoutManager(linearLayoutManager);
-            radapter = new GameListAdapter(games, presenter);
+            radapter = new GameListAdapter(CModel.getInstance().getAllGames(), presenter);
 
 
             //radapter.setList(games);

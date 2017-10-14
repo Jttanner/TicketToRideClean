@@ -23,6 +23,7 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     public GameListPresenter(MVP_GameList.GameListActivityInterface view){
         myView = new WeakReference<>(view);
+        CModel.getInstance().setGameListPresenter(this);
         CModel.getInstance().addObserver(this);
     }
     @Override
@@ -41,6 +42,9 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
         ServerProxy.getInstance().sendCommand(data);
 
 
+    }
+    public void JoinGameResult(){
+        myView.get().JoinGameResult(CModel.getInstance().getCurrGame());
     }
 
     /*@Override
