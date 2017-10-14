@@ -4,7 +4,7 @@ package result;
  * Created by Hwang on 9/29/2017.
  */
 
-public class CommandResult implements Result {
+public class CommandResult extends Result {
 
     /*
     Packaged result for a Result. Able to handle any type of data since its contained within an object.
