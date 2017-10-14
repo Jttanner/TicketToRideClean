@@ -1,15 +1,11 @@
 package ServerModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import modeling.Game;
 import modeling.GameList;
-import modeling.Player;
 import modeling.User;
-import modeling.UserInfo;
 import modeling.UserInfoList;
 
 /**
@@ -41,30 +37,29 @@ public class ServerModel {
         return instance;
     }
 
-    public User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
+    User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
 
         return userInfoList.register(userName, password);
     }
 
-    public boolean login(String userName, String password){
-        UserInfo matches = userInfoList.login(userName, password);
+    User login(String userName, String password){
         //If the account exists and matches with one in the database...
-        return (matches != null);
+        return userInfoList.login(userName, password);
     }
 
-    public boolean createGame(Game newGame){
+    boolean createGame(Game newGame){
         return gameList.addGame(newGame);
     }
 
-    public boolean joinGame(User user, String gameID){
+    boolean joinGame(User user, String gameID){
         return gameList.joinGame(user, gameID);
     }
 
-    public boolean startGame(Game game){
+    boolean startGame(Game game){
         return gameList.startGame(game);
     }
 
-    public boolean deleteGame(Game game){
+    boolean deleteGame(Game game){
         return gameList.deleteGame(game);
     }
 
@@ -85,7 +80,7 @@ public class ServerModel {
     }
 
     //Takes in the current list of games and returns a list of games that haven't started yet
-    public GameList getGames() {
+    GameList getGames() {
         //List<Game> gameList = new ArrayList<>();
 
         /*

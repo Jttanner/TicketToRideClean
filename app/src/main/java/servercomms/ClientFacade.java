@@ -6,7 +6,9 @@ import clientModel.CModel;
 import modeling.Game;
 import modeling.User;
 import result.CommandResult;
+import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
+import result.JoinGameCommandResult;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -30,14 +32,21 @@ class ClientFacade {
 
     void checkTypeOfCommand(CommandResult result) {
         //This if means we have created a game(and we are joining)
-       if(result.getData() instanceof Game){
-            if(((Game) result.getData()).canJoinGame()) {
+       if(result instanceof CreateGameCommandResult){
+           //add the game to the gamelist
+           CModel.getInstance().addGame(((CreateGameCommandResult) result).getGame());
+           //now join the game, if possible
+            if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
                 CModel.getInstance().setCurrGame((Game)result.getData());
             }
         }
         else if(result instanceof GetGameCommandResult){
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
+       //This if is for joinGame, and the result.getData is the GameID for the game we are joining
+       else if(result instanceof JoinGameCommandResult){
+           CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGameId());
+       }
         else if(result.getType().equals("startGame")) {
             CModel.getInstance().toggleGameHasStarted();
             //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
@@ -45,12 +54,9 @@ class ClientFacade {
             //This else if does nothing. The server should send the start game command to the command manager
             //Each client's poller should check the client manager to see when the game started.
         }
-        //This if is for joinGame, and the result.getData is the GameID for the game we are joining
-        else if(result.getType().equals("joinGame")){
-            CModel.getInstance().setCurrGame((String)result.getData());
-       }
+
        else{
-           Log.d(TAG,"We got a different class thn expected");
+           Log.d(TAG,"We got a different class then expected");
        }
     }
 

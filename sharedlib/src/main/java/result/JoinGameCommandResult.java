@@ -7,11 +7,14 @@ package result;
 
 public class JoinGameCommandResult extends CommandResult {
 
-    String gameId;
+    private String gameId;
 
     public JoinGameCommandResult(String gameId){
         super();
         this.gameId = gameId;
     }
 
+    public String getGameId() {
+        return gameId;
+    }
 }

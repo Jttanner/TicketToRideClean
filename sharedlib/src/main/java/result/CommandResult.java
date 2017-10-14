@@ -41,11 +41,6 @@ public class CommandResult implements Result {
         this.success = success;
     }
 
-    public CommandResult(String type, boolean success){
-        this.success = success;
-        this.type = type;
-    }
-
     public boolean isSuccess() {
         return success;
     }

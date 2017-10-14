@@ -14,8 +14,8 @@ public class LoginResult extends ResultObject {
 
     private User user;
 
-    public LoginResult(boolean success, String errorMessage, User user) {
-        super(success, user.getInfo().getUserName(), errorMessage);
+    public LoginResult(boolean success, String message, User user) {
+        super(success, user.getInfo().getUserName(), message);
         this.user = user;
     }
 

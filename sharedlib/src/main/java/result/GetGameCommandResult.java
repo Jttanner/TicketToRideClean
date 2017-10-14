@@ -20,6 +20,9 @@ public class GetGameCommandResult extends CommandResult {
         super(success,errorInfo);
         this.gameList = gameList;
     }
+    public GetGameCommandResult(boolean success, String errorInfo) {
+        super(success,errorInfo);
+    }
 
     public GameList getGameList() {
         return gameList;

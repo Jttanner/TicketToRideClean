@@ -9,11 +9,14 @@ import modeling.Game;
 
 public class CreateGameCommandResult extends CommandResult {
 
-    Game game;
+    private Game game;
 
     public CreateGameCommandResult(Game game){
         super();
         this.game = game;
     }
 
+    public Game getGame() {
+        return game;
+    }
 }

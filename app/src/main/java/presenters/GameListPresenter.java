@@ -66,10 +66,12 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     @Override
     public void update(Observable o, Object arg) {
+        //For updating the game list we will have a gamelist sent
         if(arg instanceof GameList){
             GameList games = (GameList) arg;
             myView.get().UpdateList(games.getGames());
         }
+        //For join game we will get a game sent to us
         else if(arg instanceof Game){
             myView.get().JoinGameResult((Game)arg);
         }
