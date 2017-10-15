@@ -7,14 +7,15 @@ import java.io.InputStream;
 import java.net.URL;
 
 import commandData.Command;
+import commandData.CreateGameCommandData;
 import commandData.GetGameListCommandData;
+import commandData.JoinGameCommandData;
 import encoder.Encoder;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
-import result.Result;
 import result.ResultObject;
 
 /**
@@ -68,6 +69,12 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return encoder.decodeRegisterResult(stream);
         } else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
+        }
+        else if(request instanceof CreateGameCommandData){
+            return encoder.decodeCreateResult(stream);
+        }
+        else if(request instanceof JoinGameCommandData){
+            return encoder.decodeJoinCommandResult(stream);
         }
         else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);

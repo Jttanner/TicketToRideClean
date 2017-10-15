@@ -10,7 +10,9 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 
 import result.CommandResult;
+import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
+import result.JoinGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -82,4 +84,21 @@ public class Encoder {
         }
     }
 
+    public CreateGameCommandResult decodeCreateResult(InputStream stream) {
+        try {
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, CreateGameCommandResult.class);
+        }catch (Exception e){
+            return new CreateGameCommandResult(false,e.getMessage());
+        }
+    }
+
+    public JoinGameCommandResult decodeJoinCommandResult(InputStream stream) {
+        try {
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, JoinGameCommandResult.class);
+        }catch (Exception e){
+            return new JoinGameCommandResult(false,e.getMessage());
+        }
+    }
 }

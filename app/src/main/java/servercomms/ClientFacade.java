@@ -32,7 +32,7 @@ class ClientFacade {
 
     void checkTypeOfCommand(CommandResult result) {
         //This if means we have created a game(and we are joining)
-       if(result.getData() instanceof CreateGameCommandResult){
+       if(result instanceof CreateGameCommandResult){
            //add the game to the gamelist
            CModel.getInstance().addGame(((CreateGameCommandResult) result).getGame());
            //now join the game, if possible

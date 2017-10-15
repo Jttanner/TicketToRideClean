@@ -11,12 +11,17 @@ public class CreateGameCommandResult extends CommandResult {
 
     private Game game;
 
-    public CreateGameCommandResult(Game game){
-        super();
+    public CreateGameCommandResult(boolean success, Game game){
+        super(success);
         this.game = game;
+    }
+
+    public CreateGameCommandResult(boolean success,String error){
+        super(success,error);
     }
 
     public Game getGame() {
         return game;
     }
+
 }

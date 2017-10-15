@@ -14,6 +14,10 @@ public class JoinGameCommandResult extends CommandResult {
         this.gameId = gameId;
     }
 
+    public JoinGameCommandResult(boolean failed,String error){
+        super(failed,error);
+    }
+
     public String getGameId() {
         return gameId;
     }
