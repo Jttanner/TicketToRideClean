@@ -11,6 +11,7 @@ import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
 import commandData.StartGameCommandData;
 import modeling.Game;
+import modeling.GameList;
 import servercomms.ServerProxy;
 
 import static android.content.ContentValues.TAG;
@@ -32,6 +33,14 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
         //TODO if the currGames players change
         if(arg instanceof Game){
             myView.get().updateWaitingRoom((Game)arg);
+        }
+        else if(arg instanceof GameList){
+            //Look for the current game in the list and update the waiting room with it
+            for (Game g: ((GameList) arg).getGames()) {
+                if(g.getGameID().equals(CModel.getInstance().getCurrGame().getGameID())){
+                    myView.get().updateWaitingRoom(g);
+                }
+            }
         }
         else if(arg instanceof Boolean && ((Boolean) arg)){
             Toast.makeText(myView.get().getActivityContext(), "Start Game Success", Toast.LENGTH_SHORT).show();
