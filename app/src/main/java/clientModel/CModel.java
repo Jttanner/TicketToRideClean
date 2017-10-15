@@ -117,12 +117,17 @@ public class CModel extends Observable {
 
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
-     * make it
+     * make it. This method is used when we join a game
      *
      * @param currGame The game that was just made
      */
     public void setCurrGame(Game currGame) {
+        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
+        allGames.remove(this.currGame);
+        //set currGame
         this.currGame = currGame;
+        //add currgame to list
+        allGames.add(currGame);
         setChanged();
         notifyObservers(this.currGame);
     }
