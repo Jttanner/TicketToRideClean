@@ -116,7 +116,7 @@ public class ServerFacade {
     }
 */
 
-    public boolean joinGame(User user, String gameID)
+    public Game joinGame(User user, String gameID)
     {
         return serverModel.joinGame(user, gameID);
     }

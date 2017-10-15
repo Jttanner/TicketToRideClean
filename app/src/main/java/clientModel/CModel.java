@@ -8,12 +8,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
-import MVP_coms_classes.MVP_GameList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
 import modeling.User;
-import presenters.GameListPresenter;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -49,16 +47,6 @@ public class CModel extends Observable {
      */
     //private Set<Observer> observerSet = new TreeSet<>();
     private CModel() {
-    }
-
-    private GameListPresenter gameListPresenter;
-
-    public GameListPresenter getGameListPresenter() {
-        return gameListPresenter;
-    }
-
-    public void setGameListPresenter(GameListPresenter gameListPresenter) {
-        this.gameListPresenter = gameListPresenter;
     }
     /*public void addGame(Game game){
         this
@@ -116,6 +104,9 @@ public class CModel extends Observable {
 
             //Updating the player list
             if (currGame != null) {
+                /*TODO Issues here with looping. SetCurrGame is called when we join a game but the poller is never stopped so we keep
+                setting the game over and over again which also sends a game to the observors which causes start game to be started until
+                we run out of memory i guess*/
                 setCurrGame(allGames.findGame(currGame.getGameID()));
             }
             //will notify the gamelist activity of games made/changed
@@ -132,24 +123,8 @@ public class CModel extends Observable {
      */
     public void setCurrGame(Game currGame) {
         this.currGame = currGame;
-        gameListPresenter.JoinGameResult();
         setChanged();
         notifyObservers(this.currGame);
-    }
-
-    /**
-     * Sets the current game for the user. takes a gameID from the server to do so
-     *
-     * @param gameID THe gameID
-     */
-    public void setCurrGame(String gameID) {
-        for (Game g : allGames) {
-            if (g.getGameID().equals(gameID)) {
-                setCurrGame(g);
-
-                return;
-            }
-        }
     }
 
     @Override

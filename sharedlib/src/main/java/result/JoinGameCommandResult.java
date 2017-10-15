@@ -1,24 +1,26 @@
 package result;
 
 
+import modeling.Game;
+
 /**
  * Created by jontt on 10/13/2017.
  */
 
 public class JoinGameCommandResult extends CommandResult {
 
-    private String gameId;
+    private Game game;
 
-    public JoinGameCommandResult(String gameId){
-        super();
-        this.gameId = gameId;
+    public JoinGameCommandResult(boolean success,Game game){
+        super(success);
+        this.game = game;
     }
 
     public JoinGameCommandResult(boolean failed,String error){
         super(failed,error);
     }
 
-    public String getGameId() {
-        return gameId;
+    public Game getGame() {
+        return game;
     }
 }

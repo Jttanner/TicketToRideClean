@@ -18,55 +18,26 @@ import servercomms.ServerProxy;
 
 public class GameListPresenter implements MVP_GameList.GameListPresenterInterface,Observer {
     private WeakReference<MVP_GameList.GameListActivityInterface> myView;
-    private Game createdGame;
     public GameListPresenter(){}
 
     public GameListPresenter(MVP_GameList.GameListActivityInterface view){
         myView = new WeakReference<>(view);
-        CModel.getInstance().setGameListPresenter(this);
         CModel.getInstance().addObserver(this);
     }
     @Override
     public void CreateGame(Game game) {
         CreateGameCommandData command = new CreateGameCommandData(game);
-        createdGame = game;
         ServerProxy.getInstance().sendCommand(command);
     }
 
 
     @Override
     public void JoinGame(Game game) {
-        //CModel.getInstance().setCurrGame(game);
-        createdGame = game;
         JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
         ServerProxy.getInstance().sendCommand(data);
 
 
     }
-    public void JoinGameResult(){
-        myView.get().JoinGameResult(CModel.getInstance().getCurrGame());
-    }
-
-    /*@Override
-    public void checkCommandSuccess(CommandResult r) {
-        if(r != null && r.isSuccess()) {
-            switch (r.getType()) {
-                case "createGame":
-                    CModel.getInstance().addGame(createdGame);
-                    CModel.getInstance().setCurrGame(createdGame);
-                    this.JoinGame(createdGame);
-                    break;
-                case "joinGame":
-                    myView.get().JoinGameResult(createdGame);
-                    break;
-                default:
-                    break;
-            }
-        }*/
-
-        //TODO check the success of any given command and do something with it
-
-    //}
 
     @Override
     public void update(Observable o, Object arg) {

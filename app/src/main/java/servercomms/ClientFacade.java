@@ -3,7 +3,6 @@ package servercomms;
 import android.util.Log;
 
 import clientModel.CModel;
-import modeling.Game;
 import modeling.User;
 import result.CommandResult;
 import result.CreateGameCommandResult;
@@ -36,16 +35,16 @@ class ClientFacade {
            //add the game to the gamelist
            CModel.getInstance().addGame(((CreateGameCommandResult) result).getGame());
            //now join the game, if possible
-            if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
-                CModel.getInstance().setCurrGame((Game)result.getData());
-            }
+            /*if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
+                CModel.getInstance().setCurrGame(((CreateGameCommandResult) result).getGame());
+            }*/
         }
         else if(result instanceof GetGameCommandResult){
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
        //This if is for joinGame, and the result.getData is the GameID for the game we are joining
        else if(result instanceof JoinGameCommandResult){
-           CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGameId());
+           CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
        }
 //        else if(result.getType().equals("startGame")) {
 //            CModel.getInstance().toggleGameHasStarted();

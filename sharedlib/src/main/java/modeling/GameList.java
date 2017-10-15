@@ -29,19 +29,9 @@ public class GameList {
         return false;
     }
 
-    public boolean joinGame(User user, String gameID){
+    public Game joinGame(User user, String gameID){
         Game existingGame = findGame(gameID);
-        List<Player> existingGamePlayers = existingGame.getPlayers();
-        if (existingGame.getPlayers().size() >= existingGame.getPlayerMax()){ //Checks the player max
-            return false;
-        }
-        for (Player foundPlayer : existingGamePlayers)
-        {
-            if (foundPlayer.getUserName().equals(user.getUserName())){
-                return true;
-            }
-        }
-        if (!existingGame.isHasStarted()){
+        if (existingGame.canJoinGame()){ //Checks the player max
             Player newPlayer = new Player(user.getUserName());
             switch (existingGame.getPlayers().size()){
                 case 0:
@@ -64,12 +54,11 @@ public class GameList {
             }
             newPlayer.setPlayerName(user.getInfo().getUserName());
             existingGame.addPlayer(newPlayer);
-            //ServerModel.getInstance().getGamesAsMap().put(foundGame.getGameID(),foundGame); //TODO: Don't need this since it's already in the map
             user.addPlayer(newPlayer);
             user.addGame(existingGame);
-            return true;
+
         }
-        return false;
+        return existingGame;
     }
 
     public boolean startGame(Game game){

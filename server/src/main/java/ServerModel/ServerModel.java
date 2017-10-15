@@ -52,7 +52,7 @@ public class ServerModel {
         return gameList.addGame(newGame);
     }
 
-    boolean joinGame(User user, String gameID){
+    Game joinGame(User user, String gameID){
         return gameList.joinGame(user, gameID);
     }
 
