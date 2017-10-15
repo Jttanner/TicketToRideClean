@@ -5,7 +5,6 @@ import android.util.Log;
 import clientModel.CModel;
 import modeling.User;
 import result.CommandResult;
-import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 
@@ -30,16 +29,17 @@ class ClientFacade {
     }*/
 
     void checkTypeOfCommand(CommandResult result) {
+        //TODO So i took out the if statement for handling the result when we create a game. Because honestly the poller gets it for us already
         //This if means we have created a game(and we are joining)
-       if(result instanceof CreateGameCommandResult){
+       /*if(result instanceof CreateGameCommandResult){
            //add the game to the gamelist
            CModel.getInstance().addGame(((CreateGameCommandResult) result).getGame());
            //now join the game, if possible
-            /*if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
+            *//*if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
                 CModel.getInstance().setCurrGame(((CreateGameCommandResult) result).getGame());
-            }*/
-        }
-        else if(result instanceof GetGameCommandResult){
+            }*//*
+        }*/
+        if(result instanceof GetGameCommandResult){
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
        //This if is for joinGame, and the result.getData is the GameID for the game we are joining

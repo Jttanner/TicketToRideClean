@@ -20,7 +20,8 @@ public class Poller {
     CModel clientModel = CModel.getInstance();
     //URL URL;
     GetGameListCommandData command;
-    Timer timer = new Timer();
+    //Timer needs to be static or else it will cancel another instance of the Timer class
+    private static Timer timer;
     private final String TAG = "Poller";
 
     private static Poller instance = new Poller();
@@ -42,6 +43,7 @@ public class Poller {
     }
 
     public void updateGameList() {
+        timer = new Timer();
         //final Handler handler = new Handler();
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
@@ -70,6 +72,7 @@ public class Poller {
     public void stopPoller(){
         if(timer != null){
             timer.cancel();
+            timer = null;
         }
     }
 

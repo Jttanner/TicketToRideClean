@@ -15,6 +15,11 @@ public class CreateGameCommandData extends Command {
         setType("createGame");
     }
 
+    public CreateGameCommandData()
+    {
+        setType("createGame");
+    }
+
     public Game getGame() {
         return game;
     }

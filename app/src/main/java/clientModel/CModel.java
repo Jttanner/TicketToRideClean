@@ -71,19 +71,21 @@ public class CModel extends Observable {
         notifyObservers(Boolean.TRUE);
     }
 
-    public void addGame(Game game) {
+    /*public void addGame(Game game) {
+        Log.d(TAG,"Adding game to gamelist when we create a game");
         this.allGames.add(game);
         setChanged();
         GameList wrapperGameList = new GameList();
         wrapperGameList.setGames(this.allGames);
         notifyObservers(wrapperGameList);
-    }
+    }*/
 
     public Set<Player> getAllPlayers() {
         return allPlayers;
     }
 
     public void setMyUser(User myUser) {
+        Log.d(TAG,"Setting user");
         if (myUser != null) {
             this.myUser = myUser;
             setChanged();
@@ -99,16 +101,17 @@ public class CModel extends Observable {
      * @param allGames THe games we got from the server
      */
     public void setAllGames(GameList allGames) {
+        Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
 
-            //Updating the player list
+            /*//Updating the player list
             if (currGame != null) {
-                /*TODO Issues here with looping. SetCurrGame is called when we join a game but the poller is never stopped so we keep
+                *//*TODO Issues here with looping. SetCurrGame is called when we join a game but the poller is never stopped so we keep
                 setting the game over and over again which also sends a game to the observors which causes start game to be started until
-                we run out of memory i guess*/
+                we run out of memory i guess*//*
                 setCurrGame(allGames.findGame(currGame.getGameID()));
-            }
+            }*/
             //will notify the gamelist activity of games made/changed
             setChanged();
             notifyObservers(allGames);
@@ -122,12 +125,21 @@ public class CModel extends Observable {
      * @param currGame The game that was just made
      */
     public void setCurrGame(Game currGame) {
+        Log.d(TAG,"Setting current game");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
-        allGames.remove(this.currGame);
+        for(Game g : allGames){
+            if(g.getGameID().equals(currGame.getGameID())){
+                allGames.remove(g);
+                //add currgame to list
+                allGames.add(currGame);
+                GameList list = new GameList();
+                list.setGames(allGames);
+                setAllGames(list);
+                break;
+            }
+        }
         //set currGame
         this.currGame = currGame;
-        //add currgame to list
-        allGames.add(currGame);
         setChanged();
         notifyObservers(this.currGame);
     }

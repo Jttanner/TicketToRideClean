@@ -43,13 +43,19 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     private PlayerListAdapter playerListAdapter;// = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onDestroy() {
+        super.onDestroy();
         Poller.getInstance().stopPoller();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         Log.d(TAG,"OnCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waitingroom);
         setupMVP();
         wireUp();
+        Poller.getInstance().updateGameList();
 
     }
 
