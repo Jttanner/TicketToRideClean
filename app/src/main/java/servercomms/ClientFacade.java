@@ -24,10 +24,6 @@ class ClientFacade {
     private ClientFacade() {
     }
 
-   /* public void updateGameList(GameList games){
-        CModel.getInstance().setAllGames(games);
-    }*/
-
     void checkTypeOfCommand(CommandResult result) {
         //TODO So i took out the if statement for handling the result when we create a game. Because honestly the poller gets it for us already
         //This if means we have created a game(and we are joining)
@@ -63,15 +59,4 @@ class ClientFacade {
         CModel.getInstance().setMyUser(user);
     }
 
-    /*public void updateCurrGame(Game game){
-        //this if means we have joined a game
-        if(game.canJoinGame()){
-            CModel.getInstance().setCurrGame(game);
-        }
-
-    }*/
-
-    /*public void updatePlayerList(PlayerList players){
-        CModel.getInstance().setAllPlayers(players.getPlayers());
-    }*/
 }
