@@ -56,6 +56,7 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
             ServerProxy.getInstance().sendCommand(startGameCommandData);
         } catch (Exception e) {
             Log.d(TAG, "hi my name is Kwan: " + e.toString());
+            Log.d(TAG, "hi Kwan, my name is Jon: " + e.toString());
             e.printStackTrace();
         }
     }

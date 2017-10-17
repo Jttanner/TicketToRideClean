@@ -1,9 +1,11 @@
 package ui.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -77,6 +79,9 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
                 StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
                 mPresenter.startGame(startGameCommandData);
                 //Check if it is valid. Go to new activity
+                //TODO: implment way to check if game started successfully
+                Intent intent = new Intent(getApplicationContext(),MapActivity.class);
+                startActivity(intent, null);
 
             }
         });

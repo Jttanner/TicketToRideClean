@@ -15,8 +15,6 @@ public class UserInfoList {
     //Checks username to find it's userinfo
     private Map<String, UserInfo> usernameToUserInfo = new HashMap<>();
 
-    private Map<String, User> userNameToUser = new HashMap<>();
-
     private Map<User, UserInfo> userToUserInfo = new HashMap<>();
 
 
@@ -40,8 +38,6 @@ public class UserInfoList {
 
             User user = new User(new UserInfo(userName, password));
             userToUserInfo.put(user, newUserInfo);
-            //Made this so that we can easily send back a user when a login is done. Please keep it
-            userNameToUser.put(userName,user);
 
             //Places it into a map so we can check if they already have an account
             usernameToUserInfo.put(userName, newUserInfo);
@@ -50,16 +46,14 @@ public class UserInfoList {
         return null;
     }
 
-    public User login(String userName, String password)
+    public UserInfo login(String userName, String password)
     {
-
+        UserInfo matches = null;
         for (UserInfo userInfo : userInfoList) {
             if (userInfo.getUserName().equals(userName) && userInfo.getPassword().equals(password)) {
-                //return the user
-                return userNameToUser.get(userName);
+                matches = userInfo;
             }
         }
-        //just return null otherwise
-        return null;
+        return matches;
     }
 }

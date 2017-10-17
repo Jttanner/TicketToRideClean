@@ -44,7 +44,7 @@ public class ServerModel {
 
     User login(String userName, String password){
         //If the account exists and matches with one in the database...
-        return userInfoList.login(userName, password);
+        return new User(userInfoList.login(userName, password));
     }
 
     boolean createGame(Game newGame){
