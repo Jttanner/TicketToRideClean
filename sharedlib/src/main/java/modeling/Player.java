@@ -1,6 +1,7 @@
 package modeling;
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -12,6 +13,10 @@ public class Player implements Comparator<Player> {
     private String userName;
     private String playerName;
     private String color;
+    private List<TrainCar> trainCar;
+    private List<ResourceCard> resourceCard;
+    private List<Route> routes;
+    private int points;
 
     public Player(String userName){
         this.userName = userName;
@@ -57,6 +62,11 @@ public class Player implements Comparator<Player> {
     }
 
     @Override
+    public String toString() {
+        return playerName + "/n" + points + "/n" + trainCar.size() + "/n" + resourceCard.size() + "/n" + routes.size();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -75,5 +85,25 @@ public class Player implements Comparator<Player> {
 
     public String getUserName() {
         return userName;
+    }
+
+    public List<TrainCar> getTrainCar() {
+        return trainCar;
+    }
+
+    public List<ResourceCard> getResourceCard() {
+        return resourceCard;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

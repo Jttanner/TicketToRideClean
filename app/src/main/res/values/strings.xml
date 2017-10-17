@@ -9,5 +9,6 @@
     <string name="user">user</string>
     <string name="password">password</string>
     <string name="startGame">Start Game</string>
+    <string name="statusLayout">Player:/nPoints:/nTrains/nCards/nRoutes</string>
 
 </resources>
