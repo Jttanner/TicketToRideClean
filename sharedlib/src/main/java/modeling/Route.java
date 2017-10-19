@@ -15,11 +15,11 @@ public class Route {
         this.trainColorNeeded = trainColorNeeded;
     }
 
-    List<City> twoCities = new ArrayList<>();
-    int distance;
-    boolean claimed = false;
-    String trainColorNeeded;
-    Player owner = null;
+    private List<City> twoCities = new ArrayList<>();
+    private int distance;
+    private boolean claimed = false;
+    private String trainColorNeeded;
+    private Player owner = null;
 
     //TODO: It is less good to pass the list directly.  should we change it?
     List<City> getTwoCities(){
