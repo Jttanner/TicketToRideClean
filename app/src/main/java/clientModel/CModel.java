@@ -86,12 +86,13 @@ public class CModel extends Observable {
 
     public void setMyUser(User myUser) {
         Log.d(TAG,"Setting user");
-        if (myUser != null) {
+        if (myUser != null && myUser.getInfo() != null) {
             this.myUser = myUser;
             setChanged();
             notifyObservers(myUser);
         } else {
-            Log.d(TAG, "You gave us a null user???");
+            setChanged();
+            notifyObservers(false);
         }
     }
 

@@ -1,6 +1,5 @@
 package modeling;
 
-import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,13 +8,13 @@ import java.util.Set;
  */
 
 public class City {
-    public City(String cityName, Point coords){
+    public City(String cityName){
         this.cityName = cityName;
-        this.coords = coords;
+        //this.coords = coords;
     }
 
     private String cityName;
-    private Point coords;
+    //private Point coords;
 
 
     //TODO: double check type for this collection.  is Set okay?
@@ -29,13 +28,13 @@ public class City {
         return cityName;
     }
 
-    public int getX_coord() {
+    /*public int getX_coord() {
         return coords.x;
     }
 
     public int getY_coord() {
         return coords.y;
-    }
+    }*/
 
     public Set<Route> getRoutes() {
         return routes;

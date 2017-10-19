@@ -32,7 +32,7 @@ public class ServerFacade {
 
     public LoginResult login(LoginRequest request){
         User user = serverModel.login(request.getUserName(), request.getPassword());
-        if(user != null){
+        if(user != null && user.getInfo() != null){
             return new LoginResult(true, "login success!",user);
         }
         else{
@@ -43,7 +43,7 @@ public class ServerFacade {
     public RegisterResult register(RegisterRequest request){
         User user = serverModel.register(request.getUserName(), request.getPassword());
         if (user != null){
-            return new RegisterResult(true, "Successfully Registered", user); //TODO: Do we even need to give you a USER??
+            return new RegisterResult(true, "Successfully Registered", user);
         }
         else{
             return new RegisterResult(false, "Failed to Register.", null);

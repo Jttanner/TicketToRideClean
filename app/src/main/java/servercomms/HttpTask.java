@@ -57,9 +57,8 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     @Override
     protected Object doInBackground(URL... urls) {
         Log.d("DoInBackGround", "Entering DoInBackGround");
-        String typeOfRequest;
         Encoder encoder = new Encoder();
-        typeOfRequest = "POST";
+        String typeOfRequest = "POST";
         //connection with the server is here
         InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
 

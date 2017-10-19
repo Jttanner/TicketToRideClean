@@ -75,7 +75,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
      * Also as a note I'm passing in an object because i get a java.lang.ClassCastException if I that above
      * @param r The result object being passed in
      */
-    void checkLogSuccess(ResultObject r) {
+    private void checkLogSuccess(ResultObject r) {
         myView.get().loginFailed(r.getMessage());
     }
 
@@ -141,6 +141,8 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         if(arg instanceof User){
             Intent intent = new Intent(getActivityContext(), GameListActivity.class);
             myView.get().loginSucceeded(intent);
+        }else if(arg instanceof  Boolean){
+            myView.get().loginFailed("Failure, please try again");
         }
         Log.d(TAG, "Num of observers: " + o.countObservers());
     }
