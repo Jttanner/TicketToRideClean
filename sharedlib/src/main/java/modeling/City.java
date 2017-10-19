@@ -41,4 +41,10 @@ public class City {
     public Set<Route> getRoutes() {
         return routes;
     }
+
+    @Override
+    public String toString() {
+        return cityName;
+    }
+
 }

@@ -52,4 +52,7 @@ public class Route {
         return  trainColorNeeded;
     }
 
+    public int getDistance() {
+        return distance;
+    }
 }
