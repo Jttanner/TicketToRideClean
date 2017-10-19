@@ -12,7 +12,6 @@ public class PlayerColumns {
         this.playerString = playerString;
     }
 
-
     public String getPlayerText() {
         return playerString;
     }

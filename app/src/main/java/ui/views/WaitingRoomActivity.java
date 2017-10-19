@@ -84,29 +84,21 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
             @Override
             public void onClick(View v) {
                 mPresenter.startGame();
-                /*CModel cModel = CModel.getInstance();
-                Game currentGame =cModel.getCurrGame();
-                StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
-                mPresenter.startGame(startGameCommandData);
-                //Check if it is valid. Go to new activity
-                //TODO: implment way to check if game started successfully
-                Intent intent = new Intent(getApplicationContext(),MapActivity.class);
-                startActivity(intent, null);*/
 
             }
         });
         playerListView = (ListView) findViewById(R.id.waitingRoom_PlayerList);
         playerListView.setAdapter(playerListAdapter);
     }
+
+
     @Override
-    /**Handles the updating of the playerlist in the listview
+    /*Handles the updating of the playerlist in the listview
      * @param Game THe game that may or may not have changed*/
     public void updateWaitingRoom(Game game) {
         Log.d(TAG,"updateWaitingRoom");
         playerListAdapter.setPlayerList(game.getPlayers());
         playerListAdapter.notifyDataSetChanged();
-        //playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
-        //playerListView.setAdapter(playerListAdapter);
     }
 
 }

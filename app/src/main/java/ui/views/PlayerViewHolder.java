@@ -24,6 +24,8 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(PlayerColumns row) {
-        mPlayerInfo.setText(row.getPlayerText());
+        //mPlayerInfo.setText(row.getPlayerText());
+        mPlayerInfo.setText(row.getPlayerText().replaceAll("\\t","\t"));
+        System.out.println(row.getPlayerText());
     }
 }

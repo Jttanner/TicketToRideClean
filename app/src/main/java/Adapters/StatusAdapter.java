@@ -37,4 +37,8 @@ public class StatusAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
     public int getItemCount() {
         return playerColumns.size();
     }
+
+    public void setPlayerColumns(ArrayList<PlayerColumns> playerColumns) {
+        this.playerColumns = playerColumns;
+    }
 }
