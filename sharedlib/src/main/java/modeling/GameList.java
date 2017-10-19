@@ -65,12 +65,14 @@ public class GameList {
         //Find the game from the list of games
         //Place that same game in the list of gamesStarted
         //Delete the game from the general list of games
-        for (Game gameFound : games){
-            if(gameFound.equals(game)) {
-                gamesStarted.add(game);
-                games.remove(game);
-                return true;
-            }
+        Game serverGame = gameIDtoGame.get(game.getGameID());
+        int minPlayersNeeded = 2;
+        //TODO uncomment this when neeeded, keeping it commented right now for testing purposes
+        if(serverGame.equals(game)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
+            serverGame.setHasStarted(true);
+            gamesStarted.add(serverGame);
+            games.remove(serverGame);
+            return true;
         }
         return false;
     }

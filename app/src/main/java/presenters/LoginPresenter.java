@@ -141,7 +141,8 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         if(arg instanceof User){
             Intent intent = new Intent(getActivityContext(), GameListActivity.class);
             myView.get().loginSucceeded(intent);
-        }else if(arg instanceof  Boolean){
+            //if we got a boolean and it is false
+        }else if(arg instanceof  Boolean && !(Boolean)arg){
             myView.get().loginFailed("Failure, please try again");
         }
         Log.d(TAG, "Num of observers: " + o.countObservers());

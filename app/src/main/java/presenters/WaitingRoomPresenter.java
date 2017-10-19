@@ -1,7 +1,6 @@
 package presenters;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.Observable;
@@ -30,10 +29,11 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO if the currGames players change
+        //for when the game is set
         if(arg instanceof Game){
             myView.get().updateWaitingRoom((Game)arg);
         }
+        //for when the poller updates the gamelist and we need to update the player list accordingly
         else if(arg instanceof GameList){
             //Look for the current game in the list and update the waiting room with it
             for (Game g: ((GameList) arg).getGames()) {
@@ -42,18 +42,24 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
                 }
             }
         }
-        else if(arg instanceof Boolean && ((Boolean) arg)){
-            Toast.makeText(myView.get().getActivityContext(), "Start Game Success", Toast.LENGTH_SHORT).show();
-            //TODO start the map activity
-            //Intent intent = new Intent();
+        //if we got a boolean back and it was true
+        else if(arg instanceof Boolean){
+            if((Boolean)arg){
+                myView.get().goToMap();
+            }
+            else{
+                myView.get().goToMapFailed();
+            }
+
         }
     }
-
+    /**Calls the server proxy to try and join the game*/
     @Override
-    public void startGame(StartGameCommandData startGameCommandData){
+    public void startGame(){
         try {
             //call the async task
-            ServerProxy.getInstance().sendCommand(startGameCommandData);
+            StartGameCommandData data = new StartGameCommandData(CModel.getInstance().getCurrGame());
+            ServerProxy.getInstance().sendCommand(data);
         } catch (Exception e) {
             Log.d(TAG, "hi my name is Kwan: " + e.toString());
             Log.d(TAG, "hi Kwan, my name is Jon: " + e.toString());
