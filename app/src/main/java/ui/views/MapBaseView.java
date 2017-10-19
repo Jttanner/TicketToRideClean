@@ -33,8 +33,7 @@ public class MapBaseView extends View {
 
     @Override
     public void onDraw(Canvas canvas){
-
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.BLACK); //Draw a background color, not really needed.
         canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
     }
 
