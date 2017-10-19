@@ -2,28 +2,23 @@ package MVP_coms_classes;
 
 import android.content.Context;
 
-import modeling.Route;
-
 /**
  * Created by tyler on 10/19/2017.
- * This interface handles information transfers between tha mapview and it's presenter
  */
 
-public interface MVP_Map {
+public interface MVP_GameHistory {
     /**
      * Required View methods available to Presenter.
      * A passive layer, responsible to show data
      * and receive user interactions
      */
     interface MapViewOps{
-        /***/
-        void updateMap();
-        /**Returns the application context*/
+        /**Gets application context*/
         Context getAppContext();
-        /**The activity context of the view*/
+        /**gets activity context*/
         Context getActivityContext();
-        /**Updates the route to be a certain player's*/
-        void routeClaimed(Route r);
+        /**Any commands toString method is passed in here to add to the GameHistoryView*/
+        void addCommandString(String c);
 
     }
     /**
@@ -31,8 +26,7 @@ public interface MVP_Map {
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface MapPresOps{
-        /**Will tell the model who just claimed a route*/
-        //Not sure if needed if model will just take care of it,void claimRoute(Route r);
-
+        /**Tells the view to exit itself*/
+        void exitView();
     }
 }

@@ -1,5 +1,7 @@
 package modeling;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,9 +15,9 @@ public class Player implements Comparator<Player> {
     private String userName;
     private String playerName;
     private String color;
-    private List<TrainCar> trainCar;
-    private List<ResourceCard> resourceCard;
-    private List<Route> routes;
+    private List<ResourceCard> resourceCards = new ArrayList<>();
+    private List<DestinationCard> destinationCards = new ArrayList<>();
+    private List<Route> routes = new ArrayList<>();
     private int points;
 
     public Player(String userName){
@@ -63,7 +65,7 @@ public class Player implements Comparator<Player> {
 
     @Override
     public String toString() {
-        return playerName + "/n" + points + "/n" + trainCar.size() + "/n" + resourceCard.size() + "/n" + routes.size();
+        return playerName + "/n" + points + "/n" + resourceCards.size() + "/n" + destinationCards.size() + "/n" + routes.size();
     }
 
     @Override
@@ -87,23 +89,40 @@ public class Player implements Comparator<Player> {
         return userName;
     }
 
-    public List<TrainCar> getTrainCar() {
-        return trainCar;
+    public List<ResourceCard> getResourceCards() {
+        return Collections.unmodifiableList(resourceCards);
     }
-
-    public List<ResourceCard> getResourceCard() {
-        return resourceCard;
+    /**Adds a resource card to the player's hand
+     * @param c The resource card*/
+    public void addResourceCard(ResourceCard c){
+        resourceCards.add(c);
     }
 
     public List<Route> getRoutes() {
-        return routes;
+        return Collections.unmodifiableList(routes);
+    }
+    /**Adds a route to what the player has claimed already
+     * @param route Their newly claimed route*/
+    public void addRoute(Route route){
+        routes.add(route);
     }
 
     public int getPoints() {
         return points;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    /**Adds some number of points, positive or negative, to the player's score*/
+    public void addPoints(int pointsToAdd){
+        points += pointsToAdd;
+    }
+
+    public List<DestinationCard> getDestinationCards() {
+        return Collections.unmodifiableList(destinationCards);
+    }
+
+    /**Adds a list of destination cards to what the player has already
+     * @param cards Their newly added*/
+    public void addDestinationCard(List<DestinationCard> cards){
+        destinationCards.addAll(cards);
     }
 }
