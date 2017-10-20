@@ -41,6 +41,15 @@ public class CModel extends Observable {
      * The set of players you are playing with
      */
     private Set<Player> allPlayers;
+    private List<String> chatHistory = new ArrayList<>();
+
+    public List<String> getChatHistory() {
+        return chatHistory;
+    }
+
+    public void setChatHistory(List<String> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
 
     /**
      * Our Presenters
