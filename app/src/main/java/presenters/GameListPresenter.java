@@ -10,6 +10,7 @@ import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import servercomms.ServerProxy;
 
 /**
@@ -33,10 +34,18 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
 
     @Override
     public void JoinGame(Game game) {
-        JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
-        ServerProxy.getInstance().sendCommand(data);
-
-
+        //Check to see if the user is already in the game
+        boolean userExist = false;
+        for(Player p: game.getPlayers()) {
+            if(p.getUserName().equals(CModel.getInstance().getMyUser().getUserName())) {
+                //Don't let them join
+                userExist = true;
+            }
+        }
+        if (userExist == false) {
+            JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
+            ServerProxy.getInstance().sendCommand(data);
+        }
     }
 
     @Override
