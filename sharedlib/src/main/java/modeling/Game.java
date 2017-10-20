@@ -81,6 +81,7 @@ public class Game {
      * @return boolean*/
     public boolean canJoinGame() {
         boolean stillCanJoin = players.size() >= 0 && players.size() < playerMax;
+        //Adding in to see if the user is already in the game
         return !hasStarted && stillCanJoin;
     }
 

@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
 import clientModel.CModel;
-import commandData.StartGameCommandData;
 import modeling.Game;
 import poller.Poller;
 import presenters.WaitingRoomPresenter;
@@ -64,6 +64,18 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         mPresenter = new WaitingRoomPresenter(this);
         playerListAdapter = new PlayerListAdapter(this,CModel.getInstance().getCurrGame().getPlayers());
     }
+
+    @Override
+    public void goToMapFailed() {
+        Toast.makeText(this,"Need more players to start a game",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void goToMap() {
+        Intent intent = new Intent(getAppContext(),MapActivity.class);
+        startActivity(intent, null);
+    }
+
     void wireUp(){
         Log.d(TAG,"wireUp");
         // StartGameButton = (Button) findViewById(R.id.StartGameButton);
@@ -71,29 +83,22 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         StartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CModel cModel = CModel.getInstance();
-                Game currentGame =cModel.getCurrGame();
-                StartGameCommandData startGameCommandData = new StartGameCommandData(currentGame);
-                mPresenter.startGame(startGameCommandData);
-                //Check if it is valid. Go to new activity
-                //TODO: implment way to check if game started successfully
-                Intent intent = new Intent(getApplicationContext(),MapActivity.class);
-                startActivity(intent, null);
+                mPresenter.startGame();
 
             }
         });
         playerListView = (ListView) findViewById(R.id.waitingRoom_PlayerList);
         playerListView.setAdapter(playerListAdapter);
     }
+
+
     @Override
-    /**Handles the updating of the playerlist in the listview
+    /*Handles the updating of the playerlist in the listview
      * @param Game THe game that may or may not have changed*/
     public void updateWaitingRoom(Game game) {
         Log.d(TAG,"updateWaitingRoom");
         playerListAdapter.setPlayerList(game.getPlayers());
         playerListAdapter.notifyDataSetChanged();
-        //playerListAdapter = new PlayerListAdapter(this,game.getPlayers());
-        //playerListView.setAdapter(playerListAdapter);
     }
 
 }

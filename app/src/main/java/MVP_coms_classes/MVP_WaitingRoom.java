@@ -2,7 +2,6 @@ package MVP_coms_classes;
 
 import android.content.Context;
 
-import commandData.StartGameCommandData;
 import modeling.Game;
 
 /**
@@ -16,10 +15,13 @@ public interface MVP_WaitingRoom {
         Context getAppContext();
 
         Context getActivityContext();
-
+        /**Starts your game*/
+        void goToMap();
+        /**Tell the user that going to the map failed, need more players*/
+        void goToMapFailed();
     }
     interface RequiredPresenterOps {
-        void startGame(StartGameCommandData startGameCommandData);
+        void startGame();
 
     }
 }

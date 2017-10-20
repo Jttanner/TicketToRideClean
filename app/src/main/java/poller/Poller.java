@@ -78,7 +78,7 @@ public class Poller {
 
 
 
-    public class UpdateLobby extends AsyncTask<Void, Void, Integer>
+    private class UpdateLobby extends AsyncTask<Void, Void, Integer>
     {
         private GameList gameList;
 

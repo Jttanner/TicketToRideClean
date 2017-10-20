@@ -101,4 +101,5 @@ public class Encoder {
             return new JoinGameCommandResult(false,e.getMessage());
         }
     }
+
 }
