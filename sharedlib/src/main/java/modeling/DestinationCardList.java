@@ -10,41 +10,43 @@ import java.util.List;
 public class DestinationCardList {
 
     private List<DestinationCard> destinationCardList;
+    private List<DestinationCard> discardPile;
 
     public DestinationCardList(){
         destinationCardList = new ArrayList<>();
 
-        destinationCardList.add(new DestinationCard("Denver", "El Paso", 4));
-        destinationCardList.add(new DestinationCard("Kansas City", "Houston", 5));
-        destinationCardList.add(new DestinationCard("New York", "Atlanta", 6));
-        destinationCardList.add(new DestinationCard("Chicago", "New Orleans", 7));
-        destinationCardList.add(new DestinationCard("Calgary", "Salt Lake City", 7));
-        destinationCardList.add(new DestinationCard("Helena", "Los Angeles", 8));
-        destinationCardList.add(new DestinationCard("Duluth", "Houston", 8));
-        destinationCardList.add(new DestinationCard("Sault St. Marie", "Nashville", 8));
-        destinationCardList.add(new DestinationCard("Montreal", "Atlanta", 9));
-        destinationCardList.add(new DestinationCard("Sault St. Marie", "Oklahoma City", 9));
-        destinationCardList.add(new DestinationCard("Seattle", "Los Angeles", 9));
-        destinationCardList.add(new DestinationCard("Chicago", "Santa Fe", 9));
-        destinationCardList.add(new DestinationCard("Duluth", "El Paso", 10));
-        destinationCardList.add(new DestinationCard("Toronto", "Miami", 10));
-        destinationCardList.add(new DestinationCard("Portland", "Phoenix", 11));
-        destinationCardList.add(new DestinationCard("Dallas", "New York", 11));
-        destinationCardList.add(new DestinationCard("Denver", "Pittsburgh", 11));
-        destinationCardList.add(new DestinationCard("Winnipeg", "Little Rock", 11));
-        destinationCardList.add(new DestinationCard("Winnipeg", "Houston", 12));
-        destinationCardList.add(new DestinationCard("Boston", "Miami", 12));
-        destinationCardList.add(new DestinationCard("Vancouver", "Santa Fe", 13));
-        destinationCardList.add(new DestinationCard("Calgary", "Phoenix", 13));
-        destinationCardList.add(new DestinationCard("Montreal", "New Orleans", 13));
-        destinationCardList.add(new DestinationCard("Los Angeles", "Chicago", 16));
-        destinationCardList.add(new DestinationCard("San Francisco", "Atlanta", 17));
-        destinationCardList.add(new DestinationCard("Portland", "Nashville", 17));
-        destinationCardList.add(new DestinationCard("Vancouver", "Montreal", 20));
-        destinationCardList.add(new DestinationCard("Los Angeles", "Miami", 20));
-        destinationCardList.add(new DestinationCard("Los Angeles", "New York", 21));
-        destinationCardList.add(new DestinationCard("Seattle", "New York", 22));
-
+        /*
+        destinationCardList.add(new DestinationCard(new City("Denver"), new City("El Paso"), 4));
+        destinationCardList.add(new DestinationCard(new City("Kansas City"), new City("Houston"), 5));
+        destinationCardList.add(new DestinationCard(new City("New York"), new City("Atlanta"), 6));
+        destinationCardList.add(new DestinationCard(new City("Chicago"), new City("New Orleans"), 7));
+        destinationCardList.add(new DestinationCard(new City("Calgary"), new City("Salt Lake City"), 7));
+        destinationCardList.add(new DestinationCard(new City("Helena"), new City("Los Angeles"), 8));
+        destinationCardList.add(new DestinationCard(new City("Duluth"), new City("Houston"), 8));
+        destinationCardList.add(new DestinationCard(new City("Sault St. Marie"), new City("Nashville"), 8));
+        destinationCardList.add(new DestinationCard(new City("Montreal"), new City("Atlanta"), 9));
+        destinationCardList.add(new DestinationCard(new City("Sault St. Marie"), new City("Oklahoma City"), 9));
+        destinationCardList.add(new DestinationCard(new City("Seattle"), new City("Los Angeles"), 9));
+        destinationCardList.add(new DestinationCard(new City("Chicago"), new City("Santa Fe"), 9));
+        destinationCardList.add(new DestinationCard(new City("Duluth"), new City("El Paso"), 10));
+        destinationCardList.add(new DestinationCard(new City("Toronto"), new City("Miami"), 10));
+        destinationCardList.add(new DestinationCard(new City("Portland"), new City("Phoenix"), 11));
+        destinationCardList.add(new DestinationCard(new City("Dallas"), new City("New York"), 11));
+        destinationCardList.add(new DestinationCard(new City("Denver"), new City("Pittsburgh"), 11));
+        destinationCardList.add(new DestinationCard(new City("Winnipeg"), new City("Little Rock"), 11));
+        destinationCardList.add(new DestinationCard(new City("Winnipeg"), new City("Houston"), 12));
+        destinationCardList.add(new DestinationCard(new City("Boston"), new City("Miami"), 12));
+        destinationCardList.add(new DestinationCard(new City("Vancouver"), new City("Santa Fe"), 13));
+        destinationCardList.add(new DestinationCard(new City("Calgary"), new City("Phoenix"), 13));
+        destinationCardList.add(new DestinationCard(new City("Montreal"), new City("New Orleans"), 13));
+        destinationCardList.add(new DestinationCard(new City("Los Angeles"), new City("Chicago"), 16));
+        destinationCardList.add(new DestinationCard(new City("San Francisco"), new City("Atlanta"), 17));
+        destinationCardList.add(new DestinationCard(new City("Portland"), new City("Nashville"), 17));
+        destinationCardList.add(new DestinationCard(new City("Vancouver"), new City("Montreal"), 20));
+        destinationCardList.add(new DestinationCard(new City("Los Angeles"), new City("Miami"), 20));
+        destinationCardList.add(new DestinationCard(new City("Los Angeles"), new City("New York"), 21));
+        destinationCardList.add(new DestinationCard(new City("Seattle"), new City("New York"), 22));
+        */
     }
 
 }

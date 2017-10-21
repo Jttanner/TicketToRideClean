@@ -13,6 +13,7 @@ public class RouteList {
     private Map<Route, Player> routesClaimed;
 
     public RouteList(){
+        /*
         routesAvailable.add(new Route("Atlanta", "Raleigh", Color.WILD, 2));
         routesAvailable.add(new Route("Atlanta", "Raleigh", Color.WILD, 2));
         routesAvailable.add(new Route("Atlanta", "Charleston", Color.WILD, 2));
@@ -115,5 +116,6 @@ public class RouteList {
         routesAvailable.add(new Route("Sault St. Marie", "Toronto", Color.WILD, 2));
         routesAvailable.add(new Route("Seattle", "Vancouver", Color.WILD, 1));
         routesAvailable.add(new Route("Seattle", "Vancouver", Color.WILD, 1));
+        */
     }
 }
