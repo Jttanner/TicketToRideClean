@@ -1,6 +1,8 @@
 package ui.views;
 
 import android.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,14 +22,17 @@ public class DestinationCardFragment extends Fragment {
     private EditText mRoute3;
     private Button buttonStart;
 
-    public CreateGameFragment(){
+    public DestinationCardFragment(){
         System.out.println("hello");
+
+
         game = new Game();
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserName());
         player = new Player(CModel.getInstance().getMyUser().getUserName());
         player.setPlayerName(CModel.getInstance().getMyUser().getInfo().getUserName());
         player.setColor(MyColor.BLACK.toString());
+
     }
 
     @Override
@@ -40,6 +45,8 @@ public class DestinationCardFragment extends Fragment {
 
         return v;
     }
+
+    //TODO: Create the view, make a list of routes, draw randomly from the list of routes, change the textview based on those routes
     private void setUp(View v){
         gameName = (EditText) v.findViewById(R.id.gameName);
         gameName.addTextChangedListener(new TextWatcher() {
