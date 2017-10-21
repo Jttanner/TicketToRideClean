@@ -13,12 +13,12 @@ import modeling.GameList;
 
 public class GetGameListCommandData extends Command {
 
-    private GameList gameListLobby;
+    //private GameList gameListLobby;
 
     public GetGameListCommandData() {
         setType("getGameList");
     }
-
+    /*
     public GameList getGameListLobby() {
         return gameListLobby;
     }
@@ -26,4 +26,5 @@ public class GetGameListCommandData extends Command {
     public void setGameListLobby(GameList gameListLobby) {
         this.gameListLobby = gameListLobby;
     }
+    */
 }
