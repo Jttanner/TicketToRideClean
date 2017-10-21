@@ -72,6 +72,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 if(g.getGameName().equals(name.getText().toString())){
                     selectedGame = g;
                     presenter.JoinGame(selectedGame);
+
                     return;
                 }
             }
