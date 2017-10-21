@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +40,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         setContentView(R.layout.activity_map);
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
 
-        setupMVP();
+
         chatroom = (Button) findViewById(R.id.chatButton);
         chatroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +48,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 FragmentManager fm = getSupportFragmentManager();
                 ChatFragment fragment = new ChatFragment();
                 fragment.show(fm,"chat_fragment");
+
             }
         });
         //mGameStatus = (RecyclerView) findViewById(R.id.recycler_status);

@@ -35,6 +35,8 @@ public class ChatFragment extends DialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
+        getDialog().show();
+        getDialog().getWindow().setLayout(1000,1000);
 
         chatView = (TextView) v.findViewById(R.id.chatText);
         changeChat();
@@ -44,6 +46,7 @@ public class ChatFragment extends DialogFragment {
             public void onClick(View v) {
                 CModel.getInstance().getChatHistory().add(currentString);
                 currentString = "";
+                chatEdit.setText("");
                 changeChat();
             }
         });
