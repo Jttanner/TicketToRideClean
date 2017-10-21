@@ -57,14 +57,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
 
         TypedArray a=getContext().obtainStyledAttributes(this.attrs, R.styleable.PlayerStatsView);
         //Use a
-        statNames = a.getString(
-                R.styleable.PlayerStatsView_android_text);
-        /*Log.i("test",a.getString(
-                R.styleable.PlayerStatsView_android_text));*/
-        /*Log.i("test",""+a.getColor(
-                R.styleable.PlayerStatsView_android_textColor, Color.BLACK));
-        Log.i("test",a.getString(
-                R.styleable.PlayerStatsView_extraInformation));*/
+        statNames = a.getString(R.styleable.PlayerStatsView_android_text);
 
         a.recycle();
 
