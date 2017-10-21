@@ -11,7 +11,7 @@ import clientModel.CModel;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
-import ui.views.PlayerColumns;
+import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 10/20/2017.
@@ -28,13 +28,13 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
     }
 
     @Override
-    public ArrayList<PlayerColumns> getPlayerColumns() {
+    public ArrayList<PlayerColumn> getPlayerColumns() {
         List<Player> players = CModel.getInstance().getCurrGame().getPlayers();
 
-        ArrayList<PlayerColumns> columns = new ArrayList<>();
+        ArrayList<PlayerColumn> columns = new ArrayList<>();
         //create strings out of the stats of each player for the recycler
         for(Player player : players){
-            columns.add(new PlayerColumns(player.toString()));
+            columns.add(new PlayerColumn(player));
         }
         return columns;
     }

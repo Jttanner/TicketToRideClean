@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ui.views.PlayerColumns;
-import ui.views.PlayerViewHolder;
+import clientModel.PlayerViewHolder;
+import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 4/3/2017.
@@ -16,8 +16,8 @@ import ui.views.PlayerViewHolder;
  */
 
 public class StatusAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
-    private ArrayList<PlayerColumns> playerColumns;
-    public StatusAdapter(Context context, ArrayList<PlayerColumns> playerColumns) {
+    private ArrayList<PlayerColumn> playerColumns;
+    public StatusAdapter(Context context, ArrayList<PlayerColumn> playerColumns) {
         super();
         this.playerColumns = playerColumns;
     }
@@ -38,7 +38,7 @@ public class StatusAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
         return playerColumns.size();
     }
 
-    public void setPlayerColumns(ArrayList<PlayerColumns> playerColumns) {
+    public void setPlayerColumns(ArrayList<PlayerColumn> playerColumns) {
         this.playerColumns = playerColumns;
     }
 }

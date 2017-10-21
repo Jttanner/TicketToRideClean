@@ -65,7 +65,9 @@ public class Player implements Comparator<Player> {
 
     @Override
     public String toString() {
-        return playerName + "\t" + points + "\t" + resourceCards.size() + "\t" + destinationCards.size() + "\t" + routes.size();
+        //I know..its ugly, just a quick fix
+        //String.format()
+        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + resourceCards.size() + "\t\t\t\t\t" + destinationCards.size() + "\t\t\t\t\t" + routes.size();
     }
 
     @Override

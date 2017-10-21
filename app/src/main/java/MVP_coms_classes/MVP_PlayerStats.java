@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import modeling.Game;
-import ui.views.PlayerColumns;
+import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 10/20/2017.
@@ -24,6 +24,6 @@ public interface MVP_PlayerStats {
 
     interface PresOps{
         //Will get the player columns for the Game status
-        ArrayList<PlayerColumns> getPlayerColumns();
+        ArrayList<PlayerColumn> getPlayerColumns();
     }
 }
