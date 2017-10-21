@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical"
     android:id="@+id/activity_map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/recycler_status">
-
-    </android.support.v7.widget.RecyclerView>
     <ui.views.MapBaseView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/recycler_status"
         android:id="@+id/map_base_view"/>
+    <ui.views.PlayerStatsView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/statusLayout"
+        android:textColor="#FFFFFF"
+        app:extraInformation="My extra information"
+        android:id="@+id/player_stats"/>
 
 </RelativeLayout>

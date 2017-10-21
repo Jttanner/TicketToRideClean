@@ -2,11 +2,7 @@ package MVP_coms_classes;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-
-import modeling.Game;
 import modeling.Route;
-import ui.views.PlayerColumns;
 
 /**
  * Created by tyler on 10/19/2017.
@@ -28,16 +24,13 @@ public interface MVP_Map {
         Context getActivityContext();
         /**Updates the route to be a certain player's*/
         void routeClaimed(Route r);
-        /**updates the player stats*/
-        void updatePlayerStats(Game g);
     }
     /**
      * Operations offered to View to communicate with Presenter.
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface MapPresOps{
-        //Will get the player columns for the Game status
-        ArrayList<PlayerColumns> getPlayerColumns();
+
         /**Will tell the model who just claimed a route*/
         //Not sure if needed if model will just take care of it,void claimRoute(Route r);
 
