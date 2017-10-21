@@ -11,4 +11,7 @@
     <string name="startGame">Start Game</string>
     <string name="statusLayout">Player:\tPoints:\tTrains:\tCards:\t\tRoutes:</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
