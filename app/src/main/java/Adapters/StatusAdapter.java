@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import clientModel.PlayerColumn;
 import clientModel.PlayerViewHolder;
-import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 4/3/2017.

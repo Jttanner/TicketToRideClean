@@ -1,4 +1,4 @@
-package ui.views;
+package clientModel;
 
 import android.graphics.Color;
 

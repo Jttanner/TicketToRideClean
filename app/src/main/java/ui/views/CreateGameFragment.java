@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clientModel.CModel;
+import clientModel.MyColor;
 import modeling.Game;
 import modeling.Player;
 import teamjapannumbahone.tickettoride.R;

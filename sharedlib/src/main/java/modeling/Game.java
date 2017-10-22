@@ -115,6 +115,11 @@ public class Game {
     }
 
     public void setHasStarted(boolean hasStarted) {
+
         this.hasStarted = hasStarted;
+        //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
+        if(this.hasStarted && !players.get(0).isMyTurn()){
+            players.get(0).toggleMyTurn();
+        }
     }
 }

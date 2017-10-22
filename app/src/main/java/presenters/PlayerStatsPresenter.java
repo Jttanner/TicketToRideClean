@@ -8,10 +8,10 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_PlayerStats;
 import clientModel.CModel;
+import clientModel.PlayerColumn;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
-import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 10/20/2017.

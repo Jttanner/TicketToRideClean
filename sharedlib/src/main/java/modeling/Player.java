@@ -19,6 +19,7 @@ public class Player implements Comparator<Player> {
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
     private int points;
+    private boolean isMyTurn;
 
     public Player(String userName){
         this.userName = userName;
@@ -126,5 +127,13 @@ public class Player implements Comparator<Player> {
      * @param cards Their newly added*/
     public void addDestinationCard(List<DestinationCard> cards){
         destinationCards.addAll(cards);
+    }
+
+    public boolean isMyTurn() {
+        return isMyTurn;
+    }
+
+    public void toggleMyTurn() {
+        this.isMyTurn = !this.isMyTurn;
     }
 }

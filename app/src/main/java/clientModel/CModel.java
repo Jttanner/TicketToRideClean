@@ -75,19 +75,11 @@ public class CModel extends Observable {
     }
 
     public void toggleGameHasStarted() {
+        Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() +" to value of: " + !this.currGame.isHasStarted());
         this.currGame.setHasStarted(!this.currGame.isHasStarted());
         setChanged();
         notifyObservers(Boolean.TRUE);
     }
-
-    /*public void addGame(Game game) {
-        Log.d(TAG,"Adding game to gamelist when we create a game");
-        this.allGames.add(game);
-        setChanged();
-        GameList wrapperGameList = new GameList();
-        wrapperGameList.setGames(this.allGames);
-        notifyObservers(wrapperGameList);
-    }*/
 
     public Set<Player> getAllPlayers() {
         return allPlayers;

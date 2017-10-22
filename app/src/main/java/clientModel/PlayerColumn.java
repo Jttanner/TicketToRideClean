@@ -1,4 +1,4 @@
-package ui.views;
+package clientModel;
 
 import android.util.Log;
 
@@ -17,10 +17,10 @@ public class PlayerColumn {
         this.player = player;
     }
 
-    public String getPlayerText() {
+    String getPlayerText() {
         return player.toString();
     }
-    public int getPlayerColor(){
+    int getPlayerColor(){
         MyColor myColor = MyColor.unToString(player.getColor());
         if(myColor != null) {
             Log.d(TAG,"setting color in game status: " + myColor.toString());
@@ -28,6 +28,10 @@ public class PlayerColumn {
         }
         Log.d(TAG,"Error in getting color from player, giving default: ");
         return  MyColor.DARKGREY.getColor();
+    }
+
+    boolean getIfPlayerTurn(){
+        return player.isMyTurn();
     }
 
 

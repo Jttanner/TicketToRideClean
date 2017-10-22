@@ -4,8 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import clientModel.PlayerColumn;
 import modeling.Game;
-import ui.views.PlayerColumn;
 
 /**
  * Created by tyler on 10/20/2017.
