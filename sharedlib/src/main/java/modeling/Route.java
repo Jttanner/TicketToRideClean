@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class Route {
-    public Route(City first, City second, int distance, String trainColorNeeded){
+    public Route(City first, City second, String trainColorNeeded, int distance){
         twoCities.add(first);
         twoCities.add(second);
         this.distance = distance;
@@ -24,6 +24,31 @@ public class Route {
     //TODO: It is less good to pass the list directly.  should we change it?
     List<City> getTwoCities(){
         return  twoCities;
+    }
+
+    public int getPointValue(){
+        int points = 0;
+        switch(distance) {
+            case 1:
+                points = 1;
+                break;
+            case 2:
+                points = 2;
+                break;
+            case 3:
+                points = 4;
+                break;
+            case 4:
+                points = 7;
+                break;
+            case 5:
+                points = 10;
+                break;
+            case 6:
+                points = 15;
+                break;
+        }
+        return points;
     }
 
     boolean isClaimed(){

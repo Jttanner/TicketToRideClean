@@ -5,4 +5,19 @@ package modeling;
  */
 
 public class DestinationCard {
+
+    private City first;
+    private City second;
+    private int points;
+
+
+    public DestinationCard(City first, City second, int points){
+        this.first = first;
+        this.second = second;
+        this.points = points;
+    }
+
+    public String getDestinationCardString(){
+        return first.getCityName() + " " + second.getCityName();
+    }
 }
