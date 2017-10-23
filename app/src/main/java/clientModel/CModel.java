@@ -96,6 +96,18 @@ public class CModel extends Observable {
             notifyObservers(false);
         }
     }
+    /**Gets the user's player object
+     * @return Player User's player object*/
+    public Player getUserPlayer(){
+        String userName = getMyUser().getInfo().getUserName();
+        ArrayList<Player> players = currGame.getPlayers();
+        for(Player player : players){
+            if(player.getUserName().equals(userName)){
+                return player;
+            }
+        }
+        return null;
+    }
 
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList

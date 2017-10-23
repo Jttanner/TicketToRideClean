@@ -1,13 +1,17 @@
 package presenters;
 
+import android.widget.TextView;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.MVP_PlayerStats;
 import clientModel.CModel;
+import clientModel.MyColor;
 import clientModel.PlayerColumn;
 import modeling.Game;
 import modeling.GameList;
@@ -15,6 +19,7 @@ import modeling.Player;
 
 /**
  * Created by tyler on 10/20/2017.
+ * The presenter for the player stats view on the map
  */
 
 public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
@@ -25,6 +30,21 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
     public PlayerStatsPresenter(MVP_PlayerStats.ViewOps view) {
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
+    }
+    /**This method sets the textviews of certain colors of traincars with the number the user's palyer object has
+     * @param colorNumMap Map which holds colors as keys and textviews as values*/
+    @Override
+    public void setCardNumbers(Map<MyColor, TextView> colorNumMap) {
+        Player user = CModel.getInstance().getUserPlayer();
+        //For every type of color
+        for (MyColor color: colorNumMap.keySet()) {
+            //grab the num of how many cards of this color the user has
+            int numOfThisColor = user.getResourceColorList(color.toString()).size();
+            TextView textView = colorNumMap.get(color);
+            //set the textview to that number
+            textView.setText(numOfThisColor);
+        }
+
     }
 
     @Override

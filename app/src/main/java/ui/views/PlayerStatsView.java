@@ -10,8 +10,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Adapters.StatusAdapter;
 import MVP_coms_classes.MVP_PlayerStats;
+import clientModel.MyColor;
 import modeling.Game;
 import presenters.PlayerStatsPresenter;
 import teamjapannumbahone.tickettoride.R;
@@ -21,14 +25,24 @@ import teamjapannumbahone.tickettoride.R;
  */
 
 public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.ViewOps{
+    /**The recycler view for the game stats*/
     private RecyclerView mGameStatus;
+    /**The textview which holds the column names for the recycler views info*/
     private TextView mTextView;
+    /**The adapter for the recycler*/
     private StatusAdapter statusAdapter;
+    /**Our presenter that we can call*/
     private MVP_PlayerStats.PresOps presenter;
+    /**Our context*/
     private Context myParentContext;
+    /**The head stat column strings*/
     private String statNames;
+    /**Set of attributes for this view*/
     private  AttributeSet attrs;
+    /**Our view of this class*/
     private View myView;
+    /**Textviews holding num of user's cards*/
+    Map<MyColor,TextView> colorNumMap = new HashMap<>();
 
 
 
@@ -69,6 +83,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        setupTrains();
         mGameStatus = (RecyclerView) myView.findViewById(R.id.recycler_status);
         mTextView = (TextView) myView.findViewById(R.id.statusNames);
         mTextView.setText(statNames.replaceAll("\\n","\n"));
@@ -78,6 +93,30 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
         LinearLayoutManager manager = new LinearLayoutManager(myParentContext);
         mGameStatus.setLayoutManager(manager);
         mGameStatus.setAdapter(statusAdapter);
+    }
+
+    private void setupTrains() {
+        TextView redNum = (TextView)myView.findViewById(R.id.rednum);
+        TextView blueNum = (TextView)myView.findViewById(R.id.bluenum);
+        TextView blackNum = (TextView)myView.findViewById(R.id.blacknum);
+        TextView greenNum = (TextView)myView.findViewById(R.id.greennum);
+        TextView whiteNum = (TextView)myView.findViewById(R.id.whitenum);
+        TextView yellowNum = (TextView)myView.findViewById(R.id.yellownum);
+        TextView rainbowNum = (TextView)myView.findViewById(R.id.rainbownum);
+        TextView purpleNum = (TextView)myView.findViewById(R.id.purplenum);
+        TextView orangeNum = (TextView)myView.findViewById(R.id.orangenum);
+        colorNumMap.put(MyColor.RED,redNum);
+        colorNumMap.put(MyColor.BLUE,blueNum);
+        colorNumMap.put(MyColor.BLACK,blackNum);
+        colorNumMap.put(MyColor.GREEN,greenNum);
+        colorNumMap.put(MyColor.WHITE,whiteNum);
+        colorNumMap.put(MyColor.YELLOW,yellowNum);
+        colorNumMap.put(MyColor.WILD,rainbowNum);
+        colorNumMap.put(MyColor.ORANGE,orangeNum);
+        colorNumMap.put(MyColor.PURPLE,purpleNum);
+
+
+
     }
 
     @Override
@@ -92,6 +131,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
 
     @Override
     public void updatePlayerStats(Game g) {
+        presenter.setCardNumbers(colorNumMap);
         statusAdapter.setPlayerColumns(presenter.getPlayerColumns());
         statusAdapter.notifyDataSetChanged();
     }

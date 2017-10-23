@@ -1,19 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:id="@+id/play_stat_xml"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/play_stat_xml">
+    android:orientation="horizontal">
 
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/statusNames"/>
-
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
+        android:id="@+id/currPlayerCards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/red"
+            android:background="@drawable/background_border"
+            android:id="@+id/redImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rednum"/>
+
+        <ImageView
+            android:id="@+id/blueImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/background_border"
+            android:src="@drawable/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bluenum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/green"
+            android:background="@drawable/background_border"
+            android:id="@+id/greenImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/greennum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/purple"
+            android:background="@drawable/background_border"
+            android:id="@+id/purpleImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/purplenum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/orange"
+            android:background="@drawable/background_border"
+            android:id="@+id/orangeImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/orangenum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/white"
+            android:background="@drawable/background_border"
+            android:id="@+id/whiteImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/whitenum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/black"
+            android:background="@drawable/background_border"
+            android:id="@+id/blackImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/blacknum"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/yellow"
+            android:background="@drawable/background_border"
+            android:id="@+id/yellowImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yellownum"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/rainbow_sq"
+            android:background="@drawable/background_border"
+            android:id="@+id/rainbowImage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rainbownum"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/statusNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/currPlayerCards" />
+
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/statusNames">
 
     </android.support.v7.widget.RecyclerView>

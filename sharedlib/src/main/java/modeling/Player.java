@@ -1,9 +1,12 @@
 package modeling;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -15,7 +18,7 @@ public class Player implements Comparator<Player> {
     private String userName;
     private String playerName;
     private String color;
-    private List<ResourceCard> resourceCards = new ArrayList<>();
+    private Map<String,List<ResourceCard>> resourceCards;
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
     private int points;
@@ -29,6 +32,17 @@ public class Player implements Comparator<Player> {
         this.userName = userName;
         playerName = name;
         this.color = color;
+        resourceCards = new HashMap<>();
+        //Setup the resource card map
+        resourceCards.put("Red",new ArrayList<ResourceCard>());
+        resourceCards.put("Blue",new ArrayList<ResourceCard>());
+        resourceCards.put("Black",new ArrayList<ResourceCard>());
+        resourceCards.put("Yellow",new ArrayList<ResourceCard>());
+        resourceCards.put("Orange",new ArrayList<ResourceCard>());
+        resourceCards.put("Wild",new ArrayList<ResourceCard>());
+        resourceCards.put("Green",new ArrayList<ResourceCard>());
+        resourceCards.put("Purple",new ArrayList<ResourceCard>());
+        resourceCards.put("White",new ArrayList<ResourceCard>());
     }
 
     public String getColor() {
@@ -63,12 +77,21 @@ public class Player implements Comparator<Player> {
     public int compare(Player player, Player other) {
         return Integer.parseInt(player.userName) - Integer.parseInt(other.userName);
     }
+    /**Grabs the current number of destination cards*/
+    public int getNumOfResourceCardsTotal(){
+        int num = 0;
+        Collection<List<ResourceCard>> cards = resourceCards.values();
+        for(List<ResourceCard> cardArrayList : cards){
+            num += cardArrayList.size();
+        }
+        return num;
+    }
 
     @Override
     public String toString() {
         //I know..its ugly, just a quick fix
         //String.format()
-        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + resourceCards.size() + "\t\t\t\t\t" + destinationCards.size() + "\t\t\t\t\t" + routes.size();
+        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + getNumOfResourceCardsTotal() + "\t\t\t\t\t" + destinationCards.size() + "\t\t\t\t\t" + routes.size() + "\t";
     }
 
     @Override
@@ -92,18 +115,27 @@ public class Player implements Comparator<Player> {
         return userName;
     }
 
-    public List<ResourceCard> getResourceCards() {
-        return Collections.unmodifiableList(resourceCards);
+    /**Gets resource card map*/
+    public Map<String,List<ResourceCard>> getResourceCards() {
+        return resourceCards;
     }
+    /**Gets the list of the appropriate color*/
+    public List<ResourceCard> getResourceColorList(String color){
+        return Collections.unmodifiableList(resourceCards.get(color));
+    }
+
     /**Adds a resource card to the player's hand
      * @param c The resource card*/
     public void addResourceCard(ResourceCard c){
-        resourceCards.add(c);
+        //TODO need to add player as owner? Do we even needs this method, wont server handle it?
+        List<ResourceCard> cardList = resourceCards.get(c.getMyColor());
+        cardList.add(c);
     }
 
     public List<Route> getRoutes() {
         return Collections.unmodifiableList(routes);
     }
+
     /**Adds a route to what the player has claimed already
      * @param route Their newly claimed route*/
     public void addRoute(Route route){

@@ -29,11 +29,10 @@ public class Game {
         }
         Game oGame = (Game) o;
         //All instance variables must match to return true
-        boolean bool = (this.isHasStarted() == oGame.isHasStarted()) && (this.gameID.equals(oGame.getGameID()))
+        return  (this.isHasStarted() == oGame.isHasStarted()) && (this.gameID.equals(oGame.getGameID()))
                 && (this.gameName.equals(oGame.gameName))
                 && (this.getPlayerMax() == oGame.getPlayerMax())
                 && (this.players.equals(oGame.players));
-        return bool;
     }
 
     private ArrayList<Player> players;
@@ -110,10 +109,13 @@ public class Game {
         return gameID;
     }
 
+
     public boolean isHasStarted() {
         return hasStarted;
     }
-
+    /**Set if the game has started or not
+     * @param hasStarted Boolean, if it has started or not
+     **/
     public void setHasStarted(boolean hasStarted) {
 
         this.hasStarted = hasStarted;

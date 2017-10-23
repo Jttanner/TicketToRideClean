@@ -17,9 +17,16 @@ public enum MyColor {
     YELLOW(Color.YELLOW),
     DARKGREY(Color.DKGRAY),
     LIGHTGRAY(Color.LTGRAY),
+    WILD(Color.TRANSPARENT),
+    WHITE(Color.WHITE),
+    ORANGE(Color.parseColor("#FFA500")),
+    PURPLE(Color.parseColor("#551a8b")),
     BLACK(Color.BLACK);
 
+
     private int color;
+    private final int orangeColor = Color.parseColor("#FFA500");
+    private final int purpleColor = Color.parseColor("#551a8b");
 
     MyColor(int c) {
         color = c;
@@ -31,7 +38,10 @@ public enum MyColor {
 
     @Override
     public String toString() {
+
         switch (color){
+            case Color.WHITE:
+                return "White";
             case Color.BLACK:
                 return "Black";
             case Color.BLUE:
@@ -52,40 +62,48 @@ public enum MyColor {
                 return "Red";
             case Color.YELLOW:
                 return "Yellow";
+            case Color.TRANSPARENT:
+                return "Wild";
+        }
+        if(color == orangeColor){
+            return "Orange";
+        }
+        else if(color == purpleColor){
+            return "Purple";
         }
         return "Unknown Color";
     }
     /**Used for the spinners to go from string to color*/
-    public static MyColor unToString(String color){
-        if(color.equals("Black")){
-            return MyColor.BLACK;
-        }
-        if(color.equals("Blue")){
-            return MyColor.BLUE;
-        }
-        if(color.equals("Cyan")){
-            return MyColor.CYAN;
-        }
-        if(color.equals("Dark Gray")){
-            return MyColor.DARKGREY;
-        }
-        if(color.equals("Gray")){
-            return MyColor.GRAY;
-        }
-        if(color.equals("Green")){
-            return MyColor.GREEN;
-        }
-        if(color.equals("LightGray")){
-            return MyColor.LIGHTGRAY;
-        }
-        if(color.equals("Magenta")){
-            return MyColor.MAGENTA;
-        }
-        if(color.equals("Red")){
-            return MyColor.RED;
-        }
-        if(color.equals("Yellow")){
-            return MyColor.YELLOW;
+    public static MyColor unToString(String colorString){
+        switch (colorString) {
+            case "Black":
+                return MyColor.BLACK;
+            case "Blue":
+                return MyColor.BLUE;
+            case "Cyan":
+                return MyColor.CYAN;
+            case "Dark Gray":
+                return MyColor.DARKGREY;
+            case "Gray":
+                return MyColor.GRAY;
+            case "Green":
+                return MyColor.GREEN;
+            case "LightGray":
+                return MyColor.LIGHTGRAY;
+            case "Magenta":
+                return MyColor.MAGENTA;
+            case "Red":
+                return MyColor.RED;
+            case "Yellow":
+                return MyColor.YELLOW;
+            case "Wild":
+                return MyColor.WILD;
+            case "White":
+                return MyColor.WHITE;
+            case "Orange":
+                return MyColor.ORANGE;
+            case "Purple":
+                return MyColor.PURPLE;
         }
         return null;
     }
