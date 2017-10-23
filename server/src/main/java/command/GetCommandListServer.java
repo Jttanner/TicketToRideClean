@@ -3,7 +3,7 @@ package command;
 import java.util.Map;
 
 import ServerModel.ServerModel;
-import commandData.GetCommandListData;
+import commandData.GetCmndListDataServer;
 import modeling.CommandList;
 
 /**
@@ -11,17 +11,16 @@ import modeling.CommandList;
  * WIP
  */
 
-public class GetCommandListServer extends GetCommandListData {
-    public GetCommandListServer(String gameID) {
-        super(gameID);
+public class GetCommandListServer extends GetCmndListDataServer {
+    public GetCommandListServer() {
+        super();
     }
 
     /**Gets the CommandList to send to the Server*/
-    public CommandList execute() {
+    public Map<String,CommandList> execute() {
         ServerModel model = ServerModel.getInstance();
         Map<String, CommandList> commandListMap = model.getCommandListMap();
-        CommandList commandList = commandListMap.get(this.getGameID());
-        return commandList;
+        return commandListMap;
 
     }
 }

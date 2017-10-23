@@ -11,15 +11,14 @@ import java.net.HttpURLConnection;
 
 import command.AddChatCommand;
 import command.CreateGameCommand;
-import command.GetCommandListDataClient;
 import command.GetCommandListServer;
+import command.GetCommandListToClient;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
-import commandData.GetCommandListData;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
 import encoder.Encoder;
@@ -67,9 +66,8 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = startGameCommand.execute();
                     break;
                 case "getCommandList":
-                    GetCommandListData commandListData = gson.fromJson(reqData,GetCommandListData.class);
-                    GetCommandListServer commandListServer = new GetCommandListServer(commandListData.getGameID());
-                    commandData = new GetCommandListDataClient(commandListServer.execute());
+                    GetCommandListServer commandListServer = new GetCommandListServer();
+                    commandData = new GetCommandListToClient(commandListServer.execute());
                 case "addChat":
                     ChatCommandData chatCommandData = gson.fromJson(reqData,ChatCommandData.class);
                     AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
