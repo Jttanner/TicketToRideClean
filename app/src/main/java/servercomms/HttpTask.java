@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
+import commandData.ChatCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.GetGameListCommandData;

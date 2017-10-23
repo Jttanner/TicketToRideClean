@@ -9,15 +9,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
+import command.AddChatCommand;
 import command.CreateGameCommand;
-import command.GetCommandListDataClient;
-import command.GetCommandListServer;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
+import commandData.ChatCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
-import commandData.GetCommandListData;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
 import encoder.Encoder;
@@ -42,7 +41,6 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Gson gson = new Gson();
             Command cmd = gson.fromJson(reqData, Command.class);
             CommandResult result = null;
-            Command pollingCommandResult = null;
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
@@ -63,22 +61,17 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData.getGame());
                     result = startGameCommand.execute();
-                case "getCommandList":
-                    GetCommandListData commandListData = gson.fromJson(reqData, GetCommandListData.class);
-                    GetCommandListServer getCommandList = new GetCommandListServer(commandListData.getGameID());
-                    pollingCommandResult = new GetCommandListDataClient(getCommandList.execute());
-
+                    break;
+                case "addChat":
+                    ChatCommandData chatCommandData = gson.fromJson(reqData,ChatCommandData.class);
+                    AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
+                    addChatCommand.execute();
                 default:
                     break;
             }
             OutputStream respBody = exchange.getResponseBody();
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-            if(result != null){
-                new Encoder().encode(result,exchange.getResponseBody());
-            }
-            else if(pollingCommandResult != null){
-                new Encoder().encode(pollingCommandResult,exchange.getResponseBody());
-            }
+            new Encoder().encode(result,exchange.getResponseBody());
             respBody.close();
         }
         catch (IOException e) {

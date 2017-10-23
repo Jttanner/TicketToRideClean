@@ -1,9 +1,11 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import commandData.CommandList;
+import commandData.Command;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -22,11 +24,28 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
-    private Map<Game,CommandList> commandList = new HashMap<>();
 
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
+    private List<String> chatHistory = new ArrayList<>();
 
+    public List<String> getChatHistory() {
+        return chatHistory;
+    }
+
+    public List<Command> returnCommand = new ArrayList<>();
+
+    public List<Command> getReturnCommand() {
+        return returnCommand;
+    }
+
+    public void setReturnCommand(List<Command> returnCommand) {
+        this.returnCommand = returnCommand;
+    }
+
+    public void setChatHistory(List<String> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
 
     public ServerModel() {
     }
@@ -59,10 +78,7 @@ public class ServerModel {
     }
 
     boolean startGame(Game game){
-        //Game is started, lets create a list of commands
-        commandList.put(game,new CommandList());
         return gameList.startGame(game);
-
     }
 
     boolean deleteGame(Game game){
@@ -103,7 +119,4 @@ public class ServerModel {
         return this.gameList;
     }
 
-    public Map<Game, CommandList> getCommandList() {
-        return commandList;
-    }
 }

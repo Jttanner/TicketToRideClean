@@ -42,6 +42,13 @@ public class Poller {
         return instance;
     }
 
+    public void doEverything(){
+        updateGameList();
+    }
+    public void FetchChat(){
+
+
+    }
     public void updateGameList() {
         timer = new Timer();
         //final Handler handler = new Handler();
@@ -52,6 +59,7 @@ public class Poller {
                 UpdateLobby updateLobby = new UpdateLobby();
                 // PerformBackgroundTask this class is the class that extends AsynchTask
                 updateLobby.execute();
+                //updatechat
             }
         };
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms

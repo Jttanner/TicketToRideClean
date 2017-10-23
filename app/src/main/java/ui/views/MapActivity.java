@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +20,8 @@ import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private static final String TAG = "MapActivity";
-    private MVP_Map.MapPresOps presenter;
+    private RecyclerView mGameStatus;
+    public MVP_Map.MapPresOps presenter;
     private Button chatroom;
 
     @Override
@@ -32,6 +36,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
+        presenter = new MapPresenter(this);
 
 
         chatroom = (Button) findViewById(R.id.chatButton);
@@ -65,6 +70,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public Context getAppContext() {
         return getApplicationContext();
     }
+
 
     @Override
     public Context getActivityContext() {
