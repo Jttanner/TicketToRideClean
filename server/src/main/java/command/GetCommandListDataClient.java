@@ -1,7 +1,7 @@
 package command;
 
 import commandData.Command;
-import commandData.CommandList;
+import modeling.CommandList;
 
 /**
  * Created by tyler on 10/23/2017.

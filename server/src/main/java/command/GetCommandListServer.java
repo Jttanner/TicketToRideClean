@@ -3,9 +3,8 @@ package command;
 import java.util.Map;
 
 import ServerModel.ServerModel;
-import commandData.CommandList;
 import commandData.GetCommandListData;
-import modeling.Game;
+import modeling.CommandList;
 
 /**
  * Created by tyler on 10/23/2017.
@@ -20,9 +19,9 @@ public class GetCommandListServer extends GetCommandListData {
     /**Gets the CommandList to send to the Server*/
     public CommandList execute() {
         ServerModel model = ServerModel.getInstance();
-        Map<Game, CommandList> gameGameListMap = model.getCommandList();
-        Game currGame = model.getGamesAsMap().get(this.getGameID());
-        return gameGameListMap.get(currGame);
+        Map<String, CommandList> commandListMap = model.getCommandListMap();
+        CommandList commandList = commandListMap.get(this.getGameID());
+        return commandList;
 
     }
 }
