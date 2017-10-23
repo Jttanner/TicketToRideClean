@@ -1,8 +1,11 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import commandData.Command;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -24,7 +27,25 @@ public class ServerModel {
 
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
+    private List<String> chatHistory = new ArrayList<>();
 
+    public List<String> getChatHistory() {
+        return chatHistory;
+    }
+
+    public List<Command> returnCommand = new ArrayList<>();
+
+    public List<Command> getReturnCommand() {
+        return returnCommand;
+    }
+
+    public void setReturnCommand(List<Command> returnCommand) {
+        this.returnCommand = returnCommand;
+    }
+
+    public void setChatHistory(List<String> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
 
     public ServerModel() {
     }

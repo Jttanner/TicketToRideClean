@@ -9,10 +9,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
+import command.AddChatCommand;
 import command.CreateGameCommand;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
+import commandData.ChatCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.JoinGameCommandData;
@@ -59,6 +61,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData.getGame());
                     result = startGameCommand.execute();
+                    break;
+                case "addChat":
+                    ChatCommandData chatCommandData = gson.fromJson(reqData,ChatCommandData.class);
+                    AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
+                    addChatCommand.execute();
                 default:
                     break;
             }

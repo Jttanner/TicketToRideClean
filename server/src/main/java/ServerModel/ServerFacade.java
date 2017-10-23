@@ -1,5 +1,6 @@
 package ServerModel;
 
+import commandData.ChatCommandData;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -38,6 +39,12 @@ public class ServerFacade {
         else{
             return new LoginResult(false, "login failed.");
         }
+    }
+
+    public void addChat(String s){
+        ServerModel.getInstance().getChatHistory().add(s);
+        ChatCommandData chatCommandData = new ChatCommandData(ServerModel.getInstance().getChatHistory());
+        ServerModel.getInstance().getReturnCommand().add(chatCommandData);
     }
 
     public RegisterResult register(RegisterRequest request){

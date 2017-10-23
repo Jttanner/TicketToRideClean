@@ -6,6 +6,8 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import commandData.ChatCommandData;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 10/19/2017.
@@ -29,5 +31,10 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
     @Override
     public void update(Observable o, Object arg) {
         //ex, game won,player attributes changed(routeClaimed),
+    }
+
+    public void UpdateChat(String s){
+        ChatCommandData chatCommandData = new ChatCommandData(s);
+        ServerProxy.getInstance().sendCommand(chatCommandData);
     }
 }

@@ -44,6 +44,8 @@ public class ChatFragment extends DialogFragment {
         Enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ((MapActivity)getActivity()).presenter.UpdateChat(currentString);
                 CModel.getInstance().getChatHistory().add(currentString);
                 currentString = "";
                 chatEdit.setText("");
