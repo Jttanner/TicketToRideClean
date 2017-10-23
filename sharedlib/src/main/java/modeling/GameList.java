@@ -52,7 +52,7 @@ public class GameList {
                 default:
                     break;
             }
-            newPlayer.setPlayerName(user.getInfo().getUserName());
+            //newPlayer.setPlayerName(user.getInfo().getUserName());
             existingGame.addPlayer(newPlayer);
             user.addPlayer(newPlayer);
             user.addGame(existingGame);

@@ -40,9 +40,8 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
         for (MyColor color: colorNumMap.keySet()) {
             //grab the num of how many cards of this color the user has
             int numOfThisColor = user.getResourceColorList(color.toString()).size();
-            TextView textView = colorNumMap.get(color);
-            //set the textview to that number
-            textView.setText(numOfThisColor);
+            myView.get().setMyTextView(color,numOfThisColor);
+
         }
 
     }

@@ -5,4 +5,13 @@ package modeling;
  */
 
 public class TrainCar {
+    private String color;
+
+    public TrainCar(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }

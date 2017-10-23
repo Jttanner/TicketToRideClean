@@ -18,6 +18,7 @@ public class Player implements Comparator<Player> {
     private String userName;
     private String playerName;
     private String color;
+    private List<TrainCar> trainCarList;
     private Map<String,List<ResourceCard>> resourceCards;
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
@@ -26,13 +27,21 @@ public class Player implements Comparator<Player> {
 
     public Player(String userName){
         this.userName = userName;
+        this.playerName = userName;
+        setup();
     }
 
     public Player(String userName, String name, String color) {
         this.userName = userName;
         playerName = name;
         this.color = color;
+        setup();
+
+    }
+
+    private void setup() {
         resourceCards = new HashMap<>();
+        trainCarList = new ArrayList<>();
         //Setup the resource card map
         resourceCards.put("Red",new ArrayList<ResourceCard>());
         resourceCards.put("Blue",new ArrayList<ResourceCard>());
@@ -91,7 +100,7 @@ public class Player implements Comparator<Player> {
     public String toString() {
         //I know..its ugly, just a quick fix
         //String.format()
-        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + getNumOfResourceCardsTotal() + "\t\t\t\t\t" + destinationCards.size() + "\t\t\t\t\t" + routes.size() + "\t";
+        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + getNumOfResourceCardsTotal() + "\t\t\t\t\t" + trainCarList.size() + "\t\t\t\t\t" + routes.size() + "\t";
     }
 
     @Override
@@ -167,5 +176,9 @@ public class Player implements Comparator<Player> {
 
     public void toggleMyTurn() {
         this.isMyTurn = !this.isMyTurn;
+    }
+
+    public List<TrainCar> getTrainCarList() {
+        return trainCarList;
     }
 }

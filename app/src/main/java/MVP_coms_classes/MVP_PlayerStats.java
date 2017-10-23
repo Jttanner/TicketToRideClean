@@ -24,6 +24,8 @@ public interface MVP_PlayerStats {
         Context getActivityContext();
         /**updates the player stats*/
         void updatePlayerStats(Game g);
+        /**Sets the textviews for card color numbers*/
+        void setMyTextView(MyColor color, int numOfThisColor);
     }
 
     interface PresOps{

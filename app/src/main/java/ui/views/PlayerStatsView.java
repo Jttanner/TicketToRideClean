@@ -78,7 +78,15 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
 
     }
 
-
+    /**Sets the text of a particular textview that is tied to a resource card color
+     * @param color THe MyColor Key
+     * @param numOfThisColor The number of this kind of resource cards we have*/
+    @Override
+    public void setMyTextView(MyColor color, int numOfThisColor) {
+        TextView textView = colorNumMap.get(color);
+        //set the textview to that number
+        textView.setText(String.valueOf(numOfThisColor));
+    }
 
     @Override
     protected void onFinishInflate() {
@@ -86,13 +94,14 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
         setupTrains();
         mGameStatus = (RecyclerView) myView.findViewById(R.id.recycler_status);
         mTextView = (TextView) myView.findViewById(R.id.statusNames);
-        mTextView.setText(statNames.replaceAll("\\n","\n"));
+        mTextView.setText(statNames.replaceAll("\\t","\t"));
         presenter = new PlayerStatsPresenter(this);
         //setup recycler
         statusAdapter = new StatusAdapter(myParentContext,presenter.getPlayerColumns());
         LinearLayoutManager manager = new LinearLayoutManager(myParentContext);
         mGameStatus.setLayoutManager(manager);
         mGameStatus.setAdapter(statusAdapter);
+        presenter.setCardNumbers(colorNumMap);
     }
 
     private void setupTrains() {
