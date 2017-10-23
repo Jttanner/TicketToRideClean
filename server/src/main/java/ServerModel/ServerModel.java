@@ -3,6 +3,7 @@ package ServerModel;
 import java.util.HashMap;
 import java.util.Map;
 
+import commandData.CommandList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -21,6 +22,7 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
+    private Map<Game,CommandList> commandList = new HashMap<>();
 
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
@@ -57,7 +59,10 @@ public class ServerModel {
     }
 
     boolean startGame(Game game){
+        //Game is started, lets create a list of commands
+        commandList.put(game,new CommandList());
         return gameList.startGame(game);
+
     }
 
     boolean deleteGame(Game game){
@@ -98,4 +103,7 @@ public class ServerModel {
         return this.gameList;
     }
 
+    public Map<Game, CommandList> getCommandList() {
+        return commandList;
+    }
 }

@@ -15,7 +15,7 @@ public class DestinationCardList {
     public DestinationCardList(){
         destinationCardList = new ArrayList<>();
 
-        /*
+
         destinationCardList.add(new DestinationCard(new City("Denver"), new City("El Paso"), 4));
         destinationCardList.add(new DestinationCard(new City("Kansas City"), new City("Houston"), 5));
         destinationCardList.add(new DestinationCard(new City("New York"), new City("Atlanta"), 6));
@@ -46,7 +46,7 @@ public class DestinationCardList {
         destinationCardList.add(new DestinationCard(new City("Los Angeles"), new City("Miami"), 20));
         destinationCardList.add(new DestinationCard(new City("Los Angeles"), new City("New York"), 21));
         destinationCardList.add(new DestinationCard(new City("Seattle"), new City("New York"), 22));
-        */
+
     }
 
 }

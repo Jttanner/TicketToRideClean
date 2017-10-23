@@ -57,14 +57,14 @@ public class Poller {
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
     }
 
-    public void updatePlayerList(){
+    public void getCommands(){
         TimerTask doAsyoncronousTask = new TimerTask() {
             @Override
             public void run() {
                 //handler.post(new Runnable() {
-                UpdateLobby updateLobby = new UpdateLobby();
+                //UpdateLobby updateLobby = new UpdateLobby();
                 // PerformBackgroundTask this class is the class that extends AsynchTask
-                updateLobby.execute();
+                //updateLobby.execute();
             }
         };
     }
