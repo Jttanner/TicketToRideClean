@@ -89,7 +89,6 @@ public class Poller {
     private class UpdateLobby extends AsyncTask<Void, Void, Integer>
     {
         private GameList gameList;
-
         @Override
         protected Integer doInBackground(Void... params)
         {
@@ -104,11 +103,23 @@ public class Poller {
             }
             return 0;
         }
-
         @Override
         protected void onPostExecute(Integer integer)
         {
             super.onPostExecute(integer);
         }
     }
+
+//    private class GetCommandList extends AsyncTask<Void,Void,Integer>{
+//        @Override
+//        protected Integer doInBackground(Void... params) {
+//            try{
+//
+//            }
+//            catch (Exception e){
+//
+//            }
+//        }
+//
+//    }
 }
