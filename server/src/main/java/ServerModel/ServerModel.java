@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.Command;
+import modeling.CommandList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -24,7 +25,7 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
-
+    private Map<String, CommandList> commandListMap = new HashMap<>();
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
@@ -78,6 +79,7 @@ public class ServerModel {
     }
 
     boolean startGame(Game game){
+        commandListMap.put(game.getGameID(),new CommandList());
         return gameList.startGame(game);
     }
 
@@ -119,4 +121,7 @@ public class ServerModel {
         return this.gameList;
     }
 
+    public Map<String, CommandList> getCommandListMap() {
+        return commandListMap;
+    }
 }

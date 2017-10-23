@@ -65,14 +65,14 @@ public class Poller {
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
     }
 
-    public void updatePlayerList(){
+    public void getCommands(){
         TimerTask doAsyoncronousTask = new TimerTask() {
             @Override
             public void run() {
                 //handler.post(new Runnable() {
-                UpdateLobby updateLobby = new UpdateLobby();
+                //UpdateLobby updateLobby = new UpdateLobby();
                 // PerformBackgroundTask this class is the class that extends AsynchTask
-                updateLobby.execute();
+                //updateLobby.execute();
             }
         };
     }
@@ -89,7 +89,6 @@ public class Poller {
     private class UpdateLobby extends AsyncTask<Void, Void, Integer>
     {
         private GameList gameList;
-
         @Override
         protected Integer doInBackground(Void... params)
         {
@@ -104,11 +103,23 @@ public class Poller {
             }
             return 0;
         }
-
         @Override
         protected void onPostExecute(Integer integer)
         {
             super.onPostExecute(integer);
         }
     }
+
+//    private class GetCommandList extends AsyncTask<Void,Void,Integer>{
+//        @Override
+//        protected Integer doInBackground(Void... params) {
+//            try{
+//
+//            }
+//            catch (Exception e){
+//
+//            }
+//        }
+//
+//    }
 }

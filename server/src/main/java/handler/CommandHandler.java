@@ -11,6 +11,8 @@ import java.net.HttpURLConnection;
 
 import command.AddChatCommand;
 import command.CreateGameCommand;
+import command.GetCommandListServer;
+import command.GetCommandListToClient;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
@@ -41,6 +43,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Gson gson = new Gson();
             Command cmd = gson.fromJson(reqData, Command.class);
             CommandResult result = null;
+            Command commandData = null;
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
@@ -59,9 +62,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;
                 case "startGame":
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
-                    StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData.getGame());
+                    StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData);
                     result = startGameCommand.execute();
                     break;
+                case "getCommandList":
+                    GetCommandListServer commandListServer = new GetCommandListServer();
+                    commandData = new GetCommandListToClient(commandListServer.execute());
                 case "addChat":
                     ChatCommandData chatCommandData = gson.fromJson(reqData,ChatCommandData.class);
                     AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
@@ -71,7 +77,13 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             }
             OutputStream respBody = exchange.getResponseBody();
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-            new Encoder().encode(result,exchange.getResponseBody());
+            //Whether we are sending over a command result or a commandData
+            if(result != null) {
+                new Encoder().encode(result,exchange.getResponseBody());
+            }
+            else if(commandData != null){
+                new Encoder().encode(commandData,exchange.getResponseBody());
+            }
             respBody.close();
         }
         catch (IOException e) {

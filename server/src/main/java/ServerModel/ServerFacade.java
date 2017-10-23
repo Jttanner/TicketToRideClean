@@ -1,6 +1,10 @@
 package ServerModel;
 
+import java.util.Map;
+
 import commandData.ChatCommandData;
+import commandData.Command;
+import modeling.CommandList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.User;
@@ -82,6 +86,10 @@ public class ServerFacade {
     public GameList getGameList(){
         return ServerModel.getInstance().getGames();
     }
-
-
+    /**Adds command to the correct commandList
+     * @param gameID THe game id key*/
+    public void addCommandToList(String gameID, Command command){
+        Map<String, CommandList> commandListMap = serverModel.getCommandListMap();
+        commandListMap.get(gameID).addToList(command);
+    }
 }
