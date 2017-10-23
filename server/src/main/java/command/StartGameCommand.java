@@ -2,7 +2,6 @@ package command;
 
 import ServerModel.ServerFacade;
 import commandData.StartGameCommandData;
-import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -10,28 +9,24 @@ import result.CommandResult;
  */
 
 public class StartGameCommand extends StartGameCommandData implements ICommand {
-    Game game;
-
-    public StartGameCommand(Game game) {
-        super(game);
-        this.game = game;
+    private StartGameCommandData commandData;
+    public StartGameCommand(StartGameCommandData data) {
+        super(data.getGame());
+        //hold onto dataobjct in case of success
+        this.commandData = data;
         setType("startGame");
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     @Override
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
+
         CommandResult result;
-        if (facade.startGame(game)){
+        //start the game then if it succeeds add this commanddata to the list for the game object
+        //others will take this startGameData and start the game themselves
+        if (facade.startGame(this.getGame())){
             result = new CommandResult(true);
+            facade.addCommandToList(this.getGame().getGameID(),commandData);
         } else{
             result = new CommandResult(false);
         }
