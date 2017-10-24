@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
 import modeling.Player;
+import presenters.DestinationCardPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -29,10 +31,12 @@ public class DestinationCardFragment extends Fragment {
     private TextView mRoute2;
     private TextView mRoute3;
     private Button buttonStart;
+    MVP_DestCard.MapPresOps presenter;
     private final String TAG = "Destination Frag";
 
     public DestinationCardFragment(){
         System.out.println("hello");
+        presenter = new DestinationCardPresenter(this);
         /*game = new Game();
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserName());

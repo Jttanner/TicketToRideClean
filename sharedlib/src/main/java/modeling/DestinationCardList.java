@@ -3,6 +3,7 @@ package modeling;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by ahwang13 on 10/21/17.
@@ -47,6 +48,32 @@ public class DestinationCardList {
         destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("New York"), 21));
         destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("New York"), 22));
 
+    }
+
+    public List<DestinationCard> get3Cards() {
+        List<DestinationCard> threeCards = null;
+        for (int i = 0; i < 3; i++) {
+            DestinationCard card = get1RandomCard();
+            threeCards.add(card);
+        }
+        return threeCards;
+    }
+
+    public DestinationCard get1RandomCard() {
+        int min = 0;
+        int max = destinationCardList.size() - 1;
+        int randomIndex = randInt(min, max);
+        DestinationCard saved = destinationCardList.get(randomIndex);
+        destinationCardList.remove(randomIndex);
+        return saved;
+    }
+
+    public static int randInt(int min, int max) {
+        Random rand = null;
+
+        int randomNum = rand.nextInt((max-min) + 1) + min;
+
+        return randomNum;
     }
 
 }
