@@ -112,7 +112,7 @@ public class ServerCommunicator {
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
             //String portNumber = args[0];
-            new ServerCommunicator().run("8080");
+            new ServerCommunicator().run("8081");
         }
     }
 

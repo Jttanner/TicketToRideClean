@@ -21,8 +21,9 @@ public interface MVP_DestCard {
         Context getAppContext();
         /**gets activity context*/
         Context getActivityContext();
-        /**replaces destination cards drawn*/
-        void addFaceUpCard(DestinationCard c);
+        /**gives the player the destination cards he has chosen*/
+        void giveChosenCards(List<DestinationCard> destinationCards);
+        //Or is it string destinationCard?
 
     }
     /**
@@ -31,7 +32,7 @@ public interface MVP_DestCard {
      */
     interface MapPresOps{ //View pushes to the presenter
         /**Sends the presenter what destination cards were picked*/
-        void pickDestCards(List<DestinationCard> cards) ;
+        //void pickDestCards(List<DestinationCard> cards) ;
     }
 
     //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards

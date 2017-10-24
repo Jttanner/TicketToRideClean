@@ -1,5 +1,7 @@
 package command;
 
+import com.sun.corba.se.spi.activation.Server;
+
 import java.util.List;
 
 import ServerModel.ServerFacade;
@@ -12,6 +14,7 @@ import result.DrawDestinationCardCommandResult;
  * Created by ahwang13 on 10/24/17.
  */
 
+/*
 public class DrawDestinationCardCommand extends DrawDestinationCardCommandData implements ICommand {
     public DrawDestinationCardCommand() {
         super();
@@ -20,10 +23,13 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
 
     @Override
     public DrawDestinationCardCommand execute() {
+        ServerFacade facade = ServerFacade.getInstance();
         DrawDestinationCardCommandResult result;
-        List<DestinationCard> destinationCardList = ServerFacade.getInstance().getDestinationCardList();
+        List<DestinationCard> destinationCardList = facade.getDestinationCardList();
         if(destinationCardList == null) {
+            //facade.addCommandToList(facade.getGame().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
+
             return result;
         }
         else {
@@ -35,4 +41,4 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
         }
     }
 
-}
+}*/

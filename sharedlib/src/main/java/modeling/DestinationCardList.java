@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class DestinationCardList {
 
-    private List<DestinationCard> destinationCardList;
-    private List<DestinationCard> discardPile;
+    private List<DestinationCard> destinationCardList = new ArrayList<>();
+    private List<DestinationCard> discardPile = new ArrayList<>();
     private CityList cityList = new CityList();
     private Map<String, City> cityMap = cityList.getCityListMap();
 

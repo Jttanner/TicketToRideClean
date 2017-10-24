@@ -1,6 +1,7 @@
 package ui.views;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,8 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
+import modeling.DestinationCard;
 import modeling.Player;
 import presenters.DestinationCardPresenter;
 import teamjapannumbahone.tickettoride.R;
@@ -22,7 +26,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by Hwang on 10/20/2017.
  */
 
-public class DestinationCardFragment extends Fragment {
+public class DestinationCardFragment extends Fragment implements MVP_DestCard.MapViewOps {
 
     //Game game;
     Player player;
@@ -35,8 +39,8 @@ public class DestinationCardFragment extends Fragment {
     private final String TAG = "Destination Frag";
 
     public DestinationCardFragment(){
-        System.out.println("hello");
         presenter = new DestinationCardPresenter(this);
+
         /*game = new Game();
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserName());
@@ -63,6 +67,10 @@ public class DestinationCardFragment extends Fragment {
         mRoute2 = (TextView) v.findViewById(R.id.mRoute2);
         mRoute3 = (TextView) v.findViewById(R.id.mRoute3);
         buttonStart = (Button) v.findViewById(R.id.buttonStart);
+
+        mRoute1.setText(CModel.getInstance().threeDestinationCards().get(0).getDestinationCardString());
+        mRoute2.setText(CModel.getInstance().threeDestinationCards().get(1).getDestinationCardString());
+        mRoute3.setText(CModel.getInstance().threeDestinationCards().get(2).getDestinationCardString());
 
         wireUp();
     }
@@ -135,5 +143,20 @@ public class DestinationCardFragment extends Fragment {
 
             }
         });*/
+    }
+
+    @Override
+    public Context getAppContext() {
+        return null;
+    }
+
+    @Override
+    public Context getActivityContext() {
+        return null;
+    }
+
+    @Override
+    public void giveChosenCards(List<DestinationCard> destinationCards) {
+
     }
 }

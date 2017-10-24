@@ -63,7 +63,6 @@ public class ServerModel {
     }
 
     User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
-
         return userInfoList.register(userName, password);
     }
 

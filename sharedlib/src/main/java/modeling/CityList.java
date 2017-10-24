@@ -1,5 +1,6 @@
 package modeling;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.Map;
  */
 
 public class CityList {
-    private List<City> cities;
+    private List<City> cities = new ArrayList<>();
     private Map<String, City> cityListMap = new HashMap();
 
     private void fillMap(){
