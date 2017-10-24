@@ -23,7 +23,7 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private String ipaddress = "10.24.68.47";
+    private String ipaddress = "10.24.71.31";
     private String myUrl = "http://" + ipaddress +":8080/user/";
 
     private ServerProxy() {
@@ -51,10 +51,7 @@ public class ServerProxy {
         }
     }
 
-//    public List<Game> getGameList(Command c) {
-//
-//    }
-    /**Sends commands to the server. All commandData objects are of Type Command so this works
+    /**Sends commands to the server. All commandData objects are of Type Command
      * @param command The command to be sent*/
     public void sendCommand(Command command){
         Log.d(TAG, "Sending Commands: " + command.getType());

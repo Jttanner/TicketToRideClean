@@ -14,7 +14,7 @@ import teamjapannumbahone.tickettoride.R;
 
 /**
  * Created by tyler on 4/3/2017.
- * Our View Holder
+ * Our View Holder for the status adapter
  */
 
 public class PlayerViewHolder extends RecyclerView.ViewHolder {

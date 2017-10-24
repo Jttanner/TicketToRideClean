@@ -124,4 +124,13 @@ public class Game {
             players.get(0).toggleMyTurn();
         }
     }
+    /**Gets the a particular player by a given username*/
+    public Player getPlayer(String playerName) {
+        for(Player player : players){
+            if(player.getUserName().equals(playerName)){
+                return player;
+            }
+        }
+        return null;
+    }
 }
