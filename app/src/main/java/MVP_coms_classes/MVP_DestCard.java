@@ -33,4 +33,5 @@ public interface MVP_DestCard {
         /**Sends the presenter what destination cards were picked*/
         void pickDestCards(List<DestinationCard> cards) ;
     }
+    //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards
 }
