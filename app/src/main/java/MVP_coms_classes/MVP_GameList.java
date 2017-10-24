@@ -10,13 +10,13 @@ import modeling.Game;
 
 public interface MVP_GameList {
 
-    interface GameListActivityInterface{
+    interface GameListActivityInterface{ //Presenter is pushing things to the view
         void UpdateList(List<Game> list);
         void JoinGameResult(Game game);
         void ToggleButton(boolean startGame, boolean joinGame);
     }
 
-    interface GameListPresenterInterface {
+    interface GameListPresenterInterface { //View is pushing things to the presenter
         void CreateGame(Game game);
         void JoinGame(Game game);
     }
