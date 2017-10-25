@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 
+import commandData.GetCmndListDataToClient;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
@@ -103,5 +104,12 @@ public class Encoder {
     }
 
 
-
+    public Object decodeGetCommandListToClient(InputStream stream) {
+        try {
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, GetCmndListDataToClient.class);
+        }catch (Exception e){
+            return new JoinGameCommandResult(false,e.getMessage());
+        }
+    }
 }

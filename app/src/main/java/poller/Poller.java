@@ -7,8 +7,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import clientModel.CModel;
+import commandData.Command;
+import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
-import modeling.GameList;
 import servercomms.ServerProxy;
 
 /**
@@ -19,19 +20,16 @@ public class Poller {
 
     CModel clientModel = CModel.getInstance();
     //URL URL;
-    GetGameListCommandData command;
+    Command command;
     //Timer needs to be static or else it will cancel another instance of the Timer class
-    private static Timer timer;
+    private static Timer timer,getCommandTimer;
     private final String TAG = "Poller";
-
+    /**Our Async task*/
+    private Poll sendCommand;
     private static Poller instance = new Poller();
 
     private Poller(){
-        try{
-            command = new GetGameListCommandData();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        Log.d(TAG,"Making Poller Object");
     }
 
     public static Poller getInstance()
@@ -42,58 +40,70 @@ public class Poller {
         return instance;
     }
 
-    public void doEverything(){
+    /*public void doEverything(){
         updateGameList();
-    }
+    }*/
     public void FetchChat(){
 
 
     }
+    /**Method to call in order to have the poller the game list*/
     public void updateGameList() {
+        Log.d(TAG,"updatingGameList");
         timer = new Timer();
-        //final Handler handler = new Handler();
+        command = new GetGameListCommandData();
+        //makes the Timer task
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
-                //handler.post(new Runnable() {
-                UpdateLobby updateLobby = new UpdateLobby();
-                // PerformBackgroundTask this class is the class that extends AsynchTask
-                updateLobby.execute();
-                //updatechat
+                Log.d(TAG,"Going into AsynTask");
+                sendCommand = new Poll();
+                sendCommand.execute();
             }
         };
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
+
     }
 
-    public void getCommands(){
-        TimerTask doAsyoncronousTask = new TimerTask() {
+    /**Method to call in order to have the poller get the command list*/
+    public void getCommandList(){
+        Log.d(TAG,"getting command list");
+        getCommandTimer = new Timer();
+        command = new GetCmndDataFromServer();
+        //makes the TimerTask
+        TimerTask doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
-                //handler.post(new Runnable() {
-                //UpdateLobby updateLobby = new UpdateLobby();
-                // PerformBackgroundTask this class is the class that extends AsynchTask
-                //updateLobby.execute();
+                Log.d(TAG,"Going into AsynTask");
+                sendCommand = new Poll();
+                sendCommand.execute();
             }
         };
+        getCommandTimer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
     }
 
+    /**Stops the GetCommandsPoller from running*/
+    public void stopGetCommandsPoller(){
+        if(getCommandTimer != null){
+            Log.d(TAG,"Stopping getCommand poller");
+            getCommandTimer.cancel();
+            getCommandTimer = null;
+        }
+    }
+    /**Stops the GetGameList poller from working*/
     public void stopPoller(){
         if(timer != null){
+            Log.d(TAG,"Stopping getGamelist poller");
             timer.cancel();
             timer = null;
         }
     }
 
-
-
-    private class UpdateLobby extends AsyncTask<Void, Void, Integer>
+    private class Poll extends AsyncTask<Void, Void, Integer>
     {
-        private GameList gameList;
         @Override
         protected Integer doInBackground(Void... params)
         {
-            //TODO: Push the request to the serverProxy
-
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
                 serverProxy.sendCommand(command);
@@ -109,17 +119,4 @@ public class Poller {
             super.onPostExecute(integer);
         }
     }
-
-//    private class GetCommandList extends AsyncTask<Void,Void,Integer>{
-//        @Override
-//        protected Integer doInBackground(Void... params) {
-//            try{
-//
-//            }
-//            catch (Exception e){
-//
-//            }
-//        }
-//
-//    }
 }

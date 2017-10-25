@@ -23,6 +23,8 @@ public class Player implements Comparator<Player> {
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
     private int points;
+    /**Where in the Commadlist we are for this player*/
+    private int commandIndex;
     private boolean isMyTurn;
 
     public Player(String userName){
@@ -86,6 +88,7 @@ public class Player implements Comparator<Player> {
     public int compare(Player player, Player other) {
         return Integer.parseInt(player.userName) - Integer.parseInt(other.userName);
     }
+
     /**Grabs the current number of destination cards*/
     public int getNumOfResourceCardsTotal(){
         int num = 0;
@@ -180,5 +183,13 @@ public class Player implements Comparator<Player> {
 
     public List<TrainCar> getTrainCarList() {
         return trainCarList;
+    }
+
+    public int getCommandIndex() {
+        return commandIndex;
+    }
+
+    public void incrementCommandIndex(){
+        commandIndex++;
     }
 }

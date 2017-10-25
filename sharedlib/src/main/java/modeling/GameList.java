@@ -19,6 +19,9 @@ public class GameList {
         this.games = games;
     }
 
+    /**Called when the game has been created and sent serverSide
+     * @param newGame The new game object
+     * @return Boolean*/
     public boolean addGame(Game newGame){
         if (newGame != null && !games.contains(newGame)) {
             games.add(newGame);
@@ -66,12 +69,12 @@ public class GameList {
         //Place that same game in the list of gamesStarted
         //Delete the game from the general list of games
         Game serverGame = gameIDtoGame.get(game.getGameID());
-        int minPlayersNeeded = 2;
+        //int minPlayersNeeded = 2;
         //TODO uncomment this when neeeded, keeping it commented right now for testing purposes
         if(serverGame.equals(game)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
             serverGame.setHasStarted(true);
             gamesStarted.add(serverGame);
-            games.remove(serverGame);
+            games.remove(serverGame);;
             return true;
         }
         return false;

@@ -25,11 +25,10 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
         try {
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
             String gameID = this.getGameID();
-            //Game game = ServerModel.getInstance().getGamesAsMap().get(gameID);
             Game gameToJoin = ServerFacade.getInstance().joinGame(getUser(),gameID);
-            //So the last player added to this list would be the user if we were able to join successfully
-            Player lastPlayerAdded = gameToJoin.getPlayers().get(gameToJoin.getPlayers().size()-1);
-            if(lastPlayerAdded.getUserName().equals(this.getUser().getUserName())) {
+            //If we joined the game successfully we will not a not null player object below
+            Player usersPlayer = gameToJoin.getPlayer(getUser().getUserName());
+            if(usersPlayer != null) {
                 CommandResult result = new JoinGameCommandResult(true,gameToJoin);
                 result.setType("joinGame");
                 return result;

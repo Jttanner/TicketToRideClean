@@ -2,7 +2,10 @@ package servercomms;
 
 import android.util.Log;
 
+import clientCommands.SetGameMap;
 import clientModel.CModel;
+import commandData.Command;
+import commandData.GetCmndListDataToClient;
 import modeling.User;
 import result.CommandResult;
 import result.GetGameCommandResult;
@@ -23,18 +26,16 @@ class ClientFacade {
 
     private ClientFacade() {
     }
-
+    /**Checks the type of command objects*/
+    void checkTypeOfCommand(Command command){
+        if(command.getType().equals("getCommandList")){
+            SetGameMap setGameMap = new SetGameMap(((GetCmndListDataToClient) command).getCommandList());
+            setGameMap.execute();
+        }
+    }
+    /**Checks the type of command results*/
     void checkTypeOfCommand(CommandResult result) {
-        //TODO So i took out the if statement for handling the result when we create a game. Because honestly the poller gets it for us already
-        //This if means we have created a game(and we are joining)
-       /*if(result instanceof CreateGameCommandResult){
-           //add the game to the gamelist
-           CModel.getInstance().addGame(((CreateGameCommandResult) result).getGame());
-           //now join the game, if possible
-            *//*if((((CreateGameCommandResult) result).getGame().canJoinGame())) {
-                CModel.getInstance().setCurrGame(((CreateGameCommandResult) result).getGame());
-            }*//*
-        }*/
+
         if(result instanceof GetGameCommandResult){
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
@@ -44,10 +45,6 @@ class ClientFacade {
        }
        else if(result.getType().equals("startGame")) {
            CModel.getInstance().toggleGameHasStarted();
-            //When do we check if there is at least 2 players? The client will never be able to start the game until 2 players
-           //We don't need to worry about that logic here
-          //This else if does nothing. The server should send the start game command to the command manager
-           //Each client's poller should check the client manager to see when the game started.
        }
 
        else{

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -26,8 +24,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     @Override
     protected void onDestroy() {
-        //destroy poller
+        //destroy pollers
         Poller.getInstance().stopPoller();
+        Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
 
@@ -51,8 +50,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         setupView();
-        //start poller
+        //start pollers
         Poller.getInstance().updateGameList();
+        Poller.getInstance().getCommandList();
     }
 
     private void setupView() {

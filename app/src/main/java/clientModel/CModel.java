@@ -8,8 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
-import modeling.DestinationCard;
-import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
@@ -43,6 +41,9 @@ public class CModel extends Observable {
      * The set of players you are playing with
      */
     private Set<Player> allPlayers;
+    /**The command Manager, holds our Map of gameId's to CommandLists*/
+    private CommandManager commandManager = new CommandManager();
+
     private List<String> chatHistory = new ArrayList<>();
 
     public List<String> getChatHistory() {
@@ -53,21 +54,8 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
-    /**
-     * Our Presenters
-     */
-    //private Set<Observer> observerSet = new TreeSet<>();
     private CModel() {
     }
-    /*public void addGame(Game game){
-        this
-    }*/
-
-    public List<DestinationCard> threeDestinationCards(){
-        DestinationCardList destinationCardList = new DestinationCardList();
-        return destinationCardList.get3Cards();
-    }
-
 
     public User getMyUser() {
         return myUser;
@@ -81,9 +69,17 @@ public class CModel extends Observable {
         return currGame;
     }
 
+
+    /**Increments the command index of the appropriate user player*/
+    private void incrementUsersCommandIndex(){
+        Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
+        myPlayer.incrementCommandIndex();;
+    }
+    /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
-        Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() +" to value of: " + !this.currGame.isHasStarted());
+        Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
         this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
     }
@@ -205,5 +201,9 @@ public class CModel extends Observable {
     @Override
     public synchronized boolean hasChanged() {
         return super.hasChanged();
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 }

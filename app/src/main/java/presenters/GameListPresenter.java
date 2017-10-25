@@ -36,15 +36,17 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     public void JoinGame(Game game) {
         //Check to see if the user is already in the game
         boolean userExist = false;
-        for(Player p: game.getPlayers()) {
-            if(p.getUserName().equals(CModel.getInstance().getMyUser().getUserName())) {
-                //Don't let them join
-                userExist = true;
-            }
-        }
-        if (userExist == false) {
+        String userName = CModel.getInstance().getMyUser().getUserName();
+        Player userPlayer = game.getPlayer(userName);
+        //if we didnt find the user, add him in the server
+        if(userPlayer == null) {
             JoinGameCommandData data = new JoinGameCommandData(game.getGameID(),CModel.getInstance().getMyUser());
             ServerProxy.getInstance().sendCommand(data);
+        }
+        else {
+            //otherwise lets go on to the next activity as what would of happened is that the user simply backed out of
+            //the waiting room activity and is trying to get in. No need to talk to the server in this case
+            myView.get().JoinGameResult(game);
         }
     }
 

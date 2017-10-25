@@ -87,7 +87,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
             recyclerView.setAdapter(radapter);
         }
     }
-
+    /**This activity starts the waiting room activity*/
     @Override
     public void JoinGameResult(Game game) {
         Poller.getInstance().stopPoller();

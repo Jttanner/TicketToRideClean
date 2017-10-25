@@ -6,9 +6,9 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
-import commandData.ChatCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
+import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
 import encoder.Encoder;
@@ -76,6 +76,9 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         else if(request instanceof JoinGameCommandData){
             return encoder.decodeJoinCommandResult(stream);
         }
+        else if(request instanceof GetCmndDataFromServer){
+            return encoder.decodeGetCommandListToClient(stream);
+        }
         else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);
         }
@@ -86,16 +89,19 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
     @Override
     protected void onPostExecute(Object result) {//gets us back on the main thread
         Log.d("onPostExecute", "Entering onPostExecute");
-        //result = (Result)result;
+        ClientFacade facade = ClientFacade.getInstance();
         super.onPostExecute(result);
         if (result instanceof LoginResult) {
-            ClientFacade.getInstance().updateUser(((LoginResult) result).getUser());
+            facade.updateUser(((LoginResult) result).getUser());
         } else if (result instanceof RegisterResult) {
-            ClientFacade.getInstance().updateUser(((RegisterResult) result).getUser());
+            facade.updateUser(((RegisterResult) result).getUser());
         }
         //this is used for any other command
         else if(result instanceof CommandResult){
-            ClientFacade.getInstance().checkTypeOfCommand((CommandResult) result);
+            facade.checkTypeOfCommand((CommandResult) result);
+        }
+        else if(result instanceof Command){
+            facade.checkTypeOfCommand((Command) result);
         }
 
 
