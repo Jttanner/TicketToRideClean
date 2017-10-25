@@ -58,7 +58,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             @Override
             public void onClick(View v) {
                 int counter = 0;
-                switch(counter){
+                switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     case 0:
                         FragmentManager fm = getSupportFragmentManager();
                         Fragment fragment = fm.findFragmentById(R.id.activity_map);
@@ -70,10 +70,45 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.commit();
                         }
                         break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+                        break;
+                    case 12:
+                        break;
+                    case 13:
+                        break;
+                    case 14:
+                        break;
+                    case 15:
+                        break;
+
+
                     default:
                         break;
                 }
-                //counter++;
+                //Change this counter when we add more test cases. Basically caps the number of cases we will use
+                while(counter != 0) {
+                    counter++;
+                }
             }
         });
 

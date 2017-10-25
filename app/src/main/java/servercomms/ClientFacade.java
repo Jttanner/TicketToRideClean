@@ -40,16 +40,16 @@ class ClientFacade {
             CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
         }
        //This if is for joinGame, and the result.getData is the GameID for the game we are joining
-       else if(result instanceof JoinGameCommandResult){
+        else if(result instanceof JoinGameCommandResult){
            CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
-       }
-       else if(result.getType().equals("startGame")) {
+        }
+        //TODO: Does not like this line when we stop the app, re-run it, and try to log back in
+        else if(result.getType().equals("startGame")) {
            CModel.getInstance().toggleGameHasStarted();
-       }
-
-       else{
+        }
+        else{
            Log.d(TAG,"We got a different class then expected");
-       }
+        }
     }
 
     void updateUser(User user) {
