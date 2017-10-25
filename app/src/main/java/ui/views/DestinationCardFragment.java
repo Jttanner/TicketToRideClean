@@ -1,10 +1,10 @@
 package ui.views;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +38,8 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
     MVP_DestCard.MapPresOps presenter;
     private final String TAG = "Destination Frag";
 
+
+
     public DestinationCardFragment(){
         presenter = new DestinationCardPresenter(this);
 
@@ -68,9 +70,13 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
         mRoute3 = (TextView) v.findViewById(R.id.mRoute3);
         buttonStart = (Button) v.findViewById(R.id.buttonStart);
 
-        mRoute1.setText(CModel.getInstance().threeDestinationCards().get(0).getDestinationCardString());
-        mRoute2.setText(CModel.getInstance().threeDestinationCards().get(1).getDestinationCardString());
-        mRoute3.setText(CModel.getInstance().threeDestinationCards().get(2).getDestinationCardString());
+        List<DestinationCard> cards = CModel.getInstance().threeDestinationCards();
+        mRoute1.setText(cards.get(0).getDestinationCardString());
+        mRoute2.setText(cards.get(1).getDestinationCardString());
+        mRoute3.setText(cards.get(2).getDestinationCardString());
+        mRoute1.setTextColor(Color.RED);
+        mRoute2.setTextColor(Color.RED);
+        mRoute3.setTextColor(Color.RED);
 
         wireUp();
     }

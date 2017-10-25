@@ -17,9 +17,9 @@ public class DestinationCardList {
     private Map<String, City> cityMap = cityList.getCityListMap();
 
     public DestinationCardList(){
-        destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("ERl Paso"), 4));
+        destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("El Paso"), 4));
         destinationCardList.add(new DestinationCard(cityMap.get("Kansas City"), cityMap.get("Houston"), 5));
-        destinationCardList.add(new DestinationCard(cityMap.get("New York"), cityMap.get("Atlanta"), 6));
+        destinationCardList.add(new DestinationCard(cityMap.get("New York City"), cityMap.get("Atlanta"), 6));
         destinationCardList.add(new DestinationCard(cityMap.get("Chicago"), cityMap.get("New Orleans"), 7));
         destinationCardList.add(new DestinationCard(cityMap.get("Calgary"), cityMap.get("Salt Lake City"), 7));
         destinationCardList.add(new DestinationCard(cityMap.get("Helena"), cityMap.get("Los Angeles"), 8));
@@ -32,7 +32,7 @@ public class DestinationCardList {
         destinationCardList.add(new DestinationCard(cityMap.get("Duluth"), cityMap.get("El Paso"), 10));
         destinationCardList.add(new DestinationCard(cityMap.get("Toronto"), cityMap.get("Miami"), 10));
         destinationCardList.add(new DestinationCard(cityMap.get("Portland"), cityMap.get("Phoenix"), 11));
-        destinationCardList.add(new DestinationCard(cityMap.get("Dallas"), cityMap.get("New York"), 11));
+        destinationCardList.add(new DestinationCard(cityMap.get("Dallas"), cityMap.get("New York City"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("Pittsburgh"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Winnipeg"), cityMap.get("Little Rock"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Winnipeg"), cityMap.get("Houston"), 12));
@@ -45,13 +45,13 @@ public class DestinationCardList {
         destinationCardList.add(new DestinationCard(cityMap.get("Portland"), cityMap.get("Nashville"), 17));
         destinationCardList.add(new DestinationCard(cityMap.get("Vancouver"), cityMap.get("Montreal"), 20));
         destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("Miami"), 20));
-        destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("New York"), 21));
-        destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("New York"), 22));
+        destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("New York City"), 21));
+        destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("New York City"), 22));
 
     }
 
     public List<DestinationCard> get3Cards() {
-        List<DestinationCard> threeCards = null;
+        List<DestinationCard> threeCards = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             DestinationCard card = get1RandomCard();
             threeCards.add(card);
@@ -69,7 +69,7 @@ public class DestinationCardList {
     }
 
     public static int randInt(int min, int max) {
-        Random rand = null;
+        Random rand = new Random();
 
         int randomNum = rand.nextInt((max-min) + 1) + min;
 

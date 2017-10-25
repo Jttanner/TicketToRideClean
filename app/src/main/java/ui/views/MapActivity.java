@@ -2,8 +2,12 @@ package ui.views;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +25,12 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
     private Button chatroom;
+    private Button demo;
 
     @Override
     protected void onDestroy() {
-        //destroy pollers
+        //destroy poller
         Poller.getInstance().stopPoller();
-        Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
 
@@ -49,10 +53,33 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
+        demo = (Button) findViewById(R.id.demoButton);
+        demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int counter = 0;
+                switch(counter){
+                    case 0:
+                        FragmentManager fm = getSupportFragmentManager();
+                        Fragment fragment = fm.findFragmentById(R.id.activity_map);
+
+                        if (fragment == null) {
+                            fragment = new DestinationCardFragment();
+                            FragmentTransaction transaction = fm.beginTransaction();
+                            transaction.replace(R.id.activity_map, fragment);
+                            transaction.commit();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                //counter++;
+            }
+        });
+
         setupView();
-        //start pollers
-        Poller.getInstance().updateGameList();
-        Poller.getInstance().getCommandList();
+        //start poller
+        //Poller.getInstance().updateGameList();
     }
 
     private void setupView() {

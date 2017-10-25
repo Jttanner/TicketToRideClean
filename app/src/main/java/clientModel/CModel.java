@@ -8,6 +8,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import modeling.DestinationCard;
+import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
@@ -67,6 +69,11 @@ public class CModel extends Observable {
 
     public Game getCurrGame() {
         return currGame;
+    }
+
+    public List<DestinationCard> threeDestinationCards(){
+        DestinationCardList destinationCardList = new DestinationCardList();
+        return destinationCardList.get3Cards();
     }
 
 
