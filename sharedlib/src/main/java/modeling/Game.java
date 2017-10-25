@@ -10,31 +10,6 @@ import java.util.UUID;
 public class Game {
 
 
-    @Override
-    public String toString() {
-        return gameName;
-    }
-
-    //Comparing objects to see if they are truly equal
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Game)) {
-            return false;
-        }
-        Game oGame = (Game) o;
-        //All instance variables must match to return true
-        return  (this.isHasStarted() == oGame.isHasStarted()) && (this.gameID.equals(oGame.getGameID()))
-                && (this.gameName.equals(oGame.gameName))
-                && (this.getPlayerMax() == oGame.getPlayerMax())
-                && (this.players.equals(oGame.players));
-    }
-
     private ArrayList<Player> players;
 
     private boolean hasStarted;
@@ -44,12 +19,15 @@ public class Game {
     private String gameName;
 
     private int playerMax;
+    /**The List/deck of resource cards*/
+    private ResourceCardList resourceCardList;
 
     public Game() {
         this.hasStarted = false;
         gameID = UUID.randomUUID().toString();
         players = new ArrayList<>();
-
+        //card deck created for the game
+        resourceCardList = new ResourceCardList();
     }
 
     public Game(ArrayList<Player> players, boolean hasStarted, String gameID, String gameName, int playerMax) {
@@ -117,10 +95,11 @@ public class Game {
      * @param hasStarted Boolean, if it has started or not
      **/
     public void setHasStarted(boolean hasStarted) {
-
         this.hasStarted = hasStarted;
         //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
         if(this.hasStarted && !players.get(0).isMyTurn()){
+
+            setupStartingCards();//setup starting cards when game starts
             players.get(0).toggleMyTurn();
         }
     }
@@ -133,4 +112,45 @@ public class Game {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return gameName;
+    }
+
+    //Comparing objects to see if they are truly equal
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Game)) {
+            return false;
+        }
+        Game oGame = (Game) o;
+        //All instance variables must match to return true
+        return  (this.isHasStarted() == oGame.isHasStarted()) && (this.gameID.equals(oGame.getGameID()))
+                && (this.gameName.equals(oGame.gameName))
+                && (this.getPlayerMax() == oGame.getPlayerMax())
+                && (this.players.equals(oGame.players));
+    }
+    /**Sets up each players starting cards*/
+    private void setupStartingCards() {
+        resourceCardList.setUpPlayers(players);
+    }
+
+    /**Get the player whose turn it is
+     * @return The player whose turn it is*/
+    public Player getCurrentPlayer(){
+        for (Player player : players){
+            if(player.isMyTurn()){
+                return player;
+            }
+        }
+        return null;
+    }
+
 }

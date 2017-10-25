@@ -88,6 +88,7 @@ public class Player implements Comparator<Player> {
     public int compare(Player player, Player other) {
         return Integer.parseInt(player.userName) - Integer.parseInt(other.userName);
     }
+
     /**Grabs the current number of destination cards*/
     public int getNumOfResourceCardsTotal(){
         int num = 0;
