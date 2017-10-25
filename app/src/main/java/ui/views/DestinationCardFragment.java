@@ -1,6 +1,7 @@
 package ui.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import MVP_coms_classes.MVP_DestCard;
@@ -78,9 +81,9 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
         mRoute2.setTextColor(Color.RED);
         mRoute3.setTextColor(Color.RED);
 
-        wireUp();
+        wireUp(cards);
     }
-    void wireUp(){
+    void wireUp(final List<DestinationCard> cards){
         mRoute1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,8 +125,25 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
             @Override
             public void onClick(View v) {
                 //TODO: Goes back to the Map activity
-                //((MapActivity)getActivity()).
-                //getDialog().dismiss();
+                List<DestinationCard> cardsSelected = new ArrayList();
+
+                if(mRoute1.getCurrentTextColor() == Color.GREEN) {
+                    cardsSelected.add(cards.get(0));
+                }
+                if(mRoute2.getCurrentTextColor() == Color.GREEN) {
+                    cardsSelected.add(cards.get(1));
+                }
+                if(mRoute3.getCurrentTextColor() == Color.GREEN) {
+                    cardsSelected.add(cards.get(2));
+                }
+                if(cardsSelected.size() >= 2) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), MapActivity.class);
+                    getActivity().startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getContext(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
+                }
             }
         });
         /*
