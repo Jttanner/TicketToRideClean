@@ -79,7 +79,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         setupView();
         //start poller
-        //Poller.getInstance().updateGameList();
+        Poller.getInstance().updateGameList();
+        Poller.getInstance().getCommandList();
     }
 
     private void setupView() {
