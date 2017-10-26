@@ -30,7 +30,6 @@ public class RouteList {
         routesAvailable.add(new Route("Calgary", "Helena", Color.WILD, 4));
         routesAvailable.add(new Route("Calgary", "Seattle", Color.WILD, 4));
         routesAvailable.add(new Route("Charleston", "Raleigh", Color.WILD, 2));
-        routesAvailable.add(new Route("Charleston", "Atlanta", Color.WILD, 2));
         routesAvailable.add(new Route("Charleston", "Miami", Color.PURPLE, 4));
         routesAvailable.add(new Route("Chicago", "Pittsburgh", Color.ORANGE, 3));
         routesAvailable.add(new Route("Chicago", "Pittsburgh", Color.BLACK, 3));
@@ -56,7 +55,6 @@ public class RouteList {
         routesAvailable.add(new Route("Denver", "Oklahoma City", Color.RED, 4));
         routesAvailable.add(new Route("Duluth", "Omaha", Color.WILD, 2));
         routesAvailable.add(new Route("Duluth", "Omaha", Color.WILD, 2));
-        routesAvailable.add(new Route("Duluth", "Chicago", Color.RED, 3));
         routesAvailable.add(new Route("Duluth", "Toronto", Color.PURPLE, 6));
         routesAvailable.add(new Route("Duluth", "Sault St. Marie", Color.WILD, 3));
         routesAvailable.add(new Route("Duluth", "Winnipeg", Color.BLACK, 4));
