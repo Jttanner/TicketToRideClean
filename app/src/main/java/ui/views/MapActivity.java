@@ -32,7 +32,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     @Override
     protected void onDestroy() {
         //destroy poller
-        Poller.getInstance().stopPoller();
         Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
@@ -144,7 +143,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         setupView();
         //start poller
-        Poller.getInstance().updateGameList();
         Poller.getInstance().getCommandList();
     }
 

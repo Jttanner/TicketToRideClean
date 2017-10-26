@@ -50,6 +50,7 @@ public class GameHistoryFragment extends DialogFragment {
         testString.add("Game History 12");
 
 
+
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
         getDialog().show();
         getDialog().getWindow().setLayout(1000,1000);
