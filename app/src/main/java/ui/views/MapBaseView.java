@@ -31,7 +31,7 @@ public class MapBaseView extends View {
     Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
     Resources resources = getResources();
     Bitmap mapBitmap = BitmapFactory.decodeResource(resources, R.drawable.usamap);
-
+    Paint cityNames = new Paint();
     List<Point> touchCoords = new ArrayList<>();
     //Context callingContext = getContext();
 
@@ -45,14 +45,17 @@ public class MapBaseView extends View {
         //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
         fillCityPointList();
         float thickness = 10;
+        float textSize = 30;
         paint.setStrokeWidth(thickness);
         paint.setColor(Color.BLACK);
+        cityNames.setTextSize(textSize);
+        cityNames.setColor(Color.YELLOW);
+
 
         canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
-        drawCities(canvas);
         drawCityLines(canvas);
+        drawCities(canvas);
 
-        paint.setTextSize(thickness);
         //Point p1 = new Point(50, 50);
         //Point p2 = new Point(10000, 10000);
         //drawFourCarLine(p1, p2, canvas);
@@ -293,7 +296,7 @@ public class MapBaseView extends View {
         int diameter = 10;
         for (CityDrawData data: cities){
             canvas.drawCircle(data.getX(), data.getY(), diameter, paint);
-            canvas.drawText(data.cityName, data.getX(), data.getY(), paint);
+            canvas.drawText(data.cityName, data.getX(), data.getY(), cityNames);
         }
         /*canvas.drawCircle(Vancouver.x, Vancouver.y, 10, paint);
         canvas.drawCircle(Seattle.x, Seattle.y, 10, paint);

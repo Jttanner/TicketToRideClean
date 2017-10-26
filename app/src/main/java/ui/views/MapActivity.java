@@ -33,6 +33,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     protected void onDestroy() {
         //destroy poller
         Poller.getInstance().stopPoller();
+        Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
 
