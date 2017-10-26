@@ -26,6 +26,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
     private Button chatroom;
+    private Button gameHistory;
     private Button demo;
 
     @Override
@@ -61,7 +62,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
             }
         });
-
+        gameHistory = (Button) findViewById(R.id.gameHistoryButton);
+        gameHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                GameHistoryFragment fragment = new GameHistoryFragment();
+                fragment.show(fm,"game_History_fragment");
+            }
+        });
         chatroom = (Button) findViewById(R.id.chatButton);
         chatroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,64 +82,64 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        demo = (Button) findViewById(R.id.demoButton);
-        demo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int counter = 0;
-                switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
-                    case 0:
-                        FragmentManager fm = getSupportFragmentManager();
-                        Fragment fragment = fm.findFragmentById(R.id.activity_map);
-
-                        if (fragment == null) {
-                            fragment = new DestinationCardFragment();
-                            FragmentTransaction transaction = fm.beginTransaction();
-                            transaction.replace(R.id.activity_map, fragment);
-                            transaction.commit();
-                        }
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    case 7:
-                        break;
-                    case 8:
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                    case 11:
-                        break;
-                    case 12:
-                        break;
-                    case 13:
-                        break;
-                    case 14:
-                        break;
-                    case 15:
-                        break;
-
-
-                    default:
-                        break;
-                }
-                //Change this counter when we add more test cases. Basically caps the number of cases we will use
-                while(counter != 0) {
-                    counter++;
-                }
-            }
-        });
+//        demo = (Button) findViewById(R.id.demoButton);
+//        demo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int counter = 0;
+//                switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
+//                    case 0:
+//                        FragmentManager fm = getSupportFragmentManager();
+//                        Fragment fragment = fm.findFragmentById(R.id.activity_map);
+//
+//                        if (fragment == null) {
+//                            fragment = new DestinationCardFragment();
+//                            FragmentTransaction transaction = fm.beginTransaction();
+//                            transaction.replace(R.id.activity_map, fragment);
+//                            transaction.commit();
+//                        }
+//                        break;
+//                    case 1:
+//                        break;
+//                    case 2:
+//                        break;
+//                    case 3:
+//                        break;
+//                    case 4:
+//                        break;
+//                    case 5:
+//                        break;
+//                    case 6:
+//                        break;
+//                    case 7:
+//                        break;
+//                    case 8:
+//                        break;
+//                    case 9:
+//                        break;
+//                    case 10:
+//                        break;
+//                    case 11:
+//                        break;
+//                    case 12:
+//                        break;
+//                    case 13:
+//                        break;
+//                    case 14:
+//                        break;
+//                    case 15:
+//                        break;
+//
+//
+//                    default:
+//                        break;
+//                }
+//                //Change this counter when we add more test cases. Basically caps the number of cases we will use
+//                while(counter != 0) {
+//                    counter++;
+//                }
+//            }
+//        });
 
         setupView();
         //start poller
