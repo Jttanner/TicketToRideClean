@@ -23,5 +23,6 @@ public interface MVP_WaitingRoom {
     interface RequiredPresenterOps {
         void startGame();
 
+        void deleteObserver();
     }
 }

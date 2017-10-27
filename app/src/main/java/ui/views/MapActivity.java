@@ -8,19 +8,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SlidingPaneLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import MVP_coms_classes.MVP_Map;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
-import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
@@ -102,8 +98,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.replace(R.id.activity_map, fragment);
                             transaction.commit();
                         }
-
-
 
                         break;
                     case 1:

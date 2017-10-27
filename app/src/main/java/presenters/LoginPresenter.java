@@ -130,6 +130,12 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         hasUserName = b;
         canEnableButtons();
     }
+
+    @Override
+    public void deleteObservor() {
+        CModel.getInstance().deleteObserver(this);
+    }
+
     /**Handles the logic of whether the login and register buttons are enabled or not*/
     private void canEnableButtons() {
         myView.get().toggleButtons(hasPassword && hasUserName);

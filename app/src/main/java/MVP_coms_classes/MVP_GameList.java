@@ -19,5 +19,7 @@ public interface MVP_GameList {
     interface GameListPresenterInterface { //View is pushing things to the presenter
         void CreateGame(Game game);
         void JoinGame(Game game);
+
+        void deleteObserver();
     }
 }

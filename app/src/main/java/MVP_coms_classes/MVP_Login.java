@@ -2,9 +2,9 @@ package MVP_coms_classes;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
-import request.*;
-import result.*;
+
+import request.LoginRequest;
+import request.RegisterRequest;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -86,5 +86,7 @@ public interface MVP_Login {
         /**Checks if the user has enterd a valid username
          * @param b Boolean, if they have a userName**/
         void hasUserName(boolean b);
+
+        void deleteObservor();
     }
 }

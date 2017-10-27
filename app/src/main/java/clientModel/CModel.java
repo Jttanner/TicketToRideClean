@@ -171,12 +171,15 @@ public class CModel extends Observable {
     @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);
-        Log.d(TAG, "Number of observers " + String.valueOf(countObservers()));
+        String str = String.valueOf(countObservers());
+        Log.d(TAG, "Number of observers " + str);
     }
 
     @Override
     public synchronized void deleteObserver(Observer o) {
         super.deleteObserver(o);
+        String str = String.valueOf(countObservers());
+        Log.d(TAG, "Number of observers " + str);
     }
 
     @Override

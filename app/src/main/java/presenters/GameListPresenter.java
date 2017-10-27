@@ -51,6 +51,11 @@ public class GameListPresenter implements MVP_GameList.GameListPresenterInterfac
     }
 
     @Override
+    public void deleteObserver() {
+        CModel.getInstance().deleteObserver(this);
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
         if(arg instanceof GameList){

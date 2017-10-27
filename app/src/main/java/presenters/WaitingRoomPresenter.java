@@ -28,6 +28,11 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
     }
 
     @Override
+    public void deleteObserver() {
+        CModel.getInstance().deleteObserver(this);
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
         //for when the game is set
         if(arg instanceof Game){
