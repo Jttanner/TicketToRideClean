@@ -11,7 +11,7 @@ import result.CommandResult;
 public class StartGameCommand extends StartGameCommandData implements ICommand {
     private StartGameCommandData commandData;
     public StartGameCommand(StartGameCommandData data) {
-        super(data.getGame());
+        super();
         //hold onto dataobjct in case of success
         this.commandData = data;
         setType("startGame");
@@ -21,12 +21,13 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
 
+
         CommandResult result;
         //start the game then if it succeeds add this commanddata to the list for the game object
         //others will take this startGameData and start the game themselves
-        if (facade.startGame(this.getGame())){
+        if (facade.startGame(commandData.getGame())){
             result = new CommandResult(true);
-            facade.addCommandToList(this.getGame().getGameID(),commandData);
+            facade.addCommandToList(commandData.getGame().getGameID(),commandData);
         } else{
             result = new CommandResult(false);
         }

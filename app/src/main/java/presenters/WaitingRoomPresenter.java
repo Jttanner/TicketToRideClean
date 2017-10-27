@@ -63,6 +63,7 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
         } catch (Exception e) {
             Log.d(TAG, "hi my name is Kwan: " + e.toString());
             Log.d(TAG, "hi Kwan, my name is Jon: " + e.toString());
+            Log.d(TAG, "hi Jon, it is nice to meet you: " + e.toString());
             e.printStackTrace();
         }
     }

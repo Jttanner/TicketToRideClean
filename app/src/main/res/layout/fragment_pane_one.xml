@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="ui.views.PaneOneFragment">
+
+    <ui.views.PlayerStatsView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statusLayout"
+        android:textColor="#FFFFFF"
+        app:extraInformation="My extra information"
+        android:id="@+id/player_stats"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chatButton"
+        android:text="Chat Room" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameHistoryButton"
+        android:text="Game History" />
+
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/demoButton"-->
+        <!--android:text="Demo"-->
+        <!--/>-->
+
+
+</LinearLayout>

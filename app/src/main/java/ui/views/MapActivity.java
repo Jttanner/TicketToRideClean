@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,12 +26,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
     private Button chatroom;
+    private Button gameHistory;
     private Button demo;
 
     @Override
     protected void onDestroy() {
         //destroy poller
-        Poller.getInstance().stopPoller();
+        Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
 
@@ -38,10 +40,37 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
+        //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
+
         presenter = new MapPresenter(this);
 
+        SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.activity_map);
 
+        slidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+            }
+
+            @Override
+            public void onPanelOpened(View panel) {
+
+            }
+
+            @Override
+            public void onPanelClosed(View panel) {
+
+            }
+        });
+        gameHistory = (Button) findViewById(R.id.gameHistoryButton);
+        gameHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                GameHistoryFragment fragment = new GameHistoryFragment();
+                fragment.show(fm,"game_History_fragment");
+            }
+        });
         chatroom = (Button) findViewById(R.id.chatButton);
         chatroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +145,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         setupView();
         //start poller
-        Poller.getInstance().updateGameList();
         Poller.getInstance().getCommandList();
     }
 

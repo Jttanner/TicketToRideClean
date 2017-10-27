@@ -78,7 +78,7 @@ public class CModel extends Observable {
 
 
     /**Increments the command index of the appropriate user player*/
-    private void incrementUsersCommandIndex(){
+    void incrementUsersCommandIndex(){
         Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
         myPlayer.incrementCommandIndex();;
     }
