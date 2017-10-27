@@ -44,7 +44,7 @@ public class MapBaseView extends View {
     public void onDraw(Canvas canvas){
         //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
         fillCityPointList();
-        float thickness = 10;
+        float thickness = 5;
         paint.setStrokeWidth(thickness);
         paint.setColor(Color.BLACK);
 
@@ -162,7 +162,10 @@ public class MapBaseView extends View {
         Charleston.addConnection(Raleigh);
         Charleston.addConnection(Atlanta);
         Charleston.addConnection(Miami);
-        Chicago.addConnection(Pittsburgh); //x2
+        //Chicago.addConnection(Pittsburgh); //x2
+        //double route
+        Chicago.addConnection(new CityDrawData(new Point(PittsburghPoint.x + 5, PittsburghPoint.y + 5), "Pittsburgh"));
+        Chicago.addConnection(new CityDrawData(new Point(PittsburghPoint.x - 5, PittsburghPoint.y - 5), "Pittsburgh"));
         Chicago.addConnection(Toronto);
         Chicago.addConnection(Deluth);
         Chicago.addConnection(Omaha);
@@ -293,50 +296,10 @@ public class MapBaseView extends View {
         int diameter = 10;
         for (CityDrawData data: cities){
             canvas.drawCircle(data.getX(), data.getY(), diameter, paint);
-            canvas.drawText(data.cityName, data.getX(), data.getY(), paint);
+            float textSize = (float) 35.0;
+            paint.setTextSize(textSize);
+            canvas.drawText(data.cityName, data.getX() - 10, data.getY() - 5, paint);
         }
-        /*canvas.drawCircle(Vancouver.x, Vancouver.y, 10, paint);
-        canvas.drawCircle(Seattle.x, Seattle.y, 10, paint);
-        canvas.drawCircle(Portland.x, Portland.y, 10, paint);
-        canvas.drawCircle(SanFrancisco.x, SanFrancisco.y, 10, paint);
-        canvas.drawCircle(LosAngeles.x, LosAngeles.y, 10, paint);
-
-        canvas.drawCircle(Phoenix.x, Phoenix.y, 10, paint);
-        canvas.drawCircle(LasVegas.x, LasVegas.y, 10, paint);
-        canvas.drawCircle(SLC.x, SLC.y, 10, paint);
-        canvas.drawCircle(Helena.x, Helena.y, 10, paint);
-        canvas.drawCircle(Calgary.x, Calgary.y, 10, paint);
-        canvas.drawCircle(Winnipeg.x, Winnipeg.y, 10, paint);
-        canvas.drawCircle(SaultStMarie.x, SaultStMarie.y, 10, paint);
-        canvas.drawCircle(Montreal.x, Montreal.y, 10, paint);
-        canvas.drawCircle(IDontKNow.x, IDontKNow.y, 10, paint);
-
-        canvas.drawCircle(Toronto.x, Toronto.y, 10, paint);
-        canvas.drawCircle(Deluth.x, Deluth.y, 10, paint);
-        canvas.drawCircle(Denver.x, Denver.y, 10, paint);
-        canvas.drawCircle(ElPaso.x, ElPaso.y, 10, paint);
-        canvas.drawCircle(SantaFe.x, SantaFe.y, 10, paint);
-        canvas.drawCircle(Houston.x, Houston.y, 10, paint);
-        canvas.drawCircle(Dallas.x, Dallas.y, 10, paint);
-        canvas.drawCircle(OklahomaCity.x, OklahomaCity.y, 10, paint);
-
-        canvas.drawCircle(KansasCity.x, KansasCity.y, 10, paint);
-        canvas.drawCircle(Omaha.x, Omaha.y, 10, paint);
-        canvas.drawCircle(Chicago.x, Chicago.y, 10, paint);
-        canvas.drawCircle(Pittsburgh.x, Pittsburgh.y, 10, paint);
-        canvas.drawCircle(Boston.x, Boston.y, 10, paint);
-        canvas.drawCircle(Washington.x, Washington.y, 10, paint);
-        canvas.drawCircle(NewYork.x, NewYork.y, 10, paint);
-
-        canvas.drawCircle(Raleigh.x, Raleigh.y, 10, paint);
-        canvas.drawCircle(Nashville.x, Nashville.y, 10, paint);
-        canvas.drawCircle(Atlanta.x, Atlanta.y, 10, paint);
-        canvas.drawCircle(Charleston.x, Charleston.y, 10, paint);
-        canvas.drawCircle(Miami.x, Miami.y, 10, paint);
-        canvas.drawCircle(NewOrleans.x, NewOrleans.y, 10, paint);
-        canvas.drawCircle(LittleRock.x, LittleRock.y, 10, paint);
-        canvas.drawCircle(SaintLouis.x, SaintLouis.y, 10, paint);
-        */
     }
 
 
