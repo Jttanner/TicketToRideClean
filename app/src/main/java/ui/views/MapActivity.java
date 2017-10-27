@@ -1,6 +1,7 @@
 package ui.views;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,7 @@ import MVP_coms_classes.MVP_Map;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
@@ -86,7 +88,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int testCases = 0;
+                int testCases = 1;
                 int counter = 0;
                 switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
@@ -100,8 +102,14 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.replace(R.id.activity_map, fragment);
                             transaction.commit();
                         }
+
+
+
                         break;
                     case 1:
+                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
+                        //DrawRouteAsync task = new DrawRouteAsync();
+                        //task.execute();
                         break;
                     case 2:
                         break;
@@ -147,6 +155,31 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         //start poller
         Poller.getInstance().getCommandList();
     }
+
+    private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
+    {
+        MapBaseView mapBaseView;
+        @Override
+        protected Integer doInBackground(Void... params)
+        {
+            mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+
+            return 0;
+        }
+        @Override
+        protected void onPostExecute(Integer integer)
+        {
+            super.onPostExecute(integer);
+            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.Omaha, "blue");
+            mapBaseView.claimRoute(mapBaseView.Phoenix, mapBaseView.Denver, "red");
+            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.SaltLakeCity, "blue");
+            mapBaseView.claimRoute(mapBaseView.NewYork, mapBaseView.Nashville, "green");
+            mapBaseView.claimRoute(mapBaseView.LosAngeles, mapBaseView.SanFrancisco, "yellow");
+            mapBaseView.claimRoute(mapBaseView.Nashville, mapBaseView.Omaha, "black");
+        }
+    }
+
+
 
     private void setupView() {
         Log.d(TAG,"setupView");

@@ -25,220 +25,6 @@ import teamjapannumbahone.tickettoride.R;
  */
 
 public class MapBaseView extends View {
-    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-    Display display = wm.getDefaultDisplay();
-    Paint paint = new Paint();
-    Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
-    Resources resources = getResources();
-    Bitmap mapBitmap = BitmapFactory.decodeResource(resources, R.drawable.usamap);
-
-    List<Point> touchCoords = new ArrayList<>();
-    //Context callingContext = getContext();
-
-
-    public MapBaseView(Context context, AttributeSet st) {
-        super(context, st);
-    }
-
-    @Override
-    public void onDraw(Canvas canvas){
-        //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
-        fillCityPointList();
-        float thickness = 5;
-        paint.setStrokeWidth(thickness);
-        paint.setColor(Color.BLACK);
-
-        canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
-        drawCities(canvas);
-        drawCityLines(canvas);
-
-        paint.setTextSize(thickness);
-        //Point p1 = new Point(50, 50);
-        //Point p2 = new Point(10000, 10000);
-        //drawFourCarLine(p1, p2, canvas);
-        //canvas.drawLine(p1.x, p1.y, p2.x, p2.y, paint);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        int xTouch = Math.round(event.getX());
-        int yTouch = Math.round(event.getY());
-        touchCoords.add(new Point(xTouch, yTouch));
-        return true;
-    }
-
-    private void drawTrackSquare(Point p1, Point p2, Canvas canvas){
-
-    }
-
-    List<CityDrawData> cities = new ArrayList<>();
-
-    private void fillCityPointList(){
-        CityDrawData Vancouver = new CityDrawData(VancouverPoint, "Vancouver");
-        cities.add(Vancouver);
-        CityDrawData Seattle = new CityDrawData(SeattlePoint, "Seattle");
-        cities.add(Seattle);
-        CityDrawData Portland = new CityDrawData(PortlandPoint, "Portland");
-        cities.add(Portland);
-        CityDrawData SanFrancisco = new CityDrawData(SanFranciscoPoint, "San Francisco");
-        cities.add(SanFrancisco);
-        CityDrawData LosAngeles = new CityDrawData(LosAngelesPoint, "Los Angeles");
-        cities.add(LosAngeles);
-        CityDrawData Phoenix = new CityDrawData(PhoenixPoint, "Phoenix");
-        cities.add(Phoenix);
-        CityDrawData LasVegas = new CityDrawData(LasVegasPoint, "Las Vegas");
-        cities.add(LasVegas);
-        CityDrawData SaltLakeCity = new CityDrawData(SLCPoint, "Salt Lake City");
-        cities.add(SaltLakeCity);
-        CityDrawData Helena = new CityDrawData(HelenaPoint, "Helena");
-        cities.add(Helena);
-        CityDrawData Calgary = new CityDrawData(CalgaryPoint, "Calgary");
-        cities.add(Calgary);
-        CityDrawData Winnipeg = new CityDrawData(WinnipegPoint, "Winnipeg");
-        cities.add(Winnipeg);
-        CityDrawData SaultStMarie = new CityDrawData(SaultStMariePoint, "Sault St Marie");
-        cities.add(SaultStMarie);
-        CityDrawData Montreal = new CityDrawData(MontrealPoint, "Montreal");
-        cities.add(Montreal);
-        CityDrawData Boston = new CityDrawData(BostonPoint, "Boston");
-        cities.add(Boston);
-        CityDrawData Toronto = new CityDrawData(TorontoPoint, "Toronto");
-        cities.add(Toronto);
-        CityDrawData Deluth = new CityDrawData(DeluthPoint, "Deluth");
-        cities.add(Deluth);
-        CityDrawData Denver = new CityDrawData(DenverPoint, "Denver");
-        cities.add(Denver);
-        CityDrawData SantaFe = new CityDrawData(SantaFePoint, "Santa Fe");
-        cities.add(SantaFe);
-        CityDrawData ElPaso = new CityDrawData(ElPasoPoint, "El Paso");
-        cities.add(ElPaso);
-        CityDrawData Houston = new CityDrawData(HoustonPoint, "Houston");
-        cities.add(Houston);
-        CityDrawData Dallas = new CityDrawData(DallasPoint, "Dallas");
-        cities.add(Dallas);
-        CityDrawData OklahomaCity = new CityDrawData(OklahomaCityPoint, "Oklahoma City");
-        cities.add(OklahomaCity);
-        CityDrawData KansasCity = new CityDrawData(KansasCityPoint, "Kansas City");
-        cities.add(KansasCity);
-        CityDrawData Omaha = new CityDrawData(OmahaPoint, "Omaha");
-        cities.add(Omaha);
-        CityDrawData Chicago = new CityDrawData(ChicagoPoint, "Chicago");
-        cities.add(Chicago);
-        CityDrawData Pittsburgh = new CityDrawData(PittsburghPoint, "Pittsburgh");
-        cities.add(Pittsburgh);
-        CityDrawData Washington = new CityDrawData(WashingtonPoint, "Washington");
-        cities.add(Washington);
-        CityDrawData NewYork = new CityDrawData(NewYorkPoint, "New York");
-        cities.add(NewYork);
-        CityDrawData Raleigh = new CityDrawData(RaleighPoint, "Raleigh");
-        cities.add(Raleigh);
-        CityDrawData Nashville = new CityDrawData(NashvillePoint, "Nashville");
-        cities.add(Nashville);
-        CityDrawData Atlanta = new CityDrawData(AtlantaPoint, "Atlanta");
-        cities.add(Atlanta);
-        CityDrawData Charleston = new CityDrawData(CharlestonPoint, "Charleston");
-        cities.add(Charleston);
-        CityDrawData Miami = new CityDrawData(MiamiPoint, "Miami");
-        cities.add(Miami);
-        CityDrawData NewOrleans = new CityDrawData(NewOrleansPoint, "New Orleans");
-        cities.add(NewOrleans);
-        CityDrawData LittleRock = new CityDrawData(LittleRockPoint, "Little Rock");
-        cities.add(LittleRock);
-        CityDrawData SaintLouis = new CityDrawData(SaintLouisPoint, "Saint Louis");
-        cities.add(SaintLouis);
-
-        //add connections
-        Atlanta.addConnection(Miami);
-        Atlanta.addConnection(NewOrleans);
-        //second atlanta NO
-        Boston.addConnection(Montreal);
-        //second Boston Montreal
-        Boston.addConnection(NewYork);
-        //second B-NY
-        Calgary.addConnection(Vancouver);
-        Calgary.addConnection(Winnipeg);
-        Calgary.addConnection(Helena);
-        Calgary.addConnection(Seattle);
-        Charleston.addConnection(Raleigh);
-        Charleston.addConnection(Atlanta);
-        Charleston.addConnection(Miami);
-        //Chicago.addConnection(Pittsburgh); //x2
-        //double route
-        Chicago.addConnection(new CityDrawData(new Point(PittsburghPoint.x + 5, PittsburghPoint.y + 5), "Pittsburgh"));
-        Chicago.addConnection(new CityDrawData(new Point(PittsburghPoint.x - 5, PittsburghPoint.y - 5), "Pittsburgh"));
-        Chicago.addConnection(Toronto);
-        Chicago.addConnection(Deluth);
-        Chicago.addConnection(Omaha);
-        Chicago.addConnection(SaintLouis); //x2
-        Dallas.addConnection(LittleRock);
-        Dallas.addConnection(OklahomaCity); //x2
-        Dallas.addConnection(ElPaso);
-        Dallas.addConnection(Houston); //x2
-        Denver.addConnection(KansasCity); //x2
-        Denver.addConnection(Omaha);
-        Denver.addConnection(Helena);
-        Denver.addConnection(SaltLakeCity); //x2
-        Denver.addConnection(Phoenix);
-        Denver.addConnection(SantaFe);
-        Denver.addConnection(OklahomaCity);
-        Deluth.addConnection(Omaha); //c2
-        Deluth.addConnection(Chicago);
-        Deluth.addConnection(Toronto);
-        Deluth.addConnection(SaultStMarie);
-        Deluth.addConnection(Winnipeg);
-        Deluth.addConnection(Helena);
-        ElPaso.addConnection(Houston);
-        ElPaso.addConnection(OklahomaCity);
-        ElPaso.addConnection(SantaFe);
-        ElPaso.addConnection(Phoenix);
-        ElPaso.addConnection(LosAngeles);
-        Helena.addConnection(Winnipeg);
-        Helena.addConnection(Omaha);
-        Helena.addConnection(SaltLakeCity);
-        Helena.addConnection(Seattle);
-        Houston.addConnection(NewOrleans);
-        Helena.addConnection(Winnipeg);
-        Helena.addConnection(Omaha);
-        Helena.addConnection(SaltLakeCity);
-        Helena.addConnection(Seattle);
-        KansasCity.addConnection(SaintLouis); //x2
-        KansasCity.addConnection(Omaha); //x2
-        KansasCity.addConnection(OklahomaCity); //x2
-        LasVegas.addConnection(SaltLakeCity);
-        LasVegas.addConnection(LosAngeles);
-        LittleRock.addConnection(Nashville);
-        LittleRock.addConnection(SaintLouis);
-        LittleRock.addConnection(OklahomaCity);
-        LittleRock.addConnection(NewOrleans);
-        LosAngeles.addConnection(SanFrancisco); //2x
-        LosAngeles.addConnection(Phoenix);
-        Miami.addConnection(NewOrleans);
-        Montreal.addConnection(NewYork);
-        Montreal.addConnection(Toronto);
-        Montreal.addConnection(SaultStMarie);
-        Nashville.addConnection(Raleigh);
-        Nashville.addConnection(Pittsburgh);
-        Nashville.addConnection(SaintLouis);
-        NewYork.addConnection(Washington); //2x
-        NewYork.addConnection(Pittsburgh); //2x
-        OklahomaCity.addConnection(SantaFe);
-        Phoenix.addConnection(SantaFe);
-        Pittsburgh.addConnection(Washington);
-        Pittsburgh.addConnection(Raleigh);
-        Pittsburgh.addConnection(SaintLouis);
-        Pittsburgh.addConnection(Toronto);
-        Portland.addConnection(Seattle); //2s
-        Portland.addConnection(SaltLakeCity);
-        Portland.addConnection(SanFrancisco);
-        Raleigh.addConnection(Washington);
-        SaltLakeCity.addConnection(SanFrancisco); //x2
-        SaultStMarie.addConnection(Winnipeg);
-        SaultStMarie.addConnection(Toronto);
-        Seattle.addConnection(Vancouver); //2x
-
-
-
-    }
 
     Point VancouverPoint = new Point(159, 135);
     Point SeattlePoint = new Point(167, 290);
@@ -259,12 +45,12 @@ public class MapBaseView extends View {
     Point DenverPoint = new Point(722, 612);
     Point SantaFePoint = new Point(685, 744);
     Point ElPasoPoint = new Point(730, 917);
-    Point HoustonPoint = new Point(1043, 999);
+    Point HoustonPoint = new Point(1000, 999);
     Point DallasPoint = new Point(1051, 999);
-    Point OklahomaCityPoint = new Point(1014, 925);
-    Point KansasCityPoint = new Point(988, 723);
-    Point OmahaPoint = new Point(1025, 595);
-    Point ChicagoPoint = new Point(1014, 493);
+    Point OklahomaCityPoint = new Point(1014, 725);
+    Point KansasCityPoint = new Point(988, 640);
+    Point OmahaPoint = new Point(1025, 480);
+    Point ChicagoPoint = new Point(1114, 493);
     Point PittsburghPoint = new Point(1347, 511);
     Point BostonPoint = new Point(1597, 538);
     Point WashingtonPoint = new Point(1662, 686);
@@ -278,28 +64,319 @@ public class MapBaseView extends View {
     Point LittleRockPoint = new Point(1155, 760);
     Point SaintLouisPoint = new Point(1191, 622);
 
+    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+    Display display = wm.getDefaultDisplay();
+    Paint paint = new Paint();
+    Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
+    Resources resources = getResources();
+    Bitmap mapBitmap = BitmapFactory.decodeResource(resources, R.drawable.usamap);
+    Paint cityNames = new Paint();
+    List<Point> touchCoords = new ArrayList<>();
+
+    Canvas baseCanvas;
+
+    //Context callingContext = getContext();
+
+
+    public MapBaseView(Context context, AttributeSet st) {
+        super(context, st);
+    }
+
+    @Override
+    public void onDraw(Canvas canvas){
+        baseCanvas = canvas;
+        //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
+        fillCityPointList();
+        float thickness = 4;
+        float textSize = 35;
+        paint.setStrokeWidth(thickness);
+        paint.setColor(Color.LTGRAY);
+        cityNames.setTextSize(textSize);
+        cityNames.setColor(Color.RED);
+
+
+        canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
+        drawCityLines(canvas);
+        drawCities(canvas);
+
+        claimRoute(Phoenix, Denver, "red");
+        claimRoute(LasVegas, SaltLakeCity, "blue");
+        claimRoute(NewYork, Nashville, "green");
+        claimRoute(LosAngeles, SanFrancisco, "yellow");
+        claimRoute(Nashville, Omaha, "black");
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        int xTouch = Math.round(event.getX());
+        int yTouch = Math.round(event.getY());
+        touchCoords.add(new Point(xTouch, yTouch));
+        return true;
+    }
+
+    private void drawTrackSquare(Point p1, Point p2, Canvas canvas){
+
+    }
+
+    List<CityDrawData> cities = new ArrayList<>();
+    CityDrawData Vancouver = new CityDrawData(VancouverPoint, "Vancouver");
+    CityDrawData Seattle = new CityDrawData(SeattlePoint, "Seattle");
+    CityDrawData Portland = new CityDrawData(PortlandPoint, "Portland");
+    CityDrawData SanFrancisco = new CityDrawData(SanFranciscoPoint, "San Francisco");
+    CityDrawData LosAngeles = new CityDrawData(LosAngelesPoint, "Los Angeles");
+    CityDrawData Phoenix = new CityDrawData(PhoenixPoint, "Phoenix");
+    CityDrawData LasVegas = new CityDrawData(LasVegasPoint, "Las Vegas");
+    CityDrawData SaltLakeCity = new CityDrawData(SLCPoint, "Salt Lake City");
+    CityDrawData Helena = new CityDrawData(HelenaPoint, "Helena");
+    CityDrawData Calgary = new CityDrawData(CalgaryPoint, "Calgary");
+    CityDrawData Winnipeg = new CityDrawData(WinnipegPoint, "Winnipeg");
+    CityDrawData SaultStMarie = new CityDrawData(SaultStMariePoint, "Sault St Marie");
+    CityDrawData Montreal = new CityDrawData(MontrealPoint, "Montreal");
+    CityDrawData Boston = new CityDrawData(BostonPoint, "Boston");
+    CityDrawData Toronto = new CityDrawData(TorontoPoint, "Toronto");
+    CityDrawData Deluth = new CityDrawData(DeluthPoint, "Deluth");
+    CityDrawData Denver = new CityDrawData(DenverPoint, "Denver");
+    CityDrawData SantaFe = new CityDrawData(SantaFePoint, "Santa Fe");
+    CityDrawData ElPaso = new CityDrawData(ElPasoPoint, "El Paso");
+    CityDrawData Houston = new CityDrawData(HoustonPoint, "Houston");
+    CityDrawData Dallas = new CityDrawData(DallasPoint, "Dallas");
+    CityDrawData OklahomaCity = new CityDrawData(OklahomaCityPoint, "Oklahoma City");
+    CityDrawData KansasCity = new CityDrawData(KansasCityPoint, "Kansas City");
+    CityDrawData Omaha = new CityDrawData(OmahaPoint, "Omaha");
+    CityDrawData Chicago = new CityDrawData(ChicagoPoint, "Chicago");
+    CityDrawData Pittsburgh = new CityDrawData(PittsburghPoint, "Pittsburgh");
+    CityDrawData Washington = new CityDrawData(WashingtonPoint, "Washington");
+    CityDrawData NewYork = new CityDrawData(NewYorkPoint, "New York");
+    CityDrawData Raleigh = new CityDrawData(RaleighPoint, "Raleigh");
+    CityDrawData Nashville = new CityDrawData(NashvillePoint, "Nashville");
+    CityDrawData Atlanta = new CityDrawData(AtlantaPoint, "Atlanta");
+    CityDrawData Charleston = new CityDrawData(CharlestonPoint, "Charleston");
+    CityDrawData Miami = new CityDrawData(MiamiPoint, "Miami");
+    CityDrawData NewOrleans = new CityDrawData(NewOrleansPoint, "New Orleans");
+    CityDrawData LittleRock = new CityDrawData(LittleRockPoint, "Little Rock");
+    CityDrawData SaintLouis = new CityDrawData(SaintLouisPoint, "Saint Louis");
+
+    private void fillCityPointList(){
+
+        cities.add(Vancouver);
+
+        cities.add(Seattle);
+
+        cities.add(Portland);
+
+        cities.add(SanFrancisco);
+
+        cities.add(LosAngeles);
+
+        cities.add(Phoenix);
+
+        cities.add(LasVegas);
+
+        cities.add(SaltLakeCity);
+
+        cities.add(Helena);
+
+        cities.add(Calgary);
+
+        cities.add(Winnipeg);
+
+        cities.add(SaultStMarie);
+
+        cities.add(Montreal);
+
+        cities.add(Boston);
+
+        cities.add(Toronto);
+
+        cities.add(Deluth);
+
+        cities.add(Denver);
+
+        cities.add(SantaFe);
+
+        cities.add(ElPaso);
+
+        cities.add(Houston);
+
+        cities.add(Dallas);
+
+        cities.add(OklahomaCity);
+
+        cities.add(KansasCity);
+
+        cities.add(Omaha);
+
+        cities.add(Chicago);
+
+        cities.add(Pittsburgh);
+
+        cities.add(Washington);
+
+        cities.add(NewYork);
+
+        cities.add(Raleigh);
+
+        cities.add(Nashville);
+
+        cities.add(Atlanta);
+
+        cities.add(Charleston);
+
+        cities.add(Miami);
+
+        cities.add(NewOrleans);
+
+        cities.add(LittleRock);
+
+        cities.add(SaintLouis);
+
+        //add connections
+        Atlanta.addConnection(Miami);
+        Atlanta.addConnection(NewOrleans);
+        //second atlanta NO
+        Boston.addConnection(Montreal);
+        //second Boston Montreal
+        Boston.addConnection(NewYork);
+        //second B-NY
+        Calgary.addConnection(Vancouver);
+        Calgary.addConnection(Winnipeg);
+        Calgary.addConnection(Helena);
+        Calgary.addConnection(Seattle);
+        Charleston.addConnection(Raleigh);
+        Charleston.addConnection(Atlanta);
+        Charleston.addConnection(Miami);
+        Chicago.addDoubleConnection(Pittsburgh); //x2
+        Chicago.addConnection(Toronto);
+        Chicago.addConnection(Deluth);
+        Chicago.addConnection(Omaha);
+        Chicago.addDoubleConnection(SaintLouis); //x2
+        Dallas.addConnection(LittleRock);
+        Dallas.addDoubleConnection(OklahomaCity); //x2
+        Dallas.addConnection(ElPaso);
+        Dallas.addDoubleConnection(Houston); //x2
+        Denver.addDoubleConnection(KansasCity); //x2
+        Denver.addConnection(Omaha);
+        Denver.addConnection(Helena);
+        Denver.addDoubleConnection(SaltLakeCity); //x2
+        Denver.addConnection(Phoenix);
+        Denver.addConnection(SantaFe);
+        Denver.addConnection(OklahomaCity);
+        Deluth.addDoubleConnection(Omaha); //c2
+        Deluth.addConnection(Chicago);
+        Deluth.addConnection(Toronto);
+        Deluth.addConnection(SaultStMarie);
+        Deluth.addConnection(Winnipeg);
+        Deluth.addConnection(Helena);
+        ElPaso.addConnection(Houston);
+        ElPaso.addConnection(OklahomaCity);
+        ElPaso.addConnection(SantaFe);
+        ElPaso.addConnection(Phoenix);
+        ElPaso.addConnection(LosAngeles);
+        Helena.addConnection(Winnipeg);
+        Helena.addConnection(Omaha);
+        Helena.addConnection(SaltLakeCity);
+        Helena.addConnection(Seattle);
+        Houston.addConnection(NewOrleans);
+        Helena.addConnection(Winnipeg);
+        Helena.addConnection(Omaha);
+        Helena.addConnection(SaltLakeCity);
+        Helena.addConnection(Seattle);
+        KansasCity.addDoubleConnection(SaintLouis); //x2
+        KansasCity.addDoubleConnection(Omaha); //x2
+        KansasCity.addDoubleConnection(OklahomaCity); //x2
+        LasVegas.addConnection(SaltLakeCity);
+        LasVegas.addConnection(LosAngeles);
+        LittleRock.addConnection(Nashville);
+        LittleRock.addConnection(SaintLouis);
+        LittleRock.addConnection(OklahomaCity);
+        LittleRock.addConnection(NewOrleans);
+        LosAngeles.addDoubleConnection(SanFrancisco); //2x
+        LosAngeles.addConnection(Phoenix);
+        Miami.addConnection(NewOrleans);
+        Montreal.addConnection(NewYork);
+        Montreal.addConnection(Toronto);
+        Montreal.addConnection(SaultStMarie);
+        Nashville.addConnection(Raleigh);
+        Nashville.addConnection(Pittsburgh);
+        Nashville.addConnection(SaintLouis);
+        NewYork.addDoubleConnection(Washington); //2x
+        NewYork.addDoubleConnection(Pittsburgh); //2x
+        OklahomaCity.addConnection(SantaFe);
+        Phoenix.addConnection(SantaFe);
+        Pittsburgh.addConnection(Washington);
+        Pittsburgh.addConnection(Raleigh);
+        Pittsburgh.addConnection(SaintLouis);
+        Pittsburgh.addConnection(Toronto);
+        Portland.addDoubleConnection(Seattle); //2s
+        Portland.addConnection(SaltLakeCity);
+        Portland.addConnection(SanFrancisco);
+        Raleigh.addConnection(Washington);
+        SaltLakeCity.addDoubleConnection(SanFrancisco); //x2
+        SaultStMarie.addConnection(Winnipeg);
+        SaultStMarie.addConnection(Toronto);
+        Seattle.addDoubleConnection(Vancouver); //2x
+
+
+
+    }
+
+
+
 
     private void drawCityLines(Canvas canvas){
         for (CityDrawData data: cities){
             for(CityDrawData connection : data.connections){
-                drawCityLine(data.city, connection.city, canvas);
-                //canvas.drawLine(data.getX(), data.getY(), connection.getX(), connection.getY(), paint);
+                drawCityConnection(data.city, connection.city, canvas);
+            }
+            for(DoubleConnectionDrawData doubleConnection : data.doubleConnections){
+                drawDoubleCityConnection(data.city, doubleConnection.connectedCityDrawData.city, canvas);
             }
         }
     }
 
-    private void drawCityLine(Point p1, Point p2, Canvas canvas){
+    public boolean claimRoute(CityDrawData cityDrawData1, CityDrawData cityDrawData2, String color){
+        switch (color){
+            case "red":
+                paint.setColor(Color.RED);
+                break;
+            case "blue":
+                paint.setColor(Color.BLUE);
+                break;
+            case "black":
+                paint.setColor(Color.BLACK);
+                break;
+            case "yellow":
+                paint.setColor(Color.YELLOW);
+                break;
+            case "green":
+                paint.setColor(Color.GREEN);
+                break;
+            default:
+                paint.setColor(Color.DKGRAY);
+        }
+        drawCityConnection(cityDrawData1.city, cityDrawData2.city, baseCanvas);
+        paint.setColor(Color.DKGRAY);
+
+        return false;
+    }
+
+    private void drawCityConnection(Point p1, Point p2, Canvas canvas){
         canvas.drawLine(p1.x, p1.y, p2.x, p2.y, paint);
+    }
+
+    private void drawDoubleCityConnection(Point p1, Point p2, Canvas canvas){
+        int offset = 6;
+        canvas.drawLine(p1.x + offset, p1.y + offset, p2.x + offset, p2.y + offset, paint);
+        canvas.drawLine(p1.x - offset, p1.y - offset, p2.x - offset, p2.y - offset, paint);
     }
 
     private void drawCities(Canvas canvas){
         int diameter = 10;
         for (CityDrawData data: cities){
             canvas.drawCircle(data.getX(), data.getY(), diameter, paint);
-            float textSize = (float) 35.0;
-            paint.setTextSize(textSize);
-            canvas.drawText(data.cityName, data.getX() - 10, data.getY() - 5, paint);
+            canvas.drawText(data.cityName, data.getX() - 50, data.getY() - 15, cityNames);
         }
+
     }
 
 
@@ -314,6 +391,16 @@ public class MapBaseView extends View {
     }
 
 
+    private class DoubleConnectionDrawData{
+        CityDrawData connectedCityDrawData;
+
+        boolean oneClaimed = false;
+
+        public DoubleConnectionDrawData(CityDrawData connectedCityDrawData){
+            this.connectedCityDrawData = connectedCityDrawData;
+        }
+    }
+
     private class CityDrawData{
         CityDrawData(Point city, String cityName){
             this.city = city;
@@ -325,6 +412,8 @@ public class MapBaseView extends View {
         Point city;
         List<CityDrawData> connections = new ArrayList<>();
 
+        List<DoubleConnectionDrawData> doubleConnections = new ArrayList<>();
+
         public float getX(){
             return city.x;
         }
@@ -335,6 +424,10 @@ public class MapBaseView extends View {
 
         public void addConnection(CityDrawData otherCity){
             connections.add(otherCity);
+        }
+
+        public void addDoubleConnection(CityDrawData otherCity){
+            doubleConnections.add(new DoubleConnectionDrawData(otherCity));
         }
 
         public void drawCity(Canvas canvas){
