@@ -67,8 +67,13 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
                 //if the same game
                 //TODO check to see if the status stuff is actually different before redoing the whole recycler view
                 if (CModel.getInstance().getCurrGame().getGameID().equals(g.getGameID())){
-                    myView.get().updatePlayerStats(g);
+                    myView.get().updatePlayerStats();
                 }
+            }
+        }
+        else if(arg instanceof  Game){
+            if (CModel.getInstance().getCurrGame().getGameID().equals(((Game) arg).getGameID())){
+                myView.get().updatePlayerStats();
             }
         }
         //ex, game won,player attributes changed(routeClaimed),
