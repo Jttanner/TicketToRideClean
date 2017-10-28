@@ -27,6 +27,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
+    private int count = 0;
 
     @Override
     protected void onDestroy() {
@@ -86,8 +87,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             @Override
             public void onClick(View v) {
                 int testCases = 1;
-                int counter = 0;
-                switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
+                switch(count){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
                     case 0:
                         FragmentManager fm = getSupportFragmentManager();
@@ -142,9 +142,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         break;
                 }
                 //Change this counter when we add more test cases. Basically caps the number of cases we will use
-                while(counter != testCases) {
-                    counter++;
-                }
+                count++;
             }
         });
 
