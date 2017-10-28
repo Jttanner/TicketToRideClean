@@ -7,9 +7,16 @@ import clientModel.CModel;
  */
 
 public class DrawTrainCardDeck implements ClientCommand {
+    String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+
     @Override
     public void execute() {
 
-        CModel.getInstance().getUserPlayer().getPlayerName();
+        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        return playerName + " drew a resource card from the deck";
     }
 }
