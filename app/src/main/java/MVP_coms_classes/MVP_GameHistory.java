@@ -20,7 +20,7 @@ public interface MVP_GameHistory {
         /**gets activity context*/
         Context getActivityContext();
         /**Any commands toString method is passed in here to add to the GameHistoryView*/
-        void updateGameHistory(ArrayList gameHistoryList);
+        void updateGameHistory(ArrayList<String> gameHistoryList);
 
     }
     /**

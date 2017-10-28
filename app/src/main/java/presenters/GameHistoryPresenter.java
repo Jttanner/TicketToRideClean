@@ -1,6 +1,7 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 

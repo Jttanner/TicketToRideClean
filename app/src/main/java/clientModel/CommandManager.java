@@ -54,6 +54,18 @@ public class CommandManager {
         if(command.getType().equals("startGame")) {
             return new StartGameClient();
         }
+        else if(command.getType().equals("drawTrainCardDeck")) {
+
+        }
+        else if(command.getType().equals("drawTrainCardFaceUp")) {
+
+        }
+        else if(command.getType().equals("drawDestinationCard")) {
+
+        }
+        else if(command.getType().equals("claimRoute")) {
+
+        }
         //TODO add new commands for the client here
         Log.d(TAG,"NULL command given");
         return  null;
