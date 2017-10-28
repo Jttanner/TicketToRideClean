@@ -150,7 +150,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         setupView();
         //start poller
-        Poller.getInstance().getCommandList();
+        //Poller.getInstance().getCommandList();
     }
 
     private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
