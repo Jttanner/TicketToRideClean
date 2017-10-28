@@ -99,7 +99,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.replace(R.id.activity_map, fragment);
                             transaction.commit();
                         }
-
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 1:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
@@ -150,7 +151,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         setupView();
         //start poller
-        Poller.getInstance().getCommandList();
+        //Poller.getInstance().getCommandList();
     }
 
     private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>

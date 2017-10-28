@@ -38,18 +38,18 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        testString.add("Game History 1");
-        testString.add("Game History 2");
-        testString.add("Game History 3");
-        testString.add("Game History 4");
-        testString.add("Game History 5");
-        testString.add("Game History 6");
-        testString.add("Game History 7");
-        testString.add("Game History 88");
-        testString.add("Game History 9");
-        testString.add("Game History 10");
-        testString.add("Game History 11");
-        testString.add("Game History 12");
+        testString.add("Game History");
+//        testString.add("Game History 2");
+//        testString.add("Game History 3");
+//        testString.add("Game History 4");
+//        testString.add("Game History 5");
+//        testString.add("Game History 6");
+//        testString.add("Game History 7");
+//        testString.add("Game History 88");
+//        testString.add("Game History 9");
+//        testString.add("Game History 10");
+//        testString.add("Game History 11");
+//        testString.add("Game History 12");
 
         presenter = new GameHistoryPresenter(this);
 
@@ -76,15 +76,11 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
         return null;
     }
 
-    public void updateGameHistory(ArrayList gameHistoryList) {
+    @Override
+    public void updateGameHistory(ArrayList<String> gameHistoryList) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new GameHistoryAdapter(gameHistoryList, getContext());
         recyclerView.setAdapter(adapter);
     }
-
-//When the GameCommandList is updated
-//    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//    adapter = new GameHistoryAdapter(gameHistoryList, getContext());
-//    recyclerView.setAdapter(adapter);
 
 }

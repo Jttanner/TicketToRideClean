@@ -44,7 +44,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     @Override
     protected void onDestroy() {
         Poller.getInstance().stopPoller();
-        Poller.getInstance().stopGetCommandsPoller();
+        //Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
 
