@@ -147,14 +147,6 @@ public class CModel extends Observable {
         Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
-
-            /*//Updating the player list
-            if (currGame != null) {
-                *//*TODO Issues here with looping. SetCurrGame is called when we join a game but the poller is never stopped so we keep
-                setting the game over and over again which also sends a game to the observors which causes start game to be started until
-                we run out of memory i guess*//*
-                setCurrGame(allGames.findGame(currGame.getGameID()));
-            }*/
             //will notify the gamelist activity of games made/changed
             setChanged();
             notifyObservers(allGames);
