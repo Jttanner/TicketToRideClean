@@ -46,7 +46,8 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
 
     public DestinationCardFragment(){
         presenter = new DestinationCardPresenter(this);
-
+        game = CModel.getInstance().getCurrGame();
+        player = CModel.getInstance().getUserPlayer();
         /*game = new Game();
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserName());
@@ -77,6 +78,9 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
         presenter.getDestinationCards(game, player);
         //TODO: How do we update the view after the it goes to the server and back????
     }
+
+
+
     void wireUp(final List<DestinationCard> cards){
         mRoute1.setOnClickListener(new View.OnClickListener() {
             @Override

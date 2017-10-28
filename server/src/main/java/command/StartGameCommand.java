@@ -21,7 +21,6 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
 
-
         CommandResult result;
         //start the game then if it succeeds add this commanddata to the list for the game object
         //others will take this startGameData and start the game themselves

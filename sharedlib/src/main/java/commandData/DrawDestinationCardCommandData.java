@@ -20,8 +20,11 @@ public class DrawDestinationCardCommandData extends Command{
         this.player = player;
     }
 
+    public DrawDestinationCardCommandData() {
+
+    }
+
     public DrawDestinationCardCommandData(String gameID, Player player) {
-        setType("drawDestinationCards");
         this.gameID = gameID;
         this.player = player;
     }

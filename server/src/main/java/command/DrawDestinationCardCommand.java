@@ -20,8 +20,9 @@ import result.DrawDestinationCardCommandResult;
 public class DrawDestinationCardCommand extends DrawDestinationCardCommandData implements ICommand {
 
     private DrawDestinationCardCommandData commandData;
-    public DrawDestinationCardCommand(String gameID, Player player) {
-        super(gameID, player);
+    public DrawDestinationCardCommand(DrawDestinationCardCommandData data) {
+        super();
+        this.commandData = data;
         setType("drawDestinationCards");
     }
 
