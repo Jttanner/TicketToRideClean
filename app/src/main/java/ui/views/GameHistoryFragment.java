@@ -38,7 +38,7 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        testString.add("Game History");
+//        testString.add("Game History");
 //        testString.add("Game History 2");
 //        testString.add("Game History 3");
 //        testString.add("Game History 4");
@@ -60,8 +60,8 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
         recyclerView = (RecyclerView) v.findViewById(R.id.GameHistoryRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Set up Adapter
-        //adapter = new GameHistoryAdapter(CModel.getInstance().getCurrGame().getGameHistoryList(), getContext());
-        adapter = new GameHistoryAdapter(testString, getContext());
+        adapter = new GameHistoryAdapter(CModel.getInstance().getCurrGame().getGameHistoryList(), getContext());
+        //adapter = new GameHistoryAdapter(testString, getContext());
         recyclerView.setAdapter(adapter);
         return v;
     }
