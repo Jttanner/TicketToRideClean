@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import clientCommands.ClientCommand;
+import clientCommands.DrawTrainCardDeck;
 import clientCommands.StartGameClient;
 import commandData.Command;
 import modeling.CommandList;
@@ -55,7 +56,7 @@ public class CommandManager {
             return new StartGameClient();
         }
         else if(command.getType().equals("drawTrainCardDeck")) {
-
+            return new DrawTrainCardDeck();
         }
         else if(command.getType().equals("drawTrainCardFaceUp")) {
 
