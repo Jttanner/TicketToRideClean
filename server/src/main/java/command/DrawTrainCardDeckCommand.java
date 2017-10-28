@@ -2,6 +2,8 @@ package command;
 
 import com.sun.org.apache.bcel.internal.generic.ICONST;
 
+import ServerModel.ServerFacade;
+import commandData.Command;
 import commandData.DrawTrainCardDeckCommandData;
 import result.CommandResult;
 
@@ -10,13 +12,21 @@ import result.CommandResult;
  */
 
 public class DrawTrainCardDeckCommand extends DrawTrainCardDeckCommandData implements ICommand {
-
-    public DrawTrainCardDeckCommand(DrawTrainCardDeckCommandData drawTrainCardDeckCommandData){
-
-
+    private DrawTrainCardDeckCommandData drawTrainCardDeckCommandData;
+    public DrawTrainCardDeckCommand(DrawTrainCardDeckCommandData data){
+        super();
+        drawTrainCardDeckCommandData = data;
+        setType("drawTrainCardDeck");
     }
     @Override
     public CommandResult execute() {
-        return null;
+        ServerFacade facade = ServerFacade.getInstance();
+        CommandResult result;
+
+        //Temporary Implementation. May need to change
+        facade.addCommandToList(drawTrainCardDeckCommandData.getGame().getGameID(), drawTrainCardDeckCommandData);
+        result = new CommandResult(true);
+
+        return result;
     }
 }
