@@ -109,11 +109,11 @@ public class Game {
         this.hasStarted = hasStarted;
         //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
         if(this.hasStarted && !players.get(0).isMyTurn()){
-
             setupStartingCards();//setup starting cards when game starts
             players.get(0).toggleMyTurn();
         }
     }
+
     /**Gets the a particular player by a given username*/
     public Player getPlayer(String playerName) {
         for(Player player : players){
