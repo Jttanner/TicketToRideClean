@@ -2,6 +2,7 @@ package command;
 
 import javax.swing.Icon;
 
+import ServerModel.ServerFacade;
 import commandData.ClaimRouteCommandData;
 import result.CommandResult;
 
@@ -10,14 +11,22 @@ import result.CommandResult;
  */
 
 public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand {
-
-    public ClaimRouteCommand(ClaimRouteCommandData claimRouteCommandData){
-
-
+    private ClaimRouteCommandData claimRouteCommandData;
+    public ClaimRouteCommand(ClaimRouteCommandData data){
+        super();
+        this.claimRouteCommandData = data;
+        setType("claimRoute");
     }
 
     @Override
     public CommandResult execute() {
-        return null;
+        ServerFacade facade = ServerFacade.getInstance();
+        CommandResult result;
+
+        //Temporary Implementation. May need to change
+        facade.addCommandToList(claimRouteCommandData.getGame().getGameID(), claimRouteCommandData);
+        result = new CommandResult(true);
+
+        return result;
     }
 }
