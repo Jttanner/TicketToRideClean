@@ -8,7 +8,6 @@ import java.util.Map;
 
 import clientModel.MyColor;
 import clientModel.PlayerColumn;
-import modeling.Game;
 
 /**
  * Created by tyler on 10/20/2017.
@@ -23,7 +22,7 @@ public interface MVP_PlayerStats {
         /**The activity context of the view*/
         Context getActivityContext();
         /**updates the player stats*/
-        void updatePlayerStats(Game g);
+        void updatePlayerStats();
         /**Sets the textviews for card color numbers*/
         void setMyTextView(MyColor color, int numOfThisColor);
     }
