@@ -12,6 +12,7 @@ import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
+import modeling.History;
 import modeling.Player;
 import modeling.User;
 
@@ -55,6 +56,24 @@ public class CModel extends Observable {
     public void setChatHistory(List<String> chatHistory) {
         this.chatHistory = chatHistory;
     }
+
+
+//    private List<String> gameHistory = new ArrayList<>();
+//    public List<String> getGameHistory() {
+//        return gameHistory;
+//    }
+//    public void setGameHistory(List<String> gameHistory) {
+//        this.gameHistory = gameHistory;
+//    }
+
+    //Call this when the commands that will update the Game History are executed
+    public void updateCurrGameHistoryList(String history) {
+        currGame.addToGameHistory(history);
+        History observerHistory = new History();
+        setChanged();
+        notifyObservers(observerHistory);
+    }
+
 
     private CModel() {
     }

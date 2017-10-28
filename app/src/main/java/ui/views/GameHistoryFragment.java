@@ -22,15 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapters.GameHistoryAdapter;
+import MVP_coms_classes.MVP_GameHistory;
 import clientModel.CModel;
+import presenters.GameHistoryPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 
-public class GameHistoryFragment extends DialogFragment {
+public class GameHistoryFragment extends DialogFragment implements MVP_GameHistory.GameHistoryViewOps {
     private RecyclerView recyclerView;
     private GameHistoryAdapter adapter;
     private ArrayList<String> testString = new ArrayList<>();
-
+    private MVP_GameHistory.GameHistoryPresOps presenter;
 
     public GameHistoryFragment(){
     }
@@ -49,7 +51,7 @@ public class GameHistoryFragment extends DialogFragment {
         testString.add("Game History 11");
         testString.add("Game History 12");
 
-
+        presenter = new GameHistoryPresenter(this);
 
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
         getDialog().show();
@@ -64,8 +66,25 @@ public class GameHistoryFragment extends DialogFragment {
         return v;
     }
 
+    @Override
+    public Context getAppContext() {
+        return null;
+    }
+
+    @Override
+    public Context getActivityContext() {
+        return null;
+    }
+
+    public void updateGameHistory(ArrayList gameHistoryList) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new GameHistoryAdapter(gameHistoryList, getContext());
+        recyclerView.setAdapter(adapter);
+    }
+
 //When the GameCommandList is updated
 //    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //    adapter = new GameHistoryAdapter(gameHistoryList, getContext());
 //    recyclerView.setAdapter(adapter);
+
 }

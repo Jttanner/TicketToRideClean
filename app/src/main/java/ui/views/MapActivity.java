@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import MVP_coms_classes.MVP_Map;
+import clientModel.CModel;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
@@ -104,8 +105,10 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
                         //DrawRouteAsync task = new DrawRouteAsync();
                         //task.execute();
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
                         break;
                     case 2:
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 3:
                         break;

@@ -9,8 +9,6 @@ import java.util.UUID;
  */
 public class Game {
 
-
-
     private ArrayList<String> gameHistoryList = new ArrayList<>();
     private ArrayList<Player> players;
 
@@ -40,6 +38,9 @@ public class Game {
         this.playerMax = playerMax;
     }
 
+    public void addToGameHistory(String oneHistory) {
+        gameHistoryList.add(oneHistory);
+    }
     public ArrayList<String> getGameHistoryList() {
         return gameHistoryList;
     }
@@ -47,6 +48,7 @@ public class Game {
     public void setGameHistoryList(ArrayList<String> gameHistoryList) {
         this.gameHistoryList = gameHistoryList;
     }
+
     public int getPlayerMax() {
         return playerMax;
     }
