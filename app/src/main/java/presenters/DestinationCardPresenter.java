@@ -7,7 +7,10 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
+import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
+import modeling.Game;
+import modeling.Player;
 import servercomms.ServerProxy;
 
 /**
@@ -16,12 +19,20 @@ import servercomms.ServerProxy;
 
 public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observer {
     private WeakReference<MVP_DestCard.MapViewOps> myView;
-    public DestinationCardPresenter(){}
 
     public DestinationCardPresenter(MVP_DestCard.MapViewOps view){
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
     }
+
+    @Override
+    public void getDestinationCards(Game game, Player player) {
+
+        //if we didnt find the user, add him in the server
+        DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player);
+        ServerProxy.getInstance().sendCommand(data);
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {
@@ -31,6 +42,7 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
             myView.get().giveChosenCards(destinationCards);
         }
     }
+
     /*
     @Override
     public void CreateGame(Game game) {

@@ -8,6 +8,7 @@ import java.net.URL;
 
 import commandData.Command;
 import commandData.CreateGameCommandData;
+import commandData.DrawDestinationCardCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -65,9 +66,14 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
 
         if (request instanceof LoginRequest) {
             return encoder.decodeLoginResult(stream);
-        } else if (request instanceof RegisterRequest) {
+        }
+        else if (request instanceof RegisterRequest) {
             return encoder.decodeRegisterResult(stream);
-        } else if(request instanceof GetGameListCommandData){
+        }
+        else if(request instanceof DrawDestinationCardCommandData) {
+            return encoder.decodeDestinationCardResult(stream);
+        }
+        else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
         }
         else if(request instanceof CreateGameCommandData){

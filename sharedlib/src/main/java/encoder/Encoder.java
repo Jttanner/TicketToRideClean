@@ -12,6 +12,7 @@ import java.io.Reader;
 import commandData.GetCmndListDataToClient;
 import result.CommandResult;
 import result.CreateGameCommandResult;
+import result.DrawDestinationCardCommandResult;
 import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 import result.LoginResult;
@@ -70,6 +71,15 @@ public class Encoder {
             return gson.fromJson(reader, CommandResult.class);
         }catch (Exception e){
             return new CommandResult(false,e.getMessage());
+        }
+    }
+
+    public DrawDestinationCardCommandResult decodeDestinationCardResult(InputStream stream) {
+        try{
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, DrawDestinationCardCommandResult.class);
+        }catch(Exception e){
+            return new DrawDestinationCardCommandResult(false, e.getMessage());
         }
     }
 

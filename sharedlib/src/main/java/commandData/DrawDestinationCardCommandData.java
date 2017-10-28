@@ -1,6 +1,7 @@
 package commandData;
 
 import modeling.DestinationCard;
+import modeling.Player;
 
 /**
  * Created by ahwang13 on 10/24/17.
@@ -8,9 +9,29 @@ import modeling.DestinationCard;
 
 public class DrawDestinationCardCommandData extends Command{
 
-    private DestinationCard route1;
-    private DestinationCard route2;
-    private DestinationCard route3;
+    private String gameID;
+    private Player player;
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public DrawDestinationCardCommandData(String gameID, Player player) {
+        setType("drawDestinationCards");
+        this.gameID = gameID;
+        this.player = player;
+    }
+
+    public String getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+    }
 
 }

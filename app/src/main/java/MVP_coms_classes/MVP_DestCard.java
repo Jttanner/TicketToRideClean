@@ -3,8 +3,11 @@ package MVP_coms_classes;
 import android.content.Context;
 
 import java.util.List;
+import java.util.Observable;
 
 import modeling.DestinationCard;
+import modeling.Game;
+import modeling.Player;
 
 /**
  * Created by tyler on 10/19/2017.
@@ -24,6 +27,7 @@ public interface MVP_DestCard {
         /**gives the player the destination cards he has chosen*/
         void giveChosenCards(List<DestinationCard> destinationCards);
         //Or is it string destinationCard?
+        //void update(Observable o, Object arg);
 
     }
     /**
@@ -33,6 +37,7 @@ public interface MVP_DestCard {
     interface MapPresOps{ //View pushes to the presenter
         /**Sends the presenter what destination cards were picked*/
         //void pickDestCards(List<DestinationCard> cards) ;
+        void getDestinationCards(Game game, Player player);
     }
 
     //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards
