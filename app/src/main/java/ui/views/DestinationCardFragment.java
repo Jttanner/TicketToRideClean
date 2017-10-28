@@ -76,17 +76,6 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
 
         presenter.getDestinationCards(game, player);
         //TODO: How do we update the view after the it goes to the server and back????
-        //List<DestinationCard> cards = CModel.getInstance().threeDestinationCards();
-        mRoute1.setText(cards.get(0).getDestinationCardString());
-        mRoute2.setText(cards.get(1).getDestinationCardString());
-        mRoute3.setText(cards.get(2).getDestinationCardString());
-        mRoute1.setTextColor(Color.RED);
-        mRoute2.setTextColor(Color.RED);
-        mRoute3.setTextColor(Color.RED);
-
-        Toast.makeText(getContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
-
-        wireUp(cards);
     }
     void wireUp(final List<DestinationCard> cards){
         mRoute1.setOnClickListener(new View.OnClickListener() {
@@ -189,5 +178,15 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
 
+        mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+        mRoute2.setText(destinationCards.get(1).getDestinationCardString());
+        mRoute3.setText(destinationCards.get(2).getDestinationCardString());
+        mRoute1.setTextColor(Color.RED);
+        mRoute2.setTextColor(Color.RED);
+        mRoute3.setTextColor(Color.RED);
+
+        Toast.makeText(getContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
+
+        wireUp(destinationCards);
     }
 }
