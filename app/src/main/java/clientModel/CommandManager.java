@@ -8,8 +8,13 @@ import java.util.Map;
 
 import clientCommands.ClientCommand;
 import clientCommands.DrawTrainCardDeck;
+import clientCommands.DrawTrainCardFaceUp;
+import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
+import commandData.ClaimRouteCommandData;
 import commandData.Command;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.CommandList;
 import modeling.Game;
 import modeling.Player;
@@ -56,16 +61,16 @@ public class CommandManager {
             return new StartGameClient();
         }
         else if(command.getType().equals("drawTrainCardDeck")) {
-            return new DrawTrainCardDeck();
+            return new DrawTrainCardDeck((DrawTrainCardDeckCommandData)command);
         }
         else if(command.getType().equals("drawTrainCardFaceUp")) {
-
+            return new DrawTrainCardFaceUp((DrawTrainCardFaceUpCommandData)command);
         }
         else if(command.getType().equals("drawDestinationCard")) {
-
+            //
         }
         else if(command.getType().equals("claimRoute")) {
-
+            return new PlaceTrainRoute((ClaimRouteCommandData)command);
         }
         //TODO add new commands for the client here
         Log.d(TAG,"NULL command given");

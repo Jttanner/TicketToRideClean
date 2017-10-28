@@ -85,7 +85,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int testCases = 1;
+                int testCases = 0;
                 int counter = 0;
                 switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
@@ -112,6 +112,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 3:
+
                         break;
                     case 4:
                         break;
@@ -142,10 +143,11 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                     default:
                         break;
                 }
+                counter++;
                 //Change this counter when we add more test cases. Basically caps the number of cases we will use
-                while(counter != testCases) {
-                    counter++;
-                }
+//                while(counter != testCases) {
+//                    counter++;
+//                }
             }
         });
 
