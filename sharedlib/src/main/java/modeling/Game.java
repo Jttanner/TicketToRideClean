@@ -1,6 +1,7 @@
 package modeling;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,6 +12,15 @@ public class Game {
 
     private ArrayList<String> gameHistoryList = new ArrayList<>();
     private ArrayList<Player> players;
+    private List<String> chatHistory = new ArrayList<>();
+
+    public List<String> getChatHistory() {
+        return chatHistory;
+    }
+
+    public void setChatHistory(List<String> chatHistory) {
+        this.chatHistory = chatHistory;
+    }
 
     private boolean hasStarted;
 

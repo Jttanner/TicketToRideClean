@@ -11,14 +11,15 @@ import result.CommandResult;
 public class AddChatCommand extends ChatCommandData implements ICommand {
 
     public AddChatCommand(ChatCommandData chatCommandData){
-        super(chatCommandData.getChatString());
+        super(chatCommandData.getChatString(),chatCommandData.getGameId());
 
     }
 
     @Override
     public CommandResult execute() {
 
-        ServerFacade.getInstance().addChat(getChatString());
+        ServerFacade.getInstance().addChat(getChatString(),getGameId());
+
         return null;
     }
 }

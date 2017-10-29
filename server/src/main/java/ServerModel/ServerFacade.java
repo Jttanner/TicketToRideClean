@@ -48,10 +48,14 @@ public class ServerFacade {
         }
     }
 
-    public void addChat(String s){
-        ServerModel.getInstance().getChatHistory().add(s);
-        ChatCommandData chatCommandData = new ChatCommandData(ServerModel.getInstance().getChatHistory());
-        ServerModel.getInstance().getReturnCommand().add(chatCommandData);
+    public void addChat(String s,String gameID){
+
+        ServerModel.getInstance().addChatHistory(s,gameID);
+//        ChatCommandData chatCommandData = new ChatCommandData( ServerModel.getInstance().getGamesAsMap().get(gameID).getChatHistory(),gameID);
+//        ServerModel.getInstance().getReturnCommand().add(chatCommandData);
+//        addCommandToList(gameID,chatCommandData);
+
+
     }
 
     public RegisterResult register(RegisterRequest request){

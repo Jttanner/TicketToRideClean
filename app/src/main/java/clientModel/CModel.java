@@ -68,6 +68,7 @@ public class CModel extends Observable {
 
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history) {
+
         currGame.addToGameHistory(history);
         History observerHistory = new History();
         setChanged();
@@ -95,6 +96,19 @@ public class CModel extends Observable {
         return destinationCardList.get3Cards();
     }
 
+    public void UpdateHistory(List<String> history,String gameID){
+        for(Game game: allGames){
+            if(game.getGameID().equals(gameID)){
+                game.setChatHistory(history);
+            }
+        }
+        if(currGame!=null){
+            currGame.setChatHistory(history);
+        }
+
+        setChanged();
+        notifyObservers("addChat");
+    }
 
     /**Increments the command index of the appropriate user player*/
     void incrementUsersCommandIndex(){

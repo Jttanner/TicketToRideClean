@@ -33,8 +33,8 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         //ex, game won,player attributes changed(routeClaimed),
     }
 
-    public void UpdateChat(String s){
-        ChatCommandData chatCommandData = new ChatCommandData(s);
-        ServerProxy.getInstance().sendCommand(chatCommandData);
-    }
+//    public void UpdateChat(String s){
+//        ChatCommandData chatCommandData = new ChatCommandData(s);
+//        ServerProxy.getInstance().sendCommand(chatCommandData);
+//    }
 }

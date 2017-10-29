@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import commandData.ChatCommandData;
 import commandData.Command;
 import modeling.CommandList;
 import modeling.DestinationCard;
@@ -103,6 +104,15 @@ public class ServerModel {
     //(gameID, Game)
     public Map<String, Game> getGamesAsMap(){
         return games;
+    }
+    public void addChatHistory(String s,String gameId){
+
+        gameList.findGame(gameId).getChatHistory().add(s);
+
+        ChatCommandData chatCommandData = new ChatCommandData(gameList.findGame(gameId).getChatHistory(),gameId);
+
+        //ServerModel.getInstance().getReturnCommand().add(chatCommandData);
+        ServerFacade.getInstance().addCommandToList(gameId, chatCommandData);
     }
 
     //Takes in the current list of games and returns a list of games that haven't started yet
