@@ -205,4 +205,14 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public void routeClaimed(Route r) {
 
     }
+    /*
+    protected void switchFragments(){
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+        fragment = new MapFragment();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+    }*/
 }

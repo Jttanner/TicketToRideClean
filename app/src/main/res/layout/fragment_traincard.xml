@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose 2 Train Cards:"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainCardButton1"
+        android:background="@drawable/blacktrain"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainCardButton2"
+        app:srcCompat="@drawable/redtrain"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainCardButton3"
+        app:srcCompat="@drawable/bluetrain"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainCardButton4"
+        app:srcCompat="@drawable/greentrain"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainCardButton5"
+        app:srcCompat="@drawable/orangetrain"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:id="@+id/trainDeckCardButton"
+        android:src="@drawable/backcard" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Destination Cards"
+        android:id="@+id/chooseNewDestinationCardsButton"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/buttonCancel"/>
+    </LinearLayout>
+
+</LinearLayout>

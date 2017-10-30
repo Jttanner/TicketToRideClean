@@ -21,7 +21,6 @@ public class DrawDestinationCardCommandData extends Command{
     }
 
     public DrawDestinationCardCommandData() {
-
     }
 
     public DrawDestinationCardCommandData(String gameID, Player player) {
