@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
@@ -27,6 +28,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
+    int counter = 0;
+
 
     @Override
     protected void onDestroy() {
@@ -81,12 +84,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
+
+
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int testCases = 1;
-                int counter = 0;
+
+                MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+
                 switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
                     case 0:
@@ -99,25 +105,29 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.replace(R.id.activity_map, fragment);
                             transaction.commit();
                         }
-                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
-                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 1:
-                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
-                        //DrawRouteAsync task = new DrawRouteAsync();
-                        //task.execute();
                         CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
                         break;
                     case 2:
                         CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 3:
+                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
+                        Toast.makeText(getApplicationContext(), "Blue Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false, false);
                         break;
                     case 4:
+                        Toast.makeText(getApplicationContext(), "Red Player claiming route from Kansas City to St. Louis...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.KansasCityPoint, "Kansas City", mapBaseView.SaintLouisPoint, "St. Louis", "red", true, false);
                         break;
                     case 5:
+                        Toast.makeText(getApplicationContext(), "Green Player claiming first available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "green", true, false);
                         break;
                     case 6:
+                        Toast.makeText(getApplicationContext(), "Yellow Player claiming second available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "yellow", true, true);
                         break;
                     case 7:
                         break;
@@ -142,42 +152,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                     default:
                         break;
                 }
-                //Change this counter when we add more test cases. Basically caps the number of cases we will use
-                while(counter != testCases) {
-                    counter++;
-                }
+                counter++;
             }
         });
 
         setupView();
-        //start poller
-        //Poller.getInstance().getCommandList();
+
     }
-
-    private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
-    {
-        MapBaseView mapBaseView;
-        @Override
-        protected Integer doInBackground(Void... params)
-        {
-            mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
-
-            return 0;
-        }
-        @Override
-        protected void onPostExecute(Integer integer)
-        {
-            super.onPostExecute(integer);
-            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.Omaha, "blue");
-            mapBaseView.claimRoute(mapBaseView.Phoenix, mapBaseView.Denver, "red");
-            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.SaltLakeCity, "blue");
-            mapBaseView.claimRoute(mapBaseView.NewYork, mapBaseView.Nashville, "green");
-            mapBaseView.claimRoute(mapBaseView.LosAngeles, mapBaseView.SanFrancisco, "yellow");
-            mapBaseView.claimRoute(mapBaseView.Nashville, mapBaseView.Omaha, "black");
-        }
-    }
-
-
 
     private void setupView() {
         Log.d(TAG,"setupView");
@@ -205,14 +186,4 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public void routeClaimed(Route r) {
 
     }
-    /*
-    protected void switchFragments(){
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        fragment = new MapFragment();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
-    }*/
 }
