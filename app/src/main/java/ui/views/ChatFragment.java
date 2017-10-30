@@ -14,27 +14,47 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import MVP_coms_classes.MVP_Chat;
 import clientModel.CModel;
+import poller.Poller;
+import presenters.ChatPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
  * Created by ACL1 on 10/20/2017.
  */
 
-public class ChatFragment extends DialogFragment {
+public class ChatFragment extends DialogFragment implements MVP_Chat.ChatViewOps {
     private TextView chatView;
     private EditText chatEdit;
     private Button Enter;
     private String currentString ;
+    private MVP_Chat.ChatPresenterOps presenter = new ChatPresenter(this);
 
     public ChatFragment(){
         currentString = "";
     }
+
+    @Override
+    public void UpdateChatView() {
+        changeChat();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Poller.getInstance().stopGetCommandsPoller();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        Poller.getInstance().getCommandList();
+
         getDialog().show();
         getDialog().getWindow().setLayout(1000,1000);
 
@@ -45,8 +65,8 @@ public class ChatFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                ((MapActivity)getActivity()).presenter.UpdateChat(currentString);
-                CModel.getInstance().getChatHistory().add(currentString);
+                presenter.UpdateChatServer(currentString);
+               // CModel.getInstance().getChatHistory().add(currentString);
                 currentString = "";
                 chatEdit.setText("");
                 changeChat();
@@ -72,7 +92,7 @@ public class ChatFragment extends DialogFragment {
         return v;
     }
     void changeChat(){
-        List<String> list = CModel.getInstance().getChatHistory();
+        List<String> list = CModel.getInstance().getCurrGame().getChatHistory();
         String display = "";
         if(list.size()<5){
             for(String a : list){

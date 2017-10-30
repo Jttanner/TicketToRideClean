@@ -11,6 +11,8 @@ import clientCommands.DrawTrainCardDeck;
 import clientCommands.DrawTrainCardFaceUp;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
+import clientCommands.UpdateChatCommand;
+import commandData.ChatCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawTrainCardDeckCommandData;
@@ -71,6 +73,11 @@ public class CommandManager {
         }
         else if(command.getType().equals("claimRoute")) {
             return new PlaceTrainRoute((ClaimRouteCommandData)command);
+        }
+        else if(command.getType().equals("addChat")){
+            if(command instanceof  ChatCommandData)
+            return new UpdateChatCommand((ChatCommandData)command.getData());
+
         }
         //TODO add new commands for the client here
         Log.d(TAG,"NULL command given");

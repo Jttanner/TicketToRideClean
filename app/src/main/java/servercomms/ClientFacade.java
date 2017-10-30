@@ -36,19 +36,23 @@ class ClientFacade {
     /**Checks the type of command results*/
     void checkTypeOfCommand(CommandResult result) {
 
-        if(result instanceof GetGameCommandResult){
-            CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
-        }
-       //This if is for joinGame, and the result.getData is the GameID for the game we are joining
-        else if(result instanceof JoinGameCommandResult){
-           CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
-        }
-        //TODO: Does not like this line when we stop the app, re-run it, and try to log back in
-        else if(result.getType().equals("startGame")) {
-           CModel.getInstance().toggleGameHasStarted();
-        }
-        else{
-           Log.d(TAG,"We got a different class then expected");
+        if(result!=null) {
+            if (result instanceof GetGameCommandResult) {
+                CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
+            }
+            //This if is for joinGame, and the result.getData is the GameID for the game we are joining
+            else if (result instanceof JoinGameCommandResult) {
+                CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
+            }
+            //TODO: Does not like this line when we stop the app, re-run it, and try to log back in
+            else if(result.getType()!=null) {
+                if (result.getType().equals("startGame")) {
+                    CModel.getInstance().toggleGameHasStarted();
+                }
+            }
+            else {
+                Log.d(TAG, "We got a different class then expected");
+            }
         }
     }
 

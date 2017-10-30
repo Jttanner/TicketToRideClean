@@ -10,6 +10,15 @@ public class ChatCommandData extends Command {
 
     String chatString;
     List<String> chatHistory;
+    String gameId;
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -19,12 +28,14 @@ public class ChatCommandData extends Command {
         this.chatHistory = chatHistory;
     }
 
-    public ChatCommandData(List<String> list){
+    public ChatCommandData(List<String> list,String gameId){
+        this.gameId = gameId;
         chatHistory = list;
         setType("addChat");
     }
     public ChatCommandData(){}
-    public ChatCommandData(String s){
+    public ChatCommandData(String s,String gameId){
+        this.gameId = gameId;
         chatString = s;
         setType("addChat");
     }
