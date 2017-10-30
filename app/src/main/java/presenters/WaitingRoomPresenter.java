@@ -50,7 +50,7 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
         //if we got a boolean back and it was true
         else if(arg instanceof Boolean){
             if((Boolean)arg){
-                myView.get().goToMap();
+                myView.get().goToDestinationCard();
             }
             else{
                 myView.get().goToMapFailed();

@@ -73,10 +73,10 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
     }
 
     @Override
-    public void goToMap() {
-        Intent intent = new Intent(getAppContext(),MapActivity.class);
+    public void goToDestinationCard() {
+        Intent intent = new Intent(this, DestinationCardActivity.class);
         mPresenter.deleteObserver();
-        startActivity(intent, null);
+        startActivity(intent);
     }
 
     void wireUp(){

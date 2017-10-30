@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import modeling.DestinationCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
@@ -64,6 +65,27 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
             }
         });
+
+        /*
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+        DestinationCardFragment fragment = new DestinationCardFragment();
+        fragmentTransaction.add(R.id.fragment_pane_two, fragment);
+        fragmentTransaction.commit();
+        */
+
+
+        /*Fragment fragment = fm.findFragmentById(R.id.activity_map);
+
+        if (fragment == null) {
+            fragment = new DestinationCardFragment();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.acti
+        fragment.show(fm, "destination_card_fragment");vity_map, fragment);
+            transaction.commit();
+        } */
+
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,15 +118,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
                     case 0:
-                        FragmentManager fm = getSupportFragmentManager();
-                        Fragment fragment = fm.findFragmentById(R.id.activity_map);
 
-                        if (fragment == null) {
-                            fragment = new DestinationCardFragment();
-                            FragmentTransaction transaction = fm.beginTransaction();
-                            transaction.replace(R.id.activity_map, fragment);
-                            transaction.commit();
-                        }
                         break;
                     case 1:
                         CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
