@@ -339,10 +339,11 @@ public class MapBaseView extends View {
 
     List<ClaimedRoute> claimedRoutes = new ArrayList<>();
 
-    public void addClaimedRoute(Point city1, String city1Name, Point city2, String city2Name, String color, boolean isDouble){
+    public void addClaimedRoute(Point city1, String city1Name, Point city2, String city2Name, String color, boolean isDouble, boolean hasOneLine){
         ClaimedRoute claimedRoute = new ClaimedRoute(city1, city1Name, city2, city2Name);
         claimedRoute.setClaimedColor(color);
         claimedRoute.doubleRoute = isDouble;
+        claimedRoute.hasOneLine = hasOneLine;
         claimedRoutes.add(claimedRoute);
         this.invalidate();
     }
@@ -405,18 +406,6 @@ public class MapBaseView extends View {
         }
 
     }
-
-
-    private void drawFourCarLine(Point p1, Point p2, Canvas canvas){
-        Point temp = new Point(p2.x/4, p2.y/4);
-        for (int i = 0; i < 4; ++i){
-
-            temp.set(temp.x * i - 10, temp.y *i - 10);
-            canvas.drawLine(p1.x, p1.y, temp.x, temp.y, paint);
-
-        }
-    }
-
 
     private class DoubleConnectionDrawData{
         CityDrawData connectedCityDrawData;

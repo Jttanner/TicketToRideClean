@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
@@ -115,17 +116,20 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         break;
                     case 3:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
-                        mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false);
-                        mapBaseView.addClaimedRoute(mapBaseView.KansasCityPoint, "Kansas City", mapBaseView.SaintLouisPoint, "St. Louis", "red", true);
-                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "red", true);
-                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "red", true);
-
+                        Toast.makeText(getApplicationContext(), "Blue Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false, false);
                         break;
                     case 4:
+                        Toast.makeText(getApplicationContext(), "Red Player claiming route from Kansas City to St. Louis...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.KansasCityPoint, "Kansas City", mapBaseView.SaintLouisPoint, "St. Louis", "red", true, false);
                         break;
                     case 5:
+                        Toast.makeText(getApplicationContext(), "Green Player claiming first available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "green", true, false);
                         break;
                     case 6:
+                        Toast.makeText(getApplicationContext(), "Yellow Player claiming second available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "yellow", true, true);
                         break;
                     case 7:
                         break;
@@ -155,34 +159,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         setupView();
-        //start poller
-        //Poller.getInstance().getCommandList();
+
     }
-
-   /* private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
-    {
-        MapBaseView mapBaseView;
-        @Override
-        protected Integer doInBackground(Void... params)
-        {
-            mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
-
-            return 0;
-        }
-        @Override
-        protected void onPostExecute(Integer integer)
-        {
-            super.onPostExecute(integer);
-            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.Omaha, "blue");
-            mapBaseView.claimRoute(mapBaseView.Phoenix, mapBaseView.Denver, "red");
-            mapBaseView.claimRoute(mapBaseView.LasVegas, mapBaseView.SaltLakeCity, "blue");
-            mapBaseView.claimRoute(mapBaseView.NewYork, mapBaseView.Nashville, "green");
-            mapBaseView.claimRoute(mapBaseView.LosAngeles, mapBaseView.SanFrancisco, "yellow");
-            mapBaseView.claimRoute(mapBaseView.Nashville, mapBaseView.Omaha, "black");
-        }
-    }*/
-
-
 
     private void setupView() {
         Log.d(TAG,"setupView");
