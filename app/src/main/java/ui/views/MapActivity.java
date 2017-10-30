@@ -86,8 +86,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
 
 
-
-
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
