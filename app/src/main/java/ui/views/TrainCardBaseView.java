@@ -27,6 +27,7 @@ public class TrainCardBaseView extends View{
     Paint paint = new Paint();
     Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
     Resources resources = getResources();
+
     Bitmap redTrainBitmap = BitmapFactory.decodeResource(resources, R.drawable.redtrain);
     Bitmap blueTrainBitmap = BitmapFactory.decodeResource(resources, R.drawable.bluetrain);
     Bitmap blackTrainBitmap = BitmapFactory.decodeResource(resources, R.drawable.blacktrain);
