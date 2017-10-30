@@ -27,6 +27,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
+    int counter = 0;
+
 
     @Override
     protected void onDestroy() {
@@ -81,12 +83,17 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
+
+
+
+
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int testCases = 0;
-                int counter = 0;
+
+                MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+
                 switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
                     //YOU ROCK
                     case 0:
@@ -99,19 +106,19 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                             transaction.replace(R.id.activity_map, fragment);
                             transaction.commit();
                         }
-                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
-                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 1:
-                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
-                        //DrawRouteAsync task = new DrawRouteAsync();
-                        //task.execute();
                         CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
                         break;
                     case 2:
                         CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
                         break;
                     case 3:
+                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
+                        mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false);
+                        mapBaseView.addClaimedRoute(mapBaseView.KansasCityPoint, "Kansas City", mapBaseView.SaintLouisPoint, "St. Louis", "red", true);
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "red", true);
+                        mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "red", true);
 
                         break;
                     case 4:
@@ -144,10 +151,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         break;
                 }
                 counter++;
-                //Change this counter when we add more test cases. Basically caps the number of cases we will use
-//                while(counter != testCases) {
-//                    counter++;
-//                }
             }
         });
 
@@ -156,7 +159,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         //Poller.getInstance().getCommandList();
     }
 
-    private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
+   /* private class DrawRouteAsync extends AsyncTask<Void, Void, Integer>
     {
         MapBaseView mapBaseView;
         @Override
@@ -177,7 +180,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             mapBaseView.claimRoute(mapBaseView.LosAngeles, mapBaseView.SanFrancisco, "yellow");
             mapBaseView.claimRoute(mapBaseView.Nashville, mapBaseView.Omaha, "black");
         }
-    }
+    }*/
 
 
 

@@ -26,6 +26,8 @@ import teamjapannumbahone.tickettoride.R;
 
 public class MapBaseView extends View {
 
+    static int DOUBLE_ROUTE_OFFSET = 6;
+
     Point VancouverPoint = new Point(159, 135);
     Point SeattlePoint = new Point(167, 290);
     Point PortlandPoint = new Point(104,375);
@@ -99,11 +101,11 @@ public class MapBaseView extends View {
         drawCityLines(canvas);
         drawCities(canvas);
 
-        claimRoute(Phoenix, Denver, "red");
-        claimRoute(LasVegas, SaltLakeCity, "blue");
-        claimRoute(NewYork, Nashville, "green");
-        claimRoute(LosAngeles, SanFrancisco, "yellow");
-        claimRoute(Nashville, Omaha, "black");
+        //claimRoute(Phoenix, Denver, "red");
+        //claimRoute(LasVegas, SaltLakeCity, "blue");
+        //claimRoute(NewYork, Nashville, "green");
+        //claimRoute(LosAngeles, SanFrancisco, "yellow");
+        //claimRoute(Nashville, Omaha, "black");
     }
 
     @Override
@@ -114,9 +116,6 @@ public class MapBaseView extends View {
         return true;
     }
 
-    private void drawTrackSquare(Point p1, Point p2, Canvas canvas){
-
-    }
 
     List<CityDrawData> cities = new ArrayList<>();
     CityDrawData Vancouver = new CityDrawData(VancouverPoint, "Vancouver");
@@ -324,7 +323,7 @@ public class MapBaseView extends View {
 
 
     private void drawCityLines(Canvas canvas){
-        for (CityDrawData data: cities){
+        for (CityDrawData data : cities){
             for(CityDrawData connection : data.connections){
                 drawCityConnection(data.city, connection.city, canvas);
             }
@@ -332,9 +331,23 @@ public class MapBaseView extends View {
                 drawDoubleCityConnection(data.city, doubleConnection.connectedCityDrawData.city, canvas);
             }
         }
+        for (ClaimedRoute route : claimedRoutes){
+            claimRoute(route.city1, route.city2, route.claimedColor, route.doubleRoute, route.hasOneLine);
+        }
+
     }
 
-    public boolean claimRoute(CityDrawData cityDrawData1, CityDrawData cityDrawData2, String color){
+    List<ClaimedRoute> claimedRoutes = new ArrayList<>();
+
+    public void addClaimedRoute(Point city1, String city1Name, Point city2, String city2Name, String color, boolean isDouble){
+        ClaimedRoute claimedRoute = new ClaimedRoute(city1, city1Name, city2, city2Name);
+        claimedRoute.setClaimedColor(color);
+        claimedRoute.doubleRoute = isDouble;
+        claimedRoutes.add(claimedRoute);
+        this.invalidate();
+    }
+
+    public boolean claimRoute(Point p1, Point p2, String color, boolean isDoubleRoute, boolean hasOneRouteClaimed){
         switch (color){
             case "red":
                 paint.setColor(Color.RED);
@@ -352,12 +365,26 @@ public class MapBaseView extends View {
                 paint.setColor(Color.GREEN);
                 break;
             default:
-                paint.setColor(Color.DKGRAY);
+                paint.setColor(Color.LTGRAY);
         }
-        drawCityConnection(cityDrawData1.city, cityDrawData2.city, baseCanvas);
-        paint.setColor(Color.DKGRAY);
+        if (isDoubleRoute){
+            Point offsetP1 = new Point(p1);
+            Point offsetP2 = new Point(p2);
+            if (hasOneRouteClaimed){
+                offsetP1.set(p1.x + DOUBLE_ROUTE_OFFSET, p1.y + DOUBLE_ROUTE_OFFSET);
+                offsetP2.set(p2.x + DOUBLE_ROUTE_OFFSET, p2.y + DOUBLE_ROUTE_OFFSET);
 
-        return false;
+            } else{
+                offsetP1.set(p1.x - DOUBLE_ROUTE_OFFSET, p1.y - DOUBLE_ROUTE_OFFSET);
+                offsetP2.set(p2.x - DOUBLE_ROUTE_OFFSET, p2.y - DOUBLE_ROUTE_OFFSET);
+            }
+            drawCityConnection(offsetP1, offsetP2, baseCanvas);
+
+        } else{
+            drawCityConnection(p1, p2, baseCanvas);
+        }
+        paint.setColor(Color.LTGRAY);
+        return true;
     }
 
     private void drawCityConnection(Point p1, Point p2, Canvas canvas){
@@ -365,9 +392,9 @@ public class MapBaseView extends View {
     }
 
     private void drawDoubleCityConnection(Point p1, Point p2, Canvas canvas){
-        int offset = 6;
-        canvas.drawLine(p1.x + offset, p1.y + offset, p2.x + offset, p2.y + offset, paint);
-        canvas.drawLine(p1.x - offset, p1.y - offset, p2.x - offset, p2.y - offset, paint);
+        canvas.drawLine(p1.x - DOUBLE_ROUTE_OFFSET, p1.y - DOUBLE_ROUTE_OFFSET, p2.x - DOUBLE_ROUTE_OFFSET, p2.y - DOUBLE_ROUTE_OFFSET, paint);
+        canvas.drawLine(p1.x + DOUBLE_ROUTE_OFFSET, p1.y + DOUBLE_ROUTE_OFFSET, p2.x + DOUBLE_ROUTE_OFFSET, p2.y + DOUBLE_ROUTE_OFFSET, paint);
+
     }
 
     private void drawCities(Canvas canvas){
@@ -399,6 +426,34 @@ public class MapBaseView extends View {
         public DoubleConnectionDrawData(CityDrawData connectedCityDrawData){
             this.connectedCityDrawData = connectedCityDrawData;
         }
+    }
+
+
+    //TODO: TAKE THESE PRIVATE CLASSES AND PUT THEM IN CLINET MODELLING ONCE ALL IS WORKING WELL, EXPLAIN TO EVERYBODY
+    //THIS MUST GO ON CLIENT-SIDE MODELLING UNLESS I WANT TO CHANGE POINTS TO X Y COORDS
+    public class ClaimedRoute{
+        Point city1;
+        Point city2;
+        String cityName1;
+        String cityName2;
+
+        String claimedColor;
+
+        boolean doubleRoute;
+
+        boolean hasOneLine = false;
+
+        ClaimedRoute(Point city1, String cityName1, Point city2, String cityName2){
+            this.city1 = city1;
+            this.cityName1 = cityName1;
+            this.city2 = city2;
+            this.cityName2 = cityName2;
+        }
+
+        void setClaimedColor(String color){
+            this.claimedColor = color;
+        }
+
     }
 
     private class CityDrawData{
