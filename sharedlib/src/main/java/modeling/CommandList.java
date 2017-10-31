@@ -11,7 +11,7 @@ import commandData.Command;
  */
 
 public class CommandList {
-    private List<Command> commandList;
+    private List<Command> commandList = new ArrayList<>();
 
     public CommandList() {
         this.commandList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class CommandList {
     /**Gets a unmodifiable list
      * @return List<Command>*/
     public List<Command> getCommandList(){
-        return Collections.unmodifiableList(commandList);
+        return commandList;
     }
 
 

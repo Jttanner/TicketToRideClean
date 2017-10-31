@@ -25,6 +25,7 @@ import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.GetCmndDataFromServer;
 import commandData.GetCmndListDataToClient;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
@@ -73,8 +74,10 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = startGameCommand.execute();
                     break;
                 case "getCommandList":
-                    GetCmndListServer commandListServer = new GetCmndListServer();
-                    commandData = new GetCmndListDataToClient(commandListServer.execute());
+                    GetCmndDataFromServer getCmndDataFromServer = gson.fromJson(reqData,GetCmndDataFromServer.class);
+                    String gameId = getCmndDataFromServer.getGameId();
+                    GetCmndListServer commandListServer = new GetCmndListServer(gameId);
+                    commandData = new GetCmndListDataToClient(commandListServer.execute(),gameId);
                     break;
                 case "addChat":
                     ChatCommandData chatCommandData = gson.fromJson(reqData, ChatCommandData.class);

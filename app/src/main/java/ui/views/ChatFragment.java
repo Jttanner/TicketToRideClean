@@ -53,7 +53,7 @@ public class ChatFragment extends DialogFragment implements MVP_Chat.ChatViewOps
 
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        Poller.getInstance().getCommandList();
+        //Poller.getInstance().getCommandList();
 
         getDialog().show();
         getDialog().getWindow().setLayout(1000,1000);

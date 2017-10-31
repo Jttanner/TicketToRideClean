@@ -110,8 +110,7 @@ public class ServerModel {
         gameList.findGame(gameId).getChatHistory().add(s);
 
         ChatCommandData chatCommandData = new ChatCommandData(gameList.findGame(gameId).getChatHistory(),gameId);
-
-        //ServerModel.getInstance().getReturnCommand().add(chatCommandData);
+        ServerModel.getInstance().getReturnCommand().add(chatCommandData);
         ServerFacade.getInstance().addCommandToList(gameId, chatCommandData);
     }
 

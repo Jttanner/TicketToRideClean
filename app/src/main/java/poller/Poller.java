@@ -68,8 +68,8 @@ public class Poller {
     /**Method to call in order to have the poller get the command list*/
     public void getCommandList(){
         Log.d(TAG,"getting command list");
-        getCommandTimer = new Timer();
-        command = new GetCmndDataFromServer();
+         getCommandTimer = new Timer();
+        command = new GetCmndDataFromServer(CModel.getInstance().getCurrGame().getGameID());
         //makes the TimerTask
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override

@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 
 import commandData.GetCmndListDataToClient;
+import modeling.CommandList;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
@@ -32,6 +33,7 @@ public class Encoder {
      * */
     public void encode(Object obj,OutputStream respBody) throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
+        String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
         writer.flush();
     }
@@ -104,12 +106,15 @@ public class Encoder {
     }
 
 
-    public Object decodeGetCommandListToClient(InputStream stream) {
+    public  GetCmndListDataToClient decodeGetCommandListToClient(InputStream stream) {
         try {
             Reader reader = new InputStreamReader(stream);
+            String string = reader.toString();
             return gson.fromJson(reader, GetCmndListDataToClient.class);
         }catch (Exception e){
-            return new JoinGameCommandResult(false,e.getMessage());
+           // return new JoinGameCommandResult(false,e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }
