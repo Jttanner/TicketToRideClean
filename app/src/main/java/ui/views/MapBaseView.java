@@ -24,6 +24,9 @@ import teamjapannumbahone.tickettoride.R;
 
 /**
  * Created by jontt on 10/17/2017.
+ *
+ * THE STRINGS TO ACCESS THE MAP OF CITIES TAKES IN THE NAME OF THE CITY AS DECLARED IN THE INITIALIZATION OF EACH CITYDRAWDATA OBJECT!
+ *
  */
 
 public class MapBaseView extends View {
@@ -31,7 +34,7 @@ public class MapBaseView extends View {
     static int DOUBLE_ROUTE_OFFSET = 6;
 
     Point VancouverPoint = new Point(159, 135);
-    Point SeattlePoint = new Point(167, 290);
+    Point SeattlePoint = new Point(180, 220);
     Point PortlandPoint = new Point(104,375);
     Point SanFranciscoPoint = new Point(185, 696);
     Point LosAngelesPoint = new Point(306, 815);
@@ -49,22 +52,22 @@ public class MapBaseView extends View {
     Point DenverPoint = new Point(722, 612);
     Point SantaFePoint = new Point(685, 744);
     Point ElPasoPoint = new Point(730, 917);
-    Point HoustonPoint = new Point(1000, 999);
-    Point DallasPoint = new Point(1051, 999);
+    Point HoustonPoint = new Point(1050, 1050);
+    Point DallasPoint = new Point(1000, 950);
     Point OklahomaCityPoint = new Point(1014, 725);
     Point KansasCityPoint = new Point(988, 640);
     Point OmahaPoint = new Point(1025, 480);
-    Point ChicagoPoint = new Point(1114, 493);
-    Point PittsburghPoint = new Point(1347, 511);
-    Point BostonPoint = new Point(1597, 538);
-    Point WashingtonPoint = new Point(1662, 686);
+    Point ChicagoPoint = new Point(1347, 500);
+    Point PittsburghPoint = new Point(1620, 511);
+    Point BostonPoint = new Point(1890, 465);
+    Point WashingtonPoint = new Point(1662, 630);
     Point NewYorkPoint = new Point(1773, 485);
     Point RaleighPoint = new Point(1589, 733);
     Point NashvillePoint = new Point(1339, 733);
     Point AtlantaPoint = new Point(1457, 833);
     Point CharlestonPoint = new Point(1578, 815);
     Point MiamiPoint = new Point(1541, 1138);
-    Point NewOrleansPoint = new Point(1199, 862);
+    Point NewOrleansPoint = new Point(1199, 1000);
     Point LittleRockPoint = new Point(1155, 760);
     Point SaintLouisPoint = new Point(1191, 622);
 
@@ -151,7 +154,7 @@ public class MapBaseView extends View {
      */
     private void indexCityPointMap(){
         for (CityDrawData data : cities){
-            cityMap.put(data.cityName, data.city);
+            cityMap.put(data.cityName.toLowerCase(), data.city);
         }
     }
 

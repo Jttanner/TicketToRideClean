@@ -1,9 +1,11 @@
 package clientModel;
 
+import android.graphics.Point;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -14,7 +16,9 @@ import modeling.Game;
 import modeling.GameList;
 import modeling.History;
 import modeling.Player;
-import modeling.ResourceCard;
+import modeling.Route;
+import modeling.RouteList;
+import modeling.TrainCarList;
 import modeling.User;
 
 /**
@@ -58,8 +62,15 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
+    private RouteList unclaimedRouteList = new RouteList(true);
 
-//    private List<String> gameHistory = new ArrayList<>();
+    private RouteList claimedRouteList = new RouteList(false);
+
+    public RouteList getClaimedRouteList() {
+        return claimedRouteList;
+    }
+
+    //    private List<String> gameHistory = new ArrayList<>();
 //    public List<String> getGameHistory() {
 //        return gameHistory;
 //    }
@@ -192,6 +203,27 @@ public class CModel extends Observable {
         this.currGame = currGame;
         setChanged();
         notifyObservers(this.currGame);
+    }
+
+    public void updateRoutes(Game currGame, Route route, Player player){
+        //Player userPlayer = CModel.getInstance().getUserPlayer();
+        player.addRoute(route);
+        player.addPoints(route.getPointValue());
+        TrainCarList playerTrainCars = player.getTrainCarList();
+        playerTrainCars.decrementCars(route.getDistance());
+        //int claimedCount = 0;
+        //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap(). entrySet()){
+
+        //}
+        for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
+            if (entry.getKey().equals(route)){
+                route.setFirstOfDouble(false);
+            }
+        }
+        claimedRouteList.addClaimedRoute(route, player);
+        unclaimedRouteList.removeAvailableRoute(route);
+        setChanged();
+        notifyObservers(currGame);
     }
 
     @Override
