@@ -29,7 +29,8 @@ class ClientFacade {
     /**Checks the type of command objects*/
     void checkTypeOfCommand(Command command){
         if(command.getType().equals("getCommandList")){
-            SetGameMap setGameMap = new SetGameMap(((GetCmndListDataToClient) command).getCommandList());
+            GetCmndListDataToClient getCmdList = (GetCmndListDataToClient) command;
+            SetGameMap setGameMap = new SetGameMap(getCmdList.getReturnCommandList(),getCmdList.getGameId());
             setGameMap.execute();
         }
     }

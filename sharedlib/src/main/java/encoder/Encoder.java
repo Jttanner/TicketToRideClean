@@ -1,6 +1,10 @@
 package encoder;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,8 +12,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
+import commandData.ChatCommandData;
+import commandData.Command;
 import commandData.GetCmndListDataToClient;
+import commandData.StartGameCommandData;
+import modeling.CommandList;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.GetGameCommandResult;
@@ -32,6 +42,7 @@ public class Encoder {
      * */
     public void encode(Object obj,OutputStream respBody) throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
+        String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
         writer.flush();
     }
@@ -104,12 +115,50 @@ public class Encoder {
     }
 
 
-    public Object decodeGetCommandListToClient(InputStream stream) {
+    public  GetCmndListDataToClient decodeGetCommandListToClient(InputStream stream) {
+        List<Command> list = new ArrayList<>();
+        String gameID = "";
+        Command command = null;
         try {
+
+
             Reader reader = new InputStreamReader(stream);
-            return gson.fromJson(reader, GetCmndListDataToClient.class);
+            String string = reader.toString();
+
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = (JsonObject)jsonParser.parse(
+                    new InputStreamReader(stream, "UTF-8"));
+
+            JsonElement element = (JsonElement) jsonObject;
+
+            if(element.isJsonObject()){
+                JsonObject wrapper = element.getAsJsonObject();
+                JsonObject cl = wrapper.get("returnCommandList").getAsJsonObject();
+                gameID = wrapper.get("gameId").getAsString();
+                JsonArray array =  cl.get("commandList").getAsJsonArray();
+                for(int i = 0; i < array.size();i ++){
+                    JsonObject object = array.get(i).getAsJsonObject();
+                    switch (object.get("type").getAsString()){
+                        case "addChat":
+                            command = gson.fromJson(object,ChatCommandData.class);
+                            break;
+                        case "startGame":
+                            command = gson.fromJson(object,StartGameCommandData.class);
+                            break;
+                    }
+                    if(command!=null)
+                    list.add(command);
+                }
+
+            }
+            CommandList commandList = new CommandList();
+            commandList.setCommandList(list);
+            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList,gameID);
+            return dataToClient;
         }catch (Exception e){
-            return new JoinGameCommandResult(false,e.getMessage());
+           // return new JoinGameCommandResult(false,e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }
