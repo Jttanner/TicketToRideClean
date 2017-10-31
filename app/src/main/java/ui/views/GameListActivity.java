@@ -91,7 +91,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     /**This activity starts the waiting room activity*/
     @Override
     public void JoinGameResult(Game game) {
-        Poller.getInstance().stopPoller();
+        //Poller.getInstance().stopPoller();
         presenter.deleteObserver();
         Intent intent = new Intent(this,WaitingRoomActivity.class);
         startActivity(intent);

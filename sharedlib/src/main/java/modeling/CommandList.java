@@ -1,7 +1,6 @@
 package modeling;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import commandData.Command;
@@ -12,6 +11,10 @@ import commandData.Command;
 
 public class CommandList {
     private List<Command> commandList;
+
+    public void setCommandList(List<Command> commandList) {
+        this.commandList = commandList;
+    }
 
     public CommandList() {
         this.commandList = new ArrayList<>();
@@ -38,7 +41,7 @@ public class CommandList {
     /**Gets a unmodifiable list
      * @return List<Command>*/
     public List<Command> getCommandList(){
-        return Collections.unmodifiableList(commandList);
+        return commandList;
     }
 
 

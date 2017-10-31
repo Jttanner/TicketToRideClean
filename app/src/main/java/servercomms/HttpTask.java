@@ -8,6 +8,7 @@ import java.net.URL;
 
 import commandData.Command;
 import commandData.CreateGameCommandData;
+import commandData.DrawDestinationCardCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -62,12 +63,18 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         String typeOfRequest = "POST";
         //connection with the server is here
         InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
+       // String string = stream.toString();
 
-        if (request instanceof LoginRequest) {
+        if (request instanceof LoginRequest) { //do we update the view after the it goes to the server and back????
             return encoder.decodeLoginResult(stream);
-        } else if (request instanceof RegisterRequest) {
+        }
+        else if (request instanceof RegisterRequest) {
             return encoder.decodeRegisterResult(stream);
-        } else if(request instanceof GetGameListCommandData){
+        }
+        else if(request instanceof DrawDestinationCardCommandData) {
+            return encoder.decodeDestinationCardResult(stream);
+        }
+        else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
         }
         else if(request instanceof CreateGameCommandData){

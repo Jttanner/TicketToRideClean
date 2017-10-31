@@ -174,4 +174,7 @@ public class Game {
         return null;
     }
 
+    public ResourceCardList getResourceCardList() {
+        return resourceCardList;
+    }
 }

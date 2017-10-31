@@ -16,7 +16,7 @@ public interface MVP_WaitingRoom {
 
         Context getActivityContext();
         /**Starts your game*/
-        void goToMap();
+        void goToDestinationCard();
         /**Tell the user that going to the map failed, need more players*/
         void goToMapFailed();
     }

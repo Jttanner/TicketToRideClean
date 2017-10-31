@@ -2,8 +2,6 @@ package clientCommands;
 
 import android.util.Log;
 
-import java.util.Map;
-
 import clientModel.CModel;
 import clientModel.CommandManager;
 import modeling.CommandList;
@@ -20,16 +18,20 @@ public class SetGameMap implements ClientCommand {
     /**Our GameCommandMap*/
     private GameCommandMap gameCommandMap;
 
+    private CommandList commandList;
 
-    public SetGameMap(GameCommandMap gameCommandMap){
-        this.gameCommandMap = gameCommandMap;
+    private String gameID;
+
+    public SetGameMap(CommandList gameCommandMap,String gameID){
+        this.commandList = gameCommandMap;
+        this.gameID = gameID;
     }
 
     @Override
     public void execute() {
         Log.d(TAG,"Executing SetGameMap Command");
-        Map<String, CommandList> commandListMap = gameCommandMap.getCommandList();
+//        Map<String, CommandList> commandListMap = gameCommandMap.getCommandList();
         CommandManager manager = CModel.getInstance().getCommandManager();
-        manager.updateCommandLists(commandListMap);
+        manager.updateCommandLists(commandList,this.gameID);
     }
 }

@@ -49,7 +49,7 @@ public class ResourceCardList {
 
     /**Returns an unmodifiable list of available resource cards to the caller
      * @return List<ResourceCard>*/
-    private List<ResourceCard> getAvailableCards() {
+    public List<ResourceCard> getAvailableCards() {
         return Collections.unmodifiableList(availableCards);
     }
 
