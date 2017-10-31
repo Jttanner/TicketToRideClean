@@ -196,15 +196,17 @@ public class CModel extends Observable {
     }
 
     private void updateCurrGame(){
-        for(Game g : allGames){
-            if(g.getGameID().equals(currGame.getGameID())){
-                allGames.remove(g);
-                //add currgame to list
-                allGames.add(currGame);
-                GameList list = new GameList();
-                list.setGames(allGames);
-                setAllGames(list);
-                break;
+        if(currGame != null) {
+            for (Game g : allGames) {
+                if (g.getGameID().equals(currGame.getGameID())) {
+                    allGames.remove(g);
+                    //add currgame to list
+                    allGames.add(currGame);
+                    GameList list = new GameList();
+                    list.setGames(allGames);
+                    setAllGames(list);
+                    break;
+                }
             }
         }
     }
