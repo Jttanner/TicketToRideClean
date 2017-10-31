@@ -21,6 +21,7 @@ import java.util.Map;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import modeling.DestinationCard;
 import modeling.Player;
 import modeling.Route;
 import poller.Poller;
@@ -31,6 +32,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
+    private Button destinationCard;
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
@@ -70,6 +72,18 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
             }
         });
+
+
+        destinationCard = (Button) findViewById(R.id.destinationCardButton);
+        destinationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                DestinationCardFragment fragment = new DestinationCardFragment();
+                fragment.show(fm, "fragment_destinationcard");
+            }
+        });
+
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override

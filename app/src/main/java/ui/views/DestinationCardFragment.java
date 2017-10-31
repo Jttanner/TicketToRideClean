@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +30,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by Hwang on 10/20/2017.
  */
 
-public class DestinationCardFragment extends Fragment implements MVP_DestCard.MapViewOps {
+public class DestinationCardFragment extends DialogFragment implements MVP_DestCard.MapViewOps {
 
     Game game;
     Player player;
@@ -140,7 +140,7 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
                     getActivity().startActivity(intent);
                 }
                 else {
-                    Toast.makeText(getContext(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getAppContext(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -189,7 +189,7 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
         mRoute2.setTextColor(Color.RED);
         mRoute3.setTextColor(Color.RED);
 
-        Toast.makeText(getContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
+        Toast.makeText(getAppContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
 
         wireUp(destinationCards);
     }

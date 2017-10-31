@@ -1,5 +1,7 @@
 package presenters;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Observable;
@@ -31,6 +33,7 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         //if we didnt find the user, add him in the server
         DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player);
         ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "A");
     }
 
 
