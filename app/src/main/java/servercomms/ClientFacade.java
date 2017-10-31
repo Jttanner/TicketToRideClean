@@ -47,7 +47,6 @@ class ClientFacade {
             else if (result instanceof JoinGameCommandResult) {
                 CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
             }
-            //TODO: Does not like this line when we stop the app, re-run it, and try to log back in
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {
                     CModel.getInstance().toggleGameHasStarted();
