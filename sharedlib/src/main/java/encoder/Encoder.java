@@ -17,6 +17,7 @@ import java.util.List;
 
 import commandData.ChatCommandData;
 import commandData.Command;
+import commandData.DrawDestinationCardCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import modeling.CommandList;
@@ -27,6 +28,7 @@ import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
+import sun.rmi.runtime.Log;
 
 /**
  * This class handles all encoding(and will have methods for decoding) to and from JSON
@@ -45,8 +47,9 @@ public class Encoder {
      * @param respBody The output stream
      */
     public void encode(Object obj, OutputStream respBody) throws IOException {
+        System.out.println(obj.getClass());
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
-        String string = gson.toJson(obj);
+        //String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
         writer.flush();
     }
@@ -175,6 +178,9 @@ public class Encoder {
                             break;
                         case "startGame":
                             command = gson.fromJson(object, StartGameCommandData.class);
+                            break;
+                        case "drawDestinationCards":
+                            command = gson.fromJson(object, DrawDestinationCardCommandData.class);
                             break;
                         //TODO: PLEASE ADD CASES HERE
                     }

@@ -12,6 +12,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by ahwang13 on 10/30/17.
  */
 
+/*
 public class DestinationCardActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +33,5 @@ public class DestinationCardActivity extends AppCompatActivity{
             fragment = new DestinationCardFragment();
             fm.beginTransaction().add(R.id.fragment_spot1,fragment).commit();
         }*/
-    }
-}
+    //}
+//}
