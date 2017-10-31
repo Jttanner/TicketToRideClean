@@ -10,7 +10,7 @@ import commandData.Command;
  */
 
 public class CommandList {
-    private List<Command> commandList = new ArrayList<>();
+    private List<Command> commandList;
 
     public void setCommandList(List<Command> commandList) {
         this.commandList = commandList;

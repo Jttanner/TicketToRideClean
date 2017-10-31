@@ -30,79 +30,93 @@ import result.RegisterResult;
 
 /**
  * This class handles all encoding(and will have methods for decoding) to and from JSON
- * */
+ */
 public class Encoder {
 
     private Gson gson = new Gson();
+
     public Encoder() {
     }
+
     /**
      * This encodes java objects into JSON
-     * @param obj The object to encode
+     *
+     * @param obj      The object to encode
      * @param respBody The output stream
-     * */
-    public void encode(Object obj,OutputStream respBody) throws IOException {
+     */
+    public void encode(Object obj, OutputStream respBody) throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
         String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
         writer.flush();
     }
-    /**Handles the decoding of register result objects,
+
+    /**
+     * Handles the decoding of register result objects,
+     *
      * @param inputStream The input from the server
      * @return RegisterResult A decoded RegisterResult
-     * */
+     */
     public RegisterResult decodeRegisterResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, RegisterResult.class);
-        }catch (Exception e){
-            return new RegisterResult(false,e.getMessage());
+        } catch (Exception e) {
+            return new RegisterResult(false, e.getMessage());
         }
     }
 
-    /**Handles the decoding of login  result objects,
+    /**
+     * Handles the decoding of login  result objects,
+     *
      * @param inputStream The input from the server
      * @return LoginResult A LoginResult result
-     * */
+     */
     public LoginResult decodeLoginResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, LoginResult.class);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return new LoginResult(false, e.getMessage());
         }
     }
-    /**Handles the decoding of command results coming from the server
-    * @param inputStream The input given back
-    * @return CommandResult**/
+
+    /**
+     * Handles the decoding of command results coming from the server
+     *
+     * @param inputStream The input given back
+     * @return CommandResult
+     **/
     public CommandResult decodeCommandResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, CommandResult.class);
-        }catch (Exception e){
-            return new CommandResult(false,e.getMessage());
+        } catch (Exception e) {
+            return new CommandResult(false, e.getMessage());
         }
     }
 
     public DrawDestinationCardCommandResult decodeDestinationCardResult(InputStream stream) {
-        try{
+        try {
             Reader reader = new InputStreamReader(stream);
             return gson.fromJson(reader, DrawDestinationCardCommandResult.class);
-        }catch(Exception e){
+        } catch (Exception e) {
             return new DrawDestinationCardCommandResult(false, e.getMessage());
         }
     }
 
-    /**Handles the decoding of GetGameCommandResult coming from the server
+    /**
+     * Handles the decoding of GetGameCommandResult coming from the server
+     *
      * @param inputStream The input given back
-     * @return CommandResult**/
+     * @return CommandResult
+     **/
     public CommandResult decodeGetGameResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, GetGameCommandResult.class);
-        }catch (Exception e){
-            return new CommandResult(false,e.getMessage());
+        } catch (Exception e) {
+            return new CommandResult(false, e.getMessage());
         }
     }
 
@@ -110,8 +124,8 @@ public class Encoder {
         try {
             Reader reader = new InputStreamReader(stream);
             return gson.fromJson(reader, CreateGameCommandResult.class);
-        }catch (Exception e){
-            return new CreateGameCommandResult(false,e.getMessage());
+        } catch (Exception e) {
+            return new CreateGameCommandResult(false, e.getMessage());
         }
     }
 
@@ -119,13 +133,13 @@ public class Encoder {
         try {
             Reader reader = new InputStreamReader(stream);
             return gson.fromJson(reader, JoinGameCommandResult.class);
-        }catch (Exception e){
-            return new JoinGameCommandResult(false,e.getMessage());
+        } catch (Exception e) {
+            return new JoinGameCommandResult(false, e.getMessage());
         }
     }
 
 
-    public  GetCmndListDataToClient decodeGetCommandListToClient(InputStream stream) {
+    public GetCmndListDataToClient decodeGetCommandListToClient(InputStream stream) {
         List<Command> list = new ArrayList<>();
         String gameID = "";
         Command command = null;
@@ -136,37 +150,43 @@ public class Encoder {
             String string = reader.toString();
 
             JsonParser jsonParser = new JsonParser();
-            JsonObject jsonObject = (JsonObject)jsonParser.parse(
+            JsonObject jsonObject = (JsonObject) jsonParser.parse(
                     new InputStreamReader(stream, "UTF-8"));
 
             JsonElement element = (JsonElement) jsonObject;
 
-            if(element.isJsonObject()){
+            if (element.isJsonObject()) {
                 JsonObject wrapper = element.getAsJsonObject();
-                JsonObject cl = wrapper.get("returnCommandList").getAsJsonObject();
                 gameID = wrapper.get("gameId").getAsString();
-                JsonArray array =  cl.get("commandList").getAsJsonArray();
-                for(int i = 0; i < array.size();i ++){
+                JsonObject cl = null;
+                try {
+                    cl = wrapper.get("returnCommandList").getAsJsonObject();
+                }
+                catch (NullPointerException e){
+                    //if we get a null pointer it means there is nothing to get
+                    return new GetCmndListDataToClient(new CommandList(), gameID);
+                }
+                JsonArray array = cl.get("commandList").getAsJsonArray();
+                for (int i = 0; i < array.size(); i++) {
                     JsonObject object = array.get(i).getAsJsonObject();
-                    switch (object.get("type").getAsString()){
+                    switch (object.get("type").getAsString()) {
                         case "addChat":
-                            command = gson.fromJson(object,ChatCommandData.class);
+                            command = gson.fromJson(object, ChatCommandData.class);
                             break;
                         case "startGame":
-                            command = gson.fromJson(object,StartGameCommandData.class);
+                            command = gson.fromJson(object, StartGameCommandData.class);
                             break;
                     }
-                    if(command!=null)
-                    list.add(command);
+                    if (command != null)
+                        list.add(command);
                 }
-
             }
             CommandList commandList = new CommandList();
             commandList.setCommandList(list);
-            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList,gameID);
+            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList, gameID);
             return dataToClient;
-        }catch (Exception e){
-           // return new JoinGameCommandResult(false,e.getMessage());
+        } catch (Exception e) {
+            // return new JoinGameCommandResult(false,e.getMessage());
             e.printStackTrace();
             return null;
         }
