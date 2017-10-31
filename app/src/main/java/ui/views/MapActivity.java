@@ -26,6 +26,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
+    private Button destinationCard;
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
@@ -86,6 +87,19 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             transaction.commit();
         } */
 
+        /*
+        destinationCard = (Button) findViewById(R.id.destinationCardButton);
+        destinationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                DestinationCardFragment fragment = new DestinationCardFragment();
+                FragmentTransaction transaction = fm.beginTransaction();
+                transaction.replace(R.id.activity_map, fragment);
+                transaction.commit();
+            }
+        });
+*/
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override

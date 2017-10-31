@@ -176,6 +176,7 @@ public class Encoder {
                         case "startGame":
                             command = gson.fromJson(object, StartGameCommandData.class);
                             break;
+                        //TODO: PLEASE ADD CASES HERE
                     }
                     if (command != null)
                         list.add(command);

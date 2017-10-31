@@ -3,6 +3,7 @@ package ui.views;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import teamjapannumbahone.tickettoride.R;
@@ -19,10 +20,17 @@ public class DestinationCardActivity extends AppCompatActivity{
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_destinationcard);
+        fragment = new DestinationCardFragment();
         // “Create a new fragment transaction, include one add operation in it, and then commit it.”
+
+
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.fragment_spot1, fragment);
+        transaction.commit();
+        /*
         if(fragment == null){
             fragment = new DestinationCardFragment();
             fm.beginTransaction().add(R.id.fragment_spot1,fragment).commit();
-        }
+        }*/
     }
 }
