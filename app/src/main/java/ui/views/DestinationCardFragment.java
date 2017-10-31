@@ -21,6 +21,7 @@ import java.util.List;
 import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
 import modeling.DestinationCard;
+import modeling.Game;
 import modeling.Player;
 import presenters.DestinationCardPresenter;
 import teamjapannumbahone.tickettoride.R;
@@ -31,7 +32,7 @@ import teamjapannumbahone.tickettoride.R;
 
 public class DestinationCardFragment extends Fragment implements MVP_DestCard.MapViewOps {
 
-    //Game game;
+    Game game;
     Player player;
 
     private TextView mRoute1;
@@ -45,7 +46,8 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
 
     public DestinationCardFragment(){
         presenter = new DestinationCardPresenter(this);
-
+        game = CModel.getInstance().getCurrGame();
+        player = CModel.getInstance().getUserPlayer();
         /*game = new Game();
         game.setPlayerMax(2);
         System.out.println(CModel.getInstance().getMyUser().getUserName());
@@ -73,16 +75,12 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
         mRoute3 = (TextView) v.findViewById(R.id.mRoute3);
         buttonStart = (Button) v.findViewById(R.id.buttonStart);
 
-        List<DestinationCard> cards = CModel.getInstance().threeDestinationCards();
-        mRoute1.setText(cards.get(0).getDestinationCardString());
-        mRoute2.setText(cards.get(1).getDestinationCardString());
-        mRoute3.setText(cards.get(2).getDestinationCardString());
-        mRoute1.setTextColor(Color.RED);
-        mRoute2.setTextColor(Color.RED);
-        mRoute3.setTextColor(Color.RED);
-
-        wireUp(cards);
+        presenter.getDestinationCards(game, player);
+        //TODO: How do we update the view after the it goes to the server and back????
     }
+
+
+
     void wireUp(final List<DestinationCard> cards){
         mRoute1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,5 +182,15 @@ public class DestinationCardFragment extends Fragment implements MVP_DestCard.Ma
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
 
+        mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+        mRoute2.setText(destinationCards.get(1).getDestinationCardString());
+        mRoute3.setText(destinationCards.get(2).getDestinationCardString());
+        mRoute1.setTextColor(Color.RED);
+        mRoute2.setTextColor(Color.RED);
+        mRoute3.setTextColor(Color.RED);
+
+        Toast.makeText(getContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
+
+        wireUp(destinationCards);
     }
 }

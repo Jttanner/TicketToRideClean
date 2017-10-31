@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import teamjapannumbahone.tickettoride.R;
 
@@ -66,57 +68,6 @@ public class MapBaseView extends View {
     Point LittleRockPoint = new Point(1155, 760);
     Point SaintLouisPoint = new Point(1191, 622);
 
-    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-    Display display = wm.getDefaultDisplay();
-    Paint paint = new Paint();
-    Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
-    Resources resources = getResources();
-    Bitmap mapBitmap = BitmapFactory.decodeResource(resources, R.drawable.usamap);
-    Paint cityNames = new Paint();
-    List<Point> touchCoords = new ArrayList<>();
-
-    Canvas baseCanvas;
-
-    //Context callingContext = getContext();
-
-
-    public MapBaseView(Context context, AttributeSet st) {
-        super(context, st);
-    }
-
-    @Override
-    public void onDraw(Canvas canvas){
-        baseCanvas = canvas;
-        //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
-        fillCityPointList();
-        float thickness = 4;
-        float textSize = 35;
-        paint.setStrokeWidth(thickness);
-        paint.setColor(Color.LTGRAY);
-        cityNames.setTextSize(textSize);
-        cityNames.setColor(Color.RED);
-
-
-        canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
-        drawCityLines(canvas);
-        drawCities(canvas);
-
-        //claimRoute(Phoenix, Denver, "red");
-        //claimRoute(LasVegas, SaltLakeCity, "blue");
-        //claimRoute(NewYork, Nashville, "green");
-        //claimRoute(LosAngeles, SanFrancisco, "yellow");
-        //claimRoute(Nashville, Omaha, "black");
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        int xTouch = Math.round(event.getX());
-        int yTouch = Math.round(event.getY());
-        touchCoords.add(new Point(xTouch, yTouch));
-        return true;
-    }
-
-
     List<CityDrawData> cities = new ArrayList<>();
     CityDrawData Vancouver = new CityDrawData(VancouverPoint, "Vancouver");
     CityDrawData Seattle = new CityDrawData(SeattlePoint, "Seattle");
@@ -155,88 +106,110 @@ public class MapBaseView extends View {
     CityDrawData LittleRock = new CityDrawData(LittleRockPoint, "Little Rock");
     CityDrawData SaintLouis = new CityDrawData(SaintLouisPoint, "Saint Louis");
 
-    private void fillCityPointList(){
+    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+    Display display = wm.getDefaultDisplay();
+    Paint paint = new Paint();
+    Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
+    Resources resources = getResources();
+    Bitmap mapBitmap = BitmapFactory.decodeResource(resources, R.drawable.usamap);
+    Paint cityNames = new Paint();
+    List<Point> touchCoords = new ArrayList<>();
+
+    Map<String, Point> cityMap = new HashMap<>();
+
+    Canvas baseCanvas;
+
+    //Context callingContext = getContext();
+
+
+    public MapBaseView(Context context, AttributeSet st) {
+        super(context, st);
+    }
+
+    @Override
+    public void onDraw(Canvas canvas){
+        baseCanvas = canvas;
+        //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
+        fillCityList();
+        indexCityPointMap();
+        float thickness = 4;
+        float textSize = 35;
+        paint.setStrokeWidth(thickness);
+        paint.setColor(Color.LTGRAY);
+        cityNames.setTextSize(textSize);
+        cityNames.setColor(Color.RED);
+
+
+
+        canvas.drawBitmap(mapBitmap, screenRect, screenRect, null);
+        drawCityLines(canvas);
+        drawCities(canvas);
+    }
+
+    /*
+    Use city map to lookup coordinates when passed a city name.
+     */
+    private void indexCityPointMap(){
+        for (CityDrawData data : cities){
+            cityMap.put(data.cityName, data.city);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        int xTouch = Math.round(event.getX());
+        int yTouch = Math.round(event.getY());
+        touchCoords.add(new Point(xTouch, yTouch));
+        return true;
+    }
+
+
+
+
+    private void fillCityList(){
 
         cities.add(Vancouver);
-
         cities.add(Seattle);
-
         cities.add(Portland);
-
         cities.add(SanFrancisco);
-
         cities.add(LosAngeles);
-
         cities.add(Phoenix);
-
         cities.add(LasVegas);
-
         cities.add(SaltLakeCity);
-
         cities.add(Helena);
-
         cities.add(Calgary);
-
         cities.add(Winnipeg);
-
         cities.add(SaultStMarie);
-
         cities.add(Montreal);
-
         cities.add(Boston);
-
         cities.add(Toronto);
-
         cities.add(Deluth);
-
         cities.add(Denver);
-
         cities.add(SantaFe);
-
         cities.add(ElPaso);
-
         cities.add(Houston);
-
         cities.add(Dallas);
-
         cities.add(OklahomaCity);
-
         cities.add(KansasCity);
-
         cities.add(Omaha);
-
         cities.add(Chicago);
-
         cities.add(Pittsburgh);
-
         cities.add(Washington);
-
         cities.add(NewYork);
-
         cities.add(Raleigh);
-
         cities.add(Nashville);
-
         cities.add(Atlanta);
-
         cities.add(Charleston);
-
         cities.add(Miami);
-
         cities.add(NewOrleans);
-
         cities.add(LittleRock);
-
         cities.add(SaintLouis);
 
         //add connections
         Atlanta.addConnection(Miami);
-        Atlanta.addConnection(NewOrleans);
-        //second atlanta NO
-        Boston.addConnection(Montreal);
-        //second Boston Montreal
-        Boston.addConnection(NewYork);
-        //second B-NY
+        Atlanta.addDoubleConnection(NewOrleans);//2x
+        Boston.addDoubleConnection(Montreal); //2x
+        Boston.addDoubleConnection(NewYork);//2x
         Calgary.addConnection(Vancouver);
         Calgary.addConnection(Winnipeg);
         Calgary.addConnection(Helena);
@@ -314,9 +287,6 @@ public class MapBaseView extends View {
         SaultStMarie.addConnection(Winnipeg);
         SaultStMarie.addConnection(Toronto);
         Seattle.addDoubleConnection(Vancouver); //2x
-
-
-
     }
 
 
@@ -339,16 +309,17 @@ public class MapBaseView extends View {
 
     List<ClaimedRoute> claimedRoutes = new ArrayList<>();
 
-    public void addClaimedRoute(Point city1, String city1Name, Point city2, String city2Name, String color, boolean isDouble){
+    public void addClaimedRoute(Point city1, String city1Name, Point city2, String city2Name, String color, boolean isDouble, boolean hasOneLine){
         ClaimedRoute claimedRoute = new ClaimedRoute(city1, city1Name, city2, city2Name);
         claimedRoute.setClaimedColor(color);
         claimedRoute.doubleRoute = isDouble;
+        claimedRoute.hasOneLine = hasOneLine;
         claimedRoutes.add(claimedRoute);
         this.invalidate();
     }
 
     public boolean claimRoute(Point p1, Point p2, String color, boolean isDoubleRoute, boolean hasOneRouteClaimed){
-        switch (color){
+        switch (color.toLowerCase()){
             case "red":
                 paint.setColor(Color.RED);
                 break;
@@ -365,6 +336,7 @@ public class MapBaseView extends View {
                 paint.setColor(Color.GREEN);
                 break;
             default:
+                //nobody actually claims its.  Default, unclaimed color.
                 paint.setColor(Color.LTGRAY);
         }
         if (isDoubleRoute){
@@ -405,18 +377,6 @@ public class MapBaseView extends View {
         }
 
     }
-
-
-    private void drawFourCarLine(Point p1, Point p2, Canvas canvas){
-        Point temp = new Point(p2.x/4, p2.y/4);
-        for (int i = 0; i < 4; ++i){
-
-            temp.set(temp.x * i - 10, temp.y *i - 10);
-            canvas.drawLine(p1.x, p1.y, temp.x, temp.y, paint);
-
-        }
-    }
-
 
     private class DoubleConnectionDrawData{
         CityDrawData connectedCityDrawData;

@@ -14,6 +14,7 @@ import modeling.Game;
 import modeling.GameList;
 import modeling.History;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.User;
 
 /**

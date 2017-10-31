@@ -8,37 +8,43 @@ import ServerModel.ServerFacade;
 import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
+import modeling.Player;
+import result.CommandResult;
 import result.DrawDestinationCardCommandResult;
 
 /**
  * Created by ahwang13 on 10/24/17.
  */
 
-/*
+
 public class DrawDestinationCardCommand extends DrawDestinationCardCommandData implements ICommand {
-    public DrawDestinationCardCommand() {
+
+    private DrawDestinationCardCommandData commandData;
+    public DrawDestinationCardCommand(DrawDestinationCardCommandData data) {
         super();
+        this.commandData = data;
         setType("drawDestinationCards");
     }
 
     @Override
-    public DrawDestinationCardCommand execute() {
+    public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
         DrawDestinationCardCommandResult result;
         List<DestinationCard> destinationCardList = facade.getDestinationCardList();
         if(destinationCardList == null) {
             //facade.addCommandToList(facade.getGame().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
-
+            setType("drawDestinationCards");
             return result;
         }
         else {
-            //TODO this code commented out seems to do nothing
+            facade.addCommandToList(getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
-            result = new DrawDestinationCardCommandResult(true, gameList, "Game Lists sent.");
+            result = new DrawDestinationCardCommandResult(true, destinationCardList, "Destination card list sent.");
+            setType("drawDestinationCards");
             return result;
         }
     }
 
-}*/
+}
