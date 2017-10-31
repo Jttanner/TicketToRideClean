@@ -1,6 +1,5 @@
 package clientModel;
 
-import android.graphics.Point;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -173,6 +172,7 @@ public class CModel extends Observable {
         Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
+            updateCurrGame();
             //will notify the gamelist activity of games made/changed
             setChanged();
             notifyObservers(allGames);
@@ -188,6 +188,14 @@ public class CModel extends Observable {
     public void setCurrGame(Game currGame) {
         Log.d(TAG,"Setting current game");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
+        updateCurrGame();
+        //set currGame
+        this.currGame = currGame;
+        setChanged();
+        notifyObservers(this.currGame);
+    }
+
+    private void updateCurrGame(){
         for(Game g : allGames){
             if(g.getGameID().equals(currGame.getGameID())){
                 allGames.remove(g);
@@ -199,10 +207,6 @@ public class CModel extends Observable {
                 break;
             }
         }
-        //set currGame
-        this.currGame = currGame;
-        setChanged();
-        notifyObservers(this.currGame);
     }
 
     public void updateRoutes(Game currGame, Route route, Player player){
