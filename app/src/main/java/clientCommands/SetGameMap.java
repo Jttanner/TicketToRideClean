@@ -2,8 +2,6 @@ package clientCommands;
 
 import android.util.Log;
 
-import java.util.Map;
-
 import clientModel.CModel;
 import clientModel.CommandManager;
 import modeling.CommandList;

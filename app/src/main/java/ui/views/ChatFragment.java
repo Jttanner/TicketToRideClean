@@ -16,7 +16,6 @@ import java.util.List;
 
 import MVP_coms_classes.MVP_Chat;
 import clientModel.CModel;
-import poller.Poller;
 import presenters.ChatPresenter;
 import teamjapannumbahone.tickettoride.R;
 
@@ -44,7 +43,6 @@ public class ChatFragment extends DialogFragment implements MVP_Chat.ChatViewOps
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Poller.getInstance().stopGetCommandsPoller();
     }
 
     @Override

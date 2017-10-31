@@ -55,7 +55,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         setContentView(R.layout.activity_waitingroom);
         setupMVP();
         wireUp();
-        Poller.getInstance().updateGameList();
+        //Poller.getInstance().updateGameList();
         Poller.getInstance().getCommandList();
 
     }

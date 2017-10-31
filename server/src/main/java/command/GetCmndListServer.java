@@ -1,10 +1,6 @@
 package command;
 
-import java.util.List;
-import java.util.Map;
-
 import ServerModel.ServerModel;
-import commandData.Command;
 import commandData.GetCmndDataFromServer;
 import modeling.CommandList;
 

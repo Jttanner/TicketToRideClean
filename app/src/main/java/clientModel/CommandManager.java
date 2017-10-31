@@ -18,7 +18,6 @@ import commandData.Command;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.CommandList;
-import modeling.Game;
 import modeling.Player;
 
 /**

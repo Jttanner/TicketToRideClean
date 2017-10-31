@@ -1,9 +1,6 @@
 package commandData;
 
-import java.util.Map;
-
 import modeling.CommandList;
-import modeling.GameCommandMap;
 
 /**
  * Created by tyler on 10/23/2017.
