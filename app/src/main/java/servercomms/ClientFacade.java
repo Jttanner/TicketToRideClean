@@ -6,6 +6,8 @@ import clientCommands.SetGameMap;
 import clientModel.CModel;
 import commandData.Command;
 import commandData.GetCmndListDataToClient;
+import modeling.Game;
+import modeling.Route;
 import modeling.User;
 import result.CommandResult;
 import result.GetGameCommandResult;
@@ -58,6 +60,10 @@ class ClientFacade {
 
     void updateUser(User user) {
         CModel.getInstance().setMyUser(user);
+    }
+
+    void claimRoute(Game currGame, Route route){
+        CModel.getInstance().updateRoutes(currGame, route, CModel.getInstance().getUserPlayer());
     }
 
 }

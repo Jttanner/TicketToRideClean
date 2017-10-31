@@ -1,5 +1,7 @@
 package modeling;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,111 +11,150 @@ import java.util.Map;
 
 public class RouteList {
 
-    private List<Route> routesAvailable;
-    private Map<Route, Player> routesClaimed;
+    private List<Route> routesAvailable = new ArrayList<>();
+    private Map<Route, Player> routesClaimed = new HashMap<>();
 
-    public RouteList(){
-        /*
-        routesAvailable.add(new Route("Atlanta", "Raleigh", Color.WILD, 2));
-        routesAvailable.add(new Route("Atlanta", "Raleigh", Color.WILD, 2));
-        routesAvailable.add(new Route("Atlanta", "Charleston", Color.WILD, 2));
-        routesAvailable.add(new Route("Atlanta", "Miami", Color.BLUE, 5));
-        routesAvailable.add(new Route("Atlanta", "New Orleans", Color.YELLOW, 4));
-        routesAvailable.add(new Route("Atlanta", "New Orleans", Color.ORANGE, 4));
-        routesAvailable.add(new Route("Atlanta", "Nashville", Color.WILD, 1));
-        routesAvailable.add(new Route("Boston", "Montreal", Color.WILD, 2));
-        routesAvailable.add(new Route("Boston", "Montreal", Color.WILD, 2));
-        routesAvailable.add(new Route("Boston", "New York", Color.YELLOW, 2));
-        routesAvailable.add(new Route("Boston", "New York", Color.RED, 2));
-        routesAvailable.add(new Route("Calgary", "Vancouver", Color.WILD, 3));
-        routesAvailable.add(new Route("Calgary", "Winnipeg", Color.WHITE, 6));
-        routesAvailable.add(new Route("Calgary", "Helena", Color.WILD, 4));
-        routesAvailable.add(new Route("Calgary", "Seattle", Color.WILD, 4));
-        routesAvailable.add(new Route("Charleston", "Raleigh", Color.WILD, 2));
-        routesAvailable.add(new Route("Charleston", "Miami", Color.PURPLE, 4));
-        routesAvailable.add(new Route("Chicago", "Pittsburgh", Color.ORANGE, 3));
-        routesAvailable.add(new Route("Chicago", "Pittsburgh", Color.BLACK, 3));
-        routesAvailable.add(new Route("Chicago", "Toronto", Color.WHITE, 4));
-        routesAvailable.add(new Route("Chicago", "Duluth", Color.RED, 3));
-        routesAvailable.add(new Route("Chicago", "Omaha", Color.BLUE, 4));
-        routesAvailable.add(new Route("Chicago", "St. Louis", Color.GREEN, 2));
-        routesAvailable.add(new Route("Chicago", "St. Louis", Color.WHITE, 2));
-        routesAvailable.add(new Route("Dallas", "Little Rock", Color.WILD, 2));
-        routesAvailable.add(new Route("Dallas", "Oklahoma City", Color.WILD, 2));
-        routesAvailable.add(new Route("Dallas", "Oklahoma City", Color.WILD, 2));
-        routesAvailable.add(new Route("Dallas", "El Paso", Color.RED, 4));
-        routesAvailable.add(new Route("Dallas", "Houston", Color.WILD, 1));
-        routesAvailable.add(new Route("Dallas", "Houston", Color.WILD, 1));
-        routesAvailable.add(new Route("Denver", "Kansas City", Color.BLACK, 4));
-        routesAvailable.add(new Route("Denver", "Kansas City", Color.ORANGE, 4));
-        routesAvailable.add(new Route("Denver", "Omaha", Color.PURPLE, 4));
-        routesAvailable.add(new Route("Denver", "Helena", Color.GREEN, 4));
-        routesAvailable.add(new Route("Denver", "Salt Lake City", Color.RED, 3));
-        routesAvailable.add(new Route("Denver", "Salt Lake City", Color.YELLOW, 3));
-        routesAvailable.add(new Route("Denver", "Phoenix", Color.WHITE, 5));
-        routesAvailable.add(new Route("Denver", "Santa Fe", Color.WILD, 2));
-        routesAvailable.add(new Route("Denver", "Oklahoma City", Color.RED, 4));
-        routesAvailable.add(new Route("Duluth", "Omaha", Color.WILD, 2));
-        routesAvailable.add(new Route("Duluth", "Omaha", Color.WILD, 2));
-        routesAvailable.add(new Route("Duluth", "Toronto", Color.PURPLE, 6));
-        routesAvailable.add(new Route("Duluth", "Sault St. Marie", Color.WILD, 3));
-        routesAvailable.add(new Route("Duluth", "Winnipeg", Color.BLACK, 4));
-        routesAvailable.add(new Route("Duluth", "Helena", Color.ORANGE, 6));
-        routesAvailable.add(new Route("El Paso", "Houston", Color.GREEN, 6));
-        routesAvailable.add(new Route("El Paso", "Oklahoma City", Color.YELLOW, 5));
-        routesAvailable.add(new Route("El Paso", "Santa Fe", Color.WILD, 2));
-        routesAvailable.add(new Route("El Paso", "Phoenix", Color.WILD, 3));
-        routesAvailable.add(new Route("El Paso", "Los Angeles", Color.BLACK, 6));
-        routesAvailable.add(new Route("Helena", "Winnipeg", Color.BLUE, 4));
-        routesAvailable.add(new Route("Helena", "Omaha", Color.RED, 5));
-        routesAvailable.add(new Route("Helena", "Salt Lake City", Color.PURPLE, 3));
-        routesAvailable.add(new Route("Helena", "Seattle", Color.YELLOW, 6));
-        routesAvailable.add(new Route("Houston", "New Orleans", Color.WILD, 2));
-        routesAvailable.add(new Route("Kansas City", "St. Louis", Color.BLUE, 2));
-        routesAvailable.add(new Route("Kansas City", "St. Louis", Color.PURPLE, 2));
-        routesAvailable.add(new Route("Kansas City", "Omaha", Color.WILD, 1));
-        routesAvailable.add(new Route("Kansas City", "Omaha", Color.WILD, 1));
-        routesAvailable.add(new Route("Kansas City", "Oklahoma City", Color.WILD, 2));
-        routesAvailable.add(new Route("Kansas City", "Oklahoma City", Color.WILD, 2));
-        routesAvailable.add(new Route("Las Vegas", "Salt Lake City", Color.ORANGE, 3));
-        routesAvailable.add(new Route("Las Vegas", "Los Angeles", Color.WILD, 2));
-        routesAvailable.add(new Route("Little Rock", "Nashville", Color.WHITE, 3));
-        routesAvailable.add(new Route("Little Rock", "St. Louis", Color.WILD, 2));
-        routesAvailable.add(new Route("Little Rock", "Oklahoma City", Color.WILD, 2));
-        routesAvailable.add(new Route("Little Rock", "New Orleans", Color.GREEN, 3));
-        routesAvailable.add(new Route("Los Angeles", "San Francisco", Color.PURPLE, 3));
-        routesAvailable.add(new Route("Los Angeles", "San Francisco", Color.YELLOW, 3));
-        routesAvailable.add(new Route("Los Angeles", "Phoenix", Color.WILD, 3));
-        routesAvailable.add(new Route("Miami", "New Orleans", Color.RED, 6));
-        routesAvailable.add(new Route("Montreal", "New York", Color.BLUE, 3));
-        routesAvailable.add(new Route("Montreal", "Toronto", Color.WILD, 3));
-        routesAvailable.add(new Route("Montreal", "Sault St. Marie", Color.BLACK, 5));
-        routesAvailable.add(new Route("Nashville", "Raleigh", Color.BLACK, 3));
-        routesAvailable.add(new Route("Nashville", "Pittsburgh", Color.YELLOW, 4));
-        routesAvailable.add(new Route("Nashville", "St. Louis", Color.WILD, 2));
-        routesAvailable.add(new Route("New York", "Washington", Color.BLACK, 2));
-        routesAvailable.add(new Route("New York", "Washington", Color.ORANGE, 2));
-        routesAvailable.add(new Route("New York", "Pittsburgh", Color.WHITE, 2));
-        routesAvailable.add(new Route("New York", "Pittsburgh", Color.GREEN, 2));
-        routesAvailable.add(new Route("Oklahoma City", "Santa Fe", Color.BLUE, 3));
-        routesAvailable.add(new Route("Phoenix", "Santa Fe", Color.WILD, 3));
-        routesAvailable.add(new Route("Pittsburgh", "Washington", Color.WILD, 2));
-        routesAvailable.add(new Route("Pittsburgh", "Raleigh", Color.WILD, 2));
-        routesAvailable.add(new Route("Pittsburgh", "St. Louis", Color.GREEN, 5));
-        routesAvailable.add(new Route("Pittsburgh", "Toronto", Color.WILD, 2));
-        routesAvailable.add(new Route("Portland", "Seattle", Color.WILD, 1));
-        routesAvailable.add(new Route("Portland", "Seattle", Color.WILD, 1));
-        routesAvailable.add(new Route("Portland", "Salt Lake City", Color.BLUE, 6));
-        routesAvailable.add(new Route("Portland", "San Francisco", Color.GREEN, 5));
-        routesAvailable.add(new Route("Portland", "San Francisco", Color.PURPLE, 5));
-        routesAvailable.add(new Route("Raleigh", "Washington", Color.WILD, 2));
-        routesAvailable.add(new Route("Raleigh", "Washington", Color.WILD, 2));
-        routesAvailable.add(new Route("Salt Lake City", "San Francisco", Color.ORANGE, 5));
-        routesAvailable.add(new Route("Salt Lake City", "San Francisco", Color.WHITE, 5));
-        routesAvailable.add(new Route("Sault St. Marie", "Winnipeg", Color.WILD, 6));
-        routesAvailable.add(new Route("Sault St. Marie", "Toronto", Color.WILD, 2));
-        routesAvailable.add(new Route("Seattle", "Vancouver", Color.WILD, 1));
-        routesAvailable.add(new Route("Seattle", "Vancouver", Color.WILD, 1));
-        */
+    public Map<Route, Player> getRoutesMap(){
+        return  routesClaimed;
+    }
+
+    public void addAvailableRoute(Route route){
+        routesAvailable.add(route);
+    }
+
+    public void removeAvailableRoute(Route route){
+        routesAvailable.remove(route);
+    }
+
+    public void addClaimedRoute(Route route, Player player){
+        routesClaimed.put(route, player);
+    }
+
+    public void removeClaimedRoute(Route route){
+        routesClaimed.remove(route);
+    }
+
+    private void setDoubles(){
+        Route lastRoute = null;
+        for (Route route : routesAvailable){
+            if (lastRoute == null){
+                //first is duplicate so its okay
+                lastRoute = route;
+            } else{
+                if ((lastRoute.getFirstCityName().equals(route.getFirstCityName()) && lastRoute.getSecondCityName().equals(route.getSecondCityName())) ||
+                        (lastRoute.getSecondCityName().equals(route.getFirstCityName()) && lastRoute.getFirstCityName().equals(route.getSecondCityName())) ){
+                    route.setIsDouble();
+                }
+                lastRoute = route;
+            }
+        }
+    }
+
+    public RouteList(boolean initialize){
+        if (initialize){
+
+            routesAvailable.add(new Route("Atlanta", "Raleigh", "Wild", 2, true));
+            routesAvailable.add(new Route("Atlanta", "Raleigh", "Wild", 2, true));
+            routesAvailable.add(new Route("Atlanta", "Charleston", "Wild", 2));
+            routesAvailable.add(new Route("Atlanta", "Miami", "blue", 5));
+            routesAvailable.add(new Route("Atlanta", "New Orleans", "yellow", 4, true));
+            routesAvailable.add(new Route("Atlanta", "New Orleans", "orange", 4, true));
+            routesAvailable.add(new Route("Atlanta", "Nashville", "Wild", 1));
+            routesAvailable.add(new Route("Boston", "Montreal", "Wild", 2, true));
+            routesAvailable.add(new Route("Boston", "Montreal", "Wild", 2, true));
+            routesAvailable.add(new Route("Boston", "New York", "yellow", 2, true));
+            routesAvailable.add(new Route("Boston", "New York", "red", 2, true));
+            routesAvailable.add(new Route("Calgary", "Vancouver", "Wild", 3));
+            routesAvailable.add(new Route("Calgary", "Winnipeg", "white", 6));
+            routesAvailable.add(new Route("Calgary", "Helena", "Wild", 4));
+            routesAvailable.add(new Route("Calgary", "Seattle", "Wild", 4));
+            routesAvailable.add(new Route("Charleston", "Raleigh", "Wild", 2));
+            routesAvailable.add(new Route("Charleston", "Miami", "purple", 4));
+            routesAvailable.add(new Route("Chicago", "Pittsburgh", "orange", 3, true));
+            routesAvailable.add(new Route("Chicago", "Pittsburgh", "black", 3, true));
+            routesAvailable.add(new Route("Chicago", "Toronto", "white", 4));
+            routesAvailable.add(new Route("Chicago", "Duluth", "red", 3));
+            routesAvailable.add(new Route("Chicago", "Omaha", "blue", 4));
+            routesAvailable.add(new Route("Chicago", "St. Louis", "green", 2, true));
+            routesAvailable.add(new Route("Chicago", "St. Louis", "white", 2, true));
+            routesAvailable.add(new Route("Dallas", "Little Rock", "Wild", 2));
+            routesAvailable.add(new Route("Dallas", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Dallas", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Dallas", "El Paso", "red", 4));
+            routesAvailable.add(new Route("Dallas", "Houston", "Wild", 1, true));
+            routesAvailable.add(new Route("Dallas", "Houston", "Wild", 1, true));
+            routesAvailable.add(new Route("Denver", "Kansas City", "black", 4, true));
+            routesAvailable.add(new Route("Denver", "Kansas City", "orange", 4, true));
+            routesAvailable.add(new Route("Denver", "Omaha", "purple", 4));
+            routesAvailable.add(new Route("Denver", "Helena", "green", 4));
+            routesAvailable.add(new Route("Denver", "Salt Lake City", "red", 3, true));
+            routesAvailable.add(new Route("Denver", "Salt Lake City", "yellow", 3, true));
+            routesAvailable.add(new Route("Denver", "Phoenix", "white", 5));
+            routesAvailable.add(new Route("Denver", "Santa Fe", "Wild", 2));
+            routesAvailable.add(new Route("Denver", "Oklahoma City", "red", 4));
+            routesAvailable.add(new Route("Duluth", "Omaha", "Wild", 2, true));
+            routesAvailable.add(new Route("Duluth", "Omaha", "Wild", 2, true));
+            routesAvailable.add(new Route("Duluth", "Toronto", "purple", 6));
+            routesAvailable.add(new Route("Duluth", "Sault St. Marie", "Wild", 3));
+            routesAvailable.add(new Route("Duluth", "Winnipeg", "black", 4));
+            routesAvailable.add(new Route("Duluth", "Helena", "orange", 6));
+            routesAvailable.add(new Route("El Paso", "Houston", "green", 6));
+            routesAvailable.add(new Route("El Paso", "Oklahoma City", "yellow", 5));
+            routesAvailable.add(new Route("El Paso", "Santa Fe", "Wild", 2));
+            routesAvailable.add(new Route("El Paso", "Phoenix", "Wild", 3));
+            routesAvailable.add(new Route("El Paso", "Los Angeles", "black", 6));
+            routesAvailable.add(new Route("Helena", "Winnipeg", "blue", 4));
+            routesAvailable.add(new Route("Helena", "Omaha", "red", 5));
+            routesAvailable.add(new Route("Helena", "Salt Lake City", "purple", 3));
+            routesAvailable.add(new Route("Helena", "Seattle", "yellow", 6));
+            routesAvailable.add(new Route("Houston", "New Orleans", "Wild", 2));
+            routesAvailable.add(new Route("Kansas City", "St. Louis", "blue", 2, true));
+            routesAvailable.add(new Route("Kansas City", "St. Louis", "purple", 2, true));
+            routesAvailable.add(new Route("Kansas City", "Omaha", "Wild", 1, true));
+            routesAvailable.add(new Route("Kansas City", "Omaha", "Wild", 1, true));
+            routesAvailable.add(new Route("Kansas City", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Kansas City", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Las Vegas", "Salt Lake City", "orange", 3));
+            routesAvailable.add(new Route("Las Vegas", "Los Angeles", "Wild", 2));
+            routesAvailable.add(new Route("Little Rock", "Nashville", "white", 3));
+            routesAvailable.add(new Route("Little Rock", "St. Louis", "Wild", 2));
+            routesAvailable.add(new Route("Little Rock", "Oklahoma City", "Wild", 2));
+            routesAvailable.add(new Route("Little Rock", "New Orleans", "green", 3));
+            routesAvailable.add(new Route("Los Angeles", "San Francisco", "purple", 3, true));
+            routesAvailable.add(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+            routesAvailable.add(new Route("Los Angeles", "Phoenix", "Wild", 3));
+            routesAvailable.add(new Route("Miami", "New Orleans", "red", 6));
+            routesAvailable.add(new Route("Montreal", "New York", "blue", 3));
+            routesAvailable.add(new Route("Montreal", "Toronto", "Wild", 3));
+            routesAvailable.add(new Route("Montreal", "Sault St. Marie", "black", 5));
+            routesAvailable.add(new Route("Nashville", "Raleigh", "black", 3));
+            routesAvailable.add(new Route("Nashville", "Pittsburgh", "yellow", 4));
+            routesAvailable.add(new Route("Nashville", "St. Louis", "Wild", 2));
+            routesAvailable.add(new Route("New York", "Washington", "black", 2, true));
+            routesAvailable.add(new Route("New York", "Washington", "orange", 2, true));
+            routesAvailable.add(new Route("New York", "Pittsburgh", "white", 2, true));
+            routesAvailable.add(new Route("New York", "Pittsburgh", "green", 2, true));
+            routesAvailable.add(new Route("Oklahoma City", "Santa Fe", "blue", 3));
+            routesAvailable.add(new Route("Phoenix", "Santa Fe", "Wild", 3));
+            routesAvailable.add(new Route("Pittsburgh", "Washington", "Wild", 2));
+            routesAvailable.add(new Route("Pittsburgh", "Raleigh", "Wild", 2));
+            routesAvailable.add(new Route("Pittsburgh", "St. Louis", "green", 5));
+            routesAvailable.add(new Route("Pittsburgh", "Toronto", "Wild", 2));
+            routesAvailable.add(new Route("Portland", "Seattle", "Wild", 1, true));
+            routesAvailable.add(new Route("Portland", "Seattle", "Wild", 1, true));
+            routesAvailable.add(new Route("Portland", "Salt Lake City", "blue", 6));
+            routesAvailable.add(new Route("Portland", "San Francisco", "green", 5, true));
+            routesAvailable.add(new Route("Portland", "San Francisco", "purple", 5, true));
+            routesAvailable.add(new Route("Raleigh", "Washington", "Wild", 2, true));
+            routesAvailable.add(new Route("Raleigh", "Washington", "Wild", 2, true));
+            routesAvailable.add(new Route("Salt Lake City", "San Francisco", "orange", 5, true));
+            routesAvailable.add(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+            routesAvailable.add(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+            routesAvailable.add(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+            routesAvailable.add(new Route("Seattle", "Vancouver", "Wild", 1, true));
+            routesAvailable.add(new Route("Seattle", "Vancouver", "Wild", 1, true));
+            //setDoubles();
+        }
+
     }
 }

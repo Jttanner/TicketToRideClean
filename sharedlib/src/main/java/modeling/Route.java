@@ -15,11 +15,56 @@ public class Route {
         this.trainColorNeeded = trainColorNeeded;
     }
 
+    public Route(String firstCityName, String secondCityName, String trainColorNeeded, int distance){
+        this.firstCityName = firstCityName;
+        this.secondCityName = secondCityName;
+        this.trainColorNeeded = trainColorNeeded;
+        this.distance = distance;
+    }
+
+    public Route(String firstCityName, String secondCityName, String trainColorNeeded, int distance, boolean isDouble){
+        this.firstCityName = firstCityName;
+        this.secondCityName = secondCityName;
+        this.trainColorNeeded = trainColorNeeded;
+        this.distance = distance;
+        this.isDouble = isDouble;
+    }
+
+    String firstCityName;
+    String secondCityName;
+
+    boolean firstOfDouble = true;
+
+    public void setFirstOfDouble(boolean firstOfDouble){
+        this.firstOfDouble = firstOfDouble;
+    }
+
+    public boolean getFirstOfDouble(){
+        return  firstOfDouble;
+    }
+
+    public String getFirstCityName() {
+        return firstCityName;
+    }
+
+    public String getSecondCityName() {
+        return secondCityName;
+    }
+
     private List<City> twoCities = new ArrayList<>();
     private int distance;
     private boolean claimed = false;
+    private boolean isDouble = false;
     private String trainColorNeeded;
     private Player owner = null;
+
+    public void setIsDouble(){
+        isDouble = true;
+    }
+
+    public boolean getIsDouble(){
+        return isDouble;
+    }
 
     //TODO: It is less good to pass the list directly.  should we change it?
     List<City> getTwoCities(){
@@ -79,5 +124,22 @@ public class Route {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Route route = null;
+        if (object instanceof Route){
+            route = (Route) object;
+        } else{
+            return  false;
+        }
+        if (this.getFirstCityName().toLowerCase().equals(route.getFirstCityName().toLowerCase()) && this.getSecondCityName().toLowerCase().equals(route.getSecondCityName().toLowerCase())){
+            return true;
+        } else if (this.getFirstCityName().toLowerCase().equals(route.getSecondCityName().toLowerCase()) && this.getSecondCityName().toLowerCase().equals(route.getFirstCityName().toLowerCase())){
+            return true;
+        } else{
+            return false;
+        }
     }
 }
