@@ -2,6 +2,7 @@ package ui.views;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,16 +14,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import modeling.DestinationCard;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
@@ -36,6 +40,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
+
+    private ImageButton firstDrawableTrainCard;
+    private ImageButton secondDrawableTrainCard;
+    private ImageButton thirdDrawableTrainCard;
+    private ImageButton fourthDrawableTrainCard;
+    private ImageButton fifthDrawableTrainCard;
+    private ImageButton drawableDeck;
+
+
     int counter = 0;
 
 
@@ -104,7 +117,71 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
+        firstDrawableTrainCard = (ImageButton) findViewById(R.id.first_drawable_card);
 
+        firstDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
+
+        secondDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        thirdDrawableTrainCard = (ImageButton) findViewById(R.id.third_drawable_card);
+
+        thirdDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        fourthDrawableTrainCard = (ImageButton) findViewById(R.id.fourth_drawable_card);
+
+        fourthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        fifthDrawableTrainCard = (ImageButton) findViewById(R.id.fifth_drawable_card);
+
+        fifthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        drawableDeck = (ImageButton) findViewById(R.id.drawable_deck);
+
+        drawableDeck.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        initializeFaceUpCards();
 
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
@@ -166,14 +243,24 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         //mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "yellow", true, true);
                         break;
                     case 7:
+                        Toast.makeText(getApplicationContext(), "Replacing First Card...", Toast.LENGTH_LONG).show();
+                        firstDrawableTrainCard.setImageResource(R.drawable.purpletrain);
                         break;
                     case 8:
+                        Toast.makeText(getApplicationContext(), "Replacing Second Card...", Toast.LENGTH_LONG).show();
+                        secondDrawableTrainCard.setImageResource(R.drawable.greentrain);
                         break;
                     case 9:
+                        Toast.makeText(getApplicationContext(), "Replacing Third Card...", Toast.LENGTH_LONG).show();
+                        thirdDrawableTrainCard.setImageResource(R.drawable.bluetrain);
                         break;
                     case 10:
+                        Toast.makeText(getApplicationContext(), "Replacing Fourth Card...", Toast.LENGTH_LONG).show();
+                        fourthDrawableTrainCard.setImageResource(R.drawable.redtrain);
                         break;
                     case 11:
+                        Toast.makeText(getApplicationContext(), "Replacing Fifth Card...", Toast.LENGTH_LONG).show();
+                        fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
                         break;
                     case 12:
                         break;
@@ -195,6 +282,57 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         setupView();
     }
 
+    public void initializeFaceUpCards(){
+        for (int i = 0; i < 5; ++i){
+            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().drawCard();
+            int drawableCardIndex = 0;
+            switch (i){
+                case 0:
+                    drawableCardIndex = R.id.first_drawable_card;
+                    break;
+                case 1:
+                    drawableCardIndex = R.id.second_drawable_card;
+                    break;
+                case 2:
+                    drawableCardIndex = R.id.third_drawable_card;
+                    break;
+                case 3:
+                    drawableCardIndex = R.id.fourth_drawable_card;
+                    break;
+                case 4:
+                    drawableCardIndex = R.id.fifth_drawable_card;
+                    break;
+                default:
+                    break;
+            }
+            ((ImageButton) findViewById(drawableCardIndex)).setImageResource(getTrainColorPictureID(card.getMyColor()));
+        }
+        drawableDeck.setImageResource(R.drawable.backcard);
+    }
+
+    private int getTrainColorPictureID(String color){
+        switch (color.toLowerCase()){
+            case "black":
+                return R.drawable.blacktrain;
+            case "purple":
+                return R.drawable.purpletrain;
+            case "white":
+                return R.drawable.whitetrain;
+            case "blue":
+                return R.drawable.bluetrain;
+            case "yelllow":
+                return R.drawable.yellowtrain;
+            case "green":
+                return R.drawable.greentrain;
+            case "red":
+                return R.drawable.redtrain;
+            case "orange":
+                return R.drawable.orangetrain;
+            default:
+                return R.drawable.wildtrain;
+        }
+    }
+
     public void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
         MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
         Map<String, Point> cities = mapBaseView.cityMap;
@@ -211,7 +349,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     @Override
     public void updateMap() {
         Map<Route, Player> routeList = CModel.getInstance().getClaimedRouteList().getRoutesMap();
-
         for (Map.Entry<Route, Player> entry : routeList.entrySet())
         {
             Route route = entry.getKey();

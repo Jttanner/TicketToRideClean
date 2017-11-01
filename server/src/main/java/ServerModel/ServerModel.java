@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import modeling.CommandList;
 import modeling.DestinationCard;
@@ -138,5 +139,19 @@ public class ServerModel {
 
     public List<DestinationCard> getDestinationCards() {
         return destinationCardList.get3Cards();
+    }
+
+    public void distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+        List<DestinationCard> claimedCards = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
+            if (isClaimed) {
+                 claimedCards.add(commandData.getClaimDestinationCards().get(i));
+            }
+            else {
+                destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
+            }
+        }
+        commandData.getPlayer().addDestinationCard(claimedCards);
     }
 }

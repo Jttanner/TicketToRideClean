@@ -10,6 +10,7 @@ import modeling.Game;
 import modeling.Route;
 import modeling.User;
 import result.CommandResult;
+import result.DrawDestinationCardCommandResult;
 import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 
@@ -46,6 +47,9 @@ class ClientFacade {
             //This if is for joinGame, and the result.getData is the GameID for the game we are joining
             else if (result instanceof JoinGameCommandResult) {
                 CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
+            }
+            else if (result instanceof DrawDestinationCardCommandResult) {
+                CModel.getInstance().setThreeDestinationCards(((DrawDestinationCardCommandResult) result).getDestinationCardList());
             }
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {

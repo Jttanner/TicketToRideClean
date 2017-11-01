@@ -3,12 +3,14 @@ package presenters;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.Game;
@@ -33,14 +35,19 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         //if we didnt find the user, add him in the server
         DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player);
         ServerProxy.getInstance().sendCommand(data);
-        Log.d("DestCardPresenter", "A");
+        Log.d("DestCardPresenter", "get3DestinationCards");
     }
 
+    public void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards) {
+        ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player, destinationCards);
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "claimDestinationCards");
+    }
 
     @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
-        if(arg instanceof DestinationCard){
+        if(arg instanceof ArrayList){
             List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
             myView.get().giveChosenCards(destinationCards);
         }

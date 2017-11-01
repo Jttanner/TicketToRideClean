@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import modeling.CommandList;
 import modeling.DestinationCard;
@@ -101,4 +102,8 @@ public class ServerFacade {
     }
 
     public List<DestinationCard> getDestinationCardList() { return serverModel.getDestinationCards(); }
+
+    public void distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+        serverModel.distributeUsedDestinationCards(commandData);
+    }
 }

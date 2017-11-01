@@ -1,5 +1,7 @@
 package commandData;
 
+import java.util.List;
+
 import modeling.DestinationCard;
 import modeling.Player;
 
@@ -7,10 +9,11 @@ import modeling.Player;
  * Created by ahwang13 on 10/24/17.
  */
 
-public class DrawDestinationCardCommandData extends Command{
+public class ClaimDestinationCardCommandData extends Command{
 
     private String gameID;
     private Player player;
+    private List<DestinationCard> claimDestinationCards;
 
     public Player getPlayer() {
         return player;
@@ -20,14 +23,14 @@ public class DrawDestinationCardCommandData extends Command{
         this.player = player;
     }
 
-    public DrawDestinationCardCommandData() {
+    public ClaimDestinationCardCommandData() {
     }
 
-    public DrawDestinationCardCommandData(String gameID, Player player) {
+    public ClaimDestinationCardCommandData(String gameID, Player player, List<DestinationCard> claimDestinationCards) {
         this.gameID = gameID;
         this.player = player;
-        this.setType("drawDestinationCards");
-        this.setData("");
+        this.claimDestinationCards = claimDestinationCards;
+        this.setType("claimDestinationCards");
     }
 
     public String getGameID() {
@@ -38,4 +41,7 @@ public class DrawDestinationCardCommandData extends Command{
         this.gameID = gameID;
     }
 
+    public List<DestinationCard> getClaimDestinationCards() {
+        return claimDestinationCards;
+    }
 }

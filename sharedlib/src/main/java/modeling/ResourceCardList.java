@@ -53,6 +53,14 @@ public class ResourceCardList {
         return Collections.unmodifiableList(availableCards);
     }
 
+    public ResourceCard drawCard(){
+        for (ResourceCard card : availableCards){
+            availableCards.remove(card);
+            return card;
+        }
+        return null;
+    }
+
     /**Sets up each players starting cards*/
     void setUpPlayers(ArrayList<Player> players) {
         int start = 0;//start at index zero in the card list
