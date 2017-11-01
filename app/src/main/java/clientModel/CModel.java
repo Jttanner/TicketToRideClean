@@ -172,10 +172,17 @@ public class CModel extends Observable {
         Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
-            this.currGame = allGames.findGame(this.currGame.getGameID());
+            if(this.currGame != null) {
+                Game g = allGames.findGame(this.currGame.getGameID());
+                if (g != null) {
+                    this.currGame = g;
+                }
+            }
             //will notify the gamelist activity of games made/changed
             setChanged();
-            notifyObservers(this.allGames);
+            GameList gameList = new GameList();
+            gameList.setGames(this.allGames);
+            notifyObservers(gameList);
         }
     }
 
