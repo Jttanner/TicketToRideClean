@@ -87,7 +87,8 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return encoder.decodeGetCommandListToClient(stream);
         }
         else if(request instanceof Command){
-            return encoder.decodeCommandResult(stream);
+            CommandResult result = encoder.decodeCommandResult(stream);
+            return result;
         }
         Log.d(TAG,"Yo things went wack, you gave us the wrong object type in the HttpTask");
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());
