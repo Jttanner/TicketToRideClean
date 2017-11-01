@@ -53,7 +53,7 @@ class ClientFacade {
                 CModel.getInstance().setThreeDestinationCards(((DrawDestinationCardCommandResult) result).getDestinationCardList());
             }
             else if (result instanceof ClaimDestinationCardCommandResult) {
-                CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards());
+                CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards(), 25);
             }
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {

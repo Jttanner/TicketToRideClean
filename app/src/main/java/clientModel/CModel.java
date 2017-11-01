@@ -15,6 +15,7 @@ import modeling.Game;
 import modeling.GameList;
 import modeling.History;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.Route;
 import modeling.RouteList;
 import modeling.TrainCarList;
@@ -178,6 +179,14 @@ public class CModel extends Observable {
         return null;
     }
 
+    public void drawResourceCard(ResourceCard card, Game currGame){
+
+        getUserPlayer().addResourceCard(card);
+        setChanged();
+        notifyObservers(currGame);
+
+    }
+
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList
      *
@@ -211,10 +220,22 @@ public class CModel extends Observable {
         notifyObservers(this.threeDestinationCards);
     }
 
-    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
+    private int deckSize = 52;
+
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    public void setDeckSize(int deckSize) {
+        this.deckSize = deckSize;
+    }
+
+    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards, int deckSize) {
         Log.d(TAG, "Setting claimed destination cards");
         this.claimedDestinationCards = claimedDestinationCards;
         currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
+
+        this.deckSize = deckSize;
         //player.addDestinationCard(claimedDestinationCards);
         setChanged();
         notifyObservers(this.currGame);

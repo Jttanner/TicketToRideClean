@@ -15,6 +15,7 @@ import java.util.Map;
 
 import Adapters.StatusAdapter;
 import MVP_coms_classes.MVP_PlayerStats;
+import clientModel.CModel;
 import clientModel.MyColor;
 import presenters.PlayerStatsPresenter;
 import teamjapannumbahone.tickettoride.R;
@@ -139,6 +140,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
 
     @Override
     public void updatePlayerStats() {
+        ((TextView) findViewById(R.id.destination_deck_size)).setText(CModel.getInstance().getDeckSize());
         presenter.setCardNumbers(colorNumMap);
         statusAdapter.setPlayerColumns(presenter.getPlayerColumns());
         statusAdapter.notifyDataSetChanged();

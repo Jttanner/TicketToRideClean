@@ -189,7 +189,7 @@ public class Encoder {
  //                   //if we get a null pointer it means there is nothing to get
 //                    return new GetCmndListDataToClient(new CommandList(), gameID);
  //               }
-                JsonArray array = cl.get("commandList").getAsJsonArray();
+                JsonArray array = wrapper.get("returnCommandList").getAsJsonArray();
                 for (int i = 0; i < array.size(); i++) {
                     JsonObject object = array.get(i).getAsJsonObject();
                     switch (object.get("type").getAsString()) {
@@ -219,7 +219,7 @@ public class Encoder {
             }
            // CommandList commandList = new CommandList();
            // commandList.setCommandList(list);
-            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList, gameID);
+            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(list, gameID);
             return dataToClient;
         } catch (Exception e) {
             // return new JoinGameCommandResult(false,e.getMessage());

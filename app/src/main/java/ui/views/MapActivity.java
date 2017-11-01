@@ -25,6 +25,7 @@ import java.util.Random;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import clientModel.MyColor;
 import commandData.ClaimRouteCommandData;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
@@ -71,6 +72,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
 
         changeTurnDisplay();
+
+
+        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
 
         presenter = new MapPresenter(this);
 
@@ -271,22 +275,27 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                     case 7:
                         Toast.makeText(getApplicationContext(), "Replacing First Card...", Toast.LENGTH_LONG).show();
                         firstDrawableTrainCard.setImageResource(R.drawable.purpletrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 135");
                         break;
                     case 8:
                         Toast.makeText(getApplicationContext(), "Replacing Second Card...", Toast.LENGTH_LONG).show();
                         secondDrawableTrainCard.setImageResource(R.drawable.greentrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 134");
                         break;
                     case 9:
                         Toast.makeText(getApplicationContext(), "Replacing Third Card...", Toast.LENGTH_LONG).show();
                         thirdDrawableTrainCard.setImageResource(R.drawable.bluetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 133");
                         break;
                     case 10:
                         Toast.makeText(getApplicationContext(), "Replacing Fourth Card...", Toast.LENGTH_LONG).show();
                         fourthDrawableTrainCard.setImageResource(R.drawable.redtrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 132");
                         break;
                     case 11:
                         Toast.makeText(getApplicationContext(), "Replacing Fifth Card...", Toast.LENGTH_LONG).show();
                         fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 131");
                         break;
                     case 12:
                         Toast.makeText(getApplicationContext(), "Advancing Player Turn...", Toast.LENGTH_LONG).show();
@@ -300,10 +309,40 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         changeTurnDisplay();
                         break;
                     case 14:
+                        Toast.makeText(getApplicationContext(), "Adding Card to Hand", Toast.LENGTH_LONG).show();
+                        //CModel.getInstance().getCurrGame().getCurrentPlayer().addResourceCard(new ResourceCard("blue", false));
+                        String previousNum = ((TextView) findViewById(R.id.bluenum)).getText().toString();
+                        previousNum = previousNum.substring(previousNum.length() - 1);
+                        int number = Integer.parseInt(previousNum);
+                        int newNumber = number + 1;
+                        ((TextView) findViewById(R.id.bluenum)).setText("newNumber");
+
+
+                        CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame());
+
+
+
+
                         break;
                     case 15:
-                        break;
+                        Toast.makeText(getApplicationContext(), "removing Cards from Hand", Toast.LENGTH_LONG).show();
 
+                        ((TextView) findViewById(R.id.bluenum)).setText("0");
+                        ((TextView) findViewById(R.id.rednum)).setText("0");
+                        ((TextView) findViewById(R.id.greennum)).setText("0");
+                        ((TextView) findViewById(R.id.orangenum)).setText("0");
+                        ((TextView) findViewById(R.id.yellownum)).setText("0");
+                        ((TextView) findViewById(R.id.purplenum)).setText("0");
+                        ((TextView) findViewById(R.id.blacknum)).setText("0");
+                        ((TextView) findViewById(R.id.whitenum)).setText("0");
+                        ((TextView) findViewById(R.id.rainbownum)).setText("0");
+                        break;
+                    case 16:
+                        break;
+                    case 17:
+                        break;
+                    case 18:
+                        break;
 
                     default:
                         break;
