@@ -77,6 +77,12 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Poller.getInstance().stopPoller();
+    }
+
+    @Override
     public void UpdateList(List<Game> list) {
         if(list != null){
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
