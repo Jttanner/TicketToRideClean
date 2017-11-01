@@ -6,9 +6,12 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
+import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -85,6 +88,18 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         }
         else if(request instanceof GetCmndDataFromServer){
             return encoder.decodeGetCommandListToClient(stream);
+        }
+        else if(request instanceof DrawTrainCardDeckCommandData) {
+            CommandResult result = encoder.decodeHistory(stream);
+            return result;
+        }
+        else if(request instanceof DrawTrainCardFaceUpCommandData) {
+            CommandResult result = encoder.decodeHistory(stream);
+            return result;
+        }
+        else if(request instanceof ClaimRouteCommandData) {
+            CommandResult result = encoder.decodeHistory(stream);
+            return result;
         }
         else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);

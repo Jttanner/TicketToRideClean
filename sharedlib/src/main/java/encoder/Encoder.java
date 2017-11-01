@@ -131,6 +131,9 @@ public class Encoder {
      * @param inputStream The input given back
      * @return CommandResult
      **/
+    public CommandResult decodeHistory(InputStream inputStream) {
+        return new CommandResult(true, "DrawTrainCard");
+    }
     public CommandResult decodeGetGameResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);

@@ -11,10 +11,11 @@ public class DrawDestinationCards implements ClientCommand {
     //How many he decided to keep
     String playerName;
     int numberOfCards;
+    String gameID;
     @Override
     public void execute() {
 
-        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(),CModel.getInstance().getCurrGame().getGameID());
     }
 
     @Override

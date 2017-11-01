@@ -10,13 +10,15 @@ import commandData.DrawTrainCardFaceUpCommandData;
 public class DrawTrainCardFaceUp implements ClientCommand {
     String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
     String resourceCardColor;
+    String gameID;
     public DrawTrainCardFaceUp (DrawTrainCardFaceUpCommandData data) {
         resourceCardColor = data.getResourceCardColor();
+        gameID = data.getGame();
     }
     @Override
     public void execute() {
 
-        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
     }
 
     @Override
