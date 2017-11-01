@@ -76,4 +76,7 @@ public class DestinationCardList {
         return randomNum;
     }
 
+    public List<DestinationCard> getDestinationCardList() {
+        return destinationCardList;
+    }
 }

@@ -9,6 +9,7 @@ public class DestinationCard {
     private City first;
     private City second;
     private int points;
+    private boolean claimed = false;
 
 
     public DestinationCard(City first, City second, int points){
@@ -19,5 +20,13 @@ public class DestinationCard {
 
     public String getDestinationCardString(){
         return first.getCityName() + " " + second.getCityName();
+    }
+
+    public boolean isClaimed() {
+        return claimed;
+    }
+
+    public void setClaimed(boolean claimed) {
+        this.claimed = claimed;
     }
 }

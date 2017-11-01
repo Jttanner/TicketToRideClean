@@ -38,7 +38,7 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
             return result;
         }
         else {
-            //facade.addCommandToList(getGameID(), commandData);
+            facade.addCommandToList(getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
             result = new DrawDestinationCardCommandResult(true, destinationCardList, "Destination card list sent.");
