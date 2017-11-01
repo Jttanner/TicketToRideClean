@@ -82,6 +82,7 @@ public class ServerModel {
     }
 
     boolean startGame(Game game){
+        game.setHasStarted(true);
         commandListMap.put(game.getGameID(),new CommandList());
         return gameList.startGame(game);
     }
