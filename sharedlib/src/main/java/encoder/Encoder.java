@@ -18,8 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
+import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import modeling.CommandList;
@@ -212,6 +215,15 @@ public class Encoder {
                             break;
                         case "drawDestinationCards":
                             command = gson.fromJson(object, DrawDestinationCardCommandData.class);
+                            break;
+                        case "drawTrainCardDeck":
+                            command = gson.fromJson(object, DrawTrainCardDeckCommandData.class);
+                            break;
+                        case "drawTrainCardFaceUp":
+                            command = gson.fromJson(object, DrawTrainCardFaceUpCommandData.class);
+                            break;
+                        case "claimRoute":
+                            command = gson.fromJson(object, ClaimRouteCommandData.class);
                             break;
                         //TODO: PLEASE ADD CASES HERE
                     }
