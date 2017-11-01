@@ -127,7 +127,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        firstDrawableTrainCard.setImageResource(R.drawable.blacktrain);
 
         secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
 
@@ -139,7 +138,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        secondDrawableTrainCard.setImageResource(R.drawable.bluetrain);
 
         thirdDrawableTrainCard = (ImageButton) findViewById(R.id.third_drawable_card);
 
@@ -151,7 +149,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        thirdDrawableTrainCard.setImageResource(R.drawable.orangetrain);
 
         fourthDrawableTrainCard = (ImageButton) findViewById(R.id.fourth_drawable_card);
 
@@ -163,7 +160,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        fourthDrawableTrainCard.setImageResource(R.drawable.purpletrain);
 
         fifthDrawableTrainCard = (ImageButton) findViewById(R.id.fifth_drawable_card);
 
@@ -175,8 +171,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        fifthDrawableTrainCard.setImageResource(R.drawable.wildtrain);
-
         drawableDeck = (ImageButton) findViewById(R.id.drawable_deck);
 
         drawableDeck.setOnClickListener(new View.OnClickListener(){
@@ -187,8 +181,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-        drawableDeck.setImageResource(R.drawable.backcard);
-
+        initializeFaceUpCards();
 
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
@@ -250,14 +243,24 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         //mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "yellow", true, true);
                         break;
                     case 7:
+                        Toast.makeText(getApplicationContext(), "Replacing First Card...", Toast.LENGTH_LONG).show();
+                        firstDrawableTrainCard.setImageResource(R.drawable.purpletrain);
                         break;
                     case 8:
+                        Toast.makeText(getApplicationContext(), "Replacing Second Card...", Toast.LENGTH_LONG).show();
+                        secondDrawableTrainCard.setImageResource(R.drawable.greentrain);
                         break;
                     case 9:
+                        Toast.makeText(getApplicationContext(), "Replacing Third Card...", Toast.LENGTH_LONG).show();
+                        thirdDrawableTrainCard.setImageResource(R.drawable.bluetrain);
                         break;
                     case 10:
+                        Toast.makeText(getApplicationContext(), "Replacing Fourth Card...", Toast.LENGTH_LONG).show();
+                        fourthDrawableTrainCard.setImageResource(R.drawable.redtrain);
                         break;
                     case 11:
+                        Toast.makeText(getApplicationContext(), "Replacing Fifth Card...", Toast.LENGTH_LONG).show();
+                        fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
                         break;
                     case 12:
                         break;
@@ -304,14 +307,30 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
             ((ImageButton) findViewById(drawableCardIndex)).setImageResource(getTrainColorPictureID(card.getMyColor()));
         }
+        drawableDeck.setImageResource(R.drawable.backcard);
     }
 
     private int getTrainColorPictureID(String color){
         switch (color.toLowerCase()){
             case "black":
                 return R.drawable.blacktrain;
+            case "purple":
+                return R.drawable.purpletrain;
+            case "white":
+                return R.drawable.whitetrain;
+            case "blue":
+                return R.drawable.bluetrain;
+            case "yelllow":
+                return R.drawable.yellowtrain;
+            case "green":
+                return R.drawable.greentrain;
+            case "red":
+                return R.drawable.redtrain;
+            case "orange":
+                return R.drawable.orangetrain;
+            default:
+                return R.drawable.wildtrain;
         }
-        return 0;
     }
 
     public void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
