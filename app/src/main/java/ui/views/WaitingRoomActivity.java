@@ -43,7 +43,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 
     @Override
     protected void onDestroy() {
-        Poller.getInstance().stopPoller();
+        //Poller.getInstance().stopPoller();
         //Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
@@ -86,6 +86,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         StartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Poller.getInstance().stopPoller();
                 mPresenter.startGame();
 
             }

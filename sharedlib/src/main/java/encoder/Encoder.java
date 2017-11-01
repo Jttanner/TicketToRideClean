@@ -48,7 +48,6 @@ public class Encoder {
     public void encode(Object obj, OutputStream respBody) throws IOException {
         //System.out.println(obj.getClass());
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
-        //String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
         writer.flush();
     }
