@@ -1,6 +1,7 @@
 package encoder;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import commandData.ChatCommandData;
 import commandData.Command;
@@ -47,29 +49,38 @@ public class Encoder {
      */
     public void encode(Object obj, OutputStream respBody) throws IOException {
         //System.out.println(obj.getClass());
+        OutputStreamWriter writer = new OutputStreamWriter(respBody);;
         if (obj instanceof Command){
             if (((Command)obj).getType().equals("drawDestinationCards")) {
-                OutputStreamWriter writer = new OutputStreamWriter(respBody);
                 ((DrawDestinationCardCommandData) obj).getPlayer().resetResourceCards();
                 writer.write(gson.toJson(obj));
-                writer.flush();
-            } else{
-                OutputStreamWriter writer = new OutputStreamWriter(respBody);
-                writer.write(gson.toJson(obj));
-                writer.flush();
             }
+            else if(obj instanceof  GetCmndListDataToClient) {
+                /*GsonBuilder gb = new GsonBuilder();
+                List<Command> commands = ((GetCmndListDataToClient) obj).getReturnCommandList();
+                if(commands.size() > 0) {
+                    //gb.registerTypeAdapter(commands.getClass(), new CustomDeserializer());
+                    gb.registerTypeAdapter(commands.getClass(), new CustomSerializer());
+                    Gson gson = gb.create();
+                    String json = gson.toJson(commands);
+                    writer.write(json);
+                }
+            }*/
+                writer.write(gson.toJson(obj));
+            }
+            else{
+                writer.write(gson.toJson(obj));
+
+            }
+            writer.flush();
         } else{
-            OutputStreamWriter writer = new OutputStreamWriter(respBody);
             writer.write(gson.toJson(obj));
             writer.flush();
         }
-        /*
-        OutputStreamWriter writer = new OutputStreamWriter(respBody);
-        writer.write(gson.toJson(obj));
-        writer.flush();
-         */
+
 
     }
+
 
     /**
      * Handles the decoding of register result objects,
@@ -184,7 +195,7 @@ public class Encoder {
                 }
                 catch (NullPointerException e){
                     //if we get a null pointer it means there is nothing to get
-                    return new GetCmndListDataToClient(new CommandList(), gameID);
+                    return new GetCmndListDataToClient(new ArrayList<Command>(), gameID);
                 }
                 JsonArray array = cl.get("commandList").getAsJsonArray();
                 for (int i = 0; i < array.size(); i++) {
@@ -205,9 +216,7 @@ public class Encoder {
                         list.add(command);
                 }
             }
-            CommandList commandList = new CommandList();
-            commandList.setCommandList(list);
-            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList, gameID);
+            GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(list, gameID);
             return dataToClient;
         } catch (Exception e) {
             // return new JoinGameCommandResult(false,e.getMessage());

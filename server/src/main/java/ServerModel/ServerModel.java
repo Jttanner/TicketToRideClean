@@ -29,7 +29,7 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
-    private Map<String, CommandList> commandListMap = new HashMap<>();
+    private Map<String, List<Command>> commandListMap = new HashMap<>();
     private DestinationCardList destinationCardList = new DestinationCardList();
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
@@ -84,7 +84,7 @@ public class ServerModel {
 
     boolean startGame(Game game){
         game.setHasStarted(true);
-        commandListMap.put(game.getGameID(),new CommandList());
+        commandListMap.put(game.getGameID(),new ArrayList<Command>());
         return gameList.startGame(game);
     }
 
@@ -134,7 +134,7 @@ public class ServerModel {
         return this.gameList;
     }
 
-    public Map<String, CommandList> getCommandListMap() {
+    public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
 

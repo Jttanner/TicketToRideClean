@@ -97,8 +97,8 @@ public class ServerFacade {
     /**Adds command to the correct commandList
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
-        Map<String, CommandList> commandListMap = serverModel.getCommandListMap();
-        commandListMap.get(gameID).addToList(command);
+        Map<String, List<Command>> commandListMap = serverModel.getCommandListMap();
+        commandListMap.get(gameID).add(command);
 
     }
 

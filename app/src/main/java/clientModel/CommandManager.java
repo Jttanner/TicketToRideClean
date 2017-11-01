@@ -28,9 +28,9 @@ import modeling.Player;
 public class CommandManager {
     private static final String TAG = "CommandManager";
     /**The command map for every game*/
-    private Map<String, CommandList> commandListMap = new HashMap<>();
+    private Map<String, List<Command>> commandListMap = new HashMap<>();
     /**Sets the new commandListMap*/
-    public void updateCommandLists(CommandList commandList,String gameID){
+    public void updateCommandLists(List<Command> commandList,String gameID){
         //if we didnt get a null command list execute them
         if(commandList != null) {
             commandListMap.put(gameID, commandList);
@@ -38,17 +38,16 @@ public class CommandManager {
         }
     }
     /**Executes the commands for the current game*/
-    private void executeCurrCommands(CommandList commandList) {
+    private void executeCurrCommands(List<Command> commandList) {
         Player myPlayer = CModel.getInstance().getUserPlayer();
         //get the current command index. NOTE: This will need to be incremented properly in the model for this to work, use method
         //incrementUsersCommandIndex() in any appropriate method. Ex: toggleGameHasStarted()
         int commandIndex = myPlayer.getCommandIndex();
 
 //            CommandList commandList = this.commandListMap.get(currGame.getGameID());
-        if (commandList.getCommandList().size() > 0) {
-            List<Command> commands = commandList.getCommandList();
-            for (int i = commandIndex; i < commands.size(); i++) {
-                ClientCommand clientCommand = findCommandObject(commands.get(i));
+        if (commandList.size() > 0) {
+            for (int i = commandIndex; i < commandList.size(); i++) {
+                ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     clientCommand.execute();
                     CModel.getInstance().incrementUsersCommandIndex();
@@ -87,7 +86,7 @@ public class CommandManager {
         return  null;
     }
 
-    public CommandList getACommandList(String gameID){
+    public List<Command> getACommandList(String gameID){
         return this.commandListMap.get(gameID);
     }
 }
