@@ -16,11 +16,11 @@
         android:text="@string/startGame"
         android:id="@+id/waitingRoom_StartGame"
         android:layout_weight=".5"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chat Room"
-        android:id="@+id/waitingRoom_Chat_Room"
-        />
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Chat Room"-->
+        <!--android:id="@+id/waitingRoom_Chat_Room"-->
+        <!--/>-->
 
 </LinearLayout>
