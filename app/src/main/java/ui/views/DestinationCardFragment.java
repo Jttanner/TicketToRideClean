@@ -148,6 +148,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 }
                 if(cardsSelected.size() >= 2) {
                     presenter.claimDestinationCards(game, player, cardsSelected);
+                    ((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                     getDialog().dismiss();
                 }
                 else {

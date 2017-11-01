@@ -220,7 +220,7 @@ public class CModel extends Observable {
         notifyObservers(this.threeDestinationCards);
     }
 
-    private int deckSize = 52;
+    private int deckSize = 30;
 
     public int getDeckSize() {
         return deckSize;

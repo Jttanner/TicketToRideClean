@@ -140,7 +140,6 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
 
     @Override
     public void updatePlayerStats() {
-        ((TextView) findViewById(R.id.destination_deck_size)).setText(CModel.getInstance().getDeckSize());
         presenter.setCardNumbers(colorNumMap);
         statusAdapter.setPlayerColumns(presenter.getPlayerColumns());
         statusAdapter.notifyDataSetChanged();
