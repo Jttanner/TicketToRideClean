@@ -2,13 +2,13 @@ package servercomms;
 
 import android.util.Log;
 
-import encoder.Encoder;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import encoder.Encoder;
 
 
 /**
@@ -35,7 +35,6 @@ class ClientCommunicator {
      * @return A result from the server*/
     InputStream send(URL url, Object request, String typeOfRequest) {
         try {
-
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
 
             http.setRequestMethod(typeOfRequest);
@@ -44,7 +43,7 @@ class ClientCommunicator {
 
             //Makes an encoder object to encode the request object into the output stream
             Encoder encoder = new Encoder();
-            Log.d(TAG,"getting outputstream");
+            Log.d(TAG,"getting outputstream" + request.getClass());
             OutputStream respBody = http.getOutputStream();
             encoder.encode(request, respBody); //Sending it into object -> JSON
             respBody.close();
