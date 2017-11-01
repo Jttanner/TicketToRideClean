@@ -93,16 +93,16 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 
             }
         });
-        ChatRoomButton = (Button) findViewById(R.id.waitingRoom_Chat_Room);
-        ChatRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                ChatFragment fragment = new ChatFragment();
-                fragment.show(fm,"chat_fragment");
-
-            }
-        });
+//        ChatRoomButton = (Button) findViewById(R.id.waitingRoom_Chat_Room);
+//        ChatRoomButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager fm = getSupportFragmentManager();
+//                ChatFragment fragment = new ChatFragment();
+//                fragment.show(fm,"chat_fragment");
+//
+//            }
+//        });
 
         playerListView = (ListView) findViewById(R.id.waitingRoom_PlayerList);
         playerListView.setAdapter(playerListAdapter);
