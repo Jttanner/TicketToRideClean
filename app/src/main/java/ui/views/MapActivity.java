@@ -2,6 +2,7 @@ package ui.views;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,11 +14,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
@@ -36,6 +39,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button chatroom;
     private Button gameHistory;
     private Button demo;
+
+    private ImageButton firstDrawableTrainCard;
+    private ImageButton secondDrawableTrainCard;
+    private ImageButton thirdDrawableTrainCard;
+    private ImageButton fourthDrawableTrainCard;
+    private ImageButton fifthDrawableTrainCard;
+    private ImageButton drawableDeck;
+
+
     int counter = 0;
 
 
@@ -104,6 +116,77 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
+        firstDrawableTrainCard = (ImageButton) findViewById(R.id.first_drawable_card);
+
+        firstDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        firstDrawableTrainCard.setImageResource(R.drawable.blacktrain);
+
+        secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
+
+        secondDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        secondDrawableTrainCard.setImageResource(R.drawable.bluetrain);
+
+        thirdDrawableTrainCard = (ImageButton) findViewById(R.id.third_drawable_card);
+
+        thirdDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        thirdDrawableTrainCard.setImageResource(R.drawable.orangetrain);
+
+        fourthDrawableTrainCard = (ImageButton) findViewById(R.id.fourth_drawable_card);
+
+        fourthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        fourthDrawableTrainCard.setImageResource(R.drawable.purpletrain);
+
+        fifthDrawableTrainCard = (ImageButton) findViewById(R.id.fifth_drawable_card);
+
+        fifthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        fifthDrawableTrainCard.setImageResource(R.drawable.wildtrain);
+
+        drawableDeck = (ImageButton) findViewById(R.id.drawable_deck);
+
+        drawableDeck.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        drawableDeck.setImageResource(R.drawable.backcard);
 
 
         demo = (Button) findViewById(R.id.demoButton);
@@ -193,6 +276,24 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         setupView();
+    }
+
+    public void initializeFaceUpCards(){
+        for (int i = 0; i < 5; ++i){
+            
+            switch (i){
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+        }
     }
 
     public void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
