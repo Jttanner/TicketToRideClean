@@ -56,6 +56,10 @@ public class Player implements Comparator<Player> {
         resourceCards.put("White",new ArrayList<ResourceCard>());
     }
 
+    public void resetResourceCards(){
+        resourceCards = null;
+    }
+
     public String getColor() {
         return color;
     }

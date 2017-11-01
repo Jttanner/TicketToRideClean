@@ -38,7 +38,7 @@
     
     <fragment
         android:id="@+id/fragment_pane_one"
-        android:layout_width="100pt"
+        android:layout_width="115pt"
         android:layout_height="match_parent"
         android:name="ui.views.PaneOneFragment"/>
 

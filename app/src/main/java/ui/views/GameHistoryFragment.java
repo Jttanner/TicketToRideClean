@@ -51,6 +51,8 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
 //        testString.add("Game History 11");
 //        testString.add("Game History 12");
 
+        this.setCancelable(false);
+
         presenter = new GameHistoryPresenter(this);
 
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
