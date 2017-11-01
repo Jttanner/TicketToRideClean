@@ -189,7 +189,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
         mRoute2.setTextColor(Color.RED);
         mRoute3.setTextColor(Color.RED);
 
-        Toast.makeText(getAppContext(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
 
         wireUp(destinationCards);
     }
