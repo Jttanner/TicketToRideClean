@@ -9,7 +9,7 @@ import modeling.CommandList;
 
 public class GetCmndListDataToClient extends Command{
 
-    private CommandList returnCommandList;
+    private CommandList returnCommandList = new CommandList();
     private String gameId;
     //takes in a map and wraps it up to send
     public GetCmndListDataToClient(CommandList commandList,String gameID) {

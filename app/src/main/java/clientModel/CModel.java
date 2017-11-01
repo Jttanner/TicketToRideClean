@@ -178,10 +178,17 @@ public class CModel extends Observable {
         Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
-            updateCurrGame();
+            if(this.currGame != null) {
+                Game g = allGames.findGame(this.currGame.getGameID());
+                if (g != null) {
+                    this.currGame = g;
+                }
+            }
             //will notify the gamelist activity of games made/changed
             setChanged();
-            notifyObservers(allGames);
+            GameList gameList = new GameList();
+            gameList.setGames(this.allGames);
+            notifyObservers(gameList);
         }
     }
 
@@ -204,24 +211,21 @@ public class CModel extends Observable {
 
     public void setCurrGame(Game currGame) {
         Log.d(TAG,"Setting current game");
-        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
-        updateCurrGame();
         //set currGame
         this.currGame = currGame;
+        updateCurrGame();
         setChanged();
         notifyObservers(this.currGame);
     }
-
+    /*Replaces curr game in list**/
     private void updateCurrGame(){
+        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
         if(currGame != null) {
             for (Game g : allGames) {
                 if (g.getGameID().equals(currGame.getGameID())) {
                     allGames.remove(g);
                     //add currgame to list
                     allGames.add(currGame);
-                    GameList list = new GameList();
-                    list.setGames(allGames);
-                    setAllGames(list);
                     break;
                 }
             }

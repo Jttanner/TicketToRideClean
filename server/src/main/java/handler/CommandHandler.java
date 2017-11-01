@@ -53,6 +53,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Command cmd = gson.fromJson(reqData, Command.class);
             CommandResult result = null;
             Command commandData = null;
+            System.out.println("Command handler: " + cmd.getType());
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
