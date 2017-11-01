@@ -124,6 +124,23 @@ public class Game {
         }
     }
 
+    public void advancePlayerTurn(){
+        boolean wasToggled = false;
+        for (Player p : players){
+            if (wasToggled){
+                p.toggleMyTurn();
+                return;
+            }
+            if (p.isMyTurn()){
+                p.toggleMyTurn();
+                wasToggled = true;
+                if (p.equals(players.get(players.size() - 1))){
+                    players.get(0).toggleMyTurn();
+                }
+            }
+        }
+    }
+
     /**Gets the a particular player by a given username*/
     public Player getPlayer(String playerName) {
         for(Player player : players){

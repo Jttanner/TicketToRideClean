@@ -142,7 +142,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                     getDialog().dismiss();
                 }
                 else {
-                    Toast.makeText(getAppContext(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
                 }
             }
         });

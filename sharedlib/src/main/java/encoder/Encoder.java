@@ -47,9 +47,28 @@ public class Encoder {
      */
     public void encode(Object obj, OutputStream respBody) throws IOException {
         //System.out.println(obj.getClass());
+        if (obj instanceof Command){
+            if (((Command)obj).getType().equals("drawDestinationCards")) {
+                OutputStreamWriter writer = new OutputStreamWriter(respBody);
+                ((DrawDestinationCardCommandData) obj).getPlayer().resetResourceCards();
+                writer.write(gson.toJson(obj));
+                writer.flush();
+            } else{
+                OutputStreamWriter writer = new OutputStreamWriter(respBody);
+                writer.write(gson.toJson(obj));
+                writer.flush();
+            }
+        } else{
+            OutputStreamWriter writer = new OutputStreamWriter(respBody);
+            writer.write(gson.toJson(obj));
+            writer.flush();
+        }
+        /*
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
         writer.write(gson.toJson(obj));
         writer.flush();
+         */
+
     }
 
     /**

@@ -118,7 +118,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 new Encoder().encode(result,exchange.getResponseBody());
             }
             else if(commandData != null){
-                new Encoder().encode(commandData,exchange.getResponseBody());
+                if (commandData.getType().equals("getCommandList")){
+                    new Encoder().encode(commandData,exchange.getResponseBody());
+                } else{
+                    new Encoder().encode(commandData,exchange.getResponseBody());
+                }
+
             }
             respBody.close();
         }

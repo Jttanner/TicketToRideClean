@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -64,6 +65,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
+
+        changeTurnDisplay();
 
         presenter = new MapPresenter(this);
 
@@ -263,8 +266,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
                         break;
                     case 12:
+                        Toast.makeText(getApplicationContext(), "Advancing Player Turn...", Toast.LENGTH_LONG).show();
+                        //uncomment mock object if necessary as an example
+                        //CModel.getInstance().getCurrGame().getPlayers().add(new Player("dumbo"));
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
                         break;
                     case 13:
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
                         break;
                     case 14:
                         break;
@@ -280,6 +290,22 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         setupView();
+
+
+    }
+
+    public void changeTurnDisplay(){
+        for (Player player : CModel.getInstance().getCurrGame().getPlayers()){
+            if (player.isMyTurn()){
+                ((TextView) findViewById(R.id.current_turn)).setText("Current Turn: " + player.getPlayerName());
+            }
+        }
+    }
+
+    private  void selectDestinationCardsOnStartup(){
+        FragmentManager fm = getSupportFragmentManager();
+        DestinationCardFragment fragment = new DestinationCardFragment();
+        fragment.show(fm, "fragment_destinationcard");
     }
 
     public void initializeFaceUpCards(){
