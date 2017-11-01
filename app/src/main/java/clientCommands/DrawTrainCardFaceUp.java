@@ -16,7 +16,7 @@ public class DrawTrainCardFaceUp implements ClientCommand {
     @Override
     public void execute() {
 
-        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(),CModel.getInstance().getCurrGame().getGameID());
     }
 
     @Override

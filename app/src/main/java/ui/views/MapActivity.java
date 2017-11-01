@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.EdgeEffectCompat;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,11 +22,15 @@ import java.util.Map;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import commandData.ClaimRouteCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.Player;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
@@ -129,10 +134,27 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         }*/
                         break;
                     case 1:
-                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
+                        //COMMAND HISTORY
+                        String color = "GREEN";
+                        String color2 = "RED";
+                        String gameID = CModel.getInstance().getCurrGame().getGameID();
+                        String startCity = "Salt Lake City";
+                        String endCity = "Seoul";
+
+                        DrawTrainCardDeckCommandData X = new DrawTrainCardDeckCommandData(gameID, color);
+                        ServerProxy.getInstance().sendCommand(X);
+
+                        ClaimRouteCommandData Z = new ClaimRouteCommandData(gameID, startCity, endCity);
+                        ServerProxy.getInstance().sendCommand(Z);
+
+                        DrawTrainCardFaceUpCommandData Y = new DrawTrainCardFaceUpCommandData(gameID, color2);
+                        ServerProxy.getInstance().sendCommand(Y);
+
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY", gameID);
+                        //COMMAND HISTORY
                         break;
                     case 2:
-                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING", CModel.getInstance().getCurrGame().getGameID());
                         break;
                     case 3:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
@@ -182,6 +204,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                     case 14:
                         break;
                     case 15:
+
                         break;
 
 

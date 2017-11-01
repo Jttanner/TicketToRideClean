@@ -6,9 +6,13 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
+import clientCommands.DrawTrainCardFaceUp;
+import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -61,10 +65,17 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         Log.d("DoInBackGround", "Entering DoInBackGround");
         Encoder encoder = new Encoder();
         String typeOfRequest = "POST";
-        //connection with the server is here
-        InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
-       // String string = stream.toString();
 
+//        InputStream stream;
+//        if(request instanceof DrawTrainCardDeckCommandData) {
+//            DrawTrainCardDeckCommandData test = (DrawTrainCardDeckCommandData) request;
+//            stream = ClientCommunicator.getInstance().send(urls[0], test, typeOfRequest);
+//        }
+//        else {
+//            stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
+//        }
+
+        InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
         if (request instanceof LoginRequest) { //do we update the view after the it goes to the server and back????
             return encoder.decodeLoginResult(stream);
         }
@@ -86,16 +97,31 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         else if(request instanceof GetCmndDataFromServer){
             return encoder.decodeGetCommandListToClient(stream);
         }
+        else if(request instanceof DrawTrainCardDeckCommandData) {
+            CommandResult name = encoder.decodeHistoryCommand(stream);
+            return name;
+        }
+        else if(request instanceof DrawTrainCardFaceUpCommandData) {
+            CommandResult name2 = encoder.decodeHistoryCommand(stream);
+            return name2;
+        }
+        else if(request instanceof ClaimRouteCommandData) {
+            CommandResult name3 = encoder.decodeHistoryCommand(stream);
+            return name3;
+        }
         else if(request instanceof Command){
             return encoder.decodeCommandResult(stream);
         }
         Log.d(TAG,"Yo things went wack, you gave us the wrong object type in the HttpTask");
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());
+
+
     }
 
     @Override
     protected void onPostExecute(Object result) {//gets us back on the main thread
         Log.d("onPostExecute", "Entering onPostExecute");
+
         ClientFacade facade = ClientFacade.getInstance();
         super.onPostExecute(result);
         if (result instanceof LoginResult) {

@@ -52,6 +52,10 @@ class ClientFacade {
                     CModel.getInstance().toggleGameHasStarted();
                 }
             }
+            else if(result.getMessage().equals("DrawDestinationCard")) {
+                CModel.getInstance().updateCurrGameHistoryList("Test", CModel.getInstance().getCurrGame().getGameID());
+
+            }
             else {
                 Log.d(TAG, "We got a different class then expected");
             }

@@ -106,7 +106,7 @@ public class Poller {
                 execute();
             }
             catch (Exception e){
-                Log.d("here", "login method messed up: " + e.toString());
+                Log.d("Poller", "Command List Messed UP: " + e.toString());
                 e.printStackTrace();
             }
 

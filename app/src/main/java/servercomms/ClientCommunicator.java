@@ -2,12 +2,15 @@ package servercomms;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import commandData.DrawTrainCardDeckCommandData;
 import encoder.Encoder;
 
 
@@ -35,6 +38,35 @@ class ClientCommunicator {
      * @return A result from the server*/
     InputStream send(URL url, Object request, String typeOfRequest) {
         try {
+//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+//            http.setRequestMethod(typeOfRequest);
+//            http.setDoOutput(true);    // There is a request body
+//            http.addRequestProperty("Accept", "application/json");
+//            Encoder encoder = new Encoder();
+//            http.connect();
+//            OutputStream respBody = http.getOutputStream();
+//            if(request instanceof DrawTrainCardDeckCommandData) {
+//                DrawTrainCardDeckCommandData test = (DrawTrainCardDeckCommandData) request;
+//                Log.d(TAG,"getting outputstream" + test.getClass());
+//                Gson gson = new Gson();
+//                String jsonStr = gson.toJson(test);
+//                respBody.write(jsonStr.getBytes());
+//                respBody.flush();
+//                respBody.close();
+//
+//            }
+//            else {
+//
+//                Log.d(TAG,"getting outputstream" + request.getClass());
+//                encoder.encode(request, respBody); //Sending it into object -> JSON
+//                respBody.close();
+//
+//            }
+
+
+
+
+
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
 
             http.setRequestMethod(typeOfRequest);

@@ -25,7 +25,11 @@ public class GameHistoryPresenter implements MVP_GameHistory.GameHistoryPresOps,
     public void update(Observable o, Object arg) {
         if(arg instanceof History) {
             //Call the view and update it with a new game history list
-            myView.get().updateGameHistory(CModel.getInstance().getCurrGame().getGameHistoryList());
+            if (myView != null) {
+                myView.get().updateGameHistory(CModel.getInstance().getCurrGame().getGameHistoryList());
+            }
+            else {
+            }
         }
     }
 

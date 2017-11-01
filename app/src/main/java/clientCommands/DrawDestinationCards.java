@@ -14,7 +14,7 @@ public class DrawDestinationCards implements ClientCommand {
     @Override
     public void execute() {
 
-        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(), CModel.getInstance().getCurrGame().getGameID());
     }
 
     @Override

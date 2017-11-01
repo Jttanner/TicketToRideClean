@@ -46,7 +46,9 @@ public class Encoder {
      * @param respBody The output stream
      */
     public void encode(Object obj, OutputStream respBody) throws IOException {
-        //System.out.println(obj.getClass());
+        System.out.println(obj.getClass());
+
+
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
         writer.write(gson.toJson(obj));
         writer.flush();
@@ -93,10 +95,14 @@ public class Encoder {
             Reader reader = new InputStreamReader(inputStream);
             return gson.fromJson(reader, CommandResult.class);
         } catch (Exception e) {
+            System.out.println("ENCODER: COMMAND RESULT DECODE");
+            e.printStackTrace();
             return new CommandResult(false, e.getMessage());
         }
     }
-
+    public CommandResult decodeHistoryCommand (InputStream inputStream) {
+        return new CommandResult(true, "DrawDestinationCard");
+    }
     public DrawDestinationCardCommandResult decodeDestinationCardResult(InputStream stream) {
         try {
             Reader reader = new InputStreamReader(stream);
