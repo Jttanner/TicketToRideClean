@@ -179,9 +179,9 @@ public class CModel extends Observable {
         return null;
     }
 
-    public void drawResourceCard(ResourceCard card, Game currGame){
+    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
 
-        getUserPlayer().addResourceCard(card);
+        player.addResourceCard(card);
         setChanged();
         notifyObservers(currGame);
 

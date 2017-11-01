@@ -315,8 +315,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         previousNum = previousNum.substring(previousNum.length() - 1);
                         int number = Integer.parseInt(previousNum);
                         int newNumber = number + 1;
-                        ((TextView) findViewById(R.id.bluenum)).setText(newNumber);
-                        CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame());
+                        ((TextView) findViewById(R.id.bluenum)).setText(newNumber + "");
+                        CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), CModel.getInstance().getUserPlayer());
                         break;
                     case 15:
                         Toast.makeText(getApplicationContext(), "removing Cards from Hand", Toast.LENGTH_LONG).show();
@@ -332,6 +332,11 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         ((TextView) findViewById(R.id.rainbownum)).setText("0");
                         break;
                     case 16:
+                        for (Player p : CModel.getInstance().getCurrGame().getPlayers()){
+                            CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), p);
+
+                        }
+
                         break;
                     case 17:
                         break;
