@@ -243,7 +243,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         break;
                     case 3:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
-                        Toast.makeText(getApplicationContext(), "Red Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Client Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
                         CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Las Vegas", "Salt Lake City", "purple", 5), CModel.getInstance().getUserPlayer());
                         // drawClaimedRoute("Las Vegas", "Salt Lake City", "blue", false, false);
                         //mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false, false);
@@ -332,10 +332,14 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         ((TextView) findViewById(R.id.rainbownum)).setText("0");
                         break;
                     case 16:
+                        Player[] testPlayers = new Player[5];
+                        int i = 0;
                         for (Player p : CModel.getInstance().getCurrGame().getPlayers()){
                             CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), p);
-
+                            testPlayers[i] = p;
+                            ++i;
                         }
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Portland", "Salt Lake City", "purple", 5), testPlayers[1]);
 
                         break;
                     case 17:
