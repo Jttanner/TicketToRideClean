@@ -25,12 +25,16 @@ import java.util.Random;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import commandData.ClaimRouteCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.Player;
 import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
@@ -209,10 +213,29 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         }*/
                         break;
                     case 1:
-                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY", CModel.getInstance().getCurrGame().getGameID());
                         break;
                     case 2:
-                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING", CModel.getInstance().getCurrGame().getGameID());
+
+                        //COMMAND HISTORY
+                        String color = "GREEN";
+                        String color2 = "RED";
+                        String gameID = CModel.getInstance().getCurrGame().getGameID();
+                        String startCity = "Salt Lake City";
+                        String endCity = "Seoul";
+
+                        DrawTrainCardDeckCommandData X = new DrawTrainCardDeckCommandData(gameID, color);
+                        ServerProxy.getInstance().sendCommand(X);
+
+                        ClaimRouteCommandData Z = new ClaimRouteCommandData(gameID, startCity, endCity);
+                        ServerProxy.getInstance().sendCommand(Z);
+
+                        DrawTrainCardFaceUpCommandData Y = new DrawTrainCardFaceUpCommandData(gameID, color2);
+                        ServerProxy.getInstance().sendCommand(Y);
+
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY 235 ", gameID);
+                        //COMMAND HISTORY
                         break;
                     case 3:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW

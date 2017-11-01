@@ -25,7 +25,7 @@ public class DrawTrainCardFaceUpCommand extends DrawTrainCardFaceUpCommandData i
         CommandResult result;
 
         //Temporary Implementation. May need to change
-        ServerFacade.getInstance().addCommandToList(drawTrainCardFaceUpCommandData.getGame().getGameID(), drawTrainCardFaceUpCommandData);
+        ServerFacade.getInstance().addCommandToList(drawTrainCardFaceUpCommandData.getGame(), drawTrainCardFaceUpCommandData);
         result = new CommandResult(true);
 
         return result;

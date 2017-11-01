@@ -11,11 +11,11 @@ public class ClaimRouteCommandData extends Command {
     //Data Members
     private String startCity;
     private String endCity;
-    private Game game;
+    private String game;
     private Player player;
 
     //Constructors
-    public ClaimRouteCommandData(Game game, String startCity, String endCity) {
+    public ClaimRouteCommandData(String game, String startCity, String endCity) {
         setType("claimRoute");
         this.game = game;
         this.startCity = startCity;
@@ -25,10 +25,11 @@ public class ClaimRouteCommandData extends Command {
     }
 
     //Getters and Setters
-    public Game getGame() {
+
+    public String getGame() {
         return game;
     }
-    public void setGame(Game game) {
+    public void setGame(String game) {
         this.game = game;
     }
     public String getStartCity() {
