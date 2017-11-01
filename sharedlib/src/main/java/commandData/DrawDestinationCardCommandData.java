@@ -26,6 +26,8 @@ public class DrawDestinationCardCommandData extends Command{
     public DrawDestinationCardCommandData(String gameID, Player player) {
         this.gameID = gameID;
         this.player = player;
+        this.setType("drawDestinationCards");
+        this.setData("");
     }
 
     public String getGameID() {

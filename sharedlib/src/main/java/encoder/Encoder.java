@@ -50,8 +50,24 @@ public class Encoder {
         System.out.println(obj.getClass());
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
         //String string = gson.toJson(obj);
-        writer.write(gson.toJson(obj));
-        writer.flush();
+        if ( obj instanceof Command){
+            switch(((Command) obj).getType() ){
+                case "drawDestinationCards":
+                    obj = (DrawDestinationCardCommandData) obj;
+                    ((DrawDestinationCardCommandData) obj).getPlayer().resetResourceCards();
+                    System.out.println(gson.toJson(obj, DrawDestinationCardCommandData.class));
+                    writer.write(gson.toJson(obj, DrawDestinationCardCommandData.class));
+                    writer.flush();
+                    break;
+                default:
+                    writer.write(gson.toJson(obj));
+                    writer.flush();
+            }
+        } else{
+            writer.write(gson.toJson(obj));
+            writer.flush();
+        }
+
     }
 
     /**
