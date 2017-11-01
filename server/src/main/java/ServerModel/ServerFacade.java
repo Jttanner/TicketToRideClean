@@ -99,6 +99,7 @@ public class ServerFacade {
     public void addCommandToList(String gameID, Command command){
         Map<String, CommandList> commandListMap = serverModel.getCommandListMap();
         commandListMap.get(gameID).addToList(command);
+
     }
 
     public List<DestinationCard> getDestinationCardList() { return serverModel.getDestinationCards(); }
