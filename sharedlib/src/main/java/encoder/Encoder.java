@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
@@ -24,6 +25,7 @@ import commandData.DrawTrainCardFaceUpCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import modeling.CommandList;
+import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.DrawDestinationCardCommandResult;
@@ -128,6 +130,15 @@ public class Encoder {
         }
     }
 
+    public ClaimDestinationCardCommandResult decodeClaimDestinationCardResult(InputStream stream) {
+        try {
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, ClaimDestinationCardCommandResult.class);
+        } catch (Exception e) {
+            return new ClaimDestinationCardCommandResult(false, e.getMessage());
+        }
+    }
+
     /**
      * Handles the decoding of GetGameCommandResult coming from the server
      *
@@ -202,6 +213,9 @@ public class Encoder {
                         case "drawDestinationCards":
                             command = gson.fromJson(object, DrawDestinationCardCommandData.class);
                             break;
+                        case "claimDestinationCards":
+                            command = gson.fromJson(object, ClaimDestinationCardCommandData.class);
+                            break;
                         case "drawTrainCardDeck":
                             command = gson.fromJson(object, DrawTrainCardDeckCommandData.class);
                             break;
@@ -211,6 +225,7 @@ public class Encoder {
                         case "claimRoute":
                             command = gson.fromJson(object, ClaimRouteCommandData.class);
                             break;
+
                         //TODO: PLEASE ADD CASES HERE
                     }
                     if (command != null)
