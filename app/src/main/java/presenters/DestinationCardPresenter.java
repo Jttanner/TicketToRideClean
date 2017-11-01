@@ -3,6 +3,7 @@ package presenters;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -40,7 +41,7 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
-        if(arg instanceof DestinationCard){
+        if(arg instanceof ArrayList){
             List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
             myView.get().giveChosenCards(destinationCards);
         }

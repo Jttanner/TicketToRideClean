@@ -53,6 +53,8 @@ public class CModel extends Observable {
 
     private List<String> chatHistory = new ArrayList<>();
 
+    private List<DestinationCard> threeDestinationCards;
+
     public List<String> getChatHistory() {
         return chatHistory;
     }
@@ -102,10 +104,14 @@ public class CModel extends Observable {
         return currGame;
     }
 
+
+    /*
     public List<DestinationCard> threeDestinationCards(){
         DestinationCardList destinationCardList = new DestinationCardList();
         return destinationCardList.get3Cards();
-    }
+    }*/
+
+
 
     public void UpdateHistory(List<String> history,String gameID){
         for(Game game: allGames){
@@ -179,12 +185,23 @@ public class CModel extends Observable {
         }
     }
 
+    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards){
+        Log.d(TAG,"Setting destination cards");
+        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
+
+        //set currGame
+        this.threeDestinationCards = threeDestinationCards;
+        setChanged();
+        notifyObservers(this.threeDestinationCards);
+    }
+
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game
      *
      * @param currGame The game that was just made
      */
+
     public void setCurrGame(Game currGame) {
         Log.d(TAG,"Setting current game");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
