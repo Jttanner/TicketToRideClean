@@ -79,7 +79,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Poller.getInstance().stopPoller();
+        //Poller.getInstance().stopPoller();
     }
 
     @Override

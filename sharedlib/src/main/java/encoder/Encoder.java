@@ -28,7 +28,6 @@ import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 import result.LoginResult;
 import result.RegisterResult;
-import sun.rmi.runtime.Log;
 
 /**
  * This class handles all encoding(and will have methods for decoding) to and from JSON
@@ -47,7 +46,7 @@ public class Encoder {
      * @param respBody The output stream
      */
     public void encode(Object obj, OutputStream respBody) throws IOException {
-        System.out.println(obj.getClass());
+        //System.out.println(obj.getClass());
         OutputStreamWriter writer = new OutputStreamWriter(respBody);
         //String string = gson.toJson(obj);
         writer.write(gson.toJson(obj));
