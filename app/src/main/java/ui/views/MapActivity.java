@@ -26,6 +26,7 @@ import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import modeling.DestinationCard;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
@@ -280,20 +281,37 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     public void initializeFaceUpCards(){
         for (int i = 0; i < 5; ++i){
-            
+            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().drawCard();
+            int drawableCardIndex = 0;
             switch (i){
                 case 0:
+                    drawableCardIndex = R.id.first_drawable_card;
                     break;
                 case 1:
+                    drawableCardIndex = R.id.second_drawable_card;
                     break;
                 case 2:
+                    drawableCardIndex = R.id.third_drawable_card;
                     break;
                 case 3:
+                    drawableCardIndex = R.id.fourth_drawable_card;
                     break;
                 case 4:
+                    drawableCardIndex = R.id.fifth_drawable_card;
+                    break;
+                default:
                     break;
             }
+            ((ImageButton) findViewById(drawableCardIndex)).setImageResource(getTrainColorPictureID(card.getMyColor()));
         }
+    }
+
+    private int getTrainColorPictureID(String color){
+        switch (color.toLowerCase()){
+            case "black":
+                return R.drawable.blacktrain;
+        }
+        return 0;
     }
 
     public void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
