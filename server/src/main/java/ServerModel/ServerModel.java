@@ -82,10 +82,9 @@ public class ServerModel {
         return gameList.joinGame(user, gameID);
     }
 
-    boolean startGame(Game game){
-        game.setHasStarted(true);
-        commandListMap.put(game.getGameID(),new ArrayList<Command>());
-        return gameList.startGame(game);
+    boolean startGame(String gameID){;
+        commandListMap.put(gameID,new ArrayList<Command>());
+        return gameList.startGame(gameID);
     }
 
     boolean deleteGame(Game game){

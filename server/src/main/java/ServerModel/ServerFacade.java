@@ -81,7 +81,7 @@ public class ServerFacade {
     }
 
 
-    public boolean startGame(Game game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
+    public boolean startGame(String game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
         return serverModel.startGame(game);
     }
 
