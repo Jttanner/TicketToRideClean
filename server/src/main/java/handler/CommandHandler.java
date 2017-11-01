@@ -91,12 +91,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "drawTrainCardDeck":
                     DrawTrainCardDeckCommandData drawTrainCardDeckCommandData = gson.fromJson(reqData, DrawTrainCardDeckCommandData.class);
                     DrawTrainCardDeckCommand drawTrainCardDeckCommand = new DrawTrainCardDeckCommand(drawTrainCardDeckCommandData);
-                    drawTrainCardDeckCommand.execute();
+                    result = drawTrainCardDeckCommand.execute();
                     break;
                 case "drawTrainCardFaceUp":
                     DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = gson.fromJson(reqData,DrawTrainCardFaceUpCommandData.class);
                     DrawTrainCardFaceUpCommand drawTrainCardFaceUpCommand = new DrawTrainCardFaceUpCommand(drawTrainCardFaceUpCommandData);
-                    drawTrainCardFaceUpCommand.execute();
+                    result = drawTrainCardFaceUpCommand.execute();
                     break;
                 case "drawDestinationCards":
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
@@ -113,7 +113,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "claimRoute":
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
-                    claimRouteCommand.execute();
+                    result = claimRouteCommand.execute();
                     break;
                 default:
                     break;

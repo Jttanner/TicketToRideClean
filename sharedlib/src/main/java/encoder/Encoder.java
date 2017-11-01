@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,6 @@ import commandData.DrawDestinationCardCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import modeling.CommandList;
-import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.DrawDestinationCardCommandResult;
@@ -127,15 +125,6 @@ public class Encoder {
         }
     }
 
-    public ClaimDestinationCardCommandResult decodeClaimDestinationCardResult(InputStream stream) {
-        try {
-            Reader reader = new InputStreamReader(stream);
-            return gson.fromJson(reader, ClaimDestinationCardCommandResult.class);
-        } catch (Exception e) {
-            return new ClaimDestinationCardCommandResult(false, e.getMessage());
-        }
-    }
-
     /**
      * Handles the decoding of GetGameCommandResult coming from the server
      *
@@ -189,14 +178,14 @@ public class Encoder {
             if (element.isJsonObject()) {
                 JsonObject wrapper = element.getAsJsonObject();
                 gameID = wrapper.get("gameId").getAsString();
-                JsonObject cl = null;
-                try {
-                    cl = wrapper.get("returnCommandList").getAsJsonObject();
-                }
-                catch (NullPointerException e){
-                    //if we get a null pointer it means there is nothing to get
-                    return new GetCmndListDataToClient(new CommandList(), gameID);
-                }
+//                JsonObject cl = null;
+//                try {
+//                    cl = wrapper.get("returnCommandList").getAsJsonObject();
+//                }
+//                catch (NullPointerException e){
+ //                   //if we get a null pointer it means there is nothing to get
+//                    return new GetCmndListDataToClient(new CommandList(), gameID);
+ //               }
                 JsonArray array = cl.get("commandList").getAsJsonArray();
                 for (int i = 0; i < array.size(); i++) {
                     JsonObject object = array.get(i).getAsJsonObject();
@@ -216,8 +205,8 @@ public class Encoder {
                         list.add(command);
                 }
             }
-            CommandList commandList = new CommandList();
-            commandList.setCommandList(list);
+           // CommandList commandList = new CommandList();
+           // commandList.setCommandList(list);
             GetCmndListDataToClient dataToClient = new GetCmndListDataToClient(commandList, gameID);
             return dataToClient;
         } catch (Exception e) {

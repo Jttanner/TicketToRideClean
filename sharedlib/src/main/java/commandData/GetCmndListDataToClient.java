@@ -1,5 +1,8 @@
 package commandData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modeling.CommandList;
 
 /**
@@ -9,10 +12,10 @@ import modeling.CommandList;
 
 public class GetCmndListDataToClient extends Command{
 
-    private CommandList returnCommandList = new CommandList();
+    private List<Command> returnCommandList = new ArrayList<>();
     private String gameId;
     //takes in a map and wraps it up to send
-    public GetCmndListDataToClient(CommandList commandList,String gameID) {
+    public GetCmndListDataToClient(List<Command> commandList,String gameID) {
         setType("getCommandList");
         this.gameId = gameID;
         returnCommandList = commandList;
@@ -24,11 +27,11 @@ public class GetCmndListDataToClient extends Command{
 //        return commandList;
 //    }
 
-    public CommandList getReturnCommandList() {
+    public List<Command> getReturnCommandList() {
         return returnCommandList;
     }
 
-    public void setReturnCommandList(CommandList returnCommandList) {
+    public void setReturnCommandList(List<Command> returnCommandList) {
         this.returnCommandList = returnCommandList;
     }
 

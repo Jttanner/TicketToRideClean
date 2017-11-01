@@ -81,9 +81,17 @@ public class CModel extends Observable {
 //    }
 
     //Call this when the commands that will update the Game History are executed
-    public void updateCurrGameHistoryList(String history) {
+    public void updateCurrGameHistoryList(String history, String gameID) {
+        for(Game game: allGames){
+            if(game.getGameID().equals(gameID)){
+                game.addToGameHistory(history);
+            }
+        }
+        if(currGame!=null){
+            currGame.addToGameHistory(history);
+        }
 
-        currGame.addToGameHistory(history);
+//        currGame.addToGameHistory(history);
         History observerHistory = new History();
         setChanged();
         notifyObservers(observerHistory);

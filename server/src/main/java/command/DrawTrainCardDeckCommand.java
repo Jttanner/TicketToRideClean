@@ -24,7 +24,7 @@ public class DrawTrainCardDeckCommand extends DrawTrainCardDeckCommandData imple
         CommandResult result;
 
         //Temporary Implementation. May need to change
-        facade.addCommandToList(drawTrainCardDeckCommandData.getGame().getGameID(), drawTrainCardDeckCommandData);
+        facade.addCommandToList(drawTrainCardDeckCommandData.getGame(), drawTrainCardDeckCommandData);
         result = new CommandResult(true);
 
         return result;

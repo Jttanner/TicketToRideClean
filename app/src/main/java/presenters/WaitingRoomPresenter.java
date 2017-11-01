@@ -63,7 +63,7 @@ public class WaitingRoomPresenter implements MVP_WaitingRoom.RequiredPresenterOp
     public void startGame(){
         try {
             //call the async task
-            StartGameCommandData data = new StartGameCommandData(CModel.getInstance().getCurrGame());
+            StartGameCommandData data = new StartGameCommandData(CModel.getInstance().getCurrGame().getGameID());
             ServerProxy.getInstance().sendCommand(data);
         } catch (Exception e) {
             Log.d(TAG, "hi my name is Kwan: " + e.toString());

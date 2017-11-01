@@ -2,8 +2,11 @@ package clientCommands;
 
 import android.util.Log;
 
+import java.util.List;
+
 import clientModel.CModel;
 import clientModel.CommandManager;
+import commandData.Command;
 import modeling.CommandList;
 import modeling.GameCommandMap;
 
@@ -18,11 +21,11 @@ public class SetGameMap implements ClientCommand {
     /**Our GameCommandMap*/
     private GameCommandMap gameCommandMap;
 
-    private CommandList commandList;
+    private List<Command> commandList;
 
     private String gameID;
 
-    public SetGameMap(CommandList gameCommandMap,String gameID){
+    public SetGameMap(List<Command> gameCommandMap, String gameID){
         this.commandList = gameCommandMap;
         this.gameID = gameID;
     }

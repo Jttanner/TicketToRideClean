@@ -6,7 +6,6 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
-import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
@@ -74,9 +73,6 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         }
         else if(request instanceof DrawDestinationCardCommandData) {
             return encoder.decodeDestinationCardResult(stream);
-        }
-        else if(request instanceof ClaimDestinationCardCommandData) {
-            return encoder.decodeClaimDestinationCardResult(stream);
         }
         else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
