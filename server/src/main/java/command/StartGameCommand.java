@@ -34,3 +34,4 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
         return result;
     }
 }
+

@@ -192,15 +192,15 @@ public class Encoder {
             if (element.isJsonObject()) {
                 JsonObject wrapper = element.getAsJsonObject();
                 gameID = wrapper.get("gameId").getAsString();
-                JsonObject cl = null;
-                try {
-                    cl = wrapper.get("returnCommandList").getAsJsonObject();
-                }
-                catch (NullPointerException e){
-                    //if we get a null pointer it means there is nothing to get
-                    return new GetCmndListDataToClient(new ArrayList<Command>(), gameID);
-                }
-                JsonArray array = cl.get("commandList").getAsJsonArray();
+//                JsonObject cl = null;
+//                try {
+//                    cl = wrapper.get("returnCommandList").getAsJsonObject();
+//                }
+//                catch (NullPointerException e){
+//                    //if we get a null pointer it means there is nothing to get
+//                    return new GetCmndListDataToClient(new ArrayList<Command>(), gameID);
+//                }
+                JsonArray array = wrapper.get("returnCommandList").getAsJsonArray();
                 for (int i = 0; i < array.size(); i++) {
                     JsonObject object = array.get(i).getAsJsonObject();
                     switch (object.get("type").getAsString()) {
