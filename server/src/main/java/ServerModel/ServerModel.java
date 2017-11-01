@@ -13,6 +13,7 @@ import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -142,17 +143,21 @@ public class ServerModel {
         return destinationCardList.get3Cards();
     }
 
-    public void distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
         List<DestinationCard> claimedCards = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
             if (isClaimed) {
                  claimedCards.add(commandData.getClaimDestinationCards().get(i));
             }
-            else {
+            else if(!isClaimed){
                 destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
             }
         }
-        commandData.getPlayer().addDestinationCard(claimedCards);
+        String playerID = commandData.getPlayerID();
+        Game currGame = gameList.findGame(commandData.getGameID());
+        Player currPlayer = currGame.getPlayer(playerID);
+        currPlayer.addDestinationCard(claimedCards);
+        return claimedCards;
     }
 }

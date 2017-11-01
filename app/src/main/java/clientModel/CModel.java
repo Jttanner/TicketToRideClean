@@ -54,6 +54,7 @@ public class CModel extends Observable {
     private List<String> chatHistory = new ArrayList<>();
 
     private List<DestinationCard> threeDestinationCards;
+    private List<DestinationCard> claimedDestinationCards;
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -202,6 +203,16 @@ public class CModel extends Observable {
         notifyObservers(this.threeDestinationCards);
     }
 
+    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
+        Log.d(TAG, "Setting claimed destination cards");
+        this.claimedDestinationCards = claimedDestinationCards;
+        currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
+        //player.addDestinationCard(claimedDestinationCards);
+        setChanged();
+        notifyObservers(this.currGame);
+        //setChanged();
+        //notifyObservers(this.claimedDestinationCards);
+    }
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game

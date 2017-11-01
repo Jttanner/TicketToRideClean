@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 import command.AddChatCommand;
+import command.ClaimDestinationCardCommand;
 import command.ClaimRouteCommand;
 import command.CreateGameCommand;
 import command.DrawDestinationCardCommand;
@@ -20,6 +21,7 @@ import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
@@ -100,6 +102,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
                     DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
                     result = drawDestinationCardCommand.execute();
+                    break;
+                case "claimDestinationCards":
+                    ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(reqData,ClaimDestinationCardCommandData.class);
+                    ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
+                    result = claimDestinationCardCommand.execute();
                     break;
                     // drawTrainCardDeckCommand = new AddChatCommand(chatCommandData);
                     //addChatCommand.execute();

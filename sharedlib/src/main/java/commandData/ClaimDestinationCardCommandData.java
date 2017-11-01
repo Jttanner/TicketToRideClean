@@ -12,23 +12,23 @@ import modeling.Player;
 public class ClaimDestinationCardCommandData extends Command{
 
     private String gameID;
-    private Player player;
+    private String playerID;
     private List<DestinationCard> claimDestinationCards;
 
-    public Player getPlayer() {
-        return player;
+    public String getPlayerID() {
+        return playerID;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
 
     public ClaimDestinationCardCommandData() {
     }
 
-    public ClaimDestinationCardCommandData(String gameID, Player player, List<DestinationCard> claimDestinationCards) {
+    public ClaimDestinationCardCommandData(String gameID, String playerID, List<DestinationCard> claimDestinationCards) {
         this.gameID = gameID;
-        this.player = player;
+        this.playerID = playerID;
         this.claimDestinationCards = claimDestinationCards;
         this.setType("claimDestinationCards");
     }

@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +22,7 @@ import commandData.DrawDestinationCardCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import modeling.CommandList;
+import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 import result.CreateGameCommandResult;
 import result.DrawDestinationCardCommandResult;
@@ -50,7 +52,7 @@ public class Encoder {
         if (obj instanceof Command){
             if (((Command)obj).getType().equals("drawDestinationCards")) {
                 OutputStreamWriter writer = new OutputStreamWriter(respBody);
-                ((DrawDestinationCardCommandData) obj).getPlayer().resetResourceCards();
+                //((DrawDestinationCardCommandData) obj).getPlayer().resetResourceCards();
                 writer.write(gson.toJson(obj));
                 writer.flush();
             } else{
@@ -122,6 +124,15 @@ public class Encoder {
             return gson.fromJson(reader, DrawDestinationCardCommandResult.class);
         } catch (Exception e) {
             return new DrawDestinationCardCommandResult(false, e.getMessage());
+        }
+    }
+
+    public ClaimDestinationCardCommandResult decodeClaimDestinationCardResult(InputStream stream) {
+        try {
+            Reader reader = new InputStreamReader(stream);
+            return gson.fromJson(reader, ClaimDestinationCardCommandResult.class);
+        } catch (Exception e) {
+            return new ClaimDestinationCardCommandResult(false, e.getMessage());
         }
     }
 

@@ -6,6 +6,7 @@ import ServerModel.ServerFacade;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import modeling.DestinationCard;
+import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 
 /**
@@ -25,9 +26,9 @@ public class ClaimDestinationCardCommand extends ClaimDestinationCardCommandData
     @Override
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
-        List<DestinationCard> destinationCardList = commandData.getClaimDestinationCards();
+        List<DestinationCard> claimedDestinationCards = facade.distributeUsedDestinationCards(commandData);
         CommandResult result;
-        if(destinationCardList == null) {
+        if(claimedDestinationCards == null) {
             //facade.addCommandToList(facade.getGame().getGameID(),commandData);
             result = new CommandResult(false, "failed");
             setType("claimDestinationCards");
@@ -38,7 +39,7 @@ public class ClaimDestinationCardCommand extends ClaimDestinationCardCommandData
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
             facade.distributeUsedDestinationCards(commandData);
-            result = new CommandResult(true, "Destination Cards given and unchosen cards restored to deck.");
+            result = new ClaimDestinationCardCommandResult(true, claimedDestinationCards, "Destination Cards given and unchosen cards restored to deck.");
             setType("claimDestinationCards");
             return result;
         }

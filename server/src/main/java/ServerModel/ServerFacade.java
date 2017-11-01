@@ -104,7 +104,7 @@ public class ServerFacade {
 
     public List<DestinationCard> getDestinationCardList() { return serverModel.getDestinationCards(); }
 
-    public void distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
-        serverModel.distributeUsedDestinationCards(commandData);
+    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+        return serverModel.distributeUsedDestinationCards(commandData);
     }
 }
