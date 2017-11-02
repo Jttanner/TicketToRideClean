@@ -73,9 +73,9 @@ public class GameList {
 //        Game serverGame = games.find
         //int minPlayersNeeded = 2;
         //TODO uncomment this when neeeded, keeping it commented right now for testing purposes
-        if(false){
+        //if(false){
         //if(serverGame.equals(game)){
-        //if(serverGame.getGameID().equals(gameID)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
+        if(serverGame.getGameID().equals(gameID)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
             serverGame.setHasStarted(true);
             gamesStarted.add(serverGame);
             games.remove(serverGame);
