@@ -194,9 +194,12 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
 
-        mRoute1.setText(destinationCards.get(0).getDestinationCardString());
-        mRoute2.setText(destinationCards.get(1).getDestinationCardString());
-        mRoute3.setText(destinationCards.get(2).getDestinationCardString());
+//        mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+//        mRoute2.setText(destinationCards.get(1).getDestinationCardString());
+//        mRoute3.setText(destinationCards.get(2).getDestinationCardString());
+        mRoute1.setText("Hi my name is Kwan");
+        mRoute2.setText("What is your name?");
+        mRoute3.setText("Nice to meet you!");
         mRoute1.setTextColor(Color.RED);
         mRoute2.setTextColor(Color.RED);
         mRoute3.setTextColor(Color.RED);

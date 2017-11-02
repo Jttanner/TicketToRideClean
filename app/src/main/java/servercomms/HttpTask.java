@@ -20,6 +20,7 @@ import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
+import encoder.Encoder;
 
 /**
  * Task which does a register or login request. Calls the proxy server which calls the server.

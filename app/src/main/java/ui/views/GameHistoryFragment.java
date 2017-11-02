@@ -31,25 +31,12 @@ import teamjapannumbahone.tickettoride.R;
 public class GameHistoryFragment extends DialogFragment implements MVP_GameHistory.GameHistoryViewOps {
     private RecyclerView recyclerView;
     private GameHistoryAdapter adapter;
-    private ArrayList<String> testString = new ArrayList<>();
     private MVP_GameHistory.GameHistoryPresOps presenter;
 
     public GameHistoryFragment(){
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        testString.add("Game History");
-//        testString.add("Game History 2");
-//        testString.add("Game History 3");
-//        testString.add("Game History 4");
-//        testString.add("Game History 5");
-//        testString.add("Game History 6");
-//        testString.add("Game History 7");
-//        testString.add("Game History 88");
-//        testString.add("Game History 9");
-//        testString.add("Game History 10");
-//        testString.add("Game History 11");
-//        testString.add("Game History 12");
 
         //this.setCancelable(false);
 
@@ -63,7 +50,6 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Set up Adapter
         adapter = new GameHistoryAdapter(CModel.getInstance().getCurrGame().getGameHistoryList(), getContext());
-        //adapter = new GameHistoryAdapter(testString, getContext());
         recyclerView.setAdapter(adapter);
         return v;
     }
