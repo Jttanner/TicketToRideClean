@@ -14,7 +14,11 @@
         app:extraInformation="My extra information"
         android:id="@+id/player_stats"/>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/current_turn"
+        android:text="Current Turn: "/>
 
     <Button
         android:layout_width="wrap_content"
@@ -33,6 +37,29 @@
         android:layout_height="wrap_content"
         android:id="@+id/destinationCardButton"
         android:text="Destination Cards"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dest Deck size: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/destination_deck_size"
+            android:text="30"/>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/num_cards_in_deck"
+        android:text="Cards in Deck: "/>
 
     <ImageButton
         android:layout_width="200px"

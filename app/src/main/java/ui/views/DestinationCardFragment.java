@@ -129,20 +129,30 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                     cardsSelected.add(cards.get(0));
                     cards.get(0).setClaimed(true);
                 }
+                else if (mRoute1.getCurrentTextColor() == Color.RED) {
+                    cardsSelected.add(cards.get(0));
+                }
                 if(mRoute2.getCurrentTextColor() == Color.GREEN) {
                     cardsSelected.add(cards.get(1));
                     cards.get(1).setClaimed(true);
+                }
+                else if (mRoute2.getCurrentTextColor() == Color.RED) {
+                    cardsSelected.add(cards.get(1));
                 }
                 if(mRoute3.getCurrentTextColor() == Color.GREEN) {
                     cardsSelected.add(cards.get(2));
                     cards.get(2).setClaimed(true);
                 }
+                else if (mRoute3.getCurrentTextColor() == Color.RED) {
+                    cardsSelected.add(cards.get(2));
+                }
                 if(cardsSelected.size() >= 2) {
                     presenter.claimDestinationCards(game, player, cardsSelected);
+                    ((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                     getDialog().dismiss();
                 }
                 else {
-                    Toast.makeText(getAppContext(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
                 }
             }
         });

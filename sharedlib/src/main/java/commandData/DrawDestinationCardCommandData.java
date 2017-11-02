@@ -10,22 +10,23 @@ import modeling.Player;
 public class DrawDestinationCardCommandData extends Command{
 
     private String gameID;
-    private Player player;
+    private String playerID;
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public DrawDestinationCardCommandData() {
     }
 
-    public DrawDestinationCardCommandData(String gameID, Player player) {
+    public String getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
+    }
+
+    public DrawDestinationCardCommandData(String gameID, String playerID) {
         this.gameID = gameID;
-        this.player = player;
+        this.playerID = playerID;
         this.setType("drawDestinationCards");
         this.setData("");
     }

@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
+import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
@@ -74,6 +75,9 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         else if(request instanceof DrawDestinationCardCommandData) {
             return encoder.decodeDestinationCardResult(stream);
         }
+        else if(request instanceof ClaimDestinationCardCommandData) {
+            return encoder.decodeClaimDestinationCardResult(stream);
+        }
         else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
         }
@@ -87,7 +91,8 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
             return encoder.decodeGetCommandListToClient(stream);
         }
         else if(request instanceof Command){
-            return encoder.decodeCommandResult(stream);
+            CommandResult result = encoder.decodeCommandResult(stream);
+            return result;
         }
         Log.d(TAG,"Yo things went wack, you gave us the wrong object type in the HttpTask");
         return new ResultObject(false, "Given incorrect object of type: " + request.getClass());

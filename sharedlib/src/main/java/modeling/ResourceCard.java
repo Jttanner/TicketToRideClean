@@ -17,6 +17,9 @@ public class ResourceCard {
     ResourceCard(String myColor) {
         this.myColor = myColor;
     }
+    public ResourceCard(String myColor, boolean yay) {
+        this.myColor = myColor;
+    }
 
     public String getMyColor() {
         return myColor;

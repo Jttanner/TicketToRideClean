@@ -1,26 +1,24 @@
 package commandData;
 
-import modeling.Game;
-
 /**
  * Created by jontt on 10/9/2017.
  */
 
 public class StartGameCommandData extends Command {
-    private Game game;
+    private String gameID;
 
-    public StartGameCommandData(Game game){
+    public StartGameCommandData(String game){
         setType("startGame");
-        this.game = game;
+        this.gameID = game;
     }
     public StartGameCommandData(){
 
     }
-    public Game getGame() {
-        return game;
+    public String getGame() {
+        return gameID;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(String game) {
+        this.gameID = game;
     }
 }

@@ -15,6 +15,7 @@ import modeling.Game;
 import modeling.GameList;
 import modeling.History;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.Route;
 import modeling.RouteList;
 import modeling.TrainCarList;
@@ -54,6 +55,7 @@ public class CModel extends Observable {
     private List<String> chatHistory = new ArrayList<>();
 
     private List<DestinationCard> threeDestinationCards;
+    private List<DestinationCard> claimedDestinationCards;
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -80,9 +82,17 @@ public class CModel extends Observable {
 //    }
 
     //Call this when the commands that will update the Game History are executed
-    public void updateCurrGameHistoryList(String history) {
+    public void updateCurrGameHistoryList(String history, String gameID) {
+        for(Game game: allGames){
+            if(game.getGameID().equals(gameID)){
+                game.addToGameHistory(history);
+            }
+        }
+        if(currGame!=null){
+            currGame.addToGameHistory(history);
+        }
 
-        currGame.addToGameHistory(history);
+//        currGame.addToGameHistory(history);
         History observerHistory = new History();
         setChanged();
         notifyObservers(observerHistory);
@@ -169,6 +179,14 @@ public class CModel extends Observable {
         return null;
     }
 
+    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
+
+        player.addResourceCard(card);
+        setChanged();
+        notifyObservers(currGame);
+
+    }
+
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList
      *
@@ -202,6 +220,28 @@ public class CModel extends Observable {
         notifyObservers(this.threeDestinationCards);
     }
 
+    private int deckSize = 30;
+
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    public void setDeckSize(int deckSize) {
+        this.deckSize = deckSize;
+    }
+
+    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards, int deckSize) {
+        Log.d(TAG, "Setting claimed destination cards");
+        this.claimedDestinationCards = claimedDestinationCards;
+        currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
+
+        this.deckSize = deckSize;
+        //player.addDestinationCard(claimedDestinationCards);
+        setChanged();
+        notifyObservers(this.currGame);
+        //setChanged();
+        //notifyObservers(this.claimedDestinationCards);
+    }
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game
@@ -274,7 +314,9 @@ public class CModel extends Observable {
 
     @Override
     public void notifyObservers(Object arg) {
-        Log.d(TAG, "Notifying observers: sending class " + arg.getClass().toString());
+        if (arg != null){
+            Log.d(TAG, "Notifying observers: sending class " + arg.getClass().toString());
+        }
         super.notifyObservers(arg);
     }
 

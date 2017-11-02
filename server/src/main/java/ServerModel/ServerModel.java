@@ -13,6 +13,7 @@ import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -29,7 +30,7 @@ public class ServerModel {
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     private Map<String, Game> games = new HashMap<>(); //Key=gameID
-    private Map<String, CommandList> commandListMap = new HashMap<>();
+    private Map<String, List<Command>> commandListMap = new HashMap<>();
     private DestinationCardList destinationCardList = new DestinationCardList();
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
@@ -82,9 +83,9 @@ public class ServerModel {
         return gameList.joinGame(user, gameID);
     }
 
-    boolean startGame(Game game){
-        commandListMap.put(game.getGameID(),new CommandList());
-        return gameList.startGame(game);
+    boolean startGame(String gameID){;
+        commandListMap.put(gameID,new ArrayList<Command>());
+        return gameList.startGame(gameID);
     }
 
     boolean deleteGame(Game game){
@@ -133,7 +134,7 @@ public class ServerModel {
         return this.gameList;
     }
 
-    public Map<String, CommandList> getCommandListMap() {
+    public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
 
@@ -141,17 +142,21 @@ public class ServerModel {
         return destinationCardList.get3Cards();
     }
 
-    public void distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
         List<DestinationCard> claimedCards = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
             if (isClaimed) {
                  claimedCards.add(commandData.getClaimDestinationCards().get(i));
             }
-            else {
+            else if(!isClaimed){
                 destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
             }
         }
-        commandData.getPlayer().addDestinationCard(claimedCards);
+        String playerID = commandData.getPlayerID();
+        Game currGame = gameList.findGame(commandData.getGameID());
+        Player currPlayer = currGame.getPlayer(playerID);
+        currPlayer.addDestinationCard(claimedCards);
+        return claimedCards;
     }
 }

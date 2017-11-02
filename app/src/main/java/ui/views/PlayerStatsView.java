@@ -15,6 +15,7 @@ import java.util.Map;
 
 import Adapters.StatusAdapter;
 import MVP_coms_classes.MVP_PlayerStats;
+import clientModel.CModel;
 import clientModel.MyColor;
 import presenters.PlayerStatsPresenter;
 import teamjapannumbahone.tickettoride.R;

@@ -56,10 +56,6 @@ public class Player implements Comparator<Player> {
         resourceCards.put("White",new ArrayList<ResourceCard>());
     }
 
-    public void resetResourceCards(){
-        resourceCards = null;
-    }
-
     public String getColor() {
         return color;
     }
@@ -107,7 +103,7 @@ public class Player implements Comparator<Player> {
     public String toString() {
         //I know..its ugly, just a quick fix
         //String.format()
-        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + trainCarList.getNumOfCars() + "\t\t\t\t\t" + getNumOfResourceCardsTotal() + "\t\t\t\t\t" + routes.size() + "\t";
+        return playerName + "\t\t\t" + points + "\t\t\t\t\t" + trainCarList.getNumOfCars() + "\t\t\t\t\t" + getNumOfResourceCardsTotal() + "\t\t\t\t\t" + destinationCards.size() + "\t";
     }
 
     @Override
@@ -136,6 +132,8 @@ public class Player implements Comparator<Player> {
         return resourceCards;
     }
     /**Gets the list of the appropriate color*/
+
+
     public List<ResourceCard> getResourceColorList(String color){
         return Collections.unmodifiableList(resourceCards.get(color));
     }

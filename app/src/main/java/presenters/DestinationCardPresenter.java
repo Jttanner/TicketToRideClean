@@ -33,13 +33,13 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     public void getDestinationCards(Game game, Player player) {
 
         //if we didnt find the user, add him in the server
-        DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player);
+        DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player.getPlayerName());
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "get3DestinationCards");
     }
 
     public void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards) {
-        ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player, destinationCards);
+        ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player.getPlayerName(), destinationCards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
     }

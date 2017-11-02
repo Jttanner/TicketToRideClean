@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,12 +25,17 @@ import java.util.Random;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import clientModel.MyColor;
+import commandData.ClaimRouteCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.Player;
 import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
@@ -64,6 +70,11 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
+
+        changeTurnDisplay();
+
+
+        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
 
         presenter = new MapPresenter(this);
 
@@ -206,14 +217,33 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         }*/
                         break;
                     case 1:
-                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY");
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY", CModel.getInstance().getCurrGame().getGameID());
                         break;
                     case 2:
-                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING");
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING", CModel.getInstance().getCurrGame().getGameID());
+
+                        //COMMAND HISTORY
+                        String color = "GREEN";
+                        String color2 = "RED";
+                        String gameID = CModel.getInstance().getCurrGame().getGameID();
+                        String startCity = "Salt Lake City";
+                        String endCity = "Seoul";
+
+                        DrawTrainCardDeckCommandData X = new DrawTrainCardDeckCommandData(gameID, color);
+                        ServerProxy.getInstance().sendCommand(X);
+
+                        ClaimRouteCommandData Z = new ClaimRouteCommandData(gameID, startCity, endCity);
+                        ServerProxy.getInstance().sendCommand(Z);
+
+                        DrawTrainCardFaceUpCommandData Y = new DrawTrainCardFaceUpCommandData(gameID, color2);
+                        ServerProxy.getInstance().sendCommand(Y);
+
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY 235 ", gameID);
+                        //COMMAND HISTORY
                         break;
                     case 3:
                         //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
-                        Toast.makeText(getApplicationContext(), "Red Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Client Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
                         CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Las Vegas", "Salt Lake City", "purple", 5), CModel.getInstance().getUserPlayer());
                         // drawClaimedRoute("Las Vegas", "Salt Lake City", "blue", false, false);
                         //mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false, false);
@@ -245,32 +275,77 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                     case 7:
                         Toast.makeText(getApplicationContext(), "Replacing First Card...", Toast.LENGTH_LONG).show();
                         firstDrawableTrainCard.setImageResource(R.drawable.purpletrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 135");
                         break;
                     case 8:
                         Toast.makeText(getApplicationContext(), "Replacing Second Card...", Toast.LENGTH_LONG).show();
                         secondDrawableTrainCard.setImageResource(R.drawable.greentrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 134");
                         break;
                     case 9:
                         Toast.makeText(getApplicationContext(), "Replacing Third Card...", Toast.LENGTH_LONG).show();
                         thirdDrawableTrainCard.setImageResource(R.drawable.bluetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 133");
                         break;
                     case 10:
                         Toast.makeText(getApplicationContext(), "Replacing Fourth Card...", Toast.LENGTH_LONG).show();
                         fourthDrawableTrainCard.setImageResource(R.drawable.redtrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 132");
                         break;
                     case 11:
                         Toast.makeText(getApplicationContext(), "Replacing Fifth Card...", Toast.LENGTH_LONG).show();
                         fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 131");
                         break;
                     case 12:
+                        Toast.makeText(getApplicationContext(), "Advancing Player Turn...", Toast.LENGTH_LONG).show();
+                        //uncomment mock object if necessary as an example
+                        //CModel.getInstance().getCurrGame().getPlayers().add(new Player("dumbo"));
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
                         break;
                     case 13:
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
                         break;
                     case 14:
+                        Toast.makeText(getApplicationContext(), "Adding Card to Hand", Toast.LENGTH_LONG).show();
+                        //CModel.getInstance().getCurrGame().getCurrentPlayer().addResourceCard(new ResourceCard("blue", false));
+                        String previousNum = ((TextView) findViewById(R.id.bluenum)).getText().toString();
+                        previousNum = previousNum.substring(previousNum.length() - 1);
+                        int number = Integer.parseInt(previousNum);
+                        int newNumber = number + 1;
+                        ((TextView) findViewById(R.id.bluenum)).setText(newNumber + "");
+                        CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), CModel.getInstance().getUserPlayer());
                         break;
                     case 15:
-                        break;
+                        Toast.makeText(getApplicationContext(), "removing Cards from Hand", Toast.LENGTH_LONG).show();
 
+                        ((TextView) findViewById(R.id.bluenum)).setText("0");
+                        ((TextView) findViewById(R.id.rednum)).setText("0");
+                        ((TextView) findViewById(R.id.greennum)).setText("0");
+                        ((TextView) findViewById(R.id.orangenum)).setText("0");
+                        ((TextView) findViewById(R.id.yellownum)).setText("0");
+                        ((TextView) findViewById(R.id.purplenum)).setText("0");
+                        ((TextView) findViewById(R.id.blacknum)).setText("0");
+                        ((TextView) findViewById(R.id.whitenum)).setText("0");
+                        ((TextView) findViewById(R.id.rainbownum)).setText("0");
+                        break;
+                    case 16:
+                        Player[] testPlayers = new Player[5];
+                        int i = 0;
+                        for (Player p : CModel.getInstance().getCurrGame().getPlayers()){
+                            CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), p);
+                            testPlayers[i] = p;
+                            ++i;
+                        }
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Portland", "Salt Lake City", "purple", 5), testPlayers[1]);
+
+                        break;
+                    case 17:
+                        break;
+                    case 18:
+                        break;
 
                     default:
                         break;
@@ -280,6 +355,22 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         setupView();
+
+
+    }
+
+    public void changeTurnDisplay(){
+        for (Player player : CModel.getInstance().getCurrGame().getPlayers()){
+            if (player.isMyTurn()){
+                ((TextView) findViewById(R.id.current_turn)).setText("Current Turn: " + player.getPlayerName());
+            }
+        }
+    }
+
+    private  void selectDestinationCardsOnStartup(){
+        FragmentManager fm = getSupportFragmentManager();
+        DestinationCardFragment fragment = new DestinationCardFragment();
+        fragment.show(fm, "fragment_destinationcard");
     }
 
     public void initializeFaceUpCards(){
