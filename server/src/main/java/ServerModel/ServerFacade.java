@@ -83,7 +83,12 @@ public class ServerFacade {
 
 
     public void startGame(String game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
-        serverModel.getGames().findGame(game).setHasStarted(true);
+        for(Game thisgame : serverModel.getGames().getGames()){
+            if(thisgame.getGameID().equals(game)){
+                thisgame.setHasStarted(true);
+            }
+
+        }
     }
 
 
