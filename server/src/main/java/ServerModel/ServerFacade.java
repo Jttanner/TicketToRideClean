@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,8 @@ public class ServerFacade {
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
         Map<String, List<Command>> commandListMap = serverModel.getCommandListMap();
+        if(!commandListMap.containsKey(gameID))
+            commandListMap.put(gameID, new ArrayList<Command>());
         commandListMap.get(gameID).add(command);
 
     }

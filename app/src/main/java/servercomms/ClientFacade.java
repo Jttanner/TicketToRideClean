@@ -57,7 +57,7 @@ class ClientFacade {
             }
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {
-                    CModel.getInstance().toggleGameHasStarted();
+                   // CModel.getInstance().toggleGameHasStarted();
                 }
             }
             else {
