@@ -22,6 +22,7 @@ import modeling.Route;
 import modeling.RouteList;
 import modeling.TrainCarList;
 import modeling.User;
+import poller.Poller;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -150,6 +151,7 @@ public class CModel extends Observable {
     }
     /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
+        Poller.getInstance().stopPoller();
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
         this.currGame.setHasStarted(!this.currGame.isHasStarted());
         for(Game game : allGames){
