@@ -9,6 +9,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import modeling.City;
+import modeling.CityList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
@@ -37,6 +39,10 @@ public class CModel extends Observable {
      * The user associated with this client model
      */
     private User myUser;
+
+
+
+
     /**
      * The list of games being played or waiting to be played
      */

@@ -63,6 +63,8 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
 
         View v = inflater.inflate(R.layout.fragment_destinationcard, container, false);
 
+
+        this.setCancelable(false);
         setUp(v);
         Log.d(TAG, "Returning View and exiting the method");
         return v;

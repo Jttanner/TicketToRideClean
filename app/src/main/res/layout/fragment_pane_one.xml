@@ -61,41 +61,55 @@
         android:id="@+id/num_cards_in_deck"
         android:text="Cards in Deck: "/>
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/first_drawable_card"
-        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/second_drawable_card"
-        />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="200px"
+                android:layout_height="150px"
+                android:id="@+id/first_drawable_card"
+                />
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/third_drawable_card"
-        />
+            <ImageButton
+                android:layout_width="200px"
+                android:layout_height="150px"
+                android:id="@+id/second_drawable_card"
+                />
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/fourth_drawable_card"
-        />
+            <ImageButton
+                android:layout_width="200px"
+                android:layout_height="150px"
+                android:id="@+id/third_drawable_card"
+                />
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/fifth_drawable_card"
-        />
+            <ImageButton
+                android:layout_width="200px"
+                android:layout_height="150px"
+                android:id="@+id/fourth_drawable_card"
+                />
 
-    <ImageButton
-        android:layout_width="200px"
-        android:layout_height="150px"
-        android:id="@+id/drawable_deck"
-        />
+            <ImageButton
+                android:layout_width="200px"
+                android:layout_height="150px"
+                android:id="@+id/fifth_drawable_card"
+                />
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="200px"
+            android:layout_height="150px"
+            android:id="@+id/drawable_deck"
+            />
+    </LinearLayout>
+
+
+
+
 
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->

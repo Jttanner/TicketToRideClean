@@ -38,6 +38,10 @@ import presenters.MapPresenter;
 import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
+/**
+ * Activity which is the base for the game itself.  Holds the gameboard as the main view, with a sliding drawer for
+ * to hold data relevant to the game for each player. Other views relevant to the game stem from this.
+ */
 public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
@@ -58,6 +62,11 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     int counter = 0;
 
 
+    /**
+     * If we leave this activity, we want to stop the poller which polls the command list.
+     * @pre Our instance of Poller is running a GetCommandsPoll
+     * @post Our instance of Poller is no longer running a GetCommandsPoll
+     */
     @Override
     protected void onDestroy() {
         //destroy poller
@@ -65,6 +74,14 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         super.onDestroy();
     }
 
+    /**
+     * Initializes the game by setting up the view for the game.
+     * Also sets up demo button functions which updates the views appopriately.
+     *
+     * @param savedInstanceState could be used to save a state, not implemented yet.
+     * @pre Game has just started
+     * @post Game and view for the Game are both completely initialized
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,7 +259,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                         //COMMAND HISTORY
                         break;
                     case 3:
-                        //TODO: FIX IT SO THAT IT WILL WORK WHEN WE PRESS DEMO.  RIGHT NOW ITS JUST IN THE ONDRAW
                         Toast.makeText(getApplicationContext(), "Client Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
                         CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Las Vegas", "Salt Lake City", "purple", 5), CModel.getInstance().getUserPlayer());
                         // drawClaimedRoute("Las Vegas", "Salt Lake City", "blue", false, false);
@@ -359,6 +375,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     }
 
+    /**
+     * Updates the TextView which states whose turn it currently is
+     * @pre List<Player> in current Game object is not null
+     * @pre only one Player in List<Player> in current game has isMyTurn = true
+     * @post the Player whos isMyTurn = true now = false, the player after him has isMyTurn = true.
+     *               (If it was the last Player on the list's turn, the Player at the beginning of the list sets isMyTurn = true)
+     */
     public void changeTurnDisplay(){
         for (Player player : CModel.getInstance().getCurrGame().getPlayers()){
             if (player.isMyTurn()){
@@ -367,13 +390,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         }
     }
 
-    private  void selectDestinationCardsOnStartup(){
-        FragmentManager fm = getSupportFragmentManager();
-        DestinationCardFragment fragment = new DestinationCardFragment();
-        fragment.show(fm, "fragment_destinationcard");
-    }
-
-    public void initializeFaceUpCards(){
+    /**
+     * Initializes the face up resource cards which can be drawn.
+     * These will be drawn one at at time from the top of the deck.
+     * @pre Game is in initialization phase
+     * @post drawable cards are visually updated
+     */
+    private void initializeFaceUpCards(){
         for (int i = 0; i < 5; ++i){
             ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().drawCard();
             int drawableCardIndex = 0;
@@ -401,6 +424,12 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         drawableDeck.setImageResource(R.drawable.backcard);
     }
 
+    /**
+     * @pre color = any of: "black", "purple", "white", "blue", "yellow", "green", "red", "orange", or "wild"
+     *
+     * @param color color of the resource card we want
+     * @return The ID to be referenced to find the image of the correct traincar drawable
+     */
     private int getTrainColorPictureID(String color){
         switch (color.toLowerCase()){
             case "black":
@@ -424,19 +453,43 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         }
     }
 
-    public void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
+    /**
+     * Helper function
+     * Draws a Player's color on a route claimed that Player.
+     *
+     * @pre the Connection object which specifies the connections between cityName1 and cityName2 has a canClaim == true;
+     *
+     * @post Claming Player's color has been drawn over the route he claimed if it was appopriate.
+     *
+     * @param cityName1 Name of first city on a route
+     * @param cityName2 Name of connected city on a route
+     * @param color Color of the player who is claiming the route
+     * @param isDoubleRoute true if the route has more than one connection between the two cities, false otherwise
+     * @param hasOneDoubleClaimed true if isDoubleRoute == true AND one of double connections has been claimed.
+     */
+    private void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
         MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
         Map<String, Point> cities = mapBaseView.cityMap;
         mapBaseView.addClaimedRoute(cities.get(cityName1.toLowerCase()), cityName1.toLowerCase(), cities.get(cityName2.toLowerCase()), cityName2.toLowerCase(), color, isDoubleRoute, hasOneDoubleClaimed);
     }
 
-
+    /**
+     * Initializes the MapPResenter
+     *
+     * @pre Activity initialization state
+     * @post MapPresenter has been initialized
+     */
     private void setupView() {
         Log.d(TAG,"setupView");
         /* Create the Presenter; Set the Presenter as a interface to limit communication*/
         presenter = new MapPresenter(this);
     }
 
+
+    /**
+     * @pre Claimed RouteList in the model has changed
+     * @post Newly claimed routes have been drawn on the board
+     */
     @Override
     public void updateMap() {
         Map<Route, Player> routeList = CModel.getInstance().getClaimedRouteList().getRoutesMap();
@@ -448,12 +501,22 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         }
     }
 
+    /**
+     * Getter for Application Context
+     *
+     * @return Context of the application
+     */
     @Override
     public Context getAppContext() {
         return getApplicationContext();
     }
 
 
+    /**
+     * Getter for MapActicty Context
+     *
+     * @return the MapActivity Context
+     */
     @Override
     public Context getActivityContext() {
         return this;
@@ -463,4 +526,5 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public void routeClaimed(Route r) {
 
     }
+
 }
