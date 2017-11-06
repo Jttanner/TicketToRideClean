@@ -108,6 +108,8 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(GameListAdapter.ViewHolder holder, int position) {
         Game currentGame = list.get(position);
+        if(currentGame.isHasStarted())
+            return;
         holder.id.setText("" + position);
         String str = String.valueOf(position);
         holder.id.setText(str);

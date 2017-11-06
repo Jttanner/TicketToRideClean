@@ -26,6 +26,7 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
         //others will take this startGameData and start the game themselves
         //if (facade.startGame(commandData.getGame())){
             result = new CommandResult(true);
+            facade.startGame(commandData.getGame());
             facade.addCommandToList(commandData.getGame(),commandData);
         //} else{
        //     result = new CommandResult(false);

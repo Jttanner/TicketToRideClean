@@ -146,6 +146,12 @@ public class CModel extends Observable {
     public void toggleGameHasStarted() {
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
         this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        for(Game game : allGames){
+            if(game.getGameID().equals(currGame.getGameID())){
+                game.setHasStarted(true);
+            }
+        }
+
         incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
