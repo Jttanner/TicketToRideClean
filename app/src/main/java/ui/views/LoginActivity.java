@@ -14,7 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.activity_login);
-        // “Create a new fragment transaction, include one add operation in it, and then commit it.”
+        // Create a new fragment transaction, include one add operation in it, and then commit it.
         if(fragment == null){
             fragment = new LoginFragment();
             fm.beginTransaction().add(R.id.fragment_spot,fragment).commit();

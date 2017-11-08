@@ -33,8 +33,12 @@ public class SetGameMap implements ClientCommand {
     @Override
     public void execute() {
         Log.d(TAG,"Executing SetGameMap Command");
-//        Map<String, CommandList> commandListMap = gameCommandMap.getCommandList();
         CommandManager manager = CModel.getInstance().getCommandManager();
-        manager.updateCommandLists(commandList,this.gameID);
+        try {
+            manager.updateCommandLists(commandList, this.gameID);
+        }catch (Exception e){
+            //This won't break anything if we get a null command list
+            Log.d(TAG,"Gave a null commandList: " + e.getMessage());
+        }
     }
 }
