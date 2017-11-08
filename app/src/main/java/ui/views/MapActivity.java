@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -58,6 +59,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private ImageButton fifthDrawableTrainCard;
     private ImageButton drawableDeck;
 
+    private MapBaseView mapBaseView;
 
     int counter = 0;
 
@@ -120,6 +122,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getSupportFragmentManager();
+
                 DestinationCardFragment fragment = new DestinationCardFragment();
                 fragment.show(fm, "fragment_destinationcard");
             }
@@ -210,6 +213,24 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         });
 
         initializeFaceUpCards();
+
+        mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+        mapBaseView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                FragmentManager fm = getSupportFragmentManager();
+                ClaimRouteFragment fragment = new ClaimRouteFragment();
+                String selectedCity = mapBaseView.decodeCityTouched(event);
+                fragment.setSelectedCity(selectedCity);
+                //TODO: Add check to the game state once it is implemented!
+                if (fragment.getSelectedCity() != null){
+                    //populate recyclerView with routes
+                    fragment.show(fm, "fragment_claim_route");
+                }
+                return true;
+            }
+        });
+
 
         demo = (Button) findViewById(R.id.demoButton);
         demo.setOnClickListener(new View.OnClickListener() {
