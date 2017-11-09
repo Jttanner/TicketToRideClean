@@ -59,6 +59,8 @@ public class CModel extends Observable {
     /**The command Manager, holds our Map of gameId's to CommandLists*/
     private CommandManager commandManager = new CommandManager();
 
+    private GameState currGameState;
+
     private List<String> chatHistory = new ArrayList<>();
 
     private List<DestinationCard> threeDestinationCards;
@@ -157,7 +159,7 @@ public class CModel extends Observable {
     public void toggleGameHasStarted() {
         Poller.getInstance().stopPoller();
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
-        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        //this.currGame.setHasStarted(!this.currGame.isHasStarted());
         for(Game game : allGames){
             if(game.getGameID().equals(currGame.getGameID())){
                 game.setHasStarted(true);
@@ -374,5 +376,13 @@ public class CModel extends Observable {
 
     public CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    public GameState getCurrGameState() {
+        return currGameState;
+    }
+
+    public void setCurrGameState(GameState currGameState) {
+        this.currGameState = currGameState;
     }
 }
