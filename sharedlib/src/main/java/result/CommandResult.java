@@ -37,10 +37,10 @@ public class CommandResult extends Result {
         this.success = success;
         this.message = errorInfo;
     }
+
     public CommandResult(boolean success){
         this.success = success;
     }
-
     public boolean isSuccess() {
         return success;
     }

@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -81,8 +82,13 @@ public class ServerFacade {
     }
 
 
-    public boolean startGame(String game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
-        return serverModel.startGame(game);
+    public void startGame(String game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
+        for(Game thisgame : serverModel.getGames().getGames()){
+            if(thisgame.getGameID().equals(game)){
+                thisgame.setHasStarted(true);
+            }
+
+        }
     }
 
 
@@ -98,6 +104,8 @@ public class ServerFacade {
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
         Map<String, List<Command>> commandListMap = serverModel.getCommandListMap();
+        if(!commandListMap.containsKey(gameID))
+            commandListMap.put(gameID, new ArrayList<Command>());
         commandListMap.get(gameID).add(command);
 
     }

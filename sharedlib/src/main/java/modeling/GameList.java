@@ -64,7 +64,7 @@ public class GameList {
         return existingGame;
     }
 
-    public boolean startGame(String gameID){
+    /*public boolean startGame(String gameID){
         //Find the game from the list of games
         //Place that same game in the list of gamesStarted
         //Delete the game from the general list of games
@@ -75,14 +75,14 @@ public class GameList {
         //TODO uncomment this when neeeded, keeping it commented right now for testing purposes
         if(false){
         //if(serverGame.equals(game)){
-        //if(serverGame.getGameID().equals(gameID)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
+       // if(serverGame.getGameID().equals(gameID)){ //&& serverGame.getPlayers().size() > minPlayersNeeded){
             serverGame.setHasStarted(true);
             gamesStarted.add(serverGame);
             games.remove(serverGame);
             return true;
         }
         return false;
-    }
+    }*/
 
     public boolean deleteGame(Game game){
         for(Game gameFound : games) {
@@ -115,6 +115,7 @@ public class GameList {
     }*/
 
     public Game findGame(String gameID){
+
         return gameIDtoGame.get(gameID); //TODO: Will this return the game that I want that's associated with GameID?
     }
 

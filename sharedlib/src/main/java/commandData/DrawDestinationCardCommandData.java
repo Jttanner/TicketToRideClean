@@ -1,8 +1,5 @@
 package commandData;
 
-import modeling.DestinationCard;
-import modeling.Player;
-
 /**
  * Created by ahwang13 on 10/24/17.
  */
@@ -10,23 +7,23 @@ import modeling.Player;
 public class DrawDestinationCardCommandData extends Command{
 
     private String gameID;
-    private String playerID;
+    private String playerName;
 
 
     public DrawDestinationCardCommandData() {
     }
 
-    public String getPlayerID() {
-        return playerID;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setPlayerID(String playerID) {
-        this.playerID = playerID;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public DrawDestinationCardCommandData(String gameID, String playerID) {
         this.gameID = gameID;
-        this.playerID = playerID;
+        this.playerName = playerID;
         this.setType("drawDestinationCards");
         this.setData("");
     }

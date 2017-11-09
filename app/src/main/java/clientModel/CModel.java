@@ -9,6 +9,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import modeling.City;
+import modeling.CityList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
@@ -20,6 +22,7 @@ import modeling.Route;
 import modeling.RouteList;
 import modeling.TrainCarList;
 import modeling.User;
+import poller.Poller;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -37,6 +40,10 @@ public class CModel extends Observable {
      * The user associated with this client model
      */
     private User myUser;
+
+
+
+
     /**
      * The list of games being played or waiting to be played
      */
@@ -51,6 +58,8 @@ public class CModel extends Observable {
     private Set<Player> allPlayers;
     /**The command Manager, holds our Map of gameId's to CommandLists*/
     private CommandManager commandManager = new CommandManager();
+
+    private GameState currGameState;
 
     private List<String> chatHistory = new ArrayList<>();
 
@@ -140,12 +149,19 @@ public class CModel extends Observable {
     /**Increments the command index of the appropriate user player*/
     void incrementUsersCommandIndex(){
         Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
-        myPlayer.incrementCommandIndex();;
+        myPlayer.incrementCommandIndex();
     }
     /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
+        Poller.getInstance().stopPoller();
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
-        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        //this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        for(Game game : allGames){
+            if(game.getGameID().equals(currGame.getGameID())){
+                game.setHasStarted(true);
+            }
+        }
+
         incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
@@ -342,5 +358,13 @@ public class CModel extends Observable {
 
     public CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    public GameState getCurrGameState() {
+        return currGameState;
+    }
+
+    public void setCurrGameState(GameState currGameState) {
+        this.currGameState = currGameState;
     }
 }
