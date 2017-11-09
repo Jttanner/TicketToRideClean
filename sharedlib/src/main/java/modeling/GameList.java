@@ -64,7 +64,7 @@ public class GameList {
         return existingGame;
     }
 
-    public boolean startGame(String gameID){
+    /*public boolean startGame(String gameID){
         //Find the game from the list of games
         //Place that same game in the list of gamesStarted
         //Delete the game from the general list of games
@@ -82,7 +82,7 @@ public class GameList {
             return true;
         }
         return false;
-    }
+    }*/
 
     public boolean deleteGame(Game game){
         for(Game gameFound : games) {
