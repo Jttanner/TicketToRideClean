@@ -8,9 +8,9 @@ import commandData.DrawTrainCardFaceUpCommandData;
  */
 
 public class DrawTrainCardFaceUp implements ClientCommand {
-    String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-    String resourceCardColor;
-    String gameID;
+    private String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+    private String resourceCardColor;
+    private String gameID;
     public DrawTrainCardFaceUp (DrawTrainCardFaceUpCommandData data) {
         resourceCardColor = data.getResourceCardColor();
         gameID = data.getGame();

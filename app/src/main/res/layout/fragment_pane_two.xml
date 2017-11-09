@@ -9,8 +9,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/demoButton"
-        android:text="Demo"/>
+        android:id="@+id/turnStartOptionButton"
+        android:text="Turn Start Button(Temp)"/>
 
     <ui.views.MapBaseView
         xmlns:android="http://schemas.android.com/apk/res/android"

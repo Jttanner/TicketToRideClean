@@ -12,15 +12,23 @@ public class DrawTrainCardDeckCommandData extends Command {
     private String game;
     private String resourceCardColor;
 
+    private String playerName;
     //Constructor
-    public DrawTrainCardDeckCommandData (String game, String resourceCardColor) {
+    public DrawTrainCardDeckCommandData (String game, String resourceCardColor, String playerName) {
         setType("drawTrainCardDeck");
         this.game = game;
         this.resourceCardColor = resourceCardColor;
+        this.playerName = playerName;
     }
     public DrawTrainCardDeckCommandData () {}
 
     //Getters and Setters
+    public String getPlayerName() {
+        return playerName;
+    }
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
     public String getGame() {
         return game;
     }

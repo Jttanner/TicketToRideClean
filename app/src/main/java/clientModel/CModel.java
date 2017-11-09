@@ -104,7 +104,11 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers(observerHistory);
     }
+    public void updatePlayerStatsView (Game game) {
 
+        setChanged();
+        notifyObservers(game);
+    }
 
     private CModel() {
     }
@@ -147,7 +151,7 @@ public class CModel extends Observable {
     /**Increments the command index of the appropriate user player*/
     void incrementUsersCommandIndex(){
         Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
-        myPlayer.incrementCommandIndex();;
+        myPlayer.incrementCommandIndex();
     }
     /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
@@ -256,6 +260,7 @@ public class CModel extends Observable {
         //setChanged();
         //notifyObservers(this.claimedDestinationCards);
     }
+
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game
@@ -307,6 +312,19 @@ public class CModel extends Observable {
         notifyObservers(currGame);
     }
 
+    //KWANS STUFF :)
+    public void resourceCardOption() {
+        setChanged();
+        notifyObservers("ResourceCardOption");
+    }
+    public void destinationCardOption() {
+        setChanged();
+        notifyObservers("DestinationCardOption");
+    }
+    public void claimRouteOption() {
+        setChanged();
+        notifyObservers("ClaimRouteOption");
+    }
     @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);

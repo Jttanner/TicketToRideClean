@@ -8,10 +8,10 @@ import commandData.ClaimRouteCommandData;
  */
 
 public class PlaceTrainRoute implements ClientCommand {
-    String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-    String startCity;
-    String endCity;
-    String gameID;
+    private String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+    private String startCity;
+    private String endCity;
+    private String gameID;
 
     public PlaceTrainRoute (ClaimRouteCommandData data) {
         startCity = data.getStartCity();

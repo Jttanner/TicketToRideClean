@@ -13,7 +13,7 @@ import modeling.History;
  * Created by korea on 10/27/2017.
  */
 
-public class GameHistoryPresenter implements MVP_GameHistory.GameHistoryPresOps, Observer {
+public class GameHistoryPresenter implements Observer {
     private WeakReference<MVP_GameHistory.GameHistoryViewOps> myView;
 
     public GameHistoryPresenter(MVP_GameHistory.GameHistoryViewOps view) {
@@ -29,8 +29,8 @@ public class GameHistoryPresenter implements MVP_GameHistory.GameHistoryPresOps,
         }
     }
 
-    @Override
-    public void exitView() {
-
-    }
+//    @Override
+//    public void exitView() {
+//
+//    }
 }
