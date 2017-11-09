@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by tyler on 10/22/2017.
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 
 public class ResourceCardList {
-    private Map<String, List<ResourceCard>> colorToCardMap = new HashMap<>();
+    //private List<ResourceCard> colorToCardMap = new ArrayList<>();
     private List<ResourceCard> availableCards = new ArrayList<>();
 
     public ResourceCardList() {
@@ -29,7 +30,7 @@ public class ResourceCardList {
                 availableCards.add(card);
             }
             //add card list to map
-            colorToCardMap.put(string, resourceCards);
+          //  colorToCardMap = resourceCards;
         }
         //add the wild cards
         resourceCards = new ArrayList<>();
@@ -38,14 +39,14 @@ public class ResourceCardList {
             resourceCards.add(card);
             availableCards.add(card);
         }
-        colorToCardMap.put("Wild",resourceCards);
+       // colorToCardMap = resourceCards;
         //Shuffle the list
         Collections.shuffle(availableCards);
     }
 
-    public Map<String, List<ResourceCard>> getColorToCardMap() {
-        return colorToCardMap;
-    }
+  //  public List<ResourceCard> getColorToCardMap() {
+       // return colorToCardMap;
+   // }
 
     /**Returns an unmodifiable list of available resource cards to the caller
      * @return List<ResourceCard>*/
@@ -72,7 +73,7 @@ public class ResourceCardList {
             for(int i = start; i < end; i++){
                 //set this card as assigned to the particular player
                 ResourceCard thisCard = availableCards.get(i);
-                thisCard.setPlayer(player);
+                thisCard.setPlayerID(player.getPlayerName());
                 //Now give the card to the player
                 player.addResourceCard(availableCards.get(i));
                 //remove this card from the resource card deck, now it is just held in the map

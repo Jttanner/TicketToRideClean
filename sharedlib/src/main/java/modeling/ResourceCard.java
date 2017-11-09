@@ -12,7 +12,7 @@ public class ResourceCard {
      * up or not*/
     private boolean isFaceUp;
     /**The owner of this card*/
-    private Player player;
+    private String playerID;
 
     ResourceCard(String myColor) {
         this.myColor = myColor;
@@ -37,11 +37,11 @@ public class ResourceCard {
         this.myColor = myColor;
     }
 
-    public Player getPlayer() {
-        return player;
+    public String getPlayer() {
+        return playerID;
     }
     /**Sets the player who owns this card*/
-    void setPlayer(Player player) {
-        this.player = player;
+    void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
 }
