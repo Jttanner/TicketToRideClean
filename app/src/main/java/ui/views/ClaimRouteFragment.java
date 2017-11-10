@@ -12,7 +12,7 @@ import MVP_coms_classes.MVP_ClaimRoute;
 import MVP_coms_classes.MVP_DestCard;
 import teamjapannumbahone.tickettoride.R;
 
-public class ClaimRouteFragment extends android.support.v4.app.DialogFragment implements MVP_ClaimRoute.MapViewOps{
+public class ClaimRouteFragment extends android.support.v4.app.DialogFragment implements MVP_ClaimRoute.ClaimRouteMapViewOps{
     private final String TAG = "claim_route_fragment";
 
 
@@ -47,18 +47,10 @@ public class ClaimRouteFragment extends android.support.v4.app.DialogFragment im
         return inflater.inflate(R.layout.fragment_claim_route, container, false);
     }
 
-
-
-
-
+    
     @Override
-    public Context getAppContext() {
-        return null;
-    }
+    public void UpdateClaimRouteView() {
 
-    @Override
-    public Context getActivityContext() {
-        return null;
     }
 
     /**
