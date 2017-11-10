@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -158,13 +159,68 @@ public class MapBaseView extends View {
         }
     }
 
+    /**
+     *
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        int xTouch = Math.round(event.getX());
+        /*int xTouch = Math.round(event.getX());
         int yTouch = Math.round(event.getY());
         touchCoords.add(new Point(xTouch, yTouch));
         return true;
+        */
+
+        int eventAction = event.getAction();
+
+        // you may need the x/y location
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+
+        if (eventAction == MotionEvent.ACTION_DOWN){
+            //decode location, open dialog fragment to claim routes connected to city if it works
+
+        } else {
+            //do nothing
+        }
+
+
+        // put your code in here to handle the event
+        /*switch (eventAction) {
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+        }*/
+
+        // tell the View to redraw the Canvas
+        invalidate();
+
+        // tell the View that we handled the event
+        return true;
+
+
     }
+
+
+    /**
+     * this is really brute forcey
+     * @param event
+     * @return
+     */
+    public String decodeCityTouched(MotionEvent event){
+        for (CityDrawData city : cities){
+            if (city.getX() > event.getX() - 5 && city.getX() < event.getX() + 5
+                    && city.getY() > event.getY() - 5 && city.getY() < event.getY() + 5){
+                return city.getCityName();
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -384,15 +440,13 @@ public class MapBaseView extends View {
     private class DoubleConnectionDrawData{
         CityDrawData connectedCityDrawData;
 
-        boolean oneClaimed = false;
-
         public DoubleConnectionDrawData(CityDrawData connectedCityDrawData){
             this.connectedCityDrawData = connectedCityDrawData;
         }
     }
 
 
-    //TODO: TAKE THESE PRIVATE CLASSES AND PUT THEM IN CLINET MODELLING ONCE ALL IS WORKING WELL, EXPLAIN TO EVERYBODY
+    //TODO: TAKE THESE PRIVATE CLASSES AND PUT THEM IN CLIENT MODELLING ONCE ALL IS WORKING WELL, EXPLAIN TO EVERYBODY
     //THIS MUST GO ON CLIENT-SIDE MODELLING UNLESS I WANT TO CHANGE POINTS TO X Y COORDS
     public class ClaimedRoute{
         Point city1;
@@ -438,6 +492,10 @@ public class MapBaseView extends View {
 
         public float getY(){
             return city.y;
+        }
+
+        public String getCityName() {
+            return cityName;
         }
 
         public void addConnection(CityDrawData otherCity){

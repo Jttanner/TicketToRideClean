@@ -9,16 +9,20 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import modeling.City;
+import modeling.CityList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.History;
 import modeling.Player;
+import modeling.ResourceCard;
 import modeling.Route;
 import modeling.RouteList;
 import modeling.TrainCarList;
 import modeling.User;
+import poller.Poller;
 
 /**
  * Created by tyler on 9/27/2017.
@@ -36,6 +40,10 @@ public class CModel extends Observable {
      * The user associated with this client model
      */
     private User myUser;
+
+
+
+
     /**
      * The list of games being played or waiting to be played
      */
@@ -51,7 +59,12 @@ public class CModel extends Observable {
     /**The command Manager, holds our Map of gameId's to CommandLists*/
     private CommandManager commandManager = new CommandManager();
 
+    private GameState currGameState;
+
     private List<String> chatHistory = new ArrayList<>();
+
+    private List<DestinationCard> threeDestinationCards;
+    private List<DestinationCard> claimedDestinationCards;
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -78,9 +91,17 @@ public class CModel extends Observable {
 //    }
 
     //Call this when the commands that will update the Game History are executed
-    public void updateCurrGameHistoryList(String history) {
+    public void updateCurrGameHistoryList(String history, String gameID) {
+        for(Game game: allGames){
+            if(game.getGameID().equals(gameID)){
+                game.addToGameHistory(history);
+            }
+        }
+        if(currGame!=null){
+            currGame.addToGameHistory(history);
+        }
 
-        currGame.addToGameHistory(history);
+//        currGame.addToGameHistory(history);
         History observerHistory = new History();
         setChanged();
         notifyObservers(observerHistory);
@@ -102,10 +123,14 @@ public class CModel extends Observable {
         return currGame;
     }
 
+
+    /*
     public List<DestinationCard> threeDestinationCards(){
         DestinationCardList destinationCardList = new DestinationCardList();
         return destinationCardList.get3Cards();
-    }
+    }*/
+
+
 
     public void UpdateHistory(List<String> history,String gameID){
         for(Game game: allGames){
@@ -124,12 +149,19 @@ public class CModel extends Observable {
     /**Increments the command index of the appropriate user player*/
     void incrementUsersCommandIndex(){
         Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
-        myPlayer.incrementCommandIndex();;
+        myPlayer.incrementCommandIndex();
     }
     /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
+        Poller.getInstance().stopPoller();
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
-        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        //this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        for(Game game : allGames){
+            if(game.getGameID().equals(currGame.getGameID())){
+                game.setHasStarted(true);
+            }
+        }
+
         incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
@@ -163,6 +195,14 @@ public class CModel extends Observable {
         return null;
     }
 
+    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
+
+        player.addResourceCard(card);
+        setChanged();
+        notifyObservers(currGame);
+
+    }
+
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList
      *
@@ -172,39 +212,76 @@ public class CModel extends Observable {
         Log.d(TAG,"Setting all games");
         if (allGames.getGames().size() != 0) {
             this.allGames = allGames.getGames();
-            updateCurrGame();
+            if(this.currGame != null) {
+                Game g = allGames.findGame(this.currGame.getGameID());
+                if (g != null) {
+                    this.currGame = g;
+                }
+            }
             //will notify the gamelist activity of games made/changed
             setChanged();
-            notifyObservers(allGames);
+            GameList gameList = new GameList();
+            gameList.setGames(this.allGames);
+            notifyObservers(gameList);
         }
     }
 
+    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards){
+        Log.d(TAG,"Setting destination cards");
+        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
+
+        //set currGame
+        this.threeDestinationCards = threeDestinationCards;
+        setChanged();
+        notifyObservers(this.threeDestinationCards);
+    }
+
+    private int deckSize = 30;
+
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    public void setDeckSize(int deckSize) {
+        this.deckSize = deckSize;
+    }
+
+    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards, int deckSize) {
+        Log.d(TAG, "Setting claimed destination cards");
+        this.claimedDestinationCards = claimedDestinationCards;
+        currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
+
+        this.deckSize = deckSize;
+        //player.addDestinationCard(claimedDestinationCards);
+        setChanged();
+        notifyObservers(this.currGame);
+        //setChanged();
+        //notifyObservers(this.claimedDestinationCards);
+    }
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game
      *
      * @param currGame The game that was just made
      */
+
     public void setCurrGame(Game currGame) {
         Log.d(TAG,"Setting current game");
-        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
-        updateCurrGame();
         //set currGame
         this.currGame = currGame;
+        updateCurrGame();
         setChanged();
         notifyObservers(this.currGame);
     }
-
+    /*Replaces curr game in list**/
     private void updateCurrGame(){
+        //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
         if(currGame != null) {
             for (Game g : allGames) {
                 if (g.getGameID().equals(currGame.getGameID())) {
                     allGames.remove(g);
                     //add currgame to list
                     allGames.add(currGame);
-                    GameList list = new GameList();
-                    list.setGames(allGames);
-                    setAllGames(list);
                     break;
                 }
             }
@@ -253,7 +330,9 @@ public class CModel extends Observable {
 
     @Override
     public void notifyObservers(Object arg) {
-        Log.d(TAG, "Notifying observers: sending class " + arg.getClass().toString());
+        if (arg != null){
+            Log.d(TAG, "Notifying observers: sending class " + arg.getClass().toString());
+        }
         super.notifyObservers(arg);
     }
 
@@ -279,5 +358,15 @@ public class CModel extends Observable {
 
     public CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    public GameState getCurrGameState() {
+        return currGameState;
+    }
+
+    public void setCurrGameState(GameState currGameState) {
+        this.currGameState = currGameState;
+        setChanged();
+        notifyObservers(this.currGameState);
     }
 }

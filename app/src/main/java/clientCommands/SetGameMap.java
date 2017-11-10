@@ -2,8 +2,11 @@ package clientCommands;
 
 import android.util.Log;
 
+import java.util.List;
+
 import clientModel.CModel;
 import clientModel.CommandManager;
+import commandData.Command;
 import modeling.CommandList;
 import modeling.GameCommandMap;
 
@@ -18,11 +21,11 @@ public class SetGameMap implements ClientCommand {
     /**Our GameCommandMap*/
     private GameCommandMap gameCommandMap;
 
-    private CommandList commandList;
+    private List<Command> commandList;
 
     private String gameID;
 
-    public SetGameMap(CommandList gameCommandMap,String gameID){
+    public SetGameMap(List<Command> gameCommandMap, String gameID){
         this.commandList = gameCommandMap;
         this.gameID = gameID;
     }
@@ -30,8 +33,12 @@ public class SetGameMap implements ClientCommand {
     @Override
     public void execute() {
         Log.d(TAG,"Executing SetGameMap Command");
-//        Map<String, CommandList> commandListMap = gameCommandMap.getCommandList();
         CommandManager manager = CModel.getInstance().getCommandManager();
-        manager.updateCommandLists(commandList,this.gameID);
+        try {
+            manager.updateCommandLists(commandList, this.gameID);
+        }catch (Exception e){
+            //This won't break anything if we get a null command list
+            Log.d(TAG,"Gave a null commandList: " + e.getMessage());
+        }
     }
 }

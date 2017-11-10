@@ -23,7 +23,7 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private String ipaddress = "10.24.66.239";
+    private String ipaddress = "10.10.182.82";
     private String myUrl = "http://" + ipaddress +":8080/user/";
 
     private ServerProxy() {

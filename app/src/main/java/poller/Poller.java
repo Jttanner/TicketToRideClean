@@ -19,8 +19,6 @@ import servercomms.ServerProxy;
 public class Poller {
 
     CModel clientModel = CModel.getInstance();
-    //URL URL;
-    Command command;
     //Timer needs to be static or else it will cancel another instance of the Timer class
     private static Timer timer,getCommandTimer;
     private final String TAG = "Poller";
@@ -51,14 +49,14 @@ public class Poller {
     public void updateGameList() {
         Log.d(TAG,"updatingGameList");
         timer = new Timer();
-        command = new GetGameListCommandData();
+        final Command command = new GetGameListCommandData();
         //makes the Timer task
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
                 Log.d(TAG,"Going into AsynTask");
                 sendCommand = new Poll();
-                sendCommand.execute();
+                sendCommand.start(command);
             }
         };
         timer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
@@ -69,14 +67,14 @@ public class Poller {
     public void getCommandList(){
         Log.d(TAG,"getting command list");
          getCommandTimer = new Timer();
-        command = new GetCmndDataFromServer(CModel.getInstance().getCurrGame().getGameID());
+        final Command command = new GetCmndDataFromServer(CModel.getInstance().getCurrGame().getGameID());
         //makes the TimerTask
         TimerTask doAsynchronousTask = new TimerTask() {
             @Override
             public void run() {
                 Log.d(TAG,"Going into AsynTask");
                 sendCommand = new Poll();
-                sendCommand.execute();
+                sendCommand.start(command);
             }
         };
         getCommandTimer.schedule(doAsynchronousTask,0,3000); //execute in every 3000 ms
@@ -101,9 +99,22 @@ public class Poller {
 
     private class Poll extends AsyncTask<Void, Void, Integer>
     {
+        private Command command;
+        void start(Command request) {
+            try {
+                command = request;
+                execute();
+            }
+            catch (Exception e){
+                Log.d("here", "login method messed up: " + e.toString());
+                e.printStackTrace();
+            }
+
+        }
         @Override
         protected Integer doInBackground(Void... params)
         {
+            Log.d(TAG,""+command.getClass());
             ServerProxy serverProxy = ServerProxy.getInstance();
             try{
                 serverProxy.sendCommand(command);

@@ -1,6 +1,7 @@
 
 package result;
 
+
 import modeling.GameList;
 
 /**
@@ -8,7 +9,7 @@ import modeling.GameList;
  */
 
 
-public class GetGameCommandResult extends CommandResult {
+public class GetGameCommandResult extends  CommandResult {
 
     /*
     * Will return the game result for the waiting lobby
@@ -29,3 +30,4 @@ public class GetGameCommandResult extends CommandResult {
     }
 
 }
+

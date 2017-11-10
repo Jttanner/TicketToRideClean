@@ -1,9 +1,11 @@
 package ServerModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import modeling.CommandList;
 import modeling.DestinationCard;
@@ -80,8 +82,13 @@ public class ServerFacade {
     }
 
 
-    public boolean startGame(Game game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
-        return serverModel.startGame(game);
+    public void startGame(String game){ //TODO: The poller should be constantly checking if the game has started...what do we want to do with startgame?
+        for(Game thisgame : serverModel.getGames().getGames()){
+            if(thisgame.getGameID().equals(game)){
+                thisgame.setHasStarted(true);
+            }
+
+        }
     }
 
 
@@ -96,9 +103,16 @@ public class ServerFacade {
     /**Adds command to the correct commandList
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
-        Map<String, CommandList> commandListMap = serverModel.getCommandListMap();
-        commandListMap.get(gameID).addToList(command);
+        Map<String, List<Command>> commandListMap = serverModel.getCommandListMap();
+        if(!commandListMap.containsKey(gameID))
+            commandListMap.put(gameID, new ArrayList<Command>());
+        commandListMap.get(gameID).add(command);
+
     }
 
     public List<DestinationCard> getDestinationCardList() { return serverModel.getDestinationCards(); }
+
+    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+        return serverModel.distributeUsedDestinationCards(commandData);
+    }
 }

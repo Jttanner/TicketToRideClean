@@ -5,7 +5,7 @@ package MVP_coms_classes;
  */
 
 public interface MVP_ClaimRoute {
-    interface ClaimRouteViewOps {
+    interface ClaimRouteMapViewOps {
         void UpdateClaimRouteView();
     }
 

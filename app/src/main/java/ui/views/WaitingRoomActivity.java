@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,7 @@ import teamjapannumbahone.tickettoride.R;
 public class WaitingRoomActivity extends AppCompatActivity implements MVP_WaitingRoom.RequiredViewOps {
     private static final String TAG = "WaitingRoomActivity";
     private Context mContext = this;
+    private Button ChatRoomButton;
     private Button StartGameButton;
     private MVP_WaitingRoom.RequiredPresenterOps mPresenter;
     private ListView playerListView;
@@ -43,7 +45,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 
     @Override
     protected void onDestroy() {
-        Poller.getInstance().stopPoller();
+        //Poller.getInstance().stopPoller();
         //Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
@@ -86,10 +88,22 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         StartGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Poller.getInstance().stopPoller();
                 mPresenter.startGame();
 
             }
         });
+//        ChatRoomButton = (Button) findViewById(R.id.waitingRoom_Chat_Room);
+//        ChatRoomButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FragmentManager fm = getSupportFragmentManager();
+//                ChatFragment fragment = new ChatFragment();
+//                fragment.show(fm,"chat_fragment");
+//
+//            }
+//        });
+
         playerListView = (ListView) findViewById(R.id.waitingRoom_PlayerList);
         playerListView.setAdapter(playerListAdapter);
     }

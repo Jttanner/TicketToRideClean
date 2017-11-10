@@ -3,7 +3,6 @@ package presenters;
 import java.lang.ref.WeakReference;
 
 import MVP_coms_classes.MVP_ClaimRoute;
-import clientModel.CModel;
 
 /**
  * Created by jontt on 11/10/2017.
@@ -11,9 +10,9 @@ import clientModel.CModel;
 
 public class ClaimRoutePresenter implements MVP_ClaimRoute.ClaimRoutePresenterOps {
 
-    private WeakReference<MVP_ClaimRoute.ClaimRouteViewOps> myView;
+    private WeakReference<MVP_ClaimRoute.ClaimRouteMapViewOps> myView;
 
-    public ClaimRoutePresenter(MVP_ClaimRoute.ClaimRouteViewOps view){
+    public ClaimRoutePresenter(MVP_ClaimRoute.ClaimRouteMapViewOps view){
         myView = new WeakReference<>(view);
         //CModel.getInstance().addObserver(this);
     }

@@ -9,7 +9,7 @@
     <string name="user">user</string>
     <string name="password">password</string>
     <string name="startGame">Start Game</string>
-    <string name="statusLayout">Player:\tPoints:\tTrains:\tCards:\t\tRoutes:</string>
+    <string name="statusLayout">Player:\tPoints:\tTrains:\tCards:\t\tDest:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

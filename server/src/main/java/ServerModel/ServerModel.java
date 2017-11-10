@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -27,8 +29,8 @@ public class ServerModel {
 
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
-    private Map<String, Game> games = new HashMap<>(); //Key=gameID
-    private Map<String, CommandList> commandListMap = new HashMap<>();
+    //private Map<String, Game> games = new HashMap<>(); //Key=gameID
+    private Map<String, List<Command>> commandListMap = new HashMap<>();
     private DestinationCardList destinationCardList = new DestinationCardList();
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
@@ -38,9 +40,9 @@ public class ServerModel {
         return chatHistory;
     }
 
-    public List<Command> returnCommand = new ArrayList<>();
+    List<Command> returnCommand = new ArrayList<>();
 
-    public List<Command> getReturnCommand() {
+    List<Command> getReturnCommand() {
         return returnCommand;
     }
 
@@ -81,10 +83,10 @@ public class ServerModel {
         return gameList.joinGame(user, gameID);
     }
 
-    boolean startGame(Game game){
-        commandListMap.put(game.getGameID(),new CommandList());
-        return gameList.startGame(game);
-    }
+    /*boolean startGame(String gameID){;
+        commandListMap.put(gameID,new ArrayList<Command>());
+        return gameList.startGame(gameID);
+    }*/
 
     boolean deleteGame(Game game){
         return gameList.deleteGame(game);
@@ -102,10 +104,10 @@ public class ServerModel {
     }
 
     //(gameID, Game)
-    public Map<String, Game> getGamesAsMap(){
+
+    void addChatHistory(String s,String gameId){/*public Map<String, Game> getGamesAsMap(){
         return games;
-    }
-    public void addChatHistory(String s,String gameId){
+    }*/
 
         gameList.findGame(gameId).getChatHistory().add(s);
 
@@ -132,11 +134,29 @@ public class ServerModel {
         return this.gameList;
     }
 
-    public Map<String, CommandList> getCommandListMap() {
+    public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
 
-    public List<DestinationCard> getDestinationCards() {
+    List<DestinationCard> getDestinationCards() {
         return destinationCardList.get3Cards();
+    }
+
+    List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+        List<DestinationCard> claimedCards = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
+            if (isClaimed) {
+                 claimedCards.add(commandData.getClaimDestinationCards().get(i));
+            }
+            else{
+                destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
+            }
+        }
+        String playerID = commandData.getPlayerID();
+        Game currGame = gameList.findGame(commandData.getGameID());
+        Player currPlayer = currGame.getPlayer(playerID);
+        currPlayer.addDestinationCard(claimedCards);
+        return claimedCards;
     }
 }

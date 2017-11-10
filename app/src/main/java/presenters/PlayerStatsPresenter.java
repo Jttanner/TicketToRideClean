@@ -46,6 +46,8 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
 
     }
 
+
+
     @Override
     public ArrayList<PlayerColumn> getPlayerColumns() {
         List<Player> players = CModel.getInstance().getCurrGame().getPlayers();

@@ -23,6 +23,10 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
    // @Override
     public CommandResult execute() {
         try {
+            //Check if the player already exists in the game
+
+
+
             //JoinGameCommandData joinGameCommandData = new JoinGameCommandData();
             String gameID = this.getGameID();
             Game gameToJoin = ServerFacade.getInstance().joinGame(getUser(),gameID);
@@ -38,6 +42,8 @@ public class JoinGameCommand extends JoinGameCommandData implements  ICommand{
                 result.setType("joinGame");
                 return result;
             }
+
+
         }
         catch (NumberFormatException e) {
             CommandResult result = new CommandResult(false, null, "Error, not a number!");
