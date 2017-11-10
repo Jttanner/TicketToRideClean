@@ -59,6 +59,8 @@ public class CModel extends Observable {
     /**The command Manager, holds our Map of gameId's to CommandLists*/
     private CommandManager commandManager = new CommandManager();
 
+    private GameState currGameState;
+
     private List<String> chatHistory = new ArrayList<>();
 
     private List<DestinationCard> threeDestinationCards;
@@ -147,13 +149,13 @@ public class CModel extends Observable {
     /**Increments the command index of the appropriate user player*/
     void incrementUsersCommandIndex(){
         Player myPlayer = this.currGame.getPlayer(getMyUser().getUserName());
-        myPlayer.incrementCommandIndex();;
+        myPlayer.incrementCommandIndex();
     }
     /**Is called by the result of starting a game if I started the game or by being executed by the CommandManager*/
     public void toggleGameHasStarted() {
         Poller.getInstance().stopPoller();
         Log.d(TAG,"setting game has started for game " + this.currGame.getGameName() + " to value of: " + !this.currGame.isHasStarted());
-        this.currGame.setHasStarted(!this.currGame.isHasStarted());
+        //this.currGame.setHasStarted(!this.currGame.isHasStarted());
         for(Game game : allGames){
             if(game.getGameID().equals(currGame.getGameID())){
                 game.setHasStarted(true);
@@ -356,5 +358,15 @@ public class CModel extends Observable {
 
     public CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    public GameState getCurrGameState() {
+        return currGameState;
+    }
+
+    public void setCurrGameState(GameState currGameState) {
+        this.currGameState = currGameState;
+        setChanged();
+        notifyObservers(this.currGameState);
     }
 }
