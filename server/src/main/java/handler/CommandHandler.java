@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 import command.AddChatCommand;
+import command.ClaimDestinationCardCommand;
 import command.ClaimRouteCommand;
 import command.CreateGameCommand;
 import command.DrawDestinationCardCommand;
@@ -20,6 +21,7 @@ import command.GetGameListCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
@@ -53,6 +55,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Command cmd = gson.fromJson(reqData, Command.class);
             CommandResult result = null;
             Command commandData = null;
+            System.out.println("Command handler: " + cmd.getType());
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
@@ -75,10 +78,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = startGameCommand.execute();
                     break;
                 case "getCommandList":
+                    System.out.println("Command handler: getCommandList 2");
                     GetCmndDataFromServer getCmndDataFromServer = gson.fromJson(reqData,GetCmndDataFromServer.class);
                     String gameId = getCmndDataFromServer.getGameId();
                     GetCmndListServer commandListServer = new GetCmndListServer(gameId);
                     commandData = new GetCmndListDataToClient(commandListServer.execute(),gameId);
+                    System.out.println("Command handler: getCommandList 3");
                     break;
                 case "addChat":
                     ChatCommandData chatCommandData = gson.fromJson(reqData, ChatCommandData.class);
@@ -88,24 +93,29 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 case "drawTrainCardDeck":
                     DrawTrainCardDeckCommandData drawTrainCardDeckCommandData = gson.fromJson(reqData, DrawTrainCardDeckCommandData.class);
                     DrawTrainCardDeckCommand drawTrainCardDeckCommand = new DrawTrainCardDeckCommand(drawTrainCardDeckCommandData);
-                    drawTrainCardDeckCommand.execute();
+                    result = drawTrainCardDeckCommand.execute();
                     break;
                 case "drawTrainCardFaceUp":
                     DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = gson.fromJson(reqData,DrawTrainCardFaceUpCommandData.class);
                     DrawTrainCardFaceUpCommand drawTrainCardFaceUpCommand = new DrawTrainCardFaceUpCommand(drawTrainCardFaceUpCommandData);
-                    drawTrainCardFaceUpCommand.execute();
+                    result = drawTrainCardFaceUpCommand.execute();
                     break;
                 case "drawDestinationCards":
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
                     DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
                     result = drawDestinationCardCommand.execute();
                     break;
+                case "claimDestinationCards":
+                    ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(reqData,ClaimDestinationCardCommandData.class);
+                    ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
+                    result = claimDestinationCardCommand.execute();
+                    break;
                     // drawTrainCardDeckCommand = new AddChatCommand(chatCommandData);
                     //addChatCommand.execute();
                 case "claimRoute":
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
-                    claimRouteCommand.execute();
+                    result = claimRouteCommand.execute();
                     break;
                 default:
                     break;
@@ -117,7 +127,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                 new Encoder().encode(result,exchange.getResponseBody());
             }
             else if(commandData != null){
-                new Encoder().encode(commandData,exchange.getResponseBody());
+                if (commandData.getType().equals("getCommandList")){
+                    new Encoder().encode(commandData,exchange.getResponseBody());
+                } else{
+                    new Encoder().encode(commandData,exchange.getResponseBody());
+                }
+
             }
             respBody.close();
         }

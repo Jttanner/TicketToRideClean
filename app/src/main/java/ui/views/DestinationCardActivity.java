@@ -22,7 +22,7 @@ public class DestinationCardActivity extends AppCompatActivity{
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_destinationcard);
         fragment = new DestinationCardFragment();
-        // “Create a new fragment transaction, include one add operation in it, and then commit it.”
+        // Create a new fragment transaction, include one add operation in it, and then commit it.
 
 
         FragmentTransaction transaction = fm.beginTransaction();

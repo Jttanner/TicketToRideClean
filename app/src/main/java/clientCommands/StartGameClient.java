@@ -9,6 +9,7 @@ import clientModel.CModel;
 public class StartGameClient implements ClientCommand {
     @Override
     public void execute() {
+
         CModel.getInstance().toggleGameHasStarted();
     }
 }

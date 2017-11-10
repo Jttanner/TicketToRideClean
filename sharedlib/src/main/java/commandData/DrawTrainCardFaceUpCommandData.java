@@ -8,11 +8,11 @@ import modeling.Game;
 
 public class DrawTrainCardFaceUpCommandData extends Command {
     //Data Members
-    private Game game;
+    private String game;
     private String resourceCardColor;
 
     //Constructors
-    public DrawTrainCardFaceUpCommandData (Game game, String resourceCardColor) {
+    public DrawTrainCardFaceUpCommandData (String game, String resourceCardColor) {
         setType("drawTrainCardFaceUp");
         this.game = game;
         this.resourceCardColor = resourceCardColor;
@@ -20,10 +20,11 @@ public class DrawTrainCardFaceUpCommandData extends Command {
     public DrawTrainCardFaceUpCommandData () {}
 
     //Getters and Setters
-    public Game getGame() {
+
+    public String getGame() {
         return game;
     }
-    public void setGame(Game game) {
+    public void setGame(String game) {
         this.game = game;
     }
     public String getResourceCardColor() {

@@ -10,14 +10,16 @@ import commandData.DrawTrainCardDeckCommandData;
 public class DrawTrainCardDeck implements ClientCommand {
     String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
     String resourceCardColor;
+    String gameID;
 
     public DrawTrainCardDeck (DrawTrainCardDeckCommandData data) {
         resourceCardColor = data.getResourceCardColor();
+        gameID = data.getGame();
     }
     @Override
     public void execute() {
 
-        CModel.getInstance().updateCurrGameHistoryList(this.toString());
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
     }
 
     @Override
