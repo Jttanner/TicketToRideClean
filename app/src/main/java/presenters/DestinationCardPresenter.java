@@ -44,6 +44,13 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         Log.d("DestCardPresenter", "claimDestinationCards");
     }
 
+    public boolean hasGameJustStarted(Game game, Player player) {
+        if (player.getDestinationCards().size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
