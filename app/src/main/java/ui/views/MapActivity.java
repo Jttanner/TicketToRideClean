@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -33,15 +34,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
-//    private Button destinationCardButton;
     private Button chatroom;
     private Button gameHistory;
-//    private Button drawResourceCardButton;
-//    private Button claimRouteButton;
     private Button turnStartOption;
 
     private ImageButton drawableDeck;
 
+    private MapBaseView mapBaseView;
 
     /**
      * If we leave this activity, we want to stop the poller which polls the command list.
@@ -94,6 +93,18 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
             }
         });
 
+
+        destinationCard = (Button) findViewById(R.id.destinationCardButton);
+        destinationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+
+                DestinationCardFragment fragment = new DestinationCardFragment();
+                fragment.show(fm, "fragment_destinationcard");
+            }
+        });
+
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +135,240 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
                 fragment.show(fm, "start");
             }
         });
+
+
+        secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
+
+        secondDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        thirdDrawableTrainCard = (ImageButton) findViewById(R.id.third_drawable_card);
+
+        thirdDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        fourthDrawableTrainCard = (ImageButton) findViewById(R.id.fourth_drawable_card);
+
+        fourthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        fifthDrawableTrainCard = (ImageButton) findViewById(R.id.fifth_drawable_card);
+
+        fifthDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        drawableDeck = (ImageButton) findViewById(R.id.drawable_deck);
+
+        drawableDeck.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        initializeFaceUpCards();
+
+        mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+       /* mapBaseView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                FragmentManager fm = getSupportFragmentManager();
+                ClaimRouteFragment fragment = new ClaimRouteFragment();
+                String selectedCity = mapBaseView.decodeCityTouched(event);
+                fragment.setSelectedCity(selectedCity);
+                //TODO: Add check to the game state once it is implemented!
+                if (fragment.getSelectedCity() != null){
+                    //populate recyclerView with routes
+                    fragment.show(fm, "fragment_claim_route");
+                }
+                return true;
+            }
+        });*/
+
+
+        demo = (Button) findViewById(R.id.demoButton);
+        demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+
+
+
+                switch(counter){ //TODO: HERE ARE THE HARDCODED TEST CASES! ENJOY!
+                    //YOU ROCK
+                    case 0:
+                       /* FragmentManager fm = getSupportFragmentManager();
+                        Fragment fragment = fm.findFragmentById(R.id.activity_map);
+
+                        if (fragment == null) {
+                            fragment = new DestinationCardFragment();
+                            FragmentTransaction transaction = fm.beginTransaction();
+                            transaction.replace(R.id.activity_map, fragment);
+                            transaction.commit();
+                        }*/
+                        break;
+                    case 1:
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY", CModel.getInstance().getCurrGame().getGameID());
+                        break;
+                    case 2:
+                        CModel.getInstance().updateCurrGameHistoryList("HISTORY IN THE MAKING", CModel.getInstance().getCurrGame().getGameID());
+
+                        //COMMAND HISTORY
+                        String color = "GREEN";
+                        String color2 = "RED";
+                        String gameID = CModel.getInstance().getCurrGame().getGameID();
+                        String startCity = "Salt Lake City";
+                        String endCity = "Seoul";
+
+                        DrawTrainCardDeckCommandData X = new DrawTrainCardDeckCommandData(gameID, color);
+                        ServerProxy.getInstance().sendCommand(X);
+
+                        ClaimRouteCommandData Z = new ClaimRouteCommandData(gameID, startCity, endCity);
+                        ServerProxy.getInstance().sendCommand(Z);
+
+                        DrawTrainCardFaceUpCommandData Y = new DrawTrainCardFaceUpCommandData(gameID, color2);
+                        ServerProxy.getInstance().sendCommand(Y);
+
+                        CModel.getInstance().updateCurrGameHistoryList("NEW HISTORY 235 ", gameID);
+                        //COMMAND HISTORY
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Client Player claiming route from Las Vegas to Salt Lake City...", Toast.LENGTH_LONG).show();
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Las Vegas", "Salt Lake City", "purple", 5), CModel.getInstance().getUserPlayer());
+                        // drawClaimedRoute("Las Vegas", "Salt Lake City", "blue", false, false);
+                        //mapBaseView.addClaimedRoute(mapBaseView.LasVegasPoint, "Las Vegas", mapBaseView.SLCPoint, "Salt Lake City", "blue", false, false);
+                        break;
+                    case 4:
+                        /*
+                        I Make mock player objects to simulate drawing different colors for different players with our demo button.
+                         */
+                        Toast.makeText(getApplicationContext(), "Blue Player claiming route from Kansas City to St. Louis...", Toast.LENGTH_LONG).show();
+                        Player mockBluePlayer = new Player("mockBluePlayer", "mockBluePlayer", "blue");
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Kansas City", "Saint Louis", "purple", 5, true), mockBluePlayer);
+                        //drawClaimedRoute("Kansas City", "Saint Louis", "blue", true, false);
+                        //mapBaseView.addClaimedRoute(mapBaseView.KansasCityPoint, "Kansas City", mapBaseView.SaintLouisPoint, "St. Louis", "red", true, false);
+                        break;
+                    case 5:
+                        Player mockGreenPlayer = new Player("mockGreenPlayer", "mockGreenPlayer", "Green");
+                        Toast.makeText(getApplicationContext(), "Green Player claiming first available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Chicago", "Pittsburgh", "blue", 4, true), mockGreenPlayer);
+                        //drawClaimedRoute("Chicago", "Pittsburgh", "green", true, false);
+                        //mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "green", true, false);
+                        break;
+                    case 6:
+                        Player mockYellowPlayer = new Player("mockYellowPlayer", "mockYellowPlayer", "Yellow");
+                        Toast.makeText(getApplicationContext(), "Yellow Player claiming second available route from Chicago to Pittsburgh...", Toast.LENGTH_LONG).show();
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Chicago", "Pittsburgh", "wild", 6, true), mockYellowPlayer);
+                        //drawClaimedRoute("Chicago", "Pittsburgh", "yellow", true, true);
+                        //mapBaseView.addClaimedRoute(mapBaseView.ChicagoPoint, "Chicago", mapBaseView.PittsburghPoint, "Pittsburgh", "yellow", true, true);
+                        break;
+                    case 7:
+                        Toast.makeText(getApplicationContext(), "Replacing First Card...", Toast.LENGTH_LONG).show();
+                        firstDrawableTrainCard.setImageResource(R.drawable.purpletrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 135");
+                        break;
+                    case 8:
+                        Toast.makeText(getApplicationContext(), "Replacing Second Card...", Toast.LENGTH_LONG).show();
+                        secondDrawableTrainCard.setImageResource(R.drawable.greentrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 134");
+                        break;
+                    case 9:
+                        Toast.makeText(getApplicationContext(), "Replacing Third Card...", Toast.LENGTH_LONG).show();
+                        thirdDrawableTrainCard.setImageResource(R.drawable.bluetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 133");
+                        break;
+                    case 10:
+                        Toast.makeText(getApplicationContext(), "Replacing Fourth Card...", Toast.LENGTH_LONG).show();
+                        fourthDrawableTrainCard.setImageResource(R.drawable.redtrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 132");
+                        break;
+                    case 11:
+                        Toast.makeText(getApplicationContext(), "Replacing Fifth Card...", Toast.LENGTH_LONG).show();
+                        fifthDrawableTrainCard.setImageResource(R.drawable.whitetrain);
+                        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 131");
+                        break;
+                    case 12:
+                        Toast.makeText(getApplicationContext(), "Advancing Player Turn...", Toast.LENGTH_LONG).show();
+                        //uncomment mock object if necessary as an example
+                        //CModel.getInstance().getCurrGame().getPlayers().add(new Player("dumbo"));
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
+                        break;
+                    case 13:
+                        CModel.getInstance().getCurrGame().advancePlayerTurn();
+                        changeTurnDisplay();
+                        break;
+                    case 14:
+                        Toast.makeText(getApplicationContext(), "Adding Card to Hand", Toast.LENGTH_LONG).show();
+                        //CModel.getInstance().getCurrGame().getCurrentPlayer().addResourceCard(new ResourceCard("blue", false));
+                        String previousNum = ((TextView) findViewById(R.id.bluenum)).getText().toString();
+                        previousNum = previousNum.substring(previousNum.length() - 1);
+                        int number = Integer.parseInt(previousNum);
+                        int newNumber = number + 1;
+                        ((TextView) findViewById(R.id.bluenum)).setText(newNumber + "");
+                        CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), CModel.getInstance().getUserPlayer());
+                        break;
+                    case 15:
+                        Toast.makeText(getApplicationContext(), "removing Cards from Hand", Toast.LENGTH_LONG).show();
+
+                        ((TextView) findViewById(R.id.bluenum)).setText("0");
+                        ((TextView) findViewById(R.id.rednum)).setText("0");
+                        ((TextView) findViewById(R.id.greennum)).setText("0");
+                        ((TextView) findViewById(R.id.orangenum)).setText("0");
+                        ((TextView) findViewById(R.id.yellownum)).setText("0");
+                        ((TextView) findViewById(R.id.purplenum)).setText("0");
+                        ((TextView) findViewById(R.id.blacknum)).setText("0");
+                        ((TextView) findViewById(R.id.whitenum)).setText("0");
+                        ((TextView) findViewById(R.id.rainbownum)).setText("0");
+                        break;
+                    case 16:
+                        Player[] testPlayers = new Player[5];
+                        int i = 0;
+                        for (Player p : CModel.getInstance().getCurrGame().getPlayers()){
+                            CModel.getInstance().drawResourceCard(new ResourceCard("Blue", false), CModel.getInstance().getCurrGame(), p);
+                            testPlayers[i] = p;
+                            ++i;
+                        }
+                        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), new Route("Portland", "Salt Lake City", "purple", 5), testPlayers[1]);
+
+                        break;
+                    case 17:
+                        break;
+                    case 18:
+                        break;
+
+                    default:
+                        break;
+                }
+                counter++;
+            }
+        });
+
         setupView();
 
 

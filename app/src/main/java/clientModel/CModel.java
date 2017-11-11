@@ -386,5 +386,7 @@ public class CModel extends Observable {
 
     public void setCurrGameState(GameState currGameState) {
         this.currGameState = currGameState;
+        setChanged();
+        notifyObservers(this.currGameState);
     }
 }
