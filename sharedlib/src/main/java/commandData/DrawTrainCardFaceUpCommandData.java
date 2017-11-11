@@ -8,16 +8,18 @@ import modeling.Game;
 
 public class DrawTrainCardFaceUpCommandData extends Command {
     //Data Members
-    private String game;
-    private String resourceCardColor;
     private String playerName;
+    private String gameID;
+    private String resourceCardID;
+    private int position;
 
     //Constructors
-    public DrawTrainCardFaceUpCommandData (String game, String resourceCardColor, String playerName) {
+    public DrawTrainCardFaceUpCommandData (String playerName, String gameID, String resourceCardID, int position) {
         setType("drawTrainCardFaceUp");
-        this.game = game;
-        this.resourceCardColor = resourceCardColor;
         this.playerName = playerName;
+        this.gameID = gameID;
+        this.resourceCardID = resourceCardID;
+        this.position = position;
     }
     public DrawTrainCardFaceUpCommandData () {}
 
@@ -28,16 +30,22 @@ public class DrawTrainCardFaceUpCommandData extends Command {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    public String getGame() {
-        return game;
+    public String getGameID() {
+        return gameID;
     }
-    public void setGame(String game) {
-        this.game = game;
+    public void setGameID(String game) {
+        this.gameID = game;
     }
-    public String getResourceCardColor() {
-        return resourceCardColor;
+    public String getResourceCardID() {
+        return resourceCardID;
     }
-    public void setResourceCardColor(String resourceCardColor) {
-        this.resourceCardColor = resourceCardColor;
+    public void setResourceCardID(String resourceCardID) {
+        this.resourceCardID = resourceCardID;
+    }
+    public int getPosition() {
+        return position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

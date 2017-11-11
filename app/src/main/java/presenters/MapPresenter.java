@@ -27,6 +27,7 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
     }
+
     /*@Override
     public void claimRoute(Route r) {
 
@@ -35,21 +36,18 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof Game){
-            /*
-            GameList games = (GameList) arg;
-            myView.get().UpdateList(games.getGames());
-             */
-            //Game currGame = (Game) arg;
-            //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap().entrySet()){
                 myView.get().updateMap();
-            //}
-            //myView.get().updateMap();
         }
-        //ex, game won,player attributes changed(routeClaimed),
+        else if (((String) arg).equals("DrawResourceCard123")) {
+            myView.get().ResourceCardOption();
+        }
+        else if (((String) arg).equals("DrawDestinationCard")) {
+            myView.get().DestinationCardOption();
+        }
+        else if (((String) arg).equals("ClaimRoute")) {
+            myView.get().ClaimRouteOption();
+        }
     }
 
-//    public void UpdateChat(String s){
-//        ChatCommandData chatCommandData = new ChatCommandData(s);
-//        ServerProxy.getInstance().sendCommand(chatCommandData);
-//    }
+
 }

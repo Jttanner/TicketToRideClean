@@ -1,6 +1,7 @@
 package command;
 
 import ServerModel.ServerFacade;
+import ServerModel.ServerModel;
 import commandData.Command;
 import commandData.DrawTrainCardFaceUpCommandData;
 import result.CommandResult;
@@ -24,8 +25,12 @@ public class DrawTrainCardFaceUpCommand extends DrawTrainCardFaceUpCommandData i
         ServerFacade facade = ServerFacade.getInstance();
         CommandResult result;
 
-        //Temporary Implementation. May need to change
-        ServerFacade.getInstance().addCommandToList(drawTrainCardFaceUpCommandData.getGame(), drawTrainCardFaceUpCommandData);
+        //Add card to the Person
+        //Little confused as to how the Server Model works?
+
+
+        //Adds to the commands to be executed
+        facade.addCommandToList(drawTrainCardFaceUpCommandData.getGameID(), drawTrainCardFaceUpCommandData);
         result = new CommandResult(true);
 
         return result;

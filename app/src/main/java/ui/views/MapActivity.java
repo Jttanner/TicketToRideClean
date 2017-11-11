@@ -33,12 +33,11 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
-    private Button destinationCardButton;
+//    private Button destinationCardButton;
     private Button chatroom;
     private Button gameHistory;
-    private Button drawResourceCardButton;
-    private Button claimRouteButton;
-    //Temporary TurnStartOptions Button
+//    private Button drawResourceCardButton;
+//    private Button claimRouteButton;
     private Button turnStartOption;
 
     private ImageButton drawableDeck;
@@ -95,17 +94,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
             }
         });
 
-
-        destinationCardButton = (Button) findViewById(R.id.destinationCardButton);
-        destinationCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                DestinationCardFragment fragment = new DestinationCardFragment();
-                fragment.show(fm, "fragment_destinationcard");
-            }
-        });
-
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,15 +114,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
             }
         });
 
-        drawResourceCardButton = (Button) findViewById(R.id.resourceCardButton);
-        drawResourceCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                DrawResourceCardFragment fragment = new DrawResourceCardFragment();
-                fragment.show(fm, "resource_card_fragment");
-            }
-        });
 
         turnStartOption = (Button) findViewById(R.id.turnStartOptionButton);
         turnStartOption.setOnClickListener(new View.OnClickListener() {
@@ -171,33 +150,33 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
      * @pre Game is in initialization phase
      * @post drawable cards are visually updated
      */
-    private void initializeFaceUpCards(){
-        for (int i = 0; i < 5; ++i){
-            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().drawCard();
-            int drawableCardIndex = 0;
-            switch (i){
-                case 0:
-                    drawableCardIndex = R.id.first_drawable_card;
-                    break;
-                case 1:
-                    drawableCardIndex = R.id.second_drawable_card;
-                    break;
-                case 2:
-                    drawableCardIndex = R.id.third_drawable_card;
-                    break;
-                case 3:
-                    drawableCardIndex = R.id.fourth_drawable_card;
-                    break;
-                case 4:
-                    drawableCardIndex = R.id.fifth_drawable_card;
-                    break;
-                default:
-                    break;
-            }
-            ((ImageButton) findViewById(drawableCardIndex)).setImageResource(getTrainColorPictureID(card.getMyColor()));
-        }
-        drawableDeck.setImageResource(R.drawable.backcard);
-    }
+//    private void initializeFaceUpCards(){
+//        for (int i = 0; i < 5; ++i){
+//            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().drawCard();
+//            int drawableCardIndex = 0;
+//            switch (i){
+//                case 0:
+//                    drawableCardIndex = R.id.first_drawable_card;
+//                    break;
+//                case 1:
+//                    drawableCardIndex = R.id.second_drawable_card;
+//                    break;
+//                case 2:
+//                    drawableCardIndex = R.id.third_drawable_card;
+//                    break;
+//                case 3:
+//                    drawableCardIndex = R.id.fourth_drawable_card;
+//                    break;
+//                case 4:
+//                    drawableCardIndex = R.id.fifth_drawable_card;
+//                    break;
+//                default:
+//                    break;
+//            }
+//            ((ImageButton) findViewById(drawableCardIndex)).setImageResource(getTrainColorPictureID(card.getMyColor()));
+//        }
+//        drawableDeck.setImageResource(R.drawable.backcard);
+//    }
 
     /**
      * @pre color = any of: "black", "purple", "white", "blue", "yellow", "green", "red", "orange", or "wild"
@@ -298,26 +277,28 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
     }
 
     @Override
-    public void routeClaimed(Route r) {
+    public void ResourceCardOption() {
+        FragmentManager fm = getSupportFragmentManager();
+        DrawResourceCardFragment fragment = new DrawResourceCardFragment();
+        fragment.show(fm,"resource_card_fragment");
+    }
 
+    @Override
+    public void DestinationCardOption() {
+        FragmentManager fm = getSupportFragmentManager();
+        DestinationCardFragment fragment = new DestinationCardFragment();
+        fragment.show(fm,"destination_card_fragment");
+    }
+
+    @Override
+    public void ClaimRouteOption() {
+        FragmentManager fm = getSupportFragmentManager();
+        ClaimRouteFragment fragment = new ClaimRouteFragment();
+        fragment.show(fm,"claim_route_fragment");
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        if(arg.equals("ResourceCardOption")) {
-            drawResourceCardButton.setEnabled(true);
-            destinationCardButton.setEnabled(false);
-            claimRouteButton.setEnabled(false);
-        }
-        else if(arg.equals("DestinationCardOption")) {
-            destinationCardButton.setEnabled(true);
-            drawResourceCardButton.setEnabled(false);
-            claimRouteButton.setEnabled(false);
-        }
-        else if(arg.equals("ClaimRouteOption")) {
-            claimRouteButton.setEnabled(true);
-            destinationCardButton.setEnabled(false);
-            drawResourceCardButton.setEnabled(false);
-        }
+        //Don't think I need this anymore - Kwan
     }
 }

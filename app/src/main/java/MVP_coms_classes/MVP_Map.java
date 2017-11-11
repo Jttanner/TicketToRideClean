@@ -23,7 +23,9 @@ public interface MVP_Map {
         /**The activity context of the view*/
         Context getActivityContext();
         /**Updates the route to be a certain player's*/
-        void routeClaimed(Route r);
+        void ResourceCardOption();
+        void DestinationCardOption();
+        void ClaimRouteOption();
     }
     /**
      * Operations offered to View to communicate with Presenter.

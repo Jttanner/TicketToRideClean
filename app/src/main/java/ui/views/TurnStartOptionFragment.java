@@ -1,13 +1,14 @@
 package ui.views;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import MVP_coms_classes.MVP_TurnStartOption;
+import clientModel.CModel;
 import presenters.TurnStartOptionPresenter;
 import teamjapannumbahone.tickettoride.R;
 
@@ -25,13 +26,11 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
         myPresenter = new TurnStartOptionPresenter(this);
         View v = inflater.inflate(R.layout.fragment_turn_start_option, container, false);
         getDialog().show();
-        getDialog().getWindow().setLayout(1000, 1000);
-        setCancelable(false);
+        getDialog().getWindow().setLayout(1500, 1500);
         setUp(v);
         onClickers();
         return v;
     }
-
 
     public void setUp(View v) {
 
@@ -45,22 +44,24 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
             @Override
             public void onClick(View v) {
                 //Have all buttons greyed out, and ungrey the chosen option
-                getDialog().cancel();
                 myPresenter.ResourceCardOption();
+                getDialog().dismiss();
             }
         });
         drawDestinationCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDialog().cancel();
                 myPresenter.DestinationCardOption();
+                getDialog().cancel();
+
             }
         });
         claimRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDialog().cancel();
                 myPresenter.ClaimRouteOption();
+                getDialog().cancel();
+
             }
         });
     }

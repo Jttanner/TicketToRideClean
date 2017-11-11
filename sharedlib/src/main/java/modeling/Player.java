@@ -23,6 +23,10 @@ public class Player implements Comparator<Player> {
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
     private int points;
+    private int faceUpDrawn;
+    private int deckDrawn;
+    private int wildDrawn;
+
     /**Where in the Commadlist we are for this player*/
     private int commandIndex;
     private boolean isMyTurn;

@@ -9,7 +9,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import MVP_coms_classes.MVP_DrawResourceCard;
+import clientCommands.DrawTrainCardFaceUp;
+import clientModel.CModel;
+import commandData.DrawTrainCardFaceUpCommandData;
+import modeling.Player;
+import modeling.ResourceCard;
 import presenters.DrawResourceCardPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -37,7 +43,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
         setUp(v);
         onClickers();
-        setUpResourceView();
+        displayResourceCards(v);
 
         return v;
     }
@@ -54,36 +60,78 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         endTurn = (Button) v.findViewById(R.id.resourceCardEndTurn);
     }
     public void onClickers() {
+        //When a card is picked
+        //Add that card to player
+        //Remove that card from ResourceCardList
+        //Change face up card
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(ErrorChecking()) {
+                    String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+                    String gameID = CModel.getInstance().getCurrGame().getGameID();
+                    int position = 0;
 
+                    DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                    ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+                    getDialog().dismiss();
+                }
+                else {
+                    //You already drew a Wild Card, can't choose another card
+                    TurnFinished();
+                }
             }
         });
         resourceCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+                String gameID = CModel.getInstance().getCurrGame().getGameID();
+                int position = 1;
+                if(ErrorChecking()) {
+                    DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                    ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+                }
+                else {
+                    //You already drew a Wild Card, or something else so you can't
+                }
             }
         });
         resourceCard3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+                String gameID = CModel.getInstance().getCurrGame().getGameID();
+                int position = 2;
 
+                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
             }
         });
         resourceCard4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+                String gameID = CModel.getInstance().getCurrGame().getGameID();
+                int position = 3;
 
+                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
             }
         });
         resourceCard5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+                String gameID = CModel.getInstance().getCurrGame().getGameID();
+                int position = 4;
 
+                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
             }
         });
+        //Draw the next card in deck
+        //Add it to player
         resourceCardDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +150,74 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     * Set up face up cards and deck view when game starts.
     *
     */
-    public void setUpResourceView() {
+    public void displayResourceCards(View v) {
+        int wildCardCount = 0;
+        for(int i = 0; i < 5; ++i) {
+            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(i);
+            int cardID = 0;
+            switch (i){
+                case 0:
+                    cardID = R.id.resourceCard1;
+                    break;
+                case 1:
+                    cardID = R.id.resourceCard2;
+                    break;
+                case 2:
+                    cardID = R.id.resourceCard3;
+                    break;
+                case 3:
+                    cardID = R.id.resourceCard4;
+                    break;
+                case 4:
+                    cardID = R.id.resourceCard5;
+                    break;
+                default:
+                    break;
+            }
+            ((ImageButton) v.findViewById(cardID)).setImageResource(getResourceCardColorByID(card.getMyColor()));
+            if(card.getMyColor().equals("Wild")) {
+                wildCardCount++;
+            }
+        }
+        resourceCardDeck.setImageResource(R.drawable.backcard);
+//        if(wildCardCount >= 3) {
+//            //Need to reset the face up
+//            ResetFaceUpCommandData resetFaceUpCommandData = new ResetFaceUpCommandData();
+//            //Recursion?
+//            displayResourceCards(v);
+//        }
+    }
+    public int getResourceCardColorByID(String color) {
+        switch (color.toLowerCase()) {
+            case "black":
+                return R.drawable.blacktrain;
+            case "purple":
+                return R.drawable.purpletrain;
+            case "white":
+                return R.drawable.whitetrain;
+            case "blue":
+                return R.drawable.bluetrain;
+            case "yelllow":
+                return R.drawable.yellowtrain;
+            case "green":
+                return R.drawable.greentrain;
+            case "red":
+                return R.drawable.redtrain;
+            case "orange":
+                return R.drawable.orangetrain;
+            default:
+                return R.drawable.wildtrain;
+        }
+    }
+    public boolean ErrorChecking() {
+        boolean result = true;
 
+        return  result;
+    }
+    public void TurnFinished() {
+        //Send command to end their turn
+        //Reset the resource card count
+        CModel.getInstance().getUserPlayer();
     }
     @Override
     public void upDateFaceUp() {

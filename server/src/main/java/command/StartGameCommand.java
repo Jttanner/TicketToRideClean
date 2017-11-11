@@ -2,6 +2,7 @@ package command;
 
 import ServerModel.ServerFacade;
 import commandData.StartGameCommandData;
+import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -31,6 +32,8 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
         //} else{
        //     result = new CommandResult(false);
       //  }
+
+
         result.setType(this.getType());
         return result;
     }

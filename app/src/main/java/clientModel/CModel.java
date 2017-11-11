@@ -102,9 +102,22 @@ public class CModel extends Observable {
         }
 
 //        currGame.addToGameHistory(history);
-        History observerHistory = new History();
+       // History observerHistory = new History();
         setChanged();
-        notifyObservers(observerHistory);
+        notifyObservers("UpdateGameHistory");
+    }
+    //For the Turn Start
+    public void DrawResourceCard() {
+        setChanged();
+        notifyObservers("DrawResourceCard123");
+    }
+    public void DrawDestinationCard() {
+        setChanged();
+        notifyObservers("DrawDestinationCard");
+    }
+    public void ClaimRoute() {
+        setChanged();
+        notifyObservers("ClaimRoute");
     }
     public void updatePlayerStatsView (Game game) {
 
@@ -199,13 +212,13 @@ public class CModel extends Observable {
         return null;
     }
 
-    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
-
-        player.addResourceCard(card);
-        setChanged();
-        notifyObservers(currGame);
-
-    }
+//    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
+//
+//        player.addResourceCard(card);
+//        setChanged();
+//        notifyObservers(currGame);
+//
+//    }
 
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList
@@ -315,18 +328,7 @@ public class CModel extends Observable {
     }
 
     //KWANS STUFF :)
-    public void resourceCardOption() {
-        setChanged();
-        notifyObservers("ResourceCardOption");
-    }
-    public void destinationCardOption() {
-        setChanged();
-        notifyObservers("DestinationCardOption");
-    }
-    public void claimRouteOption() {
-        setChanged();
-        notifyObservers("ClaimRouteOption");
-    }
+
     @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);

@@ -9,13 +9,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/turnStartOptionDestinationCard"/>
+        android:id="@+id/turnStartOptionResourceCard"
+        android:text="@string/turnStartOptionResourceCard"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/turnStartOptionResourceCard"/>
+        android:id="@+id/turnStartOptionDestinationCard"
+        android:text="@string/turnStartOptionDestinationCard"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/turnStartOptionClaimRoute"/>
+        android:id="@+id/turnStartOptionClaimRoute"
+        android:text="@string/turnStartOptionClaimRoute"/>
 </LinearLayout>

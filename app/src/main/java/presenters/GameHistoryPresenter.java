@@ -23,7 +23,7 @@ public class GameHistoryPresenter implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(arg instanceof History) {
+        if(((String) arg).equals("UpdateGameHistory")) {
             //Call the view and update it with a new game history list
             myView.get().updateGameHistory(CModel.getInstance().getCurrGame().getGameHistoryList());
         }
