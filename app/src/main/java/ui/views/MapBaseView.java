@@ -213,8 +213,8 @@ public class MapBaseView extends View {
      */
     public String decodeCityTouched(MotionEvent event){
         for (CityDrawData city : cities){
-            if (city.getX() > event.getX() - 5 && city.getX() < event.getX() + 5
-                    && city.getY() > event.getY() - 5 && city.getY() < event.getY() + 5){
+            if (city.getX() > event.getX() - 15 && city.getX() < event.getX() + 15
+                    && city.getY() > event.getY() - 15 && city.getY() < event.getY() + 15){
                 return city.getCityName();
             }
         }

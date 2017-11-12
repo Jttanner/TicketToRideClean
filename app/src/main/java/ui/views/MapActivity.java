@@ -2,9 +2,13 @@ package ui.views;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,30 +17,37 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import commandData.ClaimRouteCommandData;
+import commandData.DrawTrainCardDeckCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.Player;
 import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**
  * Activity which is the base for the game itself.  Holds the gameboard as the main view, with a sliding drawer for
  * to hold data relevant to the game for each player. Other views relevant to the game stem from this.
  */
-public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps, Observer{
+public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private static final String TAG = "MapActivity";
     private RecyclerView mGameStatus;
     public MVP_Map.MapPresOps presenter;
+    private Button destinationCard;
     private Button chatroom;
     private Button gameHistory;
-    private Button turnStartOption;
+    private Button demo;
 
     private ImageButton drawableDeck;
 
@@ -125,36 +136,36 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
             }
         });
 
+        //firstDrawableTrainCard = (ImageButton) findViewById(R.id.first_drawable_card);
 
-        turnStartOption = (Button) findViewById(R.id.turnStartOptionButton);
-        turnStartOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                TurnStartOptionFragment fragment = new TurnStartOptionFragment();
-                fragment.show(fm, "start");
-            }
-        });
+        //firstDrawableTrainCard.setOnClickListener(new View.OnClickListener(){
+
+          //  @Override
+            //public void onClick(View v) {
+
+//            }
+  //      });
 
 
+    //    secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
 
 
         mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
-       /* mapBaseView.setOnTouchListener(new View.OnTouchListener() {
+        mapBaseView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 FragmentManager fm = getSupportFragmentManager();
                 ClaimRouteFragment fragment = new ClaimRouteFragment();
                 String selectedCity = mapBaseView.decodeCityTouched(event);
-                fragment.setSelectedCity(selectedCity);
+                fragment.setSelectedCityName(selectedCity);
                 //TODO: Add check to the game state once it is implemented!
-                if (fragment.getSelectedCity() != null){
+                if (fragment.getSelectedCityName() != null){
                     //populate recyclerView with routes
                     fragment.show(fm, "fragment_claim_route");
                 }
                 return true;
             }
-        });*/
+        });
 
 
         setupView();
@@ -262,13 +273,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps,
 
     @Override
     public void ClaimRouteOption() {
-        FragmentManager fm = getSupportFragmentManager();
-        ClaimRouteFragment fragment = new ClaimRouteFragment();
-        fragment.show(fm,"claim_route_fragment");
+        
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        //Don't think I need this anymore - Kwan
-    }
 }

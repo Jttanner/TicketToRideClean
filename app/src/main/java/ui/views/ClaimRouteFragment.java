@@ -1,30 +1,35 @@
 package ui.views;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import Adapters.ClaimRouteAdapter;
+import Adapters.GameHistoryAdapter;
 import MVP_coms_classes.MVP_ClaimRoute;
-import MVP_coms_classes.MVP_DestCard;
+import clientModel.CModel;
+import presenters.MapPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 public class ClaimRouteFragment extends android.support.v4.app.DialogFragment implements MVP_ClaimRoute.ClaimRouteMapViewOps{
     private final String TAG = "claim_route_fragment";
 
+    private RecyclerView recyclerView;
+    private ClaimRouteAdapter adapter;
 
 
-    private String selectedCity;
+    private String selectedCityName;
 
-    public String getSelectedCity() {
-        return selectedCity;
+    public String getSelectedCityName() {
+        return selectedCityName;
     }
 
-    public void setSelectedCity(String selectedCity) {
-        this.selectedCity = selectedCity;
+    public void setSelectedCityName(String selectedCityName) {
+        this.selectedCityName = selectedCityName;
     }
 
     private OnFragmentInteractionListener mListener;
@@ -33,6 +38,11 @@ public class ClaimRouteFragment extends android.support.v4.app.DialogFragment im
         // Required empty public constructor
     }
 
+    MapPresenter mapPresenter;
+
+    public void setMapPresenter(MapPresenter presenter){
+        this.mapPresenter = mapPresenter;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +54,21 @@ public class ClaimRouteFragment extends android.support.v4.app.DialogFragment im
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_claim_route, container, false);
+
+        View v =  inflater.inflate(R.layout.fragment_claim_route, container, false);
+
+        getDialog().show();
+        getDialog().getWindow().setLayout(1000,1000);
+
+        recyclerView = (RecyclerView) v.findViewById(R.id.choose_claim_route_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ClaimRouteAdapter(CModel.getInstance().getUnclaimedRouteList().getCityRouteInfoStrings(selectedCityName), getContext());
+        recyclerView.setAdapter(adapter);
+
+        return v;
     }
 
-    
+
     @Override
     public void UpdateClaimRouteView() {
 

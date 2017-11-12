@@ -1,6 +1,8 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,9 +10,11 @@ import java.util.Observer;
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import commandData.ChatCommandData;
+import modeling.City;
 import modeling.Game;
 import modeling.Player;
 import modeling.Route;
+import modeling.RouteList;
 import servercomms.ServerProxy;
 
 /**
@@ -49,5 +53,8 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         }
     }
 
+    public List<String> getCityConnections(String baseCityName){
+        return CModel.getInstance().getUnclaimedRouteList().getCityRouteInfoStrings(baseCityName);
+    }
 
 }

@@ -82,6 +82,8 @@ public class CModel extends Observable {
         return claimedRouteList;
     }
 
+    public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
+
     //    private List<String> gameHistory = new ArrayList<>();
 //    public List<String> getGameHistory() {
 //        return gameHistory;
@@ -139,6 +141,7 @@ public class CModel extends Observable {
     public Game getCurrGame() {
         return currGame;
     }
+
 
 
     /*

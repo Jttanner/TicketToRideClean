@@ -34,6 +34,38 @@ public class RouteList {
         routesClaimed.remove(route);
     }
 
+    public List<Route> getRoutesFromCity(String cityName){
+        List<Route> connections = new ArrayList<>();
+        for (Route route : routesAvailable){
+            if (route.getFirstCityName().equals(cityName) || route.getSecondCityName().equals(cityName)){
+                connections.add(route);
+            }
+        }
+        return connections;
+    }
+
+    public List<String> getCityRouteInfoStrings(String baseCityName){
+        List<String> cityConnectionsInfo = new ArrayList<>();
+        for (Route route : getRoutesFromCity(baseCityName)){
+            StringBuilder cityInfo = new StringBuilder();
+            if (route.getFirstCityName().equals(baseCityName)){
+                cityInfo.append(route.getFirstCityName());
+                cityInfo.append(" to ");
+                cityInfo.append(route.getSecondCityName());
+            } else { //will always equal the second, otherwise it won't be in the list returned to us.
+                cityInfo.append(route.getSecondCityName());
+                cityInfo.append(" to ");
+                cityInfo.append(route.getFirstCityName());
+            }
+            cityInfo.append(" \nDistance: ");
+            cityInfo.append(route.getDistance());
+            cityInfo.append(" Color: ");
+            cityInfo.append(route.getTrainColorNeeded());
+            cityConnectionsInfo.add(cityInfo.toString());
+        }
+        return cityConnectionsInfo;
+    }
+
     private void setDoubles(){
         Route lastRoute = null;
         for (Route route : routesAvailable){

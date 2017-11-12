@@ -58,6 +58,8 @@ public class Route {
     private String trainColorNeeded;
     private Player owner = null;
 
+
+
     public void setIsDouble(){
         isDouble = true;
     }
@@ -118,7 +120,7 @@ public class Route {
         }
     }
 
-    String getTrainColorNeeded(){
+    public String getTrainColorNeeded(){
         return  trainColorNeeded;
     }
 
