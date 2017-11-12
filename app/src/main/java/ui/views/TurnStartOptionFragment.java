@@ -29,6 +29,7 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
         getDialog().getWindow().setLayout(1500, 1500);
         setUp(v);
         onClickers();
+
         return v;
     }
 
@@ -43,15 +44,16 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
         drawResourceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Have all buttons greyed out, and ungrey the chosen option
-                myPresenter.ResourceCardOption();
+       //Have all buttons greyed out, and ungrey the chosen option
+        //myPresenter.ResourceCardOption();
+                ((MapActivity)getActivity()).ResourceCardOption();
                 getDialog().dismiss();
             }
         });
         drawDestinationCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPresenter.DestinationCardOption();
+                ((MapActivity)getActivity()).DestinationCardOption();
                 getDialog().cancel();
 
             }
@@ -59,7 +61,7 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
         claimRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPresenter.ClaimRouteOption();
+                ((MapActivity)getActivity()).ClaimRouteOption();
                 getDialog().cancel();
 
             }

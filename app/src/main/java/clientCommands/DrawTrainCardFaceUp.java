@@ -26,11 +26,11 @@ public class DrawTrainCardFaceUp implements ClientCommand {
         //Update the Game History
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
-        //We can add the card to the player here instead of Server Side?
+        //Add card to player
         CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position));
 
         //Change the face up card
-        CModel.getInstance().getCurrGame().getResourceCardList().upDateFaceUpPile(position);
+        CModel.getInstance().upDateFaceUpPile(position);
 
     }
 
@@ -39,6 +39,6 @@ public class DrawTrainCardFaceUp implements ClientCommand {
         return playerName + " drew a resource card from face up pile: " + findColor();
     }
     public String findColor() {
-        return CModel.getInstance().getCurrGame().getResourceCardList().findCardByID(resourceCardID).getMyColor();
+        return CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getMyColor();
     }
 }

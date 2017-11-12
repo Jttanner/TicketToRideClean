@@ -4,6 +4,7 @@ import ServerModel.ServerFacade;
 import ServerModel.ServerModel;
 import commandData.Command;
 import commandData.DrawTrainCardFaceUpCommandData;
+import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -25,9 +26,13 @@ public class DrawTrainCardFaceUpCommand extends DrawTrainCardFaceUpCommandData i
         ServerFacade facade = ServerFacade.getInstance();
         CommandResult result;
 
-        //Add card to the Person
-        //Little confused as to how the Server Model works?
+        //Add card to player and replace the face up card
+        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getPlayer(drawTrainCardFaceUpCommandData.getPlayerName()).addResourceCard(facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().getFaceUpCard(drawTrainCardFaceUpCommandData.getPosition()));
+        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().upDateFaceUpPile(drawTrainCardFaceUpCommandData.getPosition());
 
+        //Debugging purposes
+        Game game = facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID());
+        game.getResourceCardList();
 
         //Adds to the commands to be executed
         facade.addCommandToList(drawTrainCardFaceUpCommandData.getGameID(), drawTrainCardFaceUpCommandData);

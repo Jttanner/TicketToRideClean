@@ -9,12 +9,12 @@ import modeling.ResourceCard;
 public interface MVP_DrawResourceCard {
 
     //Allow presenter to Update the View
-    public interface DrawResourceCardViewOps {
+     interface DrawResourceCardViewOps {
         void upDateFaceUp();
     }
 
     //Processes User Input
-    public interface DrawResourceCardPresOps {
+     interface DrawResourceCardPresOps {
         void drawCard(ResourceCard card);
         void shuffleDiscardPile();
     }

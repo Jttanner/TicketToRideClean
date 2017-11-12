@@ -30,14 +30,15 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     private ImageButton resourceCard5;
     private ImageButton resourceCardDeck;
     private Button endTurn;
-
     private MVP_DrawResourceCard.DrawResourceCardPresOps myPresenter;
+    private View v;
+    public DrawResourceCardFragment() {
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_draw_resource_card, container, false);
+        v = inflater.inflate(R.layout.fragment_draw_resource_card, container, false);
         getDialog().show();
         getDialog().getWindow().setLayout(1000,1000);
 
@@ -74,7 +75,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
                     DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
                     ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
-                    getDialog().dismiss();
                 }
                 else {
                     //You already drew a Wild Card, can't choose another card
@@ -221,6 +221,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     }
     @Override
     public void upDateFaceUp() {
-
+        displayResourceCards(v);
     }
 }

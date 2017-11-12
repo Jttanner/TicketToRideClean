@@ -99,28 +99,20 @@ public class CModel extends Observable {
                 game.addToGameHistory(history);
             }
         }
-        if(currGame!=null){
-            currGame.addToGameHistory(history);
-        }
+//        if(currGame!=null){
+//            currGame.addToGameHistory(history);
+//        }
 
-//        currGame.addToGameHistory(history);
-       // History observerHistory = new History();
         setChanged();
         notifyObservers("UpdateGameHistory");
     }
-    //For the Turn Start
-    public void DrawResourceCard() {
+    public void upDateFaceUpPile(int position) {
+        getCurrGame().getResourceCardList().upDateFaceUpPile(position);
+
         setChanged();
-        notifyObservers("DrawResourceCard123");
+        notifyObservers("UpdateFaceUp");
     }
-    public void DrawDestinationCard() {
-        setChanged();
-        notifyObservers("DrawDestinationCard");
-    }
-    public void ClaimRoute() {
-        setChanged();
-        notifyObservers("ClaimRoute");
-    }
+
     public void updatePlayerStatsView (Game game) {
 
         setChanged();

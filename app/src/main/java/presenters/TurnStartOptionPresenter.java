@@ -27,17 +27,17 @@ public class TurnStartOptionPresenter implements MVP_TurnStartOption.TurnStartOp
 
     @Override
     public void ResourceCardOption() {
-        CModel.getInstance().DrawResourceCard();
+        //CModel.getInstance().DrawResourceCard();
     }
 
     @Override
     public void DestinationCardOption() {
-        CModel.getInstance().DrawDestinationCard();
+        //CModel.getInstance().DrawDestinationCard();
     }
 
     @Override
     public void ClaimRouteOption() {
-        CModel.getInstance().ClaimRoute();
+        //CModel.getInstance().ClaimRoute();
     }
 
 }

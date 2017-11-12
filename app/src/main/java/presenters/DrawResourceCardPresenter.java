@@ -19,11 +19,13 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
     public DrawResourceCardPresenter(MVP_DrawResourceCard.DrawResourceCardViewOps view) {
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
-    }
 
+    }
     @Override
     public void update(Observable o, Object arg) {
-
+        if(((String) arg).equals("UpdateFaceUp")) {
+            myView.get().upDateFaceUp();
+        }
     }
 
     @Override
