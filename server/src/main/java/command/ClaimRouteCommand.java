@@ -10,6 +10,7 @@ import result.CommandResult;
 
 public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand {
     private ClaimRouteCommandData claimRouteCommandData;
+
     public ClaimRouteCommand(ClaimRouteCommandData data){
         super();
         this.claimRouteCommandData = data;
@@ -21,10 +22,12 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
         ServerFacade facade = ServerFacade.getInstance();
         CommandResult result;
 
+
+
         //Temporary Implementation. May need to change
         facade.addCommandToList(claimRouteCommandData.getGameName(), claimRouteCommandData);
         result = new CommandResult(true);
-
+        
         return result;
     }
 }

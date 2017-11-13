@@ -150,6 +150,16 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     //    secondDrawableTrainCard = (ImageButton) findViewById(R.id.second_drawable_card);
 
 
+
+
+
+        setupView();
+
+
+    }
+
+
+    public void enableClaimRoute(){
         mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
         mapBaseView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -168,12 +178,21 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 return true;
             }
         });
-
-
-        setupView();
-
-
     }
+
+    public void disableClaimRoute(){
+        mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+        mapBaseView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+
+                }
+                return true;
+            }
+        });
+    }
+
 
     /**
      * Updates the TextView which states whose turn it currently is
@@ -263,6 +282,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public void ResourceCardOption() {
         FragmentManager fm = getSupportFragmentManager();
         DrawResourceCardFragment fragment = new DrawResourceCardFragment();
+        disableClaimRoute();
         fragment.show(fm,"resource_card_fragment");
     }
 
@@ -270,12 +290,13 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     public void DestinationCardOption() {
         FragmentManager fm = getSupportFragmentManager();
         DestinationCardFragment fragment = new DestinationCardFragment();
+        disableClaimRoute();
         fragment.show(fm,"destination_card_fragment");
     }
 
     @Override
     public void ClaimRouteOption() {
-
+        enableClaimRoute();
     }
 
 }
