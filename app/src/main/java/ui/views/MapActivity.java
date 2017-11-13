@@ -154,14 +154,16 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         mapBaseView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                FragmentManager fm = getSupportFragmentManager();
-                ClaimRouteFragment fragment = new ClaimRouteFragment();
-                String selectedCity = mapBaseView.decodeCityTouched(event);
-                fragment.setSelectedCityName(selectedCity);
-                //TODO: Add check to the game state once it is implemented!
-                if (fragment.getSelectedCityName() != null){
-                    //populate recyclerView with routes
-                    fragment.show(fm, "fragment_claim_route");
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    FragmentManager fm = getSupportFragmentManager();
+                    ClaimRouteFragment fragment = new ClaimRouteFragment();
+                    String selectedCity = mapBaseView.decodeCityTouched(event);
+                    fragment.setSelectedCityName(selectedCity);
+                    //TODO: Add check to the game state once it is implemented!
+                    if (fragment.getSelectedCityName() != null){
+                        //populate recyclerView with routes
+                        fragment.show(fm, "fragment_claim_route");
+                    }
                 }
                 return true;
             }
@@ -273,7 +275,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     @Override
     public void ClaimRouteOption() {
-        
+
     }
 
 }
