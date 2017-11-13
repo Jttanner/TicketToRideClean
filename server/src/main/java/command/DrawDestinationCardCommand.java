@@ -32,7 +32,7 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
         DrawDestinationCardCommandResult result;
         List<DestinationCard> destinationCardList = facade.getDestinationCardList();
         if(destinationCardList == null) {
-            //facade.addCommandToList(facade.getGame().getGameID(),commandData);
+            //facade.addCommandToList(facade.getGameName().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
             setType("drawDestinationCards");
             return result;

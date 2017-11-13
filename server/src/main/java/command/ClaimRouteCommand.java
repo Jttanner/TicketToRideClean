@@ -1,7 +1,5 @@
 package command;
 
-import javax.swing.Icon;
-
 import ServerModel.ServerFacade;
 import commandData.ClaimRouteCommandData;
 import result.CommandResult;
@@ -24,7 +22,7 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
         CommandResult result;
 
         //Temporary Implementation. May need to change
-        facade.addCommandToList(claimRouteCommandData.getGame(), claimRouteCommandData);
+        facade.addCommandToList(claimRouteCommandData.getGameName(), claimRouteCommandData);
         result = new CommandResult(true);
 
         return result;

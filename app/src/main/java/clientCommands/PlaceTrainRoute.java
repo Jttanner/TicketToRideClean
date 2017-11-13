@@ -16,7 +16,7 @@ public class PlaceTrainRoute implements ClientCommand {
     public PlaceTrainRoute (ClaimRouteCommandData data) {
         startCity = data.getStartCity();
         endCity = data.getEndCity();
-        gameID = data.getGame();
+        gameID = data.getGameName();
     }
     @Override
     public void execute() {

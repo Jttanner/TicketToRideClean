@@ -29,7 +29,7 @@ public class ClaimDestinationCardCommand extends ClaimDestinationCardCommandData
         List<DestinationCard> claimedDestinationCards = facade.distributeUsedDestinationCards(commandData);
         CommandResult result;
         if(claimedDestinationCards == null) {
-            //facade.addCommandToList(facade.getGame().getGameID(),commandData);
+            //facade.addCommandToList(facade.getGameName().getGameID(),commandData);
             result = new CommandResult(false, "failed");
             setType("claimDestinationCards");
             return result;

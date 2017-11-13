@@ -1,8 +1,5 @@
 package commandData;
 
-import modeling.Game;
-import modeling.Player;
-
 /**
  * Created by korea on 10/28/2017.
  */
@@ -11,16 +8,18 @@ public class ClaimRouteCommandData extends Command {
     //Data Members
     private String startCity;
     private String endCity;
-    private String game;
+    private String gameName;
     private String playerName;
+    private String routeColor;
 
     //Constructors
-    public ClaimRouteCommandData(String game, String startCity, String endCity, String playerName) {
+    public ClaimRouteCommandData(String gameName, String startCity, String endCity, String playerName, String routeColor) {
         setType("claimRoute");
-        this.game = game;
+        this.gameName = gameName;
         this.startCity = startCity;
         this.endCity = endCity;
         this.playerName = playerName;
+        this.routeColor = routeColor;
     }
     public ClaimRouteCommandData () {
     }
@@ -32,11 +31,11 @@ public class ClaimRouteCommandData extends Command {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    public String getGame() {
-        return game;
+    public String getGameName() {
+        return gameName;
     }
-    public void setGame(String game) {
-        this.game = game;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
     public String getStartCity() {
         return startCity;
@@ -49,5 +48,13 @@ public class ClaimRouteCommandData extends Command {
     }
     public void setEndCity(String endCity) {
         this.endCity = endCity;
+    }
+
+    public String getRouteColor() {
+        return routeColor;
+    }
+
+    public void setRouteColor(String routeColor) {
+        this.routeColor = routeColor;
     }
 }
