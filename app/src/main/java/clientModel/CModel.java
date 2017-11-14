@@ -106,11 +106,15 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers("UpdateGameHistory");
     }
+    public void drawResourceCard(){
+        setChanged();
+        notifyObservers("ResourceFragmentTwo");
+    }
     public void upDateFaceUpPile(int position) {
         getCurrGame().getResourceCardList().upDateFaceUpPile(position);
 
         setChanged();
-        notifyObservers("UpdateFaceUp");
+        notifyObservers("UpdateFaceUpView");
     }
 
     public void updatePlayerStatsView (Game game) {
@@ -174,7 +178,7 @@ public class CModel extends Observable {
             }
         }
 
-        incrementUsersCommandIndex();
+        //incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
     }

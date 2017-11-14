@@ -13,8 +13,10 @@ import modeling.Route;
 
 public class OneCardDrawnState extends GameState {
     @Override
-    void drawResourceCard(ResourceCard c) {
-        super.drawResourceCard(c);
+    public void drawResourceCard(int position) {
+        //If wild and face up then do nothing. Toast that you can't chose face up Wild
+        //Otherwise send command.
+
     }
 
     @Override

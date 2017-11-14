@@ -1,6 +1,8 @@
 package clientCommands;
 
 import clientModel.CModel;
+import clientModel.NotMyTurn;
+import clientModel.OneCardDrawnState;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.ResourceCard;
 
@@ -21,24 +23,35 @@ public class DrawTrainCardFaceUp implements ClientCommand {
     }
     @Override
     public void execute() {
-        resourceCardID = CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getCardID();
+//        if(CModel.getInstance().getCurrGameState().equals(new OneCardDrawnState()) || CModel.getInstance().getCurrGameState().equals(new WildCardState())) {
+        if(CModel.getInstance().getCurrGameState().equals(new OneCardDrawnState())) {
+            CModel.getInstance().setCurrGameState(new NotMyTurn());
 
-        //Update the Game History
-        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
+        }
+        else {
+            //Update the Game History
+            CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
-        //Add card to player
-        CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position));
+            //Add card to player
+            CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position));
 
-        //Change the face up card
-        CModel.getInstance().upDateFaceUpPile(position);
+            //Change the face up card
+            CModel.getInstance().upDateFaceUpPile(position);
+
+            //Set new State
+            CModel.getInstance().setCurrGameState(new OneCardDrawnState());
+        }
+
+
 
     }
 
     @Override
     public String toString() {
-        return playerName + " drew a resource card from face up pile: " + findColor();
+//        return playerName + " drew a resource card from face up pile: " + findColor();
+        return playerName + " drew a resource card from face up pile: ";
     }
-    public String findColor() {
-        return CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getMyColor();
-    }
+//    public String findColor() {
+//        return CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getMyColor();
+//    }
 }

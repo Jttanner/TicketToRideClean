@@ -23,14 +23,19 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
     }
     @Override
     public void update(Observable o, Object arg) {
-        if(((String) arg).equals("UpdateFaceUp")) {
-            myView.get().upDateFaceUp();
+        if(((String) arg).equals("UpdateFaceUpView")) {
+           if(myView != null) {
+               //myView.get().upDateFaceUp();
+               myView.get().close();
+               CModel.getInstance().drawResourceCard();
+           }
         }
+
     }
 
     @Override
-    public void drawCard(ResourceCard card) {
-
+    public void drawCard(int position) {
+        CModel.getInstance().getCurrGameState().drawResourceCard(position);
     }
 
     @Override

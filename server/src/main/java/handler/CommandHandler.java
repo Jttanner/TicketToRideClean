@@ -78,12 +78,12 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = startGameCommand.execute();
                     break;
                 case "getCommandList":
-                    System.out.println("Command handler: getCommandList 2");
+                    //System.out.println("Command handler: getCommandList 2");
                     GetCmndDataFromServer getCmndDataFromServer = gson.fromJson(reqData,GetCmndDataFromServer.class);
                     String gameId = getCmndDataFromServer.getGameId();
                     GetCmndListServer commandListServer = new GetCmndListServer(gameId);
                     commandData = new GetCmndListDataToClient(commandListServer.execute(),gameId);
-                    System.out.println("Command handler: getCommandList 3");
+                    //System.out.println("Command handler: getCommandList 3");
                     break;
                 case "addChat":
                     ChatCommandData chatCommandData = gson.fromJson(reqData, ChatCommandData.class);

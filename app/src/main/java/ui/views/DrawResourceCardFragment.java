@@ -2,6 +2,7 @@ package ui.views;
 
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,18 +69,9 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ErrorChecking()) {
-                    String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-                    String gameID = CModel.getInstance().getCurrGame().getGameID();
-                    int position = 0;
+                myPresenter.drawCard(0);
 
-                    DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
-                    ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
-                }
-                else {
-                    //You already drew a Wild Card, can't choose another card
-                    TurnFinished();
-                }
+
             }
         });
         resourceCard2.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +86,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 }
                 else {
                     //You already drew a Wild Card, or something else so you can't
+                    TurnFinished();
                 }
             }
         });
@@ -127,7 +120,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 int position = 4;
 
                 DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
-                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
             }
         });
         //Draw the next card in deck
@@ -222,5 +214,10 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     @Override
     public void upDateFaceUp() {
         displayResourceCards(v);
+    }
+
+    @Override
+    public void close() {
+        getDialog().dismiss();
     }
 }

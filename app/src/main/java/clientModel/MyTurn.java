@@ -2,9 +2,11 @@ package clientModel;
 
 import java.util.List;
 
+import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
 import modeling.Route;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 11/9/2017.
@@ -14,8 +16,15 @@ import modeling.Route;
 
 public class MyTurn extends GameState {
     @Override
-    void drawResourceCard(ResourceCard c) {
-        endState();
+    public void drawResourceCard(int position) {
+        String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+        String gameID = CModel.getInstance().getCurrGame().getGameID();
+
+        //Differentiate between face up and deck
+        DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "TEMP - My turn State", position);
+        ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+        //endState();
+
     }
 
     @Override

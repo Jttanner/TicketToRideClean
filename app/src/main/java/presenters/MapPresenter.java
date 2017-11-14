@@ -42,14 +42,17 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         if (arg instanceof Game){
                 myView.get().updateMap();
         }
-        else if (((String) arg).equals("DrawResourceCard123")) {
+//        else if (((String) arg).equals("DrawResourceCard123")) {
+//            myView.get().ResourceCardOption();
+//        }
+//        else if (((String) arg).equals("DrawDestinationCard")) {
+//            myView.get().DestinationCardOption();
+//        }
+//        else if (((String) arg).equals("ClaimRoute")) {
+//            myView.get().ClaimRouteOption();
+//        }
+        if(((String) arg).equals("ResourceFragmentTwo")) {
             myView.get().ResourceCardOption();
-        }
-        else if (((String) arg).equals("DrawDestinationCard")) {
-            myView.get().DestinationCardOption();
-        }
-        else if (((String) arg).equals("ClaimRoute")) {
-            myView.get().ClaimRouteOption();
         }
     }
 

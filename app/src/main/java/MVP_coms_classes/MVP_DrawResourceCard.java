@@ -11,11 +11,12 @@ public interface MVP_DrawResourceCard {
     //Allow presenter to Update the View
      interface DrawResourceCardViewOps {
         void upDateFaceUp();
+        void close();
     }
 
     //Processes User Input
      interface DrawResourceCardPresOps {
-        void drawCard(ResourceCard card);
+        void drawCard(int position);
         void shuffleDiscardPile();
     }
 }

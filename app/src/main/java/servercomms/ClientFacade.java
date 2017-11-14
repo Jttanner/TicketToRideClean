@@ -55,13 +55,17 @@ class ClientFacade {
             else if (result instanceof ClaimDestinationCardCommandResult) {
                 CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards(), 25);
             }
+            else if(result instanceof CommandResult) {
+                //Draw Face Up Card
+                Log.d(TAG, "Draw Face Up: " + result.getClass());
+            }
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {
                    // CModel.getInstance().toggleGameHasStarted();
                 }
             }
             else {
-                Log.d(TAG, "We got a different class then expected");
+                Log.d(TAG, "We got a different class then expected: " + result.getClass());
             }
         }
     }
