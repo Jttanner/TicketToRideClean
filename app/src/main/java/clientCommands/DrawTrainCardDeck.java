@@ -12,37 +12,24 @@ import modeling.ResourceCard;
 
 public class DrawTrainCardDeck implements ClientCommand {
     private String playerName;
-    private String resourceCardColor;
     private String gameID;
+    private ResourceCard resourceCard;
+
 
 
     public DrawTrainCardDeck (DrawTrainCardDeckCommandData data) {
-        resourceCardColor = data.getResourceCardColor();
-        gameID = data.getGame();
+        resourceCard = data.getResourceCard();
+        gameID = data.getGameID();
         playerName = data.getPlayerName();
 
     }
     @Override
     public void execute() {
-        //Find the right game
-        Game updatedGame = null;
-        for(Game tempGame: CModel.getInstance().getAllGames())
-        {
-            if(tempGame.getGameID().equals(gameID)){
-                updatedGame = tempGame;
-            }
-        }
-        //Create the resource card
-        ResourceCard card = new ResourceCard(resourceCardColor, true);
-        //Update the game
-        updatedGame.getPlayer(playerName).addResourceCard(card);
-
-        CModel.getInstance().updatePlayerStatsView(updatedGame);
-        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
+        //Not using this right now
     }
 
     @Override
     public String toString() {
-        return playerName + " drew a resource card from the deck: " + resourceCardColor;
+        return playerName + " drew a resource card from the deck: " + resourceCard.getMyColor();
     }
 }
