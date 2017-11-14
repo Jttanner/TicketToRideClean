@@ -20,7 +20,7 @@ public class OneCardDrawnState extends GameState {
         String gameID = CModel.getInstance().getCurrGame().getGameID();
 
         //If wild and face up then do nothing. Toast that you can't chose face up Wild
-        if(resourceCard.getMyColor().equals("Wild") || resourceCard.isFaceUp()) {
+        if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
 
 
         }

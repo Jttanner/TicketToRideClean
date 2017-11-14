@@ -37,7 +37,7 @@ public class MyTurn extends GameState {
 
         //Set new State
         //If card is wild and was face up, end turn
-        if(resourceCard.getMyColor().equals("Wild") || resourceCard.isFaceUp()) {
+        if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
             CModel.getInstance().setCurrGameState(new NotMyTurn());
         }
         else {

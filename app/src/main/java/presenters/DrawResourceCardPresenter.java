@@ -29,6 +29,7 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
                     myView.get().upDateFaceUp();
                 }
                 else if(((String) arg).equals("CloseResourceFragment")) {
+                    //myView.get().unlock();
                     myView.get().close();
                 }
             }
