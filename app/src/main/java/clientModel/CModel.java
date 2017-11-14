@@ -106,13 +106,15 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers("UpdateGameHistory");
     }
-    public void drawResourceCard(){
+//    public void drawResourceCard(){
+//        setChanged();
+//        notifyObservers("ResourceFragmentTwo");
+//    }
+    public void closeResourceFragment() {
         setChanged();
-        notifyObservers("ResourceFragmentTwo");
+        notifyObservers("CloseResourceFragment");
     }
-    public void upDateFaceUpPile(int position) {
-        getCurrGame().getResourceCardList().upDateFaceUpPile(position);
-
+    public void upDateFaceUpPile() {
         setChanged();
         notifyObservers("UpdateFaceUpView");
     }
@@ -326,7 +328,7 @@ public class CModel extends Observable {
         notifyObservers(currGame);
     }
 
-    //KWANS STUFF :)
+
 
     @Override
     public synchronized void addObserver(Observer o) {

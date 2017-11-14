@@ -25,6 +25,7 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import clientModel.MyTurn;
 import commandData.ClaimRouteCommandData;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
@@ -109,6 +110,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 FragmentManager fm = getSupportFragmentManager();
                 TurnStartOptionFragment fragment = new TurnStartOptionFragment();
                 fragment.show(fm, "start");
+
+                //Temporary Set State to MyTurn
+                CModel.getInstance().setCurrGameState(new MyTurn());
             }
         });
 

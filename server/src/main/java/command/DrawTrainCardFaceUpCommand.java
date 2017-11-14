@@ -25,10 +25,11 @@ public class DrawTrainCardFaceUpCommand extends DrawTrainCardFaceUpCommandData i
     {
         ServerFacade facade = ServerFacade.getInstance();
         CommandResult result;
+        String cardID = drawTrainCardFaceUpCommandData.getResourceCard().getCardID();
 
         //Add card to player and replace the face up card
-        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getPlayer(drawTrainCardFaceUpCommandData.getPlayerName()).addResourceCard(facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().getFaceUpCard(drawTrainCardFaceUpCommandData.getPosition()));
-        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().upDateFaceUpPile(drawTrainCardFaceUpCommandData.getPosition());
+        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getPlayer(drawTrainCardFaceUpCommandData.getPlayerName()).addResourceCard(facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().drawCard(cardID));
+//        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().upDateFaceUpPile(drawTrainCardFaceUpCommandData.getPosition());
 
         //Debugging purposes
         Game game = facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID());

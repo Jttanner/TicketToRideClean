@@ -24,7 +24,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by tyler on 10/20/2017.
  */
 
-public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.ViewOps{
+public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.ViewOps{
     /**The recycler view for the game stats*/
     private RecyclerView mGameStatus;
     /**The textview which holds the column names for the recycler views info*/

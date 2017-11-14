@@ -23,10 +23,25 @@ public class GameHistoryPresenter implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(((String) arg).equals("UpdateGameHistory")) {
-            //Call the view and update it with a new game history list
-            myView.get().updateGameHistory(CModel.getInstance().getCurrGame().getGameHistoryList());
-        }
+        //Might not need this observable
+        //When a command is executed the currGame will have the history added on.
+        //When the user opens up the fragment it will automatically pull the latest history
+        //So, the view won't open by itself, only when the user opens up the history fragment
+
+//        if(arg instanceof String) {
+//            if(((String) arg).equals("UpdateGameHistory")) {
+//                //Call the view and update it with a new game history list
+//                //If that fragment is not up, then don't do anything
+//                if(myView != null) {
+//                    myView.get().updateGameHistory(CModel.getInstance().getCurrGame().getGameHistoryList());
+//                }
+//                else{
+//                    //does that mean we have to keep calling it?
+//                    //
+//                }
+//
+//            }
+//        }
     }
 
 //    @Override

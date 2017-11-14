@@ -1,6 +1,7 @@
 package commandData;
 
 import modeling.Game;
+import modeling.ResourceCard;
 
 /**
  * Created by korea on 10/28/2017.
@@ -10,16 +11,15 @@ public class DrawTrainCardFaceUpCommandData extends Command {
     //Data Members
     private String playerName;
     private String gameID;
-    private String resourceCardID;
-    private int position;
+    private ResourceCard resourceCard;
 
     //Constructors
-    public DrawTrainCardFaceUpCommandData (String playerName, String gameID, String resourceCardID, int position) {
+    public DrawTrainCardFaceUpCommandData (String playerName, String gameID, ResourceCard resourceCard) {
         setType("drawTrainCardFaceUp");
         this.playerName = playerName;
         this.gameID = gameID;
-        this.resourceCardID = resourceCardID;
-        this.position = position;
+        this.resourceCard = resourceCard;
+
     }
     public DrawTrainCardFaceUpCommandData () {}
 
@@ -36,16 +36,10 @@ public class DrawTrainCardFaceUpCommandData extends Command {
     public void setGameID(String game) {
         this.gameID = game;
     }
-    public String getResourceCardID() {
-        return resourceCardID;
+    public ResourceCard getResourceCard() {
+        return resourceCard;
     }
-    public void setResourceCardID(String resourceCardID) {
-        this.resourceCardID = resourceCardID;
-    }
-    public int getPosition() {
-        return position;
-    }
-    public void setPosition(int position) {
-        this.position = position;
+    public void setResourceCard(ResourceCard resourceCard) {
+        this.resourceCard = resourceCard;
     }
 }

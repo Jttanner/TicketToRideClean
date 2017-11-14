@@ -69,57 +69,47 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPresenter.drawCard(0);
-
-
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(0);
+                card.setFaceUp(true);
+                myPresenter.drawCard(card);
             }
         });
         resourceCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-                String gameID = CModel.getInstance().getCurrGame().getGameID();
-                int position = 1;
-                if(ErrorChecking()) {
-                    DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
-                    ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
-                }
-                else {
-                    //You already drew a Wild Card, or something else so you can't
-                    TurnFinished();
-                }
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(1);
+                card.setFaceUp(true);
+                myPresenter.drawCard(card);
+
             }
         });
         resourceCard3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-                String gameID = CModel.getInstance().getCurrGame().getGameID();
-                int position = 2;
-
-                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
-                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(2);
+                card.setFaceUp(true);
+                myPresenter.drawCard(card);
             }
         });
         resourceCard4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-                String gameID = CModel.getInstance().getCurrGame().getGameID();
-                int position = 3;
-
-                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
-                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(3);
+                card.setFaceUp(true);
+                myPresenter.drawCard(card);
             }
         });
         resourceCard5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
-                String gameID = CModel.getInstance().getCurrGame().getGameID();
-                int position = 4;
-
-                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, "Will find out in server", position);
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(4);
+                card.setFaceUp(true);
+                myPresenter.drawCard(card);
             }
         });
         //Draw the next card in deck
@@ -127,7 +117,10 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCardDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //In order to create the right resource card we need to get it at the position it was clicked
+                ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(5);
+                card.setFaceUp(false);
+                myPresenter.drawCard(card);
             }
         });
         endTurn.setOnClickListener(new View.OnClickListener() {
@@ -143,9 +136,9 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     *
     */
     public void displayResourceCards(View v) {
-        int wildCardCount = 0;
         for(int i = 0; i < 5; ++i) {
-            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(i);
+            //ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(i);
+            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
             int cardID = 0;
             switch (i){
                 case 0:
@@ -167,18 +160,10 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                     break;
             }
             ((ImageButton) v.findViewById(cardID)).setImageResource(getResourceCardColorByID(card.getMyColor()));
-            if(card.getMyColor().equals("Wild")) {
-                wildCardCount++;
-            }
         }
         resourceCardDeck.setImageResource(R.drawable.backcard);
-//        if(wildCardCount >= 3) {
-//            //Need to reset the face up
-//            ResetFaceUpCommandData resetFaceUpCommandData = new ResetFaceUpCommandData();
-//            //Recursion?
-//            displayResourceCards(v);
-//        }
     }
+
     public int getResourceCardColorByID(String color) {
         switch (color.toLowerCase()) {
             case "black":
@@ -189,7 +174,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 return R.drawable.whitetrain;
             case "blue":
                 return R.drawable.bluetrain;
-            case "yelllow":
+            case "yellow":
                 return R.drawable.yellowtrain;
             case "green":
                 return R.drawable.greentrain;
@@ -201,16 +186,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 return R.drawable.wildtrain;
         }
     }
-    public boolean ErrorChecking() {
-        boolean result = true;
 
-        return  result;
-    }
-    public void TurnFinished() {
-        //Send command to end their turn
-        //Reset the resource card count
-        CModel.getInstance().getUserPlayer();
-    }
     @Override
     public void upDateFaceUp() {
         displayResourceCards(v);
@@ -218,6 +194,12 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
     @Override
     public void close() {
+        getDialog().setCancelable(true);
         getDialog().dismiss();
+    }
+
+    @Override
+    public void lock() {
+        getDialog().setCancelable(false);
     }
 }
