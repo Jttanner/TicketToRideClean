@@ -47,9 +47,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     private Button destinationCard;
     private Button chatroom;
     private Button gameHistory;
-    private Button demo;
-
-    private ImageButton drawableDeck;
+    private Button turnStartOption;
 
     private MapBaseView mapBaseView;
 
@@ -104,17 +102,15 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         });
 
-
-//        destinationCard = (Button) findViewById(R.id.destinationCardButton);
-//        destinationCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager fm = getSupportFragmentManager();
-//
-//                DestinationCardFragment fragment = new DestinationCardFragment();
-//                fragment.show(fm, "fragment_destinationcard");
-//            }
-//        });
+        turnStartOption = (Button) findViewById(R.id.turnStartOptionButton);
+        turnStartOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getSupportFragmentManager();
+                TurnStartOptionFragment fragment = new TurnStartOptionFragment();
+                fragment.show(fm, "start");
+            }
+        });
 
         gameHistory = (Button) findViewById(R.id.gameHistoryButton);
         gameHistory.setOnClickListener(new View.OnClickListener() {
