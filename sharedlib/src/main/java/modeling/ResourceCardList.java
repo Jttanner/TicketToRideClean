@@ -16,7 +16,6 @@ import java.util.TreeMap;
  */
 
 public class ResourceCardList {
-    //private List<ResourceCard> colorToCardMap = new ArrayList<>();
     private List<ResourceCard> availableCards = new ArrayList<>();
     private List<ResourceCard> discardPile = new ArrayList<>();
     private ResourceCard[] faceUpPile = new ResourceCard[5];
@@ -35,7 +34,6 @@ public class ResourceCardList {
                 availableCards.add(card);
             }
             //add card list to map
-          //  colorToCardMap = resourceCards;
         }
         //add the wild cards
         resourceCards = new ArrayList<>();
@@ -44,15 +42,12 @@ public class ResourceCardList {
             resourceCards.add(card);
             availableCards.add(card);
         }
-       // colorToCardMap = resourceCards;
         //Shuffle the list
         Collections.shuffle(availableCards);
-        setUpFaceUpPile();
-    }
 
-  //  public List<ResourceCard> getColorToCardMap() {
-       // return colorToCardMap;
-   // }
+        //Maybe not use this
+        //setUpFaceUpPile();
+    }
 
     /**Returns an unmodifiable list of available resource cards to the caller
      * @return List<ResourceCard>*/
@@ -60,11 +55,19 @@ public class ResourceCardList {
         return Collections.unmodifiableList(availableCards);
     }
     //Player draws a card
-    public ResourceCard drawCard(){
-        for (ResourceCard card : availableCards){
-            availableCards.remove(card);
-            return card;
+    public ResourceCard drawCard(String cardID){
+        if(availableCards.size() > 0) {
+            for(ResourceCard card: availableCards) {
+                if(card.getCardID().equals(cardID)){
+                    availableCards.remove(card);
+                    return card;
+                }
+            }
         }
+//        for (ResourceCard card : availableCards){
+//            availableCards.remove(card);
+//            return card;
+//        }
         return null;
     }
     //When our available cards is empty, we need to reshuffle the discard pile.
@@ -76,38 +79,38 @@ public class ResourceCardList {
             }
         }
     }
-//    public void setCardInFaceUpPile(ResourceCard card, int position) {
-//        faceUpPile[position] = card;
-//    }
-    public ResourceCard getFaceUpCard(int position) {
-        return faceUpPile[position];
-    }
-    public ResourceCard findCardByID(String ID) {
-        ResourceCard result = new ResourceCard("STRING SHOULD NEVER HAVE THIS, MUAHAHAHAHA...SOMETHING WENT WRONG.");
-        for(ResourceCard card: availableCards) {
-            if(card.getCardID().equals(ID)) {
-                result = card;
-                break;
-            }
-        }
-        return result;
-    }
-    public void upDateFaceUpPile(int position) {
-        faceUpPile[position] = drawCard();
-    }
     //When a player claims a route, we need to put the used cards into the discard pile
     public void usedCards(ArrayList<ResourceCard> usedCardsList) {
         for(ResourceCard card: usedCardsList) {
             discardPile.add(card);
         }
     }
-    //When the game is created and the resource cards is initialized, it will automatically take the
-    //top 5 cards and put them in the face up pile
-    public void setUpFaceUpPile() {
-        for(int i = 0; i < 5; ++i) {
-            faceUpPile[i] = drawCard();
-        }
-    }
+//    public void setCardInFaceUpPile(ResourceCard card, int position) {
+//        faceUpPile[position] = card;
+//    }
+//    public ResourceCard getFaceUpCard(int position) {
+//        return faceUpPile[position];
+//    }
+//    public ResourceCard findCardByID(String ID) {
+//        ResourceCard result = new ResourceCard("STRING SHOULD NEVER HAVE THIS, MUAHAHAHAHA...SOMETHING WENT WRONG.");
+//        for(ResourceCard card: availableCards) {
+//            if(card.getCardID().equals(ID)) {
+//                result = card;
+//                break;
+//            }
+//        }
+//        return result;
+//    }
+//    public void upDateFaceUpPile(int position) {
+//        faceUpPile[position] = drawCard();
+//    }
+//    When the game is created and the resource cards is initialized, it will automatically take the
+//    top 5 cards and put them in the face up pile
+//    public void setUpFaceUpPile() {
+//        for(int i = 0; i < 5; ++i) {
+//            faceUpPile[i] = drawCard();
+//        }
+//    }
     /**Sets up each players starting cards*/
     void setUpPlayers(ArrayList<Player> players) {
         int start = 0;//start at index zero in the card list

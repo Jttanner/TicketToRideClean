@@ -62,7 +62,9 @@ public class ClaimRouteFragment extends android.support.v4.app.DialogFragment im
 
         recyclerView = (RecyclerView) v.findViewById(R.id.choose_claim_route_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ClaimRouteAdapter(CModel.getInstance().getUnclaimedRouteList().getRoutesFromCity(selectedCityName), CModel.getInstance().getUnclaimedRouteList().getCityRouteInfoStrings(selectedCityName), getContext());
+        adapter = new ClaimRouteAdapter(CModel.getInstance().getCurrGame().getUnclaimedRouteList().getRoutesFromCity(selectedCityName),
+                                        CModel.getInstance().getCurrGame().getUnclaimedRouteList().getCityRouteInfoStrings(selectedCityName),
+                                        getContext(), this);
         recyclerView.setAdapter(adapter);
 
         return v;

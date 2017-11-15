@@ -13,45 +13,28 @@ import modeling.ResourceCard;
 public class DrawTrainCardFaceUp implements ClientCommand {
     private String playerName;
     private String gameID;
-    private String resourceCardID;
-    private int position;
+    private ResourceCard resourceCard;
     public DrawTrainCardFaceUp (DrawTrainCardFaceUpCommandData data) {
         this.playerName = data.getPlayerName();
         this.gameID = data.getGameID();
-        this.resourceCardID = data.getResourceCardID();
-        this.position = data.getPosition();
+        this.resourceCard = data.getResourceCard();
     }
     @Override
     public void execute() {
-//        if(CModel.getInstance().getCurrGameState().equals(new OneCardDrawnState()) || CModel.getInstance().getCurrGameState().equals(new WildCardState())) {
-        if(CModel.getInstance().getCurrGameState().equals(new OneCardDrawnState())) {
-            CModel.getInstance().setCurrGameState(new NotMyTurn());
+        //Update the Game History
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
-        }
-        else {
-            //Update the Game History
-            CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
-
-            //Add card to player
-            CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position));
-
-            //Change the face up card
-            CModel.getInstance().upDateFaceUpPile(position);
-
-            //Set new State
-            CModel.getInstance().setCurrGameState(new OneCardDrawnState());
-        }
-
-
+        //Add card to player on Client Side and deletes that card from the deck
+        CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().drawCard(resourceCard.getCardID()));
+        CModel.getInstance().updatePlayerStatsView();
+        //Change the face up card on Client Side
+        CModel.getInstance().upDateFaceUpPile();
 
     }
 
     @Override
     public String toString() {
-//        return playerName + " drew a resource card from face up pile: " + findColor();
-        return playerName + " drew a resource card from face up pile: ";
+        return playerName + " drew a resource card from face up pile: " + resourceCard.getMyColor();
     }
-//    public String findColor() {
-//        return CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getMyColor();
-//    }
+
 }

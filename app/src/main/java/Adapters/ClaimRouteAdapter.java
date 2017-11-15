@@ -18,6 +18,7 @@ import modeling.Route;
 import modeling.RouteList;
 import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
+import ui.views.ClaimRouteFragment;
 
 
 /**
@@ -41,10 +42,12 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
     private List<Route> routeObjectList;
     private List<String> routeEntries;
     Context context;
-    public ClaimRouteAdapter(List<Route> routeObjectList, List<String> routeEntries, Context c) {
+    ClaimRouteFragment callingFragment;
+    public ClaimRouteAdapter(List<Route> routeObjectList, List<String> routeEntries, Context c, ClaimRouteFragment callingFragment) {
         this.routeObjectList = routeObjectList;
         this.routeEntries = routeEntries;
         this.context = c;
+        this.callingFragment = callingFragment;
     }
 
     @Override
@@ -68,7 +71,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                 if(CModel.getInstance().getCurrGame().getPlayerMax() < 4){
                     //we know route is available.  Check to see if there is something already built by them on a double
                     //brute force method:
-                    for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap().entrySet()){
+                    for (Map.Entry<Route, Player> entry : CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap().entrySet()){
                         if (entry.getKey().getFirstCityName().equals(currRoute.getFirstCityName()) &&
                                 entry.getKey().getSecondCityName().equals(currRoute.getSecondCityName()) &&
                                 entry.getValue().getPlayerName().equals(CModel.getInstance().getUserPlayer().getPlayerName())){
@@ -80,13 +83,15 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                     //canClaim = true; redundant
                 }
                 if (canClaim){
-                    ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameName(),
+                    callingFragment.getDialog().dismiss();
+                    ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
                             currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
-                            currRoute.getTrainColorNeeded());
+                            currRoute.getTrainColorNeeded(), currRoute.getDistance());
                     ServerProxy.getInstance().sendCommand(claimRouteCommandData);
                 } else{
-                    //cry and do nothing
+                    //cry and do nothing.  Failed claim that isn't cuaght here but is caught server side will also fail.
                 }
+
             }
         });
     }

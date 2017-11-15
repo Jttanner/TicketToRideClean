@@ -9,31 +9,43 @@ import java.util.List;
 
 public class Route {
     public Route(City first, City second, String trainColorNeeded, int distance){
-        twoCities.add(first);
-        twoCities.add(second);
+        firstCity = first;
+        secondCity = second;
+        /*twoCities.add(first);
+        twoCities.add(second);*/
         this.distance = distance;
         this.trainColorNeeded = trainColorNeeded;
     }
 
     public Route(String firstCityName, String secondCityName, String trainColorNeeded, int distance){
-        this.firstCityName = firstCityName;
-        this.secondCityName = secondCityName;
+        firstCity = new City(firstCityName);
+        secondCity = new City(secondCityName);
+        /*this.firstCityName = firstCityName;
+        this.secondCityName = secondCityName;*/
         this.trainColorNeeded = trainColorNeeded;
         this.distance = distance;
     }
 
     public Route(String firstCityName, String secondCityName, String trainColorNeeded, int distance, boolean isDouble){
-        this.firstCityName = firstCityName;
-        this.secondCityName = secondCityName;
+        firstCity = new City(firstCityName);
+        secondCity = new City(secondCityName);
+        /*this.firstCityName = firstCityName;
+        this.secondCityName = secondCityName;*/
         this.trainColorNeeded = trainColorNeeded;
         this.distance = distance;
         this.isDouble = isDouble;
     }
 
-    String firstCityName;
-    String secondCityName;
+    /*String firstCityName;
+    String secondCityName;*/
+
+    @Override
+    public String toString() {
+        return "Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
+    }
 
     boolean firstOfDouble = true;
+
 
     public void setFirstOfDouble(boolean firstOfDouble){
         this.firstOfDouble = firstOfDouble;
@@ -44,21 +56,34 @@ public class Route {
     }
 
     public String getFirstCityName() {
-        return firstCityName;
+        return firstCity.getCityName();
     }
 
     public String getSecondCityName() {
-        return secondCityName;
+        return secondCity.getCityName();
     }
 
-    private List<City> twoCities = new ArrayList<>();
+    /*private List<City> twoCities = new ArrayList<>();*/
     private int distance;
     private boolean claimed = false;
     private boolean isDouble = false;
     private String trainColorNeeded;
     private Player owner = null;
 
+    private City firstCity;
 
+    private City secondCity;
+
+    /**If this city has been visited by the longest path calculator*/
+    private boolean visited = false;
+
+    public City getFirstCity() {
+        return firstCity;
+    }
+
+    public City getSecondCity() {
+        return secondCity;
+    }
 
     public void setIsDouble(){
         isDouble = true;
@@ -68,10 +93,10 @@ public class Route {
         return isDouble;
     }
 
-    //TODO: It is less good to pass the list directly.  should we change it?
-    List<City> getTwoCities(){
+    /*//TODO: It is less good to pass the list directly.  should we change it?
+    public List<City> getTwoCities(){
         return  twoCities;
-    }
+    }*/
 
     public int getPointValue(){
         int points = 0;
@@ -144,4 +169,13 @@ public class Route {
             return false;
         }
     }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
 }

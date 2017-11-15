@@ -16,7 +16,7 @@ import modeling.Route;
 
 public class StartGame extends GameState {
     @Override
-    public void drawResourceCard(int c) {
+    public void drawResourceCard(ResourceCard resourceCard) {
         //super.drawResourceCard(c);
     }
 

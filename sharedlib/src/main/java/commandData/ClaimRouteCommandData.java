@@ -8,21 +8,25 @@ public class ClaimRouteCommandData extends Command {
     //Data Members
     private String startCity;
     private String endCity;
-    private String gameName;
+    private String gameID;
     private String playerName;
     private String routeColor;
+    private int distance;
 
     //Constructors
-    public ClaimRouteCommandData(String gameName, String startCity, String endCity, String playerName, String routeColor) {
+    public ClaimRouteCommandData(String gameID, String startCity, String endCity, String playerName, String routeColor, int distance) {
         setType("claimRoute");
-        this.gameName = gameName;
+        this.gameID = gameID;
         this.startCity = startCity;
         this.endCity = endCity;
         this.playerName = playerName;
         this.routeColor = routeColor;
+        this.distance = distance;
     }
     public ClaimRouteCommandData () {
     }
+
+
 
     //Getters and Setters
     public String getPlayerName() {
@@ -31,11 +35,11 @@ public class ClaimRouteCommandData extends Command {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    public String getGameName() {
-        return gameName;
+    public String getGameID() {
+        return gameID;
     }
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
     }
     public String getStartCity() {
         return startCity;
@@ -56,5 +60,13 @@ public class ClaimRouteCommandData extends Command {
 
     public void setRouteColor(String routeColor) {
         this.routeColor = routeColor;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 }

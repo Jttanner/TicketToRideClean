@@ -74,23 +74,6 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
-    private RouteList unclaimedRouteList = new RouteList(true);
-
-    private RouteList claimedRouteList = new RouteList(false);
-
-    public RouteList getClaimedRouteList() {
-        return claimedRouteList;
-    }
-
-    public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
-
-    //    private List<String> gameHistory = new ArrayList<>();
-//    public List<String> getGameHistory() {
-//        return gameHistory;
-//    }
-//    public void setGameHistory(List<String> gameHistory) {
-//        this.gameHistory = gameHistory;
-//    }
 
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history, String gameID) {
@@ -99,28 +82,21 @@ public class CModel extends Observable {
                 game.addToGameHistory(history);
             }
         }
-//        if(currGame!=null){
-//            currGame.addToGameHistory(history);
-//        }
-
         setChanged();
         notifyObservers("UpdateGameHistory");
     }
-    public void drawResourceCard(){
+    public void closeResourceFragment() {
         setChanged();
-        notifyObservers("ResourceFragmentTwo");
+        notifyObservers("CloseResourceFragment");
     }
-    public void upDateFaceUpPile(int position) {
-        getCurrGame().getResourceCardList().upDateFaceUpPile(position);
-
+    public void upDateFaceUpPile() {
         setChanged();
         notifyObservers("UpdateFaceUpView");
     }
 
-    public void updatePlayerStatsView (Game game) {
-
+    public void updatePlayerStatsView () {
         setChanged();
-        notifyObservers(game);
+        notifyObservers(currGame);
     }
 
     private CModel() {
@@ -308,26 +284,18 @@ public class CModel extends Observable {
 
     public void updateRoutes(Game currGame, Route route, Player player){
         //Player userPlayer = CModel.getInstance().getUserPlayer();
+        currGame.claimAvailableRoute(route, player);
         player.addRoute(route);
         player.addPoints(route.getPointValue());
-        TrainCarList playerTrainCars = player.getTrainCarList();
-        playerTrainCars.decrementCars(route.getDistance());
-        //int claimedCount = 0;
-        //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap(). entrySet()){
 
-        //}
-        for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
-            if (entry.getKey().equals(route)){
-                route.setFirstOfDouble(false);
-            }
-        }
-        claimedRouteList.addClaimedRoute(route, player);
-        unclaimedRouteList.removeAvailableRoute(route);
         setChanged();
         notifyObservers(currGame);
     }
 
-    //KWANS STUFF :)
+
+
+
+    //KWANS STUFF :) hey kwan u r kool
 
     @Override
     public synchronized void addObserver(Observer o) {

@@ -15,6 +15,7 @@ import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
+import modeling.RouteList;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -36,6 +37,7 @@ public class ServerModel {
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
+
 
     public List<String> getChatHistory() {
         return chatHistory;

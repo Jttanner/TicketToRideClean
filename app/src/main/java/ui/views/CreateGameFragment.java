@@ -61,7 +61,7 @@ public class CreateGameFragment extends DialogFragment {
         return v;
     }
     private void setUp(View v){
-        gameName = (EditText) v.findViewById(R.id.gameName);
+        gameName = (EditText) v.findViewById(R.id.gameID);
         gameName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

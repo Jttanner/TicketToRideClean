@@ -13,8 +13,8 @@ import modeling.Route;
 
 public abstract class GameState {
     /**Deals with sending commands to the server when the player has drawn a resource card
-     * @param position The Resource card drawn*/
-    public void drawResourceCard(int position){
+     * @param resourceCard The Resource card drawn*/
+    public void drawResourceCard(ResourceCard resourceCard){
 
     }
     /**Deals with sending commands to the server when the player has drawn a Destinaton card
