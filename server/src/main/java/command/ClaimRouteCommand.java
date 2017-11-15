@@ -11,10 +11,23 @@ import result.CommandResult;
 public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand {
     private ClaimRouteCommandData claimRouteCommandData;
 
+    /*private String startCity;
+    private String endCity;
+    private String gameID;
+    private String playerName;
+    private String routeColor;
+    private int distance;*/
+
     public ClaimRouteCommand(ClaimRouteCommandData data){
         super();
         this.claimRouteCommandData = data;
         setType("claimRoute");
+        setStartCity(data.getStartCity());
+        setEndCity(data.getEndCity());
+        setGameID(data.getGameID());
+        setPlayerName(data.getPlayerName());
+        setRouteColor(data.getRouteColor());
+        setDistance(data.getDistance());
     }
 
     @Override
@@ -36,4 +49,13 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
 
         return result;
     }
+
+    public ClaimRouteCommandData getClaimRouteCommandData() {
+        return claimRouteCommandData;
+    }
+
+    public void setClaimRouteCommandData(ClaimRouteCommandData claimRouteCommandData) {
+        this.claimRouteCommandData = claimRouteCommandData;
+    }
+
 }

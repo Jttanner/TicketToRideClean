@@ -122,7 +122,7 @@ public class ServerFacade {
         Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
         if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), data.getRouteColor(), data.getDistance()),
                                      currGame.getPlayer(data.getPlayerName()))){
-            addCommandToList(data.getGameID(), data);
+            //addCommandToList(data.getGameID(), data);
             return new CommandResult(true);
         } else{
             return new CommandResult(false);
