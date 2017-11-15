@@ -33,6 +33,8 @@ public class MyTurn extends GameState {
             //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
             CModel.getInstance().closeResourceFragment();
             CModel.getInstance().setCurrGameState(new NotMyTurn());
+
+            //Send command to server start next player turn - Tak to Austin?
         }
         else {
             CModel.getInstance().setCurrGameState(new OneCardDrawnState());

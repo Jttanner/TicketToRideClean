@@ -36,6 +36,8 @@ public class OneCardDrawnState extends GameState {
 
             //Set State
             CModel.getInstance().setCurrGameState(new NotMyTurn());
+
+            //Send command to server start next player turn - Tak to Austin?
         }
     }
 
