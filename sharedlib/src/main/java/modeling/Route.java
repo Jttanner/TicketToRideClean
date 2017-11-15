@@ -69,6 +69,9 @@ public class Route {
 
     private City secondCity;
 
+    /**If this city has been visited by the longest path calculator*/
+    private boolean visited = false;
+
     public City getFirstCity() {
         return firstCity;
     }
@@ -162,6 +165,12 @@ public class Route {
         }
     }
 
+    public boolean isVisited() {
+        return visited;
+    }
 
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
 }

@@ -20,7 +20,9 @@ public class LongestRouteCalc {
      * The player list passed into us
      */
     private List<Player> playerList;
-    /**The current route list we are working on*/
+    /**
+     * The current route list we are working on
+     */
     private List<Route> routeList;
 
     public LongestRouteCalc(List<Player> players) {
@@ -59,13 +61,15 @@ public class LongestRouteCalc {
      * We must start at every route to ensure we are returning the correct longest path
      */
     private int initLongestPath() {
-       // return getLongestPath(routeList.get(0));
         int max = 0;
-        for(Route r : routeList) {
+        //Go through every route as the starting route, seeing which one gives us the longest path
+        for (Route r : routeList) {
             int dist = getLongestPath(r);
-            if(dist > max){
+            if (dist > max) {
                 max = dist;
             }
+            //have to reset the routes as not visited every time we start else algorithm will not work
+            resetRouteList();
         }
         return max;
     }
@@ -73,25 +77,35 @@ public class LongestRouteCalc {
     /**
      * Returns the distance of this players routes
      *
-     * @param start     The route we are first going to check
+     * @param start The route we are first going to check
      */
     private int getLongestPath(Route start) {
-        int max = 0;
+        int max = 0, dist = 0;
         //set this city as visited,then get the next connecting route
-        start.getFirstCity().setVisited(true);
-        List<Route> nextRoutes = getNextCity(start.getSecondCity());
-        //if there is a route where our "second" city is another's "first" city and it is not already visited
-        if (nextRoutes.size() > 0  && !start.getSecondCity().isVisited()) {
-            //int dist = start.getDistance() + getLongestPath(nextRoute);
-            //if (dist > max)
-             //   max = dist;
+        start.setVisited(true);
+        List<Route> nextRoutes = GetNextRoutes(start.getSecondCity());
+        //if there is a route where our "second" city is another's "first" city
+        //go through every child node
+        for (Route nextRoute : nextRoutes) {
+            if (!nextRoute.isVisited()) {
+                dist = start.getDistance() + getLongestPath(nextRoute);
+                if (dist > max) {
+                    max = dist;
+                }
+            }
         }
-        start.getFirstCity().setVisited(false);
+        // }
+        start.setVisited(false);
         return max;
     }
-    /**Gets the next route where the current "second" city passed in is next routes "first" city
-     * @param city The "second" city passed in*/
-    private List<Route> getNextCity(City city) {
+
+    /**
+     * Gets the next route(s) where the current "second" city passed in is next route(s) "first" city
+     *
+     * @param city The "second" city passed in
+     * @return List<Route> A list of child routes where passed in city is their "first" city
+     */
+    private List<Route> GetNextRoutes(City city) {
         List<Route> routes = new ArrayList<>();
         for (Route r : routeList) {
             if (r.getFirstCity().equals(city)) {
@@ -99,5 +113,14 @@ public class LongestRouteCalc {
             }
         }
         return routes;
+    }
+
+    /**
+     * Resets every route in the list as not visited
+     */
+    private void resetRouteList() {
+        for (Route r : routeList) {
+            r.setVisited(false);
+        }
     }
 }

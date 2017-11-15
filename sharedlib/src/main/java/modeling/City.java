@@ -32,8 +32,8 @@ public class City {
         return this.getCityName().equals(oCity.getCityName());
     }
 
-    /**If this city has been visited by the longest path calculator*/
-    private boolean visited = false;
+    /**If this city has been visited by the longest path calculator
+    private boolean visited = false;*/
 
 
     /*
@@ -64,12 +64,12 @@ public class City {
         return cityName;
     }
 
-    public boolean isVisited() {
+    /*public boolean isVisited() {
         return visited;
     }
 
     public void setVisited(boolean visited) {
         this.visited = visited;
-    }
+    }*/
 
 }
