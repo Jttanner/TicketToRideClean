@@ -151,7 +151,7 @@ public class Player implements Comparator<Player> {
     }
 
     public List<Route> getRoutes() {
-        return Collections.unmodifiableList(routes);
+        return routes;
     }
 
     /**Adds a route to what the player has claimed already

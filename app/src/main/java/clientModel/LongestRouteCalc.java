@@ -2,7 +2,10 @@ package clientModel;
 
 import android.util.Log;
 
+import junit.framework.Assert;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import modeling.City;
@@ -17,16 +20,11 @@ public class LongestRouteCalc {
 
     private static final String TAG = "LongestRouteCalc";
     /**
-     * The player list passed into us
-     */
-    private List<Player> playerList;
-    /**
      * The current route list we are working on
      */
     private List<Route> routeList;
 
-    public LongestRouteCalc(List<Player> players) {
-        this.playerList = players;
+    public LongestRouteCalc() {
     }
 
     /**
@@ -35,20 +33,20 @@ public class LongestRouteCalc {
      *
      * @return Player The player with the longest Route
      **/
-    public Player findLongestRoute() {
+    public Player findLongestRoute(List<Player> playerList) {
         Player playerWithPath = null;
         int longestPath = 0;
         //goes through every player, seeing who has the longest route
         for (Player player : playerList) {
-            Log.d(TAG, "Checking Longest route for Player: " + player.getPlayerName());
+            //Log.d(TAG, "Checking Longest route for Player: " + player.getPlayerName());
             routeList = player.getRoutes();
             //get the i'th players longest path
             int path = initLongestPath();
 
             if (path > longestPath) {
-                String tagStr = "Player with longest path now: " + player.getPlayerName() + " with path of length " + path +
+                /*String tagStr = "Player with longest path now: " + player.getPlayerName() + " with path of length " + path +
                         " it was " + playerWithPath + " with " + longestPath;
-                Log.d(TAG, tagStr);
+                Log.d(TAG, tagStr);*/
                 playerWithPath = player;
                 longestPath = path;
             }
@@ -69,7 +67,7 @@ public class LongestRouteCalc {
                 max = dist;
             }
             //have to reset the routes as not visited every time we start else algorithm will not work
-            resetRouteList();
+            //resetRouteList();
         }
         return max;
     }
@@ -83,7 +81,7 @@ public class LongestRouteCalc {
         int max = 0, dist = 0;
         //set this city as visited,then get the next connecting route
         start.setVisited(true);
-        List<Route> nextRoutes = GetNextRoutes(start.getSecondCity());
+        List<Route> nextRoutes = GetNextRoutes(start);
         //if there is a route where our "second" city is another's "first" city
         //go through every child node
         for (Route nextRoute : nextRoutes) {
@@ -94,7 +92,10 @@ public class LongestRouteCalc {
                 }
             }
         }
-        // }
+        //if we hit a leaf, lets return its value
+        if(nextRoutes.size() == 0){
+            max += start.getDistance();
+        }
         start.setVisited(false);
         return max;
     }
@@ -102,17 +103,27 @@ public class LongestRouteCalc {
     /**
      * Gets the next route(s) where the current "second" city passed in is next route(s) "first" city
      *
-     * @param city The "second" city passed in
+     * @param start The "second" city passed in
      * @return List<Route> A list of child routes where passed in city is their "first" city
      */
-    private List<Route> GetNextRoutes(City city) {
+    private List<Route> GetNextRoutes(Route start) {
         List<Route> routes = new ArrayList<>();
         for (Route r : routeList) {
-            if (r.getFirstCity().equals(city)) {
+            if (!r.isVisited() && (sharesCity(start,r))) {
                 routes.add(r);
             }
         }
+        //Log.d(TAG,"city.getCityName() " + "has " + routes.size() + " routes as children");
         return routes;
+    }
+
+    private boolean sharesCity(Route start, Route r) {
+        return start.getFirstCity().equals(r.getFirstCity())
+                || start.getFirstCity().equals(r.getSecondCity())
+                || start.getSecondCity().equals(r.getFirstCity())
+                || start.getSecondCity().equals(r.getSecondCity());
+
+
     }
 
     /**
@@ -122,5 +133,9 @@ public class LongestRouteCalc {
         for (Route r : routeList) {
             r.setVisited(false);
         }
+    }
+
+    private void setRouteList(List<Route> routeList) {
+        this.routeList = routeList;
     }
 }
