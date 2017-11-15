@@ -21,22 +21,20 @@ public class DrawTrainCardFaceUp implements ClientCommand {
     }
     @Override
     public void execute() {
-            //Update the Game History
-            CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
+        //Update the Game History
+        CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
-            //Add card to player on Client Side and deletes that card from the deck
-            CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().drawCard(resourceCard.getCardID()));
+        //Add card to player on Client Side and deletes that card from the deck
+        CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().drawCard(resourceCard.getCardID()));
 
-            //Change the face up card on Client Side
-            CModel.getInstance().upDateFaceUpPile();
+        //Change the face up card on Client Side
+        CModel.getInstance().upDateFaceUpPile();
+
     }
 
     @Override
     public String toString() {
-//        return playerName + " drew a resource card from face up pile: " + findColor();
-        return playerName + " drew a resource card from face up pile: ";
+        return playerName + " drew a resource card from face up pile: " + resourceCard.getMyColor();
     }
-//    public String findColor() {
-//        return CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(position).getMyColor();
-//    }
+
 }

@@ -2,6 +2,7 @@ package clientModel;
 
 import java.util.List;
 
+import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
@@ -20,22 +21,17 @@ public class OneCardDrawnState extends GameState {
         String gameID = CModel.getInstance().getCurrGame().getGameID();
 
         //If wild and face up then do nothing. Toast that you can't chose face up Wild
-        if(resourceCard.getMyColor().equals("Wild") || resourceCard.isFaceUp()) {
-
+        if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
 
         }
         else {
             //Otherwise send command.
 
-            //Face Up
-            if(resourceCard.isFaceUp()) {
-                DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, resourceCard);
-                ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
-            }
-            else {
-                //Deck Command
-            }
-            //Close the View
+            //Send to Server (This does both deck and face up)
+            DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, resourceCard);
+            ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+
+            //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
             CModel.getInstance().closeResourceFragment();
 
             //Set State

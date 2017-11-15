@@ -13,6 +13,7 @@ public interface MVP_DrawResourceCard {
         void upDateFaceUp();
         void close();
         void lock();
+        void unlock();
     }
 
     //Processes User Input

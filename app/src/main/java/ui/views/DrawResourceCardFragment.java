@@ -70,6 +70,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             @Override
             public void onClick(View v) {
                 //In order to create the right resource card we need to get it at the position it was clicked
+                //instead of position we might need to send in the card ID...im not sure
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(0);
                 card.setFaceUp(true);
                 myPresenter.drawCard(card);
@@ -194,12 +195,18 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
     @Override
     public void close() {
-        getDialog().setCancelable(true);
-        getDialog().dismiss();
+        if(getDialog() != null) {
+            getDialog().dismiss();
+        }
     }
 
     @Override
     public void lock() {
         getDialog().setCancelable(false);
+    }
+
+    @Override
+    public void unlock() {
+        getDialog().setCancelable(true);
     }
 }
