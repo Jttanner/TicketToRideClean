@@ -85,7 +85,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                             currRoute.getTrainColorNeeded(), currRoute.getDistance());
                     ServerProxy.getInstance().sendCommand(claimRouteCommandData);
                 } else{
-                    //cry and do nothing
+                    //cry and do nothing.  Failed claim that isn't cuaght here but is caught server side will also fail.
                 }
             }
         });
