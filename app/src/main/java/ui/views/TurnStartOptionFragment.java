@@ -21,6 +21,7 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
     private Button drawDestinationCard;
     private Button claimRoute;
     private MVP_TurnStartOption.TurnStartOptionPresOps myPresenter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myPresenter = new TurnStartOptionPresenter(this);

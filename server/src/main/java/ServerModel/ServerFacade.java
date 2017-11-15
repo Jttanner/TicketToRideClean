@@ -100,6 +100,7 @@ public class ServerFacade {
     public GameList getGameList(){
         return serverModel.getGames();
     }
+
     /**Adds command to the correct commandList
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
