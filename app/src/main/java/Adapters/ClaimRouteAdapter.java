@@ -68,7 +68,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                 if(CModel.getInstance().getCurrGame().getPlayerMax() < 4){
                     //we know route is available.  Check to see if there is something already built by them on a double
                     //brute force method:
-                    for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap().entrySet()){
+                    for (Map.Entry<Route, Player> entry : CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap().entrySet()){
                         if (entry.getKey().getFirstCityName().equals(currRoute.getFirstCityName()) &&
                                 entry.getKey().getSecondCityName().equals(currRoute.getSecondCityName()) &&
                                 entry.getValue().getPlayerName().equals(CModel.getInstance().getUserPlayer().getPlayerName())){
@@ -80,9 +80,9 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                     //canClaim = true; redundant
                 }
                 if (canClaim){
-                    ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameName(),
+                    ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
                             currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
-                            currRoute.getTrainColorNeeded());
+                            currRoute.getTrainColorNeeded(), currRoute.getDistance());
                     ServerProxy.getInstance().sendCommand(claimRouteCommandData);
                 } else{
                     //cry and do nothing

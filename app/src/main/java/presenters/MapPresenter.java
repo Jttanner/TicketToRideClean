@@ -51,7 +51,7 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
     }
 
     public List<String> getCityConnections(String baseCityName){
-        return CModel.getInstance().getUnclaimedRouteList().getCityRouteInfoStrings(baseCityName);
+        return CModel.getInstance().getCurrGame().getUnclaimedRouteList().getCityRouteInfoStrings(baseCityName);
     }
 
 }

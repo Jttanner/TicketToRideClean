@@ -151,8 +151,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
 
 
-
-
+        enableClaimRoute(); //
         setupView();
 
 
@@ -248,7 +247,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      */
     @Override
     public void updateMap() {
-        Map<Route, Player> routeList = CModel.getInstance().getClaimedRouteList().getRoutesMap();
+        Map<Route, Player> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
         for (Map.Entry<Route, Player> entry : routeList.entrySet())
         {
             Route route = entry.getKey();

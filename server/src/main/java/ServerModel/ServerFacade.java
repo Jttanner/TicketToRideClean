@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimRouteCommandData;
 import commandData.Command;
-import modeling.CommandList;
 import modeling.DestinationCard;
-import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Route;
 import modeling.User;
 import request.LoginRequest;
 import request.RegisterRequest;
+import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 
@@ -116,4 +116,19 @@ public class ServerFacade {
     public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
         return serverModel.distributeUsedDestinationCards(commandData);
     }
+
+
+    public CommandResult claimRoute(ClaimRouteCommandData data){
+        Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
+
+        //String firstCityName, String secondCityName, String trainColorNeeded, int distance
+        if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), data.getRouteColor(), data.getDistance()),
+                                     currGame.getPlayer(data.getPlayerName()))){
+            return new CommandResult(true);
+        } else{
+            return new CommandResult(false);
+        }
+    }
+
+
 }
