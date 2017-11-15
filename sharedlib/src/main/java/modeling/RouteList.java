@@ -15,6 +15,13 @@ public class RouteList {
     private Map<Route, Player> routesClaimed = new HashMap<>();
 
     public Route getAvailableRoute(String startCity, String endCity, String routeColor){
+        for (Route route : routesAvailable){
+            if ((route.getFirstCityName().equals(startCity) && route.getSecondCityName().equals(endCity) ||
+                    route.getSecondCityName().equals(startCity) && route.getFirstCityName().equals(endCity)) &&
+                    route.getTrainColorNeeded().equals(routeColor)){
+                return route;
+            }
+        }
         return null;
     }
 

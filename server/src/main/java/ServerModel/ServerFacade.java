@@ -120,10 +120,9 @@ public class ServerFacade {
 
     public CommandResult claimRoute(ClaimRouteCommandData data){
         Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
-
-        //String firstCityName, String secondCityName, String trainColorNeeded, int distance
         if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), data.getRouteColor(), data.getDistance()),
                                      currGame.getPlayer(data.getPlayerName()))){
+            addCommandToList(data.getGameID(), data);
             return new CommandResult(true);
         } else{
             return new CommandResult(false);

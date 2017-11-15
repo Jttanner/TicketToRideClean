@@ -151,7 +151,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
 
 
-        enableClaimRoute(); //
+        //enableClaimRoute(); //
         setupView();
 
 

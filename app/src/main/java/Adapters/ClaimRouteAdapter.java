@@ -18,6 +18,7 @@ import modeling.Route;
 import modeling.RouteList;
 import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
+import ui.views.ClaimRouteFragment;
 
 
 /**
@@ -41,10 +42,12 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
     private List<Route> routeObjectList;
     private List<String> routeEntries;
     Context context;
-    public ClaimRouteAdapter(List<Route> routeObjectList, List<String> routeEntries, Context c) {
+    ClaimRouteFragment callingFragment;
+    public ClaimRouteAdapter(List<Route> routeObjectList, List<String> routeEntries, Context c, ClaimRouteFragment callingFragment) {
         this.routeObjectList = routeObjectList;
         this.routeEntries = routeEntries;
         this.context = c;
+        this.callingFragment = callingFragment;
     }
 
     @Override
@@ -80,6 +83,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                     //canClaim = true; redundant
                 }
                 if (canClaim){
+                    callingFragment.getDialog().dismiss();
                     ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
                             currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
                             currRoute.getTrainColorNeeded(), currRoute.getDistance());
@@ -87,6 +91,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                 } else{
                     //cry and do nothing.  Failed claim that isn't cuaght here but is caught server side will also fail.
                 }
+
             }
         });
     }
