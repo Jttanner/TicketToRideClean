@@ -46,7 +46,6 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
             @Override
             public void onClick(View v) {
        //Have all buttons greyed out, and ungrey the chosen option
-        //myPresenter.ResourceCardOption();
                 ((MapActivity)getActivity()).ResourceCardOption();
                 getDialog().dismiss();
             }

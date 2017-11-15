@@ -26,7 +26,7 @@ public class DrawTrainCardFaceUp implements ClientCommand {
 
         //Add card to player on Client Side and deletes that card from the deck
         CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().drawCard(resourceCard.getCardID()));
-
+        CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
 

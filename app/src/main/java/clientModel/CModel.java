@@ -84,14 +84,6 @@ public class CModel extends Observable {
 
     public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
 
-    //    private List<String> gameHistory = new ArrayList<>();
-//    public List<String> getGameHistory() {
-//        return gameHistory;
-//    }
-//    public void setGameHistory(List<String> gameHistory) {
-//        this.gameHistory = gameHistory;
-//    }
-
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history, String gameID) {
         for(Game game: allGames){
@@ -99,17 +91,9 @@ public class CModel extends Observable {
                 game.addToGameHistory(history);
             }
         }
-//        if(currGame!=null){
-//            currGame.addToGameHistory(history);
-//        }
-
         setChanged();
         notifyObservers("UpdateGameHistory");
     }
-//    public void drawResourceCard(){
-//        setChanged();
-//        notifyObservers("ResourceFragmentTwo");
-//    }
     public void closeResourceFragment() {
         setChanged();
         notifyObservers("CloseResourceFragment");
@@ -119,10 +103,9 @@ public class CModel extends Observable {
         notifyObservers("UpdateFaceUpView");
     }
 
-    public void updatePlayerStatsView (Game game) {
-
+    public void updatePlayerStatsView () {
         setChanged();
-        notifyObservers(game);
+        notifyObservers(currGame);
     }
 
     private CModel() {

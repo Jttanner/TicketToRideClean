@@ -29,7 +29,6 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
                     myView.get().upDateFaceUp();
                 }
                 else if(((String) arg).equals("CloseResourceFragment")) {
-                    //myView.get().unlock();
                     myView.get().close();
                 }
             }
@@ -39,8 +38,10 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
     @Override
     public void drawCard(ResourceCard resourceCard) {
         //Once they choose a card, lock the screen
-        myView.get().lock();
-        CModel.getInstance().getCurrGameState().drawResourceCard(resourceCard);
+        if(myView != null) {
+            myView.get().lock();
+            CModel.getInstance().getCurrGameState().drawResourceCard(resourceCard);
+        }
     }
 
     @Override

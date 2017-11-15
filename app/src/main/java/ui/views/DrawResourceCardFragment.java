@@ -62,10 +62,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         endTurn = (Button) v.findViewById(R.id.resourceCardEndTurn);
     }
     public void onClickers() {
-        //When a card is picked
-        //Add that card to player
-        //Remove that card from ResourceCardList
-        //Change face up card
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
