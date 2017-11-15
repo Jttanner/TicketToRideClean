@@ -166,6 +166,83 @@ public class LongestRouteCalcTest {
 
     }
 
+    @Test
+    public void TestCircleWithBranches(){
+
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("Name","Name","Yellow");
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+        player.addRoute(new Route("Calgary", "Vancouver", "Wild", 3));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+
+        players.add(player);
+        try {
+            setRouteList.invoke(calc,players.get(0).getRoutes());
+            Assert.assertEquals(49,initLongestPath.invoke(calc));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void TestCircleWithHook(){
+
+        List<Player> players = new ArrayList<>();
+        Player player = new Player("Name","Name","Yellow");
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+        player.addRoute(new Route("Calgary", "Vancouver", "Wild", 3));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        //hook
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+        player.addRoute(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+        player.addRoute(new Route("El Paso", "Los Angeles", "black", 6));
+        player.addRoute(new Route("El Paso", "Houston", "green", 6));
+        player.addRoute(new Route("Houston", "New Orleans", "Wild", 2));
+        player.addRoute(new Route("Miami", "New Orleans", "red", 6));
+        player.addRoute(new Route("Charleston", "Miami", "purple", 4));
+
+        players.add(player);
+        try {
+            setRouteList.invoke(calc,players.get(0).getRoutes());
+            Assert.assertEquals(76,initLongestPath.invoke(calc));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @After
     public void breakDown(){
