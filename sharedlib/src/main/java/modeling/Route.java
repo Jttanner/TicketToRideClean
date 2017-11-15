@@ -39,6 +39,11 @@ public class Route {
     /*String firstCityName;
     String secondCityName;*/
 
+    @Override
+    public String toString() {
+        return "Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
+    }
+
     boolean firstOfDouble = true;
 
 

@@ -62,13 +62,16 @@ public class LongestRouteCalc {
         int max = 0;
         //Go through every route as the starting route, seeing which one gives us the longest path
         for (Route r : routeList) {
+            System.out.println("Starting with " + r.toString() + "\n");
             int dist = getLongestPath(r);
+            System.out.println("This routes distance is: " +  dist + "\n");
             if (dist > max) {
                 max = dist;
             }
             //have to reset the routes as not visited every time we start else algorithm will not work
-            //resetRouteList();
+            resetRouteList();
         }
+        System.out.println("This tree's distance: " + max);
         return max;
     }
 
@@ -78,6 +81,7 @@ public class LongestRouteCalc {
      * @param start The route we are first going to check
      */
     private int getLongestPath(Route start) {
+        System.out.println("Node: " + start.toString());
         int max = 0, dist = 0;
         //set this city as visited,then get the next connecting route
         start.setVisited(true);
@@ -94,7 +98,8 @@ public class LongestRouteCalc {
         }
         //if we hit a leaf, lets return its value
         if(nextRoutes.size() == 0){
-            max += start.getDistance();
+            System.out.println("ACTUALLY A LEAF: " + start.toString());
+            return start.getDistance();
         }
         start.setVisited(false);
         return max;

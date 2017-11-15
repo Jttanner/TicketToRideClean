@@ -7,6 +7,8 @@ import java.util.Map;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
+import commandData.EndTurnCommandData;
+import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.Game;
 import modeling.GameList;
@@ -130,4 +132,8 @@ public class ServerFacade {
     }
 
 
+/*
+    public boolean endTurn(EndTurnCommandData commandData) {
+        return serverModel.endTurn(commandData);
+    }*/
 }

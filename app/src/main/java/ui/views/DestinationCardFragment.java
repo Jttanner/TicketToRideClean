@@ -63,7 +63,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
 
         View v = inflater.inflate(R.layout.fragment_destinationcard, container, false);
 
-
         this.setCancelable(false);
         setUp(v);
         Log.d(TAG, "Returning View and exiting the method");
@@ -156,8 +155,11 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 if(gameStarted == false) {
                     if(claimed >= 2) {
                         presenter.claimDestinationCards(game, player, cardsSelected);
-                        ((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
+                        //presenter.subtractDestinationCards(cardsSelected.size());
+                        //TODO: We need to be able to update the view here?
+                        //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
+                        presenter.endTurn(game, player);
                     }
                     else {
                         Toast.makeText(getActivity(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
@@ -166,8 +168,11 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 else {
                     if(claimed >= 1) {
                         presenter.claimDestinationCards(game, player, cardsSelected);
-                        ((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
+                        //presenter.subtractDestinationCards(cardsSelected.size());
+                        //TODO: We need to be able to update the view here?
+                        //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
+                        presenter.endTurn(game, player);
                     }
                     else {
                         Toast.makeText(getActivity(), "Please select at least 1 destination", Toast.LENGTH_LONG).show();
