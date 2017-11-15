@@ -58,7 +58,7 @@ public class Game {
         int oldSize = unclaimedRouteList.getAvailableRouteSize();
         claimedRouteList.addClaimedRoute(route, player);
         unclaimedRouteList.removeAvailableRoute(route);
-        if (oldSize != unclaimedRouteList.getAvailableRouteSize()){
+        if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
             return  false;
         } else{
             return true;
