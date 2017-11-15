@@ -7,6 +7,7 @@ import java.util.Map;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
+import commandData.EndTurnCommandData;
 import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
@@ -115,4 +116,8 @@ public class ServerFacade {
     public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
         return serverModel.distributeUsedDestinationCards(commandData);
     }
+/*
+    public boolean endTurn(EndTurnCommandData commandData) {
+        return serverModel.endTurn(commandData);
+    }*/
 }

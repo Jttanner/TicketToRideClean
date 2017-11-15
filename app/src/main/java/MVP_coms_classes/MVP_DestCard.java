@@ -43,6 +43,10 @@ public interface MVP_DestCard {
         void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards);
 
         boolean hasGameJustStarted(Game game, Player player);
+
+        //void subtractDestinationCards(int subtract);
+
+        void endTurn(Game game, Player player);
     }
 
     //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards

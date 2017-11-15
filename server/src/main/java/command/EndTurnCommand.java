@@ -1,50 +1,43 @@
 package command;
 
-import com.sun.corba.se.spi.activation.Server;
-
-import java.util.List;
-
 import ServerModel.ServerFacade;
-import commandData.DrawDestinationCardCommandData;
-import modeling.DestinationCard;
-import modeling.DestinationCardList;
-import modeling.Player;
+import commandData.EndTurnCommandData;
 import result.CommandResult;
-import result.DrawDestinationCardCommandResult;
 
 /**
- * Created by ahwang13 on 10/24/17.
+ * Created by ahwang13 on 11/14/17.
  */
+/*
+public class EndTurnCommand extends EndTurnCommandData implements ICommand {
 
-
-public class DrawDestinationCardCommand extends DrawDestinationCardCommandData implements ICommand {
-
-    private DrawDestinationCardCommandData commandData;
-    public DrawDestinationCardCommand(DrawDestinationCardCommandData data) {
+    private EndTurnCommandData commandData;
+    public EndTurnCommand(EndTurnCommandData data) {
         super();
         this.commandData = data;
-        setType("drawDestinationCards");
+        setType("endTurn");
     }
 
     @Override
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
+        boolean success = facade.endTurn();
         DrawDestinationCardCommandResult result;
         List<DestinationCard> destinationCardList = facade.getDestinationCardList();
         if(destinationCardList == null) {
-            //facade.addCommandToList(commandData.getGameID(),commandData);
+            //facade.addCommandToList(facade.getGameName().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
-            setType("drawDestinationCards");
+            setType("endTurn");
             return result;
         }
         else {
-            facade.addCommandToList(commandData.getGameID(), commandData);
+            //facade.addCommandToList(getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
             result = new DrawDestinationCardCommandResult(true, destinationCardList, "Destination card list sent.");
-            setType("drawDestinationCards");
+            setType("endTurn");
             return result;
         }
     }
 
-}
+}*/
+

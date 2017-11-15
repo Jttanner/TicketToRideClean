@@ -11,6 +11,7 @@ import modeling.DestinationCard;
 public class ClaimDestinationCardCommandResult extends CommandResult{
 
     private List<DestinationCard> claimedDestinationCards;
+    private int currentSizeOfDeck;
 
     public ClaimDestinationCardCommandResult(boolean success, List<DestinationCard> claimedDestinationCards, String errorInfo) {
         super(success,errorInfo);

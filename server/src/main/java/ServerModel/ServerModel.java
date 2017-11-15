@@ -8,6 +8,7 @@ import java.util.Map;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
+import commandData.EndTurnCommandData;
 import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
@@ -159,4 +160,9 @@ public class ServerModel {
         currPlayer.addDestinationCard(claimedCards);
         return claimedCards;
     }
+/*
+    boolean endTurn(EndTurnCommandData commandData) {
+
+        //TODO: We need to calculate what the endTurn does here
+    }*/
 }
