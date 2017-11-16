@@ -21,9 +21,9 @@ public class EndTurnCommand extends EndTurnCommandData implements ICommand {
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
         boolean success = facade.endTurn();
-        DrawDestinationCardCommandResult result;
-        List<DestinationCard> destinationCardList = facade.getDestinationCardList();
-        if(destinationCardList == null) {
+        //DrawDestinationCardCommandResult result;
+        //List<DestinationCard> destinationCardList = facade.getDestinationCardList();
+        //if(destinationCardList == null) {
             //facade.addCommandToList(facade.getGameName().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
             setType("endTurn");

@@ -77,10 +77,10 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         setContentView(R.layout.activity_map);
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
 
-        changeTurnDisplay();
+        //changeTurnDisplay();
 
 
-        ((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
+        //((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
 
         presenter = new MapPresenter(this);
 
@@ -200,6 +200,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      * @post the Player whos isMyTurn = true now = false, the player after him has isMyTurn = true.
      *               (If it was the last Player on the list's turn, the Player at the beginning of the list sets isMyTurn = true)
      */
+    /*
     public void changeTurnDisplay(){
         for (Player player : CModel.getInstance().getCurrGame().getPlayers()){
             if (player.isMyTurn()){
@@ -207,7 +208,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             }
         }
     }
-
+    */
     /**
      * Helper function
      * Draws a Player's color on a route claimed that Player.

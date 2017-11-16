@@ -31,6 +31,8 @@ public class Game {
     private String gameName;
     private int playerMax;
     private ResourceCardList resourceCardList;
+    private DestinationCardList destinationCardList;
+    //private int destDeckSize;
 
 
     private RouteList unclaimedRouteList = new RouteList(true);
@@ -42,6 +44,8 @@ public class Game {
     }
 
     public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
+
+
 
     public boolean claimAvailableRoute(Route route, Player player){
         if (route.checkIfPlayerCanClaim(this, route, player)){
@@ -88,6 +92,7 @@ public class Game {
         gameID = UUID.randomUUID().toString();
         players = new ArrayList<>();
         //card deck created for the game
+        destinationCardList = new DestinationCardList();
         resourceCardList = new ResourceCardList();
     }
     /**
@@ -397,5 +402,13 @@ public class Game {
      */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
+    }
+
+    public DestinationCardList getDestinationCardList() {
+        return destinationCardList;
+    }
+
+    public void setDestinationCardList(DestinationCardList destinationCardList) {
+        this.destinationCardList = destinationCardList;
     }
 }

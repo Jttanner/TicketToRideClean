@@ -44,6 +44,8 @@ public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.
     /**Textviews holding num of user's cards*/
     Map<MyColor,TextView> colorNumMap = new HashMap<>();
 
+    private TextView destTextView;
+
 
 
     public PlayerStatsView(Context context, @Nullable AttributeSet attrs) {
@@ -89,11 +91,17 @@ public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.
     }
 
     @Override
+    public void setMyDestTextView(int size) {
+        destTextView.setText("Dest deck size: " + size);
+    }
+
+    @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         setupTrains();
         mGameStatus = (RecyclerView) myView.findViewById(R.id.recycler_status);
         mTextView = (TextView) myView.findViewById(R.id.statusNames);
+        destTextView = (TextView) myView.findViewById(R.id.dest_deck_size);
         mTextView.setText(statNames.replaceAll("\\t","\t"));
         presenter = new PlayerStatsPresenter(this);
         //setup recycler
@@ -102,6 +110,7 @@ public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.
         mGameStatus.setLayoutManager(manager);
         mGameStatus.setAdapter(statusAdapter);
         presenter.setCardNumbers(colorNumMap);
+        presenter.setDestinationCardNumber();
     }
 
     private void setupTrains() {
@@ -141,6 +150,7 @@ public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.
     @Override
     public void updatePlayerStats() {
         presenter.setCardNumbers(colorNumMap);
+        presenter.setDestinationCardNumber();
         statusAdapter.setPlayerColumns(presenter.getPlayerColumns());
         statusAdapter.notifyDataSetChanged();
     }

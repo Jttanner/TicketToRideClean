@@ -38,7 +38,7 @@ public class ClaimDestinationCardCommand extends ClaimDestinationCardCommandData
             //facade.addCommandToList(getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
-            facade.distributeUsedDestinationCards(commandData);
+            //facade.distributeUsedDestinationCards(commandData);
             result = new ClaimDestinationCardCommandResult(true, claimedDestinationCards, "Destination Cards given and unchosen cards restored to deck.");
             setType("claimDestinationCards");
             return result;
