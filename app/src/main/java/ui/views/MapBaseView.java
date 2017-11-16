@@ -31,7 +31,7 @@ import teamjapannumbahone.tickettoride.R;
 
 public class MapBaseView extends View {
 
-    static int DOUBLE_ROUTE_OFFSET = 6;
+    static int DOUBLE_ROUTE_OFFSET = 8;
 
     Point VancouverPoint = new Point(159, 135);
     Point SeattlePoint = new Point(180, 220);

@@ -99,7 +99,6 @@ public class RouteList {
 
     public RouteList(boolean initialize){
         if (initialize){
-
             routesAvailable.add(new Route("Atlanta", "Raleigh", "Wild", 2, true));
             routesAvailable.add(new Route("Atlanta", "Raleigh", "Wild", 2, true));
             routesAvailable.add(new Route("Atlanta", "Charleston", "Wild", 2));

@@ -36,8 +36,39 @@ public class Route {
         this.isDouble = isDouble;
     }
 
-    /*String firstCityName;
-    String secondCityName;*/
+    //has enough resources
+    //only can claim double route if 4 or more players
+    //one player cannot claim both routes of a double route
+    public boolean checkIfPlayerCanClaim(Game game, Route route, Player player){
+        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
+    }
+
+    private boolean checkIfPlayerHasEnoughCards(Route route, Player player){
+        List<ResourceCard> routeCostCardType = player.getResourceColorList(route.getTrainColorNeeded());
+        //see if they have enough cards
+        if (route.getDistance() < routeCostCardType.size() + player.getResourceColorList("Wild").size()){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    private boolean canClaimDoubleRouteWithPlayerSize(Game game){
+        if (game.getPlayers().size() < 4){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    private boolean canClaimDoubleRouteOnlyOnePlayer(Game game, Route route, Player player){
+        for(Route playerRoute : player.getRoutes()){
+            if (playerRoute.equals(route)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

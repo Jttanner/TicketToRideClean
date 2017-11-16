@@ -44,25 +44,28 @@ public class Game {
     public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
 
     public boolean claimAvailableRoute(Route route, Player player){
-        TrainCarList playerTrainCars = player.getTrainCarList();
-        playerTrainCars.decrementCars(route.getDistance());
-        //int claimedCount = 0;
-        //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap(). entrySet()){
+        if (route.checkIfPlayerCanClaim(this, route, player)){
+            TrainCarList playerTrainCars = player.getTrainCarList();
+            playerTrainCars.decrementCars(route.getDistance());
 
-        //}
-        for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
-            if (entry.getKey().equals(route)){
-                route.setFirstOfDouble(false);
+            for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
+                if (entry.getKey().equals(route)){
+                    route.setFirstOfDouble(false);
+                }
             }
-        }
-        int oldSize = unclaimedRouteList.getAvailableRouteSize();
-        claimedRouteList.addClaimedRoute(route, player);
-        unclaimedRouteList.removeAvailableRoute(route);
-        if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
-            return  false;
+            int oldSize = unclaimedRouteList.getAvailableRouteSize();
+            claimedRouteList.addClaimedRoute(route, player);
+            unclaimedRouteList.removeAvailableRoute(route);
+            if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
+                return  false;
+            } else{
+                player.addRoute(route);
+                return true;
+            }
         } else{
-            return true;
+            return false;
         }
+
     }
 
 
