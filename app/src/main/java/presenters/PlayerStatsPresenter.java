@@ -46,7 +46,12 @@ public class PlayerStatsPresenter implements MVP_PlayerStats.PresOps,Observer{
 
     }
 
-
+    @Override
+    public void setDestinationCardNumber() {
+        Game currGame = CModel.getInstance().getCurrGame();
+        int size = currGame.getDestinationCardList().getDestinationCardList().size();
+        myView.get().setMyDestTextView(size);
+    }
 
     @Override
     public ArrayList<PlayerColumn> getPlayerColumns() {

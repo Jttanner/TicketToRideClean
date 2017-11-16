@@ -7,11 +7,13 @@ import java.util.Map;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
+import commandData.DrawDestinationCardCommandData;
 import commandData.EndTurnCommandData;
 import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.Route;
 import modeling.User;
 import request.LoginRequest;
@@ -113,10 +115,26 @@ public class ServerFacade {
 
     }
 
-    public List<DestinationCard> getDestinationCardList() { return serverModel.getDestinationCards(); }
+    public List<DestinationCard> getDestinationCardList(DrawDestinationCardCommandData data) {
+        Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
+        return currGame.getDestinationCardList().get3Cards();
+    }
 
-    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
-        return serverModel.distributeUsedDestinationCards(commandData);
+    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData data) {
+        Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
+        Player currPlayer = currGame.getPlayer(data.getPlayerID());
+        //currGame.getDestinationCardList().distributeUsedDestinationCards(data);
+        List<DestinationCard> claimedCards = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            boolean isClaimed = data.getClaimDestinationCards().get(i).isClaimed();
+            if (isClaimed) {
+                claimedCards.add(data.getClaimDestinationCards().get(i));
+            } else {
+                currGame.getDestinationCardList().addDestinationCardBackToDeck(data.getClaimDestinationCards().get(i));
+            }
+        }
+        currPlayer.addDestinationCard(claimedCards);
+        return claimedCards;
     }
 
 

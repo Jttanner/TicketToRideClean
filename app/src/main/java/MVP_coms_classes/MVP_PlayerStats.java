@@ -25,6 +25,8 @@ public interface MVP_PlayerStats {
         void updatePlayerStats();
         /**Sets the textviews for card color numbers*/
         void setMyTextView(MyColor color, int numOfThisColor);
+
+        void setMyDestTextView(int size);
     }
 
     interface PresOps{
@@ -32,5 +34,7 @@ public interface MVP_PlayerStats {
         ArrayList<PlayerColumn> getPlayerColumns();
 
         void setCardNumbers(Map<MyColor, TextView> colorNumMap);
+
+        void setDestinationCardNumber();
     }
 }

@@ -6,6 +6,11 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
         android:id="@+id/currPlayerCards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -135,5 +140,19 @@
         android:layout_below="@id/statusNames">
 
     </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dest_deck_size"
+            android:text="Right here"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/num_cards_in_deck"
+            android:text="And Right here"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

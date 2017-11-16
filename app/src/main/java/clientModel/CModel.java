@@ -228,28 +228,16 @@ public class CModel extends Observable {
         notifyObservers(this.threeDestinationCards);
     }
 
-    private int deckSize = 30;
-
-    public int getDeckSize() {
-        return deckSize;
-    }
-
-    public void setDeckSize(int deckSize) {
-        this.deckSize = deckSize;
-    }
-
     public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
         Log.d(TAG, "Setting claimed destination cards");
         this.claimedDestinationCards = claimedDestinationCards;
         currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
-
-        this.deckSize = deckSize - claimedDestinationCards.size();
+        //List<DestinationCard> totalList = currGame.getDestinationCardList().getDestinationCardList();
+        currGame.getDestinationCardList().removeDestinationCards(claimedDestinationCards);
+        //this.deckSize = deckSize - claimedDestinationCards.size();
         //player.addDestinationCard(claimedDestinationCards);
         setChanged();
         notifyObservers(this.currGame);
-        //TODO: WHY DOES THIS NOT CHANGE THE GAME STATS VIEW WHEN THE DECKSIZE IS CORRECT???
-        //setChanged();
-        //notifyObservers(this.claimedDestinationCards);
     }
 
     /**
