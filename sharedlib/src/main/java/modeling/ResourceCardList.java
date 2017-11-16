@@ -121,12 +121,12 @@ public class ResourceCardList {
             //For a full 5 players we will end up going through 20 cards being assigned out
             for(int i = start; i < end; i++){
                 //set this card as assigned to the particular player
-                ResourceCard thisCard = availableCards.get(i);
+                ResourceCard thisCard = availableCards.remove(0);;
                 thisCard.setPlayerID(player.getPlayerName());
                 //Now give the card to the player
                 player.addResourceCard(availableCards.get(i));
                 //remove this card from the resource card deck, now it is just held in the map
-                availableCards.remove(thisCard);
+
             }
 
         }

@@ -100,56 +100,56 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                         pageView.findViewById(R.id.redChoiceButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "red");
+                                sendClaimRouteCommand(currRoute, "Red");
                             }
                         });
                         pageView.findViewById(R.id.blueButton).setEnabled(true);
                         pageView.findViewById(R.id.blueButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "blue");
+                                sendClaimRouteCommand(currRoute, "Blue");
                             }
                         });
                         pageView.findViewById(R.id.orangeButton).setEnabled(true);
                         pageView.findViewById(R.id.orangeButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "orange");
+                                sendClaimRouteCommand(currRoute, "Orange");
                             }
                         });
                         pageView.findViewById(R.id.whiteButton).setEnabled(true);
                         pageView.findViewById(R.id.whiteButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "white");
+                                sendClaimRouteCommand(currRoute, "White");
                             }
                         });
                         pageView.findViewById(R.id.yellowButton).setEnabled(true);
                         pageView.findViewById(R.id.yellowButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "yellow");
+                                sendClaimRouteCommand(currRoute, "Yellow");
                             }
                         });
                         pageView.findViewById(R.id.purpleButton).setEnabled(true);
                         pageView.findViewById(R.id.purpleButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "purple");
+                                sendClaimRouteCommand(currRoute, "Purple");
                             }
                         });
                         pageView.findViewById(R.id.blackButton).setEnabled(true);
                         pageView.findViewById(R.id.blackButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "black");
+                                sendClaimRouteCommand(currRoute, "Black");
                             }
                         });
                         pageView.findViewById(R.id.greenButton).setEnabled(true);
                         pageView.findViewById(R.id.greenButton).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendClaimRouteCommand(currRoute, "green");
+                                sendClaimRouteCommand(currRoute, "Green");
                             }
                         });
                         pageView.findViewById(R.id.wildButton).setEnabled(true);
