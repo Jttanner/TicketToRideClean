@@ -229,9 +229,9 @@ public class Game {
      * @return The player whose turn it is*/
     public Player getCurrentPlayer(){
         for (Player player : players){
-            if(player.isMyTurn()){
+            //if(player.isMyTurn()){
                 return player;
-            }
+            //}
         }
         return null;
     }
