@@ -51,7 +51,7 @@ public class Game {
         if (route.checkIfPlayerCanClaim(this, route, player)){
             TrainCarList playerTrainCars = player.getTrainCarList();
             playerTrainCars.decrementCars(route.getDistance());
-
+            player.discardResourceCardsToPlaceCars(route, this);
             for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
                 if (entry.getKey().equals(route)){
                     route.setFirstOfDouble(false);

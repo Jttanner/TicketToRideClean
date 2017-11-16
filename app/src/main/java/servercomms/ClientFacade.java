@@ -74,8 +74,5 @@ class ClientFacade {
         CModel.getInstance().setMyUser(user);
     }
 
-    void claimRoute(Game currGame, Route route){
-        CModel.getInstance().updateRoutes(currGame, route, CModel.getInstance().getUserPlayer());
-    }
 
 }

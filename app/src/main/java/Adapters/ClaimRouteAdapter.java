@@ -29,6 +29,13 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        String routeColor;
+        public void setRouteColor(String routeColor){
+            this.routeColor = routeColor;
+        }
+        public String getRouteColor(){
+            return  routeColor;
+        }
         TextView routeTextEntry;
         public ViewHolder(View v) {
             super(v);
@@ -42,6 +49,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
     private List<Route> routeObjectList;
     private List<String> routeEntries;
     Context context;
+    View pageView;
     ClaimRouteFragment callingFragment;
     public ClaimRouteAdapter(List<Route> routeObjectList, List<String> routeEntries, Context c, ClaimRouteFragment callingFragment) {
         this.routeObjectList = routeObjectList;
@@ -54,19 +62,21 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.claim_route_view_holder, parent, false);
+        pageView = parent.getRootView();
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.getTextView().setText(routeEntries.get(position));
+        holder.setRouteColor(routeObjectList.get(position).getTrainColorNeeded());
         holder.getTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //claim route logic
                 //Same person can't build on both of a double route if there are less than 4 players
                 //TODO: make sure we are using playersMax. if not use Players.size()
-                Route currRoute = routeObjectList.get(position);
+                final Route currRoute = routeObjectList.get(position);
                 boolean canClaim = true;
                 if(CModel.getInstance().getCurrGame().getPlayerMax() < 4){
                     //we know route is available.  Check to see if there is something already built by them on a double
@@ -83,17 +93,90 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                     //canClaim = true; redundant
                 }
                 if (canClaim){
-                    callingFragment.getDialog().dismiss();
-                    ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
-                            currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
-                            currRoute.getTrainColorNeeded(), currRoute.getDistance());
-                    ServerProxy.getInstance().sendCommand(claimRouteCommandData);
+                    if (holder.getRouteColor().equals("Wild")){
+                        //"Red", "Blue", "Orange", "White", "Yellow", "Purple", "Black", "Green"
+
+                        pageView.findViewById(R.id.redChoiceButton).setEnabled(true);
+                        pageView.findViewById(R.id.redChoiceButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "red");
+                            }
+                        });
+                        pageView.findViewById(R.id.blueButton).setEnabled(true);
+                        pageView.findViewById(R.id.blueButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "blue");
+                            }
+                        });
+                        pageView.findViewById(R.id.orangeButton).setEnabled(true);
+                        pageView.findViewById(R.id.orangeButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "orange");
+                            }
+                        });
+                        pageView.findViewById(R.id.whiteButton).setEnabled(true);
+                        pageView.findViewById(R.id.whiteButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "white");
+                            }
+                        });
+                        pageView.findViewById(R.id.yellowButton).setEnabled(true);
+                        pageView.findViewById(R.id.yellowButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "yellow");
+                            }
+                        });
+                        pageView.findViewById(R.id.purpleButton).setEnabled(true);
+                        pageView.findViewById(R.id.purpleButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "purple");
+                            }
+                        });
+                        pageView.findViewById(R.id.blackButton).setEnabled(true);
+                        pageView.findViewById(R.id.blackButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "black");
+                            }
+                        });
+                        pageView.findViewById(R.id.greenButton).setEnabled(true);
+                        pageView.findViewById(R.id.greenButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "green");
+                            }
+                        });
+                        pageView.findViewById(R.id.wildButton).setEnabled(true);
+                        pageView.findViewById(R.id.wildButton).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendClaimRouteCommand(currRoute, "Wild");
+                            }
+                        });
+
+                    } else{
+                        sendClaimRouteCommand(currRoute, currRoute.getTrainColorNeeded());
+                    }
                 } else{
                     //cry and do nothing.  Failed claim that isn't cuaght here but is caught server side will also fail.
                 }
 
             }
         });
+    }
+
+    private void sendClaimRouteCommand(Route currRoute, String color){
+        callingFragment.getDialog().dismiss();
+        ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
+                currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
+                color, currRoute.getDistance());
+        ServerProxy.getInstance().sendCommand(claimRouteCommandData);
     }
 
     @Override

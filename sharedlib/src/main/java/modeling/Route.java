@@ -2,6 +2,7 @@ package modeling;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tyler on 10/17/2017.
@@ -40,21 +41,35 @@ public class Route {
     //only can claim double route if 4 or more players
     //one player cannot claim both routes of a double route
     public boolean checkIfPlayerCanClaim(Game game, Route route, Player player){
-        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
+        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
     }
 
-    private boolean checkIfPlayerHasEnoughCards(Route route, Player player){
-        List<ResourceCard> routeCostCardType = player.getResourceColorList(route.getTrainColorNeeded());
-        //see if they have enough cards
-        if (route.getDistance() < routeCostCardType.size() + player.getResourceColorList("Wild").size()){
-            return false;
-        } else{
-            return true;
+    private void addResourceCardsForTesting(Player player){
+        for(int i = 0; i < 20; ++i){
+            for (Map.Entry<String, List<ResourceCard>> entry : player.getResourceCards().entrySet()){
+                entry.getValue().add(new ResourceCard(entry.getKey()));
+            }
         }
     }
 
-    private boolean canClaimDoubleRouteWithPlayerSize(Game game){
-        if (game.getPlayers().size() < 4){
+    private boolean checkIfPlayerHasEnoughCards(Route route, Player player){
+        //List<ResourceCard> routeCostCardType = player.getResourceColorList(route.getTrainColorNeeded());
+        //see if they have enough cards
+
+
+        addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
+
+
+        List<ResourceCard> routeCostCardType = player.getResourceCards().get(route.getTrainColorNeeded());
+        if (route.getDistance() < routeCostCardType.size() + player.getResourceCards().get("Wild").size()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    private boolean canClaimDoubleRouteWithPlayerSize(Game game, Route route){
+        if (game.getPlayers().size() < 4 && route.isDouble){
             return false;
         } else{
             return true;
@@ -63,7 +78,7 @@ public class Route {
 
     private boolean canClaimDoubleRouteOnlyOnePlayer(Game game, Route route, Player player){
         for(Route playerRoute : player.getRoutes()){
-            if (playerRoute.equals(route)){
+            if (playerRoute.equals(route) && route.isDouble){
                 return false;
             }
         }
