@@ -84,6 +84,8 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
         presenter = new MapPresenter(this);
 
+        DestinationCardOption();
+
         SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.activity_map);
 
         slidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {

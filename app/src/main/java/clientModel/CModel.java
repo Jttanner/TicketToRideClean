@@ -223,9 +223,9 @@ public class CModel extends Observable {
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
 
         //set currGame
-        this.threeDestinationCards = threeDestinationCards;
+        //this.threeDestinationCards = threeDestinationCards;
         setChanged();
-        notifyObservers(this.threeDestinationCards);
+        notifyObservers(threeDestinationCards);
     }
 
     public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {

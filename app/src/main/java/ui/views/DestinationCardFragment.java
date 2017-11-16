@@ -178,40 +178,8 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                         Toast.makeText(getActivity(), "Please select at least 1 destination", Toast.LENGTH_LONG).show();
                     }
                 }
-                /*
-                if(cardsSelected.size() >= 2) {
-                    presenter.claimDestinationCards(game, player, cardsSelected);
-                    ((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
-                    getDialog().dismiss();
-                }
-                else {
-                    Toast.makeText(getActivity(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
-                }*/
             }
         });
-        /*
-        buttonBlue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.setColor(MyColor.BLUE.toString());
-            }
-        });
-
-        buttonSubmit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //game.addPlayer(player);
-                ((GameListActivity)getActivity()).presenter.CreateGame(game);
-                getDialog().dismiss();
-            }
-        });
-        buttonCancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                getDialog().dismiss();
-
-            }
-        });*/
     }
 
     @Override
@@ -227,18 +195,24 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
 
-        mRoute1.setText(destinationCards.get(0).getDestinationCardString());
-        mRoute2.setText(destinationCards.get(1).getDestinationCardString());
-        mRoute3.setText(destinationCards.get(2).getDestinationCardString());
-        //mRoute1.setText("Hi my name is Kwan");
-        //mRoute2.setText("What is your name?");
-        //mRoute3.setText("Nice to meet you!");
-        mRoute1.setTextColor(Color.RED);
-        mRoute2.setTextColor(Color.RED);
-        mRoute3.setTextColor(Color.RED);
+        if (destinationCards.get(0) == null) {
+            this.setCancelable(true);
+            Toast.makeText(getActivity(), "No more Destination Cards left. Sad.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+            mRoute2.setText(destinationCards.get(1).getDestinationCardString());
+            mRoute3.setText(destinationCards.get(2).getDestinationCardString());
+            //mRoute1.setText("Hi my name is Kwan");
+            //mRoute2.setText("What is your name?");
+            //mRoute3.setText("Nice to meet you!");
+            mRoute1.setTextColor(Color.RED);
+            mRoute2.setTextColor(Color.RED);
+            mRoute3.setTextColor(Color.RED);
 
-        Toast.makeText(getActivity(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
 
-        wireUp(destinationCards);
+            wireUp(destinationCards);
+        }
     }
 }
