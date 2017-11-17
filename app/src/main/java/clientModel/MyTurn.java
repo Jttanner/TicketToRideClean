@@ -2,10 +2,8 @@ package clientModel;
 
 import java.util.List;
 
-import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
-import modeling.Player;
 import modeling.ResourceCard;
 import modeling.Route;
 import servercomms.ServerProxy;
@@ -43,12 +41,7 @@ public class MyTurn extends GameState {
 
     @Override
     void drawDestCard(List<DestinationCard> c) {
-        endState();
-    }
-
-    @Override
-    void endState() {
-        CModel.getInstance().setCurrGameState(new NotMyTurn());
+        endTurn();
     }
 
     @Override
@@ -58,6 +51,6 @@ public class MyTurn extends GameState {
 
     @Override
     void claimRoute(Route r) {
-        endState();
+        endTurn();
     }
 }

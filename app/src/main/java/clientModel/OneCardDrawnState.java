@@ -2,7 +2,6 @@ package clientModel;
 
 import java.util.List;
 
-import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
@@ -44,11 +43,6 @@ public class OneCardDrawnState extends GameState {
     @Override
     void drawDestCard(List<DestinationCard> c) {
         super.drawDestCard(c);
-    }
-
-    @Override
-    void endState() {
-        super.endState();
     }
 
     @Override

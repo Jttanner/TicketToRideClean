@@ -26,7 +26,7 @@ public class StartGame extends GameState {
     }
 
     @Override
-    void endState() {
+    void endTurn() {
 
     }
 

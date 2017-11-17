@@ -2,9 +2,11 @@ package clientModel;
 
 import java.util.List;
 
+import commandData.EndTurnCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
 import modeling.Route;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 11/9/2017.
@@ -23,8 +25,11 @@ public abstract class GameState {
 
     }
     /**Handles ending the current game state and moving on to the next*/
-    void endState(){
-
+    void endTurn(){
+        CModel cModel = CModel.getInstance();
+        EndTurnCommandData data = new EndTurnCommandData(cModel.getCurrGame().getGameID(),cModel.getUserPlayer().getPlayerName());
+        ServerProxy.getInstance().sendCommand(data);
+        //TODO SERVERSIDE
     }
     /**Handles what to do from a certain phase when the game ends*/
     void gameEnded(){

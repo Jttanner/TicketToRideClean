@@ -349,4 +349,14 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers(this.currGameState);
     }
+
+    public String getIPAddress() {
+        return IPAddress;
+    }
+
+    private String IPAddress = "";
+
+    public void setIPAddress(String IPAddress) {
+        this.IPAddress = IPAddress;
+    }
 }
