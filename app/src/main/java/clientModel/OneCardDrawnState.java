@@ -2,7 +2,6 @@ package clientModel;
 
 import java.util.List;
 
-import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
@@ -47,17 +46,12 @@ public class OneCardDrawnState extends GameState {
     }
 
     @Override
-    void endState() {
-        super.endState();
-    }
-
-    @Override
     void gameEnded() {
         super.gameEnded();
     }
 
     @Override
-    void claimRoute(Route r) {
-        super.claimRoute(r);
+    public void claimRoute(Route r, String color) {
+        //super.claimRoute(r, color);
     }
 }

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import MVP_coms_classes.MVP_Login;
+import clientModel.CModel;
 import presenters.LoginPresenter;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -39,6 +40,8 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
     private EditText mPassWordEdit;
     /**Tag for log*/
     private final String TAG = "login Activity";
+    private EditText text;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "Entering OnCreateView");
@@ -73,7 +76,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
         setOnClicks();
         //Only for testing purposes
         //CModel.getInstance().setCurrGame(new Game());
-
+        text = (EditText) v.findViewById(R.id.ip);
     }
 
     @Override
@@ -127,6 +130,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
             public void onClick(View view) {
                 String username = mUserNameEdit.getText().toString();
                 String password = mPassWordEdit.getText().toString();
+                CModel.getInstance().setIPAddress(text.getText().toString());
                 mPresenter.login(new LoginRequest(username,password));
             }
         });
@@ -136,6 +140,7 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
             public void onClick(View view) {
                 String username = mUserNameEdit.getText().toString();
                 String password = mPassWordEdit.getText().toString();
+                CModel.getInstance().setIPAddress(text.getText().toString());
                 mPresenter.register(new RegisterRequest(username,password));
             }
         });

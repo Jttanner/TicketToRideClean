@@ -114,6 +114,7 @@ public class ServerCommunicator {
             //String portNumber = args[0];
             new ServerCommunicator().run("8080");
         }
+
     }
 
 

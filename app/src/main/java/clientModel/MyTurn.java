@@ -2,6 +2,7 @@ package clientModel;
 
 import java.util.List;
 
+import commandData.ClaimRouteCommandData;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.DestinationCard;
@@ -43,12 +44,7 @@ public class MyTurn extends GameState {
 
     @Override
     void drawDestCard(List<DestinationCard> c) {
-        endState();
-    }
-
-    @Override
-    void endState() {
-        CModel.getInstance().setCurrGameState(new NotMyTurn());
+        //endTurn();
     }
 
     @Override
@@ -57,7 +53,11 @@ public class MyTurn extends GameState {
     }
 
     @Override
-    void claimRoute(Route r) {
-        endState();
+    public void claimRoute(Route currRoute, String color) {
+        ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
+                currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
+                color, currRoute.getDistance());
+        ServerProxy.getInstance().sendCommand(claimRouteCommandData);
+        //endTurn();
     }
 }

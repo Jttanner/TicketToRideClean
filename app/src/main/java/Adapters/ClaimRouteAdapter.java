@@ -173,10 +173,7 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
 
     private void sendClaimRouteCommand(Route currRoute, String color){
         callingFragment.getDialog().dismiss();
-        ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
-                currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
-                color, currRoute.getDistance());
-        ServerProxy.getInstance().sendCommand(claimRouteCommandData);
+        CModel.getInstance().getCurrGameState().claimRoute(currRoute, color);
     }
 
     @Override

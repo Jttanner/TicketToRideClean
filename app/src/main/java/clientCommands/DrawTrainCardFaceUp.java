@@ -29,6 +29,7 @@ public class DrawTrainCardFaceUp implements ClientCommand {
         CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
+        //CModel.getInstance().setCurrGameState(this.state);
 
     }
 
