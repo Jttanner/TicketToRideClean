@@ -130,8 +130,7 @@ public class ResourceCardList {
                 ResourceCard thisCard = availableCards.remove(0);
                 thisCard.setPlayerID(player.getPlayerName());
                 //Now give the card to the player
-                player.addResourceCard(availableCards.get(i));
-                //remove this card from the resource card deck, now it is just held in the map
+                player.addResourceCard(thisCard);
 
             }
 
