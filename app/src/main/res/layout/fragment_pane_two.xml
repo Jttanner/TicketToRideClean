@@ -5,13 +5,6 @@
     tools:context="ui.views.PaneTwoFragment"
     android:background="@color/black">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/demoButton"
-        android:text="Demo"/>
-
     <ui.views.MapBaseView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

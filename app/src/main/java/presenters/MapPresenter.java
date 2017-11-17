@@ -1,6 +1,8 @@
 package presenters;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,9 +10,11 @@ import java.util.Observer;
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import commandData.ChatCommandData;
+import modeling.City;
 import modeling.Game;
 import modeling.Player;
 import modeling.Route;
+import modeling.RouteList;
 import servercomms.ServerProxy;
 
 /**
@@ -27,6 +31,7 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
     }
+
     /*@Override
     public void claimRoute(Route r) {
 
@@ -35,21 +40,18 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof Game){
-            /*
-            GameList games = (GameList) arg;
-            myView.get().UpdateList(games.getGames());
-             */
-            //Game currGame = (Game) arg;
-            //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap().entrySet()){
                 myView.get().updateMap();
-            //}
-            //myView.get().updateMap();
         }
-        //ex, game won,player attributes changed(routeClaimed),
+        else if(arg instanceof String) {
+            if(((String) arg).equals("ResourceFragmentTwo")) {
+                myView.get().ResourceCardOption();
+            }
+        }
+
     }
 
-//    public void UpdateChat(String s){
-//        ChatCommandData chatCommandData = new ChatCommandData(s);
-//        ServerProxy.getInstance().sendCommand(chatCommandData);
-//    }
+    public List<String> getCityConnections(String baseCityName){
+        return CModel.getInstance().getCurrGame().getUnclaimedRouteList().getCityRouteInfoStrings(baseCityName);
+    }
+
 }

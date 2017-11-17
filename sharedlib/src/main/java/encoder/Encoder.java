@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -120,7 +121,16 @@ public class Encoder {
             return new CommandResult(false, e.getMessage());
         }
     }
-
+    public CommandResult decodeDrawResourceCardFaceUp(InputStream inputStream) {
+        try {
+            Reader reader = new InputStreamReader(inputStream);
+            CommandResult commandResult = gson.fromJson(reader, CommandResult.class);
+            commandResult.setMessage("DrawFaceUpCard");
+            return commandResult;
+        } catch (Exception e) {
+            return new CommandResult(false, e.getMessage());
+        }
+    }
     public DrawDestinationCardCommandResult decodeDestinationCardResult(InputStream stream) {
         try {
             Reader reader = new InputStreamReader(stream);

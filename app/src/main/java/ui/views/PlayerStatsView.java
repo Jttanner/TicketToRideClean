@@ -24,7 +24,7 @@ import teamjapannumbahone.tickettoride.R;
  * Created by tyler on 10/20/2017.
  */
 
-public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.ViewOps{
+public class  PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.ViewOps{
     /**The recycler view for the game stats*/
     private RecyclerView mGameStatus;
     /**The textview which holds the column names for the recycler views info*/
@@ -43,6 +43,8 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
     private View myView;
     /**Textviews holding num of user's cards*/
     Map<MyColor,TextView> colorNumMap = new HashMap<>();
+
+    private TextView destTextView;
 
 
 
@@ -89,11 +91,17 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
     }
 
     @Override
+    public void setMyDestTextView(int size) {
+        destTextView.setText("Dest deck size: " + size);
+    }
+
+    @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         setupTrains();
         mGameStatus = (RecyclerView) myView.findViewById(R.id.recycler_status);
         mTextView = (TextView) myView.findViewById(R.id.statusNames);
+        destTextView = (TextView) myView.findViewById(R.id.dest_deck_size);
         mTextView.setText(statNames.replaceAll("\\t","\t"));
         presenter = new PlayerStatsPresenter(this);
         //setup recycler
@@ -102,6 +110,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
         mGameStatus.setLayoutManager(manager);
         mGameStatus.setAdapter(statusAdapter);
         presenter.setCardNumbers(colorNumMap);
+        presenter.setDestinationCardNumber();
     }
 
     private void setupTrains() {
@@ -141,6 +150,7 @@ public class PlayerStatsView extends RelativeLayout implements MVP_PlayerStats.V
     @Override
     public void updatePlayerStats() {
         presenter.setCardNumbers(colorNumMap);
+        presenter.setDestinationCardNumber();
         statusAdapter.setPlayerColumns(presenter.getPlayerColumns());
         statusAdapter.notifyDataSetChanged();
     }

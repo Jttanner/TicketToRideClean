@@ -12,6 +12,7 @@ import MVP_coms_classes.MVP_DestCard;
 import clientModel.CModel;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.DrawDestinationCardCommandData;
+import commandData.EndTurnCommandData;
 import modeling.DestinationCard;
 import modeling.Game;
 import modeling.Player;
@@ -42,6 +43,24 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player.getPlayerName(), destinationCards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
+    }
+
+    public boolean hasGameJustStarted(Game game, Player player) {
+        if (player.getDestinationCards().size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /*
+    public void subtractDestinationCards(int subtract) {
+        CModel.getInstance().
+    }*/
+
+    public void endTurn(Game game, Player player) {
+        EndTurnCommandData data = new EndTurnCommandData(game.getGameID(), player.getPlayerName());
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "endTurn");
     }
 
     @Override

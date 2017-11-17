@@ -10,6 +10,7 @@ import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
+import commandData.DrawTrainCardFaceUpCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -90,6 +91,9 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         }
         else if(request instanceof GetCmndDataFromServer){
             return encoder.decodeGetCommandListToClient(stream);
+        }
+        else if(request instanceof DrawTrainCardFaceUpCommandData) {
+            return encoder.decodeDrawResourceCardFaceUp(stream);
         }
         else if(request instanceof Command){
             CommandResult result = encoder.decodeCommandResult(stream);

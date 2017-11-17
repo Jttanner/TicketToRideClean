@@ -16,13 +16,32 @@ public class City {
     private String cityName;
     //private Point coords;
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof City)) {
+            return false;
+        }
+        City oCity = (City) o;
+        //All instance variables must match to return true
+        return this.getCityName().equals(oCity.getCityName());
+    }
 
-    //TODO: double check type for this collection.  is Set okay?
+    /**If this city has been visited by the longest path calculator
+    private boolean visited = false;*/
+
+
+    /*
     Set<Route> routes = new HashSet<>();
 
     public void addRoute(Route route){
         routes.add(route);
-    }
+    }*/
 
     public String getCityName() {
         return cityName;
@@ -36,13 +55,21 @@ public class City {
         return coords.y;
     }*/
 
-    public Set<Route> getRoutes() {
+    /*public Set<Route> getRoutes() {
         return routes;
-    }
+    }*/
 
     @Override
     public String toString() {
         return cityName;
     }
+
+    /*public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }*/
 
 }

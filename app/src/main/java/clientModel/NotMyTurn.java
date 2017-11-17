@@ -15,7 +15,7 @@ import modeling.Route;
 public class NotMyTurn extends GameState {
 
     @Override
-    void gameEnded() {
+    public void gameEnded() {
         super.gameEnded();
     }
 

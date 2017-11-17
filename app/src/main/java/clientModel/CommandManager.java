@@ -76,15 +76,16 @@ public class CommandManager {
     private void executeCurrCommands(List<Command> commandList) {
         Player myPlayer = CModel.getInstance().getUserPlayer();
         //get the current command index.
-        int commandIndex = myPlayer.getCommandIndex();
+         int commandIndex = myPlayer.getCommandIndex();
         //if there is anything to execute, do so
         if (commandList.size() > 0) {
             for (int i = commandIndex; i < commandList.size(); i++) {
                 //return the appropiate client command
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
-                    clientCommand.execute();
                     CModel.getInstance().incrementUsersCommandIndex();
+                    clientCommand.execute();
+
                 }
             }
         }

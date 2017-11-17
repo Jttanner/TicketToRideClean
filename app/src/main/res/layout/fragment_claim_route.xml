@@ -3,12 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ui.views.ClaimRouteFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/choose_claim_route_list"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/choose_claim_route_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/redChoiceButton"
+                android:text="Red"
+                android:enabled="false" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blueButton"
+                android:text="Blue"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/orangeButton"
+                android:text="Orange"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/whiteButton"
+                android:text="White"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yellowButton"
+                android:text="Yellow"
+                android:enabled="false"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/purpleButton"
+                android:text="Purple"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blackButton"
+                android:text="Black"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/greenButton"
+                android:text="Green"
+                android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wildButton"
+                android:text="Wild"
+                android:enabled="false"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </FrameLayout>
+

@@ -1,26 +1,14 @@
 package ui.views;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-
 import Adapters.GameHistoryAdapter;
 import MVP_coms_classes.MVP_GameHistory;
 import clientModel.CModel;
@@ -40,7 +28,7 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
 
         //this.setCancelable(false);
 
-        presenter = new GameHistoryPresenter(this);
+//        presenter = new GameHistoryPresenter(this);
 
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
         getDialog().show();
@@ -53,16 +41,16 @@ public class GameHistoryFragment extends DialogFragment implements MVP_GameHisto
         recyclerView.setAdapter(adapter);
         return v;
     }
-
-    @Override
-    public Context getAppContext() {
-        return null;
-    }
-
-    @Override
-    public Context getActivityContext() {
-        return null;
-    }
+//
+//    @Override
+//    public Context getAppContext() {
+//        return null;
+//    }
+//
+//    @Override
+//    public Context getActivityContext() {
+//        return null;
+//    }
 
     @Override
     public void updateGameHistory(ArrayList<String> gameHistoryList) {

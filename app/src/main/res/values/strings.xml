@@ -10,7 +10,12 @@
     <string name="password">password</string>
     <string name="startGame">Start Game</string>
     <string name="statusLayout">Player:\tPoints:\tTrains:\tCards:\t\tDest:</string>
-
+    <string name="resourceCardEndTurn">End Turn</string>
+    <string name="resourceCardButton">Draw Resource Card</string>
+    <string name="turnStartOptionButton">Player Option</string>
+    <string name="turnStartOptionResourceCard">Resource Card</string>
+    <string name="turnStartOptionDestinationCard">Destination Card</string>
+    <string name="turnStartOptionClaimRoute">Claim Route</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

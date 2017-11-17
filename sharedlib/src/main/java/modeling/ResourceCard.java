@@ -1,5 +1,7 @@
 package modeling;
 
+import java.util.UUID;
+
 /**
  * Created by tyler on 10/17/2017.
  * The class that represents resource cards
@@ -8,15 +10,27 @@ package modeling;
 public class ResourceCard {
     /**Our color string*/
     private String myColor;
+    private String cardID;
+
     /**Whether this card is face
      * up or not*/
     private boolean isFaceUp;
     /**The owner of this card*/
-    private Player player;
+    private String playerID;
 
     ResourceCard(String myColor) {
         this.myColor = myColor;
+        //this.cardID = UUID.randomUUID().toString();
     }
+
+    public String getCardID() {
+        return cardID;
+    }
+
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
+    }
+
     public ResourceCard(String myColor, boolean yay) {
         this.myColor = myColor;
     }
@@ -37,11 +51,11 @@ public class ResourceCard {
         this.myColor = myColor;
     }
 
-    public Player getPlayer() {
-        return player;
+    public String getPlayer() {
+        return playerID;
     }
     /**Sets the player who owns this card*/
-    void setPlayer(Player player) {
-        this.player = player;
+    void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
 }

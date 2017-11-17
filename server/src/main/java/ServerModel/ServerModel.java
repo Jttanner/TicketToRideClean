@@ -8,12 +8,14 @@ import java.util.Map;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
+import commandData.EndTurnCommandData;
 import modeling.CommandList;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
+import modeling.RouteList;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -31,10 +33,11 @@ public class ServerModel {
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     //private Map<String, Game> games = new HashMap<>(); //Key=gameID
     private Map<String, List<Command>> commandListMap = new HashMap<>();
-    private DestinationCardList destinationCardList = new DestinationCardList();
+    //private DestinationCardList destinationCardList = new DestinationCardList();
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
+
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -137,26 +140,9 @@ public class ServerModel {
     public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
+/*
+    boolean endTurn(EndTurnCommandData commandData) {
 
-    List<DestinationCard> getDestinationCards() {
-        return destinationCardList.get3Cards();
-    }
-
-    List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
-        List<DestinationCard> claimedCards = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
-            if (isClaimed) {
-                 claimedCards.add(commandData.getClaimDestinationCards().get(i));
-            }
-            else{
-                destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
-            }
-        }
-        String playerID = commandData.getPlayerID();
-        Game currGame = gameList.findGame(commandData.getGameID());
-        Player currPlayer = currGame.getPlayer(playerID);
-        currPlayer.addDestinationCard(claimedCards);
-        return claimedCards;
-    }
+        //TODO: We need to calculate what the endTurn does here
+    }*/
 }

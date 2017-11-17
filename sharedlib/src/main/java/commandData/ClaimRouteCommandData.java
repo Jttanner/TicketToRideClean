@@ -1,8 +1,5 @@
 package commandData;
 
-import modeling.Game;
-import modeling.Player;
-
 /**
  * Created by korea on 10/28/2017.
  */
@@ -11,26 +8,38 @@ public class ClaimRouteCommandData extends Command {
     //Data Members
     private String startCity;
     private String endCity;
-    private String game;
-    private Player player;
+    private String gameID;
+    private String playerName;
+    private String routeColor;
+    private int distance;
 
     //Constructors
-    public ClaimRouteCommandData(String game, String startCity, String endCity) {
+    public ClaimRouteCommandData(String gameID, String startCity, String endCity, String playerName, String routeColor, int distance) {
         setType("claimRoute");
-        this.game = game;
+        this.gameID = gameID;
         this.startCity = startCity;
         this.endCity = endCity;
+        this.playerName = playerName;
+        this.routeColor = routeColor;
+        this.distance = distance;
     }
     public ClaimRouteCommandData () {
     }
 
-    //Getters and Setters
 
-    public String getGame() {
-        return game;
+
+    //Getters and Setters
+    public String getPlayerName() {
+        return playerName;
     }
-    public void setGame(String game) {
-        this.game = game;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+    public String getGameID() {
+        return gameID;
+    }
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
     }
     public String getStartCity() {
         return startCity;
@@ -43,5 +52,21 @@ public class ClaimRouteCommandData extends Command {
     }
     public void setEndCity(String endCity) {
         this.endCity = endCity;
+    }
+
+    public String getRouteColor() {
+        return routeColor;
+    }
+
+    public void setRouteColor(String routeColor) {
+        this.routeColor = routeColor;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 }

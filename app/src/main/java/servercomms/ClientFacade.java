@@ -53,7 +53,11 @@ class ClientFacade {
                 CModel.getInstance().setThreeDestinationCards(((DrawDestinationCardCommandResult) result).getDestinationCardList());
             }
             else if (result instanceof ClaimDestinationCardCommandResult) {
-                CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards(), 25);
+                CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards());
+            }
+            else if(result instanceof CommandResult) {
+                //Draw Face Up Card
+                Log.d(TAG, "Draw Face Up: " + result.getClass());
             }
             else if(result.getType()!=null) {
                 if (result.getType().equals("startGame")) {
@@ -61,7 +65,7 @@ class ClientFacade {
                 }
             }
             else {
-                Log.d(TAG, "We got a different class then expected");
+                Log.d(TAG, "We got a different class then expected: " + result.getClass());
             }
         }
     }
@@ -70,8 +74,5 @@ class ClientFacade {
         CModel.getInstance().setMyUser(user);
     }
 
-    void claimRoute(Game currGame, Route route){
-        CModel.getInstance().updateRoutes(currGame, route, CModel.getInstance().getUserPlayer());
-    }
 
 }

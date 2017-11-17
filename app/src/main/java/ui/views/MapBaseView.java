@@ -31,7 +31,7 @@ import teamjapannumbahone.tickettoride.R;
 
 public class MapBaseView extends View {
 
-    static int DOUBLE_ROUTE_OFFSET = 6;
+    static int DOUBLE_ROUTE_OFFSET = 8;
 
     Point VancouverPoint = new Point(159, 135);
     Point SeattlePoint = new Point(180, 220);
@@ -48,7 +48,7 @@ public class MapBaseView extends View {
     Point MontrealPoint = new Point(1818, 143);
     Point IDontKNowPoint = new Point(1873, 448);
     Point TorontoPoint = new Point(1578, 382);
-    Point DeluthPoint = new Point(1118, 364);
+    Point DuluthPoint = new Point(1118, 364);
     Point DenverPoint = new Point(722, 612);
     Point SantaFePoint = new Point(685, 744);
     Point ElPasoPoint = new Point(730, 917);
@@ -83,11 +83,11 @@ public class MapBaseView extends View {
     CityDrawData Helena = new CityDrawData(HelenaPoint, "Helena");
     CityDrawData Calgary = new CityDrawData(CalgaryPoint, "Calgary");
     CityDrawData Winnipeg = new CityDrawData(WinnipegPoint, "Winnipeg");
-    CityDrawData SaultStMarie = new CityDrawData(SaultStMariePoint, "Sault St Marie");
+    CityDrawData SaultStMarie = new CityDrawData(SaultStMariePoint, "Sault St. Marie");
     CityDrawData Montreal = new CityDrawData(MontrealPoint, "Montreal");
     CityDrawData Boston = new CityDrawData(BostonPoint, "Boston");
     CityDrawData Toronto = new CityDrawData(TorontoPoint, "Toronto");
-    CityDrawData Deluth = new CityDrawData(DeluthPoint, "Deluth");
+    CityDrawData Duluth = new CityDrawData(DuluthPoint, "Duluth");
     CityDrawData Denver = new CityDrawData(DenverPoint, "Denver");
     CityDrawData SantaFe = new CityDrawData(SantaFePoint, "Santa Fe");
     CityDrawData ElPaso = new CityDrawData(ElPasoPoint, "El Paso");
@@ -107,7 +107,7 @@ public class MapBaseView extends View {
     CityDrawData Miami = new CityDrawData(MiamiPoint, "Miami");
     CityDrawData NewOrleans = new CityDrawData(NewOrleansPoint, "New Orleans");
     CityDrawData LittleRock = new CityDrawData(LittleRockPoint, "Little Rock");
-    CityDrawData SaintLouis = new CityDrawData(SaintLouisPoint, "Saint Louis");
+    CityDrawData SaintLouis = new CityDrawData(SaintLouisPoint, "St. Louis");
 
     WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
     Display display = wm.getDefaultDisplay();
@@ -158,13 +158,68 @@ public class MapBaseView extends View {
         }
     }
 
+    /**
+     *
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        int xTouch = Math.round(event.getX());
+        /*int xTouch = Math.round(event.getX());
         int yTouch = Math.round(event.getY());
         touchCoords.add(new Point(xTouch, yTouch));
         return true;
+        */
+
+        int eventAction = event.getAction();
+
+        // you may need the x/y location
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+
+        if (eventAction == MotionEvent.ACTION_DOWN){
+            //decode location, open dialog fragment to claim routes connected to city if it works
+
+        } else {
+            //do nothing
+        }
+
+
+        // put your code in here to handle the event
+        /*switch (eventAction) {
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+        }*/
+
+        // tell the View to redraw the Canvas
+        invalidate();
+
+        // tell the View that we handled the event
+        return true;
+
+
     }
+
+
+    /**
+     * this is really brute forcey
+     * @param event
+     * @return
+     */
+    public String decodeCityTouched(MotionEvent event){
+        for (CityDrawData city : cities){
+            if (city.getX() > event.getX() - 15 && city.getX() < event.getX() + 15
+                    && city.getY() > event.getY() - 15 && city.getY() < event.getY() + 15){
+                return city.getCityName();
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -186,7 +241,7 @@ public class MapBaseView extends View {
         cities.add(Montreal);
         cities.add(Boston);
         cities.add(Toronto);
-        cities.add(Deluth);
+        cities.add(Duluth);
         cities.add(Denver);
         cities.add(SantaFe);
         cities.add(ElPaso);
@@ -222,7 +277,7 @@ public class MapBaseView extends View {
         Charleston.addConnection(Miami);
         Chicago.addDoubleConnection(Pittsburgh); //x2
         Chicago.addConnection(Toronto);
-        Chicago.addConnection(Deluth);
+        Chicago.addConnection(Duluth);
         Chicago.addConnection(Omaha);
         Chicago.addDoubleConnection(SaintLouis); //x2
         Dallas.addConnection(LittleRock);
@@ -236,12 +291,12 @@ public class MapBaseView extends View {
         Denver.addConnection(Phoenix);
         Denver.addConnection(SantaFe);
         Denver.addConnection(OklahomaCity);
-        Deluth.addDoubleConnection(Omaha); //c2
-        Deluth.addConnection(Chicago);
-        Deluth.addConnection(Toronto);
-        Deluth.addConnection(SaultStMarie);
-        Deluth.addConnection(Winnipeg);
-        Deluth.addConnection(Helena);
+        Duluth.addDoubleConnection(Omaha); //c2
+        Duluth.addConnection(Chicago);
+        Duluth.addConnection(Toronto);
+        Duluth.addConnection(SaultStMarie);
+        Duluth.addConnection(Winnipeg);
+        Duluth.addConnection(Helena);
         ElPaso.addConnection(Houston);
         ElPaso.addConnection(OklahomaCity);
         ElPaso.addConnection(SantaFe);
@@ -384,8 +439,6 @@ public class MapBaseView extends View {
     private class DoubleConnectionDrawData{
         CityDrawData connectedCityDrawData;
 
-        boolean oneClaimed = false;
-
         public DoubleConnectionDrawData(CityDrawData connectedCityDrawData){
             this.connectedCityDrawData = connectedCityDrawData;
         }
@@ -438,6 +491,10 @@ public class MapBaseView extends View {
 
         public float getY(){
             return city.y;
+        }
+
+        public String getCityName() {
+            return cityName;
         }
 
         public void addConnection(CityDrawData otherCity){

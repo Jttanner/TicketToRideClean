@@ -50,6 +50,41 @@ public class DestinationCardList {
 
     }
 
+//    List<DestinationCard> getDestinationCards() {
+//        return destinationCardList.get3Cards();
+//    }
+
+    public void addDestinationCardBackToDeck (DestinationCard card) {
+        destinationCardList.add(card);
+    }
+
+    public void removeDestinationCards (List<DestinationCard> cards) {
+        for (int i = 0; i < cards.size(); i++) {
+            for (int j = 0; j < destinationCardList.size(); j++) {
+                if(cards.get(i).getDestinationCardString().equals(destinationCardList.get(j).getDestinationCardString())) {
+                    destinationCardList.remove(j);
+                }
+            }
+        }
+    }
+
+//    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+//        List<DestinationCard> claimedCards = new ArrayList<>();
+//        for (int i = 0; i < 3; i++) {
+//            boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
+//            if (isClaimed) {
+//                claimedCards.add(commandData.getClaimDestinationCards().get(i));
+//            } else {
+//                destinationCardList.getDestinationCardList().add(commandData.getClaimDestinationCards().get(i));
+//            }
+//        }
+//        String playerID = commandData.getPlayerID();
+//        Game currGame = gameList.findGame(commandData.getGameID());
+//        Player currPlayer = currGame.getPlayer(playerID);
+//        currPlayer.addDestinationCard(claimedCards);
+//        return claimedCards;
+//    }
+
     public List<DestinationCard> get3Cards() {
         List<DestinationCard> threeCards = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -60,6 +95,10 @@ public class DestinationCardList {
     }
 
     public DestinationCard get1RandomCard() {
+        //TODO: Make the check for if destinationCardList is empty or almost empty
+        if (destinationCardList.size() == 0) {
+            return null;
+        }
         int min = 0;
         int max = destinationCardList.size() - 1;
         int randomIndex = randInt(min, max);

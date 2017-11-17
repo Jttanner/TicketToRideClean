@@ -15,10 +15,10 @@ public interface MVP_GameHistory {
      * and receive user interactions
      */
     interface GameHistoryViewOps{
-        /**Gets application context*/
-        Context getAppContext();
-        /**gets activity context*/
-        Context getActivityContext();
+//        /**Gets application context*/
+//        Context getAppContext();
+//        /**gets activity context*/
+//        Context getActivityContext();
         /**Any commands toString method is passed in here to add to the GameHistoryView*/
         void updateGameHistory(ArrayList<String> gameHistoryList);
 
@@ -28,7 +28,6 @@ public interface MVP_GameHistory {
      * Processes user interactions, sends data requests to Model, etc.
      */
     interface GameHistoryPresOps{
-        /**Tells the view to exit itself*/
-        void exitView();
+        //No user interactions need to be processed
     }
 }

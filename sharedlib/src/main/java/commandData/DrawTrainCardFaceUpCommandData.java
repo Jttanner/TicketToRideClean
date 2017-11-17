@@ -1,6 +1,7 @@
 package commandData;
 
 import modeling.Game;
+import modeling.ResourceCard;
 
 /**
  * Created by korea on 10/28/2017.
@@ -8,29 +9,37 @@ import modeling.Game;
 
 public class DrawTrainCardFaceUpCommandData extends Command {
     //Data Members
-    private String game;
-    private String resourceCardColor;
+    private String playerName;
+    private String gameID;
+    private ResourceCard resourceCard;
 
     //Constructors
-    public DrawTrainCardFaceUpCommandData (String game, String resourceCardColor) {
+    public DrawTrainCardFaceUpCommandData (String playerName, String gameID, ResourceCard resourceCard) {
         setType("drawTrainCardFaceUp");
-        this.game = game;
-        this.resourceCardColor = resourceCardColor;
+        this.playerName = playerName;
+        this.gameID = gameID;
+        this.resourceCard = resourceCard;
+
     }
     public DrawTrainCardFaceUpCommandData () {}
 
     //Getters and Setters
-
-    public String getGame() {
-        return game;
+    public String getPlayerName() {
+        return playerName;
     }
-    public void setGame(String game) {
-        this.game = game;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
-    public String getResourceCardColor() {
-        return resourceCardColor;
+    public String getGameID() {
+        return gameID;
     }
-    public void setResourceCardColor(String resourceCardColor) {
-        this.resourceCardColor = resourceCardColor;
+    public void setGameID(String game) {
+        this.gameID = game;
+    }
+    public ResourceCard getResourceCard() {
+        return resourceCard;
+    }
+    public void setResourceCard(ResourceCard resourceCard) {
+        this.resourceCard = resourceCard;
     }
 }

@@ -74,21 +74,6 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
-    private RouteList unclaimedRouteList = new RouteList(true);
-
-    private RouteList claimedRouteList = new RouteList(false);
-
-    public RouteList getClaimedRouteList() {
-        return claimedRouteList;
-    }
-
-    //    private List<String> gameHistory = new ArrayList<>();
-//    public List<String> getGameHistory() {
-//        return gameHistory;
-//    }
-//    public void setGameHistory(List<String> gameHistory) {
-//        this.gameHistory = gameHistory;
-//    }
 
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history, String gameID) {
@@ -97,16 +82,22 @@ public class CModel extends Observable {
                 game.addToGameHistory(history);
             }
         }
-        if(currGame!=null){
-            currGame.addToGameHistory(history);
-        }
-
-//        currGame.addToGameHistory(history);
-        History observerHistory = new History();
         setChanged();
-        notifyObservers(observerHistory);
+        notifyObservers("UpdateGameHistory");
+    }
+    public void closeResourceFragment() {
+        setChanged();
+        notifyObservers("CloseResourceFragment");
+    }
+    public void upDateFaceUpPile() {
+        setChanged();
+        notifyObservers("UpdateFaceUpView");
     }
 
+    public void updatePlayerStatsView () {
+        setChanged();
+        notifyObservers(currGame);
+    }
 
     private CModel() {
     }
@@ -122,6 +113,7 @@ public class CModel extends Observable {
     public Game getCurrGame() {
         return currGame;
     }
+
 
 
     /*
@@ -159,12 +151,16 @@ public class CModel extends Observable {
         for(Game game : allGames){
             if(game.getGameID().equals(currGame.getGameID())){
                 game.setHasStarted(true);
+                //Set our current game to the updated game
+                this.currGame = game;
+                //updatePlayerStatsView(game);
             }
         }
 
-        incrementUsersCommandIndex();
+        //incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
+        updatePlayerStatsView();
     }
 
     public Set<Player> getAllPlayers() {
@@ -195,13 +191,13 @@ public class CModel extends Observable {
         return null;
     }
 
-    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
-
-        player.addResourceCard(card);
-        setChanged();
-        notifyObservers(currGame);
-
-    }
+//    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
+//
+//        player.addResourceCard(card);
+//        setChanged();
+//        notifyObservers(currGame);
+//
+//    }
 
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList
@@ -231,33 +227,23 @@ public class CModel extends Observable {
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
 
         //set currGame
-        this.threeDestinationCards = threeDestinationCards;
+        //this.threeDestinationCards = threeDestinationCards;
         setChanged();
-        notifyObservers(this.threeDestinationCards);
+        notifyObservers(threeDestinationCards);
     }
 
-    private int deckSize = 30;
-
-    public int getDeckSize() {
-        return deckSize;
-    }
-
-    public void setDeckSize(int deckSize) {
-        this.deckSize = deckSize;
-    }
-
-    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards, int deckSize) {
+    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
         Log.d(TAG, "Setting claimed destination cards");
         this.claimedDestinationCards = claimedDestinationCards;
         currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
-
-        this.deckSize = deckSize;
+        //List<DestinationCard> totalList = currGame.getDestinationCardList().getDestinationCardList();
+        currGame.getDestinationCardList().removeDestinationCards(claimedDestinationCards);
+        //this.deckSize = deckSize - claimedDestinationCards.size();
         //player.addDestinationCard(claimedDestinationCards);
         setChanged();
         notifyObservers(this.currGame);
-        //setChanged();
-        //notifyObservers(this.claimedDestinationCards);
     }
+
     /**
      * Sets the current game for the user. takes a game object that was saved client side until the server said we were good to
      * make it. This method is used when we join a game
@@ -290,24 +276,18 @@ public class CModel extends Observable {
 
     public void updateRoutes(Game currGame, Route route, Player player){
         //Player userPlayer = CModel.getInstance().getUserPlayer();
+        currGame.claimAvailableRoute(route, player);
         player.addRoute(route);
         player.addPoints(route.getPointValue());
-        TrainCarList playerTrainCars = player.getTrainCarList();
-        playerTrainCars.decrementCars(route.getDistance());
-        //int claimedCount = 0;
-        //for (Map.Entry<Route, Player> entry : CModel.getInstance().getClaimedRouteList().getRoutesMap(). entrySet()){
 
-        //}
-        for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
-            if (entry.getKey().equals(route)){
-                route.setFirstOfDouble(false);
-            }
-        }
-        claimedRouteList.addClaimedRoute(route, player);
-        unclaimedRouteList.removeAvailableRoute(route);
         setChanged();
         notifyObservers(currGame);
     }
+
+
+
+
+    //KWANS STUFF :) hey kwan u r kool
 
     @Override
     public synchronized void addObserver(Observer o) {
@@ -366,5 +346,7 @@ public class CModel extends Observable {
 
     public void setCurrGameState(GameState currGameState) {
         this.currGameState = currGameState;
+        setChanged();
+        notifyObservers(this.currGameState);
     }
 }

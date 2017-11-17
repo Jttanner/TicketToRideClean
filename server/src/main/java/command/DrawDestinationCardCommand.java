@@ -30,15 +30,15 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
         DrawDestinationCardCommandResult result;
-        List<DestinationCard> destinationCardList = facade.getDestinationCardList();
+        List<DestinationCard> destinationCardList = facade.getDestinationCardList(commandData);
         if(destinationCardList == null) {
-            //facade.addCommandToList(facade.getGame().getGameID(),commandData);
+            //facade.addCommandToList(facade.getGameName().getGameID(),commandData);
             result = new DrawDestinationCardCommandResult(false, "failed");
             setType("drawDestinationCards");
             return result;
         }
         else {
-            //facade.addCommandToList(getGameID(), commandData);
+            facade.addCommandToList(commandData.getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
             result = new DrawDestinationCardCommandResult(true, destinationCardList, "Destination card list sent.");

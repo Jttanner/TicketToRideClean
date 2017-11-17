@@ -2,6 +2,7 @@ package modeling;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -30,6 +31,50 @@ public class Game {
     private String gameName;
     private int playerMax;
     private ResourceCardList resourceCardList;
+    private final String TAG = "Game:";
+    private DestinationCardList destinationCardList;
+    //private int destDeckSize;
+
+
+    private RouteList unclaimedRouteList = new RouteList(true);
+
+    private RouteList claimedRouteList = new RouteList(false);
+
+    public RouteList getClaimedRouteList() {
+        return claimedRouteList;
+    }
+
+    public RouteList getUnclaimedRouteList(){ return  unclaimedRouteList; }
+
+
+
+    public boolean claimAvailableRoute(Route route, Player player){
+        if (route.checkIfPlayerCanClaim(this, route, player)){
+            TrainCarList playerTrainCars = player.getTrainCarList();
+            playerTrainCars.decrementCars(route.getDistance());
+            player.discardResourceCardsToPlaceCars(route, this);
+            for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
+                if (entry.getKey().equals(route)){
+                    route.setFirstOfDouble(false);
+                }
+            }
+            int oldSize = unclaimedRouteList.getAvailableRouteSize();
+            claimedRouteList.addClaimedRoute(route, player);
+            unclaimedRouteList.removeAvailableRoute(route);
+            if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
+                return  false;
+            } else{
+                player.addRoute(route);
+                return true;
+            }
+        } else{
+            return false;
+        }
+
+    }
+
+
+
 
     //**************************CONSTRUCTORS*************************************************************************************************//
 
@@ -48,6 +93,7 @@ public class Game {
         gameID = UUID.randomUUID().toString();
         players = new ArrayList<>();
         //card deck created for the game
+        destinationCardList = new DestinationCardList();
         resourceCardList = new ResourceCardList();
     }
     /**
@@ -88,7 +134,7 @@ public class Game {
     public void setHasStarted(boolean hasStarted) {
         this.hasStarted = hasStarted;
         //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
-        if(this.hasStarted && !players.get(0).isMyTurn()){
+        if(this.hasStarted){
             setupStartingCards();//setup starting cards when game starts
             players.get(0).toggleMyTurn();
         }
@@ -184,9 +230,9 @@ public class Game {
      * @return The player whose turn it is*/
     public Player getCurrentPlayer(){
         for (Player player : players){
-            if(player.isMyTurn()){
+            //if(player.isMyTurn()){
                 return player;
-            }
+            //}
         }
         return null;
     }
@@ -357,5 +403,13 @@ public class Game {
      */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
+    }
+
+    public DestinationCardList getDestinationCardList() {
+        return destinationCardList;
+    }
+
+    public void setDestinationCardList(DestinationCardList destinationCardList) {
+        this.destinationCardList = destinationCardList;
     }
 }
