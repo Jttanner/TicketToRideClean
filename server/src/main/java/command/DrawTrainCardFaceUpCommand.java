@@ -32,8 +32,8 @@ public class DrawTrainCardFaceUpCommand extends DrawTrainCardFaceUpCommandData i
 //        facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID()).getResourceCardList().upDateFaceUpPile(drawTrainCardFaceUpCommandData.getPosition());
 
         //Debugging purposes
-        Game game = facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID());
-        game.getResourceCardList();
+//        Game game = facade.getGameList().findGame(drawTrainCardFaceUpCommandData.getGameID());
+//        game.getResourceCardList();
 
         //Adds to the commands to be executed
         facade.addCommandToList(drawTrainCardFaceUpCommandData.getGameID(), drawTrainCardFaceUpCommandData);

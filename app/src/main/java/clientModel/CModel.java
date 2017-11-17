@@ -151,12 +151,16 @@ public class CModel extends Observable {
         for(Game game : allGames){
             if(game.getGameID().equals(currGame.getGameID())){
                 game.setHasStarted(true);
+                //Set our current game to the updated game
+                this.currGame = game;
+                //updatePlayerStatsView(game);
             }
         }
 
         //incrementUsersCommandIndex();
         setChanged();
         notifyObservers(Boolean.TRUE);
+        updatePlayerStatsView();
     }
 
     public Set<Player> getAllPlayers() {

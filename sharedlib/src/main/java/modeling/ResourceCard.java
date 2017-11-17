@@ -20,8 +20,9 @@ public class ResourceCard {
 
     ResourceCard(String myColor) {
         this.myColor = myColor;
-        this.cardID = UUID.randomUUID().toString();
+        //this.cardID = UUID.randomUUID().toString();
     }
+
     public String getCardID() {
         return cardID;
     }
@@ -29,6 +30,7 @@ public class ResourceCard {
     public void setCardID(String cardID) {
         this.cardID = cardID;
     }
+
     public ResourceCard(String myColor, boolean yay) {
         this.myColor = myColor;
     }
