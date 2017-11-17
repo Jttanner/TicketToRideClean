@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 import clientCommands.ClientCommand;
-import clientCommands.DrawDestinationCards;
+import clientCommands.ClaimDestinationCards;
 import clientCommands.DrawTrainCardDeck;
 import clientCommands.DrawTrainCardFaceUp;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
 import clientCommands.UpdateChatCommand;
 import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardDeckCommandData;
 import commandData.DrawTrainCardFaceUpCommandData;
-import modeling.CommandList;
 import modeling.Player;
 
 /**
@@ -115,7 +115,7 @@ public class CommandManager {
             case "drawTrainCardFaceUp":
                 return new DrawTrainCardFaceUp((DrawTrainCardFaceUpCommandData) command);
             case "drawDestinationCard":
-                return new DrawDestinationCards((DrawDestinationCardCommandData) command);
+                return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":
                 return new PlaceTrainRoute((ClaimRouteCommandData) command);
             case "addChat":

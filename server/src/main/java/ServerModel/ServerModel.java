@@ -20,6 +20,8 @@ import modeling.User;
 import modeling.UserInfoList;
 
 /**
+ * Serves as the root of the server where information and algorithms are stored. Accesses important data such as the list of Destination Cards,
+ * list of commands, list of games, list of user info, and chat history.
  * Created by jontt on 9/27/2017.
  */
 
@@ -38,14 +40,13 @@ public class ServerModel {
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
 
-
     public List<String> getChatHistory() {
         return chatHistory;
     }
 
-    List<Command> returnCommand = new ArrayList<>();
+    public List<Command> returnCommand = new ArrayList<>();
 
-    List<Command> getReturnCommand() {
+    public List<Command> getReturnCommand() {
         return returnCommand;
     }
 

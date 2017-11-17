@@ -191,9 +191,15 @@ public class Player implements Comparator<Player> {
 
     /**Adds a list of destination cards to what the player has already
      * @param cards Their newly added*/
-    public void addDestinationCard(List<DestinationCard> cards){
+    public void addDestinationCards(List<DestinationCard> cards){
         destinationCards.addAll(cards);
     }
+
+    public void addDestinationCard(DestinationCard card){
+        destinationCards.add(card);
+    }
+
+
 
     public boolean isMyTurn() {
         return isMyTurn;

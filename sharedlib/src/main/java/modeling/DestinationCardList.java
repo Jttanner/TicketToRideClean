@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Created by ahwang13 on 10/21/17.
+ * Accesses the list of available Destination Cards to be drawn from the deck. Also allows for the selection of random cards from the deck
+ * and the replacement of cards into the deck that the player doesn't want.
+ * Created by Austin Hwang on 10/21/17.
  */
 
 public class DestinationCardList {
@@ -16,6 +18,9 @@ public class DestinationCardList {
     private CityList cityList = new CityList();
     private Map<String, City> cityMap = cityList.getCityListMap();
 
+    /**
+     * Initializes the destination card deck by placing all possible destination cards in the list.
+     */
     public DestinationCardList(){
         destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("El Paso"), 4));
         destinationCardList.add(new DestinationCard(cityMap.get("Kansas City"), cityMap.get("Houston"), 5));
@@ -50,6 +55,11 @@ public class DestinationCardList {
 
     }
 
+
+    /**
+     * Takes the already initialized list of Destination Cards and draws 3 random cards from the deck
+     * @return A list of 3 destination cards from the deck.
+     */
 //    List<DestinationCard> getDestinationCards() {
 //        return destinationCardList.get3Cards();
 //    }
@@ -64,6 +74,14 @@ public class DestinationCardList {
                 if(cards.get(i).getDestinationCardString().equals(destinationCardList.get(j).getDestinationCardString())) {
                     destinationCardList.remove(j);
                 }
+            }
+        }
+    }
+
+    public void removeDestinationCard (DestinationCard card) {
+        for (int i = 0; i < destinationCardList.size(); i++) {
+            if (card.getDestinationCardString().equals(destinationCardList.get(i).getDestinationCardString())) {
+                destinationCardList.remove(i);
             }
         }
     }
@@ -94,6 +112,13 @@ public class DestinationCardList {
         return threeCards;
     }
 
+    /**
+     * Takes the already initialized list of Destination Cards and draws 1 random card from the deck
+     * @param What's being passed in
+     * @pre What has to be true
+     * @post A random Destination Card from the deck.
+     * @return DestinationCard
+     */
     public DestinationCard get1RandomCard() {
         //TODO: Make the check for if destinationCardList is empty or almost empty
         if (destinationCardList.size() == 0) {
@@ -107,6 +132,12 @@ public class DestinationCardList {
         return saved;
     }
 
+    /**
+     *
+     * @param min The minimum number for the random generator
+     * @param max The maximum number for the random generator
+     * @return A random number between the min and max.
+     */
     public static int randInt(int min, int max) {
         Random rand = new Random();
 

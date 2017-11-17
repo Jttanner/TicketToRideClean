@@ -133,7 +133,7 @@ public class ServerFacade {
                 currGame.getDestinationCardList().addDestinationCardBackToDeck(data.getClaimDestinationCards().get(i));
             }
         }
-        currPlayer.addDestinationCard(claimedCards);
+        currPlayer.addDestinationCards(claimedCards);
         return claimedCards;
     }
 
