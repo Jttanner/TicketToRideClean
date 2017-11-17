@@ -27,7 +27,7 @@ public class PlaceTrainRoute implements ClientCommand {
     public void execute() {
         RouteList routeList = CModel.getInstance().getCurrGame().getUnclaimedRouteList();
         Route claimedRoute = routeList.getAvailableRoute(startCity, endCity, routeColor);
-        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), claimedRoute, CModel.getInstance().getUserPlayer());
+        CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), claimedRoute, CModel.getInstance().getCurrGame().getPlayer(playerName));
         //Update the Game History
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
     }

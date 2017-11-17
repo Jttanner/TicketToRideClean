@@ -25,10 +25,10 @@ public class StartGame extends GameState {
         //super.drawDestCard(c);
     }
 
-    @Override
-    void endTurn() {
+    //@Override
+    //void endTurn() {
 
-    }
+    //}
 
     @Override
     void gameEnded() {
@@ -36,7 +36,7 @@ public class StartGame extends GameState {
     }
 
     @Override
-    void claimRoute(Route r) {
+    public void claimRoute(Route r, String color) {
         //super.claimRoute(r);
     }
 }

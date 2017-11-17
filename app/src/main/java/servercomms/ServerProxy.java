@@ -5,7 +5,6 @@ import android.util.Log;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import clientModel.CModel;
 import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -24,8 +23,8 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private String ipaddress = "10.24.19.245";
-    private String myUrl ;//= "http://" + ipaddress +":8080/user/";
+    private String ipaddress = "10.4.150.166";
+    private String myUrl = "http://" + ipaddress +":8080/user/";
 
     private ServerProxy() {
     }
@@ -33,7 +32,6 @@ public class ServerProxy {
 
     public void login( LoginRequest request){
         Log.d(TAG,"Logging on");
-        setIP();
         HttpTask httpTask = new HttpTask();
         String url = myUrl +"login";
         try {
@@ -42,19 +40,8 @@ public class ServerProxy {
             e.printStackTrace();
         }
     }
-    //setting IP so people can input their ip address the server is running off of
-    private void setIP() {
-        if(CModel.getInstance().getIPAddress().equals("")){
-            myUrl = "http://" + ipaddress +":8080/user/";
-        }
-        else{
-            myUrl = "http://" + CModel.getInstance().getIPAddress() +":8080/user/";
-        }
-    }
-
     public void register(RegisterRequest request){
         Log.d(TAG,"Registering");
-        setIP();
         HttpTask httpTask = new HttpTask();
         String url = myUrl +"register";
         try {
@@ -68,7 +55,6 @@ public class ServerProxy {
      * @param command The command to be sent*/
     public void sendCommand(Command command){
         Log.d(TAG, "Sending Commands: " + command.getType());
-        setIP();
         HttpTask httpTask = new HttpTask();
         String url = myUrl +"command";
         try {
