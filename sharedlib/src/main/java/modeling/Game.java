@@ -31,6 +31,7 @@ public class Game {
     private String gameName;
     private int playerMax;
     private ResourceCardList resourceCardList;
+    private final String TAG = "Game:";
     private DestinationCardList destinationCardList;
     //private int destDeckSize;
 
@@ -133,7 +134,7 @@ public class Game {
     public void setHasStarted(boolean hasStarted) {
         this.hasStarted = hasStarted;
         //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
-        if(this.hasStarted && !players.get(0).isMyTurn()){
+        if(this.hasStarted){
             setupStartingCards();//setup starting cards when game starts
             players.get(0).toggleMyTurn();
         }

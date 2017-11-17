@@ -33,7 +33,6 @@ public class StartGameCommand extends StartGameCommandData implements ICommand {
        //     result = new CommandResult(false);
       //  }
 
-
         result.setType(this.getType());
         return result;
     }
