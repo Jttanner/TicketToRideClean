@@ -151,6 +151,7 @@ public class CModel extends Observable {
         for(Game game : allGames){
             if(game.getGameID().equals(currGame.getGameID())){
                 game.setHasStarted(true);
+                this.currGame = game;
             }
         }
 

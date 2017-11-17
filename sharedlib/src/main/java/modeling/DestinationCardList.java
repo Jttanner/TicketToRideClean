@@ -95,6 +95,10 @@ public class DestinationCardList {
     }
 
     public DestinationCard get1RandomCard() {
+        //TODO: Make the check for if destinationCardList is empty or almost empty
+        if (destinationCardList.size() == 0) {
+            return null;
+        }
         int min = 0;
         int max = destinationCardList.size() - 1;
         int randomIndex = randInt(min, max);

@@ -117,11 +117,11 @@ public class ResourceCardList {
         for (Player player : players) {
 
             //start them with 4 train cards
-            int end = start+4;//makes sure every player gets four cards only
+            //int end = start+4;//makes sure every player gets four cards only
             //For a full 5 players we will end up going through 20 cards being assigned out
-            for(int i = start; i < end; i++){
+            for(int i = start; i < 4; i++){
                 //set this card as assigned to the particular player
-                ResourceCard thisCard = availableCards.remove(0);;
+                ResourceCard thisCard = availableCards.remove(0);
                 thisCard.setPlayerID(player.getPlayerName());
                 //Now give the card to the player
                 player.addResourceCard(availableCards.get(i));
