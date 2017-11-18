@@ -35,7 +35,7 @@ public class ClaimDestinationCardCommand extends ClaimDestinationCardCommandData
             return result;
         }
         else {
-            facade.addCommandToList(getGameID(), commandData);
+            facade.addCommandToList(commandData.getGameID(), commandData);
             //GetGameListCommandData cmdData = new GetGameListCommandData();
             //cmdData.setGameListLobby(gameList);
             //facade.distributeUsedDestinationCards(commandData);

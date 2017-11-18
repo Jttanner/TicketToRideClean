@@ -234,10 +234,10 @@ public class CModel extends Observable {
 
     public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
         Log.d(TAG, "Setting claimed destination cards");
-        this.claimedDestinationCards = claimedDestinationCards;
+        //this.claimedDestinationCards = claimedDestinationCards;
         //currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
         //List<DestinationCard> totalList = currGame.getDestinationCardList().getDestinationCardList();
-        currGame.getDestinationCardList().removeDestinationCards(claimedDestinationCards);
+        //currGame.getDestinationCardList().removeDestinationCards(claimedDestinationCards);
         //this.deckSize = deckSize - claimedDestinationCards.size();
         //player.addDestinationCard(claimedDestinationCards);
         setChanged();

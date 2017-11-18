@@ -58,9 +58,9 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     }*/
 
     public void endTurn(Game game, Player player) {
-        EndTurnCommandData data = new EndTurnCommandData(game.getGameID(), player.getPlayerName());
-        ServerProxy.getInstance().sendCommand(data);
-        Log.d("DestCardPresenter", "endTurn");
+        //EndTurnCommandData data = new EndTurnCommandData(game.getGameID(), player.getPlayerName());
+        //ServerProxy.getInstance().sendCommand(data);
+        //Log.d("DestCardPresenter", "endTurn");
     }
 
     @Override

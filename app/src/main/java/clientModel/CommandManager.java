@@ -114,7 +114,7 @@ public class CommandManager {
                 return new DrawTrainCardDeck((DrawTrainCardDeckCommandData) command);
             case "drawTrainCardFaceUp":
                 return new DrawTrainCardFaceUp((DrawTrainCardFaceUpCommandData) command);
-            case "drawDestinationCard":
+            case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":
                 return new PlaceTrainRoute((ClaimRouteCommandData) command);
