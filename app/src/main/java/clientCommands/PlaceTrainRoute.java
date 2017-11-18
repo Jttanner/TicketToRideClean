@@ -1,6 +1,7 @@
 package clientCommands;
 
 import clientModel.CModel;
+import clientModel.EndMyTurn;
 import commandData.ClaimRouteCommandData;
 import modeling.Route;
 import modeling.RouteList;
@@ -29,6 +30,9 @@ public class PlaceTrainRoute implements ClientCommand {
         Route claimedRoute = routeList.getAvailableRoute(startCity, endCity, routeColor);
         CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), claimedRoute, CModel.getInstance().getCurrGame().getPlayer(playerName));
         //Update the Game History
+        CModel.getInstance().setCurrGameState(new EndMyTurn());
+        //ends my turn
+        CModel.getInstance().getCurrGameState().endTurn();
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
     }
 

@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.awt.color.CMMException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -165,6 +166,14 @@ public class ServerFacade {
             return new CommandResult(true);
         } else{
             return new CommandResult(false);
+        }
+    }
+    /**Handles the ending of player's turns
+     * @param gameID The game we are dealing with*/
+    public void endTurn(String gameID) {
+        Game game = ServerModel.getInstance().getGames().findGame(gameID);
+        if(game != null) {
+            game.advancePlayerTurn();
         }
     }
 
