@@ -178,27 +178,24 @@ public class Game {
 //    }
     /**Assigns a player a turn in order
      *
-     * @return boolean
      *
      * {@pre none}
      * {@post the next player is assigned a turn}
      */
     public void advancePlayerTurn(){
-        boolean wasToggled = false;
-        for (Player p : players){
-            if (wasToggled){
-                p.toggleMyTurn();
-                return;
-            }
-            if (p.isMyTurn()){
-                p.toggleMyTurn();
-                wasToggled = true;
-                if (p.equals(players.get(players.size() - 1))){
+        for (int i = 0; i < players.size(); i++){
+            if (players.get(i).isMyTurn()){
+                players.get(i).toggleMyTurn();
+                if (i == players.size() - 1){
                     players.get(0).toggleMyTurn();
+                }
+                else {
+                    players.get(i+1).toggleMyTurn();
                 }
             }
         }
     }
+
 
     /**Adds a player to the game, if the player doesn't already exist in the game
      *

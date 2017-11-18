@@ -9,6 +9,7 @@ import java.util.Map;
 import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
 import clientCommands.DrawTrainCard;
+import clientCommands.EndTurnCommandClient;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
 import clientCommands.UpdateChatCommand;
@@ -81,6 +82,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
+                    System.out.println("Executing: " + clientCommand.getClass().toString());
                     clientCommand.execute();
 
                 }
@@ -115,6 +117,8 @@ public class CommandManager {
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":
                 return new PlaceTrainRoute((ClaimRouteCommandData) command);
+            case "endTurn":
+                return new EndTurnCommandClient();
             case "addChat":
                 if (command instanceof ChatCommandData) {
                     return new UpdateChatCommand((ChatCommandData) command);

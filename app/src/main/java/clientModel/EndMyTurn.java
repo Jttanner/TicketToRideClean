@@ -11,8 +11,7 @@ class EndMyTurn extends GameState {
     @Override
     public void endTurn() {
         CModel cModel = CModel.getInstance();
-        EndTurnCommandData data = new EndTurnCommandData(cModel.getCurrGame().getGameID(),
-                cModel.getUserPlayer().getPlayerName());
+        EndTurnCommandData data = new EndTurnCommandData(cModel.getCurrGame().getGameID());
         ServerProxy.getInstance().sendCommand(data);
     }
 }

@@ -15,6 +15,7 @@ import command.ClaimRouteCommand;
 import command.CreateGameCommand;
 import command.DrawDestinationCardCommand;
 import command.DrawTrainCardCommand;
+import command.EndTurnCommandServer;
 import command.GetCmndListServer;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
@@ -26,6 +27,7 @@ import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
+import commandData.EndTurnCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetCmndListDataToClient;
 import commandData.JoinGameCommandData;
@@ -53,7 +55,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Command cmd = gson.fromJson(reqData, Command.class);
             CommandResult result = null;
             Command commandData = null;
-            System.out.println("Command handler: " + cmd.getType());
+            //System.out.println("Command handler: " + cmd.getType());
             switch (cmd.getType()) {
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
@@ -95,8 +97,8 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     break;*/
                 case "drawTrainCard":
                     DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(reqData, DrawTrainCardCommandData.class);
-                    DrawTrainCardCommand drawTrainCardFaceUpCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
-                    result = drawTrainCardFaceUpCommand.execute();
+                    DrawTrainCardCommand drawTrainCardCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
+                    result = drawTrainCardCommand.execute();
                     break;
                 case "drawDestinationCards":
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
@@ -114,6 +116,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
                     result = claimRouteCommand.execute();
+                    break;
+                case"endTurn":
+                    EndTurnCommandData data = gson.fromJson(reqData,EndTurnCommandData.class);
+                    EndTurnCommandServer endTurnCommandServer = new EndTurnCommandServer(data);
+                    endTurnCommandServer.execute();
                     break;
                 default:
                     break;
