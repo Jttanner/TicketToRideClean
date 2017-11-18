@@ -276,7 +276,8 @@ public class CModel extends Observable {
 
     public void updateRoutes(Game currGame, Route route, Player player){
         //Player userPlayer = CModel.getInstance().getUserPlayer();
-        currGame.claimAvailableRoute(route, player);
+        boolean isWild = route.getTrainColorNeeded().equals("Wild") ? true : false;
+        currGame.claimAvailableRoute(route, player, isWild);
         player.addRoute(route);
         player.addPoints(route.getPointValue());
 

@@ -39,7 +39,7 @@ public abstract class GameState {
     }
     /**Handles claiming a route in any certain phase
      * @param r  The Route claimed*/
-    public void claimRoute(Route r, String color){
+    public void claimRoute(Route r, String color, boolean isWildRoute){
 
     }
 

@@ -21,7 +21,7 @@ public class PlaceTrainRoute implements ClientCommand {
         startCity = data.getStartCity();
         endCity = data.getEndCity();
         gameID = data.getGameID();
-        routeColor = data.getRouteColor();
+        routeColor = data.isWild() ? "Wild" : data.getRouteColor();
     }
     @Override
     public void execute() {

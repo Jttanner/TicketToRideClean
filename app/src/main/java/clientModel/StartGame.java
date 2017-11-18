@@ -35,8 +35,8 @@ public class StartGame extends GameState {
         //super.gameEnded();
     }
 
-    @Override
-    public void claimRoute(Route r, String color) {
+    //@Override
+    //public void claimRoute(Route r, String color, Boolean isWildRoute) {
         //super.claimRoute(r);
-    }
+    //}
 }

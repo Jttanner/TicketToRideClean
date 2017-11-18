@@ -144,6 +144,10 @@ public class Route {
         return  twoCities;
     }*/
 
+    public void setTrainColorNeeded(String trainColorNeeded) {
+        this.trainColorNeeded = trainColorNeeded;
+    }
+
     public int getPointValue(){
         int points = 0;
         switch(distance) {

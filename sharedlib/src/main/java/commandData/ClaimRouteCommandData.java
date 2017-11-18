@@ -11,10 +11,11 @@ public class ClaimRouteCommandData extends Command {
     private String gameID;
     private String playerName;
     private String routeColor;
+    private boolean isWild;
     private int distance;
 
     //Constructors
-    public ClaimRouteCommandData(String gameID, String startCity, String endCity, String playerName, String routeColor, int distance) {
+    public ClaimRouteCommandData(String gameID, String startCity, String endCity, String playerName, String routeColor, int distance, boolean isWild) {
         setType("claimRoute");
         this.gameID = gameID;
         this.startCity = startCity;
@@ -22,7 +23,9 @@ public class ClaimRouteCommandData extends Command {
         this.playerName = playerName;
         this.routeColor = routeColor;
         this.distance = distance;
+        this.isWild = isWild;
     }
+
     public ClaimRouteCommandData () {
     }
 
@@ -68,5 +71,13 @@ public class ClaimRouteCommandData extends Command {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    public boolean isWild() {
+        return isWild;
+    }
+
+    public void setWild(boolean wild) {
+        isWild = wild;
     }
 }

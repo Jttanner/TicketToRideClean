@@ -50,8 +50,8 @@ public class OneCardDrawnState extends GameState {
         super.gameEnded();
     }
 
-    @Override
-    public void claimRoute(Route r, String color) {
+    //@Override
+    //public void claimRoute(Route r, String color, Boolean isWild) {
         //super.claimRoute(r, color);
-    }
+    //}
 }

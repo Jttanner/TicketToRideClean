@@ -48,7 +48,7 @@ public class Game {
 
 
 
-    public boolean claimAvailableRoute(Route route, Player player){
+    public boolean claimAvailableRoute(Route route, Player player, boolean isWild){
         if (route.checkIfPlayerCanClaim(this, route, player)){
             TrainCarList playerTrainCars = player.getTrainCarList();
             playerTrainCars.decrementCars(route.getDistance());
@@ -59,8 +59,12 @@ public class Game {
                 }
             }
             int oldSize = unclaimedRouteList.getAvailableRouteSize();
-            claimedRouteList.addClaimedRoute(route, player);
             unclaimedRouteList.removeAvailableRoute(route);
+            if (isWild){
+                route.setTrainColorNeeded("Wild");
+            }
+            claimedRouteList.addClaimedRoute(route, player);
+            //unclaimedRouteList.removeAvailableRoute(route);
             if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
                 return  false;
             } else{

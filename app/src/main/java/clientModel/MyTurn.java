@@ -53,10 +53,10 @@ public class MyTurn extends GameState {
     }
 
     @Override
-    public void claimRoute(Route currRoute, String color) {
+    public void claimRoute(Route currRoute, String color, boolean isWild) {
         ClaimRouteCommandData claimRouteCommandData = new ClaimRouteCommandData(CModel.getInstance().getCurrGame().getGameID(),
                 currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
-                color, currRoute.getDistance());
+                color, currRoute.getDistance(), isWild);
         ServerProxy.getInstance().sendCommand(claimRouteCommandData);
         //endTurn();
     }

@@ -28,6 +28,7 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
         setPlayerName(data.getPlayerName());
         setRouteColor(data.getRouteColor());
         setDistance(data.getDistance());
+        setWild(data.isWild());
     }
 
     @Override

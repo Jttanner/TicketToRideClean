@@ -139,9 +139,10 @@ public class ServerFacade {
 
 
     public CommandResult claimRoute(ClaimRouteCommandData data){
+        String checkWildColor = data.isWild() ? "Wild" : data.getRouteColor();
         Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
-        if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), data.getRouteColor(), data.getDistance()),
-                                     currGame.getPlayer(data.getPlayerName()))){
+        if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), checkWildColor, data.getDistance()),
+                                     currGame.getPlayer(data.getPlayerName()), data.isWild())){
             //addCommandToList(data.getGameID(), data);
             return new CommandResult(true);
         } else{
