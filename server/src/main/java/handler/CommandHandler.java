@@ -14,8 +14,7 @@ import command.ClaimDestinationCardCommand;
 import command.ClaimRouteCommand;
 import command.CreateGameCommand;
 import command.DrawDestinationCardCommand;
-import command.DrawTrainCardDeckCommand;
-import command.DrawTrainCardFaceUpCommand;
+import command.DrawTrainCardCommand;
 import command.GetCmndListServer;
 import command.GetGameListCommand;
 import command.JoinGameCommand;
@@ -26,8 +25,7 @@ import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
-import commandData.DrawTrainCardDeckCommandData;
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetCmndListDataToClient;
 import commandData.JoinGameCommandData;
@@ -90,14 +88,14 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
                     addChatCommand.execute();
                     break;
-                case "drawTrainCardDeck":
+                /*case "drawTrainCardDeck":
                     DrawTrainCardDeckCommandData drawTrainCardDeckCommandData = gson.fromJson(reqData, DrawTrainCardDeckCommandData.class);
                     DrawTrainCardDeckCommand drawTrainCardDeckCommand = new DrawTrainCardDeckCommand(drawTrainCardDeckCommandData);
                     result = drawTrainCardDeckCommand.execute();
-                    break;
-                case "drawTrainCardFaceUp":
-                    DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = gson.fromJson(reqData,DrawTrainCardFaceUpCommandData.class);
-                    DrawTrainCardFaceUpCommand drawTrainCardFaceUpCommand = new DrawTrainCardFaceUpCommand(drawTrainCardFaceUpCommandData);
+                    break;*/
+                case "drawTrainCard":
+                    DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(reqData, DrawTrainCardCommandData.class);
+                    DrawTrainCardCommand drawTrainCardFaceUpCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
                     result = drawTrainCardFaceUpCommand.execute();
                     break;
                 case "drawDestinationCards":

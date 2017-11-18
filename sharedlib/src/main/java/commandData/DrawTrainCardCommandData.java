@@ -7,21 +7,21 @@ import modeling.ResourceCard;
  * Created by korea on 10/28/2017.
  */
 
-public class DrawTrainCardFaceUpCommandData extends Command {
+public class DrawTrainCardCommandData extends Command {
     //Data Members
     private String playerName;
     private String gameID;
     private ResourceCard resourceCard;
 
     //Constructors
-    public DrawTrainCardFaceUpCommandData (String playerName, String gameID, ResourceCard resourceCard) {
-        setType("drawTrainCardFaceUp");
+    public DrawTrainCardCommandData(String playerName, String gameID, ResourceCard resourceCard) {
+        setType("drawTrainCard");
         this.playerName = playerName;
         this.gameID = gameID;
         this.resourceCard = resourceCard;
 
     }
-    public DrawTrainCardFaceUpCommandData () {}
+    public DrawTrainCardCommandData() {}
 
     //Getters and Setters
     public String getPlayerName() {

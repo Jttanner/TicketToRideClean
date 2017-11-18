@@ -10,13 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import MVP_coms_classes.MVP_DrawResourceCard;
-import clientCommands.DrawTrainCardFaceUp;
 import clientModel.CModel;
-import commandData.DrawTrainCardFaceUpCommandData;
-import modeling.Player;
 import modeling.ResourceCard;
 import presenters.DrawResourceCardPresenter;
-import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**

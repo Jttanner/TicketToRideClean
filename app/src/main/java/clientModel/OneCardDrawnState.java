@@ -2,10 +2,10 @@ package clientModel;
 
 import java.util.List;
 
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
+import commandData.EndTurnCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
-import modeling.Route;
 import servercomms.ServerProxy;
 
 /**
@@ -27,14 +27,14 @@ public class OneCardDrawnState extends GameState {
             //Otherwise send command.
 
             //Send to Server (This does both deck and face up)
-            DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, resourceCard);
-            ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+            DrawTrainCardCommandData drawTrainCardCommandData = new DrawTrainCardCommandData(playerName, gameID, resourceCard);
+            ServerProxy.getInstance().sendCommand(drawTrainCardCommandData);
 
             //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
             CModel.getInstance().closeResourceFragment();
 
             //Set State
-            CModel.getInstance().setCurrGameState(new NotMyTurn());
+            CModel.getInstance().setCurrGameState(new EndMyTurn());
 
             //Send command to server start next player turn - Tak to Austin?
         }
@@ -43,6 +43,10 @@ public class OneCardDrawnState extends GameState {
     @Override
     void drawDestCard(List<DestinationCard> c) {
         super.drawDestCard(c);
+    }
+
+    @Override
+    public void endTurn() {
     }
 
     @Override

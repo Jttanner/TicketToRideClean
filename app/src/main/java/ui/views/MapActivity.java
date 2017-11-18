@@ -2,39 +2,25 @@ package ui.views;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import clientModel.MyTurn;
-import commandData.ClaimRouteCommandData;
-import commandData.DrawTrainCardDeckCommandData;
-import commandData.DrawTrainCardFaceUpCommandData;
 import modeling.Player;
-import modeling.ResourceCard;
 import modeling.Route;
 import poller.Poller;
 import presenters.MapPresenter;
-import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**

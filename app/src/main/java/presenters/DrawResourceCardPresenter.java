@@ -5,7 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import MVP_coms_classes.MVP_DrawResourceCard;
-import clientCommands.DrawTrainCardFaceUp;
 import clientModel.CModel;
 import modeling.ResourceCard;
 

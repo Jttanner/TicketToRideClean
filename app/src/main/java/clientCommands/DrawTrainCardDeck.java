@@ -1,14 +1,16 @@
+/*
 package clientCommands;
 
 import clientModel.CModel;
-import commandData.DrawTrainCardDeckCommandData;
 import modeling.Game;
 import modeling.Player;
 import modeling.ResourceCard;
 
+*/
 /**
  * Created by korea on 10/27/2017.
- */
+ *//*
+
 
 public class DrawTrainCardDeck implements ClientCommand {
     private String playerName;
@@ -33,3 +35,4 @@ public class DrawTrainCardDeck implements ClientCommand {
         return playerName + " drew a resource card from the deck: " + resourceCard.getMyColor();
     }
 }
+*/

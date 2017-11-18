@@ -3,10 +3,8 @@ package clientModel;
 import java.util.List;
 
 import commandData.ClaimRouteCommandData;
-import commandData.DrawTrainCardDeckCommandData;
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
 import modeling.DestinationCard;
-import modeling.Player;
 import modeling.ResourceCard;
 import modeling.Route;
 import servercomms.ServerProxy;
@@ -25,15 +23,15 @@ public class MyTurn extends GameState {
         String gameID = CModel.getInstance().getCurrGame().getGameID();
 
         //Send to Server (This does both deck and face up
-        DrawTrainCardFaceUpCommandData drawTrainCardFaceUpCommandData = new DrawTrainCardFaceUpCommandData(playerName, gameID, resourceCard);
-        ServerProxy.getInstance().sendCommand(drawTrainCardFaceUpCommandData);
+        DrawTrainCardCommandData drawTrainCardCommandData = new DrawTrainCardCommandData(playerName, gameID, resourceCard);
+        ServerProxy.getInstance().sendCommand(drawTrainCardCommandData);
 
         //Set new State
         //If card is wild and was face up, end turn
         if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
             //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
             CModel.getInstance().closeResourceFragment();
-            CModel.getInstance().setCurrGameState(new NotMyTurn());
+            CModel.getInstance().setCurrGameState(new EndMyTurn());
 
             //Send command to server start next player turn - Tak to Austin?
         }

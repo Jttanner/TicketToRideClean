@@ -24,14 +24,9 @@ public abstract class GameState {
     void drawDestCard(List<DestinationCard> c){
 
     }
-    /**Handles ending the current game state and moving on to the next
-     * @param stateClassName Takes in the name of the currentState*/
-    void endTurn(String stateClassName){
-        CModel cModel = CModel.getInstance();
-        EndTurnCommandData data = new EndTurnCommandData(cModel.getCurrGame().getGameID(),
-                                    cModel.getUserPlayer().getPlayerName(),stateClassName);
-        ServerProxy.getInstance().sendCommand(data);
-        //TODO SERVERSIDE
+    /**Handles ending the current game state and moving on to the next*/
+    public  void endTurn(){
+
     }
     /**Handles what to do from a certain phase when the game ends*/
     void gameEnded(){

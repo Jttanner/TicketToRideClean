@@ -1,11 +1,14 @@
+/*
 package commandData;
 
 import modeling.Game;
 import modeling.ResourceCard;
 
+*/
 /**
  * Created by korea on 10/28/2017.
- */
+ *//*
+
 
 public class DrawTrainCardDeckCommandData extends Command {
 
@@ -46,3 +49,4 @@ public class DrawTrainCardDeckCommandData extends Command {
         this.resourceCard = resourceCard;
     }
 }
+*/

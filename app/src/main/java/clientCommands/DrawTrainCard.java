@@ -1,20 +1,18 @@
 package clientCommands;
 
 import clientModel.CModel;
-import clientModel.NotMyTurn;
-import clientModel.OneCardDrawnState;
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
 import modeling.ResourceCard;
 
 /**
  * Created by korea on 10/27/2017.
  */
 
-public class DrawTrainCardFaceUp implements ClientCommand {
+public class DrawTrainCard implements ClientCommand {
     private String playerName;
     private String gameID;
     private ResourceCard resourceCard;
-    public DrawTrainCardFaceUp (DrawTrainCardFaceUpCommandData data) {
+    public DrawTrainCard(DrawTrainCardCommandData data) {
         this.playerName = data.getPlayerName();
         this.gameID = data.getGameID();
         this.resourceCard = data.getResourceCard();
@@ -30,6 +28,8 @@ public class DrawTrainCardFaceUp implements ClientCommand {
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
         //CModel.getInstance().setCurrGameState(this.state);
+        //will only end our turn if we are in EndMyTurn state
+        CModel.getInstance().getCurrGameState().endTurn();
 
     }
 

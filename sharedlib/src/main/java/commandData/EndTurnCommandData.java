@@ -8,7 +8,7 @@ public class EndTurnCommandData extends Command{
 
     private String gameID;
     private String playerName;
-    private String stateClassName;
+    /*private String stateClassName;*/
 
 
     public EndTurnCommandData() {
@@ -22,10 +22,10 @@ public class EndTurnCommandData extends Command{
         this.playerName = playerName;
     }
 
-    public EndTurnCommandData(String gameID, String playerID,String stateClassName) {
+    public EndTurnCommandData(String gameID, String playerID ) {
         this.gameID = gameID;
         this.playerName = playerID;
-        this.stateClassName = stateClassName;
+        /*this.stateClassName = stateClassName;*/
         this.setType("endTurn");
         this.setData("");
     }
@@ -38,7 +38,7 @@ public class EndTurnCommandData extends Command{
         this.gameID = gameID;
     }
 
-    public String getStateClassName() {
+    /*public String getStateClassName() {
         return stateClassName;
-    }
+    }*/
 }

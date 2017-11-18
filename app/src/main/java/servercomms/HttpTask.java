@@ -10,7 +10,7 @@ import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
 import commandData.DrawDestinationCardCommandData;
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
@@ -21,7 +21,6 @@ import result.CommandResult;
 import result.LoginResult;
 import result.RegisterResult;
 import result.ResultObject;
-import encoder.Encoder;
 
 /**
  * Task which does a register or login request. Calls the proxy server which calls the server.
@@ -92,7 +91,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         else if(request instanceof GetCmndDataFromServer){
             return encoder.decodeGetCommandListToClient(stream);
         }
-        else if(request instanceof DrawTrainCardFaceUpCommandData) {
+        else if(request instanceof DrawTrainCardCommandData) {
             return encoder.decodeDrawResourceCardFaceUp(stream);
         }
         else if(request instanceof Command){

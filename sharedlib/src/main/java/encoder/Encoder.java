@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,11 +20,9 @@ import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
-import commandData.DrawTrainCardDeckCommandData;
-import commandData.DrawTrainCardFaceUpCommandData;
+import commandData.DrawTrainCardCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
-import modeling.CommandList;
 import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 import result.CreateGameCommandResult;
@@ -226,11 +223,11 @@ public class Encoder {
                         case "claimDestinationCards":
                             command = gson.fromJson(object, ClaimDestinationCardCommandData.class);
                             break;
-                        case "drawTrainCardDeck":
+                        /*case "drawTrainCardDeck":
                             command = gson.fromJson(object, DrawTrainCardDeckCommandData.class);
-                            break;
-                        case "drawTrainCardFaceUp":
-                            command = gson.fromJson(object, DrawTrainCardFaceUpCommandData.class);
+                            break;*/
+                        case "drawTrainCard":
+                            command = gson.fromJson(object, DrawTrainCardCommandData.class);
                             break;
                         case "claimRoute":
                             command = gson.fromJson(object, ClaimRouteCommandData.class);
