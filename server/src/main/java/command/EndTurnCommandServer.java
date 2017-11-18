@@ -12,7 +12,6 @@ public class EndTurnCommandServer extends EndTurnCommandData implements ICommand
 
     private EndTurnCommandData commandData;
     public EndTurnCommandServer(EndTurnCommandData data) {
-        super();
         this.commandData = data;
         setType("endTurn");
     }

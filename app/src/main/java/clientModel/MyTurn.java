@@ -41,12 +41,12 @@ public class MyTurn extends GameState {
     }
 
     @Override
-    void drawDestCard(List<DestinationCard> c) {
+    public void drawDestCard(List<DestinationCard> c) {
         //endTurn();
     }
 
     @Override
-    void gameEnded() {
+    public void gameEnded() {
         //CModel.getInstance().setCurrGameState(new NotMyTurn());
     }
 

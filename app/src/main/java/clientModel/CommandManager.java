@@ -82,7 +82,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    System.out.println("Executing: " + clientCommand.getClass().toString());
+                    //System.out.println("Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
                 }

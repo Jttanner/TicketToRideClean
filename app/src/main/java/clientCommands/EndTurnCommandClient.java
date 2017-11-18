@@ -1,6 +1,7 @@
 package clientCommands;
 
 import clientModel.CModel;
+import clientModel.NotMyTurn;
 import commandData.EndTurnCommandData;
 
 /**
@@ -17,6 +18,7 @@ public class EndTurnCommandClient implements ClientCommand {
     public void execute() {
         CModel.getInstance().getCurrGame().advancePlayerTurn();
         //update the player stats
+        CModel.getInstance().setCurrGameState(new NotMyTurn());
         CModel.getInstance().updatePlayerStatsView();
     }
 }

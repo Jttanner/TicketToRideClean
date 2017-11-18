@@ -21,7 +21,7 @@ public abstract class GameState {
     }
     /**Deals with sending commands to the server when the player has drawn a Destinaton card
      * @param c The Destination cards drawn*/
-    void drawDestCard(List<DestinationCard> c){
+    public void drawDestCard(List<DestinationCard> c){
 
     }
     /**Handles ending the current game state and moving on to the next*/
@@ -29,7 +29,7 @@ public abstract class GameState {
 
     }
     /**Handles what to do from a certain phase when the game ends*/
-    void gameEnded(){
+    public void gameEnded(){
 
     }
     /**Handles claiming a route in any certain phase

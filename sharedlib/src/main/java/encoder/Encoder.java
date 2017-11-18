@@ -21,6 +21,7 @@ import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
+import commandData.EndTurnCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
 import result.ClaimDestinationCardCommandResult;
@@ -231,6 +232,9 @@ public class Encoder {
                             break;
                         case "claimRoute":
                             command = gson.fromJson(object, ClaimRouteCommandData.class);
+                            break;
+                        case "endTurn":
+                            command = gson.fromJson(object, EndTurnCommandData.class);
                             break;
 
                         //TODO: PLEASE ADD CASES HERE
