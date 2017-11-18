@@ -32,10 +32,9 @@ public class ClaimDestinationCards implements ClientCommand {
         for (int i = 0; i < cardsClaimed.size(); i++) {
             if(cardsClaimed.get(i).isClaimed() == true) {
                 CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed.get(i));
-            }
-            else {
                 CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCard(cardsClaimed.get(i));
             }
+            CModel.getInstance().updatePlayerStatsView();
         }
 
         //Add card to player on Client Side and deletes that card from the deck

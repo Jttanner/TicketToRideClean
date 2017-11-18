@@ -8,6 +8,7 @@ import java.util.Map;
 
 import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
+import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
@@ -16,6 +17,7 @@ import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
+import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import modeling.Player;
 
@@ -111,6 +113,8 @@ public class CommandManager {
                 return new DrawTrainCardDeck((DrawTrainCardDeckCommandData) command);*/
             case "drawTrainCard":
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
+            case "drawDestinationCards":
+                return new DrawDestinationCards((DrawDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":

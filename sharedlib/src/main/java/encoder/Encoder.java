@@ -23,10 +23,8 @@ import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import commandData.GetCmndListDataToClient;
 import commandData.StartGameCommandData;
-import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
 import result.CreateGameCommandResult;
-import result.DrawDestinationCardCommandResult;
 import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 import result.LoginResult;
@@ -128,6 +126,7 @@ public class Encoder {
             return new CommandResult(false, e.getMessage());
         }
     }
+    /*
     public DrawDestinationCardCommandResult decodeDestinationCardResult(InputStream stream) {
         try {
             Reader reader = new InputStreamReader(stream);
@@ -144,7 +143,7 @@ public class Encoder {
         } catch (Exception e) {
             return new ClaimDestinationCardCommandResult(false, e.getMessage());
         }
-    }
+    }*/
 
     /**
      * Handles the decoding of GetGameCommandResult coming from the server
