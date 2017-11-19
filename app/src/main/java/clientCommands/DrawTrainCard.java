@@ -29,7 +29,7 @@ public class DrawTrainCard implements ClientCommand {
         CModel.getInstance().upDateFaceUpPile();
         //Set my new state
 
-        //will only end our turn if we are in EndMyTurn state
+        //will only end our turn if we are in EndMyTurn state.
         CModel.getInstance().getCurrGameState().endTurn();
 
 
