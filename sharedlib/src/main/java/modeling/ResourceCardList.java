@@ -19,9 +19,10 @@ public class ResourceCardList {
     private List<ResourceCard> availableCards = new ArrayList<>();
     private List<ResourceCard> discardPile = new ArrayList<>();
     private ResourceCard[] faceUpPile = new ResourceCard[5];
-
+    private int count;
 
     public ResourceCardList() {
+        count = 0;
         List<String> colorList = new ArrayList<>(Arrays.asList("Red", "Blue", "Orange", "White", "Yellow", "Purple", "Black", "Green"));
         //add the regular resource cards
         List<ResourceCard> resourceCards;
@@ -116,24 +117,29 @@ public class ResourceCardList {
 //            faceUpPile[i] = drawCard();
 //        }
 //    }
+    public void incrementCount() {
+        count++;
+    }
     /**Sets up each players starting cards*/
     void setUpPlayers(ArrayList<Player> players) {
-        int start = 0;//start at index zero in the card list
-        for (Player player : players) {
+        if(count < 2) {
+            int start = 0;//start at index zero in the card list
+            for (Player player : players) {
 
-            //start them with 4 train cards
-            //int end = start+4;//makes sure every player gets four cards only
-            //For a full 5 players we will end up going through 20 cards being assigned out
+                //start them with 4 train cards
+                //int end = start+4;//makes sure every player gets four cards only
+                //For a full 5 players we will end up going through 20 cards being assigned out
 //            for(int i = start; i < end; i++){
-            for(int i = start; i < 4; i++){
-                //set this card as assigned to the particular player
-                ResourceCard thisCard = availableCards.remove(0);
-                thisCard.setPlayerID(player.getPlayerName());
-                //Now give the card to the player
-                player.addResourceCard(thisCard);
+                for(int i = start; i < 4; i++){
+                    //set this card as assigned to the particular player
+                    ResourceCard thisCard = availableCards.remove(0);
+                    thisCard.setPlayerID(player.getPlayerName());
+                    //Now give the card to the player
+                    player.addResourceCard(thisCard);
+
+                }
 
             }
-
         }
     }
 }

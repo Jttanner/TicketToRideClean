@@ -1,6 +1,7 @@
 package clientCommands;
 
 import clientModel.CModel;
+import clientModel.MyTurn;
 import commandData.EndTurnCommandData;
 
 /**
@@ -15,7 +16,10 @@ public class EndTurnCommandClient implements ClientCommand {
 
     @Override
     public void execute() {
-        CModel.getInstance().getCurrGame().advancePlayerTurn();
+        //Once one players turn ends, see if I am the next player through advance player turn.
+        if(CModel.getInstance().getCurrGame().advancePlayerTurn() == CModel.getInstance().getMyUser().getUserName()) {
+            CModel.getInstance().setCurrGameState(new MyTurn());
+        }
         //update the player stats
         CModel.getInstance().updatePlayerStatsView();
     }

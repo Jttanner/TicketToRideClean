@@ -27,9 +27,11 @@ public class DrawTrainCard implements ClientCommand {
         CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
-        //CModel.getInstance().setCurrGameState(this.state);
+        //Set my new state
+
         //will only end our turn if we are in EndMyTurn state
         CModel.getInstance().getCurrGameState().endTurn();
+
 
     }
 

@@ -182,18 +182,22 @@ public class Game {
      * {@pre none}
      * {@post the next player is assigned a turn}
      */
-    public void advancePlayerTurn(){
+    public String advancePlayerTurn(){
+        String name = "Game: Error, no name in advancePlayerTurn";
         for (int i = 0; i < players.size(); i++){
             if (players.get(i).isMyTurn()){
                 players.get(i).toggleMyTurn();
                 if (i == players.size() - 1){
                     players.get(0).toggleMyTurn();
+                    name = players.get(0).getPlayerName();
                 }
                 else {
                     players.get(i+1).toggleMyTurn();
+                    name = players.get(i+1).getPlayerName();
                 }
             }
         }
+        return name;
     }
 
 
@@ -224,6 +228,7 @@ public class Game {
      *
      */
     private void setupStartingCards() {
+        resourceCardList.incrementCount();
         resourceCardList.setUpPlayers(players);
     }
 

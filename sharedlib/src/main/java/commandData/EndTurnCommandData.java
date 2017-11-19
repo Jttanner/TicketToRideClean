@@ -7,20 +7,20 @@ package commandData;
 public class EndTurnCommandData extends Command{
 
     private String gameID;
-    //private String playerName;
+    private String playerName;
     /*private String stateClassName;*/
 
 
     public EndTurnCommandData() {
     }
 
-    /*public String getPlayerName() {
+    public String getPlayerName() {
         return playerName;
     }
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
-    }*/
+    }
 
     public EndTurnCommandData(String gameID) {
         this.gameID = gameID;
