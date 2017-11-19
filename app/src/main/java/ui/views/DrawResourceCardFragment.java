@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import MVP_coms_classes.MVP_DrawResourceCard;
 import clientModel.CModel;
@@ -26,7 +27,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     private ImageButton resourceCard4;
     private ImageButton resourceCard5;
     private ImageButton resourceCardDeck;
-    private Button endTurn;
+    private TextView resourceCardCount;
     private MVP_DrawResourceCard.DrawResourceCardPresOps myPresenter;
     private View v;
     public DrawResourceCardFragment() {
@@ -55,7 +56,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard4 = (ImageButton) v.findViewById(R.id.resourceCard4);
         resourceCard5 = (ImageButton) v.findViewById(R.id.resourceCard5);
         resourceCardDeck = (ImageButton) v.findViewById(R.id.resourceCardDeck);
-        endTurn = (Button) v.findViewById(R.id.resourceCardEndTurn);
+        resourceCardCount = (TextView) v.findViewById(R.id.resourceCardCount);
     }
     public void onClickers() {
         resourceCard1.setOnClickListener(new View.OnClickListener() {
@@ -116,12 +117,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 myPresenter.drawCard(card);
             }
         });
-        endTurn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
 
     /*
@@ -129,8 +125,14 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     *
     */
     public void displayResourceCards(View v) {
-        for(int i = 0; i < 5; ++i) {
-            //ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getFaceUpCard(i);
+        int availableCardSize = 0;
+        if(CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size() < 5) {
+            availableCardSize = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size();
+        }
+        else {
+            availableCardSize = 5;
+        }
+        for(int i = 0; i < availableCardSize; ++i) {
             ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
             int cardID = 0;
             switch (i){
@@ -155,6 +157,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             ((ImageButton) v.findViewById(cardID)).setImageResource(getResourceCardColorByID(card.getMyColor()));
         }
         resourceCardDeck.setImageResource(R.drawable.backcard);
+        resourceCardCount.setText("Resource Card Remaining in Deck: " + CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size());
     }
 
     public int getResourceCardColorByID(String color) {
@@ -200,5 +203,30 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     @Override
     public void unlock() {
         getDialog().setCancelable(true);
+    }
+
+    @Override
+    public void noCards() {
+
+    }
+
+    @Override
+    public void ButtonsOn() {
+        resourceCard1.setEnabled(true);
+        resourceCard2.setEnabled(true);
+        resourceCard3.setEnabled(true);
+        resourceCard4.setEnabled(true);
+        resourceCard5.setEnabled(true);
+        resourceCardDeck.setEnabled(true);
+    }
+
+    @Override
+    public void ButtonsOff() {
+        resourceCard1.setEnabled(false);
+        resourceCard2.setEnabled(false);
+        resourceCard3.setEnabled(false);
+        resourceCard4.setEnabled(false);
+        resourceCard5.setEnabled(false);
+        resourceCardDeck.setEnabled(false);
     }
 }

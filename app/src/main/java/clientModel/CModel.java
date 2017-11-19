@@ -99,7 +99,14 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers(currGame);
     }
-
+    public void resourceCardButtonsOn() {
+        setChanged();
+        notifyObservers("ResourceCardButtonsOn");
+    }
+    public void resourceCardButtonsOff() {
+        setChanged();
+        notifyObservers("ResourceCardButtonsOff");
+    }
     private CModel() {
     }
 

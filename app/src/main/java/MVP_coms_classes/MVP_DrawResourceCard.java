@@ -14,6 +14,9 @@ public interface MVP_DrawResourceCard {
         void close();
         void lock();
         void unlock();
+        void noCards();
+        void ButtonsOn();
+        void ButtonsOff();
     }
 
     //Processes User Input

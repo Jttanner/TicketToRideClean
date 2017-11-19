@@ -30,7 +30,7 @@ public class OneCardDrawnState extends GameState {
             DrawTrainCardCommandData drawTrainCardCommandData = new DrawTrainCardCommandData(playerName, gameID, resourceCard);
             ServerProxy.getInstance().sendCommand(drawTrainCardCommandData);
 
-            //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
+            //Close the View //I think closing here was giving invoking on null object reference, but now it should be okay
             CModel.getInstance().closeResourceFragment();
 
             //Set State

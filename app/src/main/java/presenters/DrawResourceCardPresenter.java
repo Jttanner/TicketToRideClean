@@ -30,6 +30,12 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
                 else if(((String) arg).equals("CloseResourceFragment")) {
                     myView.get().close();
                 }
+                else if(((String) arg).equals("ResourceCardButtonsOn")) {
+                    myView.get().ButtonsOn();
+                }
+                else if(((String) arg).equals("ResourceCardButtonsOff")) {
+                    myView.get().ButtonsOn();
+                }
             }
         }
     }

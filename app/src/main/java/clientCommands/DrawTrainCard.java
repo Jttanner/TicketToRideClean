@@ -1,7 +1,9 @@
 package clientCommands;
 
 import clientModel.CModel;
+import clientModel.EndMyTurn;
 import commandData.DrawTrainCardCommandData;
+import modeling.Game;
 import modeling.ResourceCard;
 
 /**
@@ -19,18 +21,28 @@ public class DrawTrainCard implements ClientCommand {
     }
     @Override
     public void execute() {
+        Game currentGame = CModel.getInstance().getCurrGame();
         //Update the Game History
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
         //Add card to player on Client Side and deletes that card from the deck
-        CModel.getInstance().getCurrGame().getPlayer(playerName).addResourceCard(CModel.getInstance().getCurrGame().getResourceCardList().drawCard(resourceCard.getCardID()));
+        currentGame.getPlayer(playerName).addResourceCard(currentGame.getResourceCardList().drawCard(resourceCard.getCardID()));
         CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
-        //Set my new state
 
+        //Set my new state
+        //If there are no more cards in the available cards
+        if(currentGame.getResourceCardList().getAvailableCards().size() == 0) {
+            CModel.getInstance().closeResourceFragment();
+            CModel.getInstance().setCurrGameState(new EndMyTurn());
+            //CModel.getInstance().NoCards();
+        }
+        //Make button clickable
+        CModel.getInstance().resourceCardButtonsOn();
         //will only end our turn if we are in EndMyTurn state.
         CModel.getInstance().getCurrGameState().endTurn();
+
 
 
     }

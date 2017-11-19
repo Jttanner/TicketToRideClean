@@ -16,6 +16,7 @@
     <string name="turnStartOptionResourceCard">Resource Card</string>
     <string name="turnStartOptionDestinationCard">Destination Card</string>
     <string name="turnStartOptionClaimRoute">Claim Route</string>
+    <string name="resourceCardCount">Resource Cards</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

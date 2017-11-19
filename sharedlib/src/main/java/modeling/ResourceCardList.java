@@ -70,76 +70,55 @@ public class ResourceCardList {
             }
             String hi = "";
         }
-//        for (ResourceCard card : availableCards){
-//            availableCards.remove(card);
-//            return card;
-//        }
+//        //Always check if we need to grab from the discard pile
+//        shuffleDiscardPile();
         return null;
     }
-    //When our available cards is empty, we need to reshuffle the discard pile.
-    public void shuffleDiscardPile() {
-        if(availableCards.size() == 0 && discardPile.size() != 0) {
-            Collections.shuffle(discardPile);
-            for(ResourceCard card: discardPile) {
-                availableCards.add(card);
-            }
-        }
-    }
+//    //When our available cards is empty, we need to reshuffle the discard pile.
+//    //Can't really shuffle, because the client and server will have different cards
+//    public void shuffleDiscardPile() {
+//        if(availableCards.size() == 0 && discardPile.size() != 0) {
+//            for(ResourceCard card: discardPile) {
+//                availableCards.add(card);
+//            }
+//            discardPile.clear();
+//        }
+//    }
     //When a player claims a route, we need to put the used cards into the discard pile
     public void usedCards(ArrayList<ResourceCard> usedCardsList) {
+//        for(ResourceCard card: usedCardsList) {
+//            discardPile.add(card);
+//        }
+        //Just re add the used cards to the bottom of the deck
         for(ResourceCard card: usedCardsList) {
-            discardPile.add(card);
+            availableCards.add(card);
         }
-    }
-//    public void setCardInFaceUpPile(ResourceCard card, int position) {
-//        faceUpPile[position] = card;
-//    }
-//    public ResourceCard getFaceUpCard(int position) {
-//        return faceUpPile[position];
-//    }
-//    public ResourceCard findCardByID(String ID) {
-//        ResourceCard result = new ResourceCard("STRING SHOULD NEVER HAVE THIS, MUAHAHAHAHA...SOMETHING WENT WRONG.");
-//        for(ResourceCard card: availableCards) {
-//            if(card.getCardID().equals(ID)) {
-//                result = card;
-//                break;
-//            }
-//        }
-//        return result;
-//    }
-//    public void upDateFaceUpPile(int position) {
-//        faceUpPile[position] = drawCard();
-//    }
-//    When the game is created and the resource cards is initialized, it will automatically take the
-//    top 5 cards and put them in the face up pile
-//    public void setUpFaceUpPile() {
-//        for(int i = 0; i < 5; ++i) {
-//            faceUpPile[i] = drawCard();
-//        }
-//    }
-    public void incrementCount() {
-        count++;
     }
     /**Sets up each players starting cards*/
     void setUpPlayers(ArrayList<Player> players) {
         if(count < 2) {
-            int start = 0;//start at index zero in the card list
             for (Player player : players) {
-
-                //start them with 4 train cards
-                //int end = start+4;//makes sure every player gets four cards only
-                //For a full 5 players we will end up going through 20 cards being assigned out
-//            for(int i = start; i < end; i++){
-                for(int i = start; i < 4; i++){
+                for(int i = 0; i < 4; i++){
                     //set this card as assigned to the particular player
                     ResourceCard thisCard = availableCards.remove(0);
                     thisCard.setPlayerID(player.getPlayerName());
                     //Now give the card to the player
                     player.addResourceCard(thisCard);
-
                 }
-
             }
         }
+    }
+
+    public List<ResourceCard> getDiscardPile() {
+        return discardPile;
+    }
+
+    public void setDiscardPile(List<ResourceCard> discardPile) {
+        this.discardPile = discardPile;
+    }
+
+    //Ghetto fix so that we don't initialize user multiple times. not too sure why that is happening
+    public void incrementCount() {
+        count++;
     }
 }
