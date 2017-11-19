@@ -38,8 +38,8 @@ public class DrawTrainCard implements ClientCommand {
             CModel.getInstance().setCurrGameState(new EndMyTurn());
             //CModel.getInstance().NoCards();
         }
-        //Make button clickable
-        CModel.getInstance().resourceCardButtonsOn();
+//        //Make button clickable
+//        CModel.getInstance().resourceCardButtonsOn();
         //will only end our turn if we are in EndMyTurn state.
         CModel.getInstance().getCurrGameState().endTurn();
 

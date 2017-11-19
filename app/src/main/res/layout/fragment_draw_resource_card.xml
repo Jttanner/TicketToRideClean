@@ -8,27 +8,27 @@
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150px"
         android:id="@+id/resourceCard1"
         />
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150px"
         android:id="@+id/resourceCard2"
         />
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150px"
         android:id="@+id/resourceCard3"
         />
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150px"
         android:id="@+id/resourceCard4"
         />
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150px"
         android:id="@+id/resourceCard5"
         />
     <LinearLayout
