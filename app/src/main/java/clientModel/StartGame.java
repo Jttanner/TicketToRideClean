@@ -21,7 +21,7 @@ public class StartGame extends GameState {
     }
 
     @Override
-    void drawDestCard(List<DestinationCard> c) {
+    public void drawDestCard(List<DestinationCard> c) {
         //super.drawDestCard(c);
     }
 
@@ -31,7 +31,7 @@ public class StartGame extends GameState {
     //}
 
     @Override
-    void gameEnded() {
+    public void gameEnded() {
         //super.gameEnded();
     }
 

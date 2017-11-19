@@ -3,8 +3,8 @@ package clientCommands;
 import java.util.List;
 
 import clientModel.CModel;
+import clientModel.EndMyTurn;
 import commandData.ClaimDestinationCardCommandData;
-import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 
 /**
@@ -32,16 +32,18 @@ public class ClaimDestinationCards implements ClientCommand {
         for (int i = 0; i < cardsClaimed.size(); i++) {
             if(cardsClaimed.get(i).isClaimed() == true) {
                 CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed.get(i));
-            }
-            else {
                 CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCard(cardsClaimed.get(i));
             }
+            CModel.getInstance().updatePlayerStatsView();
         }
 
         //Add card to player on Client Side and deletes that card from the deck
         //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed);
         //CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCards();
-        //CModel.getInstance().updatePlayerStatsView();
+        CModel.getInstance().setCurrGameState(new EndMyTurn());
+        //ends my turn
+        CModel.getInstance().getCurrGameState().endTurn();
+        CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         //CModel.getInstance().upDateFaceUpPile();
     }

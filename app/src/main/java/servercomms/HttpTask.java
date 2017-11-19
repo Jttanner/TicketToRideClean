@@ -73,12 +73,13 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         else if (request instanceof RegisterRequest) {
             return encoder.decodeRegisterResult(stream);
         }
+        /*
         else if(request instanceof DrawDestinationCardCommandData) {
             return encoder.decodeDestinationCardResult(stream);
         }
         else if(request instanceof ClaimDestinationCardCommandData) {
             return encoder.decodeClaimDestinationCardResult(stream);
-        }
+        }*/
         else if(request instanceof GetGameListCommandData){
             return encoder.decodeGetGameResult(stream);
         }

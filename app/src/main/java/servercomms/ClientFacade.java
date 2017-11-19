@@ -9,9 +9,7 @@ import commandData.GetCmndListDataToClient;
 import modeling.Game;
 import modeling.Route;
 import modeling.User;
-import result.ClaimDestinationCardCommandResult;
 import result.CommandResult;
-import result.DrawDestinationCardCommandResult;
 import result.GetGameCommandResult;
 import result.JoinGameCommandResult;
 
@@ -49,13 +47,14 @@ class ClientFacade {
             else if (result instanceof JoinGameCommandResult) {
                 CModel.getInstance().setCurrGame(((JoinGameCommandResult) result).getGame());
             }
+            /*
             else if (result instanceof DrawDestinationCardCommandResult) {
                 CModel.getInstance().setThreeDestinationCards(((DrawDestinationCardCommandResult) result).getDestinationCardList());
             }
 
             else if (result instanceof ClaimDestinationCardCommandResult) {
                 CModel.getInstance().setClaimedDestinationCards(((ClaimDestinationCardCommandResult) result).getClaimedDestinationCards());
-            }
+            }*/
             else if(result instanceof CommandResult) {
                 //Draw Face Up Card
                 Log.d(TAG, "Draw Face Up: " + result.getClass());

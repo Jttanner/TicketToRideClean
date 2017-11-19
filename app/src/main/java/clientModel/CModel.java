@@ -95,6 +95,7 @@ public class CModel extends Observable {
     }
 
     public void updatePlayerStatsView () {
+        Game game = currGame;
         setChanged();
         notifyObservers(currGame);
     }
@@ -230,18 +231,6 @@ public class CModel extends Observable {
         //this.threeDestinationCards = threeDestinationCards;
         setChanged();
         notifyObservers(threeDestinationCards);
-    }
-
-    public void setClaimedDestinationCards(List<DestinationCard> claimedDestinationCards) {
-        Log.d(TAG, "Setting claimed destination cards");
-        //this.claimedDestinationCards = claimedDestinationCards;
-        //currGame.getCurrentPlayer().addDestinationCard(claimedDestinationCards);
-        //List<DestinationCard> totalList = currGame.getDestinationCardList().getDestinationCardList();
-        //currGame.getDestinationCardList().removeDestinationCards(claimedDestinationCards);
-        //this.deckSize = deckSize - claimedDestinationCards.size();
-        //player.addDestinationCard(claimedDestinationCards);
-        setChanged();
-        notifyObservers(this.currGame);
     }
 
     /**

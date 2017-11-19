@@ -8,6 +8,7 @@ import java.util.Map;
 
 import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
+import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
 import clientCommands.EndTurnCommandClient;
 import clientCommands.PlaceTrainRoute;
@@ -17,6 +18,7 @@ import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
+import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import modeling.Player;
 
@@ -82,7 +84,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    System.out.println("Executing: " + clientCommand.getClass().toString());
+                    //System.out.println("Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
                 }
@@ -113,6 +115,8 @@ public class CommandManager {
                 return new DrawTrainCardDeck((DrawTrainCardDeckCommandData) command);*/
             case "drawTrainCard":
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
+            case "drawDestinationCards":
+                return new DrawDestinationCards((DrawDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":

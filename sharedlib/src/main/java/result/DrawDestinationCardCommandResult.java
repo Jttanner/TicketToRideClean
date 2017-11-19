@@ -8,6 +8,8 @@ import modeling.DestinationCard;
  * Created by ahwang13 on 10/24/17.
  */
 
+/*
+
 public class DrawDestinationCardCommandResult extends CommandResult {
 
     private List<DestinationCard> destinationCardList;
@@ -25,4 +27,4 @@ public class DrawDestinationCardCommandResult extends CommandResult {
     }
 
 
-}
+}*/

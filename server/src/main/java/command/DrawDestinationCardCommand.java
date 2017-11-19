@@ -10,7 +10,6 @@ import modeling.DestinationCard;
 import modeling.DestinationCardList;
 import modeling.Player;
 import result.CommandResult;
-import result.DrawDestinationCardCommandResult;
 
 /**
  * Created by ahwang13 on 10/24/17.
@@ -28,6 +27,7 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
 
     @Override
     public CommandResult execute() {
+        /*
         ServerFacade facade = ServerFacade.getInstance();
         DrawDestinationCardCommandResult result;
         List<DestinationCard> destinationCardList = facade.getDestinationCardList(commandData);
@@ -45,6 +45,17 @@ public class DrawDestinationCardCommand extends DrawDestinationCardCommandData i
             setType("drawDestinationCards");
             return result;
         }
+*/
+        ServerFacade facade = ServerFacade.getInstance();
+        //List<DestinationCard> claimedDestinationCards = facade.distributeUsedDestinationCards(commandData);
+        CommandResult result = new CommandResult();
+        List<DestinationCard> destinationCardList = facade.getDestinationCardList(commandData);
+        commandData.setDrawDestinationCards(destinationCardList);
+        facade.addCommandToList(commandData.getGameID(), commandData);
+        result.setSuccess(true);
+        //result = new ClaimDestinationCardCommandResult(true, claimedDestinationCards, "Destination Cards given and unchosen cards restored to deck.");
+        //setType("claimDestinationCards");
+        return result;
     }
 
 }
