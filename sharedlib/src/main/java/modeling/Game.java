@@ -152,7 +152,7 @@ public class Game {
      * {@pre none}
      * {@post return value is true if the game hasn't started and stillCanJoin is true}
      */
-    public boolean canJoinGame() {
+    boolean canJoinGame() {
         boolean stillCanJoin = players.size() >= 0 && players.size() < playerMax;
         //Adding in to see if the user is already in the game
         return !hasStarted && stillCanJoin;
@@ -165,7 +165,7 @@ public class Game {
      * {@pre p != null}
      * {@post return value is true if the user isn't already in the game, otherwise false}
      */
-    public boolean addPlayer(Player p) {
+    boolean addPlayer(Player p) {
         if (players.contains(p)) {
             return false;
         } else {
@@ -181,6 +181,7 @@ public class Game {
      *
      * {@pre none}
      * {@post the next player is assigned a turn}
+     * @return String The player whose turn it is now
      */
     public String advancePlayerTurn(){
         String name = "Game: Error, no name in advancePlayerTurn";

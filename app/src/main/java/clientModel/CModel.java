@@ -199,13 +199,6 @@ public class CModel extends Observable {
         return null;
     }
 
-//    public void drawResourceCard(ResourceCard card, Game currGame, Player player){
-//
-//        player.addResourceCard(card);
-//        setChanged();
-//        notifyObservers(currGame);
-//
-//    }
 
     /**
      * This method updates the current game for the Playerlist as well as updating the GameList

@@ -5,6 +5,7 @@ import android.util.Log;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import clientModel.CModel;
 import commandData.Command;
 import request.LoginRequest;
 import request.RegisterRequest;
@@ -23,8 +24,18 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private String ipaddress = "192.168.1.8";
-    private String myUrl = "http://" + ipaddress +":8080/user/";
+    private static String ipaddress;
+    private static String myUrl;
+    private static String ip;
+    static {
+        //grab the ip that may have been entered by the user
+        ip = CModel.getInstance().getIPAddress();
+        //if it is empty, use a hardcoded value
+        if(ip.isEmpty()){
+            ipaddress = "192.168.2.121";
+        }
+        myUrl = "http://" + ipaddress +":8080/user/";
+    }
 
     private ServerProxy() {
     }
@@ -33,7 +44,7 @@ public class ServerProxy {
     public void login( LoginRequest request){
         Log.d(TAG,"Logging on");
         HttpTask httpTask = new HttpTask();
-        String url = myUrl +"login";
+        String url = myUrl + "login";
         try {
             httpTask.start(new URL(url),request);
         } catch (MalformedURLException e) {
