@@ -1,6 +1,7 @@
 package ui.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import MVP_coms_classes.MVP_Map;
@@ -38,6 +41,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     private MapBaseView mapBaseView;
 
+    int counter = 0;
+
+
     /**
      * If we leave this activity, we want to stop the poller which polls the command list.
      * @pre Our instance of Poller is running a GetCommandsPoll
@@ -45,6 +51,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      */
     @Override
     protected void onDestroy() {
+        //destroy poller
         Poller.getInstance().stopGetCommandsPoller();
         super.onDestroy();
     }
