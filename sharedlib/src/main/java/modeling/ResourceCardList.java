@@ -97,7 +97,7 @@ public class ResourceCardList {
     /**Sets up each players starting cards*/
     void setUpPlayers(ArrayList<Player> players) {
         if(count < 2) {
-            forTestingLimitCards();
+            //forTestingLimitCards();
             for (Player player : players) {
                 for(int i = 0; i < 4; i++){
                     //set this card as assigned to the particular player
@@ -110,9 +110,10 @@ public class ResourceCardList {
         }
     }
     void forTestingLimitCards() {
-        for(int i = 0; i < (availableCards.size() - 10); ++i) {
+        for(int i = 0; i < 90; ++i) {
             availableCards.remove(i);
         }
+        availableCards.size();
     }
     public List<ResourceCard> getDiscardPile() {
         return discardPile;

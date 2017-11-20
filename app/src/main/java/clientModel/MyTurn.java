@@ -36,7 +36,7 @@ public class MyTurn extends GameState {
             //Send command to server start next player turn - Tak to Austin?
         }
         else {
-            CModel.getInstance().resourceCardButtonsOff();
+            //CModel.getInstance().resourceCardButtonsOff();
             CModel.getInstance().setCurrGameState(new OneCardDrawnState());
         }
     }

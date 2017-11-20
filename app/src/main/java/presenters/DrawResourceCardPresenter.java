@@ -33,9 +33,9 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
                 else if(((String) arg).equals("ResourceCardButtonsOn")) {
                     myView.get().ButtonsOn();
                 }
-                else if(((String) arg).equals("ResourceCardButtonsOff")) {
-                    myView.get().ButtonsOff();
-                }
+//                else if(((String) arg).equals("ResourceCardButtonsOff")) {
+//                    myView.get().ButtonsOff();
+//                }
             }
         }
     }

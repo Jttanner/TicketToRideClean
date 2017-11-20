@@ -62,6 +62,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 //instead of position we might need to send in the card ID...im not sure
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(0);
@@ -72,6 +73,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(1);
                 card.setFaceUp(true);
@@ -82,6 +84,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(2);
                 card.setFaceUp(true);
@@ -91,6 +94,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(3);
                 card.setFaceUp(true);
@@ -100,6 +104,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(4);
                 card.setFaceUp(true);
@@ -111,6 +116,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCardDeck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(5);
                 card.setFaceUp(false);
@@ -133,6 +139,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 //            availableCardSize = 5;
 //        }
         for (int i = 0; i < 5; ++i) {
+            ButtonsOn();
             ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
             int cardID = 0;
             switch (i) {
