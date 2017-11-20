@@ -24,6 +24,8 @@ import servercomms.ServerProxy;
 
 public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observer {
     private WeakReference<MVP_DestCard.MapViewOps> myView;
+    Player currPlayer;
+
 
     public DestinationCardPresenter(MVP_DestCard.MapViewOps view){
         myView = new WeakReference<>(view);
@@ -34,12 +36,14 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     public void getDestinationCards(Game game, Player player) {
 
         //if we didnt find the user, add him in the server
+        currPlayer = player;
         DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player.getPlayerName());
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "get3DestinationCards");
     }
 
     public void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards) {
+        CModel.getInstance().getUserPlayer().clearTemporaryHand();
         ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player.getPlayerName(), destinationCards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
@@ -66,10 +70,17 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
+        if (arg instanceof Player) {
+            Player playerCheck = (Player) arg;
+            if (currPlayer.equals(playerCheck)) {
+                myView.get().giveChosenCards(currPlayer.getTemporaryHand());
+            }
+        }
+        /*
         if(arg instanceof ArrayList){
             List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
             myView.get().giveChosenCards(destinationCards);
-        }
+        }*/
     }
 
     /*

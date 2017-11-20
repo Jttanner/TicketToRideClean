@@ -63,7 +63,12 @@ public class CModel extends Observable {
 
     private List<String> chatHistory = new ArrayList<>();
 
-    private List<DestinationCard> threeDestinationCards;
+    private List<DestinationCard> temporaryHand;
+
+    public void setTemporaryHand(List<DestinationCard> temporaryHand) {
+        this.temporaryHand = temporaryHand;
+    }
+
     private List<DestinationCard> claimedDestinationCards;
 
     public List<String> getChatHistory() {
@@ -223,14 +228,14 @@ public class CModel extends Observable {
         }
     }
 
-    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards){
+    public void setThreeDestinationCards(Player player){
         Log.d(TAG,"Setting destination cards");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
 
         //set currGame
         //this.threeDestinationCards = threeDestinationCards;
         setChanged();
-        notifyObservers(threeDestinationCards);
+        notifyObservers(player);
     }
 
     /**

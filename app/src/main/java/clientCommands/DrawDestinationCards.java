@@ -5,6 +5,7 @@ import java.util.List;
 import clientModel.CModel;
 import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
+import modeling.Player;
 
 /**
  * Created by ahwang13 on 11/18/17.
@@ -28,7 +29,15 @@ public class DrawDestinationCards implements ClientCommand {
     public void execute() {
 
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), CModel.getInstance().getCurrGame().getGameID());
-        CModel.getInstance().setThreeDestinationCards(cardsReturned);
+        if (CModel.getInstance().getCurrGame().getGameID().equals(gameID)) {
+            if (CModel.getInstance().getUserPlayer().getPlayerName().equals(playerName)) {
+                CModel.getInstance().getUserPlayer().addtoTemporaryHand(cardsReturned);
+                Player player = CModel.getInstance().getCurrGame().getPlayer(playerName);
+                CModel.getInstance().setThreeDestinationCards(player);
+            }
+        }
+
+
 
 
         //Add card to player on Client Side and deletes that card from the deck
