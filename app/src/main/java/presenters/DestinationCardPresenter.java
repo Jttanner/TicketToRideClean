@@ -24,6 +24,7 @@ import servercomms.ServerProxy;
 
 public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observer {
     private WeakReference<MVP_DestCard.MapViewOps> myView;
+    private Player currPlayer;
 
     public DestinationCardPresenter(MVP_DestCard.MapViewOps view){
         myView = new WeakReference<>(view);
@@ -67,6 +68,7 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
         if(arg instanceof ArrayList){
+            System.out.println("Giving them now!");
             List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
             myView.get().giveChosenCards(destinationCards);
         }

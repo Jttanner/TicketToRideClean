@@ -28,8 +28,12 @@ public class DrawDestinationCards implements ClientCommand {
     public void execute() {
 
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), CModel.getInstance().getCurrGame().getGameID());
-        CModel.getInstance().setThreeDestinationCards(cardsReturned);
-
+        //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCards(cardsReturned);
+        //CModel.getInstance().setCurrGame();
+        CModel.getInstance().setThreeDestinationCards(cardsReturned, playerName);
+        System.out.println("Card 1:" + cardsReturned.get(0).getDestinationCardString());
+        System.out.println("Card 2:" + cardsReturned.get(1).getDestinationCardString());
+        System.out.println("Card 3:" + cardsReturned.get(2).getDestinationCardString());
 
         //Add card to player on Client Side and deletes that card from the deck
         //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed);

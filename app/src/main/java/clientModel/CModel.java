@@ -223,12 +223,13 @@ public class CModel extends Observable {
         }
     }
 
-    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards){
+    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards, String playerName){
         Log.d(TAG,"Setting destination cards");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
-
+        
         //set currGame
         //this.threeDestinationCards = threeDestinationCards;
+        threeDestinationCards.add(new DestinationCard(new City(playerName), null, 0));
         setChanged();
         notifyObservers(threeDestinationCards);
     }

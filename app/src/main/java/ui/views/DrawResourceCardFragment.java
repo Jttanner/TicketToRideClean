@@ -227,9 +227,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
     @Override
     public void close() {
-        if(getDialog() != null) {
-            getDialog().dismiss();
-        }
+       getDialog().dismiss();
     }
 
     @Override
