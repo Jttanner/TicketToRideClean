@@ -3,6 +3,8 @@ package clientCommands;
 import java.util.List;
 
 import clientModel.CModel;
+import clientModel.MyTurn;
+import clientModel.NotMyTurn;
 import modeling.Player;
 
 /**
@@ -14,12 +16,16 @@ public class StartGameClient implements ClientCommand {
     public void execute() {
         CModel cModel = CModel.getInstance();
         cModel.toggleGameHasStarted();
-        /*List<Player> playerList = cModel.getCurrGame().getPlayers();
-        for(Player player : playerList){
+        for(Player player : cModel.getCurrGame().getPlayers()){
 
-           if(cModel.getUserPlayer().isMyTurn()){
-
+           if(player.getUserName().equals(cModel.getUserPlayer().getUserName())){
+                if(player.isMyTurn()){
+                    cModel.setCurrGameState(new MyTurn());
+                }
+                else{
+                    cModel.setCurrGameState(new NotMyTurn());
+                }
            }
-        }*/
+        }
     }
 }

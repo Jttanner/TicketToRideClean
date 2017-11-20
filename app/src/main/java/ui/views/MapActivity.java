@@ -100,7 +100,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 fragment.show(fm, "start");
 
                 //Temporary Set State to MyTurn
-                CModel.getInstance().setCurrGameState(new MyTurn());
+                //CModel.getInstance().setCurrGameState(new MyTurn());
             }
         });
 
