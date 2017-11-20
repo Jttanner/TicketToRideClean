@@ -84,7 +84,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    //System.out.println("Executing: " + clientCommand.getClass());
+                    System.out.println("Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
                 }
@@ -116,6 +116,7 @@ public class CommandManager {
             case "drawTrainCard":
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
             case "drawDestinationCards":
+                System.out.println("Maybe here!");
                 return new DrawDestinationCards((DrawDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);

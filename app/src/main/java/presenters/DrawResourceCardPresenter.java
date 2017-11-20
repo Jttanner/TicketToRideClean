@@ -1,5 +1,7 @@
 package presenters;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,6 +15,7 @@ import modeling.ResourceCard;
  */
 
 public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResourceCardPresOps, Observer {
+    private static final String TAG = "ResourceCardPres";
     private WeakReference<MVP_DrawResourceCard.DrawResourceCardViewOps> myView;
 
     public DrawResourceCardPresenter(MVP_DrawResourceCard.DrawResourceCardViewOps view) {
@@ -22,15 +25,23 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
     }
     @Override
     public void update(Observable o, Object arg) {
+        Log.d(TAG,"update:");
         if(myView != null) {
             if(arg instanceof String) {
                 if(((String) arg).equals("UpdateFaceUpView")) {
+                    Log.d(TAG,"update: update");
                     myView.get().upDateFaceUp();
                 }
                 else if(((String) arg).equals("CloseResourceFragment")) {
-                    myView.get().close();
+                    //if(myView != null) {
+                        Log.d(TAG,"update: close");
+                        myView.get().close();
+                        myView=null;
+                    return;
+                    //}
                 }
                 else if(((String) arg).equals("ResourceCardButtonsOn")) {
+                    Log.d(TAG,"update: on");
                     myView.get().ButtonsOn();
                 }
 //                else if(((String) arg).equals("ResourceCardButtonsOff")) {

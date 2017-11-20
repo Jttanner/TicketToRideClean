@@ -32,6 +32,9 @@
         <activity
             android:name="ui.views.DestinationCardActivity"
             android:screenOrientation="landscape"></activity>
+        <activity android:name="ui.views.GameOverActivity"
+            android:screenOrientation="landscape"></activity>
+
     </application>
 
 </manifest>

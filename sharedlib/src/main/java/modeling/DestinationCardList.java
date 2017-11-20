@@ -129,6 +129,7 @@ public class DestinationCardList {
         int randomIndex = randInt(min, max);
         DestinationCard saved = destinationCardList.get(randomIndex);
         destinationCardList.remove(randomIndex);
+        System.out.println("Current size of the deck: " + destinationCardList.size());
         return saved;
     }
 

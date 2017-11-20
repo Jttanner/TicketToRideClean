@@ -24,7 +24,7 @@ import servercomms.ServerProxy;
 
 public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observer {
     private WeakReference<MVP_DestCard.MapViewOps> myView;
-    Player currPlayer;
+    private Player currPlayer;
 
 
     public DestinationCardPresenter(MVP_DestCard.MapViewOps view){

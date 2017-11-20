@@ -39,6 +39,8 @@ public class DrawDestinationCards implements ClientCommand {
 
 
 
+        //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCards(cardsReturned);
+        //CModel.getInstance().setCurrGame();
 
         //Add card to player on Client Side and deletes that card from the deck
         //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed);
