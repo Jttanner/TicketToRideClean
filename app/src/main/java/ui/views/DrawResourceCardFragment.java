@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import MVP_coms_classes.MVP_DrawResourceCard;
 import clientModel.CModel;
+import clientModel.MyTurn;
 import modeling.ResourceCard;
 import presenters.DrawResourceCardPresenter;
 import teamjapannumbahone.tickettoride.R;
@@ -43,6 +44,13 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         setUp(v);
         onClickers();
         displayResourceCards(v);
+        String test = CModel.getInstance().getCurrGameState().toString();
+        if(test.equals("class clientModel.MyTurn") || test.equals("class clientModel.OneCardDrawnState")) {
+            ButtonsOn();
+        }
+        else {
+            ButtonsOff();
+        }
 
         return v;
     }
@@ -62,6 +70,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //CModel.getInstance().setCurrGameState(new MyTurn());
                 ButtonsOff();
                 //In order to create the right resource card we need to get it at the position it was clicked
                 //instead of position we might need to send in the card ID...im not sure
@@ -132,15 +141,20 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     */
     public void displayResourceCards(View v) {
         int availableCardSize = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size();
-//        if(CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size() < 5) {
-//            availableCardSize = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size();
-//        }
-//        else {
-//            availableCardSize = 5;
-//        }
+        int wildCount = 0;
         for (int i = 0; i < 5; ++i) {
             ButtonsOn();
-            ResourceCard card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
+            ResourceCard card = null;
+            //Dont want out of bounds
+            if(i < availableCardSize) {
+                card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
+                if(card.getMyColor().equals("Wild")) {
+                    wildCount++;
+                }
+                card = threeWildFactor(availableCardSize, wildCount, card);
+            }
+
+
             int cardID = 0;
             switch (i) {
                 case 0:
@@ -161,6 +175,7 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 default:
                     break;
             }
+            //Change the image to nothing and turn the button off
             if (i >= availableCardSize) {
                 ((ImageButton) v.findViewById(cardID)).setImageResource(R.drawable.rainbow_sq);
                 switch (i) {
@@ -191,7 +206,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         } else {
             resourceCardDeck.setEnabled(true);
         }
-
         resourceCardDeck.setImageResource(R.drawable.backcard);
         resourceCardCount.setText("Resource Card Remaining in Deck: " + CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size());
     }
@@ -219,6 +233,18 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         }
     }
 
+    public ResourceCard threeWildFactor(int deckSize, int wildCount, ResourceCard card){
+
+        while(wildCount >= 3 && deckSize > 2) {
+            deckSize--;
+            card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(deckSize);
+            if(!(card.getMyColor().equals("Wild"))){
+                wildCount--;
+            }
+        }
+
+        return card;
+    }
     @Override
     public void upDateFaceUp() {
         displayResourceCards(v);

@@ -29,6 +29,7 @@ public class ResourceCardList {
         for (String string : colorList) {
             resourceCards = new ArrayList<>();
             for (int i = 0; i < 12; i++) {
+            //for (int i = 0; i < 2; i++) {
                 ResourceCard card = new ResourceCard(string);
                 //add cards to list
                 resourceCards.add(card);
@@ -49,9 +50,6 @@ public class ResourceCardList {
         }
         //Shuffle the list
         Collections.shuffle(availableCards);
-
-        //Maybe not use this
-        //setUpFaceUpPile();
     }
 
     /**Returns an unmodifiable list of available resource cards to the caller
@@ -70,20 +68,9 @@ public class ResourceCardList {
             }
             String hi = "";
         }
-//        //Always check if we need to grab from the discard pile
-//        shuffleDiscardPile();
         return null;
     }
-//    //When our available cards is empty, we need to reshuffle the discard pile.
-//    //Can't really shuffle, because the client and server will have different cards
-//    public void shuffleDiscardPile() {
-//        if(availableCards.size() == 0 && discardPile.size() != 0) {
-//            for(ResourceCard card: discardPile) {
-//                availableCards.add(card);
-//            }
-//            discardPile.clear();
-//        }
-//    }
+
     //When a player claims a route, we need to put the used cards into the discard pile
     public void usedCards(ArrayList<ResourceCard> usedCardsList) {
 //        for(ResourceCard card: usedCardsList) {

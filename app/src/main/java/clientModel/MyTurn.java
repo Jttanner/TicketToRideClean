@@ -20,6 +20,7 @@ import servercomms.ServerProxy;
  */
 
 public class MyTurn extends GameState {
+    private static final String TAG = "MyTurn";
     @Override
     public void drawResourceCard(ResourceCard resourceCard) {
 
@@ -34,6 +35,7 @@ public class MyTurn extends GameState {
         //If card is wild and was face up, end turn
         if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
             //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
+            Log.d(TAG,"MyTurn: closeResourceFragment");
             CModel.getInstance().closeResourceFragment();
             CModel.getInstance().setCurrGameState(new EndMyTurn());
 
