@@ -1,8 +1,12 @@
 package clientModel;
 
+import android.util.Log;
+
 import java.util.List;
 
+import commandData.ClaimDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
+import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
@@ -16,6 +20,7 @@ import servercomms.ServerProxy;
  */
 
 public class MyTurn extends GameState {
+    private static final String TAG = "MyTurn";
     @Override
     public void drawResourceCard(ResourceCard resourceCard) {
 
@@ -30,6 +35,7 @@ public class MyTurn extends GameState {
         //If card is wild and was face up, end turn
         if(resourceCard.getMyColor().equals("Wild") && resourceCard.isFaceUp()) {
             //Close the View //I think closing here was giving invoking on null object reference, but not it should be okay
+            Log.d(TAG,"MyTurn: closeResourceFragment");
             CModel.getInstance().closeResourceFragment();
             CModel.getInstance().setCurrGameState(new EndMyTurn());
 
@@ -42,8 +48,26 @@ public class MyTurn extends GameState {
     }
 
     @Override
-    public void drawDestCard(List<DestinationCard> c) {
-        //endTurn();
+    public void getDestCard() {
+        String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+        String gameID = CModel.getInstance().getCurrGame().getGameID();
+
+        DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(gameID, playerName);
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "get3DestinationCards");
+    }
+
+    @Override
+    public void claimDestCard(List<DestinationCard> cards) {
+        String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+        String gameID = CModel.getInstance().getCurrGame().getGameID();
+
+        CModel.getInstance().getUserPlayer().clearTemporaryHand();
+        ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(gameID, playerName, cards);
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "claimDestinationCards");
+
+        CModel.getInstance().setCurrGameState(new EndMyTurn());
     }
 
     @Override

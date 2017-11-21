@@ -7,6 +7,7 @@ import java.util.Map;
 
 import command.ClaimDestinationCardCommand;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
@@ -93,7 +94,6 @@ public class ServerFacade {
             if(thisgame.getGameID().equals(game)){
                 thisgame.setHasStarted(true);
             }
-
         }
     }
 
@@ -156,6 +156,29 @@ public class ServerFacade {
         return new CommandResult(true);
     }
 
+    public CommandResult distributeUsedInitialDestinationCards(ClaimInitialDestinationCardCommandData data) {
+
+        Game currGame = ServerModel.getInstance().getGames().findGame(data.getGameID());
+        if (currGame.getPlayers().size() != currGame.getPlayersHaveSelectedInitialDestCards()) {
+            Player currPlayer = currGame.getPlayer(data.getPlayerID());
+            //currGame.getDestinationCardList().distributeUsedDestinationCards(data);
+            List<DestinationCard> claimedCards = new ArrayList<>();
+            for (int i = 0; i < 3; i++) {
+                boolean isClaimed = data.getClaimDestinationCards().get(i).isClaimed();
+                if (isClaimed) {
+                    claimedCards.add(data.getClaimDestinationCards().get(i));
+                } else {
+                    currGame.getDestinationCardList().addDestinationCardBackToDeck(data.getClaimDestinationCards().get(i));
+                }
+            }
+            currPlayer.addDestinationCards(claimedCards);
+            currGame.incrementPlayersHaveSelectedInitialDestCards();
+        }
+        if (currGame.getPlayers().size() == currGame.getPlayersHaveSelectedInitialDestCards()) {
+            return new CommandResult(true);
+        }
+        return new CommandResult(false);
+    }
 
     public CommandResult claimRoute(ClaimRouteCommandData data){
         String checkWildColor = data.isWild() ? "Wild" : data.getRouteColor();
@@ -163,6 +186,19 @@ public class ServerFacade {
         if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), checkWildColor, data.getDistance()),
                                      currGame.getPlayer(data.getPlayerName()), data.isWild())){
             //addCommandToList(data.getGameID(), data);
+
+            if(currGame.isLastRound()){
+               if( currGame.FinalCountDown()){
+                   Command endGame = new Command();
+                   endGame.setType("EndGame");
+                   addCommandToList(currGame.getGameID(),endGame);
+               }
+            }
+            if(!currGame.isLastRound()&&(currGame.getPlayer(data.getPlayerName()).getTrainCarList().getNumOfCars()<=2)){
+
+                currGame.setLastRound(true,currGame.getPlayers().size());
+                currGame.FinalCountDown();
+            }
             return new CommandResult(true);
         } else{
             return new CommandResult(false);

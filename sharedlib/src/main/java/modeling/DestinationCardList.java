@@ -114,7 +114,6 @@ public class DestinationCardList {
 
     /**
      * Takes the already initialized list of Destination Cards and draws 1 random card from the deck
-     * @param What's being passed in
      * @pre What has to be true
      * @post A random Destination Card from the deck.
      * @return DestinationCard
@@ -129,6 +128,7 @@ public class DestinationCardList {
         int randomIndex = randInt(min, max);
         DestinationCard saved = destinationCardList.get(randomIndex);
         destinationCardList.remove(randomIndex);
+        System.out.println("Current size of the deck: " + destinationCardList.size());
         return saved;
     }
 

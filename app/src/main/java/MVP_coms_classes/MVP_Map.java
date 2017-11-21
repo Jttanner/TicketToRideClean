@@ -25,7 +25,10 @@ public interface MVP_Map {
         /**Updates the route to be a certain player's*/
         void ResourceCardOption();
         void DestinationCardOption();
+        void StartGameOver();
         void ClaimRouteOption();
+
+
     }
     /**
      * Operations offered to View to communicate with Presenter.
@@ -36,5 +39,7 @@ public interface MVP_Map {
         /**Will tell the model who just claimed a route*/
         //Not sure if needed if model will just take care of it,void claimRoute(Route r);
 //        void UpdateChat(String s);
+
+        void startGameState();
     }
 }

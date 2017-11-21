@@ -24,25 +24,39 @@ import servercomms.ServerProxy;
 
 public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observer {
     private WeakReference<MVP_DestCard.MapViewOps> myView;
+    private Player currPlayer;
+
 
     public DestinationCardPresenter(MVP_DestCard.MapViewOps view){
         myView = new WeakReference<>(view);
         CModel.getInstance().addObserver(this);
     }
 
+    /*
     @Override
     public void getDestinationCards(Game game, Player player) {
 
         //if we didnt find the user, add him in the server
+        currPlayer = player;
         DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(game.getGameID(), player.getPlayerName());
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "get3DestinationCards");
     }
 
     public void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards) {
+        CModel.getInstance().getUserPlayer().clearTemporaryHand();
         ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player.getPlayerName(), destinationCards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
+    }*/
+
+    public void getDestinationCards() {
+        currPlayer = CModel.getInstance().getUserPlayer();
+        CModel.getInstance().getCurrGameState().getDestCard();
+    }
+
+    public void claimDestinationCards(List<DestinationCard> destinationCards) {
+        CModel.getInstance().getCurrGameState().claimDestCard(destinationCards);
     }
 
     public boolean hasGameJustStarted(Game game, Player player) {
@@ -57,18 +71,15 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         CModel.getInstance().
     }*/
 
-    public void endTurn(Game game, Player player) {
-        //EndTurnCommandData data = new EndTurnCommandData(game.getGameID(), player.getPlayerName());
-        //ServerProxy.getInstance().sendCommand(data);
-        //Log.d("DestCardPresenter", "endTurn");
-    }
 
     @Override
     public void update(Observable o, Object arg) {
         //For updating the game list we will have a gamelist sent
-        if(arg instanceof ArrayList){
-            List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
-            myView.get().giveChosenCards(destinationCards);
+        if (arg instanceof Player) {
+            Player playerCheck = (Player) arg;
+            if (currPlayer.equals(playerCheck)) {
+                myView.get().giveChosenCards(currPlayer.getTemporaryHand());
+            }
         }
     }
 

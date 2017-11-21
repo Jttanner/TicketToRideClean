@@ -1,10 +1,16 @@
 package clientModel;
 
+import android.util.Log;
+
 import java.util.List;
 
+import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
+import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
 import modeling.Route;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 11/9/2017.
@@ -20,9 +26,28 @@ public class StartGame extends GameState {
         //super.drawResourceCard(c);
     }
 
+
     @Override
-    public void drawDestCard(List<DestinationCard> c) {
-        //super.drawDestCard(c);
+    public void getDestCard() {
+        String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+        String gameID = CModel.getInstance().getCurrGame().getGameID();
+
+        DrawDestinationCardCommandData data = new DrawDestinationCardCommandData(gameID, playerName);
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "get3DestinationCards");
+    }
+
+    @Override
+    public void claimDestCard(List<DestinationCard> cards) {
+        String playerName = CModel.getInstance().getUserPlayer().getPlayerName();
+        String gameID = CModel.getInstance().getCurrGame().getGameID();
+
+        CModel.getInstance().getUserPlayer().clearTemporaryHand();
+        ClaimInitialDestinationCardCommandData data = new ClaimInitialDestinationCardCommandData(gameID, playerName, cards);
+        ServerProxy.getInstance().sendCommand(data);
+        Log.d("DestCardPresenter", "claimDestinationCards");
+
+        //CModel.getInstance().setCurrGameState(new EndMyTurn());
     }
 
     //@Override

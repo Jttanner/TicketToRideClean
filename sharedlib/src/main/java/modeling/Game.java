@@ -28,14 +28,31 @@ public class Game {
     private ArrayList<Player> players;
     private List<String> chatHistory = new ArrayList<>();
     private boolean hasStarted;
+    private boolean lastRound =false;
+    private int countdown;
     private String gameID;
     private String gameName;
     private int playerMax;
     private ResourceCardList resourceCardList;
     private final String TAG = "Game:";
     private DestinationCardList destinationCardList;
+    private int playersHaveSelectedInitialDestCards;
     //private int destDeckSize;
+    public boolean FinalCountDown(){
+        if(--countdown == 0){
+            return true;
+        }
+        return false;
+    }
 
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound, int number) {
+        this.lastRound = lastRound;
+        countdown = number;
+    }
 
     private RouteList unclaimedRouteList = new RouteList(true);
 
@@ -53,6 +70,9 @@ public class Game {
         if (route.checkIfPlayerCanClaim(this, route, player)){
             TrainCarList playerTrainCars = player.getTrainCarList();
             playerTrainCars.decrementCars(route.getDistance());
+
+
+
             player.discardResourceCardsToPlaceCars(route, this);
             for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
                 if (entry.getKey().equals(route)){
@@ -100,6 +120,7 @@ public class Game {
         //card deck created for the game
         destinationCardList = new DestinationCardList();
         resourceCardList = new ResourceCardList();
+        playersHaveSelectedInitialDestCards = 0;
     }
     /**
      * Constructs a new Game which has its resource cards initialized, given an unique game ID, and game has not started yet
@@ -419,5 +440,13 @@ public class Game {
 
     public void setDestinationCardList(DestinationCardList destinationCardList) {
         this.destinationCardList = destinationCardList;
+    }
+
+    public int getPlayersHaveSelectedInitialDestCards() {
+        return playersHaveSelectedInitialDestCards;
+    }
+
+    public void incrementPlayersHaveSelectedInitialDestCards() {
+        playersHaveSelectedInitialDestCards++;
     }
 }

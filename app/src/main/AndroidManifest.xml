@@ -29,9 +29,9 @@
             android:screenOrientation="landscape"></activity>
         <activity android:name="ui.views.MapActivity"
             android:screenOrientation="landscape"></activity>
-        <activity
-            android:name="ui.views.DestinationCardActivity"
+        <activity android:name="ui.views.GameOverActivity"
             android:screenOrientation="landscape"></activity>
+
     </application>
 
 </manifest>

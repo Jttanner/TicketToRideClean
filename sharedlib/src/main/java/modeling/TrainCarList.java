@@ -23,5 +23,8 @@ public class TrainCarList {
      * @param num Integer*/
     public void decrementCars(int num){
         numOfCars -= num;
+//        if(numOfCars<=2){
+//
+//        }
     }
 }

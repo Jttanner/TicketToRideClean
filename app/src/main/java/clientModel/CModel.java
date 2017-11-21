@@ -62,8 +62,14 @@ public class CModel extends Observable {
     private GameState currGameState;
 
     private List<String> chatHistory = new ArrayList<>();
+    private List<Player> finalPlayers;
 
-    private List<DestinationCard> threeDestinationCards;
+    private List<DestinationCard> temporaryHand;
+
+    public void setTemporaryHand(List<DestinationCard> temporaryHand) {
+        this.temporaryHand = temporaryHand;
+    }
+
     private List<DestinationCard> claimedDestinationCards;
 
     public List<String> getChatHistory() {
@@ -74,7 +80,17 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
-
+    public void EndGame(){
+        for(Game game  : getAllGames()){
+            if(game.getGameID().equals(CModel.getInstance().getCurrGame().getGameID())){
+                CModel.getInstance().getAllGames().remove(game);
+            }
+        }
+        finalPlayers = CModel.getInstance().getCurrGame().getPlayers();
+        CModel.getInstance().setCurrGame(null);
+        setChanged();
+        notifyObservers("endGmae");
+    }
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history, String gameID) {
         for(Game game: allGames){
@@ -223,14 +239,14 @@ public class CModel extends Observable {
         }
     }
 
-    public void setThreeDestinationCards(List<DestinationCard> threeDestinationCards){
+    public void setThreeDestinationCards(Player player){
         Log.d(TAG,"Setting destination cards");
         //So the code below takes out the old version of the game we are joining and adds the new one, which has the updated player list
 
         //set currGame
         //this.threeDestinationCards = threeDestinationCards;
         setChanged();
-        notifyObservers(threeDestinationCards);
+        notifyObservers(player);
     }
 
     /**
@@ -267,6 +283,8 @@ public class CModel extends Observable {
         //Player userPlayer = CModel.getInstance().getUserPlayer();
         boolean isWild = route.getTrainColorNeeded().equals("Wild") ? true : false;
         currGame.claimAvailableRoute(route, player, isWild);
+        //player.getTrainCarList().getNumOfCars()
+
         player.addRoute(route);
         player.addPoints(route.getPointValue());
 

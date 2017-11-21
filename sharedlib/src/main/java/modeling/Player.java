@@ -23,6 +23,7 @@ public class Player implements Comparator<Player> {
     private List<DestinationCard> destinationCards = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
     private int points;
+    private List<DestinationCard> temporaryHand = new ArrayList();
     private int faceUpDrawn;
     private int deckDrawn;
     private int wildDrawn;
@@ -199,7 +200,17 @@ public class Player implements Comparator<Player> {
         destinationCards.add(card);
     }
 
+    public void addtoTemporaryHand(List<DestinationCard> cards) {
+        temporaryHand.addAll(cards);
+    }
 
+    public List<DestinationCard> getTemporaryHand() {
+        return temporaryHand;
+    }
+
+    public void clearTemporaryHand() {
+        temporaryHand.clear();
+    }
 
     public boolean isMyTurn() {
         return isMyTurn;

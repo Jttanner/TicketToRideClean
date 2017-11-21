@@ -10,12 +10,15 @@ import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
 import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
+import clientCommands.EndGameCommand;
 import clientCommands.EndTurnCommandClient;
+import clientCommands.InitializeTurns;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
 import clientCommands.UpdateChatCommand;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
@@ -84,7 +87,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    //System.out.println("Executing: " + clientCommand.getClass());
+                    System.out.println("Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
                 }
@@ -117,6 +120,8 @@ public class CommandManager {
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
             case "drawDestinationCards":
                 return new DrawDestinationCards((DrawDestinationCardCommandData) command);
+            case "initializeTurns":
+                return new InitializeTurns((ClaimInitialDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":
@@ -128,6 +133,9 @@ public class CommandManager {
                     return new UpdateChatCommand((ChatCommandData) command);
                 }
                 break;
+            case "EndGame":
+                return new EndGameCommand();
+                //break;
             //TODO add new commands for the client here
         }
 

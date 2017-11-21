@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
+import clientModel.StartGame;
 import commandData.ChatCommandData;
 import modeling.City;
 import modeling.Game;
@@ -46,6 +47,10 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
             if(((String) arg).equals("ResourceFragmentTwo")) {
                 myView.get().ResourceCardOption();
             }
+            else if (((String) arg).equals("EndGame")){
+                myView.get().StartGameOver();
+            }
+
         }
 
     }
@@ -54,4 +59,7 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
         return CModel.getInstance().getCurrGame().getUnclaimedRouteList().getCityRouteInfoStrings(baseCityName);
     }
 
+    public void startGameState() {
+        CModel.getInstance().setCurrGameState(new StartGame());
+    }
 }
