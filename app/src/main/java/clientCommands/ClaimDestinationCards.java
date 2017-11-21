@@ -37,15 +37,12 @@ public class ClaimDestinationCards implements ClientCommand {
             CModel.getInstance().updatePlayerStatsView();
         }
 
-        //Add card to player on Client Side and deletes that card from the deck
-        //CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed);
-        //CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCards();
-        CModel.getInstance().setCurrGameState(new EndMyTurn());
+
+        //CModel.getInstance().setCurrGameState(new EndMyTurn());
         //ends my turn
-        CModel.getInstance().getCurrGameState().endTurn();
-        CModel.getInstance().updatePlayerStatsView();
-        //Change the face up card on Client Side
-        //CModel.getInstance().upDateFaceUpPile();
+        //CModel.getInstance().getCurrGameState().endTurn();
+        //CModel.getInstance().updatePlayerStatsView();
+
     }
 
     public int cardsTaken() {

@@ -32,13 +32,6 @@ public class InitializeTurns implements ClientCommand {
         cModel.updatePlayerStatsView();
 
         CModel.getInstance().updateCurrGameHistoryList(this.toString(),CModel.getInstance().getCurrGame().getGameID());
-        for (int i = 0; i < cardsClaimed.size(); i++) {
-            if(cardsClaimed.get(i).isClaimed() == true) {
-                CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed.get(i));
-                CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCard(cardsClaimed.get(i));
-            }
-            CModel.getInstance().updatePlayerStatsView();
-        }
 
         for (Player player : cModel.getCurrGame().getPlayers()) {
             if (player.getUserName().equals(cModel.getUserPlayer().getUserName())) {

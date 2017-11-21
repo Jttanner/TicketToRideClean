@@ -17,7 +17,7 @@ public class ClaimInitialDestinationCardCommand extends ClaimInitialDestinationC
     public ClaimInitialDestinationCardCommand(ClaimInitialDestinationCardCommandData data) {
         super();
         this.commandData = data;
-        setType("claimInitialDestinationCards");
+        setType("claimDestinationCards");
     }
 
     @Override
@@ -28,12 +28,17 @@ public class ClaimInitialDestinationCardCommand extends ClaimInitialDestinationC
         CommandResult result;
 
         result = facade.distributeUsedInitialDestinationCards(commandData);
-        //facade.addCommandToList(commandData.getGameID(), commandData);
+
+        if (result.isSuccess() == false) {
+            facade.addCommandToList(commandData.getGameID(), commandData);
+        }
         if (result.isSuccess() == true) {
+            facade.addCommandToList(commandData.getGameID(), commandData);
+            commandData.setType("initializeTurns");
             facade.addCommandToList(commandData.getGameID(), commandData);
         }
         //result = new ClaimDestinationCardCommandResult(true, claimedDestinationCards, "Destination Cards given and unchosen cards restored to deck.");
-        setType("claimInitialDestinationCards");
+        //setType("claimInitialDestinationCards");
         return result;
     }
 }
