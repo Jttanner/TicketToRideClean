@@ -46,7 +46,7 @@ public class StartGame extends GameState {
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
 
-        CModel.getInstance().setCurrGameState(new EndMyTurn());
+        //CModel.getInstance().setCurrGameState(new EndMyTurn());
     }
 
     //@Override
