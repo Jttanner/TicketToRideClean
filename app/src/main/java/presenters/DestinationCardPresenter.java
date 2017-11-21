@@ -32,6 +32,7 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         CModel.getInstance().addObserver(this);
     }
 
+    /*
     @Override
     public void getDestinationCards(Game game, Player player) {
 
@@ -47,6 +48,15 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(game.getGameID(), player.getPlayerName(), destinationCards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
+    }*/
+
+    public void getDestinationCards() {
+        currPlayer = CModel.getInstance().getUserPlayer();
+        CModel.getInstance().getCurrGameState().getDestCard();
+    }
+
+    public void claimDestinationCards(List<DestinationCard> destinationCards) {
+        CModel.getInstance().getCurrGameState().claimDestCard(destinationCards);
     }
 
     public boolean hasGameJustStarted(Game game, Player player) {
@@ -61,11 +71,6 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
         CModel.getInstance().
     }*/
 
-    public void endTurn(Game game, Player player) {
-        //EndTurnCommandData data = new EndTurnCommandData(game.getGameID(), player.getPlayerName());
-        //ServerProxy.getInstance().sendCommand(data);
-        //Log.d("DestCardPresenter", "endTurn");
-    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -76,11 +81,6 @@ public class DestinationCardPresenter implements MVP_DestCard.MapPresOps,Observe
                 myView.get().giveChosenCards(currPlayer.getTemporaryHand());
             }
         }
-        /*
-        if(arg instanceof ArrayList){
-            List<DestinationCard> destinationCards = (List<DestinationCard>) arg;
-            myView.get().giveChosenCards(destinationCards);
-        }*/
     }
 
     /*

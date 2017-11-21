@@ -19,9 +19,13 @@ public abstract class GameState {
     public void drawResourceCard(ResourceCard resourceCard){
 
     }
+
+    public void getDestCard() {
+
+    }
     /**Deals with sending commands to the server when the player has drawn a Destinaton card
      * @param c The Destination cards drawn*/
-    public void drawDestCard(List<DestinationCard> c){
+    public void claimDestCard(List<DestinationCard> c){
 
     }
     /**Handles ending the current game state and moving on to the next*/

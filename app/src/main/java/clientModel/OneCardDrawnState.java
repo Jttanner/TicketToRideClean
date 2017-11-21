@@ -40,10 +40,11 @@ public class OneCardDrawnState extends GameState {
         }
     }
 
+    /*
     @Override
     public void drawDestCard(List<DestinationCard> c) {
         super.drawDestCard(c);
-    }
+    }*/
 
     @Override
     public void endTurn() {

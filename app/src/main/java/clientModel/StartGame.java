@@ -20,10 +20,11 @@ public class StartGame extends GameState {
         //super.drawResourceCard(c);
     }
 
+    /*
     @Override
     public void drawDestCard(List<DestinationCard> c) {
         //super.drawDestCard(c);
-    }
+    }*/
 
     //@Override
     //void endTurn() {

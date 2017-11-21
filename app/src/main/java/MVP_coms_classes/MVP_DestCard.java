@@ -37,16 +37,15 @@ public interface MVP_DestCard {
     interface MapPresOps{ //View pushes to the presenter
         /**Sends the presenter what destination cards were picked*/
         //void pickDestCards(List<DestinationCard> cards) ;
-        void getDestinationCards(Game game, Player player);
+
+        //void getDestinationCards(Game game, Player player);
+        void getDestinationCards();
 
         //Gives the destination cards that were chosen back to the player and puts back the unchosen cards back to the deck.
-        void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards);
+        //void claimDestinationCards(Game game, Player player, List<DestinationCard> destinationCards);
+        void claimDestinationCards(List<DestinationCard> claimed);
 
         boolean hasGameJustStarted(Game game, Player player);
-
-        //void subtractDestinationCards(int subtract);
-
-        void endTurn(Game game, Player player);
     }
 
     //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards

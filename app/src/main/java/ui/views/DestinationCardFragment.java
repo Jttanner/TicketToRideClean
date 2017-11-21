@@ -76,7 +76,8 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
         mRoute3 = (TextView) v.findViewById(R.id.mRoute3);
         buttonStart = (Button) v.findViewById(R.id.buttonStart);
 
-        presenter.getDestinationCards(game, player);
+        //presenter.getDestinationCards(game, player);
+        presenter.getDestinationCards();
         //TODO: How do we update the view after the it goes to the server and back????
     }
 
@@ -154,12 +155,14 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 boolean gameStarted = presenter.hasGameJustStarted(game, player);
                 if(gameStarted == false) {
                     if(claimed >= 2) {
-                        presenter.claimDestinationCards(game, player, cardsSelected);
-                        //presenter.subtractDestinationCards(cardsSelected.size());
+                        //presenter.claimDestinationCards(game, player, cardsSelected);
+                        presenter.claimDestinationCards(cardsSelected);
+
+
                         //TODO: We need to be able to update the view here?
                         //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
-                        presenter.endTurn(game, player);
+                        //presenter.endTurn(game, player);
                     }
                     else {
                         Toast.makeText(getActivity(), "Please select 2 or 3 destinations", Toast.LENGTH_LONG).show();
@@ -167,12 +170,14 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 }
                 else {
                     if(claimed >= 1) {
-                        presenter.claimDestinationCards(game, player, cardsSelected);
-                        //presenter.subtractDestinationCards(cardsSelected.size());
+                        //presenter.claimDestinationCards(game, player, cardsSelected);
+                        presenter.claimDestinationCards(cardsSelected);
+
+
                         //TODO: We need to be able to update the view here?
                         //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
-                        presenter.endTurn(game, player);
+                        //presenter.endTurn(game, player);
                     }
                     else {
                         Toast.makeText(getActivity(), "Please select at least 1 destination", Toast.LENGTH_LONG).show();
