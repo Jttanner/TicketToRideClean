@@ -57,7 +57,7 @@ public class Route {
         //see if they have enough cards
 
 
-        //addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
+        addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
 
 
         List<ResourceCard> routeCostCardType = player.getResourceCards().get(route.getTrainColorNeeded());
