@@ -163,6 +163,19 @@ public class ServerFacade {
         if (currGame.claimAvailableRoute(new Route(data.getStartCity(), data.getEndCity(), checkWildColor, data.getDistance()),
                                      currGame.getPlayer(data.getPlayerName()), data.isWild())){
             //addCommandToList(data.getGameID(), data);
+
+            if(currGame.isLastRound()){
+               if( currGame.FinalCountDown()){
+                   Command endGame = new Command();
+                   endGame.setType("EndGame");
+                   addCommandToList(currGame.getGameID(),endGame);
+               }
+            }
+            if(!currGame.isLastRound()&&(currGame.getPlayer(data.getPlayerName()).getTrainCarList().getNumOfCars()<=2)){
+
+                currGame.setLastRound(true,currGame.getPlayers().size());
+                currGame.FinalCountDown();
+            }
             return new CommandResult(true);
         } else{
             return new CommandResult(false);

@@ -111,8 +111,8 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
                     result = claimDestinationCardCommand.execute();
                     break;
-                    // drawTrainCardDeckCommand = new AddChatCommand(chatCommandData);
-                    //addChatCommand.execute();
+                // drawTrainCardDeckCommand = new AddChatCommand(chatCommandData);
+                //addChatCommand.execute();
                 case "claimRoute":
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);

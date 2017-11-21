@@ -235,6 +235,9 @@ public class Encoder {
                         case "endTurn":
                             command = gson.fromJson(object, EndTurnCommandData.class);
                             break;
+                        case "EndGame":
+                            command = gson.fromJson(object,Command.class);
+                            break;
 
                         //TODO: PLEASE ADD CASES HERE
                     }

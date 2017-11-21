@@ -10,6 +10,7 @@ import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
 import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
+import clientCommands.EndGameCommand;
 import clientCommands.EndTurnCommandClient;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
@@ -129,6 +130,9 @@ public class CommandManager {
                     return new UpdateChatCommand((ChatCommandData) command);
                 }
                 break;
+            case "EndGame":
+                return new EndGameCommand();
+                //break;
             //TODO add new commands for the client here
         }
 

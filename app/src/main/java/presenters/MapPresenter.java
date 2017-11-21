@@ -46,6 +46,10 @@ public class MapPresenter implements MVP_Map.MapPresOps, Observer {
             if(((String) arg).equals("ResourceFragmentTwo")) {
                 myView.get().ResourceCardOption();
             }
+            else if (((String) arg).equals("EndGame")){
+                myView.get().StartGameOver();
+            }
+
         }
 
     }

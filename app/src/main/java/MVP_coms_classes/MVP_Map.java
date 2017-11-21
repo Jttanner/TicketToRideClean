@@ -25,6 +25,7 @@ public interface MVP_Map {
         /**Updates the route to be a certain player's*/
         void ResourceCardOption();
         void DestinationCardOption();
+        void StartGameOver();
         void ClaimRouteOption();
     }
     /**

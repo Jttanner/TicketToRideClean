@@ -28,6 +28,8 @@ public class Game {
     private ArrayList<Player> players;
     private List<String> chatHistory = new ArrayList<>();
     private boolean hasStarted;
+    private boolean lastRound =false;
+    private int countdown;
     private String gameID;
     private String gameName;
     private int playerMax;
@@ -35,7 +37,21 @@ public class Game {
     private final String TAG = "Game:";
     private DestinationCardList destinationCardList;
     //private int destDeckSize;
+    public boolean FinalCountDown(){
+        if(--countdown == 0){
+            return true;
+        }
+        return false;
+    }
 
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound, int number) {
+        this.lastRound = lastRound;
+        countdown = number;
+    }
 
     private RouteList unclaimedRouteList = new RouteList(true);
 
@@ -53,6 +69,9 @@ public class Game {
         if (route.checkIfPlayerCanClaim(this, route, player)){
             TrainCarList playerTrainCars = player.getTrainCarList();
             playerTrainCars.decrementCars(route.getDistance());
+
+
+
             player.discardResourceCardsToPlaceCars(route, this);
             for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
                 if (entry.getKey().equals(route)){

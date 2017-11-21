@@ -1,6 +1,7 @@
 package command;
 
 import ServerModel.ServerFacade;
+import ServerModel.ServerModel;
 import commandData.ClaimRouteCommandData;
 import result.CommandResult;
 
