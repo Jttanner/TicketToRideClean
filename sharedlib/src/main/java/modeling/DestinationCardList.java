@@ -114,7 +114,6 @@ public class DestinationCardList {
 
     /**
      * Takes the already initialized list of Destination Cards and draws 1 random card from the deck
-     * @param What's being passed in
      * @pre What has to be true
      * @post A random Destination Card from the deck.
      * @return DestinationCard

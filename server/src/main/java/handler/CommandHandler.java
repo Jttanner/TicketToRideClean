@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 
 import command.AddChatCommand;
 import command.ClaimDestinationCardCommand;
+import command.ClaimInitialDestinationCardCommand;
 import command.ClaimRouteCommand;
 import command.CreateGameCommand;
 import command.DrawDestinationCardCommand;
@@ -22,6 +23,7 @@ import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
@@ -101,7 +103,6 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     result = drawTrainCardCommand.execute();
                     break;
                 case "drawDestinationCards":
-                    //System.out.println("ITS RIGHT HERE AUSTIN!!!!");
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
                     DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
                     result = drawDestinationCardCommand.execute();
@@ -111,8 +112,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
                     result = claimDestinationCardCommand.execute();
                     break;
-                // drawTrainCardDeckCommand = new AddChatCommand(chatCommandData);
-                //addChatCommand.execute();
+                case "claimInitialDestinationCards":
+                    ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(reqData, ClaimInitialDestinationCardCommandData.class);
+                    ClaimInitialDestinationCardCommand claimInitialDestinationCardCommand = new ClaimInitialDestinationCardCommand(claimInitialDestinationCardCommandData);
+                    result = claimInitialDestinationCardCommand.execute();
+                    break;
                 case "claimRoute":
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);

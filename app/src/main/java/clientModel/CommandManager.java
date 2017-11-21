@@ -12,11 +12,13 @@ import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
 import clientCommands.EndGameCommand;
 import clientCommands.EndTurnCommandClient;
+import clientCommands.InitializeTurns;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.StartGameClient;
 import clientCommands.UpdateChatCommand;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
@@ -117,8 +119,9 @@ public class CommandManager {
             case "drawTrainCard":
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
             case "drawDestinationCards":
-                System.out.println("Maybe here!");
                 return new DrawDestinationCards((DrawDestinationCardCommandData) command);
+            case "claimInitialDestinationCards":
+                return new InitializeTurns((ClaimInitialDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);
             case "claimRoute":

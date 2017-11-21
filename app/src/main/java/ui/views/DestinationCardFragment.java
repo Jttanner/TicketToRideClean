@@ -158,8 +158,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                         //presenter.claimDestinationCards(game, player, cardsSelected);
                         presenter.claimDestinationCards(cardsSelected);
 
-
-                        //TODO: We need to be able to update the view here?
                         //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
                         //presenter.endTurn(game, player);

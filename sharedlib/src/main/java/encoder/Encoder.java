@@ -17,6 +17,7 @@ import java.util.List;
 
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
@@ -222,6 +223,9 @@ public class Encoder {
                             break;
                         case "claimDestinationCards":
                             command = gson.fromJson(object, ClaimDestinationCardCommandData.class);
+                            break;
+                        case "claimInitialDestinationCards":
+                            command = gson.fromJson(object, ClaimInitialDestinationCardCommandData.class);
                             break;
                         /*case "drawTrainCardDeck":
                             command = gson.fromJson(object, DrawTrainCardDeckCommandData.class);

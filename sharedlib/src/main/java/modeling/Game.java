@@ -36,6 +36,7 @@ public class Game {
     private ResourceCardList resourceCardList;
     private final String TAG = "Game:";
     private DestinationCardList destinationCardList;
+    private int playersHaveSelectedInitialDestCards;
     //private int destDeckSize;
     public boolean FinalCountDown(){
         if(--countdown == 0){
@@ -119,6 +120,7 @@ public class Game {
         //card deck created for the game
         destinationCardList = new DestinationCardList();
         resourceCardList = new ResourceCardList();
+        playersHaveSelectedInitialDestCards = 0;
     }
     /**
      * Constructs a new Game which has its resource cards initialized, given an unique game ID, and game has not started yet
@@ -438,5 +440,13 @@ public class Game {
 
     public void setDestinationCardList(DestinationCardList destinationCardList) {
         this.destinationCardList = destinationCardList;
+    }
+
+    public int getPlayersHaveSelectedInitialDestCards() {
+        return playersHaveSelectedInitialDestCards;
+    }
+
+    public void incrementPlayersHaveSelectedInitialDestCards() {
+        playersHaveSelectedInitialDestCards++;
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
 import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
@@ -42,7 +43,7 @@ public class StartGame extends GameState {
         String gameID = CModel.getInstance().getCurrGame().getGameID();
 
         CModel.getInstance().getUserPlayer().clearTemporaryHand();
-        ClaimDestinationCardCommandData data = new ClaimDestinationCardCommandData(gameID, playerName, cards);
+        ClaimInitialDestinationCardCommandData data = new ClaimInitialDestinationCardCommandData(gameID, playerName, cards);
         ServerProxy.getInstance().sendCommand(data);
         Log.d("DestCardPresenter", "claimDestinationCards");
 
