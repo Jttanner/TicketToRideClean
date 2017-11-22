@@ -120,7 +120,7 @@ public class CommandManager {
                 return new DrawTrainCard((DrawTrainCardCommandData) command);
             case "drawDestinationCards":
                 return new DrawDestinationCards((DrawDestinationCardCommandData) command);
-            case "initializeTurns":
+            case "claimInitialDestinationCards":
                 return new InitializeTurns((ClaimInitialDestinationCardCommandData) command);
             case "claimDestinationCards":
                 return new ClaimDestinationCards((ClaimDestinationCardCommandData) command);

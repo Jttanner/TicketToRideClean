@@ -18,6 +18,7 @@ public class StartGameClient implements ClientCommand {
         CModel cModel = CModel.getInstance();
         cModel.toggleGameHasStarted();
         cModel.setCurrGameState(new StartGame());
+        System.out.println("Start game has started");
         //StartGame startGame = new StartGame();
         //CModel.getInstance().setCurrGameState(startGame);
         //startGame.getDestCard();
