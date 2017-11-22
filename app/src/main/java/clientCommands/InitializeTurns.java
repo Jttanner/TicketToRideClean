@@ -33,7 +33,7 @@ public class InitializeTurns implements ClientCommand {
 
         CModel.getInstance().updateCurrGameHistoryList(this.toString(),CModel.getInstance().getCurrGame().getGameID());
 
-        if (cModel.getCurrGame().getPlayers().size() != cModel.getCurrGame().getPlayersHaveSelectedInitialDestCards()) {
+        //if (cModel.getCurrGame().getPlayers().size() != cModel.getCurrGame().getPlayersHaveSelectedInitialDestCards()) {
             for (int i = 0; i < cardsClaimed.size(); i++) {
                 if(cardsClaimed.get(i).isClaimed() == true) {
                     CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed.get(i));
@@ -42,8 +42,8 @@ public class InitializeTurns implements ClientCommand {
                 CModel.getInstance().updatePlayerStatsView();
             }
             cModel.getCurrGame().incrementPlayersHaveSelectedInitialDestCards();
-        }
-        else if (cModel.getCurrGame().getPlayers().size() != cModel.getCurrGame().getPlayersHaveSelectedInitialDestCards()) {
+        //}
+        if (cModel.getCurrGame().getPlayers().size() == cModel.getCurrGame().getPlayersHaveSelectedInitialDestCards()) {
             for (Player player : cModel.getCurrGame().getPlayers()) {
                 if (player.getUserName().equals(cModel.getUserPlayer().getUserName())) {
                     if (player.isMyTurn()) {
