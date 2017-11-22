@@ -48,7 +48,8 @@ public class InitializeTurns implements ClientCommand {
                 if (player.getUserName().equals(cModel.getUserPlayer().getUserName())) {
                     if (player.isMyTurn()) {
                         cModel.setCurrGameState(new MyTurn());
-                    } else {
+                    }
+                    else {
                         cModel.setCurrGameState(new NotMyTurn());
                     }
                 }

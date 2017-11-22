@@ -349,6 +349,7 @@ public class CModel extends Observable {
     }
 
     public GameState getCurrGameState() {
+        Log.d("CModel", "This is the current gameState:" + currGameState.toString());
         return currGameState;
     }
 
