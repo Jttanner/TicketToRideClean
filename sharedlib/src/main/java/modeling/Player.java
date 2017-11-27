@@ -220,6 +220,10 @@ public class Player implements Comparator<Player> {
         this.isMyTurn = !this.isMyTurn;
     }
 
+    public void setIsMyTurn(boolean isMyTurn){
+        this.isMyTurn = isMyTurn;
+    }
+
     public TrainCarList getTrainCarList() {
         return trainCarList;
     }

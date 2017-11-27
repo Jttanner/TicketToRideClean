@@ -161,7 +161,11 @@ public class Game {
         //if we are starting and the first player in the list hasnt had their switch for thier turn toggled yet
         if(this.hasStarted){
             setupStartingCards();//setup starting cards when game starts
-            players.get(0).toggleMyTurn();
+            players.get(0).setIsMyTurn(true);
+            for (int i = 1; i < players.size(); ++i){
+                players.get(i).setIsMyTurn(false);
+            }
+            //players.get(0).toggleMyTurn();
         }
     }
 

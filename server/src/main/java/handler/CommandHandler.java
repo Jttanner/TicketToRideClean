@@ -19,6 +19,7 @@ import command.DrawTrainCardCommand;
 import command.EndTurnCommandServer;
 import command.GetCmndListServer;
 import command.GetGameListCommand;
+import command.IncrementCommandIndexCommand;
 import command.JoinGameCommand;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
@@ -32,6 +33,7 @@ import commandData.DrawTrainCardCommandData;
 import commandData.EndTurnCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetCmndListDataToClient;
+import commandData.IncrementCommandIndexCommandData;
 import commandData.JoinGameCommandData;
 import commandData.StartGameCommandData;
 import encoder.Encoder;
@@ -126,6 +128,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     EndTurnCommandData data = gson.fromJson(reqData,EndTurnCommandData.class);
                     EndTurnCommandServer endTurnCommandServer = new EndTurnCommandServer(data);
                     endTurnCommandServer.execute();
+                    break;
+                case "incrementCommandIndex":
+                    IncrementCommandIndexCommandData incrementCommandIndexCommandData = gson.fromJson(reqData, IncrementCommandIndexCommandData.class);
+                    IncrementCommandIndexCommand incrementCommandIndexCommand = new IncrementCommandIndexCommand(incrementCommandIndexCommandData.getGameID(), incrementCommandIndexCommandData.getPlayerName());
+                    incrementCommandIndexCommand.execute();
                     break;
                 default:
                     break;

@@ -23,7 +23,9 @@ import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
+import commandData.IncrementCommandIndexCommandData;
 import modeling.Player;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 10/24/2017.
@@ -86,6 +88,8 @@ public class CommandManager {
                 //return the appropiate client command
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
+                    IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
+                    ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
                     CModel.getInstance().incrementUsersCommandIndex();
                     System.out.println("Executing: " + clientCommand.getClass());
                     clientCommand.execute();

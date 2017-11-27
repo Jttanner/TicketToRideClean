@@ -61,7 +61,7 @@ public class Route {
 
 
         List<ResourceCard> routeCostCardType = player.getResourceCards().get(route.getTrainColorNeeded());
-        if (route.getDistance() < routeCostCardType.size() + player.getResourceCards().get("Wild").size()){
+        if (route.getDistance() <= routeCostCardType.size() + player.getResourceCards().get("Wild").size()){
             return true;
         } else{
             return false;
