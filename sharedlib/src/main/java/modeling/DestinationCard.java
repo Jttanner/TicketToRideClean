@@ -19,7 +19,7 @@ public class DestinationCard {
     }
 
     public String getDestinationCardString(){
-        return first.getCityName() + " " + second.getCityName();
+        return first.getCityName() + " " + second.getCityName() + " " + points;
     }
 
     public boolean isClaimed() {

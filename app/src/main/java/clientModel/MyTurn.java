@@ -81,6 +81,7 @@ public class MyTurn extends GameState {
                 currRoute.getFirstCityName(), currRoute.getSecondCityName(), CModel.getInstance().getUserPlayer().getPlayerName(),
                 color, currRoute.getDistance(), isWild);
         ServerProxy.getInstance().sendCommand(claimRouteCommandData);
+        CModel.getInstance().setCurrGameState(new EndMyTurn());
         //endTurn();
     }
 }

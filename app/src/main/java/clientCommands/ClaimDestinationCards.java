@@ -38,7 +38,7 @@ public class ClaimDestinationCards implements ClientCommand {
         CModel.getInstance().updatePlayerStatsView();
 
 
-        CModel.getInstance().setCurrGameState(new EndMyTurn());
+        //CModel.getInstance().setCurrGameState(new EndMyTurn());
         //ends my turn
         CModel.getInstance().getCurrGameState().endTurn();
         //CModel.getInstance().updatePlayerStatsView();
