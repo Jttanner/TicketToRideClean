@@ -211,6 +211,11 @@ public class Game {
                 if (i == players.size() - 1){
                     players.get(0).toggleMyTurn();
                     name = players.get(0).getPlayerName();
+                    //TESTING PURPOSES
+                    if(players.size() == 1){
+                        players.get(0).toggleMyTurn();
+                        break;
+                    }
                 }
                 else {
                     players.get(i+1).toggleMyTurn();
@@ -218,6 +223,7 @@ public class Game {
                 }
                 //not their turn anymore
                 players.get(i).toggleMyTurn();
+                break;
             }
         }
         return name;
