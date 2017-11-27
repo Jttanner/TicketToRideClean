@@ -183,16 +183,16 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                         resourceCard1.setEnabled(false);
                         break;
                     case 1:
-                        resourceCard1.setEnabled(false);
+                        resourceCard2.setEnabled(false);
                         break;
                     case 2:
-                        resourceCard1.setEnabled(false);
+                        resourceCard3.setEnabled(false);
                         break;
                     case 3:
-                        resourceCard1.setEnabled(false);
+                        resourceCard4.setEnabled(false);
                         break;
                     case 4:
-                        resourceCard1.setEnabled(false);
+                        resourceCard5.setEnabled(false);
                         break;
                     default:
                         break;

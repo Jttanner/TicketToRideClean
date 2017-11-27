@@ -32,7 +32,7 @@ public class ServerProxy {
         ip = CModel.getInstance().getIPAddress();
         //if it is empty, use a hardcoded value
         if(ip.isEmpty()){
-            ipaddress = "10.4.144.93";
+            ipaddress = "10.24.70.216";
         }
         else{
             ipaddress = ip;

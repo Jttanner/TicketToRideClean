@@ -35,7 +35,9 @@ public class DrawResourceCardPresenter implements MVP_DrawResourceCard.DrawResou
                 else if(((String) arg).equals("CloseResourceFragment")) {
                     //if(myView != null) {
                         Log.d(TAG,"update: close");
-                        myView.get().close();
+                        if( myView.get() != null){
+                            myView.get().close();
+                        }
                         myView=null;
                     return;
                     //}

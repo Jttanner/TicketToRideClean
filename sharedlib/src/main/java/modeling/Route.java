@@ -41,7 +41,7 @@ public class Route {
     //only can claim double route if 4 or more players
     //one player cannot claim both routes of a double route
     public boolean checkIfPlayerCanClaim(Game game, Route route, Player player){
-        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
+        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
     }
 
     private void addResourceCardsForTesting(Player player){
@@ -68,8 +68,14 @@ public class Route {
         }
     }
 
-    private boolean canClaimDoubleRouteWithPlayerSize(Game game, Route route){
-        if (game.getPlayers().size() < 4 && route.isDouble){
+    private boolean canClaimDoubleRouteWithPlayerSize(Game game, Route route, Player player){
+        boolean oneIsClaimed = false;
+        for (Route claimedPlayerRoute : player.getRoutes()){
+            if (claimedPlayerRoute.equals(route)){
+                oneIsClaimed = true;
+            }
+        }
+        if (game.getPlayers().size() < 4 && route.isDouble && oneIsClaimed){
             return false;
         } else{
             return true;
