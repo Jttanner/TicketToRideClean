@@ -110,10 +110,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 }
             });
         }
-        else {
-            cards.remove(1);
-            cards.remove(2);
-        }
         if (mRoute3 != null) {
             mRoute3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,9 +122,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                     ;
                 }
             });
-        }
-        else {
-            cards.remove(2);
         }
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override

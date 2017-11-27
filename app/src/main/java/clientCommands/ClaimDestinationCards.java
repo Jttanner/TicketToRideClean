@@ -30,7 +30,7 @@ public class ClaimDestinationCards implements ClientCommand {
 
         CModel.getInstance().updateCurrGameHistoryList(this.toString(),CModel.getInstance().getCurrGame().getGameID());
         for (int i = 0; i < cardsClaimed.size(); i++) {
-            if(cardsClaimed.get(i).isClaimed()) {
+            if(cardsClaimed.get(i) != null && cardsClaimed.get(i).isClaimed()) {
                 CModel.getInstance().getCurrGame().getPlayer(playerName).addDestinationCard(cardsClaimed.get(i));
                 CModel.getInstance().getCurrGame().getDestinationCardList().removeDestinationCard(cardsClaimed.get(i));
             }
