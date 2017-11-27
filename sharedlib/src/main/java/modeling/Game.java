@@ -207,7 +207,6 @@ public class Game {
     public String advancePlayerTurn(){
         String name = "Game: Error, no name in advancePlayerTurn";
         for (int i = 0; i < players.size(); i++){
-            players.get(i).toggleMyTurn();
             if (players.get(i).isMyTurn()){
                 if (i == players.size() - 1){
                     players.get(0).toggleMyTurn();
@@ -218,6 +217,7 @@ public class Game {
                     name = players.get(i+1).getPlayerName();
                 }
                 //not their turn anymore
+                players.get(i).toggleMyTurn();
             }
         }
         return name;

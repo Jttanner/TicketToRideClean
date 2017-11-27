@@ -87,7 +87,7 @@ public class CommandManager {
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    Log.d(TAG,"CommandIndex: "+ CModel.getInstance().getUserPlayer().getCommandIndex());
+                    Log.d(TAG,"CommandIndex: " + CModel.getInstance().getUserPlayer().getCommandIndex());
                     Log.d(TAG,":Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
