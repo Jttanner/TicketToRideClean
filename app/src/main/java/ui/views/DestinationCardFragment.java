@@ -202,13 +202,22 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
             this.setCancelable(true);
             Toast.makeText(getActivity(), "No more Destination Cards left. Sad.", Toast.LENGTH_LONG).show();
         }
+        else if (destinationCards.get(1) == null) {
+            this.setCancelable(true);
+            mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+            mRoute1.setTextColor(Color.RED);
+        }
+        else if (destinationCards.get(2) == null) {
+            this.setCancelable(true);
+            mRoute1.setText(destinationCards.get(0).getDestinationCardString());
+            mRoute2.setText(destinationCards.get(1).getDestinationCardString());
+            mRoute1.setTextColor(Color.RED);
+            mRoute2.setTextColor(Color.RED);
+        }
         else {
             mRoute1.setText(destinationCards.get(0).getDestinationCardString());
             mRoute2.setText(destinationCards.get(1).getDestinationCardString());
             mRoute3.setText(destinationCards.get(2).getDestinationCardString());
-            //mRoute1.setText("Hi my name is Kwan");
-            //mRoute2.setText("What is your name?");
-            //mRoute3.setText("Nice to meet you!");
             mRoute1.setTextColor(Color.RED);
             mRoute2.setTextColor(Color.RED);
             mRoute3.setTextColor(Color.RED);
