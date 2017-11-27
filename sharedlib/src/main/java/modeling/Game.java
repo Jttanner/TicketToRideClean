@@ -1,6 +1,5 @@
 package modeling;
 
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -209,7 +208,6 @@ public class Game {
         String name = "Game: Error, no name in advancePlayerTurn";
         for (int i = 0; i < players.size(); i++){
             if (players.get(i).isMyTurn()){
-                players.get(i).toggleMyTurn();
                 if (i == players.size() - 1){
                     players.get(0).toggleMyTurn();
                     name = players.get(0).getPlayerName();
@@ -218,6 +216,8 @@ public class Game {
                     players.get(i+1).toggleMyTurn();
                     name = players.get(i+1).getPlayerName();
                 }
+                //not their turn anymore
+                players.get(i).toggleMyTurn();
             }
         }
         return name;
