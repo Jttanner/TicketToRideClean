@@ -1,12 +1,7 @@
 package clientCommands;
 
-import java.util.List;
-
 import clientModel.CModel;
-import clientModel.MyTurn;
-import clientModel.NotMyTurn;
 import clientModel.StartGame;
-import modeling.Player;
 
 /**
  * Created by tyler on 10/24/2017.
@@ -19,22 +14,5 @@ public class StartGameClient implements ClientCommand {
         cModel.toggleGameHasStarted();
         cModel.setCurrGameState(new StartGame());
         System.out.println("Start game has started");
-        //StartGame startGame = new StartGame();
-        //CModel.getInstance().setCurrGameState(startGame);
-        //startGame.getDestCard();
-        //startGame.claimDestCard();
-
-        /*
-        for(Player player : cModel.getCurrGame().getPlayers()){
-
-           if(player.getUserName().equals(cModel.getUserPlayer().getUserName())){
-                if(player.isMyTurn()){
-                    cModel.setCurrGameState(new MyTurn());
-                }
-                else{
-                    cModel.setCurrGameState(new NotMyTurn());
-                }
-           }
-        }*/
     }
 }
