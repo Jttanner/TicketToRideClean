@@ -4,23 +4,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
-import modeling.City;
-import modeling.CityList;
 import modeling.DestinationCard;
-import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
-import modeling.History;
 import modeling.Player;
-import modeling.ResourceCard;
 import modeling.Route;
-import modeling.RouteList;
-import modeling.TrainCarList;
 import modeling.User;
 import poller.Poller;
 
@@ -111,7 +103,6 @@ public class CModel extends Observable {
     }
 
     public void updatePlayerStatsView () {
-        Game game = currGame;
         setChanged();
         notifyObservers(currGame);
     }
@@ -355,6 +346,8 @@ public class CModel extends Observable {
 
     public void setCurrGameState(GameState currGameState) {
         this.currGameState = currGameState;
+        Log.d(TAG,"Curr gameState: " + currGameState.getClass().getName());
+        System.out.println("Curr gameState: " + currGameState.getClass().getName());
         setChanged();
         notifyObservers(this.currGameState);
     }
