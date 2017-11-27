@@ -22,6 +22,10 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "PlayerViewHolder";
     private TextView mPlayerInfo;
 
+    public TextView getmPlayerInfo(){
+        return mPlayerInfo;
+    }
+
     public PlayerViewHolder(LayoutInflater inflater, ViewGroup parent) {
         super(inflater.inflate(R.layout.player_list_view_holder, parent, false));
         mPlayerInfo = (TextView) itemView.findViewById(R.id.player_view);
@@ -35,6 +39,7 @@ public class PlayerViewHolder extends RecyclerView.ViewHolder {
         mPlayerInfo.setTextColor(row.getPlayerColor());
         //Set background if it is the players turn
         setBorder(row);
+
     }
 
     private void setBorder(PlayerColumn row) {
