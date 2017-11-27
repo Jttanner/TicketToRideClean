@@ -63,7 +63,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
 
         View v = inflater.inflate(R.layout.fragment_destinationcard, container, false);
 
-        this.setCancelable(false);
+        this.setCancelable(true);
         setUp(v);
         Log.d(TAG, "Returning View and exiting the method");
         return v;
@@ -197,7 +197,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
 
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
-
+        this.setCancelable(false);
         if (destinationCards.get(0) == null) {
             this.setCancelable(true);
             Toast.makeText(getActivity(), "No more Destination Cards left. Sad.", Toast.LENGTH_LONG).show();
