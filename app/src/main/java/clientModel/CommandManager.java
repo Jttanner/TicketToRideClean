@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import clientCommands.ClientCommand;
 import clientCommands.ClaimDestinationCards;
+import clientCommands.ClientCommand;
 import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
 import clientCommands.EndGameCommand;
@@ -83,11 +83,12 @@ public class CommandManager {
         //if there is anything to execute, do so
         if (commandList.size() > 0) {
             for (int i = commandIndex; i < commandList.size(); i++) {
-                //return the appropiate client command
+                //return the appropriate client command
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
                     CModel.getInstance().incrementUsersCommandIndex();
-                    System.out.println("Executing: " + clientCommand.getClass());
+                    Log.d(TAG,"CommandIndex: "+ CModel.getInstance().getUserPlayer().getCommandIndex());
+                    Log.d(TAG,":Executing: " + clientCommand.getClass());
                     clientCommand.execute();
 
                 }
