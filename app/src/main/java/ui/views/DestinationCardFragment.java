@@ -110,6 +110,10 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 }
             });
         }
+        else {
+            cards.remove(1);
+            cards.remove(2);
+        }
         if (mRoute3 != null) {
             mRoute3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +126,9 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                     ;
                 }
             });
+        }
+        else {
+            cards.remove(2);
         }
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,16 +212,16 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
             Toast.makeText(getActivity(), "No more Destination Cards left. Sad.", Toast.LENGTH_LONG).show();
         }
         else if (destinationCards.get(1) == null) {
-            this.setCancelable(true);
             mRoute1.setText(destinationCards.get(0).getDestinationCardString());
             mRoute1.setTextColor(Color.RED);
+            wireUp(destinationCards);
         }
         else if (destinationCards.get(2) == null) {
-            this.setCancelable(true);
             mRoute1.setText(destinationCards.get(0).getDestinationCardString());
             mRoute2.setText(destinationCards.get(1).getDestinationCardString());
             mRoute1.setTextColor(Color.RED);
             mRoute2.setTextColor(Color.RED);
+            wireUp(destinationCards);
         }
         else {
             mRoute1.setText(destinationCards.get(0).getDestinationCardString());
@@ -223,9 +230,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
             mRoute1.setTextColor(Color.RED);
             mRoute2.setTextColor(Color.RED);
             mRoute3.setTextColor(Color.RED);
-
-            //Toast.makeText(getActivity(), "Picking Destination Cards", Toast.LENGTH_LONG).show();
-
             wireUp(destinationCards);
         }
     }
