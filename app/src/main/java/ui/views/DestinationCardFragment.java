@@ -84,43 +84,45 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
 
 
     void wireUp(final List<DestinationCard> cards){
-        mRoute1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mRoute1.getCurrentTextColor() == Color.RED)
-                {
-                    mRoute1.setTextColor(Color.GREEN);
+        if (mRoute1 != null) {
+            mRoute1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mRoute1.getCurrentTextColor() == Color.RED) {
+                        mRoute1.setTextColor(Color.GREEN);
+                    } else if (mRoute1.getCurrentTextColor() == Color.GREEN) {
+                        mRoute1.setTextColor(Color.RED);
+                    }
+                    ;
                 }
-                else if (mRoute1.getCurrentTextColor() == Color.GREEN)
-                {
-                    mRoute1.setTextColor(Color.RED);
-                };}
-        });
-        mRoute2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mRoute2.getCurrentTextColor() == Color.RED)
-                {
-                    mRoute2.setTextColor(Color.GREEN);
+            });
+        }
+        if (mRoute2 != null) {
+            mRoute2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mRoute2.getCurrentTextColor() == Color.RED) {
+                        mRoute2.setTextColor(Color.GREEN);
+                    } else if (mRoute2.getCurrentTextColor() == Color.GREEN) {
+                        mRoute2.setTextColor(Color.RED);
+                    }
+                    ;
                 }
-                else if (mRoute2.getCurrentTextColor() == Color.GREEN)
-                {
-                    mRoute2.setTextColor(Color.RED);
-                };}
-        });
-        mRoute3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mRoute3.getCurrentTextColor() == Color.RED)
-                {
-                    mRoute3.setTextColor(Color.GREEN);
+            });
+        }
+        if (mRoute3 != null) {
+            mRoute3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mRoute3.getCurrentTextColor() == Color.RED) {
+                        mRoute3.setTextColor(Color.GREEN);
+                    } else if (mRoute3.getCurrentTextColor() == Color.GREEN) {
+                        mRoute3.setTextColor(Color.RED);
+                    }
+                    ;
                 }
-                else if (mRoute3.getCurrentTextColor() == Color.GREEN)
-                {
-                    mRoute3.setTextColor(Color.RED);
-                };}
-        });
-
+            });
+        }
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,28 +130,28 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 int claimed = 0;
                 List<DestinationCard> cardsSelected = new ArrayList();
 
-                if(mRoute1.getCurrentTextColor() == Color.GREEN) {
+                if(mRoute1 != null && mRoute1.getCurrentTextColor() == Color.GREEN) {
                     cardsSelected.add(cards.get(0));
                     cards.get(0).setClaimed(true);
                     claimed++;
                 }
-                else if (mRoute1.getCurrentTextColor() == Color.RED) {
+                else if (mRoute1 != null && mRoute1.getCurrentTextColor() == Color.RED) {
                     cardsSelected.add(cards.get(0));
                 }
-                if(mRoute2.getCurrentTextColor() == Color.GREEN) {
+                if(mRoute2 != null && mRoute2.getCurrentTextColor() == Color.GREEN) {
                     cardsSelected.add(cards.get(1));
                     cards.get(1).setClaimed(true);
                     claimed++;
                 }
-                else if (mRoute2.getCurrentTextColor() == Color.RED) {
+                else if (mRoute2 != null && mRoute2.getCurrentTextColor() == Color.RED) {
                     cardsSelected.add(cards.get(1));
                 }
-                if(mRoute3.getCurrentTextColor() == Color.GREEN) {
+                if(mRoute3 != null && mRoute3.getCurrentTextColor() == Color.GREEN) {
                     cardsSelected.add(cards.get(2));
                     cards.get(2).setClaimed(true);
                     claimed++;
                 }
-                else if (mRoute3.getCurrentTextColor() == Color.RED) {
+                else if (mRoute3 != null && mRoute3.getCurrentTextColor() == Color.RED) {
                     cardsSelected.add(cards.get(2));
                 }
                 boolean gameStarted = presenter.hasGameJustStarted(game, player);
