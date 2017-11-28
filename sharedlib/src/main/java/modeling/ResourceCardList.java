@@ -28,7 +28,7 @@ public class ResourceCardList {
         List<ResourceCard> resourceCards;
         for (String string : colorList) {
             resourceCards = new ArrayList<>();
-            for (int i = 0; i < 12; i++) { //12
+            for (int i = 0; i < 1; i++) { //12
             //for (int i = 0; i < 2; i++) {
                 ResourceCard card = new ResourceCard(string);
                 //add cards to list
@@ -39,7 +39,7 @@ public class ResourceCardList {
         }
         //add the wild cards
         resourceCards = new ArrayList<>();
-        for (int i = 0; i < 14; i++) { //14
+        for (int i = 0; i < 8; i++) { //14
             ResourceCard card = new ResourceCard("Wild");
             resourceCards.add(card);
             availableCards.add(card);
@@ -58,7 +58,7 @@ public class ResourceCardList {
         return Collections.unmodifiableList(availableCards);
     }
     //Player draws a card
-    public ResourceCard drawCard(String cardID){
+    public ResourceCard drawCard(String cardID, boolean serverSide){
         if(availableCards.size() > 0) {
             for(ResourceCard card: availableCards) {
                 if(card.getCardID().equals(cardID)){
@@ -66,9 +66,45 @@ public class ResourceCardList {
                     return card;
                 }
             }
+            if (serverSide){
+                while (topCardsHasTooManyWilds() && !enoughNonWild()){
+                    Collections.shuffle(availableCards);
+                }
+            }
+
             String hi = "";
         }
         return null;
+    }
+
+    private boolean enoughNonWild(){
+        int nonWild = 0;
+        for (ResourceCard card : availableCards){
+            if (!card.getMyColor().equals("Wild")){
+                ++nonWild;
+            }
+        }
+        if (nonWild >= 3){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+
+    private boolean topCardsHasTooManyWilds(){
+        int wildCount = 0;
+        int loopIndex = availableCards.size() > 5 ? 5 : availableCards.size();
+        for (int i = 0; i < loopIndex; ++i){
+            if (availableCards.get(i).getMyColor().equals("Wild")){
+                wildCount++;
+            }
+        }
+        if(wildCount >= 3){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //When a player claims a route, we need to put the used cards into the discard pile
@@ -113,5 +149,9 @@ public class ResourceCardList {
     //Ghetto fix so that we don't initialize user multiple times. not too sure why that is happening
     public void incrementCount() {
         count++;
+    }
+
+    public void setAvailableCards(List<ResourceCard> availableCards) {
+        this.availableCards = availableCards;
     }
 }

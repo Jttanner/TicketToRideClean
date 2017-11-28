@@ -1,5 +1,7 @@
 package commandData;
 
+import java.util.List;
+
 import modeling.Game;
 import modeling.ResourceCard;
 
@@ -12,6 +14,7 @@ public class DrawTrainCardCommandData extends Command {
     private String playerName;
     private String gameID;
     private ResourceCard resourceCard;
+    private List<ResourceCard> cardList;
 
     //Constructors
     public DrawTrainCardCommandData(String playerName, String gameID, ResourceCard resourceCard) {
@@ -41,5 +44,13 @@ public class DrawTrainCardCommandData extends Command {
     }
     public void setResourceCard(ResourceCard resourceCard) {
         this.resourceCard = resourceCard;
+    }
+
+    public List<ResourceCard> getCardList() {
+        return cardList;
+    }
+
+    public void setCardList(List<ResourceCard> cardList) {
+        this.cardList = cardList;
     }
 }

@@ -415,6 +415,8 @@ public class Game {
     public ResourceCardList getResourceCardList() {
         return resourceCardList;
     }
+
+
     /**
      * Returns the List of String
      *

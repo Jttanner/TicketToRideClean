@@ -152,12 +152,12 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             //Dont want out of bounds
             if(i < availableCardSize) {
                 card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
-                if(card.getMyColor().equals("Wild")) {
-                    System.out.println("DrawResourceFragment: WILD IF");
-                    wildCount++;
-                }
-                System.out.println("DrawResourceFragment: PRE THREE WILD");
-                card = threeWildFactor(card);
+//                if(card.getMyColor().equals("Wild")) {
+//                    System.out.println("DrawResourceFragment: WILD IF");
+//                    wildCount++;
+//                }
+//                System.out.println("DrawResourceFragment: PRE THREE WILD");
+//                card = threeWildFactor(card);
             }
             System.out.println("DrawResourceFragment: POST THREE WILD");
 

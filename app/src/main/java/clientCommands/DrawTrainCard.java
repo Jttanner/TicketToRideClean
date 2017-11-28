@@ -1,5 +1,7 @@
 package clientCommands;
 
+import java.util.List;
+
 import clientModel.CModel;
 import clientModel.EndMyTurn;
 import commandData.DrawTrainCardCommandData;
@@ -14,10 +16,12 @@ public class DrawTrainCard implements ClientCommand {
     private String playerName;
     private String gameID;
     private ResourceCard resourceCard;
+    private List<ResourceCard> resourceCardList;
     public DrawTrainCard(DrawTrainCardCommandData data) {
         this.playerName = data.getPlayerName();
         this.gameID = data.getGameID();
         this.resourceCard = data.getResourceCard();
+        this.resourceCardList = data.getCardList();
     }
     @Override
     public void execute() {
@@ -26,7 +30,10 @@ public class DrawTrainCard implements ClientCommand {
         CModel.getInstance().updateCurrGameHistoryList(this.toString(), gameID);
 
         //Add card to player on Client Side and deletes that card from the deck
-        currentGame.getPlayer(playerName).addResourceCard(currentGame.getResourceCardList().drawCard(resourceCard.getCardID()));
+        currentGame.getPlayer(playerName).addResourceCard(currentGame.getResourceCardList().drawCard(resourceCard.getCardID(), false));
+
+        CModel.getInstance().getCurrGame().getResourceCardList().setAvailableCards(resourceCardList);
+
         CModel.getInstance().updatePlayerStatsView();
         //Change the face up card on Client Side
         CModel.getInstance().upDateFaceUpPile();
