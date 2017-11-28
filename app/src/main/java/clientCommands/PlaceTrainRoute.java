@@ -23,19 +23,19 @@ public class PlaceTrainRoute implements ClientCommand {
         startCity = data.getStartCity();
         endCity = data.getEndCity();
         gameID = data.getGameID();
-        routeColor = data.getRouteColor();
-        //routeColor = data.isWild() ? "Wild" : data.getRouteColor();
-        isWild = data.isWild();
+        //routeColor = data.getRouteColor();
+        routeColor = data.isWild() ? "Wild" : data.getRouteColor();
+        //isWild = data.isWild();
     }
     @Override
     public void execute() {
         RouteList routeList = CModel.getInstance().getCurrGame().getUnclaimedRouteList();
-        Route claimedRoute;
-        if (isWild){
-            claimedRoute = routeList.getAvailableRoute(startCity, endCity, "Wild");
-        } else{
-            claimedRoute = routeList.getAvailableRoute(startCity, endCity, routeColor);
-        }
+        Route claimedRoute = routeList.getAvailableRoute(startCity, endCity, routeColor);
+        //if (isWild){
+            //claimedRoute = routeList.getAvailableRoute(startCity, endCity, "Wild");
+        //} else{
+            //claimedRoute
+        //}
 
         CModel.getInstance().updateRoutes(CModel.getInstance().getCurrGame(), claimedRoute, CModel.getInstance().getCurrGame().getPlayer(playerName));
         //Update the Game History

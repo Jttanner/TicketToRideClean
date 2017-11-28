@@ -96,6 +96,7 @@ public class Player implements Comparator<Player> {
             if (correctColorResourceCard.size() > 0){
                 spentCard = correctColorResourceCard.remove(0);
             } else{
+                if (wildCardList.size() == 0) return; //TEMPORARY FIX
                 spentCard = wildCardList.remove(0);
             }
             discardedCards.add(spentCard);

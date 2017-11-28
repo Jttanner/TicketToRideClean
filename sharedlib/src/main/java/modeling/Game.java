@@ -70,11 +70,18 @@ public class Game {
             TrainCarList playerTrainCars = player.getTrainCarList();
             playerTrainCars.decrementCars(route.getDistance());
             player.addPoints(route.getPointValue());
+
+            //ORDER MATTERS.  REFACTOR IF WE DON'T WANT IT TO
+            player.discardResourceCardsToPlaceCars(route, this);
+
+            if (isWild){
+                route.setTrainColorNeeded("Wild");
+            }
             player.addRoute(route);
 
 
 
-            player.discardResourceCardsToPlaceCars(route, this);
+
             for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
                 if (entry.getKey().equals(route)){
                     route.setFirstOfDouble(false);
