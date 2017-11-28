@@ -38,7 +38,7 @@ public class Game {
     private int playersHaveSelectedInitialDestCards;
     //private int destDeckSize;
     public boolean FinalCountDown(){
-        if(--countdown <=0){
+        if(countdown-- < 0){
             return true;
         }
         return false;
