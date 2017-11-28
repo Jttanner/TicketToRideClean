@@ -279,8 +279,8 @@ public class CModel extends Observable {
         currGame.claimAvailableRoute(route, player, isWild);
         //player.getTrainCarList().getNumOfCars()
 
-        player.addRoute(route);
-        player.addPoints(route.getPointValue());
+        //player.addRoute(route);
+        //player.addPoints(route.getPointValue());
 
         setChanged();
         notifyObservers(currGame);

@@ -88,8 +88,8 @@ public class CommandManager {
                 //return the appropriate client command
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
-                    IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
-                    ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
+                   // IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
+                    //ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
                     CModel.getInstance().incrementUsersCommandIndex();
                     Log.d(TAG,"CommandIndex: " + CModel.getInstance().getUserPlayer().getCommandIndex());
                     Log.d(TAG,":Executing: " + clientCommand.getClass());

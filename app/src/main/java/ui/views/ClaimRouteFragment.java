@@ -57,6 +57,8 @@ public class ClaimRouteFragment extends android.support.v4.app.DialogFragment im
 
         View v =  inflater.inflate(R.layout.fragment_claim_route, container, false);
 
+        if (CModel.getInstance().getCurrGame() == null) return v;
+
         getDialog().show();
         getDialog().getWindow().setLayout(1000,1000);
 
