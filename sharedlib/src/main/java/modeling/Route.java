@@ -54,7 +54,7 @@ public class Route {
     }
 
     private boolean checkIfHasEnoughCards(Route route, Player player){
-        if (player.getTrainCarList().getNumOfCars() < route.getDistance()){
+        if (player.getTrainCarList().getNumOfCars() > route.getDistance()){
             return true;
         } else{
             return false;
