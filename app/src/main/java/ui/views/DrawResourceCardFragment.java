@@ -160,23 +160,18 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             switch (i) {
                 case 0:
                     cardID = R.id.resourceCard1;
-                    //resourceCard1.setClickable(true);
                     break;
                 case 1:
                     cardID = R.id.resourceCard2;
-                    //resourceCard2.setClickable(true);
                     break;
                 case 2:
                     cardID = R.id.resourceCard3;
-                    //resourceCard3.setClickable(true);
                     break;
                 case 3:
                     cardID = R.id.resourceCard4;
-                    //resourceCard4.setClickable(true);
                     break;
                 case 4:
                     cardID = R.id.resourceCard5;
-                    //resourceCard5.setClickable(true);
                     break;
                 default:
                     break;
@@ -206,14 +201,9 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 resourceCardDeck.setClickable(false);
             } else {
                 ((ImageButton) v.findViewById(cardID)).setImageResource(getResourceCardColorByID(card.getMyColor()));
-                resourceCardDeck.setClickable(true);
             }
         }
-//        if (availableCardSize <= 5) {
-//            resourceCardDeck.setClickable(false);
-//        } else {
-//            resourceCardDeck.setClickable(true);
-//        }
+
         resourceCardDeck.setImageResource(R.drawable.backcard);
         resourceCardCount.setText("Resource Card Remaining: " + CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size());
     }
