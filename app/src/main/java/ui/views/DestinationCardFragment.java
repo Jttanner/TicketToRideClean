@@ -180,6 +180,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
     @Override
     public void giveChosenCards(List<DestinationCard> destinationCards) {
         this.setCancelable(false);
+        System.out.println("This is how many destination cards are coming in: " + destinationCards.size());
         if (destinationCards.get(0) == null) {
             this.setCancelable(true);
             Toast.makeText(getActivity(), "No more Destination Cards left. Sad.", Toast.LENGTH_LONG).show();

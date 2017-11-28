@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import MVP_coms_classes.MVP_TurnStartOption;
 import clientModel.CModel;
 import presenters.TurnStartOptionPresenter;
@@ -54,6 +56,7 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
             @Override
             public void onClick(View v) {
                 ((MapActivity)getActivity()).DestinationCardOption();
+                Toast.makeText(getActivity(), "Please select at least 1 destination card", Toast.LENGTH_LONG).show();
                 getDialog().cancel();
 
             }
@@ -62,6 +65,7 @@ public class TurnStartOptionFragment extends DialogFragment implements MVP_TurnS
             @Override
             public void onClick(View v) {
                 ((MapActivity)getActivity()).ClaimRouteOption();
+                Toast.makeText(getActivity(), "Please select a route to claim", Toast.LENGTH_LONG).show();
                 getDialog().cancel();
 
             }

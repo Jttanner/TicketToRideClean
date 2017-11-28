@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,6 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
                 FragmentManager fm = getSupportFragmentManager();
                 TurnStartOptionFragment fragment = new TurnStartOptionFragment();
                 fragment.show(fm, "start");
-
                 //Temporary Set State to MyTurn
                 //CModel.getInstance().setCurrGameState(new MyTurn());
             }
