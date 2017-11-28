@@ -31,6 +31,8 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     private TextView resourceCardCount;
     private MVP_DrawResourceCard.DrawResourceCardPresOps myPresenter;
     private View v;
+    int wildCount = 0;
+    int deckSize = 0;
     public DrawResourceCardFragment() {
 
     }
@@ -142,7 +144,8 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     */
     public void displayResourceCards(View v) {
         int availableCardSize = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size();
-        int wildCount = 0;
+        wildCount = 0;
+        deckSize = availableCardSize;
         for (int i = 0; i < 5; ++i) {
             //ButtonsOn();
             ResourceCard card = null;
@@ -150,11 +153,13 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             if(i < availableCardSize) {
                 card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(i);
                 if(card.getMyColor().equals("Wild")) {
+                    System.out.println("DrawResourceFragment: WILD IF");
                     wildCount++;
                 }
-                card = threeWildFactor(availableCardSize, wildCount, card);
+                System.out.println("DrawResourceFragment: PRE THREE WILD");
+                card = threeWildFactor(card);
             }
-
+            System.out.println("DrawResourceFragment: POST THREE WILD");
 
             int cardID = 0;
             switch (i) {
@@ -226,21 +231,28 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                 return R.drawable.redtrain;
             case "orange":
                 return R.drawable.orangetrain;
-            default:
+            case "wild":
                 return R.drawable.wildtrain;
+            default:
+                return R.drawable.red;
         }
     }
 
-    public ResourceCard threeWildFactor(int deckSize, int wildCount, ResourceCard card){
-
-        while(wildCount >= 3 && deckSize > 2) {
+    public ResourceCard threeWildFactor(ResourceCard card){
+        System.out.println("DrawResourceFragment: IN THREE WILD");
+        while(wildCount >= 3 && deckSize >= 1) {
+            System.out.println("DrawResourceFragment: WHILE THREE WILD");
             deckSize--;
             card = CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().get(deckSize);
-            if(!(card.getMyColor().equals("Wild"))){
+            if(card.getMyColor().equals("Wild")){
+
+            }
+            else {
+                System.out.println("DrawResourceFragment: IF THREE WILD");
                 wildCount--;
             }
         }
-
+        System.out.println("DrawResourceFragment: RETURN THREE WILD");
         return card;
     }
     @Override
