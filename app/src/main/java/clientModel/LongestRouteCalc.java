@@ -179,6 +179,7 @@ public class LongestRouteCalc {
             //if not visited
             if (!each.isVisited() ){
                 //if true pass along the true statement
+                //also just a note but simplifying the if statement below will cause the code to not work
                 if (each.getFirstCityName().equals(city2.getCityName())
                         || each.getSecondCityName().equals(city2.getCityName())) {
                     isFound = true;
