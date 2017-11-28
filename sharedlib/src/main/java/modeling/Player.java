@@ -24,9 +24,7 @@ public class Player implements Comparator<Player> {
     private List<Route> routes = new ArrayList<>();
     private int points;
     private List<DestinationCard> temporaryHand = new ArrayList();
-    private int faceUpDrawn;
-    private int deckDrawn;
-    private int wildDrawn;
+
 
     /**Where in the Commadlist we are for this player*/
     private int commandIndex;

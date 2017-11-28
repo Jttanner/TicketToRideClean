@@ -23,7 +23,6 @@ import poller.Poller;
 public class CModel extends Observable {
     private static final String TAG = "CModel";
     private static CModel ourInstance = new CModel();
-
     public static CModel getInstance() {
         return ourInstance;
     }
@@ -101,7 +100,6 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers("UpdateFaceUpView");
     }
-
     public void updatePlayerStatsView () {
         setChanged();
         notifyObservers(currGame);

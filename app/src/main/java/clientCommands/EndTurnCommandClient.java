@@ -18,7 +18,8 @@ public class EndTurnCommandClient implements ClientCommand {
     @Override
     public void execute() {
         //Once one players turn ends, see if I am the next player through advance player turn.
-        if(CModel.getInstance().getCurrGame().advancePlayerTurn().equals(CModel.getInstance().getMyUser().getUserName())) {
+        String nextPlayer = CModel.getInstance().getCurrGame().advancePlayerTurn();
+        if(nextPlayer.equals(CModel.getInstance().getMyUser().getUserName())) {
             CModel.getInstance().setCurrGameState(new MyTurn());
         }
         else {
@@ -26,5 +27,6 @@ public class EndTurnCommandClient implements ClientCommand {
             CModel.getInstance().setCurrGameState(new NotMyTurn());
         }
         CModel.getInstance().updatePlayerStatsView();
+        CModel.getInstance().showCurrentPlayer(nextPlayer);
     }
 }
