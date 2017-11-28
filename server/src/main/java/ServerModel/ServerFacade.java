@@ -144,7 +144,7 @@ public class ServerFacade {
         Player currPlayer = currGame.getPlayer(data.getPlayerID());
         //currGame.getDestinationCardList().distributeUsedDestinationCards(data);
         List<DestinationCard> claimedCards = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < data.getClaimDestinationCards().size(); i++) {
             boolean isClaimed = data.getClaimDestinationCards().get(i).isClaimed();
             if (isClaimed) {
                 claimedCards.add(data.getClaimDestinationCards().get(i));
