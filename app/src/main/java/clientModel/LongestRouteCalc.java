@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import modeling.City;
+import modeling.DestinationCard;
 import modeling.Player;
 import modeling.Route;
 
@@ -142,5 +143,39 @@ public class LongestRouteCalc {
 
     private void setRouteList(List<Route> routeList) {
         this.routeList = routeList;
+    }
+
+    public boolean destinationCardComplete(DestinationCard card, List<Route> list){
+        City city1 = card.getFirst();
+        City city2 = card.getSecond();
+        //boolean flag = false;
+        List<Route> startingRoute = new ArrayList<>();
+        for(Route route: list){
+            if(city1.getCityName().equals(route.getFirstCityName())
+                    || city1.getCityName().equals(route.getSecondCityName())
+                    || city2.getCityName().equals(route.getFirstCityName())
+                    || city2.getCityName().equals(route.getSecondCityName())){
+                startingRoute.add(route);
+            }
+        }
+        for(Route route : startingRoute)
+        {
+            if(recursion(route, city2))
+                return true;
+        }
+        return false;
+
+    }
+    private boolean recursion(Route route, City city2){
+        List<Route> nextOnes = GetNextRoutes(route);
+        for(Route each: nextOnes){
+            if(route.getFirstCityName().equals(city2.getCityName())
+                    ||each.getSecondCityName().equals(city2.getCityName()))
+                return true;
+            else
+                return recursion(each,city2);
+        }
+
+        return false;
     }
 }

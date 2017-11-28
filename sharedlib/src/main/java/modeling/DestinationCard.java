@@ -12,6 +12,18 @@ public class DestinationCard {
     private boolean claimed = false;
 
 
+    public City getFirst() {
+        return first;
+    }
+
+    public City getSecond() {
+        return second;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
     public DestinationCard(City first, City second, int points){
         this.first = first;
         this.second = second;

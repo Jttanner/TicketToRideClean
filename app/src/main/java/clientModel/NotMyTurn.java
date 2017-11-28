@@ -1,10 +1,14 @@
 package clientModel;
 
+import android.util.Log;
+
 import java.util.List;
 
+import commandData.ClaimDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.ResourceCard;
 import modeling.Route;
+import servercomms.ServerProxy;
 
 /**
  * Created by tyler on 11/9/2017.
