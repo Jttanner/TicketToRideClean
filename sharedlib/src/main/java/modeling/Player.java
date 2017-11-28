@@ -25,6 +25,9 @@ public class Player implements Comparator<Player> {
     private int points;
     private List<DestinationCard> temporaryHand = new ArrayList();
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     /**Where in the Commadlist we are for this player*/
     private int commandIndex;
