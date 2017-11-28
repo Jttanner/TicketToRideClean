@@ -44,6 +44,13 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
 
         setUp(v);
         onClickers();
+        String test = CModel.getInstance().getCurrGameState().toString();
+        if(test.equals("class clientModel.MyTurn") || test.equals("class clientModel.OneCardDrawnState")) {
+            ButtonsOn();
+        }
+        else {
+            ButtonsOff();
+        }
         displayResourceCards(v);
 
         return v;
@@ -59,13 +66,6 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
         resourceCard5 = (ImageButton) v.findViewById(R.id.resourceCard5);
         resourceCardDeck = (ImageButton) v.findViewById(R.id.resourceCardDeck);
         resourceCardCount = (TextView) v.findViewById(R.id.resourceCardCount);
-        String test = CModel.getInstance().getCurrGameState().toString();
-        if(test.equals("class clientModel.MyTurn") || test.equals("class clientModel.OneCardDrawnState")) {
-            ButtonsOn();
-        }
-        else {
-            ButtonsOff();
-        }
     }
     public void onClickers() {
         resourceCard1.setOnClickListener(new View.OnClickListener() {
@@ -160,23 +160,23 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
             switch (i) {
                 case 0:
                     cardID = R.id.resourceCard1;
-                    resourceCard1.setClickable(true);
+                    //resourceCard1.setClickable(true);
                     break;
                 case 1:
                     cardID = R.id.resourceCard2;
-                    resourceCard2.setClickable(true);
+                    //resourceCard2.setClickable(true);
                     break;
                 case 2:
                     cardID = R.id.resourceCard3;
-                    resourceCard3.setClickable(true);
+                    //resourceCard3.setClickable(true);
                     break;
                 case 3:
                     cardID = R.id.resourceCard4;
-                    resourceCard4.setClickable(true);
+                    //resourceCard4.setClickable(true);
                     break;
                 case 4:
                     cardID = R.id.resourceCard5;
-                    resourceCard5.setClickable(true);
+                    //resourceCard5.setClickable(true);
                     break;
                 default:
                     break;
@@ -203,15 +203,17 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
                     default:
                         break;
                 }
+                resourceCardDeck.setClickable(false);
             } else {
                 ((ImageButton) v.findViewById(cardID)).setImageResource(getResourceCardColorByID(card.getMyColor()));
+                resourceCardDeck.setClickable(true);
             }
         }
-        if (availableCardSize <= 5) {
-            resourceCardDeck.setClickable(false);
-        } else {
-            resourceCardDeck.setClickable(true);
-        }
+//        if (availableCardSize <= 5) {
+//            resourceCardDeck.setClickable(false);
+//        } else {
+//            resourceCardDeck.setClickable(true);
+//        }
         resourceCardDeck.setImageResource(R.drawable.backcard);
         resourceCardCount.setText("Resource Card Remaining: " + CModel.getInstance().getCurrGame().getResourceCardList().getAvailableCards().size());
     }
@@ -253,8 +255,9 @@ public class DrawResourceCardFragment extends DialogFragment implements MVP_Draw
     }
     @Override
     public void upDateFaceUp() {
+        ButtonsOn();
         displayResourceCards(v);
-        //ButtonsOn();
+
     }
 
     @Override
