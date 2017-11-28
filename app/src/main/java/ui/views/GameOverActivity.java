@@ -27,6 +27,7 @@ import teamjapannumbahone.tickettoride.R;
 public class GameOverActivity extends FragmentActivity implements MVP_GameOver.GameOverActivity{
 
     TextView WinningInfo;
+    TextView WinningPlayer;
     RecyclerView recyclerView;
     List<Player> list = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
 
     private void SetUp(){
         WinningInfo = (TextView) findViewById(R.id.Winning_Info);
-
+        WinningPlayer = (TextView) findViewById(R.id.WinningPlayer);
 
         recyclerView = (RecyclerView) findViewById(R.id.gameoverlist);
 
@@ -58,11 +59,26 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
                 if(longestRouteCalc.isDestinationCardComplete(card,player.getRoutes())){
                     player.setPoints(player.getPoints() + card.getPoints());
                 }
+                else {
+                    player.setPoints(player.getPoints() - card.getPoints());
+                }
             }
         }
         recyclerView.setLayoutManager(layoutManager);
         GameOverListAdapter adapter = new GameOverListAdapter(list);
         recyclerView.setAdapter(adapter);
+
+        int max = -100;
+        Player winner = null;
+        for (Player player1 : list) {
+            if (player1.getPoints() > max){
+                max = player1.getPoints();
+                winner = player1;
+            }
+        }
+        if (winner != null) {
+            WinningPlayer.setText("The winner is " + winner.getPlayerName() + " with " + winner.getPoints() + "points!");
+        }
      //   CModel.getInstance().ClearGame();
     }
 
@@ -75,9 +91,14 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
     public void SetLongestRoute(List<Player> players) {
         LongestRouteCalc calc = new LongestRouteCalc();
         Player player = calc.findLongestRoute(players);
-
-        String longestPath = player.getPlayerName() + "has won the game with the longest path with "
-                + player.getPoints() + " points";
+        String longestPath = player.getPlayerName() + " has the longest path and receives 10 extra points.";
+        for(Player player1 : players){
+            if(player.getPlayerName().equals(player1.getPlayerName())){
+                player1.setPoints(player1.getPoints()+10);
+            }
+        }
+        /*String longestPath = player.getPlayerName() + " has won the game with the longest path with "
+                + player.getPoints() + " points";*/
         WinningInfo.setText(longestPath);
     }
 }
