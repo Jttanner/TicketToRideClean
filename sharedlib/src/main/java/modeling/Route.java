@@ -41,7 +41,7 @@ public class Route {
     //only can claim double route if 4 or more players
     //one player cannot claim both routes of a double route
     public boolean checkIfPlayerCanClaim(Game game, Route route, Player player){
-        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player);
+        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && checkIfHasEnoughCards(route, player);
         //return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
     }
 
@@ -50,6 +50,14 @@ public class Route {
             for (Map.Entry<String, List<ResourceCard>> entry : player.getResourceCards().entrySet()){
                 entry.getValue().add(new ResourceCard(entry.getKey()));
             }
+        }
+    }
+
+    private boolean checkIfHasEnoughCards(Route route, Player player){
+        if (player.getTrainCarList().getNumOfCars() < route.getDistance()){
+            return true;
+        } else{
+            return false;
         }
     }
 
