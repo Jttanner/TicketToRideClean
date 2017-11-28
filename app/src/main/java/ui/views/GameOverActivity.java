@@ -47,6 +47,8 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         list =CModel.getInstance().getCurrGame().getPlayers();
 
+
+
         SetLongestRoute(list);
         LongestRouteCalc longestRouteCalc = new LongestRouteCalc();
         for(Player player: list) {
@@ -61,7 +63,7 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
         recyclerView.setLayoutManager(layoutManager);
         GameOverListAdapter adapter = new GameOverListAdapter(list);
         recyclerView.setAdapter(adapter);
-        CModel.getInstance().ClearGame();
+     //   CModel.getInstance().ClearGame();
     }
 
     @Override

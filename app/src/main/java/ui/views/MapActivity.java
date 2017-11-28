@@ -59,7 +59,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
 
     @Override
     public void StartGameOver() {
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(this, GameOverActivity.class);
         //presenter.deleteObserver();
         startActivity(intent);
     }

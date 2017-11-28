@@ -84,7 +84,7 @@ public class CModel extends Observable {
     public void EndGame(){
 
         setChanged();
-        notifyObservers("endGmae");
+        notifyObservers("endGame");
     }
     //Call this when the commands that will update the Game History are executed
     public void updateCurrGameHistoryList(String history, String gameID) {

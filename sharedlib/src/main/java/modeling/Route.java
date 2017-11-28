@@ -62,7 +62,7 @@ public class Route {
     }
 
     private boolean checkIfPlayerHasEnoughCards(Route route, Player player){
-        //addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
+        addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
         List<ResourceCard> routeCostCardType = player.getResourceCards().get(route.getTrainColorNeeded());
         if (route.getDistance() <= routeCostCardType.size() + player.getResourceCards().get("Wild").size()){
             return true;
