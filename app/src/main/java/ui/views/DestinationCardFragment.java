@@ -41,20 +41,12 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
     private Button buttonStart;
     MVP_DestCard.MapPresOps presenter;
     private final String TAG = "Destination Frag";
-
-
+    
 
     public DestinationCardFragment(){
         presenter = new DestinationCardPresenter(this);
         game = CModel.getInstance().getCurrGame();
         player = CModel.getInstance().getUserPlayer();
-        /*game = new Game();
-        game.setPlayerMax(2);
-        System.out.println(CModel.getInstance().getMyUser().getUserName());
-        player = new Player(CModel.getInstance().getMyUser().getUserName());
-        player.setPlayerName(CModel.getInstance().getMyUser().getInfo().getUserName());
-        player.setColor(MyColor.BLACK.toString());*/
-
     }
 
     @Override
@@ -69,16 +61,13 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
         return v;
     }
 
-    //TODO: Create the view, draw randomly from the list of routes, change the textview based on those routes
     private void setUp(View v){
         mRoute1 = (TextView) v.findViewById(R.id.mRoute1);
         mRoute2 = (TextView) v.findViewById(R.id.mRoute2);
         mRoute3 = (TextView) v.findViewById(R.id.mRoute3);
         buttonStart = (Button) v.findViewById(R.id.buttonStart);
 
-        //presenter.getDestinationCards(game, player);
         presenter.getDestinationCards();
-        //TODO: How do we update the view after the it goes to the server and back????
     }
 
 
@@ -126,7 +115,6 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Goes back to the Map activity
                 int claimed = 0;
                 List<DestinationCard> cardsSelected = new ArrayList();
 
@@ -157,10 +145,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 boolean gameStarted = presenter.hasGameJustStarted(game, player);
                 if(gameStarted == false) {
                     if(claimed >= 2) {
-                        //presenter.claimDestinationCards(game, player, cardsSelected);
                         presenter.claimDestinationCards(cardsSelected);
-
-                        //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
                         //presenter.endTurn(game, player);
                     }
@@ -170,12 +155,7 @@ public class DestinationCardFragment extends DialogFragment implements MVP_DestC
                 }
                 else {
                     if(claimed >= 1) {
-                        //presenter.claimDestinationCards(game, player, cardsSelected);
                         presenter.claimDestinationCards(cardsSelected);
-
-
-                        //TODO: We need to be able to update the view here?
-                        //((TextView) getActivity().findViewById(R.id.destination_deck_size)).setText("25");
                         getDialog().dismiss();
                         //presenter.endTurn(game, player);
                     }
