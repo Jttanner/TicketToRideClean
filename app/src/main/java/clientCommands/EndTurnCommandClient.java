@@ -27,6 +27,5 @@ public class EndTurnCommandClient implements ClientCommand {
             CModel.getInstance().setCurrGameState(new NotMyTurn());
         }
         CModel.getInstance().updatePlayerStatsView();
-        CModel.getInstance().showCurrentPlayer(nextPlayer);
     }
 }
