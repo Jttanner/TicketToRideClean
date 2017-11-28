@@ -91,7 +91,7 @@ public class Player implements Comparator<Player> {
     }
 
     public void discardResourceCardsToPlaceCars(Route route, Game game){
-        List<ResourceCard> correctColorResourceCard = resourceCards.get(route.getTrainColorNeeded());
+        List<ResourceCard> correctColorResourceCard = resourceCards.get(route.getOriginalTrackColor());
         List<ResourceCard> wildCardList = resourceCards.get("Wild");
         List<ResourceCard> discardedCards = new ArrayList<>();
         for (int i = 0; i < route.getDistance(); ++i){

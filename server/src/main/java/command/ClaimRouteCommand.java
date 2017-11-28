@@ -30,6 +30,7 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
         setRouteColor(data.getRouteColor());
         setDistance(data.getDistance());
         setWild(data.isWild());
+        setOriginalTrackColor(data.getRouteColor());
     }
 
     @Override

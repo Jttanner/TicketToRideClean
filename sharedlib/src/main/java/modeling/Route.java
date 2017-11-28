@@ -63,7 +63,8 @@ public class Route {
 
     private boolean checkIfPlayerHasEnoughCards(Route route, Player player){
         //addResourceCardsForTesting(player); //COMMENT THIS OUT WHEN NOT TESTING
-        List<ResourceCard> routeCostCardType = player.getResourceCards().get(route.getTrainColorNeeded());
+        List<ResourceCard> routeCostCardType = route.originalTrackColor != null ?
+                player.getResourceCards().get(route.getOriginalTrackColor()) : player.getResourceCards().get((route.getTrainColorNeeded()));
         if (route.getDistance() <= routeCostCardType.size() + player.getResourceCards().get("Wild").size()){
             return true;
         } else{
@@ -124,6 +125,16 @@ public class Route {
     private boolean isDouble = false;
     private String trainColorNeeded;
     private Player owner = null;
+
+    private String originalTrackColor;
+
+    public String getOriginalTrackColor() {
+        return originalTrackColor;
+    }
+
+    public void setOriginalTrackColor(String originalTrackColor) {
+        this.originalTrackColor = originalTrackColor;
+    }
 
     private City firstCity;
 

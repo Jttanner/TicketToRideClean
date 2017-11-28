@@ -1,7 +1,6 @@
 package clientCommands;
 
 import clientModel.CModel;
-import clientModel.EndMyTurn;
 import commandData.ClaimRouteCommandData;
 import modeling.Route;
 import modeling.RouteList;
@@ -16,6 +15,7 @@ public class PlaceTrainRoute implements ClientCommand {
     private String endCity;
     private String gameID;
     private String routeColor;
+    private String claimedColor;
     private boolean isWild;
 
     public PlaceTrainRoute (ClaimRouteCommandData data) {
@@ -25,12 +25,14 @@ public class PlaceTrainRoute implements ClientCommand {
         gameID = data.getGameID();
         //routeColor = data.getRouteColor();
         routeColor = data.isWild() ? "Wild" : data.getRouteColor();
+        claimedColor = data.getOriginalTrackColor();
         //isWild = data.isWild();
     }
     @Override
     public void execute() {
         RouteList routeList = CModel.getInstance().getCurrGame().getUnclaimedRouteList();
         Route claimedRoute = routeList.getAvailableRoute(startCity, endCity, routeColor);
+        claimedRoute.setOriginalTrackColor(claimedColor);
         //if (isWild){
             //claimedRoute = routeList.getAvailableRoute(startCity, endCity, "Wild");
         //} else{

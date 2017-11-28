@@ -11,6 +11,7 @@ public class ClaimRouteCommandData extends Command {
     private String gameID;
     private String playerName;
     private String routeColor;
+    private String originalTrackColor;
     private boolean isWild;
     private int distance;
 
@@ -32,6 +33,15 @@ public class ClaimRouteCommandData extends Command {
 
 
     //Getters and Setters
+
+    public String getOriginalTrackColor() {
+        return originalTrackColor;
+    }
+
+    public void setOriginalTrackColor(String originalTrackColor) {
+        this.originalTrackColor = originalTrackColor;
+    }
+
     public String getPlayerName() {
         return playerName;
     }

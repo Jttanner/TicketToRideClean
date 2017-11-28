@@ -72,6 +72,9 @@ public class Game {
             player.addPoints(route.getPointValue());
 
             //ORDER MATTERS.  REFACTOR IF WE DON'T WANT IT TO
+            if (route.getOriginalTrackColor() == null){
+                route.setOriginalTrackColor(route.getTrainColorNeeded());
+            }
             player.discardResourceCardsToPlaceCars(route, this);
 
             if (isWild){
