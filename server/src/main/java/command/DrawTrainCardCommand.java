@@ -1,7 +1,9 @@
 package command;
 
 import ServerModel.ServerFacade;
+import commandData.Command;
 import commandData.DrawTrainCardCommandData;
+import modeling.Game;
 import result.CommandResult;
 
 /**
@@ -27,7 +29,14 @@ public class DrawTrainCardCommand extends DrawTrainCardCommandData implements IC
         //Add card to player and replace the face up card
         facade.getGameList().findGame(drawTrainCardCommandData.getGameID()).getPlayer(drawTrainCardCommandData.getPlayerName()).addResourceCard(facade.getGameList().findGame(drawTrainCardCommandData.getGameID()).getResourceCardList().drawCard(cardID));
 //        facade.getGameList().findGame(drawTrainCardCommandData.getGameID()).getResourceCardList().upDateFaceUpPile(drawTrainCardCommandData.getPosition());
-
+        Game currGame = facade.getGameList().findGame(drawTrainCardCommandData.getGameID());
+        if(currGame.isLastRound()){
+            if( currGame.FinalCountDown()){
+                Command endGame = new Command();
+                endGame.setType("EndGame");
+                facade.addCommandToList(currGame.getGameID(),endGame);
+            }
+        }
         //Debugging purposes
 //        Game game = facade.getGameList().findGame(drawTrainCardCommandData.getGameID());
 //        game.getResourceCardList();

@@ -71,7 +71,7 @@ public class CModel extends Observable {
         this.chatHistory = chatHistory;
     }
 
-    public void EndGame(){
+    public void ClearGame(){
         for(Game game  : getAllGames()){
             if(game.getGameID().equals(CModel.getInstance().getCurrGame().getGameID())){
                 CModel.getInstance().getAllGames().remove(game);
@@ -79,6 +79,10 @@ public class CModel extends Observable {
         }
         finalPlayers = CModel.getInstance().getCurrGame().getPlayers();
         CModel.getInstance().setCurrGame(null);
+    }
+
+    public void EndGame(){
+
         setChanged();
         notifyObservers("endGmae");
     }
@@ -275,8 +279,8 @@ public class CModel extends Observable {
         currGame.claimAvailableRoute(route, player, isWild);
         //player.getTrainCarList().getNumOfCars()
 
-        player.addRoute(route);
-        player.addPoints(route.getPointValue());
+        //player.addRoute(route);
+        //player.addPoints(route.getPointValue());
 
         setChanged();
         notifyObservers(currGame);
