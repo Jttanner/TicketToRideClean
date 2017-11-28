@@ -24,18 +24,14 @@ public class ServerProxy {
     }
 
     private String TAG = "ServerProxy";
-    private static String ipaddress;
     private static String myUrl;
-    private static String ip;
     static {
+        String ipaddress;
         //grab the ip that may have been entered by the user
-        ip = CModel.getInstance().getIPAddress();
+        ipaddress = CModel.getInstance().getIPAddress();
         //if it is empty, use a hardcoded value
-        if(ip.isEmpty()){
+        if(ipaddress.isEmpty()){
             ipaddress = "192.168.2.142";
-        }
-        else{
-            ipaddress = ip;
         }
         myUrl = "http://" + ipaddress +":8080/user/";
     }
