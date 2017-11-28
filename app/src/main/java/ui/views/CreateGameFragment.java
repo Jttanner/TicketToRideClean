@@ -33,10 +33,6 @@ public class CreateGameFragment extends DialogFragment {
     EditText gameName;
     Game game;
     Player player;
-    Button buttonRed;
-    Button buttonGreen;
-    Button buttonYellow;
-    Button buttonBlue;
     Button buttonCancel;
     Button buttonSubmit;
 
@@ -101,40 +97,12 @@ public class CreateGameFragment extends DialogFragment {
             }
         });
 
-        buttonBlue = (Button) v.findViewById(R.id.ColorBlue);
-        buttonGreen = (Button) v.findViewById(R.id.ColorGreen);
-        buttonRed = (Button) v.findViewById(R.id.ColorRed);
-        buttonYellow = (Button) v. findViewById(R.id.ColorYellow);
         buttonCancel = (Button) v.findViewById(R.id.buttonCancel);
         buttonSubmit = (Button) v.findViewById(R.id.buttonSubmit);
 
         wireUp();
     }
     void wireUp(){
-        buttonBlue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.setColor(MyColor.BLUE.toString());
-            }
-        });
-        buttonRed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.setColor(MyColor.RED.toString());
-            }
-        });
-        buttonYellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.setColor(MyColor.YELLOW.toString());
-            }
-        });
-        buttonGreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                player.setColor(MyColor.GREEN.toString());
-            }
-        });
         buttonSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -27,9 +27,7 @@ import teamjapannumbahone.tickettoride.R;
 
 
 public class GameListActivity extends FragmentActivity implements MVP_GameList.GameListActivityInterface {
-    //Button StartGameButton;
     Button CreateGameButton;
-    Button JoinGameButton;
     MVP_GameList.GameListPresenterInterface presenter;
     RecyclerView recyclerView;
     GameListAdapter radapter;
@@ -60,14 +58,7 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
 
             }
         });
-        JoinGameButton = (Button) findViewById(R.id.JoinGameButton);
         recyclerView = (RecyclerView) findViewById(R.id.GameListRecycler);
-        JoinGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -103,12 +94,4 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         startActivity(intent);
         //this is where we go to the next activity
     }
-
-    @Override
-    public void ToggleButton(boolean startGame, boolean joinGame) {
-        //StartGameButton.setEnabled(startGame);
-        JoinGameButton.setEnabled(joinGame);
-    }
-
-
 }

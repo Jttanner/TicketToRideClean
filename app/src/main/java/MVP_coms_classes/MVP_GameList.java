@@ -13,7 +13,6 @@ public interface MVP_GameList {
     interface GameListActivityInterface{ //Presenter is pushing things to the view
         void UpdateList(List<Game> list);
         void JoinGameResult(Game game);
-        void ToggleButton(boolean startGame, boolean joinGame);
     }
 
     interface GameListPresenterInterface { //View is pushing things to the presenter
