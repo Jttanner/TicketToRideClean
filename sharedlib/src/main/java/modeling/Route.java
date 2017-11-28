@@ -41,7 +41,7 @@ public class Route {
     //only can claim double route if 4 or more players
     //one player cannot claim both routes of a double route
     public boolean checkIfPlayerCanClaim(Game game, Route route, Player player){
-        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && checkIfHasEnoughCards(route, player);
+        return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && checkIfHasEnoughCards(route, player) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
         //return checkIfPlayerHasEnoughCards(route, player) && canClaimDoubleRouteWithPlayerSize(game, route, player) && canClaimDoubleRouteOnlyOnePlayer(game, route, player);
     }
 
