@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Adapters.GameOverListAdapter;
@@ -26,7 +27,7 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
 
     TextView WinningInfo;
     RecyclerView recyclerView;
-
+    List<Player> list = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,9 +45,11 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+        list =CModel.getInstance().getCurrGame().getPlayers();
         recyclerView.setLayoutManager(layoutManager);
-        GameOverListAdapter adapter = new GameOverListAdapter(CModel.getInstance().getCurrGame().getPlayers());
+        GameOverListAdapter adapter = new GameOverListAdapter(list);
         recyclerView.setAdapter(adapter);
+        CModel.getInstance().ClearGame();
     }
 
     @Override
