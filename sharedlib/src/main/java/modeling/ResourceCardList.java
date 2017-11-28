@@ -28,7 +28,7 @@ public class ResourceCardList {
         List<ResourceCard> resourceCards;
         for (String string : colorList) {
             resourceCards = new ArrayList<>();
-            for (int i = 0; i < 1; i++) { //12
+            for (int i = 0; i < 12; i++) { //12
             //for (int i = 0; i < 2; i++) {
                 ResourceCard card = new ResourceCard(string);
                 //add cards to list
@@ -39,7 +39,7 @@ public class ResourceCardList {
         }
         //add the wild cards
         resourceCards = new ArrayList<>();
-        for (int i = 0; i < 8; i++) { //14
+        for (int i = 0; i < 14; i++) { //14
             ResourceCard card = new ResourceCard("Wild");
             resourceCards.add(card);
             availableCards.add(card);
