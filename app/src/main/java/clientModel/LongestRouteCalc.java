@@ -1,11 +1,6 @@
 package clientModel;
 
-import android.util.Log;
-
-import junit.framework.Assert;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import modeling.City;
@@ -40,7 +35,7 @@ public class LongestRouteCalc {
         //goes through every player, seeing who has the longest route
         for (Player player : playerList) {
             //Log.d(TAG, "Checking Longest route for Player: " + player.getPlayerName());
-            routeList = player.getRoutes();
+            this.setRouteList(player.getRoutes());
             //get the i'th players longest path
             int path = initLongestPath();
 
@@ -65,7 +60,7 @@ public class LongestRouteCalc {
         for (Route r : routeList) {
             System.out.println("Starting with " + r.toString() + "\n");
             int dist = getLongestPath(r);
-            System.out.println("This routes distance is: " +  dist + "\n");
+            System.out.println("This routes distance is: " + dist + "\n");
             if (dist > max) {
                 max = dist;
             }
@@ -98,7 +93,7 @@ public class LongestRouteCalc {
             }
         }
         //if we hit a leaf, lets return its value
-        if(nextRoutes.size() == 0){
+        if (nextRoutes.size() == 0) {
             System.out.println("ACTUALLY A LEAF: " + start.toString());
             return start.getDistance();
         }
@@ -115,7 +110,7 @@ public class LongestRouteCalc {
     private List<Route> GetNextRoutes(Route start) {
         List<Route> routes = new ArrayList<>();
         for (Route r : routeList) {
-            if (!r.isVisited() && (sharesCity(start,r))) {
+            if (!r.isVisited() && (sharesCity(start, r))) {
                 routes.add(r);
             }
         }
@@ -145,37 +140,56 @@ public class LongestRouteCalc {
         this.routeList = routeList;
     }
 
-    public boolean destinationCardComplete(DestinationCard card, List<Route> list){
+    /**
+     * Checks if a given destination card was completed by the player
+     *
+     * @param card The destination card in question
+     * @param list A List of all the player's Route's
+     * @return Boolean Whether it is complete or not
+     */
+    public boolean isDestinationCardComplete(DestinationCard card, List<Route> list) {
         City city1 = card.getFirst();
         City city2 = card.getSecond();
-        //boolean flag = false;
         List<Route> startingRoute = new ArrayList<>();
-        for(Route route: list){
-            if(city1.getCityName().equals(route.getFirstCityName())
-                    || city1.getCityName().equals(route.getSecondCityName())
-                    || city2.getCityName().equals(route.getFirstCityName())
-                    || city2.getCityName().equals(route.getSecondCityName())){
+        for (Route route : list) {
+            if (city1.getCityName().equals(route.getFirstCityName())
+                    || city1.getCityName().equals(route.getSecondCityName())) {
                 startingRoute.add(route);
             }
         }
-        for(Route route : startingRoute)
-        {
-            if(recursion(route, city2))
+        //set the route list we are using
+        this.setRouteList(list);
+        for (Route route : startingRoute) {
+            if (recursion(route, city2,false)) {
+                resetRouteList();
                 return true;
+            }
         }
+        resetRouteList();
         return false;
 
     }
-    private boolean recursion(Route route, City city2){
-        List<Route> nextOnes = GetNextRoutes(route);
-        for(Route each: nextOnes){
-            if(route.getFirstCityName().equals(city2.getCityName())
-                    ||each.getSecondCityName().equals(city2.getCityName()))
-                return true;
-            else
-                return recursion(each,city2);
-        }
 
-        return false;
+    private boolean recursion(Route route, City city2,boolean isFound) {
+        route.setVisited(true);
+        List<Route> nextRoutes = GetNextRoutes(route);
+        //if there is a route where our "second" city is another's "first" city
+        //go through every child node
+        for (Route each : nextRoutes) {
+            //if not visited
+            if (!each.isVisited() ){
+                //if true pass along the true statement
+                if (each.getFirstCityName().equals(city2.getCityName())
+                        || each.getSecondCityName().equals(city2.getCityName())) {
+                    isFound = true;
+                }
+                else {
+                    isFound = recursion(each, city2,isFound);
+                }
+            }
+        }
+        //if we hit a leaf, lets return its value
+        route.setVisited(false);
+        return isFound;
     }
 }

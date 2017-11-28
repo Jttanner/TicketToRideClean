@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clientModel.LongestRouteCalc;
+import modeling.City;
+import modeling.DestinationCard;
 import modeling.Player;
 import modeling.Route;
-
-import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -243,7 +243,196 @@ public class LongestRouteCalcTest {
 
     }
 
+    @Test
+    public void TestDestCardComplete(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"),new City("Vancouver"),15));
 
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+
+        Assert.assertTrue(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestDestCardCompleteWithHooks(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"),new City("Vancouver"),15));
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        //hook
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+        player.addRoute(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+        player.addRoute(new Route("El Paso", "Los Angeles", "black", 6));
+        player.addRoute(new Route("El Paso", "Houston", "green", 6));
+        player.addRoute(new Route("Houston", "New Orleans", "Wild", 2));
+        player.addRoute(new Route("Miami", "New Orleans", "red", 6));
+        player.addRoute(new Route("Charleston", "Miami", "purple", 4));
+
+
+    }
+
+    @Test
+    public void TestSmallDestCard(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"),new City("Sault St. Marie"),15));
+
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        Assert.assertTrue(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestHugeGraph(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"),new City("Miami"),15));
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        //hook
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+        player.addRoute(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+        player.addRoute(new Route("El Paso", "Los Angeles", "black", 6));
+        player.addRoute(new Route("El Paso", "Houston", "green", 6));
+        player.addRoute(new Route("Houston", "New Orleans", "Wild", 2));
+        player.addRoute(new Route("Miami", "New Orleans", "red", 6));
+        player.addRoute(new Route("Charleston", "Miami", "purple", 4));
+
+        Assert.assertTrue(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestHugeGraph2(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Pittsburgh"),new City("San Francisco"),15));
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        //hook
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+        player.addRoute(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+        player.addRoute(new Route("El Paso", "Los Angeles", "black", 6));
+        player.addRoute(new Route("El Paso", "Houston", "green", 6));
+        player.addRoute(new Route("Houston", "New Orleans", "Wild", 2));
+        player.addRoute(new Route("Miami", "New Orleans", "red", 6));
+        player.addRoute(new Route("Charleston", "Miami", "purple", 4));
+
+        Assert.assertTrue(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestHugeGraphFalse(){
+        Player player = new Player("Name","Name","Yellow");
+        //these cities do not exist on the game map
+        player.addDestinationCard(new DestinationCard(new City("Tucson"),new City("Provo"),15));
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+
+        //Branches
+        player.addRoute(new Route("Pittsburgh", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Duluth", "Omaha", "Wild", 2, true));
+        player.addRoute(new Route("Denver", "Helena", "green", 4));
+        //hook
+        player.addRoute(new Route("Salt Lake City", "San Francisco", "white", 5, true));
+        player.addRoute(new Route("Los Angeles", "San Francisco", "yellow", 3, true));
+        player.addRoute(new Route("El Paso", "Los Angeles", "black", 6));
+        player.addRoute(new Route("El Paso", "Houston", "green", 6));
+        player.addRoute(new Route("Houston", "New Orleans", "Wild", 2));
+        player.addRoute(new Route("Miami", "New Orleans", "red", 6));
+        player.addRoute(new Route("Charleston", "Miami", "purple", 4));
+
+        Assert.assertFalse(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestGraphFalse(){
+        Player player = new Player("Name","Name","Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"),new City("Seattle"),15));
+
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        player.addRoute(new Route("Sault St. Marie", "Toronto", "Wild", 2));
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        //missing salt lake to portland
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+
+
+        Assert.assertFalse(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
+
+    @Test
+    public void TestHugeGraphIncompleteCircle() {
+        Player player = new Player("Name", "Name", "Yellow");
+        player.addDestinationCard(new DestinationCard(new City("Calgary"), new City("Vancouver"), 15));
+        //circle
+        player.addRoute(new Route("Calgary", "Winnipeg", "white", 6));
+        //no link from winnipeg to Sault St. Marie
+        player.addRoute(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
+        player.addRoute(new Route("Duluth", "Toronto", "purple", 6));
+        player.addRoute(new Route("Duluth", "Helena", "orange", 6));
+        player.addRoute(new Route("Helena", "Salt Lake City", "purple", 3));
+        player.addRoute(new Route("Portland", "Salt Lake City", "blue", 6));
+        player.addRoute(new Route("Portland", "Seattle", "Wild", 1, true));
+        player.addRoute(new Route("Seattle", "Vancouver", "Wild", 1, true));
+        player.addRoute(new Route("Calgary", "Vancouver", "Wild", 3));
+
+        Assert.assertTrue(calc.isDestinationCardComplete(player.getDestinationCards().get(0),player.getRoutes()));
+    }
     @After
     public void breakDown(){
         /*initLongestPath.setAccessible(false);
