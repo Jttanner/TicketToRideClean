@@ -59,7 +59,7 @@ public class Poller {
                 sendCommand.start(command);
             }
         };
-        timer.schedule(doAsynchronousTask,0,1000); //execute in every 3000 ms
+        timer.schedule(doAsynchronousTask,0,2000); //execute in every 3000 ms
 
     }
 
@@ -77,7 +77,7 @@ public class Poller {
                 sendCommand.start(command);
             }
         };
-        getCommandTimer.schedule(doAsynchronousTask,0,1000); //execute in every 3000 ms
+        getCommandTimer.schedule(doAsynchronousTask,0,2000); //execute in every 3000 ms
     }
 
     /**Stops the GetCommandsPoller from running*/
