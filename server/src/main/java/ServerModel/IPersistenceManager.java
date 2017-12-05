@@ -10,7 +10,7 @@ interface IPersistenceManager {
 
     boolean endTransaction();
 
-    boolean clearDatabase();
+    boolean clearDatabase()throws NeedTransactionException;
 
     void createGameDao();
 

@@ -19,44 +19,37 @@ public class SQLPlugin implements IPlugin {
     }
 
     @Override
-    public User getUser(String name) {
-        persistenceManager.beginTransaction();
+    public User getUser(String name) throws NeedTransactionException {
         return persistenceManager.getUserDao().findUser(name);
     }
 
     @Override
-    public Game getGame(String gameID) {
-        persistenceManager.beginTransaction();
+    public Game getGame(String gameID) throws NeedTransactionException {
         return persistenceManager.getGameDao().getGameState(gameID);
     }
 
     @Override
-    public List<Command> getGameCommands(String gameID) {
-        persistenceManager.beginTransaction();
+    public List<Command> getGameCommands(String gameID) throws NeedTransactionException {
         return persistenceManager.getCommandDao().getCommandList(gameID);
     }
 
     @Override
-    public boolean saveUser(User user) {
-        persistenceManager.beginTransaction();
+    public boolean saveUser(User user) throws NeedTransactionException {
         return persistenceManager.getUserDao().registerUser(user.getInfo().getUserName(),user.getInfo().getPassword());
     }
 
     @Override
-    public boolean saveGame(Game game) {
-        persistenceManager.beginTransaction();
+    public boolean saveGame(Game game) throws NeedTransactionException {
         return persistenceManager.getGameDao().updateGameState(game);
     }
 
     @Override
-    public boolean clear() {
-        persistenceManager.beginTransaction();
+    public boolean clear() throws NeedTransactionException {
         return persistenceManager.clearDatabase();
     }
 
     @Override
-    public boolean saveGameCommands(String gameID, List<Command> commands) {
-        persistenceManager.beginTransaction();
+    public boolean saveGameCommands(String gameID, List<Command> commands) throws NeedTransactionException {
         return persistenceManager.getCommandDao().addCommandsToGame(gameID,commands);
     }
 

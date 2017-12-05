@@ -10,11 +10,11 @@ import modeling.Player;
 
 interface IPlayerDao {
 
-    void updatePlayer(Player player);
+    boolean updatePlayer(Player player) throws NeedTransactionException;;
 
-    Player getPlayer(String playerName);
+    Player getPlayer(String playerName) throws NeedTransactionException;;
 
-    boolean savePlayers(List<Player> players);
+    boolean savePlayers(List<Player> players) throws NeedTransactionException;;
 
-    boolean clear();
+    boolean clear() throws NeedTransactionException;;
 }
