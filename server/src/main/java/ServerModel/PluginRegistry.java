@@ -8,6 +8,13 @@ import java.util.Iterator;
  */
 
 public class PluginRegistry {
+    private static PluginRegistry ourInstance = new PluginRegistry();
+
+    public static PluginRegistry getInstance() {
+        return ourInstance;
+    }
+
+    private PluginRegistry(){}
 
     public IPersistenceManager create(String name){
         return null;

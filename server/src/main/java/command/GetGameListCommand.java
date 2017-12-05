@@ -24,9 +24,7 @@ public class GetGameListCommand extends GetGameListCommandData implements IComma
             return  result;
         }
         else {
-            //TODO this code commented out seems to do nothing
-            //GetGameListCommandData cmdData = new GetGameListCommandData();
-            //cmdData.setGameListLobby(gameList);
+
             result = new GetGameCommandResult(true, gameList, "Game Lists sent.");
             return result;
         }

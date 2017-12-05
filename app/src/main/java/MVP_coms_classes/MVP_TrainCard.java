@@ -18,10 +18,6 @@ public interface MVP_TrainCard {
             Context getAppContext();
             /**gets activity context*/
             Context getActivityContext();
-            /**gives the player the destination cards he has chosen*/
-            //void giveChosenCards(List<DestinationCard> destinationCards);
-            //Or is it string destinationCard?
-            //void update(Observable o, Object arg);
 
         }
         /**
@@ -29,12 +25,9 @@ public interface MVP_TrainCard {
          * Processes user interactions, sends data requests to Model, etc.
          */
         interface MapPresOps{ //View pushes to the presenter
-            /**Sends the presenter what destination cards were picked*/
-            //void pickDestCards(List<DestinationCard> cards) ;
             void cardClicked(ImageButton card);
             void deckClicked();
 
         }
 
-        //TODO: BITMAP! Map <String, Bitmap value> cardChoice; to change cards to images of the train cards
     }

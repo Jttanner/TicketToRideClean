@@ -119,7 +119,7 @@ public class DestinationCardList {
      * @return DestinationCard
      */
     public DestinationCard get1RandomCard() {
-        //TODO: Make the check for if destinationCardList is empty or almost empty
+
         if (destinationCardList.size() == 0) {
             return null;
         }

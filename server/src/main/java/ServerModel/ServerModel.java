@@ -6,16 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import commandData.ChatCommandData;
-import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
-import commandData.EndTurnCommandData;
-import modeling.CommandList;
-import modeling.DestinationCard;
-import modeling.DestinationCardList;
 import modeling.Game;
 import modeling.GameList;
-import modeling.Player;
-import modeling.RouteList;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -39,6 +32,12 @@ public class ServerModel {
     private GameList gameList = new GameList();
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
+
+    /**The plugin registry object*/
+    private PluginRegistry pluginRegistry = PluginRegistry.getInstance();
+
+    /**Our Persistence manager object*/
+    private IPersistenceManager pManager;
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -141,9 +140,12 @@ public class ServerModel {
     public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
-/*
-    boolean endTurn(EndTurnCommandData commandData) {
+    /**
+     * @param arg PluginName
+     * @param arg1 "n" save integer*/
+    public void saveArgs(String arg, String arg1) {
+        pManager = pluginRegistry.create(arg);
+        //TODO save arg1, the "n"
+    }
 
-        //TODO: We need to calculate what the endTurn does here
-    }*/
 }

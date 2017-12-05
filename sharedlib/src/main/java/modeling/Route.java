@@ -1,6 +1,5 @@
 package modeling;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -158,11 +157,6 @@ public class Route {
     public boolean getIsDouble(){
         return isDouble;
     }
-
-    /*//TODO: It is less good to pass the list directly.  should we change it?
-    public List<City> getTwoCities(){
-        return  twoCities;
-    }*/
 
     public void setTrainColorNeeded(String trainColorNeeded) {
         this.trainColorNeeded = trainColorNeeded;

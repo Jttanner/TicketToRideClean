@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import ServerModel.ServerModel;
 import handler.CommandHandler;
 import handler.LoginHandler;
 import handler.RegisterHandler;
@@ -111,7 +112,7 @@ public class ServerCommunicator {
         // "args" should contain one command-line argument, which is the port number
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
-            //String portNumber = args[0];
+            ServerModel.getInstance().saveArgs(args[0],args[1]);
             new ServerCommunicator().run("8080");
         }
 

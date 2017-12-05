@@ -164,7 +164,7 @@ public class Player implements Comparator<Player> {
     /**Adds a resource card to the player's hand
      * @param c The resource card*/
     public void addResourceCard(ResourceCard c){
-        //TODO need to add player as owner? Do we even needs this method, wont server handle it?
+
         List<ResourceCard> cardList = resourceCards.get(c.getMyColor());
         cardList.add(c);
     }
