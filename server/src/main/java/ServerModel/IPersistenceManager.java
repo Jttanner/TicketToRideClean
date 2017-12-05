@@ -6,25 +6,26 @@ package ServerModel;
 
 interface IPersistenceManager {
 
-    public void beginTransaction();
+    void beginTransaction();
 
-    public boolean endTransaction();
+    boolean endTransaction();
 
-    public void clearDatabase();
+    boolean clearDatabase();
 
-    public void createGameDao();
+    void createGameDao();
 
-    public void createUserDao();
+    void createUserDao();
 
-    public void createPlayerDao();
+    void createPlayerDao();
 
-    public void createCommandDao();
+    void createCommandDao();
 
-    public IUserDao getUserDao();
+    IUserDao getUserDao();
 
-    public IGameDao getGameDao();
+    IGameDao getGameDao();
 
-    public IPlayerDao getPlayerDao();
+    IPlayerDao getPlayerDao();
 
-    public ICommandDao getCommandDao();
+    ICommandDao getCommandDao();
+
 }

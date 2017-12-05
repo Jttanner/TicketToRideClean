@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class PluginRegistry {
     private static PluginRegistry ourInstance = new PluginRegistry();
 
-    public static PluginRegistry getInstance() {
+    static PluginRegistry getInstance() {
         return ourInstance;
     }
 
@@ -20,7 +20,7 @@ public class PluginRegistry {
     /**Creates the current plugin from the name and then returns the appropriate Persistence Manager
      * @param pluginName The class name of the plugin you are going to use
      * @return The IPersistenceManager*/
-    public IPersistenceManager create(String pluginName){
+    IPersistenceManager create(String pluginName){
 
         Class<?> c = null;
         try {
@@ -34,7 +34,7 @@ public class PluginRegistry {
         try {
             currPlugin = (IPlugin) c.newInstance();
             //get the correct Persistence manager
-            c = Class.forName(currPlugin.getPManager());
+            c = Class.forName(currPlugin.getPManagerClassName());
             //return it
             return (IPersistenceManager) c.newInstance();
         }

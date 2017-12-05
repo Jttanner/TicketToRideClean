@@ -33,11 +33,10 @@ public class ServerModel {
     private UserInfoList userInfoList = new UserInfoList();
     private List<String> chatHistory = new ArrayList<>();
 
-    /**The plugin registry object*/
-    private PluginRegistry pluginRegistry = PluginRegistry.getInstance();
-
-    /**Our Persistence manager object*/
-    private IPersistenceManager pManager;
+    /**Our Persistence manager object
+    private IPersistenceManager pManager;*/
+    /**Our current plugin object*/
+    private IPlugin currPlugin;
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -128,11 +127,18 @@ public class ServerModel {
         return commandListMap;
     }
 
+    public IPlugin getPlugin(){
+        return currPlugin;
+    }
+
     /**
      * @param pluginName The PluginName
      * @param n "n" save integer*/
     public void saveArgs(String pluginName, String n) {
-        pManager = pluginRegistry.create(pluginName);
+        //save the persistence manager and the plugin
+        IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(pluginName);
+        currPlugin = PluginRegistry.getInstance().getCurrPlugin();
+        currPlugin.setPManager(persistenceManager);
         //TODO save n, the "n"
     }
 

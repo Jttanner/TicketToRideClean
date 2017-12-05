@@ -11,48 +11,63 @@ import modeling.User;
  */
 
 public class SQLPlugin implements IPlugin {
+    private IPersistenceManager persistenceManager;
+
     @Override
     public String getPluginName() {
-        return null;
+        return this.getClass().getName();
     }
 
     @Override
-    public User getUser(String playerName) {
-        return null;
+    public User getUser(String name) {
+        persistenceManager.beginTransaction();
+        return persistenceManager.getUserDao().findUser(name);
     }
 
     @Override
     public Game getGame(String gameID) {
-        return null;
+        persistenceManager.beginTransaction();
+        return persistenceManager.getGameDao().getGameState(gameID);
     }
 
     @Override
     public List<Command> getGameCommands(String gameID) {
-        return null;
+        persistenceManager.beginTransaction();
+        return persistenceManager.getCommandDao().getCommandList(gameID);
     }
 
     @Override
-    public boolean saveUser() {
-        return false;
+    public boolean saveUser(User user) {
+        persistenceManager.beginTransaction();
+        return persistenceManager.getUserDao().registerUser(user.getInfo().getUserName(),user.getInfo().getPassword());
     }
 
     @Override
-    public boolean saveGame() {
-        return false;
-    }
-
-    @Override
-    public boolean saveGameCommands() {
-        return false;
+    public boolean saveGame(Game game) {
+        persistenceManager.beginTransaction();
+        return persistenceManager.getGameDao().updateGameState(game);
     }
 
     @Override
     public boolean clear() {
-        return false;
+        persistenceManager.beginTransaction();
+        return persistenceManager.clearDatabase();
     }
 
     @Override
-    public String getPManager() {
+    public boolean saveGameCommands(String gameID, List<Command> commands) {
+        persistenceManager.beginTransaction();
+        return persistenceManager.getCommandDao().addCommandsToGame(gameID,commands);
+    }
+
+    @Override
+    public String getPManagerClassName() {
         return "SQLPersistenceManager";
     }
+
+    @Override
+    public void setPManager(IPersistenceManager persistenceManager) {
+        this.persistenceManager = persistenceManager;
+    }
+
 }

@@ -5,6 +5,15 @@ package ServerModel;
  */
 
 public class SQLPersistenceManager implements IPersistenceManager {
+    /**The GameDAo*/
+    private IGameDao gameDao;
+    /**The UserDao*/
+    private IUserDao userDao;
+    /**The PlayerDao*/
+    private IPlayerDao playerDao;
+    /**The CommandDao*/
+    private ICommandDao commandDao;
+
     @Override
     public void beginTransaction() {
 
@@ -16,13 +25,12 @@ public class SQLPersistenceManager implements IPersistenceManager {
     }
 
     @Override
-    public void clearDatabase() {
-
+    public boolean clearDatabase() {
+        return false;
     }
 
     @Override
     public void createGameDao() {
-
     }
 
     @Override
@@ -59,4 +67,5 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public ICommandDao getCommandDao() {
         return null;
     }
+
 }
