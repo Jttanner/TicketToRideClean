@@ -1,5 +1,11 @@
 package clientModel;
 
+import java.util.List;
+
+import modeling.DestinationCard;
+import modeling.ResourceCard;
+import modeling.Route;
+
 /**
  * Created by tyler on 11/9/2017.
  * This state will handle actions when it is the last round of the game.
@@ -7,13 +13,29 @@ package clientModel;
  * EndGame Command to the server
  */
 
-public class
+public class LastRound extends MyTurn {
+    @Override
+    public void drawResourceCard(ResourceCard resourceCard) {
+        super.drawResourceCard(resourceCard);
+    }
 
+    @Override
+    public void getDestCard() {
+        super.getDestCard();
+    }
 
+    @Override
+    public void claimDestCard(List<DestinationCard> cards) {
+        super.claimDestCard(cards);
+    }
 
+    @Override
+    public void gameEnded() {
+        super.gameEnded();
+    }
 
-
-
-
-LastRound extends GameState {
+    @Override
+    public void claimRoute(Route currRoute, String color, boolean isWild) {
+        super.claimRoute(currRoute, color, isWild);
+    }
 }

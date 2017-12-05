@@ -13,11 +13,9 @@ import java.util.List;
 import Adapters.GameOverListAdapter;
 import MVP_coms_classes.MVP_GameOver;
 import clientModel.CModel;
-import clientModel.LongestRouteCalc;
+import clientModel.RouteCalc;
 import modeling.DestinationCard;
 import modeling.Player;
-import poller.Poller;
-import presenters.GameListPresenter;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -51,12 +49,12 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
 
 
         SetLongestRoute(list);
-        LongestRouteCalc longestRouteCalc = new LongestRouteCalc();
+        RouteCalc routeCalc = new RouteCalc();
         for(Player player: list) {
 
             List<DestinationCard> cards = player.getDestinationCards();
             for(DestinationCard card : cards) {
-                if(longestRouteCalc.isDestinationCardComplete(card,player.getRoutes())){
+                if(routeCalc.isDestinationCardComplete(card,player.getRoutes())){
                     player.setPoints(player.getPoints() + card.getPoints());
                 }
                 else {
@@ -89,7 +87,7 @@ public class GameOverActivity extends FragmentActivity implements MVP_GameOver.G
 
     @Override
     public void SetLongestRoute(List<Player> players) {
-        LongestRouteCalc calc = new LongestRouteCalc();
+        RouteCalc calc = new RouteCalc();
         Player player = calc.findLongestRoute(players);
         String longestPath = player.getPlayerName() + " has the longest path and receives 10 extra points.";
         for(Player player1 : players){

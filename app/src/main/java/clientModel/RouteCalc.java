@@ -12,15 +12,15 @@ import modeling.Route;
  * Created by tyler on 11/14/2017.
  */
 
-public class LongestRouteCalc {
+public class RouteCalc {
 
-    private static final String TAG = "LongestRouteCalc";
+    private static final String TAG = "RouteCalc";
     /**
      * The current route list we are working on
      */
     private List<Route> routeList;
 
-    public LongestRouteCalc() {
+    public RouteCalc() {
     }
 
     /**

@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import clientModel.LongestRouteCalc;
+import clientModel.RouteCalc;
 import modeling.City;
 import modeling.DestinationCard;
 import modeling.Player;
@@ -22,13 +22,13 @@ import modeling.Route;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class LongestRouteCalcTest {
-    private LongestRouteCalc calc;
+public class RouteCalcTest {
+    private RouteCalc calc;
     private Method initLongestPath;
     private Method setRouteList;
     @Before
     public void setUp(){
-        calc = new LongestRouteCalc();
+        calc = new RouteCalc();
         Class<?> clazz = calc.getClass();
         try {
             initLongestPath = clazz.getDeclaredMethod("initLongestPath");
