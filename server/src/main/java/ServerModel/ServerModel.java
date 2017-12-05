@@ -121,31 +121,19 @@ public class ServerModel {
 
     //Takes in the current list of games and returns a list of games that haven't started yet
     GameList getGames() {
-        //List<Game> gameList = new ArrayList<>();
-
-        /*
-        for (Map.Entry<String, Game> game : getGamesAsMap().entrySet()){
-            if (!game.getValue().isHasStarted()){
-                gameList.add(game.getValue());
-            }
-        }
-
-
-
-        return new GameList(gameList);*/
-
-        return this.gameList;
+                return this.gameList;
     }
 
     public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
+
     /**
-     * @param arg PluginName
-     * @param arg1 "n" save integer*/
-    public void saveArgs(String arg, String arg1) {
-        pManager = pluginRegistry.create(arg);
-        //TODO save arg1, the "n"
+     * @param pluginName The PluginName
+     * @param n "n" save integer*/
+    public void saveArgs(String pluginName, String n) {
+        pManager = pluginRegistry.create(pluginName);
+        //TODO save n, the "n"
     }
 
 }

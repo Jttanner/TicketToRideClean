@@ -11,6 +11,7 @@ import modeling.User;
  */
 
 public class FilePlugin implements IPlugin {
+
     @Override
     public String getPluginName() {
         return null;
@@ -49,5 +50,10 @@ public class FilePlugin implements IPlugin {
     @Override
     public boolean clear() {
         return false;
+    }
+
+    @Override
+    public String getPManager() {
+        return "FilePersistenceManager";
     }
 }

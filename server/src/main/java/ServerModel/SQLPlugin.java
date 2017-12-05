@@ -50,4 +50,9 @@ public class SQLPlugin implements IPlugin {
     public boolean clear() {
         return false;
     }
+
+    @Override
+    public String getPManager() {
+        return "SQLPersistenceManager";
+    }
 }

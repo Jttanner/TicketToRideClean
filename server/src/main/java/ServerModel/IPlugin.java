@@ -20,4 +20,5 @@ public interface IPlugin {
     boolean saveGame();
     boolean saveGameCommands();
     boolean clear();
+    String getPManager();
 }
