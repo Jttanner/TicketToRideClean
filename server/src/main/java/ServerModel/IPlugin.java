@@ -12,12 +12,12 @@ import modeling.User;
 
 public interface IPlugin {
 
-    public String getPluginName();
-    public User getUser(String playerName);
-    public Game getGame(String gameID);
-    public List<Command> getGameCommands(String gameID);
-    public boolean saveUser();
-    public boolean saveGame();
-    public boolean saveGameCommands();
-    public boolean clear();
+    String getPluginName();
+    User getUser(String playerName);
+    Game getGame(String gameID);
+    List<Command> getGameCommands(String gameID);
+    boolean saveUser();
+    boolean saveGame();
+    boolean saveGameCommands();
+    boolean clear();
 }

@@ -4,5 +4,5 @@ package ServerModel;
  * Created by tyler on 12/5/2017.
  */
 
-public class PluginRegistery {
+interface IPlayerDao {
 }
