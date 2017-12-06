@@ -2,6 +2,7 @@ package serverCommunicator;
 
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -112,7 +113,12 @@ public class ServerCommunicator {
         // "args" should contain one command-line argument, which is the port number
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
-            ServerModel.getInstance().saveArgs(args[0],args[1]);
+
+            try {
+                ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             new ServerCommunicator().run("8080");
         }
 

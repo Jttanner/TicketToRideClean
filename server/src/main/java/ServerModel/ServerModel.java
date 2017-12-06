@@ -1,7 +1,20 @@
 package ServerModel;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -132,14 +145,77 @@ public class ServerModel {
     }
 
     /**
-     * @param pluginName The PluginName
+     * @param fileName The PluginName
      * @param n "n" save integer*/
-    public void saveArgs(String pluginName, String n) {
+    public void saveArgs(String fileName, String n) throws FileNotFoundException {
+        ArrayList<String> fileArgs = readFile(fileName);
+
         //save the persistence manager and the plugin
-        IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(pluginName);
-        currPlugin = PluginRegistry.getInstance().getCurrPlugin();
+        currPlugin = (IPlugin) loadClass(fileName,fileArgs != null ? fileArgs.get(0) : null);
+        IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(currPlugin.getPManagerClassName());
         currPlugin.setPManager(persistenceManager);
         //TODO save n, the "n"
+    }
+
+    private ArrayList<String> readFile(String fileName) {
+        // This will reference one line at a time
+        String line = null;
+        ArrayList<String> arrayList = new ArrayList<String>();
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                arrayList.add(line);
+            }
+
+            // Always close files.
+            bufferedReader.close();
+            return arrayList;
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+        }
+        return  null;
+    }
+
+    private Object loadClass(String fileName,String className) {
+        String jarPath = null;
+        if(fileName.equals("sql.txt")){
+            jarPath = "sqljarPathHere";
+        }
+        else if(fileName.equals("file.txt")){
+            jarPath = "filejarPathHere";
+        }
+        // Getting the jar URL which contains target class
+        try {
+            URL[] classLoaderUrls = new URL[]{new URL(jarPath)};
+
+            // Create a new URLClassLoader
+            URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
+
+            // Load the target class
+            Class<?> beanClass = urlClassLoader.loadClass(className);
+
+            // Create a new instance from the loaded class
+            return beanClass.getConstructor().newInstance();
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
