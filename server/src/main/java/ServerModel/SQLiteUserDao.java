@@ -54,10 +54,11 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public User verifyUser(String name, String password) throws NeedTransactionException {
-        String query = "SELECT * FROM User WHERE Username=?";
+        String query = "SELECT * FROM User WHERE Username=? AND Password=?";
         try{
             PreparedStatement queryStatement = connection.prepareStatement(query);
             queryStatement.setString(1, name);
+            queryStatement.setString(2, password);
             ResultSet resultSet = queryStatement.executeQuery(query);
             //get data to build User object from resultSet
             UserInfo foundUserInfo = new UserInfo(resultSet.getString("Username"), resultSet.getString("Password"));
