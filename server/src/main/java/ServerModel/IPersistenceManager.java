@@ -5,7 +5,6 @@ package ServerModel;
  */
 
 interface IPersistenceManager {
-
     void beginTransaction();
 
     boolean endTransaction();

@@ -36,7 +36,7 @@ public class ServerModel {
     /*
     This holds all the information and calculations needed for the server.
      */
-
+    private int delta_n = 0;
     private static ServerModel instance = new ServerModel();
     private Map<String, User> users = new HashMap<>(); //Key=UserName
     //private Map<String, Game> games = new HashMap<>(); //Key=gameID
@@ -155,6 +155,7 @@ public class ServerModel {
         IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(currPlugin.getPManagerClassName());
         currPlugin.setPManager(persistenceManager);
         //TODO save n, the "n"
+        delta_n = Integer.parseInt(n);
     }
 
     private ArrayList<String> readFile(String fileName) {

@@ -8,7 +8,9 @@ import modeling.Player;
  * Created by tyler on 12/5/2017.
  */
 
+//Maybe we don't need this DAO
 interface IPlayerDao {
+
 
     boolean updatePlayer(Player player) throws NeedTransactionException;;
 
