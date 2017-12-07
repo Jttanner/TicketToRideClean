@@ -46,17 +46,6 @@ public class Player implements Comparator<Player> {
         setup();
     }
 
-    public  Player(String userName, HashMap resourceCards, List<Route> routes,
-                   List<DestinationCard> destinationCards, TrainCarList trainCarList, int points){
-        this.userName = userName;
-        this.playerName = userName;
-        this.resourceCards = resourceCards;
-        this.routes = routes;
-        this.destinationCards = destinationCards;
-        this.trainCarList = trainCarList;
-        this.points = points;
-    }
-
     private void setup() {
         resourceCards = new HashMap<>();
         trainCarList = new TrainCarList();

@@ -36,11 +36,7 @@ public class SQLitePlayerDao implements  IPlayerDao {
         String query = "create table if not exists Player \n" +
                 "( \n" +
                 "PlayerName text unique not null, \n" +
-                "ResourceCard text not null, \n" +
-                "Route text not null, \n" +
-                "DestinationCard text not null, \n" +
-                "Train text not null, \n" +
-                "Point text not null, \n" +
+                "PlayerInfo blob not null\n" +
                 ");";
         try{
             Statement statement = connection.createStatement();
@@ -53,17 +49,13 @@ public class SQLitePlayerDao implements  IPlayerDao {
 
     @Override
     public boolean updatePlayer(Player player) throws NeedTransactionException {
-        String query = "UPDATE tblPlayers SET PlayerName=? ResourceCard=? Route=? DestinationCard=? Train=? Point)=? +";
+        String query = "UPDATE tblPlayers SET PlayerInfo=? WHERE PlayerName=?";
         try{
             PreparedStatement queryStatement = connection.prepareStatement(query);
-            queryStatement.setString(1, player.getUserName());
-            queryStatement.setString(2, myGson.toJson(player.getResourceCards()));
-            queryStatement.setString(3, myGson.toJson(player.getRoutes()));
-            queryStatement.setString(4, myGson.toJson(player.getDestinationCards()));
-            queryStatement.setString(5, myGson.toJson(player.getTrainCarList()));
-            queryStatement.setString(6, myGson.toJson(player.getPoints()));
+            queryStatement.setString(1, myGson.toJson(player));
+            queryStatement.setString(2, player.getUserName());
             return queryStatement.execute();
-        } catch (Exception e){
+        } catch (SQLException e){
             e.printStackTrace();
             return false;
         }
@@ -76,14 +68,9 @@ public class SQLitePlayerDao implements  IPlayerDao {
             PreparedStatement queryStatement = connection.prepareStatement(query);
             queryStatement.setString(1, playerName);
             ResultSet resultSet = queryStatement.executeQuery();
-            Player foundPlayer = new Player(resultSet.getString("PlayerName"), myGson.fromJson(resultSet.getString("ResourceCard"), HashMap.class),
-                    Arrays.asList(myGson.fromJson(resultSet.getString("Route"), Route[].class)),
-                    Arrays.asList(myGson.fromJson(resultSet.getString("DestinationCard"), DestinationCard[].class)),
-                    myGson.fromJson(resultSet.getString("Train"), TrainCarList.class),
-                    Integer.parseInt(myGson.fromJson(resultSet.getString("Point"), String.class))
-            );
+            Player foundPlayer = myGson.fromJson(resultSet.getString("PlayerInfo"), Player.class);
             return foundPlayer;
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
             return null;
         }
@@ -95,7 +82,7 @@ public class SQLitePlayerDao implements  IPlayerDao {
         try{
             PreparedStatement statement = setupSaveQuery(players);
             return statement.execute();
-        } catch (Exception e){
+        } catch (SQLException e){
             e.printStackTrace();
             return false;
         }
