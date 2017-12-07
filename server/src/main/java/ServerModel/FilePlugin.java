@@ -19,8 +19,8 @@ public class FilePlugin implements IPlugin {
     }
 
     @Override
-    public User verifyUser(String name) throws NeedTransactionException {
-        return persistenceManager.getUserDao().verifyUser(name);
+    public User verifyUser(String name, String password) throws NeedTransactionException {
+        return persistenceManager.getUserDao().verifyUser(name, password);
     }
 
     @Override

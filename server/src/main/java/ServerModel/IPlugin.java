@@ -14,7 +14,7 @@ public interface IPlugin {
     /**Gets the plugin*/
     String getPluginName();
     /**Gets the user associated with a playername*/
-    User verifyUser(String playerName) throws NeedTransactionException;
+    User verifyUser(String playerName, String password) throws NeedTransactionException;
     /**Gets a game from a its gameID*/
     Game getGame(String gameID) throws NeedTransactionException;
     /**Gets a list of commands associated with a gameid*/

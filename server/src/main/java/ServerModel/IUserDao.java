@@ -10,7 +10,7 @@ interface IUserDao {
 
     boolean registerUser(String userName, String password) throws NeedTransactionException;;
 
-    User verifyUser(String name) throws NeedTransactionException;;
+    User verifyUser(String name, String password) throws NeedTransactionException;;
 
     boolean clear() throws NeedTransactionException;;
 
