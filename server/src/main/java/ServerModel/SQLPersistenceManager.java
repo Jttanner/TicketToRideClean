@@ -1,5 +1,9 @@
 package ServerModel;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  * Created by tyler on 12/5/2017.
  */
@@ -13,6 +17,8 @@ public class SQLPersistenceManager implements IPersistenceManager {
     private IPlayerDao playerDao;
     /**The CommandDao*/
     private ICommandDao commandDao;
+
+    String databaseURL = "database url placeholder";
 
     @Override
     public void beginTransaction() {
@@ -31,41 +37,78 @@ public class SQLPersistenceManager implements IPersistenceManager {
 
     @Override
     public void createGameDao() {
+        if (gameDao == null){
+            try{
+                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void createUserDao() {
-
+        if (userDao == null){
+            try{
+                userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void createPlayerDao() {
-
+        if (playerDao == null){
+            try{
+                playerDao = new SQLitePlayerDao(DriverManager.getConnection(databaseURL));
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void createCommandDao() {
-
+        if (commandDao == null){
+            try{
+                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public IUserDao getUserDao() {
-        return null;
+        if (userDao == null){
+            createUserDao();
+        }
+        return userDao;
     }
 
     @Override
     public IGameDao getGameDao() {
-        return null;
+        if (gameDao == null){
+            createGameDao();
+        }
+        return gameDao;
     }
 
     @Override
     public IPlayerDao getPlayerDao() {
-        return null;
+        if (playerDao == null){
+            createPlayerDao();
+        }
+        return playerDao;
     }
 
     @Override
     public ICommandDao getCommandDao() {
-        return null;
+        if (commandDao == null){
+            createCommandDao();
+        }
+        return commandDao;
     }
 
 }

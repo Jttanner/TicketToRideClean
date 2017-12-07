@@ -8,6 +8,10 @@ import java.util.Map;
  */
 
 public class Route {
+    public Route(){
+
+    }
+
     public Route(City first, City second, String trainColorNeeded, int distance){
         firstCity = first;
         secondCity = second;

@@ -37,13 +37,6 @@ public class ClaimRouteCommand extends ClaimRouteCommandData implements ICommand
     public CommandResult execute() {
         ServerFacade facade = ServerFacade.getInstance();
         CommandResult result;
-
-
-
-
-        //Temporary Implementation. May need to change
-        //facade.addCommandToList(claimRouteCommandData.getGameID(), claimRouteCommandData);
-        //result = new CommandResult(true);
         result = ServerFacade.getInstance().claimRoute(this.claimRouteCommandData);
 
         if(result.isSuccess()){
