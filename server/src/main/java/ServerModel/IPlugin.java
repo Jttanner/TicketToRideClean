@@ -27,8 +27,6 @@ public interface IPlugin {
     boolean saveGameCommands(String gameID, List<Command> commands) throws NeedTransactionException;
     /**Clears the database*/
     boolean clear() throws NeedTransactionException;
-    /**Gets the PManager class name*/
-    String getPManagerClassName();
     /**Sets the p Manager*/
     void setPManager(IPersistenceManager persistenceManager);
 }

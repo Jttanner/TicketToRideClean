@@ -54,11 +54,6 @@ public class SQLPlugin implements IPlugin {
     }
 
     @Override
-    public String getPManagerClassName() {
-        return "SQLPersistenceManager";
-    }
-
-    @Override
     public void setPManager(IPersistenceManager persistenceManager) {
         this.persistenceManager = persistenceManager;
     }

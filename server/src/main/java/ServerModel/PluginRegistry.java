@@ -20,35 +20,9 @@ public class PluginRegistry {
     /**Creates the current plugin from the name and then returns the appropriate Persistence Manager
      * @param pluginName The class name of the plugin you are going to use
      * @return The IPersistenceManager*/
-    IPersistenceManager create(String pluginName){
-
-        Class<?> c = null;
-        try {
-            c = Class.forName(pluginName);
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        try {
-            currPlugin = (IPlugin) c.newInstance();
-            //get the correct Persistence manager
-            c = Class.forName(currPlugin.getPManagerClassName());
-            //return it
-            return (IPersistenceManager) c.newInstance();
-        }
-        catch (InstantiationException e) {
-            e.printStackTrace();
-            return null;
-        }
-        catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+    IPersistenceManager create(String fileName, String pluginName){
+        Loader loader = new Loader();
+        return (IPersistenceManager) loader.loadClass(fileName,pluginName);
     }
 
     public boolean loadConfig(){

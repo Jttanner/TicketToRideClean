@@ -58,9 +58,4 @@ public class FilePlugin implements IPlugin {
     public void setPManager(IPersistenceManager persistenceManager) {
         this.persistenceManager = persistenceManager;
     }
-
-    @Override
-    public String getPManagerClassName() {
-        return "FilePersistenceManager";
-    }
 }

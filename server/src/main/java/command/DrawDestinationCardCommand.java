@@ -5,6 +5,7 @@ import com.sun.corba.se.spi.activation.Server;
 import java.util.List;
 
 import ServerModel.ServerFacade;
+import ServerModel.ServerModel;
 import commandData.DrawDestinationCardCommandData;
 import modeling.DestinationCard;
 import modeling.DestinationCardList;
