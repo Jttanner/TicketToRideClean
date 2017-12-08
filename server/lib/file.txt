@@ -1,2 +1,5 @@
 FilePlugin
 FilePersistenceManager
+FileGameDao
+FileCommandDao
+FileUserDao

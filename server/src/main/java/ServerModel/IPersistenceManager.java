@@ -10,20 +10,16 @@ interface IPersistenceManager {
     boolean endTransaction();
 
     boolean clearDatabase()throws NeedTransactionException;
-
-    void createGameDao();
-
-    void createUserDao();
-
-    void createPlayerDao();
-
-    void createCommandDao();
+//
+//    void createGameDao();
+//
+//    void createUserDao();
+//
+//    void createCommandDao();
 
     IUserDao getUserDao();
 
     IGameDao getGameDao();
-
-    IPlayerDao getPlayerDao();
 
     ICommandDao getCommandDao();
 

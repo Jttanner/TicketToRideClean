@@ -1,5 +1,6 @@
 package ServerModel;
 
+import java.io.File;
 import java.util.List;
 
 import commandData.Command;
@@ -9,6 +10,17 @@ import commandData.Command;
  */
 
 public class FileCommandDao implements ICommandDao {
+
+    public FileCommandDao () {
+        File dir = new File("Command");
+        boolean successful = dir.mkdir();
+        if (successful) {
+            System.out.println("Command Directory is created!");
+        }
+        else {
+            System.out.println("Command Directory already exists");
+        }
+    }
     @Override
     public List<Command> getCommandList(String gameID) throws NeedTransactionException {
         return null;

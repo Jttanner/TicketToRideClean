@@ -14,7 +14,7 @@ public class SQLPersistenceManager implements IPersistenceManager {
     /**The UserDao*/
     private IUserDao userDao;
     /**The PlayerDao*/
-    private IPlayerDao playerDao;
+//    private IPlayerDao playerDao;
     /**The CommandDao*/
     private ICommandDao commandDao;
 
@@ -35,19 +35,52 @@ public class SQLPersistenceManager implements IPersistenceManager {
         return false;
     }
 
-    @Override
-    public void createGameDao() {
-        if (gameDao == null){
-            try{
-                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-    }
+//    @Override
+//    public void createGameDao() {
+//        if (gameDao == null){
+//            try{
+//                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
+//            } catch (SQLException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void createUserDao() {
+//        if (userDao == null){
+//            try{
+//                userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
+//            }catch (SQLException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void createPlayerDao() {
+//        if (playerDao == null){
+//            try{
+//                playerDao = new SQLitePlayerDao(DriverManager.getConnection(databaseURL));
+//            }catch (SQLException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public void createCommandDao() {
+//        if (commandDao == null){
+//            try{
+//                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
+//            }catch (SQLException e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     @Override
-    public void createUserDao() {
+    public IUserDao getUserDao() {
         if (userDao == null){
             try{
                 userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
@@ -55,58 +88,37 @@ public class SQLPersistenceManager implements IPersistenceManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void createPlayerDao() {
-        if (playerDao == null){
-            try{
-                playerDao = new SQLitePlayerDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void createCommandDao() {
-        if (commandDao == null){
-            try{
-                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public IUserDao getUserDao() {
-        if (userDao == null){
-            createUserDao();
-        }
         return userDao;
     }
 
     @Override
     public IGameDao getGameDao() {
         if (gameDao == null){
-            createGameDao();
+            try{
+                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
         }
         return gameDao;
     }
 
-    @Override
-    public IPlayerDao getPlayerDao() {
-        if (playerDao == null){
-            createPlayerDao();
-        }
-        return playerDao;
-    }
+//    @Override
+//    public IPlayerDao getPlayerDao() {
+//        if (playerDao == null){
+//            createPlayerDao();
+//        }
+//        return playerDao;
+//    }
 
     @Override
     public ICommandDao getCommandDao() {
         if (commandDao == null){
-            createCommandDao();
+            try{
+                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
         return commandDao;
     }

@@ -1,18 +1,24 @@
 package ServerModel;
 
+import java.util.ArrayList;
+
 /**
  * Created by tyler on 12/5/2017.
  */
 
 public class FilePersistenceManager implements IPersistenceManager {
-
-
+    Loader loader;
+    ArrayList<String> fileArgs;
+    String fileName;
+    FilePersistenceManager (String fileName) {
+        loader = new Loader();
+        fileArgs = loader.readFile(fileName);
+        this.fileName = fileName;
+    }
 
     private IGameDao gameDao;
 
     private IUserDao userDao;
-
-    private IPlayerDao playerDao;
 
     private ICommandDao commandDao;
 
@@ -32,42 +38,31 @@ public class FilePersistenceManager implements IPersistenceManager {
     }
 
     @Override
-    public void createGameDao() {
-    }
-
-    @Override
-    public void createUserDao() {
-
-    }
-
-    @Override
-    public void createPlayerDao() {
-
-    }
-
-    @Override
-    public void createCommandDao() {
-
-    }
-
-    @Override
     public IUserDao getUserDao() {
-        return null;
+        if(userDao == null) {
+            //Create the gameDao via reflection?
+            userDao = (FileUserDao) loader.loadClass(fileName, fileArgs.get(4));
+        }
+        return userDao;
     }
 
     @Override
     public IGameDao getGameDao() {
-        return null;
+        if(gameDao == null) {
+            //Create the gameDao via reflection?
+            gameDao = (FileGameDao) loader.loadClass(fileName, fileArgs.get(2));
+        }
+        return gameDao;
     }
 
-    @Override
-    public IPlayerDao getPlayerDao() {
-        return null;
-    }
 
     @Override
     public ICommandDao getCommandDao() {
-        return null;
+        if(commandDao == null) {
+            //Create the gameDao via reflection?
+            commandDao = (FileCommandDao) loader.loadClass(fileName, fileArgs.get(3));
+        }
+        return commandDao;
     }
 
 }
