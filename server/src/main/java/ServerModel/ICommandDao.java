@@ -13,5 +13,7 @@ interface ICommandDao {
 
     boolean addCommandsToGame(String gameID, List<Command> command) throws NeedTransactionException;;
 
+    boolean removeCommands(String gameID) throws NeedTransactionException;
+
     boolean clear() throws NeedTransactionException;
 }

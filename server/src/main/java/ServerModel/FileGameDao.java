@@ -49,7 +49,7 @@ public class FileGameDao implements IGameDao {
         File gameFile;
         boolean result = false;
         //Create new txt file in Game
-        gameFile = new File("User/" + game.getGameID() + ".txt");
+        gameFile = new File("Game/" + game.getGameID() + ".txt");
         try {
             if (gameFile.createNewFile()){
                 System.out.println("File" + game.getGameID() + "is created!");
