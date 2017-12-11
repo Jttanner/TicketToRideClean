@@ -33,6 +33,29 @@ public class FileUserDao implements IUserDao {
 
     @Override
     public boolean clear() throws NeedTransactionException {
-        return false;
+        String userFile;
+        File directory;
+        boolean result = false;
+        //fileName = new String(Files.readAllBytes(Paths.get("Game")));
+        userFile = "User";
+        directory = new File(userFile);
+        String[]entries = directory.list();
+        Boolean temp = true;
+        if(entries != null) {
+            for(String s: entries) {
+                File currentFile = new File(directory.getPath(), s);
+                result = currentFile.delete();
+                if(!result) {
+                    temp = false;
+                }
+            }
+        }
+        if(temp) {
+            System.out.println("Clear successful");
+        }
+        else {
+            System.out.println("Clear unsuccessful");
+        }
+        return result;
     }
 }

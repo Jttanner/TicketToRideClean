@@ -23,16 +23,41 @@ public class FileCommandDao implements ICommandDao {
     }
     @Override
     public List<Command> getCommandList(String gameID) throws NeedTransactionException {
+
         return null;
     }
 
     @Override
     public boolean addCommandsToGame(String gameID, List<Command> command) throws NeedTransactionException {
+
         return false;
     }
 
     @Override
     public boolean clear() throws NeedTransactionException {
-        return false;
+        String commandFile;
+        File directory;
+        boolean result = false;
+        //fileName = new String(Files.readAllBytes(Paths.get("Game")));
+        commandFile = "Command";
+        directory = new File(commandFile);
+        String[]entries = directory.list();
+        Boolean temp = true;
+        if(entries != null) {
+            for(String s: entries) {
+                File currentFile = new File(directory.getPath(), s);
+                result = currentFile.delete();
+                if(!result) {
+                    temp = false;
+                }
+            }
+        }
+        if(temp) {
+            System.out.println("Clear successful");
+        }
+        else {
+            System.out.println("Clear unsuccessful");
+        }
+        return result;
     }
 }
