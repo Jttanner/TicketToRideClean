@@ -1,6 +1,8 @@
 package ServerModel;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -18,7 +20,9 @@ public class SQLPersistenceManager implements IPersistenceManager {
     /**The CommandDao*/
     private ICommandDao commandDao;
 
-    String databaseURL = "database url placeholder";
+    String pluginName = "SQLPlugin";
+
+    String databaseURL = "c/Users/jontt/AndroidStudioProjects/TicketToRidePhase3/TicketToRidePhase3Testing/test.db";
 
     @Override
     public void beginTransaction() {
@@ -83,8 +87,21 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public IUserDao getUserDao() {
         if (userDao == null){
             try{
-                userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
+                //userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
+                Class<?> myUserDaoClass = null;
+                myUserDaoClass = Class.forName(pluginName + "UserDao");
+                userDao = (IUserDao) myUserDaoClass.getConstructor(Connection.class).newInstance(DriverManager.getConnection(databaseURL));
+            }catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
@@ -95,8 +112,20 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public IGameDao getGameDao() {
         if (gameDao == null){
             try{
-                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
-            } catch (SQLException e){
+                Class<?> myGameDaoClass = null;
+                myGameDaoClass = Class.forName(pluginName);
+                gameDao = (IGameDao) myGameDaoClass.getConstructor(Connection.class).newInstance(DriverManager.getConnection(databaseURL));
+            } catch (ClassNotFoundException e){
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
@@ -115,8 +144,21 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public ICommandDao getCommandDao() {
         if (commandDao == null){
             try{
-                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
+               // commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
+                Class<?> myCommandDaoClass = null;
+                myCommandDaoClass = Class.forName(pluginName + "SQLiteCommandDao");
+                commandDao = (ICommandDao) myCommandDaoClass.getConstructor(Connection.class).newInstance(DriverManager.getConnection(databaseURL));
+            }catch (ClassNotFoundException e){
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
         }

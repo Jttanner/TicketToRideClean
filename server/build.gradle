@@ -5,6 +5,8 @@ dependencies {
     compile project(':sharedlib')
     compile 'com.joanzapata.android:android-iconify-parent:1.0.11'
     compile 'com.joanzapata.android:android-iconify:1.0.11'
+    compile 'junit:junit:4.12'
+    compile files('lib/sqlite-jdbc-3.7.2.jar')
 }
 
 sourceCompatibility = "1.7"
