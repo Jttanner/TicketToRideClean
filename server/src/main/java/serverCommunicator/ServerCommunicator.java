@@ -115,6 +115,7 @@ public class ServerCommunicator {
         public static void main(String[] args) {
             ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
 
+
             new ServerCommunicator().run("8080");
         }
 
