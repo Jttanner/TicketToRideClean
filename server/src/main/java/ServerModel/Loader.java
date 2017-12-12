@@ -16,6 +16,7 @@ public class Loader {
 
     public ArrayList<String> readFile(String fileName) {
         // This will reference one line at a time
+        fileName = "server\\lib\\" + fileName;
         String line = null;
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
@@ -51,10 +52,10 @@ public class Loader {
     public Object loadClass(String fileName,String className) {
         String jarPath = null;
         if(fileName.equals("sql.txt")){
-            jarPath = "sqljarPathHere";
+            jarPath = "C:\\Users\\tyler\\AndroidStudioProjects\\TicketToRide\\plugins\\SQL.jar";
         }
         else if(fileName.equals("file.txt")){
-            jarPath = "filejarPathHere";
+            jarPath = "C:\\Users\\tyler\\AndroidStudioProjects\\TicketToRide\\plugins\\File.jar";
         }
         // Getting the jar URL which contains target class
         try {
