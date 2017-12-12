@@ -14,19 +14,21 @@ public interface IPlugin {
     /**Gets the plugin*/
     String getPluginName();
     /**Gets the user associated with a playername*/
-    User verifyUser(String playerName, String password) throws NeedTransactionException;
+    User verifyUser(String playerName, String password);
     /**Gets a game from a its gameID*/
-    Game getGame(String gameID) throws NeedTransactionException;
+    Game getGame(String gameID) ;
     /**Gets a list of commands associated with a gameid*/
-    List<Command> getGameCommands(String gameID) throws NeedTransactionException;
+    List<Command> getGameCommands(String gameID) ;
     /**saves a user object to the DB*/
-    boolean saveUser(User user) throws NeedTransactionException;
+    boolean saveUser(User user) ;
     /**Saves a game to the game*/
-    boolean saveGame(Game game) throws NeedTransactionException;
-    /**Saves a list of commands for a game*/
-    boolean saveGameCommands(String gameID, List<Command> commands) throws NeedTransactionException;
+    boolean saveGame(Game game) ;
+
+    boolean saveGameCommands(String gameID, Command commands);
     /**Clears the database*/
-    boolean clear() throws NeedTransactionException;
+    boolean clear();
     /**Sets the p Manager*/
     void setPManager(IPersistenceManager persistenceManager);
+
+    boolean clearCommandList(String gameID);
 }

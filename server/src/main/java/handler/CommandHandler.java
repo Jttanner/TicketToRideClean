@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
+import ServerModel.ServerModel;
 import command.AddChatCommand;
 import command.ClaimDestinationCardCommand;
 import command.ClaimInitialDestinationCardCommand;
@@ -61,6 +62,10 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             Command commandData = null;
             System.out.println("Command handler: " + cmd.getType());
             switch (cmd.getType()) {
+                case "setZero":
+                    Command ZeroCommand = gson.fromJson(reqData,Command.class);
+                    ServerModel.getInstance().zeroOut((String)ZeroCommand.getData());
+                    break;
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
                     CreateGameCommand realCommand = new CreateGameCommand(command.getGame());

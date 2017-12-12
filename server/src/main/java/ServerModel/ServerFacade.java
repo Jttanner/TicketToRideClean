@@ -49,7 +49,13 @@ public class ServerFacade {
 
     public LoginResult login(LoginRequest request){
         User user = serverModel.login(request.getUserName(), request.getPassword());
+
+
         if(user != null && user.getInfo() != null){
+            String gameID = ServerModel.getInstance().checkUserInGame(user.getUserName());
+            if (!gameID.equals("no")) {
+                return new LoginResult(true, "there is a match", gameID,serverModel.getGames(),user);
+            }
             return new LoginResult(true, "login success!",user);
         }
         else{
@@ -111,10 +117,25 @@ public class ServerFacade {
      * @param gameID THe game id key*/
     public void addCommandToList(String gameID, Command command){
         Map<String, List<Command>> commandListMap = serverModel.getCommandListMap();
-        if(!commandListMap.containsKey(gameID))
+        if(!commandListMap.containsKey(gameID)) {
             commandListMap.put(gameID, new ArrayList<Command>());
+        }
+        //Save the command to the database
+        saveCommands(gameID,command);
         commandListMap.get(gameID).add(command);
 
+    }
+    /**Hanldes the saving of command data objects to the database
+     * @param gameID The correct gameID
+     * @param command The command to be saved*/
+    private void saveCommands(String gameID, Command command) {
+        serverModel.getPlugin().saveGameCommands(gameID,command);
+        //see if th commandlist is equal to the delta_n we were given
+        if(serverModel.getPlugin().getGameCommands(gameID).size() == serverModel.getDelta_n()) {
+            System.out.println("ServerFacade:saveCommands: delta_n = num of commands inserted");
+            serverModel.getPlugin().saveGame(serverModel.getGames().findGame(gameID));
+            serverModel.getPlugin().clearCommandList(gameID);
+        }
     }
 
     public List<DestinationCard> getDestinationCardList(DrawDestinationCardCommandData data) {

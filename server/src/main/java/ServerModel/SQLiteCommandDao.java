@@ -3,7 +3,6 @@ package ServerModel;
 import com.google.gson.Gson;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +48,7 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public List<Command> getCommandList(String gameID) throws NeedTransactionException {
+    public List<Command> getCommandList(String gameID) {
         String query = "SELECT CommandInfo FROM Command WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
@@ -70,27 +69,25 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean addCommandsToGame(String gameID, List<Command> commands) throws NeedTransactionException {
+    public boolean addCommandsToGame(String gameID, Command command) {
         String query = "INSERT INTO COMMAND VALUES";
         try{
             connection = DriverManager.getConnection(connectionString);
-            for (int i = 0; i < commands.size(); ++i){
+            //for (int i = 0; i < commands.size(); ++i){
                 query += "(?, ?)";
-                if (i == commands.size()-1){
+            //    if (i == commands.size()-1){
                     query += ";";
-                } else{
-                    query += ",";
-                }
-            }
+           //     } else{
+          //          query += ",";
+          //      }
+         //   }
             int j = 0;
             PreparedStatement statement = connection.prepareStatement(query);
-            for (Command command : commands){
+          //  for (Command command : commands){
                 statement.setString(j++, gameID);
                 statement.setString(j++, myGson.toJson(command));
-            }
-            boolean success =statement.execute();
-            connection.close();
-            return  success;
+          //  }
+            return statement.execute();
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -98,7 +95,12 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean removeCommands(String gameID) {
+        return false;
+    }
+
+    @Override
+    public boolean clear() {
         String query = "DELETE FROM Command";
         try{
             connection = DriverManager.getConnection(connectionString);

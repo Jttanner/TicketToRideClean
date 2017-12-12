@@ -10,8 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 
 import modeling.Game;
 
@@ -21,17 +21,15 @@ import modeling.Game;
 
 public class FileGameDao implements IGameDao {
 
-    private FileWriter fileWriter;
-    private File directory;
-    boolean result; //Keep
-    String stringtoJson;
-    Gson gson; //Keep
-    String fileName;
-    String line;
+    private Gson gson = new Gson(); //Keep
 
+    /*
+    * When the FileGameDao is created the Folder holding the game texts files is created
+    *
+    */
     public FileGameDao() {
-        File dir = new File("Game");
-        boolean successful = dir.mkdir();
+        File directory = new File("Game");
+        boolean successful = directory.mkdir();
         if (successful) {
             System.out.println("Game Directory is created!");
         }
@@ -39,12 +37,21 @@ public class FileGameDao implements IGameDao {
             System.out.println("Game Directory already exists");
         }
     }
+
+    /*
+    * Creates the game file, if it doesn't exist
+    * Updates the game file with a new Json string
+    */
     @Override
-    public boolean updateGameState(Game game) throws NeedTransactionException {
+    public boolean updateGameState(Game game)  {
+        FileWriter fileWriter;
+        String gameToString;
+        File gameFile;
+        boolean result = false;
         //Create new txt file in Game
-        directory = new File("User/" + game.getGameID() + ".txt");
+        gameFile = new File("Game/" + game.getGameID() + ".txt");
         try {
-            if (directory.createNewFile()){
+            if (gameFile.createNewFile()){
                 System.out.println("File" + game.getGameID() + "is created!");
             }else{
                 System.out.println("File" + game.getGameID() +  "already exists.");
@@ -54,9 +61,9 @@ public class FileGameDao implements IGameDao {
         }
         //Update file in Game Directory
         try {
-            stringtoJson = gson.toJson(game);
-            fileWriter = new FileWriter(directory);
-            fileWriter.write(stringtoJson);
+            gameToString = gson.toJson(game);
+            fileWriter = new FileWriter(gameFile);
+            fileWriter.write(gameToString);
             fileWriter.close();
 
             result = true;
@@ -65,17 +72,24 @@ public class FileGameDao implements IGameDao {
         }
         return result;
     }
-
+    /*
+    * Gets the Json string from the game file and then converts it back to a game object
+    *
+    */
     @Override
-    public Game getGameState(String gameID) throws NeedTransactionException {
-        try {
-            fileName = new String(Files.readAllBytes(Paths.get("Game/" + gameID + ".txt")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Game getGameState(String gameID) {
+        String gameFile;
+        String line;
+        Game game = null;
+//        try {
+//            fileName = new String(Files.readAllBytes(Paths.get("Game/" + gameID + ".txt")));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        gameFile = ("Game/" + gameID + ".txt");
         try {
             // FileReader reads text files in the default encoding.
-            FileReader fileReader = new FileReader(fileName);
+            FileReader fileReader = new FileReader(gameFile);
 
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -84,39 +98,68 @@ public class FileGameDao implements IGameDao {
 
             // Always close files.
             bufferedReader.close();
+            game = gson.fromJson(line, Game.class);
         }
         catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");
+            System.out.println("Unable to open file '" + gameFile + "'");
         }
         catch(IOException ex) {
-            System.out.println("Error reading file '" + fileName + "'");
+            System.out.println("Error reading file '" + gameFile + "'");
             // Or we could just do this:
             // ex.printStackTrace();
         }
-        Game game = gson.fromJson(line, Game.class);
         return game;
     }
-
+    /*
+    * Delets the game file from the folder
+    *
+    */
     @Override
-    public boolean removeGame(String gameID) throws NeedTransactionException {
-        try {
-            fileName = new String(Files.readAllBytes(Paths.get("Game/" + gameID + ".txt")));
-            directory = new File(fileName);
-            result = directory.delete();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public boolean removeGame(String gameID) {
+        String gameFile;
+        File directory;
+        boolean result = false;
+        //Removes the Game
+        //            fileName = new String(Files.readAllBytes(Paths.get("Game/" + gameID + ".txt")));
+        gameFile = "Game/" + gameID + ".txt";
+        directory = new File(gameFile);
+        result = directory.delete();
+        if(result) {
+            System.out.println("Successfully deleted game: " + gameID);
+        }
+        else {
+            System.out.println(gameID + " does not exist or not deleted :o");
         }
         return result;
     }
-
+    /*
+    * Clears the game folder
+    *
+    */
     @Override
-    public boolean clear() throws NeedTransactionException {
-        try {
-            fileName = new String(Files.readAllBytes(Paths.get("Game")));
-            directory = new File(fileName);
-            result = directory.delete();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public boolean clear() {
+        String gameFile;
+        File directory;
+        boolean result = false;
+        //fileName = new String(Files.readAllBytes(Paths.get("Game")));
+        gameFile = "Game";
+        directory = new File(gameFile);
+        String[]entries = directory.list();
+        Boolean temp = true;
+        if(entries != null) {
+            for(String s: entries) {
+                File currentFile = new File(directory.getPath(), s);
+                result = currentFile.delete();
+                if(!result) {
+                    temp = false;
+                }
+            }
+        }
+        if(temp) {
+            System.out.println("Clear successful");
+        }
+        else {
+            System.out.println("Clear unsuccessful");
         }
         return result;
     }

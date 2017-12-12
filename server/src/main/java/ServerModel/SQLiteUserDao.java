@@ -36,7 +36,7 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     @Override
-    public boolean registerUser(String userName, String password) throws NeedTransactionException {
+    public boolean registerUser(String userName, String password) {
         String query = "INSERT INTO User(Username, Password) VALUES(?, ?)";
         try{
             if (verifyUser(userName, password) != null){
@@ -55,7 +55,7 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     @Override
-    public User verifyUser(String name, String password) throws NeedTransactionException {
+    public User verifyUser(String name, String password) {
         String query = "SELECT * FROM User WHERE Username=? AND Password=?";
         try{
             PreparedStatement queryStatement = connection.prepareStatement(query);
@@ -73,7 +73,7 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean clear() {
         String query = "DELETE * FROM User";
         try{
             PreparedStatement queryStatement = connection.prepareStatement(query);

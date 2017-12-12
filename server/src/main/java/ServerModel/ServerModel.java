@@ -22,6 +22,7 @@ import commandData.ChatCommandData;
 import commandData.Command;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -50,6 +51,30 @@ public class ServerModel {
     private IPersistenceManager pManager;*/
     /**Our current plugin object*/
     private IPlugin currPlugin;
+
+    public void zeroOut(String playerID){
+        for(Game game : gameList.getGames()){
+            for(Player player : game.getPlayers()){
+                if(player.getPlayerName().equals(playerID)){
+                    player.setCommandIndex(0);
+                }
+            }
+        }
+    }
+
+    public String checkUserInGame(String userId){
+        if(gameList != null){
+            List<Game> games = gameList.getGames();
+            for(Game game : games){
+                for(Player player : game.getPlayers()){
+                    if(userId.equals(player.getPlayerName())){
+                        return game.getGameID();
+                    }
+                }
+            }
+        }
+        return "no";
+    }
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -81,12 +106,19 @@ public class ServerModel {
     }
 
     User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
-        return userInfoList.register(userName, password);
+        User user = userInfoList.register(userName, password);
+        currPlugin.saveUser(user);
+        return user;
     }
 
     User login(String userName, String password){
         //If the account exists and matches with one in the database...
-        return new User(userInfoList.login(userName, password));
+        //User user = new User(userInfoList.login(userName, password));
+        User myUser = currPlugin.verifyUser(userName, password);
+        if(myUser.getUserName().equals(userName) && myUser.getInfo().getPassword().equals(password)){
+            userInfoList.login(userName, password);
+        }
+        return myUser;
     }
 
     boolean createGame(Game newGame){
@@ -147,7 +179,7 @@ public class ServerModel {
     /**
      * @param fileName The PluginName
      * @param n "n" save integer*/
-    public void saveArgs(String fileName, String n) throws FileNotFoundException {
+    public void saveArgs(String fileName, String n) {
         Loader loader = new Loader();
         ArrayList<String> fileArgs = loader.readFile(fileName);
 
@@ -164,5 +196,8 @@ public class ServerModel {
     }
 
 
+    public int getDelta_n() {
+        return delta_n;
+    }
 
 }

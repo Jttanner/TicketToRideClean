@@ -1,5 +1,6 @@
 package ui.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,5 +21,6 @@ public class LoginActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.fragment_spot,fragment).commit();
         }
     }
+
 
 }

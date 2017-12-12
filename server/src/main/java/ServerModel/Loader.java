@@ -17,6 +17,7 @@ public class Loader {
     public ArrayList<String> readFile(String fileName) {
         // This will reference one line at a time
         String line = null;
+        fileName = "server\\lib\\" + fileName;
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
             // FileReader reads text files in the default encoding.
@@ -50,11 +51,11 @@ public class Loader {
 
     public Object loadClass(String fileName,String className) {
         String jarPath = null;
-        if(fileName.equals("sql.txt")){
-            jarPath = "sqljarPathHere";
+        if(fileName.equals("file.txt")){
+            jarPath = "\\plugins\\File.jar";
         }
-        else if(fileName.equals("file.txt")){
-            jarPath = "filejarPathHere";
+        else if(fileName.equals("sql.txt")){
+            jarPath = "\\plugins\\SQL.jar";
         }
         // Getting the jar URL which contains target class
         try {

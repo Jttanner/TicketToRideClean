@@ -45,7 +45,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     @Override
-    public boolean updateGameState(Game game) throws NeedTransactionException {
+    public boolean updateGameState(Game game) {
         String query = "UPDATE Game set GameInfo=? WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
@@ -62,7 +62,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     @Override
-    public Game getGameState(String gameID) throws NeedTransactionException {
+    public Game getGameState(String gameID)  {
         String query = "SELECT Gameinfo FROM Game WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
@@ -78,7 +78,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     @Override
-    public boolean removeGame(String gameID) throws NeedTransactionException {
+    public boolean removeGame(String gameID)  {
         String query = "DELETE FROM GAME WHERE GameID=?";
         try{
             PreparedStatement statement = connection.prepareStatement(query);
@@ -91,7 +91,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean clear() {
         String query = "DELETE FROM GAME";
         try{
             Statement statement = connection.createStatement();
