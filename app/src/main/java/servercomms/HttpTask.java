@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
+import clientModel.CModel;
 import commandData.ClaimDestinationCardCommandData;
 import commandData.Command;
 import commandData.CreateGameCommandData;
@@ -14,7 +15,11 @@ import commandData.DrawTrainCardCommandData;
 import commandData.GetCmndDataFromServer;
 import commandData.GetGameListCommandData;
 import commandData.JoinGameCommandData;
+import commandData.StartGameCommandData;
 import encoder.Encoder;
+import modeling.Game;
+import modeling.GameList;
+import poller.Poller;
 import request.LoginRequest;
 import request.RegisterRequest;
 import result.CommandResult;
@@ -109,6 +114,25 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         ClientFacade facade = ClientFacade.getInstance();
         super.onPostExecute(result);
         if (result instanceof LoginResult) {
+            if(((LoginResult) result).getMessage().equals("there is a match")){
+                GameList gameList = ((LoginResult) result).getGameList();
+                CModel.getInstance().setAllGames(gameList);
+
+                for(Game game : gameList.getGames()){
+                    if(game.getGameID().equals(((LoginResult) result).getGameID())){
+                        CModel.getInstance().setCurrGame(game);
+
+
+                    }
+                }
+                facade.updateUser(((LoginResult) result).getUser());
+
+                CModel.getInstance().getUserPlayer().setCommandIndex(0);
+                //CModel.getInstance().notifyWaitingroom();
+
+
+            }
+            else
             facade.updateUser(((LoginResult) result).getUser());
         } else if (result instanceof RegisterResult) {
             facade.updateUser(((RegisterResult) result).getUser());

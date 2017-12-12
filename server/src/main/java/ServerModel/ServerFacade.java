@@ -49,7 +49,13 @@ public class ServerFacade {
 
     public LoginResult login(LoginRequest request){
         User user = serverModel.login(request.getUserName(), request.getPassword());
+
+
         if(user != null && user.getInfo() != null){
+            String gameID = ServerModel.getInstance().checkUserInGame(user.getUserName());
+            if (!gameID.equals("no")) {
+                return new LoginResult(true, "there is a match", gameID,serverModel.getGames(),user);
+            }
             return new LoginResult(true, "login success!",user);
         }
         else{

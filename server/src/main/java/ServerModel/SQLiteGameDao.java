@@ -3,6 +3,7 @@ package ServerModel;
 import com.google.gson.Gson;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +19,12 @@ public class SQLiteGameDao implements IGameDao {
 
     Connection connection;
 
+    String connectionString;
+
     Gson myGson = new Gson();
 
-    public SQLiteGameDao(Connection connection){
-        this.connection = connection;
+    public SQLiteGameDao(String connectionString){
+        this.connectionString = connectionString;
         createTableIfNotExists();
     }
 
@@ -32,8 +35,10 @@ public class SQLiteGameDao implements IGameDao {
                 "GameInfo blob not null\n" +
                 ");";
         try{
+            connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();
             statement.execute(query);
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -43,10 +48,13 @@ public class SQLiteGameDao implements IGameDao {
     public boolean updateGameState(Game game) {
         String query = "UPDATE Game set GameInfo=? WHERE GameID=?";
         try{
+            connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, myGson.toJson(game));
             statement.setString(2, game.getGameID());
-            return statement.execute();
+            boolean success = statement.execute();
+            connection.close();
+            return success;
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -57,9 +65,11 @@ public class SQLiteGameDao implements IGameDao {
     public Game getGameState(String gameID)  {
         String query = "SELECT Gameinfo FROM Game WHERE GameID=?";
         try{
+            connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, gameID);
             ResultSet resultSet = statement.executeQuery();
+            connection.close();
             return myGson.fromJson(resultSet.getString("GameInfo"), Game.class);
         }catch (SQLException e){
             e.printStackTrace();

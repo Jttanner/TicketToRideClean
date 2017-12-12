@@ -13,10 +13,15 @@ import android.widget.Toast;
 
 import Adapters.PlayerListAdapter;
 import MVP_coms_classes.MVP_WaitingRoom;
+import clientCommands.ReStartClient;
+import clientCommands.StartGameClient;
 import clientModel.CModel;
+import commandData.Command;
 import modeling.Game;
+import modeling.Player;
 import poller.Poller;
 import presenters.WaitingRoomPresenter;
+import servercomms.ServerProxy;
 import teamjapannumbahone.tickettoride.R;
 
 /**
@@ -57,6 +62,14 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
         setupMVP();
         wireUp();
         //Poller.getInstance().updateGameList();
+//        Player player = CModel.getInstance().getUserPlayer();
+//        player.setCommandIndex(0);
+//        Command command = new Command();
+//        command.setType("setZero");
+//        command.setData(player.getPlayerName());
+     //   ServerProxy.getInstance().sendCommand(command);
+        ReStartClient command = new ReStartClient();
+        command.execute();
         Poller.getInstance().getCommandList();
 
     }
@@ -104,6 +117,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 
         playerListView = (ListView) findViewById(R.id.waitingRoom_PlayerList);
         playerListView.setAdapter(playerListAdapter);
+
     }
 
 

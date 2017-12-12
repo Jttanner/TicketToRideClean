@@ -17,6 +17,7 @@ public class Loader {
     public ArrayList<String> readFile(String fileName) {
         // This will reference one line at a time
         String line = null;
+        fileName = "server\\lib\\" + fileName;
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
             // FileReader reads text files in the default encoding.

@@ -22,6 +22,7 @@ import commandData.ChatCommandData;
 import commandData.Command;
 import modeling.Game;
 import modeling.GameList;
+import modeling.Player;
 import modeling.User;
 import modeling.UserInfoList;
 
@@ -50,6 +51,30 @@ public class ServerModel {
     private IPersistenceManager pManager;*/
     /**Our current plugin object*/
     private IPlugin currPlugin;
+
+    public void zeroOut(String playerID){
+        for(Game game : gameList.getGames()){
+            for(Player player : game.getPlayers()){
+                if(player.getPlayerName().equals(playerID)){
+                    player.setCommandIndex(0);
+                }
+            }
+        }
+    }
+
+    public String checkUserInGame(String userId){
+        if(gameList != null){
+            List<Game> games = gameList.getGames();
+            for(Game game : games){
+                for(Player player : game.getPlayers()){
+                    if(userId.equals(player.getPlayerName())){
+                        return game.getGameID();
+                    }
+                }
+            }
+        }
+        return "no";
+    }
 
     public List<String> getChatHistory() {
         return chatHistory;
@@ -154,7 +179,7 @@ public class ServerModel {
     /**
      * @param fileName The PluginName
      * @param n "n" save integer*/
-    public void saveArgs(String fileName, String n) throws FileNotFoundException {
+    public void saveArgs(String fileName, String n) {
         Loader loader = new Loader();
         ArrayList<String> fileArgs = loader.readFile(fileName);
 

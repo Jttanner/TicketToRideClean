@@ -30,7 +30,12 @@ public class Player implements Comparator<Player> {
     }
 
     /**Where in the Commadlist we are for this player*/
-    private int commandIndex;
+    private int commandIndex = 0;
+
+    public void setCommandIndex(int commandIndex) {
+        this.commandIndex = commandIndex;
+    }
+
     private boolean isMyTurn;
 
     public Player(String userName){
