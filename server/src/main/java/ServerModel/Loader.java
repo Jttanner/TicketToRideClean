@@ -51,10 +51,10 @@ public class Loader {
     public Object loadClass(String fileName,String className) {
         String jarPath = null;
         if(fileName.equals("sql.txt")){
-            jarPath = "/TicketToRideClean1/plugins/File.jar";
+            jarPath = "/plugins/src/main/SQL.jar";
         }
         else if(fileName.equals("file.txt")){
-            jarPath = "/TicketToRideClean1/plugins/SQL.jar";
+            jarPath = "/plugins/src/main/File.jar";
         }
         // Getting the jar URL which contains target class
         try {
