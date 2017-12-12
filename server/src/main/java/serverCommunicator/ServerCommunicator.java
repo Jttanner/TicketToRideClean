@@ -114,11 +114,11 @@ public class ServerCommunicator {
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
 
-            try {
-                ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
             new ServerCommunicator().run("8080");
         }
 

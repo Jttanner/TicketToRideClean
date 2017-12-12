@@ -86,6 +86,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         presenter = new MapPresenter(this);
 
         //presenter.startGameState();
+        if(CModel.getInstance().getUserPlayer()!=null && CModel.getInstance().getUserPlayer().getDestinationCards().size()==0)
         DestinationCardOption();
 
         SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout) findViewById(R.id.activity_map);
