@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/plugins" />
             <option value="$PROJECT_DIR$/server" />
             <option value="$PROJECT_DIR$/sharedlib" />
+            <option value="$PROJECT_DIR$/sql" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

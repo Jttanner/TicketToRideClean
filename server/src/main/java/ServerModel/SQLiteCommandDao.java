@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandData.Command;
-import modeling.Game;
-import result.Result;
 
 /**
  * Created by jontt on 12/7/2017.

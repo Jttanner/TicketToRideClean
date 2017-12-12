@@ -55,11 +55,11 @@ public class Loader {
          File myjar = null;
         if(fileName.equals("sql.txt")){
             myjar = new File("/plugins/src/main/SQL.jar");
-            jarPath = "./plugins/src/main/SQL.jar";
+            //jarPath = "./plugins/src/main/SQL.jar";
         }
         else if(fileName.equals("file.txt")){
             myjar = new File("/plugins/src/main/File.jar");
-            jarPath = "./plugins/src/main/File.jar";
+            //jarPath = "./plugins/src/main/File.jar";
         }
         // Getting the jar URL which contains target class
         try {
@@ -69,7 +69,7 @@ public class Loader {
             URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
 
             // Load the target class
-            Class<?> beanClass = urlClassLoader.loadClass(className+".class");
+            Class<?> beanClass = urlClassLoader.loadClass(className +".class");
 
             // Create a new instance from the loaded class
             return beanClass.getConstructor().newInstance();

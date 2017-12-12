@@ -1,9 +1,5 @@
 package ServerModel;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 /**
  * Created by tyler on 12/5/2017.
  */

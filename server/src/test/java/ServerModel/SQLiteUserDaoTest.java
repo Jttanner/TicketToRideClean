@@ -18,7 +18,7 @@ public class SQLiteUserDaoTest {
     @org.junit.Before
     public void setUp() throws Exception {
         connection = DriverManager.getConnection(dbURL);
-        userDao = new SQLiteUserDao(connection);
+        userDao = new SQLiteUserDao(connection.toString());
     }
 
     @org.junit.After
