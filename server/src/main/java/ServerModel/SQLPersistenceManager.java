@@ -83,8 +83,8 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public IUserDao getUserDao() {
         if (userDao == null){
             try{
-                userDao = new SQLiteUserDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
+                userDao = new SQLiteUserDao(databaseURL);
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
@@ -95,8 +95,8 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public IGameDao getGameDao() {
         if (gameDao == null){
             try{
-                gameDao = new SQLiteGameDao(DriverManager.getConnection(databaseURL));
-            } catch (SQLException e){
+                gameDao = new SQLiteGameDao(databaseURL);
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
@@ -115,8 +115,8 @@ public class SQLPersistenceManager implements IPersistenceManager {
     public ICommandDao getCommandDao() {
         if (commandDao == null){
             try{
-                commandDao = new SQLiteCommandDao(DriverManager.getConnection(databaseURL));
-            }catch (SQLException e){
+                commandDao = new SQLiteCommandDao(databaseURL);
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }

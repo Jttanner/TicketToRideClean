@@ -12,10 +12,12 @@ import modeling.UserInfo;
 
 public class SQLiteUserDao implements IUserDao {
 
+    String connectionString;
+
     Connection connection;
 
-    SQLiteUserDao(Connection connection){
-        this.connection = connection;
+    SQLiteUserDao(String connectionString){
+        this.connectionString = connectionString;
         createTableIfNotExists();
     }
 
