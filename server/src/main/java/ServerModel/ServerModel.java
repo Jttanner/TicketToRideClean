@@ -81,12 +81,19 @@ public class ServerModel {
     }
 
     User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
-        return userInfoList.register(userName, password);
+        User user = userInfoList.register(userName, password);
+        currPlugin.saveUser(user);
+        return user;
     }
 
     User login(String userName, String password){
         //If the account exists and matches with one in the database...
-        return new User(userInfoList.login(userName, password));
+        //User user = new User(userInfoList.login(userName, password));
+        User myUser = currPlugin.verifyUser(userName, password);
+        if(myUser.getUserName().equals(userName) && myUser.getInfo().getPassword().equals(password)){
+            userInfoList.login(userName, password);
+        }
+        return myUser;
     }
 
     boolean createGame(Game newGame){
