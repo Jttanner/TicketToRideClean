@@ -52,9 +52,9 @@ public class SQLiteGameDao implements IGameDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, myGson.toJson(game));
             statement.setString(2, game.getGameID());
-            boolean success = statement.execute();
+            statement.execute();
             connection.close();
-            return success;
+            return true;
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -83,9 +83,9 @@ public class SQLiteGameDao implements IGameDao {
         try{
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, gameID);
-            boolean success = statement.execute();
+            statement.execute();
             connection.close();
-            return success;
+            return true;
         } catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -97,9 +97,9 @@ public class SQLiteGameDao implements IGameDao {
         String query = "DELETE FROM GAME";
         try{
             Statement statement = connection.createStatement();
-            boolean success = statement.execute(query);
+            statement.execute(query);
             connection.close();
-            return success;
+            return true;
         } catch (SQLException e){
             e.printStackTrace();
             return false;
