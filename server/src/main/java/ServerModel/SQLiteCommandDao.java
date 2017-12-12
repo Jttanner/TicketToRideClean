@@ -88,7 +88,9 @@ public class SQLiteCommandDao implements ICommandDao {
                 statement.setString(j++, gameID);
                 statement.setString(j++, myGson.toJson(command));
           //  }
-            return statement.execute();
+            boolean success = statement.execute();
+            connection.close();
+            return success;
         }catch (SQLException e){
             e.printStackTrace();
             return false;

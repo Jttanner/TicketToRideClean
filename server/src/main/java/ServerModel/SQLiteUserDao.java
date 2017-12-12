@@ -28,8 +28,10 @@ public class SQLiteUserDao implements IUserDao {
                 "Password text not null, \n" +
                 ");";
         try{
+            connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();
             statement.execute(query);
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -39,14 +41,17 @@ public class SQLiteUserDao implements IUserDao {
     public boolean registerUser(String userName, String password) {
         String query = "INSERT INTO User(Username, Password) VALUES(?, ?)";
         try{
+            connection = DriverManager.getConnection(connectionString);
             if (verifyUser(userName, password) != null){
+                connection.close();
                 return false;
             } else{
                 PreparedStatement queryStatement = connection.prepareStatement(query);
                 queryStatement.setString(1, userName);
                 queryStatement.setString(2, userName);
-                queryStatement.execute();
-                return true;
+                boolean success = queryStatement.execute();
+                connection.close();
+                return success;
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -58,6 +63,7 @@ public class SQLiteUserDao implements IUserDao {
     public User verifyUser(String name, String password) {
         String query = "SELECT * FROM User WHERE Username=? AND Password=?";
         try{
+            connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);
             queryStatement.setString(1, name);
             queryStatement.setString(2, password);
@@ -65,6 +71,7 @@ public class SQLiteUserDao implements IUserDao {
             //get data to build User object from resultSet
             UserInfo foundUserInfo = new UserInfo(resultSet.getString("Username"), resultSet.getString("Password"));
             User foundUser = new User(foundUserInfo);
+            connection.close();
             return foundUser;
         }catch (Exception e){
             e.printStackTrace();
@@ -76,8 +83,10 @@ public class SQLiteUserDao implements IUserDao {
     public boolean clear() {
         String query = "DELETE * FROM User";
         try{
+            connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);
             queryStatement.execute();
+            connection.close();
             return true;
         }catch (Exception e){
             e.printStackTrace();

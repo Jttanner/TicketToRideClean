@@ -83,7 +83,9 @@ public class SQLiteGameDao implements IGameDao {
         try{
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, gameID);
-            return statement.execute();
+            boolean success = statement.execute();
+            connection.close();
+            return success;
         } catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -95,7 +97,9 @@ public class SQLiteGameDao implements IGameDao {
         String query = "DELETE FROM GAME";
         try{
             Statement statement = connection.createStatement();
-            return statement.execute(query);
+            boolean success = statement.execute(query);
+            connection.close();
+            return success;
         } catch (SQLException e){
             e.printStackTrace();
             return false;
