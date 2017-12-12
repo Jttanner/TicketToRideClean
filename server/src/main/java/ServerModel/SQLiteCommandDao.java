@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandData.Command;
+import modeling.Game;
+import result.Result;
 
 /**
  * Created by jontt on 12/7/2017.
@@ -69,26 +71,15 @@ public class SQLiteCommandDao implements ICommandDao {
 
     @Override
     public boolean addCommandsToGame(String gameID, Command command) {
-        String query = "INSERT INTO COMMAND VALUES";
+        String query = "INSERT INTO COMMAND VALUES(?, ?)";
         try{
             connection = DriverManager.getConnection(connectionString);
-            //for (int i = 0; i < commands.size(); ++i){
-                query += "(?, ?)";
-            //    if (i == commands.size()-1){
-                    query += ";";
-           //     } else{
-          //          query += ",";
-          //      }
-         //   }
-            int j = 0;
             PreparedStatement statement = connection.prepareStatement(query);
-          //  for (Command command : commands){
-                statement.setString(j++, gameID);
-                statement.setString(j++, myGson.toJson(command));
-          //  }
-            boolean success = statement.execute();
+            statement.setString(0, gameID);
+            statement.setString(1, myGson.toJson(command));
+            statement.execute();
             connection.close();
-            return success;
+            return true;
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -97,7 +88,17 @@ public class SQLiteCommandDao implements ICommandDao {
 
     @Override
     public boolean removeCommands(String gameID) {
-        return false;
+        String query = "DELETE FROM Command WHERE GameID=?";
+        try{
+            connection = DriverManager.getConnection(connectionString);
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            connection.close();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -106,9 +107,9 @@ public class SQLiteCommandDao implements ICommandDao {
         try{
             connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();
-            boolean success = statement.execute(query);
+            statement.execute(query);
             connection.close();
-            return success;
+            return true;
         }catch (SQLException e){
             e.printStackTrace();
             return false;

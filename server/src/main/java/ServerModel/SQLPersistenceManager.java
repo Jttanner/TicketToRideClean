@@ -1,5 +1,9 @@
 package ServerModel;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  * Created by tyler on 12/5/2017.
  */
@@ -14,7 +18,7 @@ public class SQLPersistenceManager implements IPersistenceManager {
     /**The CommandDao*/
     private ICommandDao commandDao;
 
-    String databaseURL = "database url placeholder";
+    String databaseURL = "jdbc:sqlite:ttrdb.sqlite";;
 
     @Override
     public void beginTransaction() {

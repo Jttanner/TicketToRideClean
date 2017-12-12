@@ -1,12 +1,7 @@
 package ServerModel;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import modeling.User;
 import modeling.UserInfo;
@@ -22,6 +17,11 @@ public class SQLiteUserDao implements IUserDao {
     Connection connection;
 
     SQLiteUserDao(String connectionString){
+        try{
+            Class.forName("org.sqlite.JDBC");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         this.connectionString = connectionString;
         createTableIfNotExists();
     }
@@ -79,8 +79,9 @@ public class SQLiteUserDao implements IUserDao {
             User foundUser = new User(foundUserInfo);
             connection.close();
             return foundUser;
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (SQLException e){
+            //e.printStackTrace();
+            System.out.println("USER NOT FOUND");
             return null;
         }
     }
