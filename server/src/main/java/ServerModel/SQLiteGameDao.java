@@ -46,10 +46,14 @@ public class SQLiteGameDao implements IGameDao {
 
     @Override
     public boolean updateGameState(Game game) {
-        String query = "UPDATE Game set GameInfo=? WHERE GameID=?";
+        String query1 = "DELETE FROM GAME WHERE GameID=?;";
+        String query2 = "INSERT INTO GAME VALUES(?, ?)";
         try{
             connection = DriverManager.getConnection(connectionString);
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = connection.prepareStatement(query1);
+            statement.setString(1, game.getGameID());
+            statement.execute();
+            statement = connection.prepareStatement(query2);
             statement.setString(1, myGson.toJson(game));
             statement.setString(2, game.getGameID());
             statement.execute();
@@ -81,6 +85,7 @@ public class SQLiteGameDao implements IGameDao {
     public boolean removeGame(String gameID)  {
         String query = "DELETE FROM GAME WHERE GameID=?";
         try{
+            connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, gameID);
             statement.execute();
@@ -96,6 +101,7 @@ public class SQLiteGameDao implements IGameDao {
     public boolean clear() {
         String query = "DELETE FROM GAME";
         try{
+            connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();
             statement.execute(query);
             connection.close();
