@@ -21,7 +21,7 @@ import modeling.Game;
 
 public class FileGameDao implements IGameDao {
 
-    private Gson gson; //Keep
+    private Gson gson = new Gson(); //Keep
 
     /*
     * When the FileGameDao is created the Folder holding the game texts files is created
@@ -124,7 +124,12 @@ public class FileGameDao implements IGameDao {
         gameFile = "Game/" + gameID + ".txt";
         directory = new File(gameFile);
         result = directory.delete();
-
+        if(result) {
+            System.out.println("Successfully deleted game: " + gameID);
+        }
+        else {
+            System.out.println(gameID + " does not exist or not deleted :o");
+        }
         return result;
     }
     /*

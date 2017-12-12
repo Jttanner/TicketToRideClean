@@ -74,11 +74,12 @@ public class FileCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean addCommandsToGame(String gameID, List<Command> command) throws NeedTransactionException {
+    public boolean addCommandsToGame(String gameID, Command command) throws NeedTransactionException {
         FileWriter fileWriter;
         String gameToString;
         File commandFile;
         boolean result = false;
+        String newLine = "\n";
         //Create new txt file in Game
         commandFile = new File("Command/" + gameID + ".txt");
         try {
@@ -91,17 +92,28 @@ public class FileCommandDao implements ICommandDao {
             e.printStackTrace();
         }
         //Update file in Game Directory
+//        try {
+//            for(Command c: command) {
+//                gameToString = gson.toJson(c);
+//                fileWriter = new FileWriter(commandFile, true);
+//                fileWriter.append(gameToString);
+//                fileWriter.close();
+//            }
+//
+//            result = true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         try {
-            for(Command c: command) {
-                gameToString = gson.toJson(c);
-                fileWriter = new FileWriter(commandFile, true);
-                fileWriter.append(gameToString);
-                fileWriter.close();
-            }
-
+            gameToString = gson.toJson(command);
+            fileWriter = new FileWriter(commandFile, true);
+            fileWriter.append(gameToString);
+            fileWriter.append(newLine);
+            fileWriter.close();
             result = true;
         } catch (IOException e) {
             e.printStackTrace();
+            result = false;
         }
         return result;
     }

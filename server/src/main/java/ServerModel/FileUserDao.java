@@ -32,27 +32,30 @@ public class FileUserDao implements IUserDao {
         FileWriter fileWriter;
         File gameFile;
         boolean result = false;
-        //Create new txt file in Game
+        //Create new txt file in User
         gameFile = new File("User/" + userName + ".txt");
         try {
             if (gameFile.createNewFile()){
-                System.out.println("File" + userName + "is created!");
+                System.out.println("File " + userName + " is created!");
             }else{
-                System.out.println("File" + userName +  "already exists.");
+                //If the user name already exists don't update the file
+                System.out.println("File " + userName +  " already exists.");
+                return result;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //Update file in Game Directory
+        //Update file in User Directory
         try {
-            fileWriter = new FileWriter(userName);
+            fileWriter = new FileWriter(gameFile);
             fileWriter.write(password);
             fileWriter.close();
-
             result = true;
+            System.out.println("File " + userName + " successfully updated!");
         } catch (IOException e) {
             e.printStackTrace();
             result = false;
+            System.out.println("File " + userName + " not updated!");
         }
         return result;
     }
@@ -68,8 +71,10 @@ public class FileUserDao implements IUserDao {
         String[]entries = directory.list();
         String line;
         if(entries != null) {
+            //System.out.println("Files inside User ");
             for(String s: entries) {
-                if(s.equals(name)) {
+                //System.out.println(s);
+                if(s.equals((name + ".txt"))) {
                     try {
                         // FileReader reads text files in the default encoding.
                         FileReader fileReader = new FileReader(name);
@@ -80,10 +85,10 @@ public class FileUserDao implements IUserDao {
                         line = bufferedReader.readLine();
                         if(line.equals(password)) {
                             result = true;
+
                         }
                         // Always close files.
                         bufferedReader.close();
-                        //game = gson.fromJson(line, Game.class);
                     }
                     catch(FileNotFoundException ex) {
                         System.out.println("Unable to open file '" + name + "'");
@@ -98,9 +103,12 @@ public class FileUserDao implements IUserDao {
         }
 
         //return result;
-        UserInfo info = new UserInfo("name", "pass");
-        User temp = new User(info);
-        return temp;
+        if(result) {
+            UserInfo info = new UserInfo(name, password);
+            User temp = new User(info);
+            return temp;
+        }
+        return null;
     }
 
 

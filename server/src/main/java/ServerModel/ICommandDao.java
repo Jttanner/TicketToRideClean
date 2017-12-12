@@ -11,7 +11,7 @@ import commandData.Command;
 interface ICommandDao {
     List<Command> getCommandList(String gameID) throws NeedTransactionException;;
 
-    boolean addCommandsToGame(String gameID, List<Command> command) throws NeedTransactionException;;
+    boolean addCommandsToGame(String gameID, Command command) throws NeedTransactionException;;
 
     boolean removeCommands(String gameID) throws NeedTransactionException;
 
