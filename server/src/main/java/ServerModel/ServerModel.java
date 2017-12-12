@@ -179,7 +179,7 @@ public class ServerModel {
     /**
      * @param fileName The PluginName
      * @param n "n" save integer*/
-    public void saveArgs(String fileName, String n) throws FileNotFoundException {
+    public void saveArgs(String fileName, String n) {
         Loader loader = new Loader();
         ArrayList<String> fileArgs = loader.readFile(fileName);
 
