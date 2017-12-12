@@ -1,6 +1,7 @@
 package command;
 
 import ServerModel.ServerFacade;
+import ServerModel.ServerModel;
 import commandData.CreateGameCommandData;
 import modeling.Game;
 import result.CommandResult;
@@ -25,6 +26,8 @@ public class CreateGameCommand extends CreateGameCommandData implements ICommand
     public CommandResult execute() {
 
         boolean gameCreatedSuccessful = ServerFacade.getInstance().createGame(getGame());
+        //add BLOB
+        ServerModel.getInstance().getPlugin().saveGame(getGame());
         CommandResult result;
         result = new CreateGameCommandResult(gameCreatedSuccessful);
         result.setType(this.getType());
