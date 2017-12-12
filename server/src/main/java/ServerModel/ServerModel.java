@@ -164,5 +164,8 @@ public class ServerModel {
     }
 
 
+    public int getDelta_n() {
+        return delta_n;
+    }
 
 }

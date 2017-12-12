@@ -43,7 +43,7 @@ public class FileGameDao implements IGameDao {
     * Updates the game file with a new Json string
     */
     @Override
-    public boolean updateGameState(Game game) throws NeedTransactionException {
+    public boolean updateGameState(Game game)  {
         FileWriter fileWriter;
         String gameToString;
         File gameFile;
@@ -77,7 +77,7 @@ public class FileGameDao implements IGameDao {
     *
     */
     @Override
-    public Game getGameState(String gameID) throws NeedTransactionException {
+    public Game getGameState(String gameID) {
         String gameFile;
         String line;
         Game game = null;
@@ -115,7 +115,7 @@ public class FileGameDao implements IGameDao {
     *
     */
     @Override
-    public boolean removeGame(String gameID) throws NeedTransactionException {
+    public boolean removeGame(String gameID) {
         String gameFile;
         File directory;
         boolean result = false;
@@ -137,7 +137,7 @@ public class FileGameDao implements IGameDao {
     *
     */
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean clear() {
         String gameFile;
         File directory;
         boolean result = false;

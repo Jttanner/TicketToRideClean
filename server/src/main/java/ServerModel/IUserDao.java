@@ -8,10 +8,10 @@ import modeling.User;
 
 interface IUserDao {
 
-    boolean registerUser(String userName, String password) throws NeedTransactionException;;
+    boolean registerUser(String userName, String password);
 
-    User verifyUser(String name, String password) throws NeedTransactionException;;
+    User verifyUser(String name, String password);
 
-    boolean clear() throws NeedTransactionException;;
+    boolean clear();
 
 }

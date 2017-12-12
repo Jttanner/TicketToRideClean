@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandData.Command;
-import modeling.Game;
-import result.Result;
+
 
 /**
  * Created by jontt on 12/7/2017.
@@ -44,7 +43,7 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public List<Command> getCommandList(String gameID) throws NeedTransactionException {
+    public List<Command> getCommandList(String gameID) {
         String query = "SELECT CommandInfo FROM Command WHERE GameID=?";
         try{
             PreparedStatement statement = connection.prepareStatement(query);
@@ -63,23 +62,23 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean addCommandsToGame(String gameID, List<Command> commands) throws NeedTransactionException {
+    public boolean addCommandsToGame(String gameID, Command command) {
         String query = "INSERT INTO COMMAND VALUES";
         try{
-            for (int i = 0; i < commands.size(); ++i){
+            //for (int i = 0; i < commands.size(); ++i){
                 query += "(?, ?)";
-                if (i == commands.size()-1){
+             //   if (i == commands.size()-1){
                     query += ";";
-                } else{
-                    query += ",";
-                }
-            }
+             //   } else{
+             //       query += ",";
+              //  }
+           // }
             int j = 0;
             PreparedStatement statement = connection.prepareStatement(query);
-            for (Command command : commands){
+            //for (Command command : commands){
                 statement.setString(j++, gameID);
                 statement.setString(j++, myGson.toJson(command));
-            }
+            //}
             return statement.execute();
         }catch (SQLException e){
             e.printStackTrace();
@@ -88,7 +87,12 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean removeCommands(String gameID) {
+        return false;
+    }
+
+    @Override
+    public boolean clear() {
         String query = "DELETE FROM Command";
         try{
             Statement statement = connection.createStatement();

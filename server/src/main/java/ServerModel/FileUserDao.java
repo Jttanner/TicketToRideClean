@@ -28,7 +28,7 @@ public class FileUserDao implements IUserDao {
         }
     }
     @Override
-    public boolean registerUser(String userName, String password) throws NeedTransactionException {
+    public boolean registerUser(String userName, String password) {
         FileWriter fileWriter;
         File gameFile;
         boolean result = false;
@@ -62,7 +62,7 @@ public class FileUserDao implements IUserDao {
 
     //Will verifyUser return a user or a boolean?
     @Override
-    public User verifyUser(String name, String password) throws NeedTransactionException {
+    public User verifyUser(String name, String password) {
         String userFile;
         File directory;
         boolean result = false;
@@ -113,7 +113,7 @@ public class FileUserDao implements IUserDao {
 
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean clear() {
         String userFile;
         File directory;
         boolean result = false;

@@ -33,7 +33,7 @@ public class FileCommandDao implements ICommandDao {
         }
     }
     @Override
-    public List<Command> getCommandList(String gameID) throws NeedTransactionException {
+    public List<Command> getCommandList(String gameID)  {
         List<Command> listOfCommands = new ArrayList<Command>();
         String commandFile;
         String line;
@@ -74,7 +74,7 @@ public class FileCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean addCommandsToGame(String gameID, Command command) throws NeedTransactionException {
+    public boolean addCommandsToGame(String gameID, Command command)  {
         FileWriter fileWriter;
         String gameToString;
         File commandFile;
@@ -119,7 +119,7 @@ public class FileCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean removeCommands(String gameID) throws NeedTransactionException {
+    public boolean removeCommands(String gameID) {
         String gameFile;
         File directory;
         boolean result = false;
@@ -133,7 +133,7 @@ public class FileCommandDao implements ICommandDao {
     }
 
     @Override
-    public boolean clear() throws NeedTransactionException {
+    public boolean clear() {
         String commandFile;
         File directory;
         boolean result = false;

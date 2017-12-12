@@ -9,11 +9,11 @@ import commandData.Command;
  */
 
 interface ICommandDao {
-    List<Command> getCommandList(String gameID) throws NeedTransactionException;;
+    List<Command> getCommandList(String gameID);
 
-    boolean addCommandsToGame(String gameID, Command command) throws NeedTransactionException;;
+    boolean addCommandsToGame(String gameID, Command command);
 
-    boolean removeCommands(String gameID) throws NeedTransactionException;
+    boolean removeCommands(String gameID);
 
-    boolean clear() throws NeedTransactionException;
+    boolean clear();
 }
