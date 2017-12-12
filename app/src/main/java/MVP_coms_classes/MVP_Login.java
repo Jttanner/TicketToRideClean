@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import request.LoginRequest;
 import request.RegisterRequest;
+import ui.views.MapActivity;
 
 /**
  * Created by tyler on 9/26/2017.
@@ -31,7 +32,7 @@ public interface MVP_Login {
          * @param intent The intent to start the Create Game activity
          */
         void loginSucceeded(Intent intent);
-
+        void goToMapActivity();
         /**
          * Handles failure of logging in or registering
          *

@@ -42,6 +42,13 @@ public class LoginFragment extends Fragment implements MVP_Login.RequiredLoginVi
     private final String TAG = "login Activity";
     private EditText text;
 
+
+    public void goToMapActivity(){
+        Intent intent = new Intent(getActivity(), MapActivity.class);
+        //mPresenter.deleteObserver();
+        startActivity(intent);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "Entering OnCreateView");

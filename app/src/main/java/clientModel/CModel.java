@@ -33,7 +33,9 @@ public class CModel extends Observable {
     private User myUser;
 
 
+    public void notifyStart(){
 
+    }
 
     /**
      * The list of games being played or waiting to be played
@@ -200,10 +202,12 @@ public class CModel extends Observable {
      * @return Player User's player object*/
     public Player getUserPlayer(){
         String userName = getMyUser().getInfo().getUserName();
-        ArrayList<Player> players = currGame.getPlayers();
-        for(Player player : players){
-            if(player.getUserName().equals(userName)){
-                return player;
+        if(currGame!=null) {
+            ArrayList<Player> players = currGame.getPlayers();
+            for (Player player : players) {
+                if (player.getUserName().equals(userName)) {
+                    return player;
+                }
             }
         }
         return null;
@@ -354,7 +358,10 @@ public class CModel extends Observable {
         setChanged();
         notifyObservers(this.currGameState);
     }
-
+    public void notifyWaitingroom(){
+        setChanged();
+        notifyObservers(true);
+    }
     public String getIPAddress() {
         return IPAddress;
     }
