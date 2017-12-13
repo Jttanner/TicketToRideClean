@@ -225,61 +225,62 @@ public class ServerModel {
            /* for (Game game:gameList.getGames()) {
                 commandListMap.put(game.getGameID(),currPlugin.getGameCommands(game.getGameID()));
             }*/
+
+            //have to go through the command list of each game to ensure the game is completely updated
+            for (Game game : gameList.getGames()) {
+                for (Command com : commandListMap.get(game.getGameID())) {
+                    switch (com.getType()) {
+                        case "startGame":
+                            StartGameCommandData startGameCommandData = (StartGameCommandData) com;
+                            StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData);
+                            startGameCommand.execute();
+                            break;
+                        case "addChat":
+                            ChatCommandData chatCommandData = (ChatCommandData) com;
+                            AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
+                            addChatCommand.execute();
+                            break;
+                        case "drawTrainCard":
+                            DrawTrainCardCommandData drawTrainCardCommandData = (DrawTrainCardCommandData) com;
+                            DrawTrainCardCommand drawTrainCardCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
+                            drawTrainCardCommand.execute();
+                            break;
+                        case "drawDestinationCards":
+                            DrawDestinationCardCommandData drawDestinationCardCommandData = (DrawDestinationCardCommandData) com;
+                            DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
+                            drawDestinationCardCommand.execute();
+                            break;
+                        case "claimDestinationCards":
+                            ClaimDestinationCardCommandData claimDestinationCardCommandData = (ClaimDestinationCardCommandData) com;
+                            ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
+                            claimDestinationCardCommand.execute();
+                            break;
+                        case "claimInitialDestinationCards":
+                            ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = (ClaimInitialDestinationCardCommandData) com;
+                            ClaimInitialDestinationCardCommand claimInitialDestinationCardCommand = new ClaimInitialDestinationCardCommand(claimInitialDestinationCardCommandData);
+                            claimInitialDestinationCardCommand.execute();
+                            break;
+                        case "claimRoute":
+                            ClaimRouteCommandData claimRouteCommandData = (ClaimRouteCommandData) com;
+                            ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
+                            claimRouteCommand.execute();
+                            break;
+                        case "endTurn":
+                            EndTurnCommandData data = (EndTurnCommandData) com;
+                            EndTurnCommandServer endTurnCommandServer = new EndTurnCommandServer(data);
+                            endTurnCommandServer.execute();
+                            break;
+                        case "incrementCommandIndex":
+                            IncrementCommandIndexCommandData incrementCommandIndexCommandData = (IncrementCommandIndexCommandData) com;
+                            IncrementCommandIndexCommand incrementCommandIndexCommand = new IncrementCommandIndexCommand(incrementCommandIndexCommandData.getGameID(), incrementCommandIndexCommandData.getPlayerName());
+                            incrementCommandIndexCommand.execute();
+                            break;
+                    }
+                }
+                clearCommandsAndSave(game.getGameID());
+            }
         } else {
             System.out.println("ServerModel:redoServerModel: db is empty or returning null");
-        }
-        //have to go through the command list of each game to ensure the game is completely updated
-        for (Game game:gameList.getGames()) {
-            for(Command com : commandListMap.get(game.getGameID())) {
-                switch (com.getType()) {
-                    case "startGame":
-                        StartGameCommandData startGameCommandData = (StartGameCommandData) com;
-                        StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData);
-                        startGameCommand.execute();
-                        break;
-                    case "addChat":
-                        ChatCommandData chatCommandData = (ChatCommandData) com;
-                        AddChatCommand addChatCommand = new AddChatCommand(chatCommandData);
-                        addChatCommand.execute();
-                        break;
-                    case "drawTrainCard":
-                        DrawTrainCardCommandData drawTrainCardCommandData = (DrawTrainCardCommandData) com;
-                        DrawTrainCardCommand drawTrainCardCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
-                        drawTrainCardCommand.execute();
-                        break;
-                    case "drawDestinationCards":
-                        DrawDestinationCardCommandData drawDestinationCardCommandData = (DrawDestinationCardCommandData) com;
-                        DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
-                        drawDestinationCardCommand.execute();
-                        break;
-                    case "claimDestinationCards":
-                        ClaimDestinationCardCommandData claimDestinationCardCommandData = (ClaimDestinationCardCommandData) com;
-                        ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
-                        claimDestinationCardCommand.execute();
-                        break;
-                    case "claimInitialDestinationCards":
-                        ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = (ClaimInitialDestinationCardCommandData) com;
-                        ClaimInitialDestinationCardCommand claimInitialDestinationCardCommand = new ClaimInitialDestinationCardCommand(claimInitialDestinationCardCommandData);
-                        claimInitialDestinationCardCommand.execute();
-                        break;
-                    case "claimRoute":
-                        ClaimRouteCommandData claimRouteCommandData = (ClaimRouteCommandData) com;
-                        ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
-                        claimRouteCommand.execute();
-                        break;
-                    case "endTurn":
-                        EndTurnCommandData data = (EndTurnCommandData) com;
-                        EndTurnCommandServer endTurnCommandServer = new EndTurnCommandServer(data);
-                        endTurnCommandServer.execute();
-                        break;
-                    case "incrementCommandIndex":
-                        IncrementCommandIndexCommandData incrementCommandIndexCommandData = (IncrementCommandIndexCommandData) com;
-                        IncrementCommandIndexCommand incrementCommandIndexCommand = new IncrementCommandIndexCommand(incrementCommandIndexCommandData.getGameID(), incrementCommandIndexCommandData.getPlayerName());
-                        incrementCommandIndexCommand.execute();
-                        break;
-                }
-            }
-            clearCommandsAndSave(game.getGameID());
         }
     }
 
@@ -292,7 +293,7 @@ public class ServerModel {
         ArrayList<Command> list = new ArrayList<>();
         list.add(cmd);
         //add this command to the lists of the game
-        commandListMap.put(gameID,list);
+        commandListMap.put(gameID, list);
         ICommand command = new ResetCommandIndex();
         //also execute the command server side
         command.execute();
