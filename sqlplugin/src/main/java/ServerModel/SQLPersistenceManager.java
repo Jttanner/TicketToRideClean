@@ -1,5 +1,10 @@
 package ServerModel;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * Created by tyler on 12/5/2017.
  */
@@ -18,17 +23,44 @@ public class SQLPersistenceManager implements IPersistenceManager {
 
     @Override
     public void beginTransaction() {
+        String query = "BEGIN TRANSACTION;";
+        try{
+            Connection connection = DriverManager.getConnection(databaseURL);
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+        }catch (SQLException e){
 
+        }
     }
 
     @Override
     public boolean endTransaction() {
-        return false;
+
+        String query = "COMMIT;";
+        try{
+            Connection connection = DriverManager.getConnection(databaseURL);
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            return true;
+        }catch (SQLException e){
+            String rollbackQuery = "ROLLBACK;";
+            try{
+                Connection connection = DriverManager.getConnection(databaseURL);
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                return false;
+            }catch (SQLException e2){
+                return  false;
+            }
+        }
     }
 
     @Override
     public boolean clearDatabase() {
-        return false;
+        getCommandDao().clear();
+        getGameDao().clear();
+        getUserDao().clear();
+        return true;
     }
 
 //    @Override

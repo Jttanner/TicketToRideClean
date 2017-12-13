@@ -115,7 +115,12 @@ public class ServerCommunicator {
         public static void main(String[] args) {
             ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
             try {
-                ServerModel.getInstance().redoServerModel();
+                if (args.length == 3){
+                    ServerModel.getInstance().getPlugin().clear();
+                } else{
+                    ServerModel.getInstance().redoServerModel();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
