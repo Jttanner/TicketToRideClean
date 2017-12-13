@@ -1,5 +1,5 @@
-FilePlugin
-FilePersistenceManager
-FileGameDao
-FileCommandDao
-FileUserDao
+ServerModel.FilePlugin
+ServerModel.FilePersistenceManager
+ServerModel.FileGameDao
+ServerModel.FileCommandDao
+ServerModel.FileUserDao
