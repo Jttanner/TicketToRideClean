@@ -62,6 +62,7 @@ public class Loader {
             myjar = new File("/server/lib/fileplugin.jar");
             //jarPath = "./plugins/src/main/File.jar";
         }
+
         // Getting the jar URL which contains target class
         try {
            //URL u =  myjar.toURL();
@@ -74,6 +75,8 @@ public class Loader {
             Class<?> beanClass = urlClassLoader.loadClass("ServerModel."+className);
 //
 //            Class<?> beanClass = Class.forName(className)
+            //Class<?> beanClass = urlClassLoader.loadClass(className);
+
             // Create a new instance from the loaded class
             return beanClass.getConstructor().newInstance();
         }catch (Exception e) {

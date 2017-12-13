@@ -68,8 +68,10 @@ public class WaitingRoomActivity extends AppCompatActivity implements MVP_Waitin
 //        command.setType("setZero");
 //        command.setData(player.getPlayerName());
      //   ServerProxy.getInstance().sendCommand(command);
-        ReStartClient command = new ReStartClient();
-        command.execute();
+        if(CModel.getInstance().getCurrGame().isHasStarted()) {
+            ReStartClient command = new ReStartClient();
+            command.execute();
+        }
         Poller.getInstance().getCommandList();
 
     }
