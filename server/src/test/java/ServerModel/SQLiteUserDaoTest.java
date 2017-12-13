@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by jontt on 12/7/2017.
- */
+ *//*
 public class SQLiteUserDaoTest {
     //Connection connection;
     String dbURL = "jdbc:sqlite:ttrdb.sqlite";
@@ -53,4 +53,4 @@ public class SQLiteUserDaoTest {
         userDao.clear();
     }
 
-}
+}*/

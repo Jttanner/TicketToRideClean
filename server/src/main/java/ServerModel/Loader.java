@@ -72,13 +72,14 @@ public class Loader {
             URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
 
             // Load the target class
-            Class<?> beanClass = urlClassLoader.loadClass("ServerModel."+className);
+            Class<?> beanClass = urlClassLoader.loadClass(className);
 //
 //            Class<?> beanClass = Class.forName(className)
             //Class<?> beanClass = urlClassLoader.loadClass(className);
 
             // Create a new instance from the loaded class
-            return beanClass.getConstructor().newInstance();
+            //return beanClass.getConstructor().newInstance();
+            return beanClass.newInstance();
         }catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

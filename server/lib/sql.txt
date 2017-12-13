@@ -1,2 +1,2 @@
-SQLPlugin
-SQLPersistenceManager
+ServerModel.SQLPlugin
+ServerModel.SQLPersistenceManager

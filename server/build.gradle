@@ -8,6 +8,7 @@ dependencies {
     compile 'junit:junit:4.12'
     compile files('lib/sqlite-jdbc-3.21.0.jar')
     compile files('lib/sqlplugin.jar')
+    compile files('lib/fileplugin.jar')
 }
 
 sourceCompatibility = "1.7"

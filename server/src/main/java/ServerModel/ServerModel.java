@@ -185,7 +185,12 @@ public class ServerModel {
 
         //save the persistence manager and the plugin
         if(fileArgs != null) {
-            currPlugin = (IPlugin) loader.loadClass(fileName, fileArgs.get(0));
+            try{
+                currPlugin = (IPlugin) loader.loadClass(fileName, fileArgs.get(0));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(fileName, fileArgs.get(1));
             currPlugin.setPManager(persistenceManager);
         }
