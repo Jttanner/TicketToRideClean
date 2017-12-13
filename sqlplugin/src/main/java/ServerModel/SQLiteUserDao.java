@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import modeling.User;
+import modeling.UserInfo;
+
 /**
  * Created by jontt on 12/7/2017.
  */
@@ -28,7 +31,7 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     private void createTableIfNotExists(){
-        String query = "create table if not exists ServerModel.User \n" +
+        String query = "create table if not exists modeling.User \n" +
                 "( \n" +
                 "Username text unique not null, \n" +
                 "Password text not null \n" +
@@ -45,7 +48,7 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public boolean registerUser(String userName, String password) {
-        String query = "INSERT INTO ServerModel.User(Username, Password) VALUES(?, ?)";
+        String query = "INSERT INTO modeling.User(Username, Password) VALUES(?, ?)";
         try{
 
             if (verifyUser(userName, password) != null){
@@ -68,14 +71,14 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public User verifyUser(String name, String password) {
-        String query = "SELECT * FROM ServerModel.User WHERE Username=? AND Password=?;";
+        String query = "SELECT * FROM modeling.User WHERE Username=? AND Password=?;";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);
             queryStatement.setString(1, name);
             queryStatement.setString(2, password);
             ResultSet resultSet = queryStatement.executeQuery();
-            //get data to build ServerModel.User object from resultSet
+            //get data to build modeling.User object from resultSet
             UserInfo foundUserInfo = new UserInfo(resultSet.getString("Username"), resultSet.getString("Password"));
             User foundUser = new User(foundUserInfo);
             connection.close();
@@ -89,7 +92,7 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public boolean clear() {
-        String query = "DELETE FROM ServerModel.User";
+        String query = "DELETE FROM modeling.User";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);

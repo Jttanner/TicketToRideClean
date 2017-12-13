@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 /**
  * Created by jontt on 10/19/2017.
@@ -34,9 +34,9 @@ public class City {
 
 
     /*
-    Set<ServerModel.Route> routes = new HashSet<>();
+    Set<modeling.Route> routes = new HashSet<>();
 
-    public void addRoute(ServerModel.Route route){
+    public void addRoute(modeling.Route route){
         routes.add(route);
     }*/
 
@@ -52,7 +52,7 @@ public class City {
         return coords.y;
     }*/
 
-    /*public Set<ServerModel.Route> getRoutes() {
+    /*public Set<modeling.Route> getRoutes() {
         return routes;
     }*/
 

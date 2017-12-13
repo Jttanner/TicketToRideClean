@@ -2,6 +2,9 @@ package ServerModel;
 
 import java.util.List;
 
+import modeling.Game;
+import modeling.User;
+
 /**
  * Created by tyler on 12/5/2017.
  * ServerModel.SQLPlugin

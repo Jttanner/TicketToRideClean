@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,11 +48,11 @@ public class ResourceCardList {
     }
 
     /**Returns an unmodifiable list of available resource cards to the caller
-     * @return List<ServerModel.ResourceCard>*/
+     * @return List<modeling.ResourceCard>*/
     public List<ResourceCard> getAvailableCards() {
         return Collections.unmodifiableList(availableCards);
     }
-    //ServerModel.Player draws a card
+    //modeling.Player draws a card
     public ResourceCard drawCard(String cardID, boolean serverSide){
         if(availableCards.size() > 0) {
             for(ResourceCard card: availableCards) {
@@ -104,7 +104,7 @@ public class ResourceCardList {
 
     //When a player claims a route, we need to put the used cards into the discard pile
     public void usedCards(ArrayList<ResourceCard> usedCardsList) {
-//        for(ServerModel.ResourceCard card: usedCardsList) {
+//        for(modeling.ResourceCard card: usedCardsList) {
 //            discardPile.add(card);
 //        }
         //Just re add the used cards to the bottom of the deck

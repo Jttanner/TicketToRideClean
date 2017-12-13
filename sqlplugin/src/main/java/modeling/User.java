@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.HashSet;
 import java.util.Set;

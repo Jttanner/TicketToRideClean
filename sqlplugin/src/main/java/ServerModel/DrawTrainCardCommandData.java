@@ -2,6 +2,8 @@ package ServerModel;
 
 import java.util.List;
 
+import modeling.ResourceCard;
+
 /**
  * Created by korea on 10/28/2017.
  */

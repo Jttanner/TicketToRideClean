@@ -1,4 +1,6 @@
-package ServerModel;
+package modeling;
+
+import modeling.City;
 
 /**
  * Created by tyler on 10/19/2017.

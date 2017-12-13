@@ -2,6 +2,8 @@ package ServerModel;
 
 import java.util.List;
 
+import modeling.DestinationCard;
+
 /**
  * Created by ahwang13 on 11/21/17.
  */

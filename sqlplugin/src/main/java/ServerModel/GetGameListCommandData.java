@@ -6,17 +6,17 @@ package ServerModel;
 
 public class GetGameListCommandData extends Command {
 
-    //private ServerModel.GameList gameListLobby;
+    //private modeling.GameList gameListLobby;
 
     public GetGameListCommandData() {
         setType("getGameList");
     }
     /*
-    public ServerModel.GameList getGameListLobby() {
+    public modeling.GameList getGameListLobby() {
         return gameListLobby;
     }
 
-    public void setGameListLobby(ServerModel.GameList gameListLobby) {
+    public void setGameListLobby(modeling.GameList gameListLobby) {
         this.gameListLobby = gameListLobby;
     }
     */

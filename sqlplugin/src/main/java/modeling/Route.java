@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.List;
 import java.util.Map;
@@ -100,7 +100,7 @@ public class Route {
 
     @Override
     public String toString() {
-        return "ServerModel.Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
+        return "modeling.Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
     }
 
     boolean firstOfDouble = true;
@@ -122,7 +122,7 @@ public class Route {
         return secondCity.getCityName();
     }
 
-    /*private List<ServerModel.City> twoCities = new ArrayList<>();*/
+    /*private List<modeling.City> twoCities = new ArrayList<>();*/
     private int distance;
     private boolean claimed = false;
     private boolean isDouble = false;

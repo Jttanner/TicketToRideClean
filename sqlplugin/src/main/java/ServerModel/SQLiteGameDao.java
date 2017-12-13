@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import modeling.Game;
+
 /**
  * Created by jontt on 12/7/2017.
  */
@@ -27,7 +29,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     private void createTableIfNotExists(){
-        String query = "create table if not exists ServerModel.Game\n" +
+        String query = "create table if not exists modeling.Game\n" +
                 "( \n" +
                 "GameID text unique not null, \n" +
                 "GameInfo blob not null\n" +
@@ -65,7 +67,7 @@ public class SQLiteGameDao implements IGameDao {
 
     @Override
     public Game getGameState(String gameID)  {
-        String query = "SELECT Gameinfo FROM ServerModel.Game WHERE GameID=?";
+        String query = "SELECT Gameinfo FROM modeling.Game WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);

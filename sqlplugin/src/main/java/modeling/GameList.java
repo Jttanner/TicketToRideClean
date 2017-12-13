@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,13 +81,13 @@ public class GameList {
     }
 
     /*
-    public boolean leaveGame(ServerModel.Game game, ServerModel.Player player){
-        for(ServerModel.Game gameFound : games){
+    public boolean leaveGame(modeling.Game game, modeling.Player player){
+        for(modeling.Game gameFound : games){
             if(gameFound.equals(game)){
                 gameFound.removePlayer(player);
             }
         }
-        for(ServerModel.Game gameFound : gamesStarted){
+        for(modeling.Game gameFound : gamesStarted){
             if(gameFound.equals(game)){
                 gameFound.removePlayer(player);
             }

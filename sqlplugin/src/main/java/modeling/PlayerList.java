@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.Set;
 

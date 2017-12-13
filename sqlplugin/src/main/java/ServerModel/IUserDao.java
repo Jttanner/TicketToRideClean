@@ -1,5 +1,7 @@
 package ServerModel;
 
+import modeling.User;
+
 /**
  * Created by tyler on 12/5/2017.
  */
