@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tyler on 12/5/2017.
@@ -25,6 +26,16 @@ public class FilePlugin implements IPlugin {
     @Override
     public List<Command> getGameCommands(String gameID) {
         return persistenceManager.getCommandDao().getCommandList(gameID);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<Command>> getAllCommands() {
+        return null;
     }
 
     @Override

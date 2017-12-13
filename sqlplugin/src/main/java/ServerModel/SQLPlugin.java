@@ -1,6 +1,7 @@
 package ServerModel;
 
 import java.util.List;
+import java.util.Map;
 
 import commandData.Command;
 import modeling.Game;
@@ -52,6 +53,16 @@ public class SQLPlugin implements IPlugin {
     @Override
     public List<Game> getAllGames() {
         return persistenceManager.getGameDao().getAllGames();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public Map<String, List<Command>> getAllCommands() {
+        return null;
     }
 
     @Override

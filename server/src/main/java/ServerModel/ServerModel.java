@@ -1,20 +1,8 @@
 package ServerModel;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -207,7 +195,7 @@ public class ServerModel {
 
     public void redoServerModel() {
         List<User> allUsers = currPlugin.getAllUsers();
-        Map<String,List<Command> commands = currPlugin.getAllCommands();
+        Map<String,List<Command>> commands = currPlugin.getAllCommands();
         List<Game> allGames = currPlugin.getAllGames();
     }
 }
