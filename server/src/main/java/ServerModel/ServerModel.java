@@ -205,4 +205,9 @@ public class ServerModel {
         return delta_n;
     }
 
+    public void redoServerModel() {
+        List<User> allUsers = currPlugin.getAllUsers();
+        Map<String,List<Command> commands = currPlugin.getAllCommands();
+        List<Game> allGames = currPlugin.getAllGames();
+    }
 }

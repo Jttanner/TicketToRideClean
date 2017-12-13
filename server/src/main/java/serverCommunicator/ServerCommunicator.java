@@ -114,7 +114,7 @@ public class ServerCommunicator {
         // on which the server should accept incoming client connections.
         public static void main(String[] args) {
             ServerModel.getInstance().saveArgs(args[0] + ".txt",args[1]);
-
+            ServerModel.getInstance().redoServerModel();
 
             new ServerCommunicator().run("8080");
         }

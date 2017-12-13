@@ -54,12 +54,12 @@ public class Loader {
         String jarPath = null;
          File myjar = null;
         if(fileName.equals("sql.txt")){
-            myjar = new File("/server/lib/sqlplugin.jar");
+            myjar = new File("server\\lib\\sqlplugin.jar");
             //jarPath = "./plugins/src/main/SQL.jar";."+className);
 //
         }
         else if(fileName.equals("file.txt")){
-            myjar = new File("/server/lib/fileplugin.jar");
+            myjar = new File("server\\lib\\fileplugin.jar");
             //jarPath = "./plugins/src/main/File.jar";
         }
 

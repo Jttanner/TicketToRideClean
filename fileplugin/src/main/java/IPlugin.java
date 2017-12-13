@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tyler on 12/5/2017.
@@ -27,4 +28,8 @@ public interface IPlugin {
     boolean clearCommandList(String gameID);
 
     List<Game> getAllGames();
+
+    List<User> getAllUsers();
+
+    Map<String,List<Command>> getAllCommands();
 }
