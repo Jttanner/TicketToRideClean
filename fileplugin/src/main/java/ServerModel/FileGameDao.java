@@ -55,9 +55,9 @@ public class FileGameDao implements IGameDao {
         gameFile = new File("Game/" + game.getGameID() + ".txt");
         try {
             if (gameFile.createNewFile()){
-                System.out.println("File" + game.getGameID() + "is created!");
+                System.out.println("UpdateGameState: File " + game.getGameID() + "is created!");
             }else{
-                System.out.println("File" + game.getGameID() +  "already exists.");
+                System.out.println("UpdateGameState: File " + game.getGameID() +  "already exists.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class FileGameDao implements IGameDao {
             game = gson.fromJson(line, Game.class);
         }
         catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + gameFile + "'");
+            System.out.println("GetGameState: Unable to open file '" + gameFile + "'");
         }
         catch(IOException ex) {
             System.out.println("Error reading file '" + gameFile + "'");
@@ -183,8 +183,10 @@ public class FileGameDao implements IGameDao {
                 //System.out.println(s);
                 //if(s.equals((name + ".txt"))) {
                 try {
+                    //s = s.substring(0, s.length() - 4);
+                    File file = new File("Game/" + s);
                     // FileReader reads text files in the default encoding.
-                    FileReader fileReader = new FileReader(s);
+                    FileReader fileReader = new FileReader(file);
 
                     // Always wrap FileReader in BufferedReader.
                     BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -198,7 +200,7 @@ public class FileGameDao implements IGameDao {
                     allGames.add(game);
                 }
                 catch(FileNotFoundException ex) {
-                    System.out.println("Unable to open file '" + "'");
+                    System.out.println("GetAllGames: Unable to open file " + s);
                 }
                 catch(IOException ex) {
                     System.out.println("Error reading file '" + "'");

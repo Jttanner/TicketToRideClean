@@ -72,7 +72,7 @@ public class FilePlugin implements IPlugin {
 
     @Override
     public boolean clearCommandList(String gameID) {
-        return persistenceManager.getCommandDao().clear();
+        return persistenceManager.getCommandDao().removeCommands(gameID);
     }
 
     @Override

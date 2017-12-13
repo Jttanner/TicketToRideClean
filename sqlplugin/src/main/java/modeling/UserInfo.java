@@ -1,6 +1,7 @@
 package modeling;
 
-import request.LoginRequest;
+
+import ServerModel.LoginRequest;
 
 /**
  * Created by jontt on 9/27/2017.

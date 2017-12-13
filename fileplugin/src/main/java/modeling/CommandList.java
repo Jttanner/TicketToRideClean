@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,7 @@ import commandData.Command;
  * Created by tyler on 10/23/2017.
  */
 
-public class
-CommandList {
+public class CommandList {
     private List<Command> commandList = new ArrayList<>();
 
     public void setCommandList(List<Command> commandList) {
@@ -40,7 +39,7 @@ CommandList {
     }
 
     /**Gets a unmodifiable list
-     * @return List<ServerModel.Command>*/
+     * @return List<Command>*/
     public List<Command> getCommandList(){
         return commandList;
     }

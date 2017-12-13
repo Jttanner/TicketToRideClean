@@ -12,8 +12,8 @@ import java.util.Map;
 public class RouteList {
 
     private List<Route> routesAvailable = new ArrayList<>();
-    private Map<Route, Player> routesClaimed = new HashMap<>();
-
+   // private Map<Route, Player> routesClaimed = new HashMap<>();
+    private Map<String, Route> routesClaimed = new HashMap<>();
     public Route getAvailableRoute(String startCity, String endCity, String routeColor){
         for (Route route : routesAvailable){
             if ((route.getFirstCityName().equals(startCity) && route.getSecondCityName().equals(endCity) ||
@@ -25,7 +25,7 @@ public class RouteList {
         return null;
     }
 
-    public Map<Route, Player> getRoutesMap(){
+    public Map<String, Route> getRoutesMap(){
         return  routesClaimed;
     }
 
@@ -37,8 +37,8 @@ public class RouteList {
         routesAvailable.remove(route);
     }
 
-    public void addClaimedRoute(Route route, Player player){
-        routesClaimed.put(route, player);
+    public void addClaimedRoute(String PlayerID, Route route){
+        routesClaimed.put(PlayerID,route);
     }
 
     public int getAvailableRouteSize(){
@@ -124,20 +124,20 @@ public class RouteList {
             routesAvailable.add(new Route("Chicago", "St. Louis", "Green", 2, true));
             routesAvailable.add(new Route("Chicago", "St. Louis", "White", 2, true));
             routesAvailable.add(new Route("Dallas", "Little Rock", "Wild", 2));
-            routesAvailable.add(new Route("Dallas", "Oklahoma modeling.City", "Wild", 2, true));
-            routesAvailable.add(new Route("Dallas", "Oklahoma modeling.City", "Wild", 2, true));
+            routesAvailable.add(new Route("Dallas", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Dallas", "Oklahoma City", "Wild", 2, true));
             routesAvailable.add(new Route("Dallas", "El Paso", "Red", 4));
             routesAvailable.add(new Route("Dallas", "Houston", "Wild", 1, true));
             routesAvailable.add(new Route("Dallas", "Houston", "Wild", 1, true));
-            routesAvailable.add(new Route("Denver", "Kansas modeling.City", "Black", 4, true));
-            routesAvailable.add(new Route("Denver", "Kansas modeling.City", "Orange", 4, true));
+            routesAvailable.add(new Route("Denver", "Kansas City", "Black", 4, true));
+            routesAvailable.add(new Route("Denver", "Kansas City", "Orange", 4, true));
             routesAvailable.add(new Route("Denver", "Omaha", "Purple", 4));
             routesAvailable.add(new Route("Denver", "Helena", "Green", 4));
-            routesAvailable.add(new Route("Denver", "Salt Lake modeling.City", "Red", 3, true));
-            routesAvailable.add(new Route("Denver", "Salt Lake modeling.City", "Yellow", 3, true));
+            routesAvailable.add(new Route("Denver", "Salt Lake City", "Red", 3, true));
+            routesAvailable.add(new Route("Denver", "Salt Lake City", "Yellow", 3, true));
             routesAvailable.add(new Route("Denver", "Phoenix", "White", 5));
             routesAvailable.add(new Route("Denver", "Santa Fe", "Wild", 2));
-            routesAvailable.add(new Route("Denver", "Oklahoma modeling.City", "Red", 4));
+            routesAvailable.add(new Route("Denver", "Oklahoma City", "Red", 4));
             routesAvailable.add(new Route("Duluth", "Omaha", "Wild", 2, true));
             routesAvailable.add(new Route("Duluth", "Omaha", "Wild", 2, true));
             routesAvailable.add(new Route("Duluth", "Toronto", "Purple", 6));
@@ -145,26 +145,26 @@ public class RouteList {
             routesAvailable.add(new Route("Duluth", "Winnipeg", "Black", 4));
             routesAvailable.add(new Route("Duluth", "Helena", "Orange", 6));
             routesAvailable.add(new Route("El Paso", "Houston", "Green", 6));
-            routesAvailable.add(new Route("El Paso", "Oklahoma modeling.City", "Yellow", 5));
+            routesAvailable.add(new Route("El Paso", "Oklahoma City", "Yellow", 5));
             routesAvailable.add(new Route("El Paso", "Santa Fe", "Wild", 2));
             routesAvailable.add(new Route("El Paso", "Phoenix", "Wild", 3));
             routesAvailable.add(new Route("El Paso", "Los Angeles", "Black", 6));
             routesAvailable.add(new Route("Helena", "Winnipeg", "Blue", 4));
             routesAvailable.add(new Route("Helena", "Omaha", "Red", 5));
-            routesAvailable.add(new Route("Helena", "Salt Lake modeling.City", "Purple", 3));
+            routesAvailable.add(new Route("Helena", "Salt Lake City", "Purple", 3));
             routesAvailable.add(new Route("Helena", "Seattle", "Yellow", 6));
             routesAvailable.add(new Route("Houston", "New Orleans", "Wild", 2));
-            routesAvailable.add(new Route("Kansas modeling.City", "St. Louis", "Blue", 2, true));
-            routesAvailable.add(new Route("Kansas modeling.City", "St. Louis", "Purple", 2, true));
-            routesAvailable.add(new Route("Kansas modeling.City", "Omaha", "Wild", 1, true));
-            routesAvailable.add(new Route("Kansas modeling.City", "Omaha", "Wild", 1, true));
-            routesAvailable.add(new Route("Kansas modeling.City", "Oklahoma modeling.City", "Wild", 2, true));
-            routesAvailable.add(new Route("Kansas modeling.City", "Oklahoma modeling.City", "Wild", 2, true));
-            routesAvailable.add(new Route("Las Vegas", "Salt Lake modeling.City", "Orange", 3));
+            routesAvailable.add(new Route("Kansas City", "St. Louis", "Blue", 2, true));
+            routesAvailable.add(new Route("Kansas City", "St. Louis", "Purple", 2, true));
+            routesAvailable.add(new Route("Kansas City", "Omaha", "Wild", 1, true));
+            routesAvailable.add(new Route("Kansas City", "Omaha", "Wild", 1, true));
+            routesAvailable.add(new Route("Kansas City", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Kansas City", "Oklahoma City", "Wild", 2, true));
+            routesAvailable.add(new Route("Las Vegas", "Salt Lake City", "Orange", 3));
             routesAvailable.add(new Route("Las Vegas", "Los Angeles", "Wild", 2));
             routesAvailable.add(new Route("Little Rock", "Nashville", "White", 3));
             routesAvailable.add(new Route("Little Rock", "St. Louis", "Wild", 2));
-            routesAvailable.add(new Route("Little Rock", "Oklahoma modeling.City", "Wild", 2));
+            routesAvailable.add(new Route("Little Rock", "Oklahoma City", "Wild", 2));
             routesAvailable.add(new Route("Little Rock", "New Orleans", "Green", 3));
             routesAvailable.add(new Route("Los Angeles", "San Francisco", "Purple", 3, true));
             routesAvailable.add(new Route("Los Angeles", "San Francisco", "Yellow", 3, true));
@@ -180,7 +180,7 @@ public class RouteList {
             routesAvailable.add(new Route("New York", "Washington", "Orange", 2, true));
             routesAvailable.add(new Route("New York", "Pittsburgh", "White", 2, true));
             routesAvailable.add(new Route("New York", "Pittsburgh", "Green", 2, true));
-            routesAvailable.add(new Route("Oklahoma modeling.City", "Santa Fe", "Blue", 3));
+            routesAvailable.add(new Route("Oklahoma City", "Santa Fe", "Blue", 3));
             routesAvailable.add(new Route("Phoenix", "Santa Fe", "Wild", 3));
             routesAvailable.add(new Route("Pittsburgh", "Washington", "Wild", 2));
             routesAvailable.add(new Route("Pittsburgh", "Raleigh", "Wild", 2));
@@ -188,13 +188,13 @@ public class RouteList {
             routesAvailable.add(new Route("Pittsburgh", "Toronto", "Wild", 2));
             routesAvailable.add(new Route("Portland", "Seattle", "Wild", 1, true));
             routesAvailable.add(new Route("Portland", "Seattle", "Wild", 1, true));
-            routesAvailable.add(new Route("Portland", "Salt Lake modeling.City", "Blue", 6));
+            routesAvailable.add(new Route("Portland", "Salt Lake City", "Blue", 6));
             routesAvailable.add(new Route("Portland", "San Francisco", "Green", 5, true));
             routesAvailable.add(new Route("Portland", "San Francisco", "Purple", 5, true));
             routesAvailable.add(new Route("Raleigh", "Washington", "Wild", 2, true));
             routesAvailable.add(new Route("Raleigh", "Washington", "Wild", 2, true));
-            routesAvailable.add(new Route("Salt Lake modeling.City", "San Francisco", "Orange", 5, true));
-            routesAvailable.add(new Route("Salt Lake modeling.City", "San Francisco", "White", 5, true));
+            routesAvailable.add(new Route("Salt Lake City", "San Francisco", "Orange", 5, true));
+            routesAvailable.add(new Route("Salt Lake City", "San Francisco", "White", 5, true));
             routesAvailable.add(new Route("Sault St. Marie", "Winnipeg", "Wild", 6));
             routesAvailable.add(new Route("Sault St. Marie", "Toronto", "Wild", 2));
             routesAvailable.add(new Route("Seattle", "Vancouver", "Wild", 1, true));
