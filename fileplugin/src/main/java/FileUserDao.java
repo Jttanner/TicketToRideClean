@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -136,7 +137,52 @@ public class FileUserDao implements IUserDao {
     }
 
     @Override
-    public List<Game> getAllGames() {
-        return null;
+    public List<User> getAllUsers() {
+        String userFile;
+        File directory;
+        boolean result = false;
+        userFile = "User";
+        directory = new File(userFile);
+        String[]entries = directory.list();
+        String line;
+        List allUsers = new ArrayList<>();
+        if(entries != null) {
+            //System.out.println("Files inside User ");
+            for(String s: entries) {
+                //System.out.println(s);
+                //if(s.equals((name + ".txt"))) {
+                    try {
+                        // FileReader reads text files in the default encoding.
+                        FileReader fileReader = new FileReader(s);
+
+                        // Always wrap FileReader in BufferedReader.
+                        BufferedReader bufferedReader = new BufferedReader(fileReader);
+                        //Gets the name of the User
+                        s = s.substring(0, s.length() - 4);
+                        //Gets the password
+                        line = bufferedReader.readLine();
+                        // Always close files.
+                        bufferedReader.close();
+
+                        UserInfo userInfo = new UserInfo(s, line);
+                        User user = new User(userInfo);
+                        allUsers.add(user);
+                    }
+                    catch(FileNotFoundException ex) {
+                        System.out.println("Unable to open file '" + "'");
+                    }
+                    catch(IOException ex) {
+                        System.out.println("Error reading file '" + "'");
+                        // Or we could just do this:
+                        // ex.printStackTrace();
+                    }
+                //}
+            }
+        }
+
+
+        return allUsers;
     }
+
+
 }

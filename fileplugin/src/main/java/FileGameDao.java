@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 //import java.nio.file.Files;
 //import java.nio.file.Paths;
@@ -159,6 +161,52 @@ public class FileGameDao implements IGameDao {
             System.out.println("Clear unsuccessful");
         }
         return result;
+    }
+
+    @Override
+    public List<Game> getAllGames() {
+        String gameFile;
+        File directory;
+        boolean result = false;
+        gameFile = "Game";
+        directory = new File(gameFile);
+        String[]entries = directory.list();
+        String line;
+        List allGames = new ArrayList<>();
+        if(entries != null) {
+            //System.out.println("Files inside User ");
+            for(String s: entries) {
+                //System.out.println(s);
+                //if(s.equals((name + ".txt"))) {
+                try {
+                    // FileReader reads text files in the default encoding.
+                    FileReader fileReader = new FileReader(s);
+
+                    // Always wrap FileReader in BufferedReader.
+                    BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                    //Gets the game Json string
+                    line = bufferedReader.readLine();
+                    // Always close files.
+                    bufferedReader.close();
+
+                    Game game = gson.fromJson(line, Game.class);
+                    allGames.add(game);
+                }
+                catch(FileNotFoundException ex) {
+                    System.out.println("Unable to open file '" + "'");
+                }
+                catch(IOException ex) {
+                    System.out.println("Error reading file '" + "'");
+                    // Or we could just do this:
+                    // ex.printStackTrace();
+                }
+                //}
+            }
+        }
+
+
+        return allGames;
     }
 
     /*
