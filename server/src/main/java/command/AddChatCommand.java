@@ -19,7 +19,6 @@ public class AddChatCommand extends ChatCommandData implements ICommand {
     public CommandResult execute() {
 
         ServerFacade.getInstance().addChat(getChatString(),getGameId());
-
         return null;
     }
 }

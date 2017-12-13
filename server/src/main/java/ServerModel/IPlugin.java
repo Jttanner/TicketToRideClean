@@ -36,6 +36,4 @@ public interface IPlugin {
     List<Game> getAllGames();
 
     List<User> getAllUsers();
-
-    Map<String,List<Command>> getAllCommands();
 }
