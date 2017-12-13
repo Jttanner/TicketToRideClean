@@ -125,6 +125,47 @@ public class FileCommandDao implements ICommandDao {
         String newLine = "\n";
         //Create new txt file in Game
         commandFile = new File("Command/" + gameID + ".txt");
+//        try {
+//            if (commandFile.createNewFile()){
+//                System.out.println("addCommandsToGame: File " + gameID + "is created!");
+//            }else{
+//                System.out.println("addCommandsToGame: File " + gameID +  "already exists.");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("addCommandsToGame: File " + gameID +  "Something went wrong.");
+//            e.printStackTrace();
+//        }
+        commandToString = "";
+        switch (command.getType()){
+            case "startGame":
+                commandToString = myGson.toJson(command, StartGameCommandData.class);
+                break;
+            case "drawTrainCard":
+                commandToString = myGson.toJson(command, DrawTrainCardCommandData.class);
+                break;
+            case "drawDestinationCards":
+                commandToString = myGson.toJson(command, DrawDestinationCardCommandData.class);
+                break;
+            case "claimInitialDestinationCards":
+                commandToString = myGson.toJson(command, ClaimInitialDestinationCardCommandData.class);
+                break;
+            case "claimDestinationCards":
+                commandToString = myGson.toJson(command, ClaimDestinationCardCommandData.class);
+                break;
+            case "claimRoute":
+                commandToString = myGson.toJson(command, ClaimRouteCommandData.class);
+                break;
+            case "endTurn":
+                commandToString = myGson.toJson(command, EndTurnCommandData.class);
+                break;
+            case "addChat":
+                commandToString = myGson.toJson(command, ChatCommandData.class);
+                break;
+            case "EndGame":
+                break;
+            default:
+                break;
+        }
         try {
             if (commandFile.createNewFile()){
                 System.out.println("addCommandsToGame: File " + gameID + "is created!");
@@ -135,38 +176,9 @@ public class FileCommandDao implements ICommandDao {
             System.out.println("addCommandsToGame: File " + gameID +  "Something went wrong.");
             e.printStackTrace();
         }
+
         try {
-            commandToString = "";
-            switch (command.getType()){
-                case "startGame":
-                    commandToString = myGson.toJson(command, StartGameCommandData.class);
-                    break;
-                case "drawTrainCard":
-                    commandToString = myGson.toJson(command, DrawTrainCardCommandData.class);
-                    break;
-                case "drawDestinationCards":
-                    commandToString = myGson.toJson(command, DrawDestinationCardCommandData.class);
-                    break;
-                case "claimInitialDestinationCards":
-                    commandToString = myGson.toJson(command, ClaimInitialDestinationCardCommandData.class);
-                    break;
-                case "claimDestinationCards":
-                    commandToString = myGson.toJson(command, ClaimDestinationCardCommandData.class);
-                    break;
-                case "claimRoute":
-                    commandToString = myGson.toJson(command, ClaimRouteCommandData.class);
-                    break;
-                case "endTurn":
-                    commandToString = myGson.toJson(command, EndTurnCommandData.class);
-                    break;
-                case "addChat":
-                    commandToString = myGson.toJson(command, ChatCommandData.class);
-                    break;
-                case "EndGame":
-                    break;
-                default:
-                    break;
-            }
+
             fileWriter = new FileWriter(commandFile, true);
             fileWriter.append(commandToString);
             fileWriter.append(newLine);
