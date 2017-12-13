@@ -53,6 +53,8 @@ public class SQLiteGameDao implements IGameDao {
             PreparedStatement statement = connection.prepareStatement(query1);
             statement.setString(1, game.getGameID());
             statement.execute();
+            connection.close();
+            connection = DriverManager.getConnection(connectionString);
             statement = connection.prepareStatement(query2);
             statement.setString(1, myGson.toJson(game));
             statement.setString(2, game.getGameID());

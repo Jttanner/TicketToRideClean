@@ -64,7 +64,7 @@ public class SQLiteUserDao implements IUserDao {
                 return true;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("USER ALREADY EXISTS");
             return false;
         }
     }
