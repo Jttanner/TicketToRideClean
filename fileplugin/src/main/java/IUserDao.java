@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by tyler on 12/5/2017.
  */
@@ -9,5 +11,7 @@ interface IUserDao {
     User verifyUser(String name, String password);
 
     boolean clear();
+
+    List<Game> getAllGames();
 
 }

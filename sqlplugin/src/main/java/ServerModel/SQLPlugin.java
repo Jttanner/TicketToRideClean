@@ -50,6 +50,11 @@ public class SQLPlugin implements IPlugin {
     }
 
     @Override
+    public List<Game> getAllGames() {
+        return null;
+    }
+
+    @Override
     public boolean clear()   {
         return persistenceManager.clearDatabase();
     }

@@ -31,4 +31,6 @@ public interface IPlugin {
     void setPManager(IPersistenceManager persistenceManager);
 
     boolean clearCommandList(String gameID);
+
+    List<Game> getAllGames();
 }

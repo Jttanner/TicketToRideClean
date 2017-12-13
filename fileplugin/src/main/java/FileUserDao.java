@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by korea on 12/7/2017.
@@ -132,5 +133,10 @@ public class FileUserDao implements IUserDao {
             System.out.println("Clear unsuccessful");
         }
         return result;
+    }
+
+    @Override
+    public List<Game> getAllGames() {
+        return null;
     }
 }

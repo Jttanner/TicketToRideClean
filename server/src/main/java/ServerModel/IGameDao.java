@@ -1,5 +1,7 @@
 package ServerModel;
 
+import java.util.List;
+
 import modeling.Game;
 
 /**
@@ -18,4 +20,6 @@ interface IGameDao {
     boolean removeGame(String gameID);
 
     boolean clear() ;
+
+    List<Game> getAllGames();
 }

@@ -57,4 +57,9 @@ public class FilePlugin implements IPlugin {
     public boolean clearCommandList(String gameID) {
         return persistenceManager.getCommandDao().clear();
     }
+
+    @Override
+    public List<Game> getAllGames() {
+        return null;
+    }
 }
