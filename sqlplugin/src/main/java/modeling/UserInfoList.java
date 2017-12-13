@@ -56,4 +56,12 @@ public class UserInfoList {
         }
         return matches;
     }
+
+    public Map<String, UserInfo> getUsernameToUserInfo() {
+        return usernameToUserInfo;
+    }
+
+    public Map<User, UserInfo> getUserToUserInfo() {
+        return userToUserInfo;
+    }
 }
