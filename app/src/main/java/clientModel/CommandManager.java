@@ -25,6 +25,7 @@ import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import commandData.IncrementCommandIndexCommandData;
+import commandData.ResetCommandIndexData;
 import modeling.Player;
 import servercomms.ServerProxy;
 
@@ -84,6 +85,13 @@ public class CommandManager {
         //get the current command index.
          int commandIndex = myPlayer.getCommandIndex();
         //if there is anything to execute, do so
+        if(commandList.get(0) instanceof ResetCommandIndexData){
+            new ResetCommandIndexClient().execute();
+            IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
+            ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
+            CModel.getInstance().incrementUsersCommandIndex();
+            return;
+        }
         if (commandList.size() > 0) {
             for (int i = commandIndex; i < commandList.size(); i++) {
                 //return the appropriate client command
