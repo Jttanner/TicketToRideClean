@@ -222,13 +222,10 @@ public class ServerModel {
                 userInfoList.getUserToUserInfo().put(user, user.getInfo());
             }
             gameList.setGames(allGames);
-           /* for (Game game:gameList.getGames()) {
-                commandListMap.put(game.getGameID(),currPlugin.getGameCommands(game.getGameID()));
-            }*/
-
             //have to go through the command list of each game to ensure the game is completely updated
             for (Game game : gameList.getGames()) {
-                List<Command> commands = commandListMap.get(game.getGameID());
+                //the execution of these commands are not yet represented in the game objects
+                List<Command> commands = currPlugin.getGameCommands(game.getGameID());
                 if(commands != null) {
                     for (Command com : commands) {
                         if (com != null) {
@@ -295,11 +292,12 @@ public class ServerModel {
         //rmake new cmd list
         ArrayList<Command> list = new ArrayList<>();
         list.add(cmd);
-        //add this command to the map
+        //clear the map and then add ResetCommandIndexData to the map
+        //commandListMap.clear();
         commandListMap.put(gameID, list);
         //reset servermodel indices
         ICommand command = new ResetCommandIndex();
-        //also execute the command server side
+        //execute the command server side
         command.execute();
         //now reset db
         getPlugin().saveGame(getGames().findGame(gameID));
