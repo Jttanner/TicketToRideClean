@@ -1,1 +1,1 @@
-include ':app', ':sharedlib', ':server', ':plugins', ':sql'
+include ':app', ':sharedlib', ':server', ':sqlplugin', ':fileplugin'

@@ -9,10 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/plugins" />
+            <option value="$PROJECT_DIR$/fileplugin" />
             <option value="$PROJECT_DIR$/server" />
             <option value="$PROJECT_DIR$/sharedlib" />
-            <option value="$PROJECT_DIR$/sql" />
+            <option value="$PROJECT_DIR$/sqlplugin" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
