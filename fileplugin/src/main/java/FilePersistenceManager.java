@@ -5,14 +5,15 @@ import java.util.ArrayList;
  */
 
 public class FilePersistenceManager implements IPersistenceManager {
-    Loader loader;
-    ArrayList<String> fileArgs;
-    String fileName;
-    FilePersistenceManager (String fileName) {
-        loader = new Loader();
-        fileArgs = loader.readFile(fileName);
-        this.fileName = fileName;
-    }
+//    Loader loader;
+//    ArrayList<String> fileArgs;
+//    String fileName;
+//    FilePersistenceManager (String fileName) {
+//        loader = new Loader();
+//        fileArgs = loader.readFile(fileName);
+//        this.fileName = fileName;
+//    }
+
 
     private IGameDao gameDao;
 
@@ -39,7 +40,8 @@ public class FilePersistenceManager implements IPersistenceManager {
     public IUserDao getUserDao() {
         if(userDao == null) {
             //Create the gameDao via reflection?
-            userDao = (FileUserDao) loader.loadClass(fileName, fileArgs.get(4));
+            //userDao = (FileUserDao) loader.loadClass(fileName, fileArgs.get(4));
+            userDao = new FileUserDao();
         }
         return userDao;
     }
@@ -48,7 +50,8 @@ public class FilePersistenceManager implements IPersistenceManager {
     public IGameDao getGameDao() {
         if(gameDao == null) {
             //Create the gameDao via reflection?
-            gameDao = (FileGameDao) loader.loadClass(fileName, fileArgs.get(2));
+            //gameDao = (FileGameDao) loader.loadClass(fileName, fileArgs.get(2));
+            gameDao = new FileGameDao();
         }
         return gameDao;
     }
@@ -58,7 +61,8 @@ public class FilePersistenceManager implements IPersistenceManager {
     public ICommandDao getCommandDao() {
         if(commandDao == null) {
             //Create the gameDao via reflection?
-            commandDao = (FileCommandDao) loader.loadClass(fileName, fileArgs.get(3));
+            //commandDao = (FileCommandDao) loader.loadClass(fileName, fileArgs.get(3));
+            commandDao = new FileCommandDao();
         }
         return commandDao;
     }

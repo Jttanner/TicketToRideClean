@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by korea on 12/7/2017.
@@ -29,15 +31,11 @@ public class FileCommandDao implements ICommandDao {
     }
     @Override
     public List<Command> getCommandList(String gameID)  {
-        List<Command> listOfCommands = new ArrayList<Command>();
+        List<Command> listOfCommands = new ArrayList<>();
         String commandFile;
         String line;
         Command command = null;
-//        try {
-//            fileName = new String(Files.readAllBytes(Paths.get("Game/" + gameID + ".txt")));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         commandFile = ("Command/" + gameID + ".txt");
         try {
             // FileReader reads text files in the default encoding.
@@ -49,7 +47,36 @@ public class FileCommandDao implements ICommandDao {
             while((line = bufferedReader.readLine()) != null){
                 //line = bufferedReader.readLine();
                 command = gson.fromJson(line, Command.class);
-                listOfCommands.add(command);
+                switch (command.getType()) {
+                    case "startGame":
+                        StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
+                        listOfCommands.add(startGameCommandData);
+                    case "drawTrainCard":
+                        DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
+                        listOfCommands.add(drawTrainCardCommandData);
+                    case "drawDestinationCards":
+                        DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
+                        listOfCommands.add(drawDestinationCardCommandData);
+                    case "claimInitialDestinationCards":
+                        ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
+                        listOfCommands.add(claimInitialDestinationCardCommandData);
+                    case "claimDestinationCards":
+                        ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
+                        listOfCommands.add(claimDestinationCardCommandData);
+                    case "claimRoute":
+                        ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
+                        listOfCommands.add(claimRouteCommandData);
+                    case "endTurn":
+                        EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
+                        listOfCommands.add(endTurnCommandData);
+                    case "addChat":
+                        ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
+                        listOfCommands.add(chatCommandData);
+                    case "EndGame":
+                        //return new EndGameCommand();
+                    //break;
+                    //TODO add new commands for the client here
+                }
             }
 
 
