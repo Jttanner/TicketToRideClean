@@ -47,7 +47,7 @@ public class Loader {
                     "Error reading file '"
                             + fileName + "'");
         }
-        return  null;
+        return null;
     }
 
     public Object loadClass(String fileName,String className) {

@@ -3,6 +3,7 @@ package presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.Observable;
@@ -112,7 +113,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         try {
             return getView().getActivityContext();
         } catch (NullPointerException e) {
-            //TODO send toast out
+            Toast.makeText(getActivityContext(), "It hit null", Toast.LENGTH_LONG).show();
             return null;
         }
     }
