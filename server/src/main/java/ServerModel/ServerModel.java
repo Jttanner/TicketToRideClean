@@ -200,11 +200,8 @@ public class ServerModel {
      */
     public void redoServerModel() {
         List<User> allUsers = currPlugin.getAllUsers();
-        Map<String, List<Command>> commands = currPlugin.getAllCommands();
         List<Game> allGames = currPlugin.getAllGames();
-        if (allUsers != null && allUsers.size() > 0
-                && commands != null && commands.size() > 0
-                && allGames != null && allGames.size() > 0) {
+        if (allUsers != null && allUsers.size() > 0 && allGames != null && allGames.size() > 0) {
             //add all the users back in
             for (User user : allUsers) {
                 users.put(user.getUserName(), user);
@@ -212,8 +209,10 @@ public class ServerModel {
                 userInfoList.getUsernameToUserInfo().put(user.getUserName(), user.getInfo());
                 userInfoList.getUserToUserInfo().put(user, user.getInfo());
             }
-            commandListMap = commands;
             gameList.setGames(allGames);
+            for (Game game:gameList.getGames()) {
+                commandListMap.put(game.getGameID(),currPlugin.getGameCommands(game.getGameID()));
+            }
         } else {
             System.out.println("ServerModel:redoServerModel: db is empty or returning null");
         }
