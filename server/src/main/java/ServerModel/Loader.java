@@ -18,7 +18,7 @@ public class Loader {
     public ArrayList<String> readFile(String fileName) {
         // This will reference one line at a time
         String line = null;
-        fileName = "server\\lib\\" + fileName;
+        fileName = "server/lib/" + fileName;
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
             // FileReader reads text files in the default encoding.
@@ -54,23 +54,26 @@ public class Loader {
         String jarPath = null;
          File myjar = null;
         if(fileName.equals("sql.txt")){
-            myjar = new File("/plugins/src/main/SQL.jar");
-            //jarPath = "./plugins/src/main/SQL.jar";
+            myjar = new File("/sqlplugin/build/libs/sqlplugin.jar");
+            //jarPath = "./plugins/src/main/SQL.jar";."+className);
+//
         }
         else if(fileName.equals("file.txt")){
-            myjar = new File("/plugins/src/main/File.jar");
+            myjar = new File("/fileplugin/build/libs/fileplugin.jar");
             //jarPath = "./plugins/src/main/File.jar";
         }
         // Getting the jar URL which contains target class
         try {
+           //URL u =  myjar.toURL();
             URL[] classLoaderUrls = new URL[]{myjar.toURL()};
 
             // Create a new URLClassLoader
             URLClassLoader urlClassLoader = new URLClassLoader(classLoaderUrls);
 
             // Load the target class
-            Class<?> beanClass = urlClassLoader.loadClass(className +".class");
-
+            Class<?> beanClass = urlClassLoader.loadClass("ServerModel."+className);
+//
+//            Class<?> beanClass = Class.forName(className)
             // Create a new instance from the loaded class
             return beanClass.getConstructor().newInstance();
         }catch (Exception e) {
