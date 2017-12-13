@@ -55,9 +55,9 @@ public class FileGameDao implements IGameDao {
         gameFile = new File("Game/" + game.getGameID() + ".txt");
         try {
             if (gameFile.createNewFile()){
-                System.out.println("File" + game.getGameID() + "is created!");
+                System.out.println("UpdateGameState: File " + game.getGameID() + "is created!");
             }else{
-                System.out.println("File" + game.getGameID() +  "already exists.");
+                System.out.println("UpdateGameState: File " + game.getGameID() +  "already exists.");
             }
         } catch (IOException e) {
             e.printStackTrace();

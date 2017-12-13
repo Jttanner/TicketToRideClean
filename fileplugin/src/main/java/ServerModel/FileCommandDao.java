@@ -118,26 +118,14 @@ public class FileCommandDao implements ICommandDao {
         commandFile = new File("Command/" + gameID + ".txt");
         try {
             if (commandFile.createNewFile()){
-                System.out.println("File" + gameID + "is created!");
+                System.out.println("addCommandsToGame: File " + gameID + "is created!");
             }else{
-                System.out.println("File" + gameID +  "already exists.");
+                System.out.println("addCommandsToGame: File " + gameID +  "already exists.");
             }
         } catch (IOException e) {
+            System.out.println("addCommandsToGame: File " + gameID +  "Something went wrong.");
             e.printStackTrace();
         }
-        //Update file in Game Directory
-//        try {
-//            for(Command c: command) {
-//                gameToString = gson.toJson(c);
-//                fileWriter = new FileWriter(commandFile, true);
-//                fileWriter.append(gameToString);
-//                fileWriter.close();
-//            }
-//
-//            result = true;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         try {
             gameToString = gson.toJson(command);
             fileWriter = new FileWriter(commandFile, true);
@@ -145,7 +133,9 @@ public class FileCommandDao implements ICommandDao {
             fileWriter.append(newLine);
             fileWriter.close();
             result = true;
+            System.out.println("Command successfully added to game " + gameID);
         } catch (IOException e) {
+            System.out.println("Command not successfully added to game " + gameID);
             e.printStackTrace();
             result = false;
         }
