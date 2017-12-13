@@ -107,7 +107,7 @@ public class ServerModel {
 
     User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
         User user = userInfoList.register(userName, password);
-    //    currPlugin.saveUser(user);
+        currPlugin.saveUser(user);
         return user;
     }
 
