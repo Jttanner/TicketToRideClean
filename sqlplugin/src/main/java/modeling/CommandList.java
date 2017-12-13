@@ -1,4 +1,4 @@
-package ServerModel;
+package modeling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class CommandList {
     }
 
     /**Gets a unmodifiable list
-     * @return List<ServerModel.Command>*/
+     * @return List<Command>*/
     public List<Command> getCommandList(){
         return commandList;
     }

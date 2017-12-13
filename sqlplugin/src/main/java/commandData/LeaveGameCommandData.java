@@ -1,13 +1,13 @@
-package ServerModel;
+package commandData;
 
-import commandData.Command;
-import modeling.*;
+import modeling.Game;
+import modeling.Player;
 
 /**
  * Created by Hwang on 10/4/2017.
  */
 
-public class LeaveGameCommandData extends Command {
+public class LeaveGameCommandData extends Command{
     private Game gameObject;
     private Player playerObject;
 

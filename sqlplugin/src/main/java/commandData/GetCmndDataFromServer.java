@@ -1,6 +1,4 @@
-package ServerModel;
-
-import commandData.*;
+package commandData;
 
 /**
  * Created by tyler on 10/24/2017.

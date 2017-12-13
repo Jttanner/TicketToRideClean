@@ -11,15 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import commandData.ChatCommandData;
-import commandData.ClaimDestinationCardCommandData;
-import commandData.ClaimInitialDestinationCardCommandData;
-import commandData.ClaimRouteCommandData;
-import commandData.Command;
-import commandData.DrawDestinationCardCommandData;
-import commandData.DrawTrainCardCommandData;
-import commandData.EndTurnCommandData;
-import commandData.StartGameCommandData;
+import commandData.*;
 
 /**
  * Created by jontt on 12/7/2017.
