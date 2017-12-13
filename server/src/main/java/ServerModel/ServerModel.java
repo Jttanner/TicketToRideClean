@@ -198,7 +198,7 @@ public class ServerModel {
     /**
      * Called when the server is started to see if there is anything in the db. If there is it will repopulate the db
      */
-    public void redoServerModel() {
+    public void redoServerModel() throws Exception {
         List<User> allUsers = currPlugin.getAllUsers();
         List<Game> allGames = currPlugin.getAllGames();
         if (allUsers != null && allUsers.size() > 0 && allGames != null && allGames.size() > 0) {
