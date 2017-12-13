@@ -57,7 +57,7 @@ public class SQLPlugin implements IPlugin {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return persistenceManager.getUserDao().getAllUsers();
     }
 
     @Override

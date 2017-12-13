@@ -1,5 +1,7 @@
 package ServerModel;
 
+import java.util.List;
+
 import modeling.User;
 
 /**
@@ -14,4 +16,5 @@ interface IUserDao {
 
     boolean clear();
 
+    List<User> getAllUsers();
 }

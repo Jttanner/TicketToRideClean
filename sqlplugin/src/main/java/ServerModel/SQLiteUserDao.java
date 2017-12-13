@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import modeling.User;
 import modeling.UserInfo;
@@ -102,6 +104,27 @@ public class SQLiteUserDao implements IUserDao {
         }catch (Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        String query = "SELECT * FROM User";
+        try{
+            List<User> users = new ArrayList<>();
+            connection = DriverManager.getConnection(connectionString);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()){
+                UserInfo userInfo = new UserInfo(resultSet.getString("Username"), resultSet.getString("Password"));
+                users.add(new User(userInfo));
+            }
+
+            return users;
+        }catch (SQLException e){
+            System.out.println("no users");
+            return null;
         }
     }
 }
