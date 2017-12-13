@@ -16,6 +16,7 @@ import command.EndTurnCommandServer;
 import command.GetCmndListServer;
 import command.ICommand;
 import command.IncrementCommandIndexCommand;
+import command.ResetCommandIndex;
 import command.StartGameCommand;
 import commandData.*;
 import commandData.GetCmndListDataToClient;
@@ -221,9 +222,9 @@ public class ServerModel {
                 userInfoList.getUserToUserInfo().put(user, user.getInfo());
             }
             gameList.setGames(allGames);
-            for (Game game:gameList.getGames()) {
+           /* for (Game game:gameList.getGames()) {
                 commandListMap.put(game.getGameID(),currPlugin.getGameCommands(game.getGameID()));
-            }
+            }*/
         } else {
             System.out.println("ServerModel:redoServerModel: db is empty or returning null");
         }
@@ -286,5 +287,14 @@ public class ServerModel {
         System.out.println("ServerFacade:saveCommands: saving game: " + gameID);
         getPlugin().saveGame(getGames().findGame(gameID));
         getPlugin().clearCommandList(gameID);
+        Command cmd = new ResetCommandIndexData();
+        //reset command lists
+        ArrayList<Command> list = new ArrayList<>();
+        list.add(cmd);
+        //add this command to the lists of the game
+        commandListMap.put(gameID,list);
+        ICommand command = new ResetCommandIndex();
+        //also execute the command server side
+        command.execute();
     }
 }

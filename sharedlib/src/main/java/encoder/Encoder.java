@@ -24,6 +24,7 @@ import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
 import commandData.EndTurnCommandData;
 import commandData.GetCmndListDataToClient;
+import commandData.ResetCommandIndexData;
 import commandData.StartGameCommandData;
 import result.CommandResult;
 import result.CreateGameCommandResult;
@@ -243,6 +244,9 @@ public class Encoder {
                             break;
                         case "EndGame":
                             command = gson.fromJson(object,Command.class);
+                            break;
+                        case "ResetCommandIndex":
+                            command = gson.fromJson(object, ResetCommandIndexData.class);
                             break;
 
                         //TODO: PLEASE ADD CASES HERE

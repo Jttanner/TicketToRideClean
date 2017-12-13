@@ -14,6 +14,7 @@ import clientCommands.EndGameCommand;
 import clientCommands.EndTurnCommandClient;
 import clientCommands.InitializeTurns;
 import clientCommands.PlaceTrainRoute;
+import clientCommands.ResetCommandIndexClient;
 import clientCommands.StartGameClient;
 import clientCommands.UpdateChatCommand;
 import commandData.ChatCommandData;
@@ -140,6 +141,8 @@ public class CommandManager {
                 break;
             case "EndGame":
                 return new EndGameCommand();
+            case "ResetCommandIndex":
+                return new ResetCommandIndexClient();
             //break;
             //TODO add new commands for the client here
         }
