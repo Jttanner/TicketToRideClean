@@ -70,7 +70,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         String typeOfRequest = "POST";
         //connection with the server is here
         InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
-        String string = stream.toString();
+        //String string = stream.toString();
 
         if (request instanceof LoginRequest) { //do we update the view after the it goes to the server and back????
             return encoder.decodeLoginResult(stream);

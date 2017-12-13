@@ -127,14 +127,15 @@ public class MapBaseView extends View {
 
     public MapBaseView(Context context, AttributeSet st) {
         super(context, st);
+        fillCityList();
+        indexCityPointMap();
     }
 
     @Override
     public void onDraw(Canvas canvas){
         baseCanvas = canvas;
         //canvas.drawColor(Color.BLACK); //Draw a paint color, not really needed.
-        fillCityList();
-        indexCityPointMap();
+
         float thickness = 4;
         float textSize = 35;
         paint.setStrokeWidth(thickness);
@@ -152,7 +153,7 @@ public class MapBaseView extends View {
     /*
     Use city map to lookup coordinates when passed a city name.
      */
-    private void indexCityPointMap(){
+    public void indexCityPointMap(){
         for (CityDrawData data : cities){
             cityMap.put(data.cityName.toLowerCase(), data.city);
         }
@@ -224,7 +225,7 @@ public class MapBaseView extends View {
 
 
 
-    private void fillCityList(){
+    public void fillCityList(){
 
         cities.add(Vancouver);
         cities.add(Seattle);

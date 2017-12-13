@@ -82,6 +82,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         //changeTurnDisplay();
         updateMap();
 
+
         //((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
 
         presenter = new MapPresenter(this);
@@ -230,7 +231,9 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      */
     private void drawClaimedRoute(String cityName1, String cityName2, String color, boolean isDoubleRoute, boolean hasOneDoubleClaimed){
         MapBaseView mapBaseView = (MapBaseView) findViewById(R.id.map_base_view);
+       // mapBaseView.indexCityPointMap();
         Map<String, Point> cities = mapBaseView.cityMap;
+
         mapBaseView.addClaimedRoute(cities.get(cityName1.toLowerCase()), cityName1.toLowerCase(), cities.get(cityName2.toLowerCase()), cityName2.toLowerCase(), color, isDoubleRoute, hasOneDoubleClaimed);
     }
 
@@ -261,7 +264,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
             Route route = entry.getValue();
             Game currentGame = CModel.getInstance().getCurrGame();
             for(Player player2 : currentGame.getPlayers()){
-                if(player2.equals(entry.getKey())){
+                if(player2.getPlayerName().equals(entry.getKey())){
                     player=player2;
                 }
             }
