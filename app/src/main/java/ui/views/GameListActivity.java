@@ -38,10 +38,12 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
         presenter = new GameListPresenter(this);
-        checkUp();
+
         wireUp();
         Poller poller = Poller.getInstance();
         poller.updateGameList();
+
+        checkUp();
     }
 
     void checkUp(){
@@ -49,9 +51,11 @@ public class GameListActivity extends FragmentActivity implements MVP_GameList.G
         if(player!=null) {
             for (Game game : CModel.getInstance().getAllGames()) {
                 for (Player each : game.getPlayers()) {
-                    if (player.getPlayerName().equals(each.getPlayerName()))
+                    if (player.getPlayerName().equals(each.getPlayerName())) {
                         Poller.getInstance().stopPoller();
-                    JoinGameResult(game);
+                        CModel.getInstance().setCurrGame(game);
+                        JoinGameResult(game);
+                    }
                 }
             }
         }

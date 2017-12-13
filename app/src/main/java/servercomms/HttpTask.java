@@ -70,7 +70,7 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         String typeOfRequest = "POST";
         //connection with the server is here
         InputStream stream = ClientCommunicator.getInstance().send(urls[0],request,typeOfRequest);
-       // String string = stream.toString();
+        String string = stream.toString();
 
         if (request instanceof LoginRequest) { //do we update the view after the it goes to the server and back????
             return encoder.decodeLoginResult(stream);
@@ -114,25 +114,25 @@ class HttpTask extends AsyncTask<URL, Integer, Object> {//URL im sending off
         ClientFacade facade = ClientFacade.getInstance();
         super.onPostExecute(result);
         if (result instanceof LoginResult) {
-            if(((LoginResult) result).getMessage().equals("there is a match")){
-                GameList gameList = ((LoginResult) result).getGameList();
-                CModel.getInstance().setAllGames(gameList);
-
-                for(Game game : gameList.getGames()){
-                    if(game.getGameID().equals(((LoginResult) result).getGameID())){
-                        CModel.getInstance().setCurrGame(game);
-
-
-                    }
-                }
-                facade.updateUser(((LoginResult) result).getUser());
-
-                CModel.getInstance().getUserPlayer().setCommandIndex(0);
-                //CModel.getInstance().notifyWaitingroom();
-
-
-            }
-            else
+//            if(((LoginResult) result).getMessage().equals("there is a match")){
+//                GameList gameList = ((LoginResult) result).getGameList();
+//                CModel.getInstance().setAllGames(gameList);
+//
+//                for(Game game : gameList.getGames()){
+//                    if(game.getGameID().equals(((LoginResult) result).getGameID())){
+//                        CModel.getInstance().setCurrGame(game);
+//
+//
+//                    }
+//                }
+//                facade.updateUser(((LoginResult) result).getUser());
+//
+//                CModel.getInstance().getUserPlayer().setCommandIndex(0);
+//                //CModel.getInstance().notifyWaitingroom();
+//
+//
+//            }
+//            else
             facade.updateUser(((LoginResult) result).getUser());
         } else if (result instanceof RegisterResult) {
             facade.updateUser(((RegisterResult) result).getUser());

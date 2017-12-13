@@ -32,7 +32,17 @@ public class CModel extends Observable {
      */
     private User myUser;
 
-
+    public void CheckUp(){
+        for(Game game: allGames){
+            for(Player player: game.getPlayers()){
+                if(myUser!=null && myUser.getUserName().equals(player.getPlayerName())){
+                    setCurrGame(game);
+                    setChanged();
+                    notifyObservers(game);
+                }
+            }
+        }
+    }
     public void notifyStart(){
 
     }

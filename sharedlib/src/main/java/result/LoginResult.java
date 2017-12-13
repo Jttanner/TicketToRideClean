@@ -16,7 +16,7 @@ public class LoginResult extends ResultObject {
 
     private User user;
     private String gameID = "";
-    private GameList gameList = null;
+   // private GameList gameList = null;
 
     public String getGameID() {
         return gameID;
@@ -25,19 +25,19 @@ public class LoginResult extends ResultObject {
     public void setGameID(String gameID) {
         this.gameID = gameID;
     }
-
-    public GameList getGameList() {
-        return gameList;
-    }
-
-    public void setGameList(GameList gameList) {
-        this.gameList = gameList;
-    }
+//
+//    public GameList getGameList() {
+//        return gameList;
+//    }
+//
+//    public void setGameList(GameList gameList) {
+//        this.gameList = gameList;
+//    }
 
     public LoginResult(boolean success, String message, String gameId, GameList gameList1, User user){
         super(success,message);
         this.gameID = gameId;
-        this.gameList = gameList1;
+        //this.gameList = gameList1;
         this.user = user;
     }
 

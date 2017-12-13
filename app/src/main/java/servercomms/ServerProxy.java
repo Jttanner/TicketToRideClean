@@ -31,7 +31,7 @@ public class ServerProxy {
         ipaddress = CModel.getInstance().getIPAddress();
         //if it is empty, use a hardcoded value
         if(ipaddress.isEmpty()){
-            ipaddress = "192.168.0.18";
+            ipaddress = "192.168.0.111";
         }
         myUrl = "http://" + ipaddress +":8080/user/";
     }

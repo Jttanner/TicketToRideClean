@@ -63,6 +63,7 @@ public class Encoder {
             }
         } else{
             OutputStreamWriter writer = new OutputStreamWriter(respBody);
+            String json = gson.toJson(obj);
             writer.write(gson.toJson(obj));
             writer.flush();
         }
@@ -156,6 +157,7 @@ public class Encoder {
     public CommandResult decodeGetGameResult(InputStream inputStream) {
         try {
             Reader reader = new InputStreamReader(inputStream);
+           // String json = gson.fromJson(reader,)
             return gson.fromJson(reader, GetGameCommandResult.class);
         } catch (Exception e) {
             return new CommandResult(false, e.getMessage());

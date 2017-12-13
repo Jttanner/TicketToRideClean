@@ -42,6 +42,7 @@ class ClientFacade {
         if(result!=null) {
             if (result instanceof GetGameCommandResult) {
                 CModel.getInstance().setAllGames(((GetGameCommandResult) result).getGameList());
+                CModel.getInstance().CheckUp();
             }
             //This if is for joinGame, and the result.getData is the GameID for the game we are joining
             else if (result instanceof JoinGameCommandResult) {
