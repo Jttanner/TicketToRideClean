@@ -304,5 +304,9 @@ public class ServerModel {
         getPlugin().clearCommandList(gameID);
         //now db has 1 command in the list
         getPlugin().saveGameCommands(gameID, cmd);
+        for (Player player : ServerModel.getInstance().getGames().findGame(gameID).getPlayers()) {
+            player.incrementCommandIndex();
+        }
+
     }
 }

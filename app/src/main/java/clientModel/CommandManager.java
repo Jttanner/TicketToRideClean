@@ -87,8 +87,8 @@ public class CommandManager {
         //if there is anything to execute, do so
         if(commandList.get(0) instanceof ResetCommandIndexData){
             new ResetCommandIndexClient().execute();
-            IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
-            ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
+            //IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
+            //ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
             CModel.getInstance().incrementUsersCommandIndex();
             return;
         }
