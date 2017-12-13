@@ -12,6 +12,6 @@ interface IUserDao {
 
     boolean clear();
 
-    List<Game> getAllGames();
+    List<User> getAllUsers();
 
 }

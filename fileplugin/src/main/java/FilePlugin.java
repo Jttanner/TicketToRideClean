@@ -30,7 +30,7 @@ public class FilePlugin implements IPlugin {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return persistenceManager.getUserDao().getAllUsers();
     }
 
     @Override
@@ -71,6 +71,6 @@ public class FilePlugin implements IPlugin {
 
     @Override
     public List<Game> getAllGames() {
-        return null;
+        return persistenceManager.getGameDao().getAllGames();
     }
 }

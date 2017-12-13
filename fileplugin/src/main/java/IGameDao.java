@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by tyler on 12/5/2017.
  */
@@ -14,4 +16,6 @@ interface IGameDao {
     boolean removeGame(String gameID);
 
     boolean clear() ;
+
+    List<Game> getAllGames();
 }
