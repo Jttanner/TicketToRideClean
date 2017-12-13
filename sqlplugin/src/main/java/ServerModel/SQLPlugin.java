@@ -51,7 +51,7 @@ public class SQLPlugin implements IPlugin {
 
     @Override
     public List<Game> getAllGames() {
-        return null;
+        return persistenceManager.getGameDao().getAllGames();
     }
 
     @Override

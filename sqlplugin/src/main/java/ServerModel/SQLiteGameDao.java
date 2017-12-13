@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import modeling.Game;
@@ -117,6 +118,20 @@ public class SQLiteGameDao implements IGameDao {
 
     @Override
     public List<Game> getAllGames() {
-        return null;
+        String query = "SELECT * FROM Game";
+        try{
+            List<Game> foundGames = new ArrayList<>();
+            connection = DriverManager.getConnection(connectionString);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                Game foundGame = myGson.fromJson(resultSet.getString("GameInfo"), Game.class);
+                foundGames.add(foundGame);
+            }
+            return foundGames;
+        } catch (SQLException e){
+            System.out.println("NO GAMES FOUND");
+            return null;
+        }
     }
 }
