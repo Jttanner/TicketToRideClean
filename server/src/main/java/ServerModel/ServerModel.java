@@ -12,6 +12,7 @@ import modeling.Game;
 import modeling.GameList;
 import modeling.Player;
 import modeling.User;
+import modeling.UserInfo;
 import modeling.UserInfoList;
 
 /**
@@ -36,26 +37,28 @@ public class ServerModel {
     private List<String> chatHistory = new ArrayList<>();
 
     /**Our Persistence manager object
-    private IPersistenceManager pManager;*/
-    /**Our current plugin object*/
+     private IPersistenceManager pManager;*/
+    /**
+     * Our current plugin object
+     */
     private IPlugin currPlugin;
 
-    public void zeroOut(String playerID){
-        for(Game game : gameList.getGames()){
-            for(Player player : game.getPlayers()){
-                if(player.getPlayerName().equals(playerID)){
+    public void zeroOut(String playerID) {
+        for (Game game : gameList.getGames()) {
+            for (Player player : game.getPlayers()) {
+                if (player.getPlayerName().equals(playerID)) {
                     player.setCommandIndex(0);
                 }
             }
         }
     }
 
-    public String checkUserInGame(String userId){
-        if(gameList != null){
+    public String checkUserInGame(String userId) {
+        if (gameList != null) {
             List<Game> games = gameList.getGames();
-            for(Game game : games){
-                for(Player player : game.getPlayers()){
-                    if(userId.equals(player.getPlayerName())){
+            for (Game game : games) {
+                for (Player player : game.getPlayers()) {
+                    if (userId.equals(player.getPlayerName())) {
                         return game.getGameID();
                     }
                 }
@@ -85,36 +88,35 @@ public class ServerModel {
     public ServerModel() {
     }
 
-    public static ServerModel getInstance()
-    {
-        if(instance == null){
+    public static ServerModel getInstance() {
+        if (instance == null) {
             instance = new ServerModel();
         }
         return instance;
     }
 
-    User register(String userName, String password){ //If register succeeds, it'll give us back a new user object
+    User register(String userName, String password) { //If register succeeds, it'll give us back a new user object
         User user = userInfoList.register(userName, password);
         currPlugin.saveUser(user);
         return user;
     }
 
-    User login(String userName, String password){
+    User login(String userName, String password) {
         //If the account exists and matches with one in the database...
         //User user = new User(userInfoList.login(userName, password));
         User myUser = currPlugin.verifyUser(userName, password);
-        if(myUser.getUserName().equals(userName) && myUser.getInfo().getPassword().equals(password)){
+        if (myUser.getUserName().equals(userName) && myUser.getInfo().getPassword().equals(password)) {
             userInfoList.login(userName, password);
         }
         return myUser;
     }
 
-    boolean createGame(Game newGame){
+    boolean createGame(Game newGame) {
         //if the game has not already been made
         return gameList.addGame(newGame);
     }
 
-    Game joinGame(User user, String gameID){
+    Game joinGame(User user, String gameID) {
         return gameList.joinGame(user, gameID);
     }
 
@@ -123,7 +125,7 @@ public class ServerModel {
         return gameList.startGame(gameID);
     }*/
 
-    boolean deleteGame(Game game){
+    boolean deleteGame(Game game) {
         return gameList.deleteGame(game);
     }
 
@@ -140,49 +142,49 @@ public class ServerModel {
 
     //(gameID, Game)
 
-    void addChatHistory(String s,String gameId){/*public Map<String, Game> getGamesAsMap(){
+    void addChatHistory(String s, String gameId) {/*public Map<String, Game> getGamesAsMap(){
         return games;
     }*/
 
         gameList.findGame(gameId).getChatHistory().add(s);
 
-        ChatCommandData chatCommandData = new ChatCommandData(gameList.findGame(gameId).getChatHistory(),gameId);
+        ChatCommandData chatCommandData = new ChatCommandData(gameList.findGame(gameId).getChatHistory(), gameId);
         ServerModel.getInstance().getReturnCommand().add(chatCommandData);
         ServerFacade.getInstance().addCommandToList(gameId, chatCommandData);
     }
 
     //Takes in the current list of games and returns a list of games that haven't started yet
     GameList getGames() {
-                return this.gameList;
+        return this.gameList;
     }
 
     public Map<String, List<Command>> getCommandListMap() {
         return commandListMap;
     }
 
-    public IPlugin getPlugin(){
+    public IPlugin getPlugin() {
         return currPlugin;
     }
 
     /**
      * @param fileName The PluginName
-     * @param n "n" save integer*/
+     * @param n        "n" save integer
+     */
     public void saveArgs(String fileName, String n) {
         Loader loader = new Loader();
         ArrayList<String> fileArgs = loader.readFile(fileName);
 
         //save the persistence manager and the plugin
-        if(fileArgs != null) {
-            try{
+        if (fileArgs != null) {
+            try {
                 currPlugin = (IPlugin) loader.loadClass(fileName, fileArgs.get(0));
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             IPersistenceManager persistenceManager = PluginRegistry.getInstance().create(fileName, fileArgs.get(1));
             currPlugin.setPManager(persistenceManager);
-        }
-        else {
+        } else {
             System.out.println("Something went horribly wrong");
         }
         delta_n = Integer.parseInt(n);
@@ -193,9 +195,28 @@ public class ServerModel {
         return delta_n;
     }
 
+    /**
+     * Called when the server is started to see if there is anything in the db. If there is it will repopulate the db
+     */
     public void redoServerModel() {
         List<User> allUsers = currPlugin.getAllUsers();
-        Map<String,List<Command>> commands = currPlugin.getAllCommands();
+        Map<String, List<Command>> commands = currPlugin.getAllCommands();
         List<Game> allGames = currPlugin.getAllGames();
+        if (allUsers != null && allUsers.size() > 0
+                && commands != null && commands.size() > 0
+                && allGames != null && allGames.size() > 0) {
+            //add all the users back in
+            for (User user : allUsers) {
+                users.put(user.getUserName(), user);
+                userInfoList.addUser(user.getInfo());
+                userInfoList.getUsernameToUserInfo().put(user.getUserName(), user.getInfo());
+                userInfoList.getUserToUserInfo().put(user, user.getInfo());
+            }
+            commandListMap = commands;
+            gameList.setGames(allGames);
+        } else {
+            System.out.println("ServerModel:redoServerModel: db is empty or returning null");
+        }
+
     }
 }
