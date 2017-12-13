@@ -63,31 +63,39 @@ public class FileCommandDao implements ICommandDao {
                     case "startGame":
                         StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
                         listOfCommands.add(startGameCommandData);
+                        break;
                     case "drawTrainCard":
                         DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
                         listOfCommands.add(drawTrainCardCommandData);
+                        break;
                     case "drawDestinationCards":
                         DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
                         listOfCommands.add(drawDestinationCardCommandData);
+                        break;
                     case "claimInitialDestinationCards":
                         ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
                         listOfCommands.add(claimInitialDestinationCardCommandData);
+                        break;
                     case "claimDestinationCards":
                         ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
                         listOfCommands.add(claimDestinationCardCommandData);
+                        break;
                     case "claimRoute":
                         ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
                         listOfCommands.add(claimRouteCommandData);
                     case "endTurn":
                         EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
                         listOfCommands.add(endTurnCommandData);
+                        break;
                     case "addChat":
                         ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
                         listOfCommands.add(chatCommandData);
+                        break;
                     case "EndGame":
                         //return new EndGameCommand();
-                    //break;
-                    //TODO add new commands for the client here
+                    break;
+                    default:
+                        break;
                 }
             }
 
@@ -110,8 +118,9 @@ public class FileCommandDao implements ICommandDao {
     @Override
     public boolean addCommandsToGame(String gameID, Command command)  {
         FileWriter fileWriter;
-        String gameToString;
+        String commandToString;
         File commandFile;
+        Gson myGson = new Gson();
         boolean result = false;
         String newLine = "\n";
         //Create new txt file in Game
@@ -127,9 +136,39 @@ public class FileCommandDao implements ICommandDao {
             e.printStackTrace();
         }
         try {
-            gameToString = gson.toJson(command);
+            commandToString = "";
+            switch (command.getType()){
+                case "startGame":
+                    commandToString = myGson.toJson(command, StartGameCommandData.class);
+                    break;
+                case "drawTrainCard":
+                    commandToString = myGson.toJson(command, DrawTrainCardCommandData.class);
+                    break;
+                case "drawDestinationCards":
+                    commandToString = myGson.toJson(command, DrawDestinationCardCommandData.class);
+                    break;
+                case "claimInitialDestinationCards":
+                    commandToString = myGson.toJson(command, ClaimInitialDestinationCardCommandData.class);
+                    break;
+                case "claimDestinationCards":
+                    commandToString = myGson.toJson(command, ClaimDestinationCardCommandData.class);
+                    break;
+                case "claimRoute":
+                    commandToString = myGson.toJson(command, ClaimRouteCommandData.class);
+                    break;
+                case "endTurn":
+                    commandToString = myGson.toJson(command, EndTurnCommandData.class);
+                    break;
+                case "addChat":
+                    commandToString = myGson.toJson(command, ChatCommandData.class);
+                    break;
+                case "EndGame":
+                    break;
+                default:
+                    break;
+            }
             fileWriter = new FileWriter(commandFile, true);
-            fileWriter.append(gameToString);
+            fileWriter.append(commandToString);
             fileWriter.append(newLine);
             fileWriter.close();
             result = true;
