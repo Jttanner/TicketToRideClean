@@ -81,13 +81,13 @@ public class GameList {
     }
 
     /*
-    public boolean leaveGame(modeling.Game game, modeling.Player player){
-        for(modeling.Game gameFound : games){
+    public boolean leaveGame(Game game, Player player){
+        for(Game gameFound : games){
             if(gameFound.equals(game)){
                 gameFound.removePlayer(player);
             }
         }
-        for(modeling.Game gameFound : gamesStarted){
+        for(Game gameFound : gamesStarted){
             if(gameFound.equals(game)){
                 gameFound.removePlayer(player);
             }

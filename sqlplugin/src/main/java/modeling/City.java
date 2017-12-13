@@ -34,9 +34,9 @@ public class City {
 
 
     /*
-    Set<modeling.Route> routes = new HashSet<>();
+    Set<Route> routes = new HashSet<>();
 
-    public void addRoute(modeling.Route route){
+    public void addRoute(Route route){
         routes.add(route);
     }*/
 
@@ -52,7 +52,7 @@ public class City {
         return coords.y;
     }*/
 
-    /*public Set<modeling.Route> getRoutes() {
+    /*public Set<Route> getRoutes() {
         return routes;
     }*/
 

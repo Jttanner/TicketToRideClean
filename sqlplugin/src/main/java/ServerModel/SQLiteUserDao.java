@@ -9,8 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import modeling.User;
-import modeling.UserInfo;
+import modeling.*;
 
 /**
  * Created by jontt on 12/7/2017.
@@ -108,7 +107,8 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<
+            User> getAllUsers() {
         String query = "SELECT * FROM User";
         try{
             List<User> users = new ArrayList<>();

@@ -23,21 +23,21 @@ public class DestinationCardList {
      */
     public DestinationCardList(){
         destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("El Paso"), 4));
-        destinationCardList.add(new DestinationCard(cityMap.get("Kansas modeling.City"), cityMap.get("Houston"), 5));
-        destinationCardList.add(new DestinationCard(cityMap.get("New York modeling.City"), cityMap.get("Atlanta"), 6));
+        destinationCardList.add(new DestinationCard(cityMap.get("Kansas City"), cityMap.get("Houston"), 5));
+        destinationCardList.add(new DestinationCard(cityMap.get("New York City"), cityMap.get("Atlanta"), 6));
         destinationCardList.add(new DestinationCard(cityMap.get("Chicago"), cityMap.get("New Orleans"), 7));
-        destinationCardList.add(new DestinationCard(cityMap.get("Calgary"), cityMap.get("Salt Lake modeling.City"), 7));
+        destinationCardList.add(new DestinationCard(cityMap.get("Calgary"), cityMap.get("Salt Lake City"), 7));
         destinationCardList.add(new DestinationCard(cityMap.get("Helena"), cityMap.get("Los Angeles"), 8));
         destinationCardList.add(new DestinationCard(cityMap.get("Duluth"), cityMap.get("Houston"), 8));
         destinationCardList.add(new DestinationCard(cityMap.get("Sault St. Marie"), cityMap.get("Nashville"), 8));
         destinationCardList.add(new DestinationCard(cityMap.get("Montreal"), cityMap.get("Atlanta"), 9));
-        destinationCardList.add(new DestinationCard(cityMap.get("Sault St. Marie"), cityMap.get("Oklahoma modeling.City"), 9));
+        destinationCardList.add(new DestinationCard(cityMap.get("Sault St. Marie"), cityMap.get("Oklahoma City"), 9));
         destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("Los Angeles"), 9));
         destinationCardList.add(new DestinationCard(cityMap.get("Chicago"), cityMap.get("Santa Fe"), 9));
         destinationCardList.add(new DestinationCard(cityMap.get("Duluth"), cityMap.get("El Paso"), 10));
         destinationCardList.add(new DestinationCard(cityMap.get("Toronto"), cityMap.get("Miami"), 10));
         destinationCardList.add(new DestinationCard(cityMap.get("Portland"), cityMap.get("Phoenix"), 11));
-        destinationCardList.add(new DestinationCard(cityMap.get("Dallas"), cityMap.get("New York modeling.City"), 11));
+        destinationCardList.add(new DestinationCard(cityMap.get("Dallas"), cityMap.get("New York City"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Denver"), cityMap.get("Pittsburgh"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Winnipeg"), cityMap.get("Little Rock"), 11));
         destinationCardList.add(new DestinationCard(cityMap.get("Winnipeg"), cityMap.get("Houston"), 12));
@@ -50,8 +50,8 @@ public class DestinationCardList {
         destinationCardList.add(new DestinationCard(cityMap.get("Portland"), cityMap.get("Nashville"), 17));
         destinationCardList.add(new DestinationCard(cityMap.get("Vancouver"), cityMap.get("Montreal"), 20));
         destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("Miami"), 20));
-        destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("New York modeling.City"), 21));
-        destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("New York modeling.City"), 22));
+        destinationCardList.add(new DestinationCard(cityMap.get("Los Angeles"), cityMap.get("New York City"), 21));
+        destinationCardList.add(new DestinationCard(cityMap.get("Seattle"), cityMap.get("New York City"), 22));
 
     }
 
@@ -60,7 +60,7 @@ public class DestinationCardList {
      * Takes the already initialized list of Destination Cards and draws 3 random cards from the deck
      * @return A list of 3 destination cards from the deck.
      */
-//    List<modeling.DestinationCard> getDestinationCards() {
+//    List<DestinationCard> getDestinationCards() {
 //        return destinationCardList.get3Cards();
 //    }
 
@@ -86,8 +86,8 @@ public class DestinationCardList {
         }
     }
 
-//    public List<modeling.DestinationCard> distributeUsedDestinationCards(ServerModel.ClaimDestinationCardCommandData commandData) {
-//        List<modeling.DestinationCard> claimedCards = new ArrayList<>();
+//    public List<DestinationCard> distributeUsedDestinationCards(ClaimDestinationCardCommandData commandData) {
+//        List<DestinationCard> claimedCards = new ArrayList<>();
 //        for (int i = 0; i < 3; i++) {
 //            boolean isClaimed = commandData.getClaimDestinationCards().get(i).isClaimed();
 //            if (isClaimed) {
@@ -97,8 +97,8 @@ public class DestinationCardList {
 //            }
 //        }
 //        String playerID = commandData.getPlayerID();
-//        modeling.Game currGame = gameList.findGame(commandData.getGameID());
-//        modeling.Player currPlayer = currGame.getPlayer(playerID);
+//        Game currGame = gameList.findGame(commandData.getGameID());
+//        Player currPlayer = currGame.getPlayer(playerID);
 //        currPlayer.addDestinationCard(claimedCards);
 //        return claimedCards;
 //    }
@@ -116,7 +116,7 @@ public class DestinationCardList {
      * Takes the already initialized list of Destination Cards and draws 1 random card from the deck
      * @pre What has to be true
      * @post A random Destination Card from the deck.
-     * @return modeling.DestinationCard
+     * @return DestinationCard
      */
     public DestinationCard get1RandomCard() {
 
