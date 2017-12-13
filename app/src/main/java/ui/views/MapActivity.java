@@ -21,6 +21,7 @@ import java.util.Map;
 import MVP_coms_classes.MVP_Map;
 import clientModel.CModel;
 import clientModel.MyTurn;
+import modeling.Game;
 import modeling.Player;
 import modeling.Route;
 import poller.Poller;
@@ -252,11 +253,18 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      */
     @Override
     public void updateMap() {
-        Map<Route, Player> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
-        for (Map.Entry<Route, Player> entry : routeList.entrySet())
+        Map<String , Route> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
+        for (Map.Entry<String,Route> entry : routeList.entrySet())
         {
-            Route route = entry.getKey();
-            Player player = entry.getValue();
+            Player player = null;
+            Route route = entry.getValue();
+            Game currentGame = CModel.getInstance().getCurrGame();
+            for(Player player2 : currentGame.getPlayers()){
+                if(player2.equals(entry.getKey())){
+                    player=player2;
+                }
+            }
+
             drawClaimedRoute(route.getFirstCityName(), route.getSecondCityName(), player.getColor(), route.getIsDouble(), !route.getFirstOfDouble());
         }
     }

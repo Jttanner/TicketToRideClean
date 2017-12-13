@@ -85,8 +85,8 @@ public class Game {
 
 
 
-            for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
-                if (entry.getKey().equals(route)){
+            for (Map.Entry<String, Route> entry : claimedRouteList.getRoutesMap().entrySet()){
+                if (entry.getValue().equals(route)){
                     route.setFirstOfDouble(false);
                 }
             }
@@ -95,7 +95,7 @@ public class Game {
             //if (isWild){
                 //route.setTrainColorNeeded("Wild");
             //}
-            claimedRouteList.addClaimedRoute(route, player);
+            claimedRouteList.addClaimedRoute(player.getPlayerName(),route);
             //unclaimedRouteList.removeAvailableRoute(route);
             if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
                 return  false;

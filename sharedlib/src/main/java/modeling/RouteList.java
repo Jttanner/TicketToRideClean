@@ -12,8 +12,8 @@ import java.util.Map;
 public class RouteList {
 
     private List<Route> routesAvailable = new ArrayList<>();
-    private Map<Route, Player> routesClaimed = new HashMap<>();
-
+   // private Map<Route, Player> routesClaimed = new HashMap<>();
+    private Map<String, Route> routesClaimed = new HashMap<>();
     public Route getAvailableRoute(String startCity, String endCity, String routeColor){
         for (Route route : routesAvailable){
             if ((route.getFirstCityName().equals(startCity) && route.getSecondCityName().equals(endCity) ||
@@ -25,7 +25,7 @@ public class RouteList {
         return null;
     }
 
-    public Map<Route, Player> getRoutesMap(){
+    public Map<String, Route> getRoutesMap(){
         return  routesClaimed;
     }
 
@@ -37,8 +37,8 @@ public class RouteList {
         routesAvailable.remove(route);
     }
 
-    public void addClaimedRoute(Route route, Player player){
-        routesClaimed.put(route, player);
+    public void addClaimedRoute(String PlayerID, Route route){
+        routesClaimed.put(PlayerID,route);
     }
 
     public int getAvailableRouteSize(){
