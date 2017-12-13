@@ -1,5 +1,6 @@
 package ServerModel;
 
+import commandData.Command;
 import modeling.Game;
 import modeling.Player;
 
@@ -7,7 +8,7 @@ import modeling.Player;
  * Created by Hwang on 10/4/2017.
  */
 
-public class LeaveGameCommandData extends Command{
+public class LeaveGameCommandData extends Command {
     private Game gameObject;
     private Player playerObject;
 

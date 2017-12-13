@@ -31,7 +31,7 @@ public class SQLiteUserDao implements IUserDao {
     }
 
     private void createTableIfNotExists(){
-        String query = "create table if not exists modeling.User \n" +
+        String query = "create table if not exists User \n" +
                 "( \n" +
                 "Username text unique not null, \n" +
                 "Password text not null \n" +
@@ -48,7 +48,7 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public boolean registerUser(String userName, String password) {
-        String query = "INSERT INTO modeling.User(Username, Password) VALUES(?, ?)";
+        String query = "INSERT INTO User(Username, Password) VALUES(?, ?)";
         try{
 
             if (verifyUser(userName, password) != null){
@@ -71,7 +71,7 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public User verifyUser(String name, String password) {
-        String query = "SELECT * FROM modeling.User WHERE Username=? AND Password=?;";
+        String query = "SELECT * FROM User WHERE Username=? AND Password=?;";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);
@@ -92,7 +92,7 @@ public class SQLiteUserDao implements IUserDao {
 
     @Override
     public boolean clear() {
-        String query = "DELETE FROM modeling.User";
+        String query = "DELETE FROM User";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement queryStatement = connection.prepareStatement(query);

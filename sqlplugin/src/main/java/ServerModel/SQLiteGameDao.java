@@ -29,7 +29,7 @@ public class SQLiteGameDao implements IGameDao {
     }
 
     private void createTableIfNotExists(){
-        String query = "create table if not exists modeling.Game\n" +
+        String query = "create table if not exists Game\n" +
                 "( \n" +
                 "GameID text unique not null, \n" +
                 "GameInfo blob not null\n" +
@@ -46,8 +46,8 @@ public class SQLiteGameDao implements IGameDao {
 
     @Override
     public boolean updateGameState(Game game) {
-        String query1 = "DELETE FROM GAME WHERE GameID=?;";
-        String query2 = "INSERT INTO GAME VALUES(?, ?)";
+        String query1 = "DELETE FROM Game WHERE GameID=?;";
+        String query2 = "INSERT INTO Game VALUES(?, ?)";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query1);
@@ -69,7 +69,7 @@ public class SQLiteGameDao implements IGameDao {
 
     @Override
     public Game getGameState(String gameID)  {
-        String query = "SELECT Gameinfo FROM modeling.Game WHERE GameID=?";
+        String query = "SELECT Gameinfo FROM Game WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);

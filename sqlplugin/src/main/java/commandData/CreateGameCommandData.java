@@ -1,4 +1,4 @@
-package ServerModel;
+package commandData;
 
 import modeling.Game;
 

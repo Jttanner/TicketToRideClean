@@ -13,7 +13,7 @@ local.properties
 # Signing files
 .signing/
 
-# ServerModel.User-specific configurations
+# modeling.User-specific configurations
 .idea/libraries/
 .idea/workspace.xml
 .idea/tasks.xml

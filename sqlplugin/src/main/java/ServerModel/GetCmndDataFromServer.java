@@ -1,5 +1,7 @@
 package ServerModel;
 
+import commandData.Command;
+
 /**
  * Created by tyler on 10/24/2017.
  */

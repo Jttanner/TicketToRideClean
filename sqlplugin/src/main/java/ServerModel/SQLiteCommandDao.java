@@ -11,6 +11,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandData.ChatCommandData;
+import commandData.ClaimDestinationCardCommandData;
+import commandData.ClaimInitialDestinationCardCommandData;
+import commandData.ClaimRouteCommandData;
+import commandData.Command;
+import commandData.DrawDestinationCardCommandData;
+import commandData.DrawTrainCardCommandData;
+import commandData.EndTurnCommandData;
+import commandData.StartGameCommandData;
+
 /**
  * Created by jontt on 12/7/2017.
  */
@@ -29,10 +39,10 @@ public class SQLiteCommandDao implements ICommandDao {
     }
 
     private void createTableIfNotExists(){
-        String query = "create table if not exists ServerModel.Command \n" +
+        String query = "create table if not exists Command \n" +
                 "( \n" +
-                "GameID text unique not null, \n" +
-                "CommandInfo text not null \n" +
+                "GameID text not null, \n" +
+                "CommandInfo blob not null \n" +
                 ");";
         try{
             connection = DriverManager.getConnection(connectionString);
@@ -46,7 +56,8 @@ public class SQLiteCommandDao implements ICommandDao {
 
     @Override
     public List<Command> getCommandList(String gameID) {
-        String query = "SELECT CommandInfo FROM ServerModel.Command WHERE GameID=?";
+        System.out.println("test");
+        String query = "SELECT CommandInfo FROM Command WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -84,6 +95,7 @@ public class SQLiteCommandDao implements ICommandDao {
                     case "endTurn":
                         EndTurnCommandData endTurnCommandData = myGson.fromJson(jsonInfo, EndTurnCommandData.class);
                         commands.add(endTurnCommandData);
+                        break;
                     case "addChat":
                         ChatCommandData chatCommandData = myGson.fromJson(jsonInfo, ChatCommandData.class);
                         commands.add(chatCommandData);
@@ -95,10 +107,13 @@ public class SQLiteCommandDao implements ICommandDao {
             connection.close();
             return commands;
         }catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("FAILED TO SAVE COMMAND SQL");
             return null;
         }
         catch (Exception e){
+            System.out.println("WHATS GOING ON?");
+            e.printStackTrace();
             return  null;
         }
     }
@@ -107,14 +122,48 @@ public class SQLiteCommandDao implements ICommandDao {
     public boolean addCommandsToGame(String gameID, Command command) {
         String query = "INSERT INTO COMMAND VALUES(?, ?)";
         try{
+            String specificCommandJson = "";
+            switch (command.getType()){
+                case "startGame":
+                    specificCommandJson = myGson.toJson(command, StartGameCommandData.class);
+                    break;
+                case "drawTrainCard":
+                    specificCommandJson = myGson.toJson(command, DrawTrainCardCommandData.class);
+                    break;
+                case "drawDestinationCards":
+                    specificCommandJson = myGson.toJson(command, DrawDestinationCardCommandData.class);
+                    break;
+                case "claimInitialDestinationCards":
+                    specificCommandJson = myGson.toJson(command, ClaimInitialDestinationCardCommandData.class);
+                    break;
+                case "claimDestinationCards":
+                    specificCommandJson = myGson.toJson(command, ClaimDestinationCardCommandData.class);
+                    break;
+                case "claimRoute":
+                    specificCommandJson = myGson.toJson(command, ClaimRouteCommandData.class);
+                    break;
+                case "endTurn":
+                    specificCommandJson = myGson.toJson(command, EndTurnCommandData.class);
+                    break;
+                case "addChat":
+                    specificCommandJson = myGson.toJson(command, ChatCommandData.class);
+                    break;
+                case "EndGame":
+                    break;
+                default:
+                    break;
+            }
             connection = DriverManager.getConnection(connectionString);
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(0, gameID);
-            statement.setString(1, myGson.toJson(command));
+            statement.setString(1, gameID);
+            statement.setString(2, specificCommandJson);
             statement.execute();
             connection.close();
             return true;
         }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }
@@ -122,7 +171,7 @@ public class SQLiteCommandDao implements ICommandDao {
 
     @Override
     public boolean removeCommands(String gameID) {
-        String query = "DELETE FROM ServerModel.Command WHERE GameID=?";
+        String query = "DELETE FROM Command WHERE GameID=?";
         try{
             connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();
@@ -137,7 +186,7 @@ public class SQLiteCommandDao implements ICommandDao {
 
     @Override
     public boolean clear() {
-        String query = "DELETE FROM ServerModel.Command";
+        String query = "DELETE FROM Command";
         try{
             connection = DriverManager.getConnection(connectionString);
             Statement statement = connection.createStatement();

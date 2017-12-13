@@ -3,6 +3,8 @@ package ServerModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandData.Command;
+
 /**
  * Created by tyler on 10/23/2017.
  */

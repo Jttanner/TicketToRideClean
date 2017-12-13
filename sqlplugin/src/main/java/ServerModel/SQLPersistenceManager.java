@@ -12,9 +12,9 @@ public class SQLPersistenceManager implements IPersistenceManager {
     /**The PlayerDao*/
 //    private IPlayerDao playerDao;
     /**The CommandDao*/
-    private ICommandDao commandDao;
 
-    String databaseURL = "jdbc:sqlite:ttrdb.sqlite";;
+    String databaseURL = "jdbc:sqlite:ttrdb.sqlite";
+    private ICommandDao commandDao = new SQLiteCommandDao(databaseURL);
 
     @Override
     public void beginTransaction() {
@@ -116,6 +116,7 @@ public class SQLPersistenceManager implements IPersistenceManager {
                 e.printStackTrace();
             }
         }
+        System.out.println("GET COMMAND DAO");
         return commandDao;
     }
 

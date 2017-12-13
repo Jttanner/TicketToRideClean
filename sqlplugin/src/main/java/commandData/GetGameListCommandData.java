@@ -1,4 +1,4 @@
-package ServerModel;
+package commandData;
 
 /**
  * Created by Hwang on 9/29/2017.
