@@ -100,12 +100,13 @@ public class SQLiteCommandDao implements ICommandDao {
             return commands;
         }catch (SQLException e){
             //e.printStackTrace();
+
             System.out.println("FAILED TO SAVE COMMAND SQL");
             return null;
         }
         catch (Exception e){
             System.out.println("WHATS GOING ON?");
-            e.printStackTrace();
+            //e.printStackTrace();
             return  null;
         }
     }
