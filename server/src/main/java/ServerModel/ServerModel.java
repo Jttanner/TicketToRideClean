@@ -281,8 +281,8 @@ public class ServerModel {
                             }
                         }
                     }
+                    clearCommandsAndSave(game.getGameID());
                 }
-                clearCommandsAndSave(game.getGameID());
             }
         } else {
             System.out.println("ServerModel:redoServerModel: db is empty or returning null");
