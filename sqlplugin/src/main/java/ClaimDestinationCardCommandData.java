@@ -1,9 +1,4 @@
-package commandData;
-
 import java.util.List;
-
-import modeling.DestinationCard;
-import modeling.Player;
 
 /**
  * Created by ahwang13 on 10/24/17.

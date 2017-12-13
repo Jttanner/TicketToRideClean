@@ -140,7 +140,7 @@ public class CommandManager {
                 break;
             case "EndGame":
                 return new EndGameCommand();
-                //break;
+            //break;
             //TODO add new commands for the client here
         }
 

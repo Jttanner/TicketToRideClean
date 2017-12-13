@@ -1,8 +1,3 @@
-package commandData;
-
-import modeling.Game;
-import modeling.Player;
-
 /**
  * Created by Hwang on 10/4/2017.
  */

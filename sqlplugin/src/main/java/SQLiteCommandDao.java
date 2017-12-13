@@ -52,14 +52,52 @@ public class SQLiteCommandDao implements ICommandDao {
             ResultSet resultSet = statement.executeQuery();
             List<Command> commands = new ArrayList<>();
             while(resultSet.next()){
-                //TODO: Does JSON need the concrete class? Otherwise do I make a switch statement? or some kind of inheritance function for command?
-                commands.add(myGson.fromJson(resultSet.getString("CommandInfo"), Command.class));
+                String jsonInfo = resultSet.getString("CommandInfo");
+                Command checkType = myGson.fromJson(jsonInfo, Command.class);
+                switch (checkType.getType()){
+                    case "startGame":
+                        StartGameCommandData startGameCommandData = myGson.fromJson(jsonInfo, StartGameCommandData.class);
+                        commands.add(startGameCommandData);
+                        break;
+                    case "drawTrainCard":
+                        DrawTrainCardCommandData drawTrainCardCommandData = myGson.fromJson(jsonInfo, DrawTrainCardCommandData.class);
+                        commands.add(drawTrainCardCommandData);
+                        break;
+                    case "drawDestinationCards":
+                        DrawDestinationCardCommandData drawDestinationCardCommandData = myGson.fromJson(jsonInfo, DrawDestinationCardCommandData.class);
+                        commands.add(drawDestinationCardCommandData);
+                        break;
+                    case "claimInitialDestinationCards":
+                        ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = myGson.fromJson(jsonInfo, ClaimInitialDestinationCardCommandData.class);
+                        commands.add(claimInitialDestinationCardCommandData);
+                        break;
+                    case "claimDestinationCards":
+                        ClaimDestinationCardCommandData claimDestinationCardCommandData = myGson.fromJson(jsonInfo, ClaimDestinationCardCommandData.class);
+                        commands.add(claimDestinationCardCommandData);
+                        break;
+                    case "claimRoute":
+                        ClaimRouteCommandData claimRouteCommandData = myGson.fromJson(jsonInfo, ClaimRouteCommandData.class);
+                        commands.add(claimRouteCommandData);
+                        break;
+                    case "endTurn":
+                        EndTurnCommandData endTurnCommandData = myGson.fromJson(jsonInfo, EndTurnCommandData.class);
+                        commands.add(endTurnCommandData);
+                    case "addChat":
+                        ChatCommandData chatCommandData = myGson.fromJson(jsonInfo, ChatCommandData.class);
+                        commands.add(chatCommandData);
+                        break;
+                    case "EndGame":
+                        break;
+                }
             }
             connection.close();
             return commands;
         }catch (SQLException e){
             e.printStackTrace();
             return null;
+        }
+        catch (Exception e){
+            return  null;
         }
     }
 

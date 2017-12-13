@@ -1,5 +1,3 @@
-package commandData;
-
 import java.util.List;
 
 /**

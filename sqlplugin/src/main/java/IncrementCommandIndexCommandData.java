@@ -1,5 +1,3 @@
-package commandData;
-
 /**
  * Created by jontt on 11/27/2017.
  */

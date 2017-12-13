@@ -58,7 +58,11 @@ public class SQLiteCommandDao implements ICommandDao {
             ResultSet resultSet = statement.executeQuery();
             List<Command> commands = new ArrayList<>();
             while(resultSet.next()){
-                //TODO: Does JSON need the concrete class? Otherwise do I make a switch statement? or some kind of inheritance function for command?
+                String jsonInfo = resultSet.getString("CommandInfo");
+                Command  checkType = myGson.fromJson(jsonInfo, Command.class);
+                switch (checkType.getType()){
+
+                }
                 commands.add(myGson.fromJson(resultSet.getString("CommandInfo"), Command.class));
             }
             connection.close();
@@ -66,6 +70,9 @@ public class SQLiteCommandDao implements ICommandDao {
         }catch (SQLException e){
             e.printStackTrace();
             return null;
+        }
+        catch (Exception e){
+            return  null;
         }
     }
 

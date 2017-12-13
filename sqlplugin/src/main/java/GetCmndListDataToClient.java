@@ -1,9 +1,5 @@
-package commandData;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import modeling.CommandList;
 
 /**
  * Created by tyler on 10/23/2017.
