@@ -213,7 +213,7 @@ public class ServerModel {
     public void redoServerModel() throws Exception {
         List<User> allUsers = currPlugin.getAllUsers();
         List<Game> allGames = currPlugin.getAllGames();
-        if (allUsers != null && allUsers.size() > 0 && allGames != null && allGames.size() > 0) {
+        if ((allUsers != null && allUsers.size() > 0) || (allGames != null && allGames.size() > 0)) {
             //add all the users back in
             for (User user : allUsers) {
                 users.put(user.getUserName(), user);
