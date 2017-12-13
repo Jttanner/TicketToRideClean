@@ -309,4 +309,28 @@ public class ServerModel {
         }
 
     }
+
+    /*void clearCommandsAndSave(String gameID) {
+        System.out.println("ServerFacade:saveCommands: saving game: " + gameID);
+        Command cmd = new ResetCommandIndexData();
+        //rmake new cmd list
+        ArrayList<Command> list = new ArrayList<>();
+        list.add(cmd);
+        //clear the map and then add ResetCommandIndexData to the map
+        //commandListMap.clear();
+        commandListMap.put(gameID, list);
+        //reset servermodel indices
+        ICommand command = new ResetCommandIndex();
+        //execute the command server side
+        command.execute();
+        //now reset db
+        getPlugin().saveGame(getGames().findGame(gameID));
+        getPlugin().clearCommandList(gameID);
+        //now db has 1 command in the list
+        getPlugin().saveGameCommands(gameID, cmd);
+        for (Player player : ServerModel.getInstance().getGames().findGame(gameID).getPlayers()) {
+            player.incrementCommandIndex();
+        }
+
+    }*/
 }
