@@ -1,5 +1,7 @@
 package modeling;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 import java.util.Map;
 
@@ -100,7 +102,9 @@ public class Route {
 
     @Override
     public String toString() {
-        return "modeling.Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
+       // return "Route from " + this.getFirstCityName() + " to " + this.getSecondCityName() + " with distance: " + distance;
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 
     boolean firstOfDouble = true;
@@ -122,7 +126,7 @@ public class Route {
         return secondCity.getCityName();
     }
 
-    /*private List<modeling.City> twoCities = new ArrayList<>();*/
+    /*private List<City> twoCities = new ArrayList<>();*/
     private int distance;
     private boolean claimed = false;
     private boolean isDouble = false;

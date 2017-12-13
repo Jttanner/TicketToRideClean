@@ -6,17 +6,17 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * The modeling.Game stores information pertaining to an ongoing game in the app Ticket to Ride.
+ * The Game stores information pertaining to an ongoing game in the app Ticket to Ride.
  *
  * DOMAIN
- *   gameHistoryList: ArrayList<String>, history of the modeling.Game
- *   players: ArrayList<modeling.Player>, players in game
+ *   gameHistoryList: ArrayList<String>, history of the Game
+ *   players: ArrayList<Player>, players in game
  *   chatHistory: List<String>, game chat history
  *   hasStarted: boolean, tells us whether the game is in a start state
  *   gameID: String, unique ID for the game
  *   gameName: String, the name given by user creating this game
  *   playerMax: int, maximum number of players in one game
- *   resourceCardList: modeling.ResourceCardList, the deck or list of resource cards the game has
+ *   resourceCardList: ResourceCardList, the deck or list of resource cards the game has
  *
  * {@invariant getPlayers.size() > playerMax}
  */
@@ -33,7 +33,7 @@ public class Game {
     private String gameName;
     private int playerMax;
     private ResourceCardList resourceCardList;
-    private final String TAG = "modeling.Game:";
+    private final String TAG = "Game:";
     private DestinationCardList destinationCardList;
     private int playersHaveSelectedInitialDestCards;
     //private int destDeckSize;
@@ -85,8 +85,8 @@ public class Game {
 
 
 
-            for (Map.Entry<Route, Player> entry : claimedRouteList.getRoutesMap().entrySet()){
-                if (entry.getKey().equals(route)){
+            for (Map.Entry<String, Route> entry : claimedRouteList.getRoutesMap().entrySet()){
+                if (entry.getValue().equals(route)){
                     route.setFirstOfDouble(false);
                 }
             }
@@ -95,7 +95,7 @@ public class Game {
             //if (isWild){
                 //route.setTrainColorNeeded("Wild");
             //}
-            claimedRouteList.addClaimedRoute(route, player);
+            claimedRouteList.addClaimedRoute(player.getPlayerName(),route);
             //unclaimedRouteList.removeAvailableRoute(route);
             if (oldSize == unclaimedRouteList.getAvailableRouteSize()){
                 return  false;
@@ -115,7 +115,7 @@ public class Game {
     //**************************CONSTRUCTORS*************************************************************************************************//
 
     /**
-     * Constructs a new modeling.Game which has its resource cards initialized, given an unique game ID, and game has not started yet
+     * Constructs a new Game which has its resource cards initialized, given an unique game ID, and game has not started yet
      *
      * @params empty
      *
@@ -134,7 +134,7 @@ public class Game {
         playersHaveSelectedInitialDestCards = 0;
     }
     /**
-     * Constructs a new modeling.Game which has its resource cards initialized, given an unique game ID, and game has not started yet
+     * Constructs a new Game which has its resource cards initialized, given an unique game ID, and game has not started yet
      *
      * @params players Players in the game
      * @params hasStarted Boolean telling if the game has started
@@ -196,7 +196,7 @@ public class Game {
     }
     /**Adds a player to the game, if the player doesn't already exist in the game
      *
-     * @param p modeling.Player
+     * @param p Player
      * @return boolean
      *
      * {@pre p != null}
@@ -210,7 +210,7 @@ public class Game {
             return true;
         }
     }
-//    public void removePlayer(modeling.Player player) {
+//    public void removePlayer(Player player) {
 //        players.remove(players.indexOf(player));
 //    }
     /**Assigns a player a turn in order
@@ -221,7 +221,7 @@ public class Game {
      * @return String The player whose turn it is now
      */
     public String advancePlayerTurn(){
-        String name = "modeling.Game: Error, no name in advancePlayerTurn";
+        String name = "Game: Error, no name in advancePlayerTurn";
         for (int i = 0; i < players.size(); i++){
             if (players.get(i).isMyTurn()){
                 if (i == players.size() - 1){
@@ -249,10 +249,10 @@ public class Game {
     /**Adds a player to the game, if the player doesn't already exist in the game
      *
      * @param playerName String of player name
-     * @return modeling.Player, returns the Playr if playerName is found in players
+     * @return Player, returns the Playr if playerName is found in players
      *
      * {@pre players.size() >= 0}
-     * {@post if playerName exists in the game return the modeling.Player, otherwise returns null}
+     * {@post if playerName exists in the game return the Player, otherwise returns null}
      * {@post players.size() == pre players.size()}
      */
     public Player getPlayer(String playerName) {

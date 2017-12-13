@@ -23,17 +23,29 @@ public class FilePersistenceManager implements IPersistenceManager {
 
     @Override
     public void beginTransaction() {
-
+        return;
     }
 
     @Override
     public boolean endTransaction() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean clearDatabase() {
-        return false;
+        if(userDao == null) {
+            userDao = new FileUserDao();
+        }
+        if(gameDao == null) {
+            gameDao = new FileGameDao();
+        }
+        if(commandDao == null) {
+            commandDao = new FileCommandDao();
+        }
+        userDao.clear();
+        gameDao.clear();
+        commandDao.clear();
+        return true;
     }
 
     @Override

@@ -31,6 +31,7 @@ public class FileCommandDao implements ICommandDao {
     private Gson gson; //Keep
 
     public FileCommandDao () {
+
         File dir = new File("Command");
         boolean successful = dir.mkdir();
         if (successful) {
