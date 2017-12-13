@@ -80,7 +80,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
         //RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_map);
 
         //changeTurnDisplay();
-
+        updateMap();
 
         //((TextView) findViewById(R.id.num_cards_in_deck)).setText("Number of Cards in Deck: 136");
 
@@ -253,6 +253,7 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
      */
     @Override
     public void updateMap() {
+
         Map<String , Route> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
         for (Map.Entry<String,Route> entry : routeList.entrySet())
         {
