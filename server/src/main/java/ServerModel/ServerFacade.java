@@ -121,8 +121,8 @@ public class ServerFacade {
             commandListMap.put(gameID, new ArrayList<Command>());
         }
         //Save the command to the database
-        saveCommands(gameID,command);
         commandListMap.get(gameID).add(command);
+        saveCommands(gameID,command);
 
     }
     /**Hanldes the saving of command data objects to the database
