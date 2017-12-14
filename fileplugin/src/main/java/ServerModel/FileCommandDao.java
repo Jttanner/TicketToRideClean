@@ -46,7 +46,7 @@ public class FileCommandDao implements ICommandDao {
         List<Command> listOfCommands = new ArrayList<>();
         String commandFile;
         String line;
-        Command command = null;
+        Command command = new Command();
 
         commandFile = ("Command/" + gameID + ".txt");
         try {
@@ -58,7 +58,11 @@ public class FileCommandDao implements ICommandDao {
 
             while((line = bufferedReader.readLine()) != null){
                 //line = bufferedReader.readLine();
+                System.out.println("GET COMMAND LIST: before gson conversion");
+                System.out.println("GET COMMAND LIST: Line: " + line);
                 command = gson.fromJson(line, Command.class);
+                System.out.println("GET COMMAND LIST: after gson conversion");
+                System.out.println("GET coMMAND LISt: command: " + command.getType());
                 switch (command.getType()) {
                     case "startGame":
                         StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
