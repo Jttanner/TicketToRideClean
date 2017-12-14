@@ -134,7 +134,7 @@ public class ServerFacade {
         System.out.println("SERVER FACADE - SAVE COMMANDS: Before getGameCommands");
         List<Command> commands = serverModel.getPlugin().getGameCommands(gameID);
         System.out.println("SERVER FACADE - SAVE COMMANDS: COMMANDS SIZE: " + commands.size() + " DELTA N: " + serverModel.getDelta_n());
-        if(commands != null && (commands.size() % serverModel.getDelta_n() == 0)) {
+        if(commands != null && (commands.size() >= serverModel.getDelta_n())) {
             System.out.println("SERVER FACADE - SAVE COMMANDS: start the save commands");
             serverModel.clearCommandsAndSave(gameID);
         }

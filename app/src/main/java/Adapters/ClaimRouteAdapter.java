@@ -81,13 +81,21 @@ public class ClaimRouteAdapter extends RecyclerView.Adapter<ClaimRouteAdapter.Vi
                 if(CModel.getInstance().getCurrGame().getPlayerMax() < 4){
                     //we know route is available.  Check to see if there is something already built by them on a double
                     //brute force method:
-                    for (Map.Entry<String,Route> entry : CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap().entrySet()){
-                        if (entry.getValue().getFirstCityName().equals(currRoute.getFirstCityName()) &&
-                                entry.getValue().getSecondCityName().equals(currRoute.getSecondCityName()) &&
-                                entry.getKey().equals(CModel.getInstance().getUserPlayer().getPlayerName())){
-                            canClaim = false;
-                            break;
+                    for (Map.Entry<String,List<Route>> entry : CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap().entrySet()){
+                        for (Route route : entry.getValue()){
+                            if(route.getFirstCityName().equals(currRoute.getFirstCityName()) &&
+                                    route.getSecondCityName().equals(currRoute.getSecondCityName()) &&
+                                    route.equals(CModel.getInstance().getUserPlayer().getPlayerName())){
+                                canClaim = false;
+                                break;
+                            }
                         }
+//                        if (entry.getValue().getFirstCityName().equals(currRoute.getFirstCityName()) &&
+//                                entry.getValue().getSecondCityName().equals(currRoute.getSecondCityName()) &&
+//                                entry.getKey().equals(CModel.getInstance().getUserPlayer().getPlayerName())){
+//                            canClaim = false;
+//                            break;
+//                        }
                     }
                 } else{
                     //canClaim = true; redundant

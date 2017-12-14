@@ -257,19 +257,20 @@ public class MapActivity extends FragmentActivity implements MVP_Map.MapViewOps{
     @Override
     public void updateMap() {
 
-        Map<String , Route> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
-        for (Map.Entry<String,Route> entry : routeList.entrySet())
+        Map<String , List<Route>> routeList = CModel.getInstance().getCurrGame().getClaimedRouteList().getRoutesMap();
+        for (Map.Entry<String, List<Route> > entry : routeList.entrySet())
         {
             Player player = null;
-            Route route = entry.getValue();
+            List<Route> route = entry.getValue();
             Game currentGame = CModel.getInstance().getCurrGame();
             for(Player player2 : currentGame.getPlayers()){
                 if(player2.getPlayerName().equals(entry.getKey())){
                     player=player2;
                 }
             }
-
-            drawClaimedRoute(route.getFirstCityName(), route.getSecondCityName(), player.getColor(), route.getIsDouble(), !route.getFirstOfDouble());
+            for(Route shawn : route) {
+                drawClaimedRoute(shawn.getFirstCityName(), shawn.getSecondCityName(), player.getColor(), shawn.getIsDouble(), !shawn.getFirstOfDouble());
+            }
         }
     }
 

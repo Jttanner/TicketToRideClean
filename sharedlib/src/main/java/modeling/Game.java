@@ -85,9 +85,11 @@ public class Game {
 
 
 
-            for (Map.Entry<String, Route> entry : claimedRouteList.getRoutesMap().entrySet()){
-                if (entry.getValue().equals(route)){
-                    route.setFirstOfDouble(false);
+            for (Map.Entry<String, List<Route>> entry : claimedRouteList.getRoutesMap().entrySet()){
+                for (Route eachRoute : entry.getValue()){
+                    if (eachRoute.equals(route)){
+                        route.setFirstOfDouble(false);
+                    }
                 }
             }
             int oldSize = unclaimedRouteList.getAvailableRouteSize();
