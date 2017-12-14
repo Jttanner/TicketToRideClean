@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import clientModel.CModel;
+import modeling.Game;
 import modeling.Player;
 
 /**
@@ -14,10 +15,13 @@ import modeling.Player;
 public class ResetCommandIndexClient implements ClientCommand {
     @Override
     public void execute() {
-        List<Player> players = CModel.getInstance().getCurrGame().getPlayers();
-        for(Player player : players){
-            Log.d("ResetCommandIndexClient","Resetting " + player.getPlayerName() + "command index to zero");
-            player.setCommandIndex(0);
+        Game game = CModel.getInstance().getCurrGame();
+        if (game != null) {
+
+            for (Player player : game.getPlayers()) {
+                Log.d("ResetCommandIndexClient", "Resetting " + player.getPlayerName() + "command index to zero");
+                player.setCommandIndex(0);
+            }
         }
     }
 }

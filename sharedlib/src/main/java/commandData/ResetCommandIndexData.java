@@ -6,7 +6,13 @@ package commandData;
  */
 
 public class ResetCommandIndexData extends Command {
-    public ResetCommandIndexData() {
+    private String gameID;
+    public ResetCommandIndexData(String gameID) {
         this.setType("ResetCommandIndex");
+        this.gameID = gameID;
+    }
+
+    public String getGameId() {
+        return gameID;
     }
 }

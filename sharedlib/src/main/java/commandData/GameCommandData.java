@@ -10,10 +10,12 @@ import modeling.Game;
 public class GameCommandData extends Command {
 
     Game game = null;
-    public GameCommandData(){
-
-    }
     public GameCommandData(Game aGame){
+        this.setType("GameCommandData");
         this.game = aGame;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

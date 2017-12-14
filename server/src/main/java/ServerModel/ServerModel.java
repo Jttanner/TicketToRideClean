@@ -297,14 +297,14 @@ public class ServerModel {
 //        //commandListMap.clear();
 //        commandListMap.put(gameID, list);
 //        //reset servermodel indices
-//        ICommand command = new ResetCommandIndex();
+          //ICommand command = new ResetCommandIndex(gameID);
 //        //execute the command server side
-//        command.execute();
-        //now reset db
+          //command.execute();
+         //now reset db
 
 
 
-
+        //commandListMap.put(gameID,new ArrayList<Command>());
         getPlugin().saveGame(getGames().findGame(gameID));
         getPlugin().clearCommandList(gameID);
 

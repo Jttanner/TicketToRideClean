@@ -22,6 +22,7 @@ import command.GetCmndListServer;
 import command.GetGameListCommand;
 import command.IncrementCommandIndexCommand;
 import command.JoinGameCommand;
+import command.ResetCommandIndex;
 import command.StartGameCommand;
 import commandData.ChatCommandData;
 import commandData.ClaimDestinationCardCommandData;
@@ -36,6 +37,7 @@ import commandData.GetCmndDataFromServer;
 import commandData.GetCmndListDataToClient;
 import commandData.IncrementCommandIndexCommandData;
 import commandData.JoinGameCommandData;
+import commandData.ResetCommandIndexData;
 import commandData.StartGameCommandData;
 import encoder.Encoder;
 import result.CommandResult;
@@ -138,6 +140,11 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     IncrementCommandIndexCommandData incrementCommandIndexCommandData = gson.fromJson(reqData, IncrementCommandIndexCommandData.class);
                     IncrementCommandIndexCommand incrementCommandIndexCommand = new IncrementCommandIndexCommand(incrementCommandIndexCommandData.getGameID(), incrementCommandIndexCommandData.getPlayerName());
                     incrementCommandIndexCommand.execute();
+                    break;
+                case "ResetCommandIndex":
+                    ResetCommandIndexData resetCommandIndexData = gson.fromJson(reqData, ResetCommandIndexData.class);
+                    ResetCommandIndex reset = new ResetCommandIndex(resetCommandIndexData.getGameId());
+                    reset.execute();
                     break;
                 default:
                     break;

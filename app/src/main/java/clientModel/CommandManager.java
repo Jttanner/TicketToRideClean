@@ -12,6 +12,7 @@ import clientCommands.DrawDestinationCards;
 import clientCommands.DrawTrainCard;
 import clientCommands.EndGameCommand;
 import clientCommands.EndTurnCommandClient;
+import clientCommands.GameCommandClient;
 import clientCommands.InitializeTurns;
 import clientCommands.PlaceTrainRoute;
 import clientCommands.ResetCommandIndexClient;
@@ -24,6 +25,7 @@ import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
+import commandData.GameCommandData;
 import commandData.IncrementCommandIndexCommandData;
 import commandData.ResetCommandIndexData;
 import modeling.Player;
@@ -86,7 +88,7 @@ public class CommandManager {
         //get the current command index.
          int commandIndex = myPlayer.getCommandIndex();
         //if there is anything to execute, do so
-        if(bool && commandList.get(0) instanceof ResetCommandIndexData){
+        /*if(bool && commandList.get(0) instanceof ResetCommandIndexData){
             new ResetCommandIndexClient().execute();
             //IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
             //ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
@@ -95,7 +97,7 @@ public class CommandManager {
         }
         else  if(!(commandList.get(0) instanceof ResetCommandIndexData)){
             bool = true;
-        }
+        }*/
         if (commandList.size() > 0) {
             for (int i = commandIndex; i < commandList.size(); i++) {
                 //return the appropriate client command
@@ -155,6 +157,11 @@ public class CommandManager {
                 return new EndGameCommand();
             case "ResetCommandIndex":
                 return new ResetCommandIndexClient();
+            case "GameCommandData":
+                return new GameCommandClient((GameCommandData) command);
+            default:
+                System.out.println("Made it to default in command manager");
+                break;
             //break;
             //TODO add new commands for the client here
         }
