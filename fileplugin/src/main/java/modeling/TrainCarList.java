@@ -9,7 +9,7 @@ public class TrainCarList {
     private int numOfCars;
 
     public TrainCarList( ) {
-        this.numOfCars = 3;
+        this.numOfCars = 30;
     }
 
     public int getNumOfCars() {

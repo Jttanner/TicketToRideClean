@@ -9,8 +9,7 @@ import commandData.Command;
  * Created by tyler on 10/23/2017.
  */
 
-public class
-CommandList {
+public class CommandList {
     private List<Command> commandList = new ArrayList<>();
 
     public void setCommandList(List<Command> commandList) {
