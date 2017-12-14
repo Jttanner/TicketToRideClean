@@ -28,7 +28,7 @@ import commandData.StartGameCommandData;
 
 public class FileCommandDao implements ICommandDao {
 
-    private Gson gson; //Keep
+    private Gson gson = new Gson(); //Keep
 
     public FileCommandDao () {
 
