@@ -96,7 +96,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
      * @return Application context
      */
     @Override
-    public Context getAppContext() {
+    public Context getAppContxt() {
         try {
             return getView().getAppContext();
         } catch (NullPointerException e) {
@@ -109,7 +109,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
      * @return Activity context
      */
     @Override
-    public Context getActivityContext() {
+    public Context getActivityContxt() {
         try {
             return getView().getActivityContext();
         } catch (NullPointerException e) {
@@ -146,7 +146,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
     public void update(Observable o, Object arg) {
         //if we have updated the current user in the model for this machine, move on to next activity
         if(arg instanceof User){
-            Intent intent = new Intent(getActivityContext(), GameListActivity.class);
+            Intent intent = new Intent(getActivityContxt(), GameListActivity.class);
             myView.get().loginSucceeded(intent);
             //if we got a boolean and it is false
         }else if(arg instanceof  Boolean && !(Boolean)arg){
