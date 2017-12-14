@@ -168,7 +168,7 @@ public class ServerModel {
     }
 
     //Takes in the current list of games and returns a list of games that haven't started yet
-    GameList getGames() {
+    public GameList getGames() {
         return this.gameList;
     }
 
@@ -302,7 +302,6 @@ public class ServerModel {
 //        //execute the command server side
           //command.execute();
          //now reset db
-
 
 
         //commandListMap.put(gameID,new ArrayList<Command>());

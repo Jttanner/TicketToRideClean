@@ -122,13 +122,13 @@ public class ServerFacade {
         }
         //Save the command to the database
         commandListMap.get(gameID).add(command);
-        saveCommands(gameID,command);
+//        saveCommands(gameID,command);
 
     }
     /**Handles the saving of command data objects to the database
      * @param gameID The correct gameID
      * @param command The command to be saved*/
-    private void saveCommands(String gameID, Command command) {
+    public void saveCommands(String gameID, Command command) {
         serverModel.getPlugin().saveGameCommands(gameID,command);
         //see if th commandlist is equal to the delta_n we were given
         List<Command> commands = serverModel.getPlugin().getGameCommands(gameID);

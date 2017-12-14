@@ -41,6 +41,7 @@ import commandData.ResetCommandIndexData;
 import commandData.StartGameCommandData;
 import encoder.Encoder;
 import result.CommandResult;
+import ServerModel.*;
 
 /**
  * Created by Hwang on 9/28/2017.
@@ -77,6 +78,10 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     JoinGameCommandData joinGameCommandData = gson.fromJson(reqData, JoinGameCommandData.class);
                     JoinGameCommand joinGameCommand = new JoinGameCommand(joinGameCommandData.getGameID(), joinGameCommandData.getUser());
                     result = joinGameCommand.execute();
+                    if (result.isSuccess()){
+                        ServerModel.getInstance().getPlugin().saveGame(ServerModel.getInstance().getGames().findGame(joinGameCommandData.getGameID()));
+
+                    }
                     break;
                 case "getGameList":
 
@@ -87,7 +92,9 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData);
                     result = startGameCommand.execute();
-                    ServerModel model = ServerModel.getInstance();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(startGameCommandData.getGame(), startGameCommandData);
+                    }
                     break;
                 case "getCommandList":
                     //System.out.println("Command handler: getCommandList 2");
@@ -111,31 +118,47 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(reqData, DrawTrainCardCommandData.class);
                     DrawTrainCardCommand drawTrainCardCommand = new DrawTrainCardCommand(drawTrainCardCommandData);
                     result = drawTrainCardCommand.execute();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(drawTrainCardCommandData.getGameID(), drawTrainCardCommandData);
+                    }
                     break;
                 case "drawDestinationCards":
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(reqData,DrawDestinationCardCommandData.class);
                     DrawDestinationCardCommand drawDestinationCardCommand = new DrawDestinationCardCommand(drawDestinationCardCommandData);
                     result = drawDestinationCardCommand.execute();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(drawDestinationCardCommandData.getGameID(), drawDestinationCardCommandData);
+                    }
                     break;
                 case "claimDestinationCards":
                     ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(reqData,ClaimDestinationCardCommandData.class);
                     ClaimDestinationCardCommand claimDestinationCardCommand = new ClaimDestinationCardCommand(claimDestinationCardCommandData);
                     result = claimDestinationCardCommand.execute();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(claimDestinationCardCommandData.getGameID(), claimDestinationCardCommandData);
+                    }
                     break;
                 case "claimInitialDestinationCards":
                     ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(reqData, ClaimInitialDestinationCardCommandData.class);
                     ClaimInitialDestinationCardCommand claimInitialDestinationCardCommand = new ClaimInitialDestinationCardCommand(claimInitialDestinationCardCommandData);
                     result = claimInitialDestinationCardCommand.execute();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(claimInitialDestinationCardCommandData.getGameID(), claimInitialDestinationCardCommandData);
+                    }
                     break;
                 case "claimRoute":
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(reqData,ClaimRouteCommandData.class);
                     ClaimRouteCommand claimRouteCommand = new ClaimRouteCommand(claimRouteCommandData);
                     result = claimRouteCommand.execute();
+                    if (result.isSuccess()){
+                        ServerFacade.getInstance().saveCommands(claimRouteCommandData.getGameID(), claimRouteCommandData);
+                    }
                     break;
                 case"endTurn":
                     EndTurnCommandData data = gson.fromJson(reqData,EndTurnCommandData.class);
                     EndTurnCommandServer endTurnCommandServer = new EndTurnCommandServer(data);
                     endTurnCommandServer.execute();
+                    ServerFacade.getInstance().saveCommands(data.getGameID(), data);
                     break;
                 case "incrementCommandIndex":
                     IncrementCommandIndexCommandData incrementCommandIndexCommandData = gson.fromJson(reqData, IncrementCommandIndexCommandData.class);
