@@ -60,41 +60,49 @@ public class FileCommandDao implements ICommandDao {
                 System.out.println("GET COMMAND LIST: before gson conversion");
 
                 if(line.contains("\"type\":\"startGame\"")) {
+                    System.out.println("GET COMMAND LIST: startGame1");
                     StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
                     listOfCommands.add(startGameCommandData);
                     System.out.println("GET COMMAND LIST: startGame");
                 }
                 else if (line.contains("\"type\":\"drawTrainCard\"")){
+                    System.out.println("GET COMMAND LIST: drawTrainCard1");
                     DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
                     listOfCommands.add(drawTrainCardCommandData);
                     System.out.println("GET COMMAND LIST: drawTrainCard");
                 }
                 else if (line.contains("\"type\":\"drawDestinationCards\"")){
+                    System.out.println("GET COMMAND LIST: drawDestinationCards1");
                     DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
                     listOfCommands.add(drawDestinationCardCommandData);
                     System.out.println("GET COMMAND LIST: drawDestinationCards");
                 }
                 else if (line.contains("\"type\":\"claimInitialDestinationCards\"")){
+                    System.out.println("GET COMMAND LIST: claimInitialDestinationCards1");
                     ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
                     listOfCommands.add(claimInitialDestinationCardCommandData);
                     System.out.println("GET COMMAND LIST: claimInitialDestinationCards");
                 }
                 else if (line.contains("\"type\":\"claimDestinationCards\"")){
+                    System.out.println("GET COMMAND LIST: claimDestinationCards1");
                     ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
                     listOfCommands.add(claimDestinationCardCommandData);
                     System.out.println("GET COMMAND LIST: claimDestinationCards");
                 }
                 else if (line.contains("\"type\":\"claimRoute\"")){
+                    System.out.println("GET COMMAND LIST: claimRoute1");
                     ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
                     listOfCommands.add(claimRouteCommandData);
                     System.out.println("GET COMMAND LIST: claimRoute");
                 }
                 else if (line.contains("\"type\":\"endTurn\"")){
+                    System.out.println("GET COMMAND LIST: endTurn1");
                     EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
                     listOfCommands.add(endTurnCommandData);
                     System.out.println("GET COMMAND LIST: endTurn");
                 }
                 else if (line.contains("\"type\":\"addChat\"")){
+                    System.out.println("GET COMMAND LIST: addChat1");
                     ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
                     listOfCommands.add(chatCommandData);
                     System.out.println("GET COMMAND LIST: addChat");
@@ -146,7 +154,7 @@ public class FileCommandDao implements ICommandDao {
 //                        break;
 //                }
             }
-
+            System.out.println("GET COMMAND LIST: Outside While");
 
             // Always close files.
             bufferedReader.close();
