@@ -52,12 +52,12 @@ public interface MVP_Login {
         /**
          * Getting the appContext
          */
-        Context getAppContext();
+        Context getAppContxt();
 
         /**
          * getting the context of the activity
          */
-        Context getActivityContext();
+        Context getActivityContxt();
 
     }
 
