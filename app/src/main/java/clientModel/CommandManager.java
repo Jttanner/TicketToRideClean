@@ -25,6 +25,7 @@ import commandData.ClaimRouteCommandData;
 import commandData.Command;
 import commandData.DrawDestinationCardCommandData;
 import commandData.DrawTrainCardCommandData;
+import commandData.EndTurnCommandData;
 import commandData.GameCommandData;
 import commandData.IncrementCommandIndexCommandData;
 import commandData.ResetCommandIndexData;
@@ -68,8 +69,11 @@ public class CommandManager {
         //if we didnt get a null command list execute them
         if (commandList != null && CModel.getInstance().getCurrGame().getGameID().equals(gameID)) {
             //put the command list in the map,replaces the old command list and then execute the list
-            commandListMap.put(gameID, commandList);
-            executeCurrCommands(commandList);
+            //if(commandList.size() == 1 && commandList.get(0) instanceof EndTurnCommandData) {
+                commandListMap.put(gameID, commandList);
+            //}
+            System.out.println("commandlist size is " + commandList.size());
+            executeCurrCommands(commandListMap.get(gameID));
         }
     }
 
@@ -88,28 +92,17 @@ public class CommandManager {
         //get the current command index.
          int commandIndex = myPlayer.getCommandIndex();
         //if there is anything to execute, do so
-        /*if(bool && commandList.get(0) instanceof ResetCommandIndexData){
-            new ResetCommandIndexClient().execute();
-            //IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
-            //ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
-            CModel.getInstance().incrementUsersCommandIndex();
-            bool = false;
-        }
-        else  if(!(commandList.get(0) instanceof ResetCommandIndexData)){
-            bool = true;
-        }*/
         if (commandList.size() > 0) {
             for (int i = commandIndex; i < commandList.size(); i++) {
                 //return the appropriate client command
                 ClientCommand clientCommand = findCommandObject(commandList.get(i));
                 if (clientCommand != null) {
-                    //IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
-                    //ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
+                    IncrementCommandIndexCommandData incrementCommandIndexCommandData = new IncrementCommandIndexCommandData(CModel.getInstance().getCurrGame().getGameID(), myPlayer.getPlayerName());
+                    ServerProxy.getInstance().sendCommand(incrementCommandIndexCommandData);
                     CModel.getInstance().incrementUsersCommandIndex();
                     Log.d(TAG,"CommandIndex: " + CModel.getInstance().getUserPlayer().getCommandIndex());
                     Log.d(TAG,":Executing: " + clientCommand.getClass());
                     clientCommand.execute();
-
                 }
             }
         }
@@ -175,7 +168,6 @@ public class CommandManager {
      * The Command list is only updated for the current game the user is in. So getting the command list
      * of a game the user is not in will not give you an command list that is current
      *
-     * @param gameID The gameID whose command list we will return
      *
      * @pre gameID != ""
      * @pre gameID is associated with an existing game
@@ -185,12 +177,7 @@ public class CommandManager {
      * @return List<Command> All the commands associated with a Game object
      * @exception Exception Thrown if you try to access a gameid's command list that isn't in the map
      */
-    public List<Command> getACommandList(String gameID) throws Exception {
-        try {
-            return this.commandListMap.get(gameID);
-        } catch (Exception e) {
-            Log.d(TAG, "Exception: " + e.getMessage());
-            throw new Exception();
-        }
+    public Map<String,List<Command>> getCommandListMap() {
+        return commandListMap;
     }
 }

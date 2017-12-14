@@ -1,8 +1,12 @@
 package clientCommands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import clientModel.CModel;
+import clientModel.CommandManager;
+import commandData.Command;
 import commandData.GameCommandData;
 import commandData.ResetCommandIndexData;
 import modeling.Game;
@@ -31,6 +35,7 @@ public class GameCommandClient implements ClientCommand {
                     for(Player player : game.getPlayers()){
                         if(player.getPlayerName().equals(CModel.getInstance().getMyUser().getUserName())){
                             CModel.getInstance().setCurrGame(game);
+                            //resetCommandList(game.getGameID());
                         }
                     }
                 }
@@ -39,9 +44,17 @@ public class GameCommandClient implements ClientCommand {
         GameList gamelist = new GameList();
         gamelist.setGames(games);
         CModel.getInstance().setAllGames(gamelist);
-        ResetCommandIndexClient cmd= new ResetCommandIndexClient();
-        cmd.execute();
-        ServerProxy.getInstance().sendCommand(new ResetCommandIndexData(gameCommandData.getGame().getGameID()));
+        //ResetCommandIndexClient cmd= new ResetCommandIndexClient();
+        //cmd.execute();
+        //ServerProxy.getInstance().sendCommand(new ResetCommandIndexData(gameCommandData.getGame().getGameID()));
+    }
+
+    private void resetCommandList(String gameID) {
+       /*List<Command> command = CModel.getInstance().getCommandManager().getCommandListMap().get(gameID);
+        if(command.get(command.size()-2) instanceof GameCommandData){
+            CModel.getInstance().getCommandManager().getCommandListMap().put(gameID,new ArrayList<Command>(Arrays.asList(command.get(command.size()-1))));
+        }*/
+
     }
 
 }

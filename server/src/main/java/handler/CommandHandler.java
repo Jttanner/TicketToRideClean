@@ -65,8 +65,8 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
             System.out.println("Command handler: " + cmd.getType());
             switch (cmd.getType()) {
                 case "setZero":
-                    Command ZeroCommand = gson.fromJson(reqData,Command.class);
-                    ServerModel.getInstance().zeroOut((String)ZeroCommand.getData());
+                    //Command ZeroCommand = gson.fromJson(reqData,Command.class);
+                    //ServerModel.getInstance().zeroOut((String)ZeroCommand.getData());
                     break;
                 case "createGame":
                     CreateGameCommandData command = gson.fromJson(reqData,CreateGameCommandData.class);
@@ -142,9 +142,9 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     incrementCommandIndexCommand.execute();
                     break;
                 case "ResetCommandIndex":
-                    ResetCommandIndexData resetCommandIndexData = gson.fromJson(reqData, ResetCommandIndexData.class);
-                    ResetCommandIndex reset = new ResetCommandIndex(resetCommandIndexData.getGameId());
-                    reset.execute();
+                    //ResetCommandIndexData resetCommandIndexData = gson.fromJson(reqData, ResetCommandIndexData.class);
+                   // ResetCommandIndex reset = new ResetCommandIndex(resetCommandIndexData.getGameId());
+                    //reset.execute();
                     break;
                 default:
                     break;

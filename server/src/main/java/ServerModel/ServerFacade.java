@@ -125,14 +125,14 @@ public class ServerFacade {
         saveCommands(gameID,command);
 
     }
-    /**Hanldes the saving of command data objects to the database
+    /**Handles the saving of command data objects to the database
      * @param gameID The correct gameID
      * @param command The command to be saved*/
     private void saveCommands(String gameID, Command command) {
         serverModel.getPlugin().saveGameCommands(gameID,command);
         //see if th commandlist is equal to the delta_n we were given
         List<Command> commands = serverModel.getPlugin().getGameCommands(gameID);
-        if(commands != null && (commands.size() >= serverModel.getDelta_n())) {
+        if(commands != null && (commands.size() % serverModel.getDelta_n() == 0)) {
             serverModel.clearCommandsAndSave(gameID);
         }
     }

@@ -2,6 +2,7 @@ package ServerModel;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ServerModel {
      */
     private IPlugin currPlugin;
 
-    public void zeroOut(String playerID) {
+    /*public void zeroOut(String playerID) {
         for (Game game : gameList.getGames()) {
             for (Player player : game.getPlayers()) {
                 if (player.getPlayerName().equals(playerID)) {
@@ -64,7 +65,7 @@ public class ServerModel {
                 }
             }
         }
-    }
+    }*/
 
     public String checkUserInGame(String userId) {
         if (gameList != null) {
@@ -310,7 +311,10 @@ public class ServerModel {
 
         //send the game to client
         Command data = new GameCommandData(getGames().findGame(gameID));
+        //List<Command> commands = commandListMap.get(gameID);
+        //ArrayList<Command> list = new ArrayList<>(Arrays.asList(commands.get(commands.size()-1),data));
         commandListMap.get(gameID).add(data);
+        //commandListMap.put(gameID,list);
 
         // set the index to 0
 
