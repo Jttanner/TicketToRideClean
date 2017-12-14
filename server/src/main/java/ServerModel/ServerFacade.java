@@ -131,6 +131,7 @@ public class ServerFacade {
     public void saveCommands(String gameID, Command command) {
         serverModel.getPlugin().saveGameCommands(gameID,command);
         //see if th commandlist is equal to the delta_n we were given
+        System.out.println("SERVER FACADE - SAVE COMMANDS: Before getGameCommands");
         List<Command> commands = serverModel.getPlugin().getGameCommands(gameID);
         System.out.println("SERVER FACADE - SAVE COMMANDS: COMMANDS SIZE: " + commands.size() + " DELTA N: " + serverModel.getDelta_n());
         if(commands != null && (commands.size() % serverModel.getDelta_n() == 0)) {
