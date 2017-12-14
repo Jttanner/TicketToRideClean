@@ -87,6 +87,7 @@ public class CommandHandler extends BaseHandler implements HttpHandler {
                     StartGameCommandData startGameCommandData = gson.fromJson(reqData, StartGameCommandData.class);
                     StartGameCommand startGameCommand = new StartGameCommand(startGameCommandData);
                     result = startGameCommand.execute();
+                    ServerModel model = ServerModel.getInstance();
                     break;
                 case "getCommandList":
                     //System.out.println("Command handler: getCommandList 2");
