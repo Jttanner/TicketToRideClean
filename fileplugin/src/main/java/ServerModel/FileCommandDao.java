@@ -60,48 +60,92 @@ public class FileCommandDao implements ICommandDao {
                 //line = bufferedReader.readLine();
                 System.out.println("GET COMMAND LIST: before gson conversion");
                 System.out.println("GET COMMAND LIST: Line: " + line);
-
-                Command command = gson.fromJson(line, Command.class);
-                System.out.println("GET COMMAND LIST: after gson conversion");
-                System.out.println("GET coMMAND LISt: command: " + command.getType());
-                switch (command.getType()) {
-                    case "startGame":
-                        StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
-                        listOfCommands.add(startGameCommandData);
-                        break;
-                    case "drawTrainCard":
-                        DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
-                        listOfCommands.add(drawTrainCardCommandData);
-                        break;
-                    case "drawDestinationCards":
-                        DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
-                        listOfCommands.add(drawDestinationCardCommandData);
-                        break;
-                    case "claimInitialDestinationCards":
-                        ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
-                        listOfCommands.add(claimInitialDestinationCardCommandData);
-                        break;
-                    case "claimDestinationCards":
-                        ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
-                        listOfCommands.add(claimDestinationCardCommandData);
-                        break;
-                    case "claimRoute":
-                        ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
-                        listOfCommands.add(claimRouteCommandData);
-                    case "endTurn":
-                        EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
-                        listOfCommands.add(endTurnCommandData);
-                        break;
-                    case "addChat":
-                        ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
-                        listOfCommands.add(chatCommandData);
-                        break;
-                    case "EndGame":
-                        //return new EndGameCommand();
-                    break;
-                    default:
-                        break;
+                //line.contains("\"type\":\"startGame\"");
+                // command = gson.fromJson(line, Command.class);
+                //System.out.println("GET COMMAND LIST: after gson conversion");
+                //System.out.println("GET coMMAND LISt: command: " + command.getType());
+                if(line.contains("\"type\":\"startGame\"")) {
+                    StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
+                    listOfCommands.add(startGameCommandData);
+                    System.out.println("GET COMMAND LIST: startGame");
                 }
+                else if (line.contains("\"type\":\"drawTrainCard\"")){
+                    DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
+                    listOfCommands.add(drawTrainCardCommandData);
+                    System.out.println("GET COMMAND LIST: drawTrainCard");
+                }
+                else if (line.contains("\"type\":\"drawDestinationCards\"")){
+                    DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
+                    listOfCommands.add(drawDestinationCardCommandData);
+                    System.out.println("GET COMMAND LIST: drawDestinationCards");
+                }
+                else if (line.contains("\"type\":\"claimInitialDestinationCards\"")){
+                    ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
+                    listOfCommands.add(claimInitialDestinationCardCommandData);
+                    System.out.println("GET COMMAND LIST: claimInitialDestinationCards");
+                }
+                else if (line.contains("\"type\":\"claimDestinationCards\"")){
+                    ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
+                    listOfCommands.add(claimDestinationCardCommandData);
+                    System.out.println("GET COMMAND LIST: claimDestinationCards");
+                }
+                else if (line.contains("\"type\":\"claimRoute\"")){
+                    ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
+                    listOfCommands.add(claimRouteCommandData);
+                    System.out.println("GET COMMAND LIST: claimRoute");
+                }
+                else if (line.contains("\"type\":\"endTurn\"")){
+                    EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
+                    listOfCommands.add(endTurnCommandData);
+                    System.out.println("GET COMMAND LIST: endTurn");
+                }
+                else if (line.contains("\"type\":\"addChat\"")){
+                    ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
+                    listOfCommands.add(chatCommandData);
+                    System.out.println("GET COMMAND LIST: addChat");
+                }
+                else if (line.contains("\"type\":\"EndGame\"")){
+                    System.out.println("GET COMMAND LIST: LAST ELSE IF");
+                }
+//                switch (command.getType()) {
+//                    case "startGame":
+//                        StartGameCommandData startGameCommandData = gson.fromJson(line, StartGameCommandData.class);
+//                        listOfCommands.add(startGameCommandData);
+//                        break;
+//                    case "drawTrainCard":
+//                        DrawTrainCardCommandData drawTrainCardCommandData = gson.fromJson(line,DrawTrainCardCommandData.class);
+//                        listOfCommands.add(drawTrainCardCommandData);
+//                        break;
+//                    case "drawDestinationCards":
+//                        DrawDestinationCardCommandData drawDestinationCardCommandData = gson.fromJson(line, DrawDestinationCardCommandData.class);
+//                        listOfCommands.add(drawDestinationCardCommandData);
+//                        break;
+//                    case "claimInitialDestinationCards":
+//                        ClaimInitialDestinationCardCommandData claimInitialDestinationCardCommandData = gson.fromJson(line, ClaimInitialDestinationCardCommandData.class);
+//                        listOfCommands.add(claimInitialDestinationCardCommandData);
+//                        break;
+//                    case "claimDestinationCards":
+//                        ClaimDestinationCardCommandData claimDestinationCardCommandData = gson.fromJson(line, ClaimDestinationCardCommandData.class);
+//                        listOfCommands.add(claimDestinationCardCommandData);
+//                        break;
+//                    case "claimRoute":
+//                        ClaimRouteCommandData claimRouteCommandData = gson.fromJson(line, ClaimRouteCommandData.class);
+//                        listOfCommands.add(claimRouteCommandData);
+//                        break;
+//                    case "endTurn":
+//                        EndTurnCommandData endTurnCommandData = gson.fromJson(line, EndTurnCommandData.class);
+//                        listOfCommands.add(endTurnCommandData);
+//                        break;
+//                    case "addChat":
+//                        ChatCommandData chatCommandData = gson.fromJson(line, ChatCommandData.class);
+//                        listOfCommands.add(chatCommandData);
+//                        break;
+//                    case "EndGame":
+//                        //return new EndGameCommand();
+//                    break;
+//                    default:
+//                        break;
+//                }
             }
 
 
