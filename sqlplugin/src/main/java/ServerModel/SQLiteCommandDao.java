@@ -144,6 +144,7 @@ public class SQLiteCommandDao implements ICommandDao {
                 case "EndGame":
                     break;
                 default:
+                    specificCommandJson = myGson.toJson(command, Command.class);
                     break;
             }
             connection = DriverManager.getConnection(connectionString);

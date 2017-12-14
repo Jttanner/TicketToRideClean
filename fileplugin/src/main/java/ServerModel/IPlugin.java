@@ -1,7 +1,6 @@
 package ServerModel;
 
 import java.util.List;
-import java.util.Map;
 
 import commandData.Command;
 import modeling.Game;
@@ -36,6 +35,4 @@ public interface IPlugin {
     List<Game> getAllGames();
 
     List<User> getAllUsers();
-
-    Map<String,List<Command>> getAllCommands();
 }

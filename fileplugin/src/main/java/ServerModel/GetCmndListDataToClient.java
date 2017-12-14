@@ -15,7 +15,7 @@ public class GetCmndListDataToClient extends Command {
     private List<Command> returnCommandList = new ArrayList<>();
     private String gameId;
     //takes in a map and wraps it up to send
-    public GetCmndListDataToClient(List<Command> commandList, String gameID) {
+    public GetCmndListDataToClient(List<Command> commandList,String gameID) {
         setType("getCommandList");
         this.gameId = gameID;
         returnCommandList = commandList;

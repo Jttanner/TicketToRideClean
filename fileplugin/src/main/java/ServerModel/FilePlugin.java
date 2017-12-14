@@ -40,11 +40,6 @@ public class FilePlugin implements IPlugin {
     }
 
     @Override
-    public Map<String, List<Command>> getAllCommands() {
-        return null;
-    }
-
-    @Override
     public boolean saveUser(User user) {
         return persistenceManager.getUserDao().registerUser(user.getInfo().getUserName(),user.getInfo().getPassword());
     }

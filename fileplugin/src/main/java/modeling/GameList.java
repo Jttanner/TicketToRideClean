@@ -17,6 +17,9 @@ public class GameList {
 
     public void setGames(List<Game> games){
         this.games = games;
+        for (Game game: games){
+            gameIDtoGame.put(game.getGameID(), game);
+        }
     }
 
     /**Called when the game has been created and sent serverSide

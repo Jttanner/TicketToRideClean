@@ -1,6 +1,5 @@
 package ServerModel;
 
-
 import java.util.List;
 
 import modeling.User;
