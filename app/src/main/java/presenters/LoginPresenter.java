@@ -113,7 +113,7 @@ public class LoginPresenter implements MVP_Login.RequiredPresenterOps, MVP_Login
         try {
             return getView().getActivityContext();
         } catch (NullPointerException e) {
-            Toast.makeText(getActivityContext(), "It hit null", Toast.LENGTH_LONG).show();
+            Toast.makeText(getView().getActivityContext(), "It hit null", Toast.LENGTH_LONG).show();
             return null;
         }
     }
